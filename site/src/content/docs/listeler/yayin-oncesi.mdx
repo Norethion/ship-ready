@@ -1,5 +1,5 @@
 ---
-title: "Yayına almadan önce: 87 benzersiz iş"
+title: "Yayına almadan önce: 91 benzersiz iş"
 description: "Yayına çıkmadan önce kontrol edilecek güvenlik, kimlik doğrulama, veri, başlık, ödeme, operasyon, tedarik zinciri, mobil, SEO, içerik, KVKK ve alan adı…"
 ---
 
@@ -227,7 +227,7 @@ CORS'u whitelist ile kilitle
 </Madde>
 
 
-## Entegrasyon, ödeme, AI (6)
+## Entegrasyon, ödeme, AI (9)
 
 <DenetimPrompt liste={"yayin-oncesi"} bolum={"Entegrasyon, ödeme, AI"} />
 
@@ -268,51 +268,75 @@ Harcama uyarısı (billing alert) kur
 
 </Madde>
 
+<Madde id={"yo-prompt-onbellegi"} no={39}>
 
-## Operasyon & dayanıklılık (7)
+AI çağrılarında değişmeyen kısmı (sistem prompt'u, araç tanımları, uzun doküman) başa koy ve prompt önbelleğini (prompt caching) aç; önbellekten okunan kısım çok daha ucuza gelir (Claude'da giriş fiyatının onda biri ya da daha azı), değişen kısım sona yazılsın
+
+</Madde>
+
+<Madde id={"yo-model-kademesi"} no={40}>
+
+Her isteği en pahalı modele gönderme: kolay istekleri küçük model karşılasın, emin olamadığında bir üst modele aktarsın (model cascade); aktarma eşiğini kendi test setinle ayarla
+
+</Madde>
+
+<Madde id={"yo-ajan-kayit-guvencesi"} no={41}>
+
+AI ajanının kayıt oluşturan işlemlerine (randevu, sipariş) idempotency key ver ki aynı mesaj iki kez gelince çift kayıt oluşmasın; "gelecek perşembe" gibi tarih ve saatleri model değil kod hesaplasın
+
+</Madde>
+
+
+## Operasyon & dayanıklılık (8)
 
 <DenetimPrompt liste={"yayin-oncesi"} bolum={"Operasyon & dayanıklılık"} />
 
 
-<Madde id={"yo-hata-mesajlari"} no={39}>
+<Madde id={"yo-hata-mesajlari"} no={42}>
 
 Hata mesajlarını kıs (stack trace/iç detay sızdırma)
 
 </Madde>
 
-<Madde id={"yo-log-hassas-veri"} no={40}>
+<Madde id={"yo-log-hassas-veri"} no={43}>
 
 Loglardan hassas veriyi temizle; log dosyaları ve log sayfaları herkese açık olmasın
 
 </Madde>
 
-<Madde id={"yo-guvenlik-logu"} no={41}>
+<Madde id={"yo-guvenlik-logu"} no={44}>
 
 Güvenlik olaylarını logla (audit trail)
 
 </Madde>
 
-<Madde id={"yo-bagimlilik-denetimi"} no={42}>
+<Madde id={"yo-bagimlilik-denetimi"} no={45}>
 
 Bağımlılıkları denetle (audit / otomatik güncelleme)
 
 </Madde>
 
-<Madde id={"yo-yedekleme"} no={43}>
+<Madde id={"yo-yedekleme"} no={46}>
 
 Otomatik yedekleme kur + geri yükleme testi yap
 
 </Madde>
 
-<Madde id={"yo-hesap-silme"} no={44}>
+<Madde id={"yo-hesap-silme"} no={47}>
 
 Hesap silme gerçekten silsin (kalıcı silme)
 
 </Madde>
 
-<Madde id={"yo-pentest"} no={45}>
+<Madde id={"yo-pentest"} no={48}>
 
 Saldırgan gibi test et (pentest / düşmanca inceleme)
+
+</Madde>
+
+<Madde id={"yo-onbellek-katmanlari"} no={49}>
+
+Sık okunan veriyi önbelleğe al: statik dosyalara uzun `Cache-Control` ver, herkese açık sayfaları CDN'de tut, sık sorguları Redis gibi bir önbellekte sakla; her okuma veritabanına gitmesin, veri değişince önbelleği temizle
 
 </Madde>
 
@@ -322,19 +346,19 @@ Saldırgan gibi test et (pentest / düşmanca inceleme)
 <DenetimPrompt liste={"yayin-oncesi"} bolum={"Tedarik zinciri & CI"} />
 
 
-<Madde id={"yo-lock-dosyasi"} no={46}>
+<Madde id={"yo-lock-dosyasi"} no={50}>
 
 Lock dosyasını (`package-lock.json`, `pnpm-lock.yaml`) commit'le, CI'da ve sunucuda lock'a sadık komutla kur (`npm ci`, `pnpm install --frozen-lockfile`); paket sürümleri kendiliğinden yükselmesin
 
 </Madde>
 
-<Madde id={"yo-kurulum-scriptleri"} no={47}>
+<Madde id={"yo-kurulum-scriptleri"} no={51}>
 
 Paketlerin kurulum script'lerini kapat (`npm config set ignore-scripts true`, pnpm'de sadece izin verdiğin paketler); kötü amaçlı bir paket kurulurken bilgisayarında ya da CI'da kod çalıştıramasın
 
 </Madde>
 
-<Madde id={"yo-fork-pr-secret"} no={48}>
+<Madde id={"yo-fork-pr-secret"} no={52}>
 
 Fork'tan gelen PR'ların kodunu secret'lara erişen iş akışında çalıştırma (GitHub Actions'ta `pull_request_target` ile PR kodunu checkout etme); CI secret'ları dışarıdan gelen koda açılmasın
 
@@ -346,49 +370,49 @@ Fork'tan gelen PR'ların kodunu secret'lara erişen iş akışında çalıştır
 <DenetimPrompt liste={"yayin-oncesi"} bolum={"Mobil uygulama"} />
 
 
-<Madde id={"yo-mobil-pakette-anahtar"} no={49}>
+<Madde id={"yo-mobil-pakette-anahtar"} no={53}>
 
 Uygulama paketine (APK, AAB, IPA) gizli anahtar koyma; paket açılıp okunabilir, istemcide sadece herkese açık anahtarlar kalsın (ör. Supabase anon key), gizli işlemler sunucudan geçsin
 
 </Madde>
 
-<Madde id={"yo-mobil-guvenli-depolama"} no={50}>
+<Madde id={"yo-mobil-guvenli-depolama"} no={54}>
 
 Oturum token'larını ve hassas veriyi iOS'ta Keychain'de, Android'de Keystore ile şifrelenmiş depoda sakla; AsyncStorage, SharedPreferences ya da UserDefaults'a düz metin yazma
 
 </Madde>
 
-<Madde id={"yo-android-yedekleme"} no={51}>
+<Madde id={"yo-android-yedekleme"} no={55}>
 
 Android'de uygulama verisinin yedeklenmesini kapat ya da hassas dosyaları yedekten çıkar (`android:allowBackup="false"`, `dataExtractionRules`); yedekten token ve veritabanı çıkarılamasın
 
 </Madde>
 
-<Madde id={"yo-firebase-app-check"} no={52}>
+<Madde id={"yo-firebase-app-check"} no={56}>
 
 Firebase kullanıyorsan App Check'i aç ve zorunlu kıl (enforce); istekler sadece gerçek uygulamandan gelsin (iOS'ta App Attest, Android'de Play Integrity)
 
 </Madde>
 
-<Madde id={"yo-android-r8"} no={53}>
+<Madde id={"yo-android-r8"} no={57}>
 
 Android sürümünde kod küçültme ve karartmayı aç (R8, `isMinifyEnabled = true`); tersine mühendisliği zorlaştırır ama gizli anahtarı korumaz
 
 </Madde>
 
-<Madde id={"yo-deep-link"} no={54}>
+<Madde id={"yo-deep-link"} no={58}>
 
 Deep link'leri doğrula: Android App Links (`autoVerify`) ve iOS Universal Links kullan, linkten gelen parametrelere güvenme, giriş ya da ödeme gibi işlemleri sadece linkle tetikleme
 
 </Madde>
 
-<Madde id={"yo-sertifika-sabitleme"} no={55}>
+<Madde id={"yo-sertifika-sabitleme"} no={59}>
 
 Hassas API'lerde sertifika sabitlemeyi (certificate pinning) değerlendir; yedek anahtar ve son kullanma tarihi koy, yoksa sertifika yenilenince uygulama sunucuya bağlanamaz
 
 </Madde>
 
-<Madde id={"yo-mobil-izinler"} no={56}>
+<Madde id={"yo-mobil-izinler"} no={60}>
 
 Sadece gerçekten kullandığın izinleri iste (kamera, konum, rehber, bildirim); kullanılmayan izin saldırı yüzeyini büyütür ve mağaza incelemesinde sorun çıkarır
 
@@ -400,61 +424,61 @@ Sadece gerçekten kullandığın izinleri iste (kamera, konum, rehber, bildirim)
 <DenetimPrompt liste={"yayin-oncesi"} bolum={"SEO & teknik site"} />
 
 
-<Madde id={"yo-404-sayfasi"} no={57}>
+<Madde id={"yo-404-sayfasi"} no={61}>
 
 Özel 404 sayfası
 
 </Madde>
 
-<Madde id={"yo-sayfa-basliklari"} no={58}>
+<Madde id={"yo-sayfa-basliklari"} no={62}>
 
 Benzersiz sayfa başlıkları
 
 </Madde>
 
-<Madde id={"yo-meta-description"} no={59}>
+<Madde id={"yo-meta-description"} no={63}>
 
 Meta description'lar
 
 </Madde>
 
-<Madde id={"yo-og-gorseli"} no={60}>
+<Madde id={"yo-og-gorseli"} no={64}>
 
 Sosyal paylaşım görseli (OG/Twitter card)
 
 </Madde>
 
-<Madde id={"yo-robots-txt"} no={61}>
+<Madde id={"yo-robots-txt"} no={65}>
 
 robots.txt
 
 </Madde>
 
-<Madde id={"yo-yapisal-veri"} no={62}>
+<Madde id={"yo-yapisal-veri"} no={66}>
 
 Yapısal veri / schema (local schema dahil)
 
 </Madde>
 
-<Madde id={"yo-breadcrumb"} no={63}>
+<Madde id={"yo-breadcrumb"} no={67}>
 
 Breadcrumb'lar
 
 </Madde>
 
-<Madde id={"yo-ic-linkler"} no={64}>
+<Madde id={"yo-ic-linkler"} no={68}>
 
 İç linkler
 
 </Madde>
 
-<Madde id={"yo-alt-text"} no={65}>
+<Madde id={"yo-alt-text"} no={69}>
 
 Görsellerde alt text
 
 </Madde>
 
-<Madde id={"yo-analitik"} no={66}>
+<Madde id={"yo-analitik"} no={70}>
 
 Google Analytics
 
@@ -466,61 +490,61 @@ Google Analytics
 <DenetimPrompt liste={"yayin-oncesi"} bolum={"İçerik & dönüşüm"} />
 
 
-<Madde id={"yo-cta-ust"} no={67}>
+<Madde id={"yo-cta-ust"} no={71}>
 
 CTA'yı fold üstüne koy
 
 </Madde>
 
-<Madde id={"yo-sticky-cta"} no={68}>
+<Madde id={"yo-sticky-cta"} no={72}>
 
 Mobilde sticky CTA
 
 </Madde>
 
-<Madde id={"yo-tesekkur-sayfasi"} no={69}>
+<Madde id={"yo-tesekkur-sayfasi"} no={73}>
 
 Teşekkür (thank you) sayfası
 
 </Madde>
 
-<Madde id={"yo-sss"} no={70}>
+<Madde id={"yo-sss"} no={74}>
 
 5 soruluk SSS
 
 </Madde>
 
-<Madde id={"yo-vaka-calismalari"} no={71}>
+<Madde id={"yo-vaka-calismalari"} no={75}>
 
 Vaka çalışmaları
 
 </Madde>
 
-<Madde id={"yo-kullanici-yorumlari"} no={72}>
+<Madde id={"yo-kullanici-yorumlari"} no={76}>
 
 Gerçek kullanıcı yorumları
 
 </Madde>
 
-<Madde id={"yo-yanit-suresi-taahhudu"} no={73}>
+<Madde id={"yo-yanit-suresi-taahhudu"} no={77}>
 
 Yanıt süresi taahhüdü
 
 </Madde>
 
-<Madde id={"yo-harita-yol-tarifi"} no={74}>
+<Madde id={"yo-harita-yol-tarifi"} no={78}>
 
 Harita + yol tarifi
 
 </Madde>
 
-<Madde id={"yo-ekip-fotografi"} no={75}>
+<Madde id={"yo-ekip-fotografi"} no={79}>
 
 Ekip fotoğrafı
 
 </Madde>
 
-<Madde id={"yo-gizlilik-politikasi"} no={76}>
+<Madde id={"yo-gizlilik-politikasi"} no={80}>
 
 Gizlilik politikası sayfası
 
@@ -532,37 +556,37 @@ Gizlilik politikası sayfası
 <DenetimPrompt liste={"yayin-oncesi"} bolum={"Hukuki & KVKK"} />
 
 
-<Madde id={"yo-yerel-fontlar"} no={77}>
+<Madde id={"yo-yerel-fontlar"} no={81}>
 
 Fontları (Google Fonts dahil) kendi sunucundan ver; ziyaretçinin IP adresi yurt dışına gitmesin (KVKK / GDPR)
 
 </Madde>
 
-<Madde id={"yo-oturum-kaydi-maskeleme"} no={78}>
+<Madde id={"yo-oturum-kaydi-maskeleme"} no={82}>
 
 Oturum kaydı ve ısı haritası araçlarında (Clarity vb.) form alanlarını maskele, çerez onayı olmadan başlatma, aydınlatma metninde belirt
 
 </Madde>
 
-<Madde id={"yo-ticari-ileti"} no={79}>
+<Madde id={"yo-ticari-ileti"} no={83}>
 
 Ticari e-posta ve SMS için önceden onay al, İYS'ye kayıt ol, her iletide ret (abonelikten çıkma) linki ve gönderenin kimliği olsun: tacirse ticaret unvanı ve MERSİS numarası, esnafsa adı soyadı ve T.C. kimlik numarası, ayrıca en az bir iletişim bilgisi (6563 sayılı Kanun, Ticari İletişim Yönetmeliği); ABD'ye gönderiyorsan posta adresi de şart (CAN-SPAM)
 
 </Madde>
 
-<Madde id={"yo-abonelik-sartlari"} no={80}>
+<Madde id={"yo-abonelik-sartlari"} no={84}>
 
 Abonelik satılıyorsa yenileme şartlarını ve iptal yolunu abone ol butonunun yanında göster, iptal abone olmak kadar kolay olsun (6502 sayılı Kanun, Mesafeli Sözleşmeler Yönetmeliği)
 
 </Madde>
 
-<Madde id={"yo-yas-kontrolu"} no={81}>
+<Madde id={"yo-yas-kontrolu"} no={85}>
 
 Kayıtta yaş sor ya da çocukların kaydını engelle; ABD'de 13 yaş altı çocukların verisini ebeveyn onayı olmadan toplamak COPPA ihlalidir ve ceza ihlal başınadır. Uygulama çocuklara yönelikse mağazaların çocuk kategorisi kurallarına da uy
 
 </Madde>
 
-<Madde id={"yo-telif-sikayeti"} no={82}>
+<Madde id={"yo-telif-sikayeti"} no={86}>
 
 Kullanıcılar görsel ya da dosya yüklüyorsa telif şikâyeti yolu kur: kaldırma talebi için iletişim adresi ve süreç yaz. ABD'li kullanıcıların varsa DMCA temsilcini ABD Telif Ofisi'ne kaydet (6 $); kayıt yoksa yüklenen içerikteki telif ihlalinden sen de sorumlu tutulabilirsin
 
@@ -574,19 +598,19 @@ Kullanıcılar görsel ya da dosya yüklüyorsa telif şikâyeti yolu kur: kald�
 <DenetimPrompt liste={"yayin-oncesi"} bolum={"Alan adı, e-posta & indeksleme"} />
 
 
-<Madde id={"yo-alt-alan-adi"} no={83}>
+<Madde id={"yo-alt-alan-adi"} no={87}>
 
 Uygulamayı alt alan adında yayınla (`app.alanadi.com`), tanıtım sayfaları ana alan adında kalsın (`alanadi.com`); ikisi ayrı ekiplerce birbirini bozmadan değiştirilebilsin (DNS'te `app` için CNAME kaydı)
 
 </Madde>
 
-<Madde id={"yo-eposta-alt-alan"} no={84}>
+<Madde id={"yo-eposta-alt-alan"} no={88}>
 
 E-postaları ana alan adından değil ayrı alt alan adlarından gönder: uygulama e-postaları (fatura, kayıt, şifre sıfırlama) `mail.alanadi.com`, pazarlama e-postaları (bülten, kampanya) `news.alanadi.com`; her biri için SPF, DKIM ve DMARC kayıtlarını kur (ör. Resend), spam bildirimi ana alan adının itibarını düşürmesin
 
 </Madde>
 
-<Madde id={"yo-sitemap"} no={85}>
+<Madde id={"yo-sitemap"} no={89}>
 
 Herkese açık sayfalar için `sitemap.xml` oluştur ve Google Search Console'da Dizin oluşturma > Site haritaları bölümünden gönder
 
@@ -598,13 +622,13 @@ Herkese açık sayfalar için `sitemap.xml` oluştur ve Google Search Console'da
 <DenetimPrompt liste={"yayin-oncesi"} bolum={"Sürüm çıkarma & geri dönüş"} />
 
 
-<Madde id={"yo-kesintisiz-surum"} no={86}>
+<Madde id={"yo-kesintisiz-surum"} no={90}>
 
 Yeni sürümü canlıyı bozmadan yayına al ve sorun çıkarsa önceki sürüme dakikalar içinde dönebil (blue-green ya da sağlık kontrollü kesintisiz güncelleme; istersen önce trafiğin küçük bir kısmına aç ve hata oranını izleyerek artır: canary); geri dönüşü yayından önce bir kez dene
 
 </Madde>
 
-<Madde id={"yo-geriye-uyumlu-sema"} no={87}>
+<Madde id={"yo-geriye-uyumlu-sema"} no={91}>
 
 Veritabanı değişikliklerini geriye uyumlu yap (genişlet-daralt): sütunu yeniden adlandırma ya da silme yerine önce yenisini ekle, iki yapıyı da okuyan kodu çıkar, veriyi taşı, eskisini sonraki sürümde kaldır; yoksa eski sürüme dönüş veritabanında kırılır
 

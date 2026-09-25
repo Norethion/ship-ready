@@ -30,6 +30,8 @@ CARD_PROMPTS = {
     "Stil": ("Bu stilde tasarla", "tasarim", lambda t, d, u: f'Bu arayüzü "{t}" stilinde yeniden tasarla. Stilin özellikleri: {d} Mevcut işlevleri, içeriği ve erişilebilirliği (kontrast, klavye kullanımı) koru.'),
     "Kalıp": ("Bu kalıbı uygula", "tasarim", lambda t, d, u: f'Bu projede "{t}" arayüz kalıbını uygula: {d} Önce silme gibi geri alınamaz işlemlerin olduğu ekranları bul ve kalıba uymayanları listele, sonra onayımla düzelt.'),
     "Renk çifti": ("Bu renklerle dene", "tasarim", lambda t, d, u: f'Bu arayüzde "{t}" renk çiftini dene ({d}). Renkleri tema değişkeni olarak tanımla, kontrastı WCAG AA sınırının altına düşürme ve önce hangi öğelere uygulayacağını göster.'),
+    "İlham": ("Bu fikri uyarla", "tasarim", lambda t, d, u: f'{t}{f" ({u})" if u else ""} sitesinden beğendiğim bir örneği ekran görüntüsü ya da adresiyle vereceğim. Düzeni birebir kopyalama; beğendiğim fikri (renk, tipografi, boşluk, hareket, bölüm akışı) bu projenin tasarımına ve altyapısına uyarla. Önce hangi fikri hangi ekrana uygulayacağını göster.'),
+    "Etkileşim": ("Bu etkileşimi yap", "tasarim", lambda t, d, u: f'Bu projede "{t}" etkileşimini yap: {d} Projenin altyapısına uygun animasyon yolunu seç (web\'de CSS ya da projede varsa Motion veya GSAP, mobilde platformun kendi animasyonları), hareketi azalt tercihinde animasyonu kapat ve önce hangi ekrana uygulayacağını göster.'),
 }
 TOOL_PROMPT = ("Kullanım prompt'u", "kullanim", lambda t, d, u: f"{t}{f' ({u})' if u else ''} aracını bu projede kullanmak istiyorum. Ne işe yarar: {d} Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle.")
 

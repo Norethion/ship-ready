@@ -64,7 +64,7 @@ Liste [bu videodan](https://www.instagram.com/reel/DctdIykgb9C/) ve aynı hesab�
 - **Önce yaz:** Ret mesajına App Store Connect'ten cevap vermek çoğu zaman yeni sürüm göndermekten hızlı sonuç verir.
 - **İtiraz:** Uygulamanın yanlış anlaşıldığını düşünüyorsan [App Review Board'a itiraz](https://developer.apple.com/contact/app-store/?topic=appeal) edebilirsin. Her ret için tek itiraz hakkı var; önce ekibin istediği ek bilgileri ver.
 - **Görüşme:** Apple, App Review ile 30 dakikalık Webex görüşmesi randevusu da veriyor ([App Review](https://developer.apple.com/distribute/app-review/) sayfasında).
-- **İlgili sekmeler:** Satın alma ekranı ve abonelik araçları [Gelir & analitik](gelir-analitik.md) sekmesinde; abonelik şartları ve hesap silme [yayın öncesi listesinin](yayin-oncesi-maddeler.md) 44. ve 80. maddelerinde.
+- **İlgili sekmeler:** Satın alma ekranı ve abonelik araçları [Gelir & analitik](gelir-analitik.md) sekmesinde; abonelik şartları ve hesap silme [yayın öncesi listesinin](yayin-oncesi-maddeler.md) 47. ve 84. maddelerinde.
 
 ## Göndermeden önce kontrol prompt'u
 

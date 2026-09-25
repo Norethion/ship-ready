@@ -84,7 +84,7 @@ Site, yerel sayfa ve MCP sunucusu bu çekirdeğin çıktısıyla beslenir; hiçb
 - Başka bir md'den bir maddeye numarasıyla atıf verilecekse numara yazılmaz, `{{no:kimlik}}` yazılır (ör. `[yayın öncesi {{no:yo-hesap-silme}}. madde](yayin-oncesi-maddeler.md)`); sayfa ve skill kopyaları maddenin o anki numarasını gösterir.
 - `<!-- yan-yana -->` satırı olan md'de tablolar karta dönüşür.
   Kartta ilk sütun başlık olur, `Tür` sütunu başlığın yanında etiket olarak görünür, sonraki ilk sütun açıklama, kalanlar "Başlık: değer" satırı olur.
-- Böyle bir md'de kartın prompt düğmesi tablonun ilk sütun başlığına göre seçilir: `Stil` "Bu stilde tasarla", `Kalıp` "Bu kalıbı uygula", `Renk çifti` "Bu renklerle dene", diğerleri araç sayılıp "Kullanım prompt'u" alır (`uygulama/site_uret.py` içindeki `CARD_PROMPTS`).
+- Böyle bir md'de kartın prompt düğmesi tablonun ilk sütun başlığına göre seçilir: `Stil` "Bu stilde tasarla", `Kalıp` "Bu kalıbı uygula", `Renk çifti` "Bu renklerle dene", `İlham` "Bu fikri uyarla", `Etkileşim` "Bu etkileşimi yap", diğerleri araç sayılıp "Kullanım prompt'u" alır (`uygulama/site_uret.py` içindeki `CARD_PROMPTS`).
 - Böyle bir md'de ilk sütun başlığı `Stil` olan tablolarda her karta o stilin CSS örneği eklenir.
   Örnekler `site/src/styles/ship.css` içindeki `.pv-<stil-adı>` sınıflarıdır (ad küçük harf, harf ve rakam dışı karakterler `-`); yeni stil eklenince örneğini de oraya yaz.
 - Md'ler arasında göreli link ver (`[yayın öncesi](yayin-oncesi-maddeler.md)`); site bunları sayfa adresine çevirir.

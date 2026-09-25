@@ -62,7 +62,21 @@ Beğendiğin bileşenin kodunu Claude'a verip "bunu kendi altyapıma çevir" dem
 | [GSAP](https://github.com/greensock/GSAP) | Animasyon | Bağımlılıksız animasyon kütüphanesi; ScrollTrigger, SplitText, MorphSVG gibi eklentiler dahil, React için `useGSAP`. | Her web projesi: düz JS, React, Vue, SVG, canvas | Web dışında kullanılmaz | Tüm eklentiler dahil ücretsiz, ticari kullanım serbest; açık kaynak değil (GreenSock lisansı) |
 | [Lottie Web](https://github.com/airbnb/lottie-web) | Animasyon oynatıcı | After Effects'te yapılıp JSON'a aktarılan animasyonları web'de oynatır. | Her web projesi (düz JS, npm ya da CDN) | Mobil için Lottie'nin iOS ve Android kütüphaneleri ayrı | Ücretsiz, MIT; animasyonu üretmek için After Effects gerekir, bir yıldan uzun süredir güncellenmiyor |
 | [Recharts](https://github.com/recharts/recharts) | Grafik | Bileşen tabanlı grafik kütüphanesi; eksen, tooltip, çizgi gibi parçalar ayrı bileşen olarak birleştirilir, SVG ile çizer. | React | Doğrudan kurulmaz; örnek alınır | Ücretsiz, MIT |
+| [Thinking Orbs](https://github.com/Jakubantalik/thinking-orbs) | Yükleniyor göstergesi | AI ve ajan arayüzleri için noktalı "düşünen küre" animasyonları: çalışıyor, arıyor, çözüyor, dinliyor, bağlanıyor gibi dokuz durum, sohbet için 64 ve satır içi 20 piksellik iki boyut. Sayfanın açık ya da koyu temasına kendiliğinden uyar; düz 2D canvas ile çizer (WebGL yok), ekrandan çıkınca durur, hareketi azalt tercihinde sabit kare gösterir. | React (`npm install thinking-orbs`) | Doğrudan kurulmaz; örnek alınıp çevrilir | Ücretsiz, MIT |
 | [mapcn](https://github.com/AnmolSaini16/mapcn) | Harita | Hazır harita bileşenleri: işaretçi, popup, rota, zoom ve pusula; shadcn/ui ile aynı yapıda. | React + Tailwind, MapLibre GL | Doğrudan kurulmaz; örnek alınır | Ücretsiz, MIT; varsayılan CARTO haritalarının ticari kullanımı lisans ister, OpenStreetMap gibi başka sağlayıcıya geçilebilir |
+
+## İlham siteleri
+
+Tasarıma başlarken ve takıldığında bakılan siteler; [bu gönderiden](https://www.instagram.com/p/DdRp-ZSCKeH/) alındı.
+Beğendiğin örneği kaydet ve neden beğendiğini not al; düzeni değil fikri al.
+
+| İlham | Ne var | Ücret |
+|---|---|---|
+| [Recent](https://recent.design) | Her gün güncellenen seçilmiş tasarım örnekleri: web sayfaları, marka, ürün ekranları, tipografi, hareket (motion), 3B. Eski adı Godly; godly.website adresi buraya yönlenir. | Ücretsiz |
+| [Saaspo](https://saaspo.com) | Sadece SaaS siteleri; sayfa türüne (landing, fiyatlandırma, ürün, hakkında...), bölüme ve kullanılan altyapıya (Webflow, Next.js, Framer...) göre süzülür, OG görselleri de var. | Ücretsiz, haftalık bülten |
+| [Awwwards](https://www.awwwards.com/websites/) | Jürinin ödüllendirdiği siteler ve yıllar öncesine uzanan "günün sitesi" arşivi; kategori, teknoloji (React, Webflow, Three.js), yazı tipi ve etikete göre süzülür. | Gezinmek ücretsiz; kurslar ve Pro üyelik ücretli |
+| [Pinterest](https://www.pinterest.com) | "web design", "dashboard ui" gibi aramalarla geniş görsel arşiv; beğendiklerini panolara kaydedersin. | Ücretsiz |
+| [X](https://x.com) | Tasarımcı ve geliştiricilerin yeni işlerini paylaştığı akış; beğendiğin kişileri bir listede toplarsın. | Ücretsiz |
 
 ## Tehlikeli işlemler
 
@@ -76,6 +90,20 @@ Silme gibi geri alınamaz işlemler için altı arayüz kalıbı; [bu videodan](
 | Kırmızıyı idareli kullan | Kırmızıyı sadece yıkıcı işlemlere ayır; uyarı, bildirim ve açık-kapalı düğmelerinde kullanma. | Her yer kırmızıysa gerçek tehlike fark edilmez. |
 | Tehlikeli bölge | Hesap ya da proje silme, sahipliği devretme gibi işlemleri ayarlar sayfasının en altında, çerçeveli ve başlıklı bir "Tehlikeli bölge"de topla. | Konum sürtünme yaratır; oraya yanlışlıkla gidilmez. |
 | Vazgeçme süresi | Hesap silmeyi hemen yapma; örneğin 14 gün sonra kalıcı sil, bu sürede tek tıkla iptal ettir. | Son savunma hattı; süre dolunca veri yine gerçekten silinmeli ([yayın öncesi {{no:yo-hesap-silme}}. madde](yayin-oncesi-maddeler.md)). |
+
+## Etkileşim örnekleri
+
+Instagram'da görülen, kodu paylaşılmamış etkileşimler; kartın prompt'u etkileşimi projenin kendi altyapısında yaptırır.
+
+| Etkileşim | Nasıl çalışır | Nerede işe yarar | Kaynak |
+|---|---|---|---|
+| Sıvı sekme çubuğu | Seçili sekmenin üstünde bir damla durur, çubuk damlanın etrafında eriyormuş gibi kıvrılır ve hiç kırışmaz; damla çubuk boyunca sürüklenebilir. HTML, CSS ve JavaScript ile yapılmış. | Web ve mobil alt menü, sekme geçişi | [video](https://www.instagram.com/reel/DbfG6fuPE9y/) |
+| Yeni alt menü fikirleri | On mobil alt menü: sıvı yüzen çubuk, mıknatıslı dock, cam kapsül, bölümlü dinamik çubuk, yörüngeli menü, dalgalı gösterge, neon dock, biçim değiştiren damla, katmanlı kartlar, sade dock. | Mobil uygulamanın alt menüsü | [video](https://www.instagram.com/reel/DcNLxSRz08-/) |
+| Animasyonlu ödeme ekranı | Kart bilgisi yazıldıkça kart önizlemesi dolar, CVC alanına gelince kart arkası görünecek şekilde döner; ödeme sırasında kart parlar, sonra başarı geçişi gelir. React ve Motion ile yapılmış. | Ödeme ve abonelik ekranı | [video](https://www.instagram.com/reel/Dac7xfXzudX/) |
+| Fiş yazdırma | "Fişi yazdır"a basınca fiş yazıcıdan kayarak çıkar ve üstüne "ÖDENDİ" damgası vurulur; yeniden yazdırma, fişi koparma ve kopyalama düğmeleri var. | Ödeme sonrası onay, makbuz ve fatura ekranı | [video](https://www.instagram.com/reel/Dcptq4cI68U/) |
+| Kilitli şifre gücü göstergesi | Şifre güçlendikçe simge açık kapıdan ataşa, asma kilide, sürgülü kilide ve kasa kapısına döner; şifrenin entropisini (bit) ve tahmini kırılma süresini yazar, "Güçlü öner" düğmesi şifre üretir. GSAP ile yapılmış. | Kayıt ve şifre değiştirme formu | [video](https://www.instagram.com/reel/DayJ5FBPbmb/) |
+| Akıcı giriş formu | Logo çizilerek açılır; Giriş ve Kayıt sekmeleri, alanın altında anında hata mesajı, giriş düğmesinde yükleniyor simgesinden onay işaretine geçiş. Flutter ile yapılmış. | Mobil giriş ve kayıt ekranı | [video](https://www.instagram.com/reel/Ddg450QpmE2/) |
+| Etkileşimli dashboard | Cam görünümlü istatistik kartları üzerine gelince hafifçe yükselir; grafik, görev ve işlem listeleri kartlarda toplanır, mobilde alt alta dizilir. React, Motion ve Lucide ikonlarıyla yapılmış. | Yönetim paneli, analitik ekranı | [video](https://www.instagram.com/reel/Ddf-7oiz126/) |
 
 ## Renk çiftleri
 

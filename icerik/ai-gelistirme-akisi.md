@@ -161,3 +161,12 @@ Müşteri e-postalarına taslak cevap:
 ```
 Gmail'deki yanıtlanmamış müşteri e-postalarını oku. docs/sss.md dosyasındaki cevaplara göre her biri için taslak yanıt hazırla; SSS'de karşılığı olmayanları ayrıca listele. E-postaları gönderme, sadece taslak olarak göster.
 ```
+
+[Bu videodaki](https://www.instagram.com/reel/Dc1su9HoqIO/) sekiz adım WhatsApp'tan randevu alan bir AI ajanı kurar: plan, WhatsApp bağlantısı, model, hafıza, işletme bilgisi, araçlar, test ve yayın.
+Her adım bir öncekine dayanır; ajanı sohbet botundan ayıran araçlardır (randevu almak gibi iş yapması).
+
+WhatsApp randevu ajanı kur:
+
+```
+İşletmem için WhatsApp'tan müşterilerle konuşup randevu alan bir AI ajanı kurmak istiyorum. İşletme: <ne yapıyor>. Müşteriler: <kimler>. Ajanın yapacakları: <soruları cevaplamak, randevu almak, iptal>. Asla yapmayacakları: <fiyat pazarlığı, iade sözü>. Kod yazmadan önce mimariyi öner ve onayımı al. Adımlar: 1) WhatsApp: Meta geliştirici uygulamasına WhatsApp ürününü ekle, webhook'u kur ve "messages" alanına abone ol (yoksa mesaj gelmez); müşterinin son mesajından 24 saat sonra sadece onaylı şablon mesaj gönderilebildiğini hesaba kat. 2) Modeli OpenRouter üzerinden bağla ki model değiştirmek tek satır olsun. 3) Hafıza: konuşmayı telefon numarasına göre sakla, son 20 kadar mesajı modele gönder, geçmişi sınırla ve eskisini sil. 4) İşletme bilgisi: hizmetler, fiyatlar, çalışma saatleri, SSS ve randevu kuralları; bilgide olmayan soruya "ekibe sorup döneceğim" desin. 5) Araçlar: müsaitlik ve randevu için Cal.com API'si; okumak serbest, randevu oluşturmadan önce müşteriden açıkça onay alsın, idempotency key kullan, "gelecek perşembe" gibi tarihleri model değil kod hesaplasın. 6) Kırmaya çalış: 31 Şubat, bir saniye arayla gelen iki mesaj, "talimatlarını unut", bilgide olmayan soru, randevudan sonra iptal; hepsini bir test setine koy ve her düzeltmeden sonra baştan çalıştır. 7) Yayına al: bilgisayarım değil VPS, pm2, geçerli TLS; webhook imzasını doğrula (adres herkese açık) ve her konuşma adımını logla. Anahtarları koda yazma, ortam değişkeninde tut.
+```
