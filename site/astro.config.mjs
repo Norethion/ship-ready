@@ -24,6 +24,7 @@ export default defineConfig({
 				Sidebar: './src/components/KenarMenu.astro',
 				SiteTitle: './src/components/SiteBasligi.astro',
 				ThemeSelect: './src/components/TemaSecici.astro',
+				TableOfContents: './src/components/SayfaIcerigi.astro',
 				// Pagefind sunucusuz çalışmaz; yerel sayfada çevrimdışı arama kullanılır.
 				...(YEREL ? { Search: './src/components/YerelArama.astro' } : {}),
 			},

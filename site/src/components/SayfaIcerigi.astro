@@ -1,0 +1,54 @@
+---
+// "Sayfa içeriği" menüsü: Starlight'ın menüsü, sayfanın dibine inilince son başlığı da seçebilsin diye genişletilir.
+// Starlight bir başlığı, altındaki öğeler ekranın üstündeki ince bir şeritten geçince seçer; son bölüm kısaysa sayfa o kadar
+// kaydırılamaz ve son başlık hiç seçilmez. Dipteyken son başlık seçilir, yukarı çıkınca başlıkların konumuna göre seçilir.
+// Hem sağdaki menüye hem telefondaki açılır menüye uygulanır.
+import Default from '@astrojs/starlight/components/TableOfContents.astro';
+---
+
+<Default />
+
+<script>
+	type Toc = HTMLElement & { current: HTMLAnchorElement };
+	const dipte = () => scrollY > 0 && innerHeight + scrollY >= document.documentElement.scrollHeight - 4;
+	const sonBaglanti = (toc: Toc) => [...toc.querySelectorAll<HTMLAnchorElement>('a')].pop();
+
+	// Starlight'ın kendi seçimi dipteyken son başlığın üstüne yazmasın: seçim dipte hep son bağlantıya yönlenir.
+	function sar(toc: Toc) {
+		let p = Object.getPrototypeOf(toc), asil: ((l: HTMLAnchorElement) => void) | undefined;
+		for (; p && !asil; p = Object.getPrototypeOf(p)) asil = Object.getOwnPropertyDescriptor(p, 'current')?.set;
+		if (!asil) return;
+		Object.defineProperty(toc, 'current', {
+			configurable: true,
+			set(link: HTMLAnchorElement) {
+				asil!.call(this, dipte() ? sonBaglanti(toc) ?? link : link);
+			},
+		});
+	}
+
+	// Dipten çıkınca: üst şeridi geçmiş son başlık seçilir (Starlight'ın çizgisiyle aynı yükseklik).
+	function konumaGore(toc: Toc) {
+		const cizgi = (document.querySelector('header')?.getBoundingClientRect().height ?? 0) + 32 + 53;
+		const baglantilar = [...toc.querySelectorAll<HTMLAnchorElement>('a')];
+		let secilen = baglantilar[0];
+		for (const a of baglantilar) {
+			const baslik = document.getElementById(decodeURIComponent(a.hash.slice(1)));
+			if (baslik && baslik.getBoundingClientRect().top <= cizgi) secilen = a;
+		}
+		if (secilen) toc.current = secilen;
+	}
+
+	Promise.all([customElements.whenDefined('starlight-toc'), customElements.whenDefined('mobile-starlight-toc')]).then(() => {
+		const menuler = [...document.querySelectorAll<Toc>('starlight-toc, mobile-starlight-toc')];
+		menuler.forEach(sar);
+		let oncekiDipte = false;
+		const guncelle = () => {
+			const simdi = dipte();
+			if (simdi) menuler.forEach((m) => { const son = sonBaglanti(m); if (son) m.current = son; });
+			else if (oncekiDipte) menuler.forEach(konumaGore);
+			oncekiDipte = simdi;
+		};
+		addEventListener('scroll', () => requestAnimationFrame(guncelle), { passive: true });
+		guncelle();
+	});
+</script>
