@@ -1,0 +1,52 @@
+---
+// Bir kontrol listesinin (ya da tek bölümünün) denetim prompt'u. Maddeler kimlikleriyle yazılır; rapor bu kimliklerle tutulur.
+// Yerel sayfada tüm listenin prompt'u raporu ship-ready'ye kaydettirir ve sayfayı yeniden ürettirir (src/yerel.ts).
+import path from 'node:path';
+import katalog from '../data/katalog.json';
+import PromptDugme from './PromptDugme.astro';
+import { KOK, YEREL } from '../yerel';
+
+interface Props {
+	liste: string;
+	bolum?: string;
+	/** Sadece düğme (Genel bakış kutucuğu): yanındaki açıklama yazılmaz. */
+	sade?: boolean;
+	etiket?: string;
+}
+const { liste, bolum, sade, etiket } = Astro.props;
+const l = katalog.listeler.find((x) => x.id === liste);
+if (!l) throw new Error(`Bilinmeyen liste: ${liste}`);
+const bolumler = bolum ? l.bolumler.filter((s) => s.baslik === bolum) : l.bolumler;
+if (!bolumler.length) throw new Error(`${liste} listesinde bölüm yok: ${bolum}`);
+const kaydet = YEREL && !bolum;
+const dosya = path.join(KOK, 'veri', 'raporlar', '<proje-adi>', `<YYYY-MM-DD>${liste === 'yayin-oncesi' ? '' : `-${liste}`}.md`);
+const metin = [
+	`Bu projeyi ship-ready'nin "${l.baslik}" listesine göre denetle${bolum ? ` (sadece "${bolum}" bölümü)` : ''}. Kodu, yapılandırmayı ve bağımlılıkları incele; tahmin etme, gördüğün kanıta dayan.`,
+	'',
+	kaydet
+		? 'Rapor biçimi (Markdown): ilk satır "# <Proje adı>", sonra "- Proje: <klasör yolu ya da repo>" ve "- Kontrol tarihi: <bugünün tarihi, YYYY-MM-DD>" maddeleri, ardından her bölüm için "## <bölüm adı>" ve altında | Kimlik | Madde | Durum | Bulgu | tablosu. Kimlik sütununa maddenin sonundaki köşeli parantezdeki kimliği yaz; rapor önceki raporla bu kimlikler üzerinden karşılaştırılır.'
+		: 'Rapor biçimi: her bölüm için "## <bölüm adı>" ve altında | Kimlik | Madde | Durum | Bulgu | tablosu. Kimlik sütununa maddenin sonundaki köşeli parantezdeki kimliği yaz.',
+	'Durum: ✅ tamam, ⚠️ kısmen, ❌ eksik, ➖ bu projeye uygulanmaz. Bulgu: kısa açıklama ve ilgili dosya:satır.',
+	'Sonunda eksik ve kısmen olan maddeleri önem sırasıyla özetle ve nasıl düzeltileceğini öner; değişiklik yapmadan önce onayımı al.',
+	...(kaydet
+		? [
+				`Raporu "${dosya}" dosyasına kaydet (proje adı küçük harf, boşluk yerine -), sonra şu komutu çalıştır: python "${path.join(KOK, 'uygulama', 'guncelle.py')}"`,
+			]
+		: []),
+	'',
+	...bolumler.flatMap((s) => [`## ${s.baslik}`, ...s.maddeler.map((m) => `${m.no}. ${m.metin} [${m.id}]`), '']),
+].join('\n');
+---
+
+<div class="denetim-satiri">
+	<PromptDugme metin={metin} etiket={etiket ?? (bolum ? 'Bu bölümü denetle' : 'Tüm listeyle denetle')} tur="denetim" />
+	{
+		!bolum && !sade && (
+			<span>
+				{kaydet
+					? "Kopyalayıp projenin Claude ya da Codex oturumuna yapıştır; rapor ship-ready'ye kaydedilir ve Proje raporları'nda görünür."
+					: 'Kopyalayıp projenin Claude ya da Codex oturumuna yapıştır; rapor maddeleri kimlikleriyle yazar.'}
+			</span>
+		)
+	}
+</div>

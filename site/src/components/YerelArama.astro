@@ -1,0 +1,90 @@
+---
+// Yerel sayfanın araması: Starlight'ın araması (Pagefind) sunucusuz çalışmadığı için yerel derlemede onun yerine geçer.
+// Dizin arama.js'tedir (uygulama/site_uret.py hazırlar, yerel-derleme.mjs yazar): sayfalar, maddeler, rehber öğeleri, repolar, raporlar.
+import { Icon } from '@astrojs/starlight/components';
+---
+
+<script is:inline src="/arama.js" defer></script>
+<button type="button" class="ya-dugme" aria-label="Ara" aria-keyshortcuts="Control+K" data-ya-ac>
+	<Icon name="magnifier" />
+	<span class="ya-yazi">Ara</span>
+	<kbd class="ya-kbd">Ctrl K</kbd>
+</button>
+<dialog class="ya-pencere" aria-label="Ara">
+	<div class="ya-ust">
+		<Icon name="magnifier" />
+		<input type="search" class="ya-girdi" placeholder="Maddelerde, rehberlerde, repolarda ve raporlarda ara…" autocomplete="off" spellcheck="false" />
+		<button type="button" class="ya-kapat" data-ya-kapat>İptal</button>
+	</div>
+	<p class="ya-bilgi" aria-live="polite"></p>
+	<ol class="ya-sonuclar"></ol>
+</dialog>
+
+<script>
+	interface Kayit { s: string; b: string; u: string; x: string; kb?: string; kx?: string }
+	const pencere = document.querySelector<HTMLDialogElement>('dialog.ya-pencere')!;
+	const girdi = pencere.querySelector<HTMLInputElement>('.ya-girdi')!;
+	const liste = pencere.querySelector<HTMLOListElement>('.ya-sonuclar')!;
+	const bilgi = pencere.querySelector<HTMLElement>('.ya-bilgi')!;
+	const EN_COK = 60;
+
+	// Türkçe büyük/küçük harf ve şapka, nokta farkı aramayı etkilemesin: "guvenlik" "Güvenlik"i bulur.
+	const katla = (s: string) => s.toLocaleLowerCase('tr').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ı/g, 'i');
+	const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+	let dizin: Kayit[] | null = null;
+	const hazirla = () => (dizin ??= ((window as any).SHIP_ARAMA as Kayit[] || []).map((k) => ({ ...k, kb: katla(k.b), kx: katla(k.x || '') })));
+
+	// Dizindeki adresler sitenin köküne göredir; sayfa dosyadan açıldığı için arama.js'in yerine göre göreli adrese çevrilir.
+	const kok = new URL('.', document.querySelector<HTMLScriptElement>('script[src$="arama.js"]')!.src);
+	const adres = (u: string) => {
+		const [yol, parca] = u.split(/#(.*)/s);
+		let p = yol.replace(/^\//, '');
+		if (p === '' || p.endsWith('/')) p += 'index.html';
+		return new URL(p, kok).href + (parca ? '#' + parca : '');
+	};
+
+	const vurgula = (metin: string, katli: string, terimler: string[]) => {
+		const araliklar: [number, number][] = [];
+		for (const t of terimler) for (let i = katli.indexOf(t); i >= 0; i = katli.indexOf(t, i + t.length)) araliklar.push([i, i + t.length]);
+		araliklar.sort((a, b) => a[0] - b[0]);
+		let html = '', son = 0;
+		for (const [a, b] of araliklar) {
+			if (a < son) continue;
+			html += esc(metin.slice(son, a)) + '<mark>' + esc(metin.slice(a, b)) + '</mark>';
+			son = b;
+		}
+		return html + esc(metin.slice(son));
+	};
+	const parca = (k: Kayit, terimler: string[]) => {
+		const yerler = terimler.map((t) => k.kx!.indexOf(t)).filter((i) => i >= 0);
+		const i = yerler.length ? Math.min(...yerler) : 0;
+		const bas = Math.max(0, i - 60), bit = Math.min(k.x.length, bas + 220);
+		return (bas > 0 ? '…' : '') + vurgula(k.x.slice(bas, bit), k.kx!.slice(bas, bit), terimler) + (bit < k.x.length ? '…' : '');
+	};
+
+	const ara = () => {
+		const terimler = katla(girdi.value).split(/\s+/).filter(Boolean);
+		if (!terimler.length) { liste.innerHTML = ''; bilgi.textContent = ''; return; }
+		const bulunan = hazirla()
+			.map((k) => terimler.every((t) => k.kb!.includes(t) || k.kx!.includes(t)) ? { k, puan: terimler.reduce((n, t) => n + (k.kb!.includes(t) ? 3 : 1), 0) } : null)
+			.filter((x): x is { k: Kayit; puan: number } => !!x)
+			.sort((a, b) => b.puan - a.puan);
+		bilgi.textContent = bulunan.length ? `${bulunan.length} sonuç${bulunan.length > EN_COK ? `, ilk ${EN_COK} tanesi` : ''}` : 'Sonuç yok.';
+		liste.innerHTML = bulunan.slice(0, EN_COK).map(({ k }) =>
+			`<li><a href="${esc(adres(k.u))}"><span class="ya-sayfa">${esc(k.s)}</span><span class="ya-baslik">${vurgula(k.b, k.kb!, terimler)}</span>` +
+			(k.x ? `<span class="ya-metin">${parca(k, terimler)}</span>` : '') + '</a></li>').join('');
+	};
+
+	const ac = () => { pencere.showModal(); girdi.select(); };
+	document.querySelectorAll('[data-ya-ac]').forEach((b) => b.addEventListener('click', ac));
+	pencere.querySelector('[data-ya-kapat]')!.addEventListener('click', () => pencere.close());
+	// Pencerenin dışına tıklayınca kapanır; sonuca tıklayınca (aynı sayfada bir bölüme gitse de) kapanır.
+	pencere.addEventListener('click', (e) => { if (e.target === pencere || (e.target as HTMLElement).closest('a')) pencere.close(); });
+	girdi.addEventListener('input', ara);
+	girdi.addEventListener('keydown', (e) => {
+		if (e.key === 'Enter') { const a = liste.querySelector('a'); if (a) { pencere.close(); location.href = a.href; } }
+	});
+	window.addEventListener('keydown', (e) => {
+		if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); pencere.open ? pencere.close() : ac(); }
+	});
+</script>

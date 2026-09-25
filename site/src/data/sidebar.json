@@ -1,0 +1,92 @@
+[
+ {
+  "label": "Genel bakış",
+  "link": "/",
+  "attrs": {
+   "data-ikon": "home"
+  }
+ },
+ {
+  "label": "Kontrol listeleri",
+  "items": [
+   {
+    "label": "Yayına almadan önce",
+    "link": "/listeler/yayin-oncesi/",
+    "attrs": {
+     "data-ikon": "shield"
+    },
+    "badge": "87"
+   },
+   {
+    "label": "App Store incelemesi",
+    "link": "/listeler/app-store/",
+    "attrs": {
+     "data-ikon": "phone"
+    },
+    "badge": "26"
+   },
+   {
+    "label": "Google Play incelemesi",
+    "link": "/listeler/google-play/",
+    "attrs": {
+     "data-ikon": "play"
+    },
+    "badge": "24"
+   },
+   {
+    "label": "Paywall dönüşümü",
+    "link": "/listeler/paywall/",
+    "attrs": {
+     "data-ikon": "card"
+    },
+    "badge": "27"
+   }
+  ]
+ },
+ {
+  "label": "Rehberler",
+  "items": [
+   {
+    "label": "UI/UX",
+    "link": "/rehberler/ui-ux-tasarim-stilleri/",
+    "attrs": {
+     "data-ikon": "palette"
+    }
+   },
+   {
+    "label": "Gelir & analitik",
+    "link": "/rehberler/gelir-analitik/",
+    "attrs": {
+     "data-ikon": "chart"
+    }
+   },
+   {
+    "label": "Yayına alma & barındırma",
+    "link": "/rehberler/yayina-alma-barindirma/",
+    "attrs": {
+     "data-ikon": "server"
+    }
+   },
+   {
+    "label": "AI geliştirme akışı",
+    "link": "/rehberler/ai-gelistirme-akisi/",
+    "attrs": {
+     "data-ikon": "sparkles"
+    }
+   }
+  ]
+ },
+ {
+  "label": "Katalog",
+  "items": [
+   {
+    "label": "Repo kataloğu",
+    "link": "/repolar/",
+    "attrs": {
+     "data-ikon": "package"
+    },
+    "badge": "113"
+   }
+  ]
+ }
+]

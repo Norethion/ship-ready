@@ -1,0 +1,508 @@
+---
+title: "UI/UX: stiller ve araçlar"
+description: "Claude'a arayüz yaptırırken stilin İngilizce adını prompt'a yazmak yeterli, örneğin \"Bento Grid düzeninde, Glassmorphism kartlarla bir özellik sayfası\"."
+---
+
+import Kartlar from '../../../components/Kartlar.astro';
+import Kart from '../../../components/Kart.astro';
+
+Claude'a arayüz yaptırırken stilin İngilizce adını prompt'a yazmak yeterli, örneğin "Bento Grid düzeninde, Glassmorphism kartlarla bir özellik sayfası".
+İşe yarayan tasarım skill'leri: [Impeccable](https://github.com/pbakaus/impeccable), [Taste Skill](https://github.com/Leonxlnx/taste-skill), [UI/UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill).
+Arayüzün her sayfada aynı kalması için projeye bir `DESIGN.md` koy: renkleri, yazı tiplerini ve boşlukları tanımlar, ajan arayüzü buna göre üretir; hazır örnekler [awesome-design-md](https://github.com/VoltAgent/awesome-design-md) reposunda.
+
+## Stiller
+
+<Kartlar>
+
+<Kart baslik={"Claymorphism"} onizleme={"claymorphism"} prompt={"Bu arayüzü \"Claymorphism\" stilinde yeniden tasarla. Stilin özellikleri: Kil ya da hamurdan yapılmış gibi şişkin, yumuşak 3B şekiller; iç ve dış yumuşak gölgeler, pastel renkler, çok yuvarlak köşeler. Mevcut işlevleri, içeriği ve erişilebilirliği (kontrast, klavye kullanımı) koru."} promptEtiket={"Bu stilde tasarla"} promptTur={"tasarim"}>
+
+Kil ya da hamurdan yapılmış gibi şişkin, yumuşak 3B şekiller; iç ve dış yumuşak gölgeler, pastel renkler, çok yuvarlak köşeler.
+
+<span class="meta">**Nerede işe yarar:** Eğlenceli uygulamalar, eğitim ve çocuk ürünleri, ikon ve illüstrasyonlar</span>
+
+</Kart>
+
+<Kart baslik={"Cybercore"} onizleme={"cybercore"} prompt={"Bu arayüzü \"Cybercore\" stilinde yeniden tasarla. Stilin özellikleri: Erken internet ve dijital dünya estetiği: ikili kod, piksel grafikler, eski işletim sistemi pencereleri, parlak mavi ve yeşil. Mevcut işlevleri, içeriği ve erişilebilirliği (kontrast, klavye kullanımı) koru."} promptEtiket={"Bu stilde tasarla"} promptTur={"tasarim"}>
+
+Erken internet ve dijital dünya estetiği: ikili kod, piksel grafikler, eski işletim sistemi pencereleri, parlak mavi ve yeşil.
+
+<span class="meta">**Nerede işe yarar:** Teknoloji meraklısı kitle, etkinlik ve kampanya sayfaları</span>
+
+</Kart>
+
+<Kart baslik={"Neo-Brutalism"} onizleme={"neo-brutalism"} prompt={"Bu arayüzü \"Neo-Brutalism\" stilinde yeniden tasarla. Stilin özellikleri: Kalın siyah kenarlıklar, bulanıklığı olmayan sert gölgeler, doygun düz renkler, bilerek \"ham\" bırakılmış görünüm. Mevcut işlevleri, içeriği ve erişilebilirliği (kontrast, klavye kullanımı) koru."} promptEtiket={"Bu stilde tasarla"} promptTur={"tasarim"}>
+
+Kalın siyah kenarlıklar, bulanıklığı olmayan sert gölgeler, doygun düz renkler, bilerek "ham" bırakılmış görünüm.
+
+<span class="meta">**Nerede işe yarar:** Startup ve ürün tanıtımı, genç kitleye hitap eden markalar</span>
+
+</Kart>
+
+<Kart baslik={"Scrapbook"} onizleme={"scrapbook"} prompt={"Bu arayüzü \"Scrapbook\" stilinde yeniden tasarla. Stilin özellikleri: Karalama defteri kolajı: yırtık kâğıt, bant, çıkartma, el yazısı, polaroid fotoğraflar. Mevcut işlevleri, içeriği ve erişilebilirliği (kontrast, klavye kullanımı) koru."} promptEtiket={"Bu stilde tasarla"} promptTur={"tasarim"}>
+
+Karalama defteri kolajı: yırtık kâğıt, bant, çıkartma, el yazısı, polaroid fotoğraflar.
+
+<span class="meta">**Nerede işe yarar:** Kişisel blog, portfolyo, etkinlik, hobi markaları</span>
+
+</Kart>
+
+<Kart baslik={"Surrealism"} onizleme={"surrealism"} prompt={"Bu arayüzü \"Surrealism\" stilinde yeniden tasarla. Stilin özellikleri: Rüya gibi, mantık dışı kompozisyonlar; beklenmedik nesne birleşimleri, gerçeküstü 3B sahneler. Mevcut işlevleri, içeriği ve erişilebilirliği (kontrast, klavye kullanımı) koru."} promptEtiket={"Bu stilde tasarla"} promptTur={"tasarim"}>
+
+Rüya gibi, mantık dışı kompozisyonlar; beklenmedik nesne birleşimleri, gerçeküstü 3B sahneler.
+
+<span class="meta">**Nerede işe yarar:** Sanat projeleri, kampanya ve açılış (hero) görselleri, marka hikâyesi</span>
+
+</Kart>
+
+<Kart baslik={"Y2K Aesthetic"} onizleme={"y2k-aesthetic"} prompt={"Bu arayüzü \"Y2K Aesthetic\" stilinde yeniden tasarla. Stilin özellikleri: 2000'lerin başı: krom ve metalik yüzeyler, holografik gradyanlar, kabarcık yazılar, parlak pembe ve mavi. Mevcut işlevleri, içeriği ve erişilebilirliği (kontrast, klavye kullanımı) koru."} promptEtiket={"Bu stilde tasarla"} promptTur={"tasarim"}>
+
+2000'lerin başı: krom ve metalik yüzeyler, holografik gradyanlar, kabarcık yazılar, parlak pembe ve mavi.
+
+<span class="meta">**Nerede işe yarar:** Moda, müzik, genç kitle</span>
+
+</Kart>
+
+<Kart baslik={"Pixel Art"} onizleme={"pixel-art"} prompt={"Bu arayüzü \"Pixel Art\" stilinde yeniden tasarla. Stilin özellikleri: Piksel piksel çizilmiş düşük çözünürlüklü grafikler, bitmap fontlar, retro oyun hissi. Mevcut işlevleri, içeriği ve erişilebilirliği (kontrast, klavye kullanımı) koru."} promptEtiket={"Bu stilde tasarla"} promptTur={"tasarim"}>
+
+Piksel piksel çizilmiş düşük çözünürlüklü grafikler, bitmap fontlar, retro oyun hissi.
+
+<span class="meta">**Nerede işe yarar:** Oyunlar, nostaljik markalar, eğlenceli küçük etkileşimler</span>
+
+</Kart>
+
+<Kart baslik={"Synthwave"} onizleme={"synthwave"} prompt={"Bu arayüzü \"Synthwave\" stilinde yeniden tasarla. Stilin özellikleri: 80'ler retro-fütürizmi: neon pembe, mor ve turkuaz, gün batımı, ızgara zemin, krom yazılar. Mevcut işlevleri, içeriği ve erişilebilirliği (kontrast, klavye kullanımı) koru."} promptEtiket={"Bu stilde tasarla"} promptTur={"tasarim"}>
+
+80'ler retro-fütürizmi: neon pembe, mor ve turkuaz, gün batımı, ızgara zemin, krom yazılar.
+
+<span class="meta">**Nerede işe yarar:** Müzik, oyun, etkinlik sayfaları</span>
+
+</Kart>
+
+<Kart baslik={"Glassmorphism"} onizleme={"glassmorphism"} prompt={"Bu arayüzü \"Glassmorphism\" stilinde yeniden tasarla. Stilin özellikleri: Buzlu cam paneller: yarı saydam yüzey, arkasını bulanıklaştırma, ince açık kenarlık, renkli arka plan. Metnin okunabilirliğine dikkat. Mevcut işlevleri, içeriği ve erişilebilirliği (kontrast, klavye kullanımı) koru."} promptEtiket={"Bu stilde tasarla"} promptTur={"tasarim"}>
+
+Buzlu cam paneller: yarı saydam yüzey, arkasını bulanıklaştırma, ince açık kenarlık, renkli arka plan. Metnin okunabilirliğine dikkat.
+
+<span class="meta">**Nerede işe yarar:** Dashboard kartları, modal ve açılır pencereler, iOS/macOS benzeri arayüzler</span>
+
+</Kart>
+
+<Kart baslik={"Neumorphism"} onizleme={"neumorphism"} prompt={"Bu arayüzü \"Neumorphism\" stilinde yeniden tasarla. Stilin özellikleri: Arka planla aynı renkte, açık ve koyu iki gölgeyle kabartılmış ya da gömülmüş öğeler. Kontrast düşük olduğu için erişilebilirlik zayıf. Mevcut işlevleri, içeriği ve erişilebilirliği (kontrast, klavye kullanımı) koru."} promptEtiket={"Bu stilde tasarla"} promptTur={"tasarim"}>
+
+Arka planla aynı renkte, açık ve koyu iki gölgeyle kabartılmış ya da gömülmüş öğeler. Kontrast düşük olduğu için erişilebilirlik zayıf.
+
+<span class="meta">**Nerede işe yarar:** Kontrol panelleri, akıllı ev ve müzik çalar arayüzleri; küçük alanlarda</span>
+
+</Kart>
+
+<Kart baslik={"Bento Grid"} onizleme={"bento-grid"} prompt={"Bu arayüzü \"Bento Grid\" stilinde yeniden tasarla. Stilin özellikleri: Farklı boyutlarda, yuvarlak köşeli kutulardan oluşan ızgara; Apple'ın tanıtım sayfalarındaki gibi. Mevcut işlevleri, içeriği ve erişilebilirliği (kontrast, klavye kullanımı) koru."} promptEtiket={"Bu stilde tasarla"} promptTur={"tasarim"}>
+
+Farklı boyutlarda, yuvarlak köşeli kutulardan oluşan ızgara; Apple'ın tanıtım sayfalarındaki gibi.
+
+<span class="meta">**Nerede işe yarar:** Özellik tanıtımı, dashboard, portfolyo</span>
+
+</Kart>
+
+<Kart baslik={"Editorial Design"} onizleme={"editorial-design"} prompt={"Bu arayüzü \"Editorial Design\" stilinde yeniden tasarla. Stilin özellikleri: Dergi ve gazete düzeni: güçlü başlık hiyerarşisi, çok sütun, büyük görseller, bol beyaz alan. Mevcut işlevleri, içeriği ve erişilebilirliği (kontrast, klavye kullanımı) koru."} promptEtiket={"Bu stilde tasarla"} promptTur={"tasarim"}>
+
+Dergi ve gazete düzeni: güçlü başlık hiyerarşisi, çok sütun, büyük görseller, bol beyaz alan.
+
+<span class="meta">**Nerede işe yarar:** Blog, haber ve içerik siteleri, vaka çalışmaları</span>
+
+</Kart>
+
+<Kart baslik={"Swiss Design"} onizleme={"swiss-design"} prompt={"Bu arayüzü \"Swiss Design\" stilinde yeniden tasarla. Stilin özellikleri: Katı ızgara, sans-serif fontlar (Helvetica tarzı), asimetrik ama düzenli yerleşim, az renk, net hiyerarşi. Mevcut işlevleri, içeriği ve erişilebilirliği (kontrast, klavye kullanımı) koru."} promptEtiket={"Bu stilde tasarla"} promptTur={"tasarim"}>
+
+Katı ızgara, sans-serif fontlar (Helvetica tarzı), asimetrik ama düzenli yerleşim, az renk, net hiyerarşi.
+
+<span class="meta">**Nerede işe yarar:** Kurumsal siteler, ajanslar, bilgi yoğun sayfalar</span>
+
+</Kart>
+
+<Kart baslik={"Minimalism"} onizleme={"minimalism"} prompt={"Bu arayüzü \"Minimalism\" stilinde yeniden tasarla. Stilin özellikleri: Az öğe, bol boşluk, sınırlı renk paleti; sadece gerekeni gösterir. Mevcut işlevleri, içeriği ve erişilebilirliği (kontrast, klavye kullanımı) koru."} promptEtiket={"Bu stilde tasarla"} promptTur={"tasarim"}>
+
+Az öğe, bol boşluk, sınırlı renk paleti; sadece gerekeni gösterir.
+
+<span class="meta">**Nerede işe yarar:** SaaS ve ürün sayfaları, portfolyo; çoğu proje için güvenli varsayılan</span>
+
+</Kart>
+
+<Kart baslik={"Maximalism"} onizleme={"maximalism"} prompt={"Bu arayüzü \"Maximalism\" stilinde yeniden tasarla. Stilin özellikleri: Bilinçli fazlalık: yoğun renk, desen ve katman, karışık fontlar, cesur kompozisyon. Mevcut işlevleri, içeriği ve erişilebilirliği (kontrast, klavye kullanımı) koru."} promptEtiket={"Bu stilde tasarla"} promptTur={"tasarim"}>
+
+Bilinçli fazlalık: yoğun renk, desen ve katman, karışık fontlar, cesur kompozisyon.
+
+<span class="meta">**Nerede işe yarar:** Moda, sanat, yaratıcı ajanslar, dikkat çekmesi gereken kampanyalar</span>
+
+</Kart>
+
+<Kart baslik={"Luxury Typography"} onizleme={"luxury-typography"} prompt={"Bu arayüzü \"Luxury Typography\" stilinde yeniden tasarla. Stilin özellikleri: İnce serif fontlar, geniş harf aralığı, büyük başlıklar, siyah-beyaz-altın, bol boşluk. Mevcut işlevleri, içeriği ve erişilebilirliği (kontrast, klavye kullanımı) koru."} promptEtiket={"Bu stilde tasarla"} promptTur={"tasarim"}>
+
+İnce serif fontlar, geniş harf aralığı, büyük başlıklar, siyah-beyaz-altın, bol boşluk.
+
+<span class="meta">**Nerede işe yarar:** Lüks ürün, otel, parfüm, mücevher, emlak</span>
+
+</Kart>
+
+<Kart baslik={"Conceptual Sketch"} onizleme={"conceptual-sketch"} prompt={"Bu arayüzü \"Conceptual Sketch\" stilinde yeniden tasarla. Stilin özellikleri: Elle çizilmiş eskiz görünümü: kalem çizgileri, taslak ikonlar, kâğıt dokusu. Mevcut işlevleri, içeriği ve erişilebilirliği (kontrast, klavye kullanımı) koru."} promptEtiket={"Bu stilde tasarla"} promptTur={"tasarim"}>
+
+Elle çizilmiş eskiz görünümü: kalem çizgileri, taslak ikonlar, kâğıt dokusu.
+
+<span class="meta">**Nerede işe yarar:** Fikir ve süreç anlatımı, eğitim içerikleri, taslak hissi verilmek istenen sayfalar</span>
+
+</Kart>
+
+<Kart baslik={"Ethereal"} onizleme={"ethereal"} prompt={"Bu arayüzü \"Ethereal\" stilinde yeniden tasarla. Stilin özellikleri: Rüya gibi hafif ve havadar: soluk pastel tonlar, yumuşak ışık ve gradyanlar, bulanıklık. Mevcut işlevleri, içeriği ve erişilebilirliği (kontrast, klavye kullanımı) koru."} promptEtiket={"Bu stilde tasarla"} promptTur={"tasarim"}>
+
+Rüya gibi hafif ve havadar: soluk pastel tonlar, yumuşak ışık ve gradyanlar, bulanıklık.
+
+<span class="meta">**Nerede işe yarar:** Sağlık ve wellness, güzellik, meditasyon</span>
+
+</Kart>
+
+<Kart baslik={"Bohemian"} onizleme={"bohemian"} prompt={"Bu arayüzü \"Bohemian\" stilinde yeniden tasarla. Stilin özellikleri: Doğal ve el yapımı hissi: toprak tonları, organik dokular, bitki ve desen motifleri, el yazısı fontlar. Mevcut işlevleri, içeriği ve erişilebilirliği (kontrast, klavye kullanımı) koru."} promptEtiket={"Bu stilde tasarla"} promptTur={"tasarim"}>
+
+Doğal ve el yapımı hissi: toprak tonları, organik dokular, bitki ve desen motifleri, el yazısı fontlar.
+
+<span class="meta">**Nerede işe yarar:** El yapımı ürünler, kafe, yoga, seyahat</span>
+
+</Kart>
+
+<Kart baslik={"Victorian"} onizleme={"victorian"} prompt={"Bu arayüzü \"Victorian\" stilinde yeniden tasarla. Stilin özellikleri: 19. yüzyıl süslemesi: süslü serif fontlar, çerçeveler, gravür illüstrasyonlar, bordo, koyu yeşil ve altın. Mevcut işlevleri, içeriği ve erişilebilirliği (kontrast, klavye kullanımı) koru."} promptEtiket={"Bu stilde tasarla"} promptTur={"tasarim"}>
+
+19. yüzyıl süslemesi: süslü serif fontlar, çerçeveler, gravür illüstrasyonlar, bordo, koyu yeşil ve altın.
+
+<span class="meta">**Nerede işe yarar:** Tarihi markalar, kitapçı, özel etkinlik, vintage ürünler</span>
+
+</Kart>
+
+<Kart baslik={"Cyberpunk"} onizleme={"cyberpunk"} prompt={"Bu arayüzü \"Cyberpunk\" stilinde yeniden tasarla. Stilin özellikleri: Distopik gelecek: koyu zemin, neon sarı, camgöbeği ve pembe, glitch efektleri, HUD tarzı arayüz çizgileri. Mevcut işlevleri, içeriği ve erişilebilirliği (kontrast, klavye kullanımı) koru."} promptEtiket={"Bu stilde tasarla"} promptTur={"tasarim"}>
+
+Distopik gelecek: koyu zemin, neon sarı, camgöbeği ve pembe, glitch efektleri, HUD tarzı arayüz çizgileri.
+
+<span class="meta">**Nerede işe yarar:** Oyun, teknoloji ürünleri, etkinlik</span>
+
+</Kart>
+
+<Kart baslik={"Wabi-Sabi"} onizleme={"wabi-sabi"} prompt={"Bu arayüzü \"Wabi-Sabi\" stilinde yeniden tasarla. Stilin özellikleri: Japon \"kusurun güzelliği\" estetiği: doğal malzeme dokuları, asimetri, sade toprak renkleri, sakinlik. Mevcut işlevleri, içeriği ve erişilebilirliği (kontrast, klavye kullanımı) koru."} promptEtiket={"Bu stilde tasarla"} promptTur={"tasarim"}>
+
+Japon "kusurun güzelliği" estetiği: doğal malzeme dokuları, asimetri, sade toprak renkleri, sakinlik.
+
+<span class="meta">**Nerede işe yarar:** Seramik ve el işi, mimari, çay ve kahve markaları</span>
+
+</Kart>
+
+</Kartlar>
+
+
+## Siteler ve kütüphaneler
+
+React dışı bir projede (Vue, Angular, Blazor, mobil) bileşen kütüphaneleri doğrudan kurulamaz ama örnek alınabilir.
+Beğendiğin bileşenin kodunu Claude'a verip "bunu kendi altyapıma çevir" demek yeterli.
+
+<Kartlar>
+
+<Kart baslik={"21st.dev"} href={"https://21st.dev/"} tur={"Bileşen kütüphanesi"} prompt={"21st.dev (https://21st.dev/) aracını bu projede kullanmak istiyorum. Ne işe yarar: 12.000'den fazla React ve Tailwind bileşeni, şablon ve shadcn teması; canlı önizlemeli. Bileşen shadcn CLI ile tek komutla projeye kopyalanır, kod senin olur. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+12.000'den fazla React ve Tailwind bileşeni, şablon ve shadcn teması; canlı önizlemeli. Bileşen shadcn CLI ile tek komutla projeye kopyalanır, kod senin olur.
+
+<span class="meta">**Altyapı:** React + Tailwind, shadcn kurulu proje (Next.js ya da Vite)</span>
+<span class="meta">**Başka altyapıda:** Doğrudan kurulmaz; örnek alınıp çevrilir</span>
+<span class="meta">**Ücret:** Gezinmek ücretsiz, günde 2 kopyalama; sınırsız kopyalama ve 21st AI ücretli</span>
+
+</Kart>
+
+<Kart baslik={"Aceternity UI"} href={"https://ui.aceternity.com/"} tur={"Bileşen kütüphanesi"} prompt={"Aceternity UI (https://ui.aceternity.com/) aracını bu projede kullanmak istiyorum. Ne işe yarar: React, Tailwind ve Motion ile yapılmış 200'den fazla animasyonlu bileşen, blok ve şablon. Kopyala-yapıştır ya da shadcn ile eklenir. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+React, Tailwind ve Motion ile yapılmış 200'den fazla animasyonlu bileşen, blok ve şablon. Kopyala-yapıştır ya da shadcn ile eklenir.
+
+<span class="meta">**Altyapı:** React + Tailwind + Motion (Next.js ya da Vite)</span>
+<span class="meta">**Başka altyapıda:** Doğrudan kurulmaz; örnek alınıp çevrilir. Animasyonlar Motion kütüphanesine bağlı olduğu için çevirmek daha çok emek ister</span>
+<span class="meta">**Ücret:** Bileşenlerin bir kısmı ücretsiz, hazır blok ve şablonlar ücretli (All-Access Pass)</span>
+
+</Kart>
+
+<Kart baslik={"Kinetics"} href={"https://kinetics.colorion.co"} tur={"Animasyon"} prompt={"Kinetics (https://kinetics.colorion.co) aracını bu projede kullanmak istiyorum. Ne işe yarar: Yay fiziğiyle çalışan 153 arayüz animasyonu: buton, slider, sürükleme, form, yükleniyor, liste, modal. Sertlik ve sönümü ayarlayıp CSS, React ya da hazır AI prompt'u olarak kopyalarsın. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Yay fiziğiyle çalışan 153 arayüz animasyonu: buton, slider, sürükleme, form, yükleniyor, liste, modal. Sertlik ve sönümü ayarlayıp CSS, React ya da hazır AI prompt'u olarak kopyalarsın.
+
+<span class="meta">**Altyapı:** Her web projesi (düz CSS); React bileşeni olarak da alınır</span>
+<span class="meta">**Başka altyapıda:** CSS hâli her web altyapısında çalışır; mobil gibi web dışı ortamlar için hazır AI prompt'u kullanılır</span>
+<span class="meta">**Ücret:** Ücretsiz, açık kaynak</span>
+
+</Kart>
+
+<Kart baslik={"Animated Buttons"} href={"https://animatedbuttons.colorion.co"} tur={"Animasyon"} prompt={"Animated Buttons (https://animatedbuttons.colorion.co) aracını bu projede kullanmak istiyorum. Ne işe yarar: Sadece CSS ile yapılmış 99 hover efektli buton; JavaScript ya da bağımlılık yok, kopyala-yapıştır. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Sadece CSS ile yapılmış 99 hover efektli buton; JavaScript ya da bağımlılık yok, kopyala-yapıştır.
+
+<span class="meta">**Altyapı:** Her web projesi: düz HTML, React, Vue, Angular, Blazor, PHP</span>
+<span class="meta">**Başka altyapıda:** Web dışında (mobil) sadece örnek alınır</span>
+<span class="meta">**Ücret:** Ücretsiz, MIT lisansı</span>
+
+</Kart>
+
+<Kart baslik={"VibePrompt"} href={"https://vibeprompts.dev"} tur={"Prompt kütüphanesi"} prompt={"VibePrompt (https://vibeprompts.dev) aracını bu projede kullanmak istiyorum. Ne işe yarar: 15 kategoride 286'dan fazla arayüz prompt'u ve Tailwind kodu: giriş formu, dashboard, yorumlar vb. Prompt'u AI aracına yapıştırıp bileşeni ürettirirsin. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+15 kategoride 286'dan fazla arayüz prompt'u ve Tailwind kodu: giriş formu, dashboard, yorumlar vb. Prompt'u AI aracına yapıştırıp bileşeni ürettirirsin.
+
+<span class="meta">**Altyapı:** Tailwind kullanan her proje (HTML, React, Vue, Svelte)</span>
+<span class="meta">**Başka altyapıda:** Tailwind yoksa prompt'a kendi altyapını yazarsın ("Bootstrap ile", "düz CSS ile")</span>
+<span class="meta">**Ücret:** Ücretsiz</span>
+
+</Kart>
+
+<Kart baslik={"MotionSites"} href={"https://motionsites.ai/"} tur={"Prompt kütüphanesi"} prompt={"MotionSites (https://motionsites.ai/) aracını bu projede kullanmak istiyorum. Ne işe yarar: Claude, Lovable, Bolt, Cursor gibi AI site yapıcılar için hazır prompt'lar; landing page, portfolyo ve 3B siteler. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Claude, Lovable, Bolt, Cursor gibi AI site yapıcılar için hazır prompt'lar; landing page, portfolyo ve 3B siteler.
+
+<span class="meta">**Altyapı:** Altyapıdan bağımsız; çıkan kod kullandığın AI aracına bağlı</span>
+<span class="meta">**Başka altyapıda:** Prompt'a altyapıyı eklemen yeterli ("Vue 3 ile", "düz HTML ile")</span>
+<span class="meta">**Ücret:** Bir kısmı ücretsiz, sınırsız erişim ücretli</span>
+
+</Kart>
+
+<Kart baslik={"Stitch"} href={"https://stitch.withgoogle.com"} tur={"Arayüz tasarımı (AI)"} prompt={"Stitch (https://stitch.withgoogle.com) aracını bu projede kullanmak istiyorum. Ne işe yarar: Google'ın aracı: metinden, eskizden ya da ekran görüntüsünden web ve mobil arayüz tasarlar, HTML/CSS koduna çevirir; Figma'ya, AI Studio'ya ya da Antigravity'ye aktarır. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Google'ın aracı: metinden, eskizden ya da ekran görüntüsünden web ve mobil arayüz tasarlar, HTML/CSS koduna çevirir; Figma'ya, AI Studio'ya ya da Antigravity'ye aktarır.
+
+<span class="meta">**Altyapı:** Her proje: çıktı HTML/CSS</span>
+<span class="meta">**Başka altyapıda:** Kodu Claude'a kendi altyapına çevirttirirsin</span>
+<span class="meta">**Ücret:** Fiyat belirtilmemiş, kotalı; Google Labs deneyi, 18+</span>
+
+</Kart>
+
+<Kart baslik={"Forma - Icon Creator"} href={"https://iconcreator.dev"} tur={"İkon"} prompt={"Forma - Icon Creator (https://iconcreator.dev) aracını bu projede kullanmak istiyorum. Ne işe yarar: Tabler, Lucide, Phosphor, Iconoir ve Heroicons ikonlarından uygulama ikonu tasarlayıp SVG ya da PNG olarak indirirsin. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Tabler, Lucide, Phosphor, Iconoir ve Heroicons ikonlarından uygulama ikonu tasarlayıp SVG ya da PNG olarak indirirsin.
+
+<span class="meta">**Altyapı:** Her proje: SVG ve PNG web, mobil ve masaüstünde kullanılır (uygulama ikonu, favicon)</span>
+<span class="meta">**Başka altyapıda:** Fark yok</span>
+<span class="meta">**Ücret:** Sitede belirtilmemiş</span>
+
+</Kart>
+
+<Kart baslik={"Invoice Generator"} href={"https://invoicegenerator.io"} tur={"Fatura (UI dışı)"} prompt={"Invoice Generator (https://invoicegenerator.io) aracını bu projede kullanmak istiyorum. Ne işe yarar: Tarayıcıda fatura hazırlayıp PDF indirirsin; veriler cihazında kalır, sunucuya gönderilmez. 30'dan fazla para birimi, vergi, indirim, kargo alanları. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Tarayıcıda fatura hazırlayıp PDF indirirsin; veriler cihazında kalır, sunucuya gönderilmez. 30'dan fazla para birimi, vergi, indirim, kargo alanları.
+
+<span class="meta">**Altyapı:** Kod değil; tarayıcıda doğrudan kullanılan araç</span>
+<span class="meta">**Başka altyapıda:** Uygulamana fatura ekranı yapacaksan düzeni örnek alınabilir</span>
+<span class="meta">**Ücret:** Ücretsiz, üyelik ve filigran yok</span>
+
+</Kart>
+
+<Kart baslik={"shadcn/ui"} href={"https://github.com/shadcn-ui/ui"} tur={"Bileşen kütüphanesi"} prompt={"shadcn/ui (https://github.com/shadcn-ui/ui) aracını bu projede kullanmak istiyorum. Ne işe yarar: Kodu doğrudan projeye kopyalanan, erişilebilir bileşenler; CLI ile eklenir. 21st.dev ve Aceternity bileşenleri de shadcn CLI ile eklenir. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Kodu doğrudan projeye kopyalanan, erişilebilir bileşenler; CLI ile eklenir. 21st.dev ve Aceternity bileşenleri de shadcn CLI ile eklenir.
+
+<span class="meta">**Altyapı:** React + Tailwind (Next.js, Vite, Remix, Astro, TanStack, Laravel)</span>
+<span class="meta">**Başka altyapıda:** Doğrudan kurulmaz; örnek alınıp çevrilir</span>
+<span class="meta">**Ücret:** Ücretsiz, MIT</span>
+
+</Kart>
+
+<Kart baslik={"Magic UI"} href={"https://github.com/magicuidesign/magicui"} tur={"Animasyonlu bileşen"} prompt={"Magic UI (https://github.com/magicuidesign/magicui) aracını bu projede kullanmak istiyorum. Ne işe yarar: Landing page ve tanıtım sayfaları için animasyonlu, kopyala-yapıştır bileşenler; kurulumu shadcn/ui ile aynı. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Landing page ve tanıtım sayfaları için animasyonlu, kopyala-yapıştır bileşenler; kurulumu shadcn/ui ile aynı.
+
+<span class="meta">**Altyapı:** React + Tailwind + Motion</span>
+<span class="meta">**Başka altyapıda:** Doğrudan kurulmaz; örnek alınıp çevrilir</span>
+<span class="meta">**Ücret:** Ücretsiz, MIT</span>
+
+</Kart>
+
+<Kart baslik={"React Bits"} href={"https://github.com/DavidHDev/react-bits"} tur={"Animasyonlu bileşen"} prompt={"React Bits (https://github.com/DavidHDev/react-bits) aracını bu projede kullanmak istiyorum. Ne işe yarar: Metin animasyonu, arka plan ve mikro etkileşim için 200'den fazla bileşen; her biri JS/TS ve düz CSS ya da Tailwind hâliyle gelir. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Metin animasyonu, arka plan ve mikro etkileşim için 200'den fazla bileşen; her biri JS/TS ve düz CSS ya da Tailwind hâliyle gelir.
+
+<span class="meta">**Altyapı:** React (CSS ya da Tailwind)</span>
+<span class="meta">**Başka altyapıda:** Vue ve Svelte için resmi portları ayrı sitelerde</span>
+<span class="meta">**Ücret:** Ücretsiz; MIT + Commons Clause: sitende ticari kullanım serbest, bileşenleri satmak ya da yeniden dağıtmak yasak</span>
+
+</Kart>
+
+<Kart baslik={"daisyUI"} href={"https://github.com/saadeghi/daisyui"} tur={"Tailwind eklentisi"} prompt={"daisyUI (https://github.com/saadeghi/daisyui) aracını bu projede kullanmak istiyorum. Ne işe yarar: Tailwind'e eklenti olarak kurulur, btn, card gibi hazır CSS sınıflarıyla kullanılır. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Tailwind'e eklenti olarak kurulur, `btn`, `card` gibi hazır CSS sınıflarıyla kullanılır.
+
+<span class="meta">**Altyapı:** Tailwind çalışan her proje: React, Vue, Svelte, Angular, Laravel, Django, Rails</span>
+<span class="meta">**Başka altyapıda:** Tailwind yoksa kullanılamaz</span>
+<span class="meta">**Ücret:** Ücretsiz, MIT</span>
+
+</Kart>
+
+<Kart baslik={"Tremor"} href={"https://github.com/tremorlabs/tremor"} tur={"Grafik ve dashboard"} prompt={"Tremor (https://github.com/tremorlabs/tremor) aracını bu projede kullanmak istiyorum. Ne işe yarar: Grafik ve dashboard için 35'ten fazla kopyala-yapıştır bileşen; grafikleri Recharts ile çizer. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Grafik ve dashboard için 35'ten fazla kopyala-yapıştır bileşen; grafikleri Recharts ile çizer.
+
+<span class="meta">**Altyapı:** React + Tailwind + Radix</span>
+<span class="meta">**Başka altyapıda:** Doğrudan kurulmaz; örnek alınır</span>
+<span class="meta">**Ücret:** Ücretsiz, Apache-2.0; Tremor Vercel'e katıldı, kodu Nisan 2025'ten beri güncellenmiyor</span>
+
+</Kart>
+
+<Kart baslik={"Motion"} href={"https://github.com/motiondivision/motion"} tur={"Animasyon"} prompt={"Motion (https://github.com/motiondivision/motion) aracını bu projede kullanmak istiyorum. Ne işe yarar: Framer Motion'ın yeni adı: yaylı animasyonlar, sayfa düzeni geçişleri, kaydırmaya bağlı efektler, sürükleme. Aceternity ve Magic UI bileşenleri bunu kullanır. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Framer Motion'ın yeni adı: yaylı animasyonlar, sayfa düzeni geçişleri, kaydırmaya bağlı efektler, sürükleme. Aceternity ve Magic UI bileşenleri bunu kullanır.
+
+<span class="meta">**Altyapı:** React, düz JavaScript, Vue</span>
+<span class="meta">**Başka altyapıda:** Web dışında kullanılmaz</span>
+<span class="meta">**Ücret:** Çekirdek ücretsiz, MIT; Motion+ ücretli</span>
+
+</Kart>
+
+<Kart baslik={"GSAP"} href={"https://github.com/greensock/GSAP"} tur={"Animasyon"} prompt={"GSAP (https://github.com/greensock/GSAP) aracını bu projede kullanmak istiyorum. Ne işe yarar: Bağımlılıksız animasyon kütüphanesi; ScrollTrigger, SplitText, MorphSVG gibi eklentiler dahil, React için useGSAP. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Bağımlılıksız animasyon kütüphanesi; ScrollTrigger, SplitText, MorphSVG gibi eklentiler dahil, React için `useGSAP`.
+
+<span class="meta">**Altyapı:** Her web projesi: düz JS, React, Vue, SVG, canvas</span>
+<span class="meta">**Başka altyapıda:** Web dışında kullanılmaz</span>
+<span class="meta">**Ücret:** Tüm eklentiler dahil ücretsiz, ticari kullanım serbest; açık kaynak değil (GreenSock lisansı)</span>
+
+</Kart>
+
+<Kart baslik={"Lottie Web"} href={"https://github.com/airbnb/lottie-web"} tur={"Animasyon oynatıcı"} prompt={"Lottie Web (https://github.com/airbnb/lottie-web) aracını bu projede kullanmak istiyorum. Ne işe yarar: After Effects'te yapılıp JSON'a aktarılan animasyonları web'de oynatır. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+After Effects'te yapılıp JSON'a aktarılan animasyonları web'de oynatır.
+
+<span class="meta">**Altyapı:** Her web projesi (düz JS, npm ya da CDN)</span>
+<span class="meta">**Başka altyapıda:** Mobil için Lottie'nin iOS ve Android kütüphaneleri ayrı</span>
+<span class="meta">**Ücret:** Ücretsiz, MIT; animasyonu üretmek için After Effects gerekir, bir yıldan uzun süredir güncellenmiyor</span>
+
+</Kart>
+
+<Kart baslik={"Recharts"} href={"https://github.com/recharts/recharts"} tur={"Grafik"} prompt={"Recharts (https://github.com/recharts/recharts) aracını bu projede kullanmak istiyorum. Ne işe yarar: Bileşen tabanlı grafik kütüphanesi; eksen, tooltip, çizgi gibi parçalar ayrı bileşen olarak birleştirilir, SVG ile çizer. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Bileşen tabanlı grafik kütüphanesi; eksen, tooltip, çizgi gibi parçalar ayrı bileşen olarak birleştirilir, SVG ile çizer.
+
+<span class="meta">**Altyapı:** React</span>
+<span class="meta">**Başka altyapıda:** Doğrudan kurulmaz; örnek alınır</span>
+<span class="meta">**Ücret:** Ücretsiz, MIT</span>
+
+</Kart>
+
+<Kart baslik={"mapcn"} href={"https://github.com/AnmolSaini16/mapcn"} tur={"Harita"} prompt={"mapcn (https://github.com/AnmolSaini16/mapcn) aracını bu projede kullanmak istiyorum. Ne işe yarar: Hazır harita bileşenleri: işaretçi, popup, rota, zoom ve pusula; shadcn/ui ile aynı yapıda. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Hazır harita bileşenleri: işaretçi, popup, rota, zoom ve pusula; shadcn/ui ile aynı yapıda.
+
+<span class="meta">**Altyapı:** React + Tailwind, MapLibre GL</span>
+<span class="meta">**Başka altyapıda:** Doğrudan kurulmaz; örnek alınır</span>
+<span class="meta">**Ücret:** Ücretsiz, MIT; varsayılan CARTO haritalarının ticari kullanımı lisans ister, OpenStreetMap gibi başka sağlayıcıya geçilebilir</span>
+
+</Kart>
+
+</Kartlar>
+
+
+## Tehlikeli işlemler
+
+Silme gibi geri alınamaz işlemler için altı arayüz kalıbı; [bu videodan](https://www.instagram.com/reel/Da4-EmYNYAP/) alındı.
+
+<Kartlar>
+
+<Kart baslik={"Basılı tutarak onayla"} prompt={"Bu projede \"Basılı tutarak onayla\" arayüz kalıbını uygula: \"Emin misin?\" penceresi yerine düğmeyi kısa bir süre basılı tutturup halka dolunca sil; erken bırakılırsa hiçbir şey olmaz. Önce silme gibi geri alınamaz işlemlerin olduğu ekranları bul ve kalıba uymayanları listele, sonra onayımla düzelt."} promptEtiket={"Bu kalıbı uygula"} promptTur={"tasarim"}>
+
+"Emin misin?" penceresi yerine düğmeyi kısa bir süre basılı tutturup halka dolunca sil; erken bırakılırsa hiçbir şey olmaz.
+
+<span class="meta">**Neden:** Onay pencereleri alışkanlıkla okunmadan geçilir.</span>
+
+</Kart>
+
+<Kart baslik={"İşi adıyla yaz"} prompt={"Bu projede \"İşi adıyla yaz\" arayüz kalıbını uygula: Düğmelerde \"Evet\" ve \"Hayır\" yerine \"Projeyi sil\" ve \"Projeyi tut\" yaz. Önce silme gibi geri alınamaz işlemlerin olduğu ekranları bul ve kalıba uymayanları listele, sonra onayımla düzelt."} promptEtiket={"Bu kalıbı uygula"} promptTur={"tasarim"}>
+
+Düğmelerde "Evet" ve "Hayır" yerine "Projeyi sil" ve "Projeyi tut" yaz.
+
+<span class="meta">**Neden:** Fiil, uyarının kendisidir.</span>
+
+</Kart>
+
+<Kart baslik={"Ana yoldan uzak tut"} prompt={"Bu projede \"Ana yoldan uzak tut\" arayüz kalıbını uygula: Sil düğmesini ana düğmenin yerine koyma; kaydet ya da iptal ana yerde kalsın, sil ayrı ve uzakta dursun. Önce silme gibi geri alınamaz işlemlerin olduğu ekranları bul ve kalıba uymayanları listele, sonra onayımla düzelt."} promptEtiket={"Bu kalıbı uygula"} promptTur={"tasarim"}>
+
+Sil düğmesini ana düğmenin yerine koyma; kaydet ya da iptal ana yerde kalsın, sil ayrı ve uzakta dursun.
+
+<span class="meta">**Neden:** Kas hafızası okumadan tıklar.</span>
+
+</Kart>
+
+<Kart baslik={"Kırmızıyı idareli kullan"} prompt={"Bu projede \"Kırmızıyı idareli kullan\" arayüz kalıbını uygula: Kırmızıyı sadece yıkıcı işlemlere ayır; uyarı, bildirim ve açık-kapalı düğmelerinde kullanma. Önce silme gibi geri alınamaz işlemlerin olduğu ekranları bul ve kalıba uymayanları listele, sonra onayımla düzelt."} promptEtiket={"Bu kalıbı uygula"} promptTur={"tasarim"}>
+
+Kırmızıyı sadece yıkıcı işlemlere ayır; uyarı, bildirim ve açık-kapalı düğmelerinde kullanma.
+
+<span class="meta">**Neden:** Her yer kırmızıysa gerçek tehlike fark edilmez.</span>
+
+</Kart>
+
+<Kart baslik={"Tehlikeli bölge"} prompt={"Bu projede \"Tehlikeli bölge\" arayüz kalıbını uygula: Hesap ya da proje silme, sahipliği devretme gibi işlemleri ayarlar sayfasının en altında, çerçeveli ve başlıklı bir \"Tehlikeli bölge\"de topla. Önce silme gibi geri alınamaz işlemlerin olduğu ekranları bul ve kalıba uymayanları listele, sonra onayımla düzelt."} promptEtiket={"Bu kalıbı uygula"} promptTur={"tasarim"}>
+
+Hesap ya da proje silme, sahipliği devretme gibi işlemleri ayarlar sayfasının en altında, çerçeveli ve başlıklı bir "Tehlikeli bölge"de topla.
+
+<span class="meta">**Neden:** Konum sürtünme yaratır; oraya yanlışlıkla gidilmez.</span>
+
+</Kart>
+
+<Kart baslik={"Vazgeçme süresi"} prompt={"Bu projede \"Vazgeçme süresi\" arayüz kalıbını uygula: Hesap silmeyi hemen yapma; örneğin 14 gün sonra kalıcı sil, bu sürede tek tıkla iptal ettir. Önce silme gibi geri alınamaz işlemlerin olduğu ekranları bul ve kalıba uymayanları listele, sonra onayımla düzelt."} promptEtiket={"Bu kalıbı uygula"} promptTur={"tasarim"}>
+
+Hesap silmeyi hemen yapma; örneğin 14 gün sonra kalıcı sil, bu sürede tek tıkla iptal ettir.
+
+<span class="meta">**Neden:** Son savunma hattı; süre dolunca veri yine gerçekten silinmeli ([yayın öncesi 44. madde](/listeler/yayin-oncesi/#yo-hesap-silme)).</span>
+
+</Kart>
+
+</Kartlar>
+
+
+## Renk çiftleri
+
+Yazı ve zemin için altı renk çifti; [bu videodan](https://www.instagram.com/reel/Da7hPcluJUV/) alındı.
+Kontrast oranları WCAG formülüyle hesaplandı; hepsi normal metin için gereken 4,5:1 sınırını geçiyor.
+
+<Kartlar>
+
+<Kart baslik={"Signal Blue + Porcelain"} renk={{"yazi": "#0057FF", "zemin": "#F8F7F4"}} prompt={"Bu arayüzde \"Signal Blue + Porcelain\" renk çiftini dene (Yazı #0057FF, zemin #F8F7F4). Renkleri tema değişkeni olarak tanımla, kontrastı WCAG AA sınırının altına düşürme ve önce hangi öğelere uygulayacağını göster."} promptEtiket={"Bu renklerle dene"} promptTur={"tasarim"}>
+
+Yazı `#0057FF`, zemin `#F8F7F4`
+
+<span class="meta">**Kontrast:** 5,1:1 (AA)</span>
+
+</Kart>
+
+<Kart baslik={"Butter Yellow + Royal Iris"} renk={{"yazi": "#3A0CA3", "zemin": "#FFF275"}} prompt={"Bu arayüzde \"Butter Yellow + Royal Iris\" renk çiftini dene (Yazı #3A0CA3, zemin #FFF275). Renkleri tema değişkeni olarak tanımla, kontrastı WCAG AA sınırının altına düşürme ve önce hangi öğelere uygulayacağını göster."} promptEtiket={"Bu renklerle dene"} promptTur={"tasarim"}>
+
+Yazı `#3A0CA3`, zemin `#FFF275`
+
+<span class="meta">**Kontrast:** 10,3:1 (AAA)</span>
+
+</Kart>
+
+<Kart baslik={"Lime Spark + Graphite"} renk={{"yazi": "#B6FF2E", "zemin": "#23262F"}} prompt={"Bu arayüzde \"Lime Spark + Graphite\" renk çiftini dene (Yazı #B6FF2E, zemin #23262F). Renkleri tema değişkeni olarak tanımla, kontrastı WCAG AA sınırının altına düşürme ve önce hangi öğelere uygulayacağını göster."} promptEtiket={"Bu renklerle dene"} promptTur={"tasarim"}>
+
+Yazı `#B6FF2E`, zemin `#23262F`
+
+<span class="meta">**Kontrast:** 12,5:1 (AAA)</span>
+
+</Kart>
+
+<Kart baslik={"Dragonfruit + Night Violet"} renk={{"yazi": "#FF4696", "zemin": "#1E1033"}} prompt={"Bu arayüzde \"Dragonfruit + Night Violet\" renk çiftini dene (Yazı #FF4696, zemin #1E1033). Renkleri tema değişkeni olarak tanımla, kontrastı WCAG AA sınırının altına düşürme ve önce hangi öğelere uygulayacağını göster."} promptEtiket={"Bu renklerle dene"} promptTur={"tasarim"}>
+
+Yazı `#FF4696`, zemin `#1E1033`
+
+<span class="meta">**Kontrast:** 5,6:1 (AA)</span>
+
+</Kart>
+
+<Kart baslik={"Emerald Ink + Champagne"} renk={{"yazi": "#064E3B", "zemin": "#F8E7C9"}} prompt={"Bu arayüzde \"Emerald Ink + Champagne\" renk çiftini dene (Yazı #064E3B, zemin #F8E7C9). Renkleri tema değişkeni olarak tanımla, kontrastı WCAG AA sınırının altına düşürme ve önce hangi öğelere uygulayacağını göster."} promptEtiket={"Bu renklerle dene"} promptTur={"tasarim"}>
+
+Yazı `#064E3B`, zemin `#F8E7C9`
+
+<span class="meta">**Kontrast:** 8,0:1 (AAA)</span>
+
+</Kart>
+
+<Kart baslik={"Ultra Violet + Soft Apricot"} renk={{"yazi": "#6A00F4", "zemin": "#FFD6A5"}} prompt={"Bu arayüzde \"Ultra Violet + Soft Apricot\" renk çiftini dene (Yazı #6A00F4, zemin #FFD6A5). Renkleri tema değişkeni olarak tanımla, kontrastı WCAG AA sınırının altına düşürme ve önce hangi öğelere uygulayacağını göster."} promptEtiket={"Bu renklerle dene"} promptTur={"tasarim"}>
+
+Yazı `#6A00F4`, zemin `#FFD6A5`
+
+<span class="meta">**Kontrast:** 5,3:1 (AA)</span>
+
+</Kart>
+
+</Kartlar>

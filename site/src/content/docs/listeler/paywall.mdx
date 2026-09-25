@@ -1,0 +1,201 @@
+---
+title: "Paywall dönüşümü"
+description: "Satın alma ekranı (paywall) az satıyorsa en sık 27 sebep ve her biri için ne yapılacağı."
+---
+
+import Madde from '../../../components/Madde.astro';
+import DenetimPrompt from '../../../components/DenetimPrompt.astro';
+
+Satın alma ekranı (paywall) az satıyorsa en sık 27 sebep ve her biri için ne yapılacağı.
+Liste bir videodaki 27 maddelik listeden alındı; videodaki "hepsi ölçüldü" iddiası ve etki oranları doğrulanmadı, her maddeyi kendi uygulamanda A/B testiyle dene.
+Mağaza kuralına dokunan maddeler (fiyatın gösterimi, deneme süresi, şartlar, geri yükleme) Apple'ın [abonelik sayfasından](https://developer.apple.com/app-store/subscriptions/) doğrulandı ve [App Store incelemesi](/listeler/app-store/) sekmesine bağlandı.
+Paywall'ı kodsuz değiştirip test etmek için Superwall ya da RevenueCat [Gelir & analitik](/rehberler/gelir-analitik/) sekmesinde.
+
+## Zamanlama ve akış
+
+
+<Madde id={"pw-yanlis-anda-gosteriliyor"} no={1} baslik={"Yanlış anda gösteriliyor"}>
+
+Paywall'ı kullanıcı değeri gördüğü anda göster: ilk sonucu aldıktan ya da bir işi tamamladıktan sonra; uygulama açılır açılmaz değil.
+
+</Madde>
+
+<Madde id={"pw-tek-ekrana-sikistirilmis"} no={2} baslik={"Tek ekrana sıkıştırılmış"}>
+
+Karşılamayı (onboarding) birkaç kısa adıma böl, paywall son adım olsun; kullanıcı önce ne kazanacağını görsün.
+
+</Madde>
+
+<Madde id={"pw-tek-paywall"} no={3} baslik={"Tek paywall var"}>
+
+Farklı yerler ve kullanıcılar için birden fazla paywall kur ve A/B testiyle karşılaştır.
+
+</Madde>
+
+<Madde id={"pw-gec-yukleniyor"} no={4} baslik={"Geç yükleniyor"}>
+
+Ürün ve fiyat bilgisini paywall açılmadan önce yükle; dönen yükleme göstergesi kullanıcı kaybettirir.
+
+</Madde>
+
+
+## İçerik ve tasarım
+
+
+<Madde id={"pw-karsilastirma-tablosu"} no={5} baslik={"Karşılaştırma tablosu"}>
+
+Ücretsiz ve ücretli özellik tablosu yerine 3–4 kısa fayda maddesi yaz.
+
+</Madde>
+
+<Madde id={"pw-ozellik-yazilmis"} no={6} baslik={"Özellik yazılmış"}>
+
+"Sınırsız proje" gibi özellik yerine kullanıcının elde edeceği sonucu yaz.
+
+</Madde>
+
+<Madde id={"pw-baslik-baglamdan-kopuk"} no={7} baslik={"Başlık bağlamdan kopuk"}>
+
+Paywall'ı açan özelliğe göre başlığı değiştir; kullanıcı neye dokunduysa başlık onu anlatsın.
+
+</Madde>
+
+<Madde id={"pw-dugme-metni-sert"} no={8} baslik={"Düğme metni sert"}>
+
+"Satın al" yerine "Ücretsiz dene" ya da "Devam et" gibi daha yumuşak bir metin kullan; deneme varsa düğme bunu söylesin.
+
+</Madde>
+
+<Madde id={"pw-dugme-kayboluyor"} no={9} baslik={"Düğme kayboluyor"}>
+
+Satın alma düğmesi sayfa kaydırılınca da ekranın altında sabit dursun.
+
+</Madde>
+
+<Madde id={"pw-kalabalik"} no={10} baslik={"Kalabalık"}>
+
+Tek odak, az metin, tek ana düğme; dikkat dağıtan link ve animasyonları çıkar.
+
+</Madde>
+
+<Madde id={"pw-cevrilmemis"} no={11} baslik={"Çevrilmemiş"}>
+
+Paywall metnini kullanıcının dilinde göster; uygulama çevrilip paywall İngilizce kalmasın.
+
+</Madde>
+
+
+## Fiyat ve planlar
+
+
+<Madde id={"pw-fiyat-ilk-ekranda"} no={12} baslik={"Fiyat ilk ekranda değil"}>
+
+Fiyat ve süre ilk ekranda, düğmenin yakınında görünsün; kaydırma ya da ikinci ekran gerektirmesin ([App Store 2. madde](/listeler/app-store/#as-fiyat-bilgisi)).
+
+</Madde>
+
+<Madde id={"pw-yillik-plan-secili"} no={13} baslik={"Yıllık plan seçili değil"}>
+
+Yıllık planı varsayılan olarak seçili getir ve aylığa göre tasarrufu yaz.
+
+</Madde>
+
+<Madde id={"pw-yillik-fiyat-buyuk"} no={14} baslik={"Yıllık fiyat büyük görünüyor"}>
+
+Yıllık fiyatın yanında haftalık ya da aylık karşılığını göster; ama Apple tahsil edilecek tutarın en belirgin fiyat olmasını istiyor, bölünmüş fiyat daha küçük ve ikinci planda kalmalı.
+
+</Madde>
+
+<Madde id={"pw-fazla-plan"} no={15} baslik={"Çok fazla plan"}>
+
+En fazla üç plan göster; seçenek arttıkça karar zorlaşır.
+
+</Madde>
+
+<Madde id={"pw-teklif-yok"} no={16} baslik={"Teklif yok"}>
+
+Giriş indirimi ya da ilk ay indirimi gibi bir teklif sun (App Store tanıtım teklifi, Google Play giriş fiyatı).
+
+</Madde>
+
+
+## Deneme süresi
+
+
+<Madde id={"pw-deneme-yok"} no={17} baslik={"Deneme yok"}>
+
+Ücretsiz deneme sun; deneme varsa süresini ve bitince alınacak ücreti açıkça yaz (Apple bunu istiyor).
+
+</Madde>
+
+<Madde id={"pw-deneme-kisa"} no={18} baslik={"Deneme kısa"}>
+
+Ürünün değeri birkaç günde anlaşılmıyorsa denemeyi uzat ve farkı ölç.
+
+</Madde>
+
+<Madde id={"pw-deneme-takvimi"} no={19} baslik={"Ne olacağı belirsiz"}>
+
+Deneme takvimini göster: bugün başlar, bitmeden önce hatırlatılır, şu gün ücret alınır.
+
+</Madde>
+
+<Madde id={"pw-ucret-hatirlatma"} no={20} baslik={"Ücret sürpriz oluyor"}>
+
+Deneme bitmeden önce bildirimle hatırlat; iade ve şikâyet azalır, güven artar.
+
+</Madde>
+
+
+## Güven ve teknik
+
+
+<Madde id={"pw-sosyal-kanit-asagida"} no={21} baslik={"Sosyal kanıt aşağıda"}>
+
+Puanı ve kullanıcı yorumlarını paywall'ın üst kısmına koy.
+
+</Madde>
+
+<Madde id={"pw-kapatma-dugmesi-gizli"} no={22} baslik={"Kapatma düğmesi gizli"}>
+
+Kapatma düğmesini gizleme ya da geciktirme; kullanıcı kandırıldığını hisseder.
+
+</Madde>
+
+<Madde id={"pw-sartlar-geri-yukleme"} no={23} baslik={"Şartlar ve geri yükleme yok"}>
+
+Kullanım Koşulları ve Gizlilik Politikası linkleri ile "Satın almaları geri yükle" düğmesi paywall'da olsun; App Store'da zorunlu ([App Store 1 ve 3. maddeler](/listeler/app-store/#as-paywall-linkleri)).
+
+</Madde>
+
+<Madde id={"pw-bos-ekran"} no={24} baslik={"Boş ekran"}>
+
+Ürünler mağazadan yüklenemezse boş paywall gösterme; hata mesajı ve "Tekrar dene" düğmesi göster. İnceleme ekibi satın alma ekranını boş görürse uygulamayı reddeder.
+
+</Madde>
+
+<Madde id={"pw-fiyat-koda-yazilmis"} no={25} baslik={"Fiyat koda yazılmış"}>
+
+Fiyatı sabit yazma; StoreKit ya da Google Play Billing'den kullanıcının ülkesine ve para birimine göre çek.
+
+</Madde>
+
+<Madde id={"pw-kapatan-kaybediliyor"} no={26} baslik={"Kapatan kaybediliyor"}>
+
+Paywall'ı kapatan kullanıcıya daha sonra indirimli bir teklif göster.
+
+</Madde>
+
+<Madde id={"pw-test-edilmiyor"} no={27} baslik={"Test edilmiyor"}>
+
+Satın almayı ayda bir test hesabıyla (sandbox) baştan sona dene; mağaza, SDK ya da ürün ayarı değişince paywall sessizce bozulabilir.
+
+</Madde>
+
+
+## Kontrol prompt'u
+
+
+```
+Bu uygulamanın satın alma ekranını (paywall) şu 27 maddeye göre kontrol et: gösterildiği an, onboarding adımları, birden fazla paywall ve A/B testi, ürünlerin önceden yüklenmesi, karşılaştırma tablosu, fayda odaklı metin, bağlama göre başlık, düğme metni, sabit düğme, sadelik, çeviri, fiyatın ilk ekranda görünmesi, yıllık planın seçili gelmesi, haftalık karşılık ve tahsil edilecek tutarın en belirgin fiyat olması, plan sayısı, teklif, ücretsiz deneme ve açıklaması, deneme süresi, deneme takvimi, ücret öncesi hatırlatma, puan ve yorumların yeri, kapatma düğmesi, şartlar ve geri yükleme, ürün yüklenemezse boş ekran, fiyatın mağazadan çekilmesi, kapatan kullanıcıya teklif, satın alma testi. Her madde için durumu (✅ ⚠️ ❌ ➖) ve ilgili dosyayı yaz, sonra en çok etki edeceğini düşündüğün 3 değişikliği öner.
+```

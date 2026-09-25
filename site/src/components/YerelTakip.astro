@@ -1,0 +1,26 @@
+---
+// Genel bakış'ın "Takip" bölümü: proje raporları kutucuğu. Sadece yerel derlemede görünür (src/yerel.ts).
+import Kutucuk from './Kutucuk.astro';
+import { YEREL, raporVerisi, tarih } from '../yerel';
+
+const gruplar = raporVerisi();
+const son = gruplar.map((g) => ({ g, r: g.raporlar[0] })).sort((a, b) => b.r.tarih.localeCompare(a.r.tarih))[0];
+---
+
+{
+	YEREL && (
+		<>
+			<h2 id="takip">Takip</h2>
+			<div class="kutucuklar not-content">
+				<Kutucuk
+					ikon="clipboard"
+					baslik="Proje raporları"
+					href="/raporlar/"
+					sayi={gruplar.length || undefined}
+					bilgi={son ? `denetim · son: ${son.g.baslik} (${son.g.liste_adi}), ${tarih(son.r.tarih)}` : undefined}
+					ozet={son ? undefined : "Henüz rapor yok. Bir projeyi denetlemek için kontrol listesinin denetim prompt'unu projenin Claude ya da Codex oturumuna yapıştır."}
+				/>
+			</div>
+		</>
+	)
+}

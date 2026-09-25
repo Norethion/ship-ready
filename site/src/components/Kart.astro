@@ -1,0 +1,42 @@
+---
+// Rehber tablolarının kart hâli: başlık (link olabilir), tür etiketi, isteğe bağlı stil önizlemesi ya da renk örneği, prompt düğmesi.
+import PromptDugme from './PromptDugme.astro';
+
+interface Props {
+	baslik: string;
+	href?: string;
+	tur?: string;
+	onizleme?: string;
+	renk?: { yazi: string; zemin: string };
+	prompt?: string;
+	promptEtiket?: string;
+	promptTur?: 'kullanim' | 'tasarim';
+	/** Son link kontrolünde açılmadıysa hatası (ör. 404). */
+	kirik?: string;
+}
+const { baslik, href, tur, onizleme, renk, prompt, promptEtiket = "Kullanım prompt'u", promptTur = 'kullanim', kirik } = Astro.props;
+---
+
+<article class="kart">
+	{
+		onizleme && (
+			<div class={`pv pv-${onizleme}`} aria-hidden="true">
+				<div class="pv-card">
+					<b>Aa</b>
+					<span class="pv-btn">Buton</span>
+					<i />
+					<i />
+				</div>
+			</div>
+		)
+	}
+	<div class="kart-govde">
+		<p class="kart-baslik">
+			{renk && <span class="renk" style={`color:${renk.yazi};background:${renk.zemin}`} aria-hidden="true">Aa</span>}
+			{href ? <a href={href} title={kirik && `Son kontrolde açılmadı (${kirik})`}>{baslik}{kirik && ' ⚠'}</a> : <span>{baslik}</span>}
+			{tur && <span class="kart-tur">{tur}</span>}
+		</p>
+		<div class="kart-metin"><slot /></div>
+		{prompt && <PromptDugme metin={prompt} etiket={promptEtiket} tur={promptTur} />}
+	</div>
+</article>

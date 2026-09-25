@@ -1,0 +1,56 @@
+---
+// Prompt'u panoya kopyalayan düğme. Ne yaptığı adında ve simgesinde yazar; üzerine gelince prompt'un kendisi görünür.
+import { Icon } from '@astrojs/starlight/components';
+
+interface Props {
+	metin: string;
+	etiket: string;
+	tur?: 'denetim' | 'kurulum' | 'claude' | 'codex' | 'uygulama' | 'kullanim' | 'tasarim';
+}
+const { metin, etiket, tur = 'kullanim' } = Astro.props;
+const SIMGE = {
+	denetim: 'approve-check-circle',
+	kurulum: 'download',
+	claude: 'puzzle',
+	codex: 'forward-slash',
+	uygulama: 'desktop',
+	kullanim: 'setting',
+	tasarim: 'pencil',
+} as const;
+const ipucu = `Kopyalanacak prompt:\n\n${metin.length > 500 ? metin.slice(0, 500) + '…' : metin}`;
+---
+
+<button type="button" class={`prompt-dugme t-${tur}`} data-kopya={metin} title={ipucu}>
+	<Icon name={SIMGE[tur]} size="1em" />
+	<span>{etiket}</span>
+</button>
+
+<script>
+	// Sayfadaki bütün prompt düğmeleri için tek dinleyici; kopyalanınca etiket kısa süre "Kopyalandı" olur.
+	document.addEventListener('click', async (e) => {
+		const b = (e.target as HTMLElement).closest<HTMLButtonElement>('button[data-kopya]');
+		if (!b) return;
+		const span = b.querySelector('span');
+		const eski = span?.textContent ?? '';
+		const metin = b.dataset.kopya ?? '';
+		let tamam = false;
+		try {
+			await navigator.clipboard.writeText(metin);
+			tamam = true;
+		} catch {
+			// Pano izni yoksa (ör. sayfa dosyadan açıldıysa) gizli bir metin alanından kopyalanır.
+			const t = document.createElement('textarea');
+			t.value = metin;
+			document.body.append(t);
+			t.select();
+			tamam = document.execCommand('copy');
+			t.remove();
+		}
+		if (span) span.textContent = tamam ? 'Kopyalandı' : 'Kopyalanamadı';
+		if (tamam) b.classList.add('kopyalandi');
+		setTimeout(() => {
+			if (span) span.textContent = eski;
+			b.classList.remove('kopyalandi');
+		}, 1600);
+	});
+</script>

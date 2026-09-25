@@ -1,0 +1,252 @@
+---
+title: "App Store incelemesi"
+description: "En sık 26 red sebebi ve her biri için ne yapılacağı."
+---
+
+import Madde from '../../../components/Madde.astro';
+import DenetimPrompt from '../../../components/DenetimPrompt.astro';
+
+En sık 26 red sebebi ve her biri için ne yapılacağı.
+Apple uygulamayı reddederken çoğu zaman sadece bir kural numarası ve iki cümle yazar; hangi ekranda neyin eksik olduğunu söylemez.
+Bu sebeplerin çoğu kod hatası değil; eksik anlatılan, unutulan ya da yanlış girilen ayarlar.
+Liste [bu videodan](https://www.instagram.com/reel/DctdIykgb9C/) ve aynı hesabın 24 maddelik ikinci listesinden alındı; kural numaraları 25.09.2026'da [App Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) sayfasından doğrulandı.
+
+## Ödeme ve abonelik
+
+
+<Madde id={"as-paywall-linkleri"} no={1} baslik={"Satın alma ekranında (paywall) link yok"}>
+
+Abonelik ekranına Kullanım Koşulları (EULA) ve Gizlilik Politikası linklerini koy; ayrıca App Store Connect'teki uygulama açıklamasına da ekle.
+
+<span class="meta">**Kural:** 3.1.2</span>
+
+</Madde>
+
+<Madde id={"as-fiyat-bilgisi"} no={2} baslik={"Fiyat yazmıyor"}>
+
+Kullanıcı abone olmadan önce ne alacağını, fiyatı, süreyi ve deneme bitince ne kadar ödeyeceğini açıkça görsün; "Premium'a geç" tek başına yetmez.
+
+<span class="meta">**Kural:** 3.1.2(a), 3.1.2(c)</span>
+
+</Madde>
+
+<Madde id={"as-geri-yukleme"} no={3} baslik={"Satın almayı geri yükleme (restore) yok"}>
+
+Geri yüklenebilen satın almalar için "Satın almaları geri yükle" düğmesi olsun.
+
+<span class="meta">**Kural:** 3.1.1</span>
+
+</Madde>
+
+<Madde id={"as-dis-odeme-linki"} no={4} baslik={"Dış ödeme linki"}>
+
+Dijital ürün ve abonelikleri uygulama dışında satın aldıran düğme ya da link koyma. ABD mağazasında bu yasak uygulanmıyor; diğer ülkelerde reddedilir.
+
+<span class="meta">**Kural:** 3.1.1(a)</span>
+
+</Madde>
+
+
+## Gizlilik ve izinler
+
+
+<Madde id={"as-hesap-silme"} no={5} baslik={"Hesap silme yok"}>
+
+Uygulamada hesap açılabiliyorsa hesap silme de uygulamanın içinden yapılabilmeli; sadece e-posta ile talep yetmez.
+
+<span class="meta">**Kural:** 5.1.1(v)</span>
+
+</Madde>
+
+<Madde id={"as-izin-gerekcesi"} no={6} baslik={"İzin gerekçesi yok"}>
+
+Kamera, konum, rehber gibi izin isteklerinde verinin neden ve nasıl kullanılacağını açıkça yaz; "Kamera erişimi gerekli" yetmez.
+
+<span class="meta">**Kural:** 5.1.1(ii)</span>
+
+</Madde>
+
+<Madde id={"as-takip-izni"} no={7} baslik={"Takip izni yok"}>
+
+Kullanıcıyı başka uygulama ve sitelerde takip ediyorsan (reklam kimliği, bazı analitik SDK'ları) App Tracking Transparency izni iste.
+
+<span class="meta">**Kural:** 5.1.2(i)</span>
+
+</Madde>
+
+<Madde id={"as-gizlilik-etiketi"} no={8} baslik={"Gizlilik etiketi yanlış"}>
+
+App Store Connect'teki gizlilik bilgileri, uygulamanın ve eklediğin SDK'ların (analitik, reklam, çökme raporu) gerçekte topladığı veriyle birebir aynı olsun.
+
+<span class="meta">**Kural:** 2.3, 5.1.1(i)</span>
+
+</Madde>
+
+<Madde id={"as-gizlilik-politikasi-linki"} no={9} baslik={"Gizlilik politikası linki yok"}>
+
+Gizlilik politikası linkini hem App Store Connect'teki alana hem de uygulamanın içinde kolay bulunur bir yere koy; sadece satın alma ekranında olması yetmez.
+
+<span class="meta">**Kural:** 5.1.1(i)</span>
+
+</Madde>
+
+<Madde id={"as-esdeger-giris-secenegi"} no={10} baslik={"Eşdeğer giriş seçeneği yok"}>
+
+Google, Facebook gibi bir hesapla giriş varsa yanında veriyi ad ve e-postayla sınırlayan, e-postayı gizlemeye izin veren ve reklam için izlemeyen bir giriş seçeneği daha sun; Apple ile Giriş bu şartları karşılar. Sadece kendi e-posta ve şifre girişin varsa gerekmez.
+
+<span class="meta">**Kural:** 4.8</span>
+
+</Madde>
+
+
+## İnceleme hazırlığı
+
+
+<Madde id={"as-yer-tutucu-icerik"} no={11} baslik={"Yer tutucu içerik"}>
+
+"Lorem ipsum", boş ekran, çalışmayan link ya da "yakında" sayfası bırakma; gönderilen sürüm son sürüm olmalı.
+
+<span class="meta">**Kural:** 2.1(a)</span>
+
+</Madde>
+
+<Madde id={"as-demo-hesap"} no={12} baslik={"Demo hesap yok"}>
+
+Giriş gerektiren her şey için çalışan ve inceleme sürerken süresi dolmayacak bir demo hesap (ya da tam demo modu) ve gerekiyorsa örnek QR kodu gibi ek bilgileri inceleme notlarına yaz.
+
+<span class="meta">**Kural:** 2.1(a)</span>
+
+</Madde>
+
+<Madde id={"as-gizli-ozellik"} no={13} baslik={"Gizli özellik"}>
+
+Gizli, kapalı bekleyen ya da belgelenmemiş özellik bırakma; yeni özellikleri inceleme notlarında ayrıntılı anlat ve inceleme ekibinin her özelliğe (ör. satın alma ekranına) nasıl ulaşacağını adım adım yaz, genel açıklama reddedilir.
+
+<span class="meta">**Kural:** 2.3.1(a)</span>
+
+</Madde>
+
+<Madde id={"as-ekran-goruntuleri"} no={14} baslik={"Ekran görüntüsü yanlış"}>
+
+Ekran görüntüleri uygulamanın kullanımını göstermeli; sadece logo, giriş ya da açılış ekranı olmaz.
+
+<span class="meta">**Kural:** 2.3.3</span>
+
+</Madde>
+
+<Madde id={"as-cokme"} no={15} baslik={"Çöküyor"}>
+
+Göndermeden önce gerçek cihazda test et; çöken ya da belirgin hatası olan sürüm reddedilir.
+
+<span class="meta">**Kural:** 2.1(a)</span>
+
+</Madde>
+
+<Madde id={"as-destek-linki"} no={16} baslik={"Destek linki çalışmıyor"}>
+
+App Store Connect'teki destek linki (Support URL) açılmalı ve sana ulaşmanın kolay bir yolunu göstermeli; boş ya da hata veren sayfa bırakma.
+
+<span class="meta">**Kural:** 1.5</span>
+
+</Madde>
+
+<Madde id={"as-yas-derecelendirmesi"} no={17} baslik={"Yaş sınırı yanlış"}>
+
+App Store Connect'teki yaş derecelendirmesi sorularını dürüst cevapla; kullanıcı içeriği, sohbet, kumar ya da yetişkin içerik varsa belirt.
+
+<span class="meta">**Kural:** 2.3.6</span>
+
+</Madde>
+
+
+## İçerik ve işlevsellik
+
+
+<Madde id={"as-web-gorunumu"} no={18} baslik={"Sadece web görünümü"}>
+
+Uygulama, paketlenmiş bir web sitesinden fazlası olmalı: uygulamaya özgü özellik, içerik ve arayüz.
+
+<span class="meta">**Kural:** 4.2</span>
+
+</Madde>
+
+<Madde id={"as-minimum-islevsellik"} no={19} baslik={"Minimum işlevsellik"}>
+
+Sadece reklam, link koleksiyonu ya da çok basit tek işlev olan uygulamalar reddedilir.
+
+<span class="meta">**Kural:** 4.2, 4.2.2</span>
+
+</Madde>
+
+<Madde id={"as-cocuk-kategorisi"} no={20} baslik={"Çocuk kategorisi"}>
+
+Çocuk kategorisindeysen dışarıya link, satın alma ve reklam ebeveyn kilidinin arkasında olmalı; kişisel ve cihaz verisi üçüncü taraflara gitmemeli.
+
+<span class="meta">**Kural:** 1.3</span>
+
+</Madde>
+
+<Madde id={"as-kullanici-icerigi"} no={21} baslik={"Kullanıcı içeriği"}>
+
+Kullanıcılar içerik paylaşabiliyorsa uygunsuz içeriği filtreleme, şikâyet etme, kullanıcı engelleme ve iletişim bilgisi şart.
+
+<span class="meta">**Kural:** 1.2</span>
+
+</Madde>
+
+<Madde id={"as-baskasinin-markasi"} no={22} baslik={"Başkasının markası"}>
+
+Başka markanın adını, logosunu ya da telifli içeriğini izinsiz kullanma; başka uygulamanın ikonunu ya da adını taklit etme. Açıklamada ve ekran görüntülerinde Android gibi başka platformların adı ya da görseli de geçmesin.
+
+<span class="meta">**Kural:** 5.2.1, 4.1(c), 2.3.10</span>
+
+</Madde>
+
+<Madde id={"as-saglik-iddiasi"} no={23} baslik={"Sağlık iddiası"}>
+
+Sağlıkla ilgili ölçüm ya da etki iddiasının verisini ve yöntemini göster; doğrulanamayan iddia ("stresi tedavi eder") reddedilir.
+
+<span class="meta">**Kural:** 1.4.1</span>
+
+</Madde>
+
+<Madde id={"as-sablon-uygulama"} no={24} baslik={"Şablon uygulama"}>
+
+Hazır şablonla ya da uygulama üretme servisiyle yapılıp başkası adına gönderilen uygulama reddedilir; içerik sahibi kendi hesabından göndermeli ve uygulama özgün olmalı.
+
+<span class="meta">**Kural:** 4.2.6</span>
+
+</Madde>
+
+<Madde id={"as-olmayan-ozellik-vaadi"} no={25} baslik={"Olmayan özellik vaadi"}>
+
+Açıklama, ekran görüntüleri ve önizleme videosu uygulamanın gerçekte yaptığını göstermeli; olmayan özelliği ya da yanlış fiyatı vaat etme.
+
+<span class="meta">**Kural:** 2.3, 2.3.1(a)</span>
+
+</Madde>
+
+
+## Reddedilince
+
+
+<Madde id={"as-red-cevabi"} no={26} baslik={"Cevap yazmıyorsun"}>
+
+Sessizce yeni sürüm göndermek yerine App Store Connect'te uygulamanın App Review bölümünden inceleme ekibine yaz; neyin eksik olduğunu sor ya da neden kurala uyduğunu açıkla.
+
+<span class="meta">**Kural:** App Review</span>
+
+</Madde>
+
+
+- **Önce yaz:** Ret mesajına App Store Connect'ten cevap vermek çoğu zaman yeni sürüm göndermekten hızlı sonuç verir.
+- **İtiraz:** Uygulamanın yanlış anlaşıldığını düşünüyorsan [App Review Board'a itiraz](https://developer.apple.com/contact/app-store/?topic=appeal) edebilirsin. Her ret için tek itiraz hakkı var; önce ekibin istediği ek bilgileri ver.
+- **Görüşme:** Apple, App Review ile 30 dakikalık Webex görüşmesi randevusu da veriyor ([App Review](https://developer.apple.com/distribute/app-review/) sayfasında).
+- **İlgili sekmeler:** Satın alma ekranı ve abonelik araçları [Gelir & analitik](/rehberler/gelir-analitik/) sekmesinde; abonelik şartları ve hesap silme [yayın öncesi listesinin](/listeler/yayin-oncesi/) 44. ve 80. maddelerinde.
+
+## Göndermeden önce kontrol prompt'u
+
+
+```
+Bu iOS uygulamasını App Store incelemesine göndermeden önce şu 26 red sebebine göre kontrol et: satın alma ekranında Kullanım Koşulları ve Gizlilik Politikası linkleri, fiyat ve deneme süresi açıklaması, satın almaları geri yükleme düğmesi, dış ödeme linki, uygulama içinden hesap silme, izin gerekçesi metinleri, App Tracking Transparency, gizlilik etiketinin SDK'larla uyumu, App Store Connect'te ve uygulama içinde gizlilik politikası linki, Google/Facebook girişinin yanında eşdeğer giriş seçeneği, yer tutucu içerik, demo hesap, gizli özellikler ve inceleme ekibinin özelliklere nasıl ulaşacağı, ekran görüntüleri, çökme, destek linki, yaş derecelendirmesi, web görünümünden ibaret olma, minimum işlevsellik, çocuk kategorisi kuralları, kullanıcı içeriği için filtreleme/şikâyet/engelleme, başkasının markası ve başka platform adları, sağlık iddiaları, şablon uygulama, açıklamadaki vaatlerin uygulamayla uyumu. Her madde için durumu (✅ ⚠️ ❌ ➖) ve ilgili dosyayı yaz, sonra inceleme notlarına yazılacak metni ve demo hesap bilgisi taslağını hazırla.
+```

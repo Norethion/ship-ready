@@ -1,0 +1,126 @@
+---
+// Proje raporları: sadece yerel derlemede üretilir (src/yerel.ts); herkese açık derlemede bu adreslerde sayfa yoktur.
+// /raporlar/ projelerin son denetimlerini, /raporlar/<proje>/<tarih>[-liste]/ tek raporu önceki raporla karşılaştırarak gösterir.
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { getEntry, render } from 'astro:content';
+import katalog from '../../data/katalog.json';
+import DenetimPrompt from '../../components/DenetimPrompt.astro';
+import RaporOzeti from '../../components/RaporOzeti.astro';
+import Simge from '../../components/Simge.astro';
+import { YEREL, raporVerisi, tarih, type Rapor, type RaporGrubu } from '../../yerel';
+
+export function getStaticPaths() {
+	if (!YEREL) return [];
+	const gruplar = raporVerisi();
+	return [
+		{ params: { yol: undefined }, props: { gruplar } },
+		...gruplar.flatMap((grup) => grup.raporlar.map((rapor) => ({ params: { yol: rapor.yol }, props: { gruplar, grup, rapor } }))),
+	];
+}
+
+interface Props {
+	gruplar: RaporGrubu[];
+	grup?: RaporGrubu;
+	rapor?: Rapor;
+}
+const { gruplar, grup, rapor } = Astro.props;
+
+const madde = (liste: string, id: string) => {
+	const m = katalog.listeler.find((l) => l.id === liste)?.bolumler.flatMap((s) => s.maddeler).find((x) => x.id === id);
+	const adres = katalog.listeler.find((l) => l.id === liste)?.adres;
+	const ad = m && m.baslik.length > 90 ? m.baslik.slice(0, 90).replace(/\s+\S*$/, '') + '…' : m?.baslik;
+	return { ad: m ? `${m.no}. ${ad}` : id, adres: adres ? `${adres}#${id}` : undefined };
+};
+const FARK = { duzelen: 'Düzelen', bozulan: 'Bozulan', degisen: 'Değişen', yeni: 'Yeni' } as const;
+const girdi = rapor ? await getEntry('raporlar', rapor.yol) : undefined;
+const icerik = girdi ? await render(girdi) : undefined;
+const baslik = grup && rapor ? `${grup.baslik}: ${grup.liste_adi} (${tarih(rapor.tarih)})` : 'Proje raporları';
+const LISTELER = katalog.listeler.map((l) => ({ id: l.id, ad: l.baslik.split(':')[0].trim() }));
+---
+
+<StarlightPage
+	frontmatter={{
+		title: baslik,
+		description: 'Projelerin kontrol listelerine göre denetim sonuçları.',
+		tableOfContents: rapor ? { minHeadingLevel: 2, maxHeadingLevel: 2 } : false,
+	}}
+	headings={icerik?.headings ?? []}
+>
+	{
+		!rapor && (
+			<>
+				<p>Projelerin kontrol listelerine göre denetim sonuçları; her denetim aynı projenin aynı listedeki bir önceki denetimiyle karşılaştırılır.</p>
+				<p>Denetim prompt'unu projenin Claude ya da Codex oturumuna yapıştır; rapor ship-ready'ye kaydedilir ve burada görünür.</p>
+				<div class="rapor-dugmeler">
+					{LISTELER.map((l) => <DenetimPrompt liste={l.id} etiket={`${l.ad} denetimi`} sade />)}
+				</div>
+				{gruplar.length ? (
+					<div class="kutucuklar not-content">
+						{gruplar.map((g) => {
+							const r = g.raporlar[0];
+							return (
+								<div class="kutucuk">
+									<span class="kutucuk-simge"><Simge ad="clipboard" /></span>
+									<h3>
+										{g.baslik} <span class="etiket">{g.liste_adi}</span>
+									</h3>
+									<p class="kutucuk-bilgi">Son kontrol: {tarih(r.tarih)} · {g.raporlar.length} rapor</p>
+									<RaporOzeti rapor={r} />
+									<div class="kutucuk-dugmeler">
+										<a class="kutucuk-ac" href={`/raporlar/${r.yol}/`}>
+											Raporu aç <Simge ad="arrow" boyut={14} />
+										</a>
+									</div>
+									{g.raporlar.length > 1 && (
+										<p class="kutucuk-bilgi">
+											Eski raporlar:{' '}
+											{g.raporlar.slice(1).map((o, i) => (
+												<>
+													{i > 0 && ', '}
+													<a href={`/raporlar/${o.yol}/`}>{tarih(o.tarih)}</a>
+												</>
+											))}
+										</p>
+									)}
+								</div>
+							);
+						})}
+					</div>
+				) : (
+					<p>Henüz rapor yok.</p>
+				)}
+			</>
+		)
+	}
+	{
+		rapor && grup && (
+			<>
+				<RaporOzeti rapor={rapor} />
+				{rapor.fark && (Object.keys(FARK) as (keyof typeof FARK)[]).some((k) => rapor.fark![k].length) && (
+					<div class="rapor-fark not-content">
+						{(Object.keys(FARK) as (keyof typeof FARK)[]).map((k) => {
+							const ogeler = rapor.fark![k];
+							return ogeler.length ? (
+								<p>
+									<b>{FARK[k]} ({ogeler.length}):</b>{' '}
+									{ogeler.map((o, i) => {
+										const id = typeof o === 'string' ? o : o.id;
+										const m = madde(grup.liste, id);
+										return (
+											<>
+												{i > 0 && ' · '}
+												<a href={m.adres}>{m.ad}</a>
+												{typeof o !== 'string' && ` ${o.once === '⚠' ? '⚠️' : o.once} → ${o.simdi === '⚠' ? '⚠️' : o.simdi}`}
+											</>
+										);
+									})}
+								</p>
+							) : null;
+						})}
+					</div>
+				)}
+				{icerik && <icerik.Content />}
+			</>
+		)
+	}
+</StarlightPage>

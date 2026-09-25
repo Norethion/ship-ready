@@ -1,0 +1,36 @@
+---
+// Genel bakıştaki kutucuk. liste verilirse "Listeyi aç" ve denetim düğmesi olur, verilmezse kutucuğun tamamı bağlantıdır.
+import DenetimPrompt from './DenetimPrompt.astro';
+import Simge from './Simge.astro';
+
+interface Props {
+	ikon: string;
+	baslik: string;
+	href: string;
+	ozet?: string;
+	sayi?: number;
+	bilgi?: string;
+	uyari?: boolean;
+	liste?: string;
+}
+const { ikon, baslik, href, ozet, sayi, bilgi, uyari, liste } = Astro.props;
+const Kap = liste ? 'div' : 'a';
+---
+
+<Kap class:list={['kutucuk', { uyari }]} href={liste ? undefined : href}>
+	<span class="kutucuk-simge"><Simge ad={ikon} /></span>
+	<h3>{baslik}</h3>
+	{sayi !== undefined && <p class="kutucuk-sayi">{sayi}</p>}
+	{ozet && <p class="kutucuk-ozet">{ozet}</p>}
+	{bilgi && <p class="kutucuk-bilgi">{bilgi}</p>}
+	{
+		liste && (
+			<div class="kutucuk-dugmeler">
+				<a class="kutucuk-ac" href={href}>
+					Listeyi aç <Simge ad="arrow" boyut={14} />
+				</a>
+				<DenetimPrompt liste={liste} sade />
+			</div>
+		)
+	}
+</Kap>

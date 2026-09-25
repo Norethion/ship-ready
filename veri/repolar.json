@@ -1,0 +1,2036 @@
+{
+  "syncedAt": "2026-09-25T18:52:22+00:00",
+  "folders": [
+    {
+      "id": "yayin",
+      "name": "🚀 Yayın Öncesi"
+    },
+    {
+      "id": "altyapi",
+      "name": "🏗️ Yayına alma & izleme"
+    },
+    {
+      "id": "tasarim",
+      "name": "🎨 Tasarım & Arayüz"
+    },
+    {
+      "id": "skill",
+      "name": "🧩 Skill & Prompt"
+    },
+    {
+      "id": "ajan",
+      "name": "🤖 Ajan Araçları"
+    },
+    {
+      "id": "veri",
+      "name": "📚 AI Veri & RAG"
+    },
+    {
+      "id": "medya",
+      "name": "🎬 Medya Üretimi"
+    },
+    {
+      "id": "finans",
+      "name": "💰 Finans"
+    },
+    {
+      "id": "arac",
+      "name": "🛠️ Araçlar"
+    },
+    {
+      "id": "ogrenme",
+      "name": "📖 Öğrenme"
+    }
+  ],
+  "repos": [
+    {
+      "r": "usestrix/strix",
+      "f": "yayin",
+      "k": "uygulama",
+      "tr": "Uygulamanı saldırgan gibi deneyen AI pentest ajanları. Bulduğu açığı çalışan bir örnekle doğrular, düzeltme önerir, rapor çıkarır.",
+      "d": "Open-source AI penetration testing tool to find and fix your app’s vulnerabilities.",
+      "w": "Sadece test etme yetkin olan sistemlerde kullan. Docker ve LLM API anahtarı ister.",
+      "l": "Python",
+      "s": 64805,
+      "at": "2026-09-25",
+      "src": {
+        "t": "the_coding_wizard",
+        "u": "https://www.instagram.com/p/Dc-wvDXkaJU/"
+      },
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "every-app/open-seo",
+      "f": "yayin",
+      "k": "uygulama",
+      "tr": "Semrush/Ahrefs'e açık kaynak alternatif: anahtar kelime, sıralama takibi, rakip analizi, backlink, site denetimi. MCP sunucusu var.",
+      "d": "Open source alternative to Semrush and Ahrefs",
+      "w": "Her sorgu DataForSEO'ya ücretli.",
+      "l": "TypeScript",
+      "s": 21035,
+      "at": "2026-09-25",
+      "src": {
+        "t": "the_coding_wizard",
+        "u": "https://www.instagram.com/p/Dc-wvDXkaJU/"
+      },
+      "archived": false,
+      "pushed": "2026-09-20"
+    },
+    {
+      "r": "alibaba/open-code-review",
+      "f": "yayin",
+      "k": "uygulama",
+      "tr": "Kural tabanlı kontrollerle bir LLM ajanını birleştiren kod inceleme aracı; satır satır yorum yazar.",
+      "d": "Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible.",
+      "w": "",
+      "l": "Go",
+      "s": 41245,
+      "at": "2026-09-21",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-09-24"
+    },
+    {
+      "r": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "f": "tasarim",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Farklı platformlarda profesyonel arayüz tasarlamak için tasarım bilgisi veren AI skill'i.",
+      "d": "An AI skill that provides design intelligence for building professional UI/UX across multiple platforms.",
+      "w": "",
+      "l": "Python",
+      "s": 130612,
+      "at": "2026-06-10",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-09-21"
+    },
+    {
+      "r": "pbakaus/impeccable",
+      "f": "tasarim",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Ajanın tipik \"AI yapmış\" görünümünden çıkmasını sağlayan tasarım skill'i. audit, polish, typeset, layout gibi ~24 komut.",
+      "d": "The design language that makes your AI harness better at design.",
+      "w": "",
+      "l": "JavaScript",
+      "s": 71086,
+      "at": "2026-09-25",
+      "src": {
+        "t": "Nate Herk",
+        "u": "https://www.instagram.com/reel/DbLuwUVlE9Z/"
+      },
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "Leonxlnx/taste-skill",
+      "f": "tasarim",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Ajanı daha premium görünen arayüzlere yönlendiren SKILL.md dosyaları; çeşitlilik, animasyon ve yoğunluk için 1–10 ayarları.",
+      "d": "Taste-Skill - gives your AI good taste. stops the AI from generating boring, generic slop ",
+      "w": "",
+      "l": "JavaScript",
+      "s": 90086,
+      "at": "2026-09-25",
+      "src": {
+        "t": "Nate Herk",
+        "u": "https://www.instagram.com/reel/DbLuwUVlE9Z/"
+      },
+      "archived": false,
+      "pushed": "2026-09-23"
+    },
+    {
+      "r": "emilkowalski/skills",
+      "f": "tasarim",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Emil Kowalski'nin (Linear) bakışıyla yazılmış skill'ler. Ağırlık animasyon ve easing; genel UI kuralları da var.",
+      "d": "Skills for Designers and Engineers.",
+      "w": "",
+      "l": "Markdown",
+      "s": 41112,
+      "at": "2026-09-25",
+      "src": {
+        "t": "Nate Herk",
+        "u": "https://www.instagram.com/reel/DbLuwUVlE9Z/"
+      },
+      "archived": false,
+      "pushed": "2026-09-23"
+    },
+    {
+      "r": "figma/mcp-server-guide",
+      "f": "tasarim",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Figma'nın resmi MCP sunucusunun rehberi. Claude'a Figma tasarımını okutup koda çevirtir.",
+      "d": "A guide on how to use the Figma MCP server",
+      "w": "",
+      "l": "Python",
+      "s": 2021,
+      "at": "2026-09-25",
+      "src": {
+        "t": "Nate Herk",
+        "u": "https://www.instagram.com/reel/DbLuwUVlE9Z/"
+      },
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "anthropics/html-effectiveness",
+      "f": "tasarim",
+      "k": "kaynak",
+      "tr": "Anthropic'in etkili HTML çıktısı örnekleri.",
+      "d": "HTML effectiveness examples",
+      "w": "",
+      "l": "HTML",
+      "s": 660,
+      "at": "2026-07-05",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-07-03"
+    },
+    {
+      "r": "vercel-labs/skills",
+      "f": "skill",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "\"npx skills add\" komutunun kendisi: GitHub'daki skill'leri Claude Code, Cursor, Codex'e kurar ve yönetir.",
+      "d": "The open agent skills tool - npx skills",
+      "w": "",
+      "l": "TypeScript",
+      "s": 32472,
+      "at": "2026-09-25",
+      "src": {
+        "t": "Nate Herk",
+        "u": "https://www.instagram.com/reel/DbLuwUVlE9Z/"
+      },
+      "archived": false,
+      "pushed": "2026-09-18"
+    },
+    {
+      "r": "vercel-labs/agent-skills",
+      "f": "skill",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Vercel'in resmi ajan skill koleksiyonu.",
+      "d": "Vercel's official collection of agent skills",
+      "w": "",
+      "l": "JavaScript",
+      "s": 31532,
+      "at": "2026-01-14",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-08-28"
+    },
+    {
+      "r": "vibeforge1111/vibeship-spawner-skills",
+      "f": "skill",
+      "k": "ajan",
+      "a": [
+        "claude"
+      ],
+      "tr": "Uzmanlaşmış ajanlar için skill dizini.",
+      "d": "a skill directory for world-class specialized agents, in your terminal / IDE. more sophisticated than skills with just md files. and they're free.",
+      "w": "",
+      "l": "JavaScript",
+      "s": 882,
+      "at": "2026-01-09",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-01-02"
+    },
+    {
+      "r": "petergyang/no-ai-slop",
+      "f": "skill",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Metindeki 20'den fazla tipik AI yazım kalıbını temizler, senin üslubunu korur.",
+      "d": "Removes 20+ patterns of AI slop from any piece of writing.",
+      "w": "",
+      "l": "Python",
+      "s": 11267,
+      "at": "2026-09-25",
+      "src": {
+        "t": "the_coding_wizard",
+        "u": "https://www.instagram.com/p/Dc-wvDXkaJU/"
+      },
+      "archived": false,
+      "pushed": "2026-09-02"
+    },
+    {
+      "r": "ayghri/i-have-adhd",
+      "f": "skill",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Ajanın cevaplarını kısa ve net yapan 10 kural: önce yapılacak iş, numaralı adımlar, gereksiz giriş ve kapanış yok.",
+      "d": "A skill to stop your coding agent from burying the answer. ADHD-friendly output.",
+      "w": "",
+      "l": "Python",
+      "s": 51166,
+      "at": "2026-09-25",
+      "src": {
+        "t": "the_coding_wizard",
+        "u": "https://www.instagram.com/p/Dc-wvDXkaJU/"
+      },
+      "archived": false,
+      "pushed": "2026-09-19"
+    },
+    {
+      "r": "virgiliojr94/book-to-skill",
+      "f": "skill",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Kitap ya da doküman setini bölüm bölüm ajan skill'ine çevirir; ajan sadece ilgili bölümü yükler.",
+      "d": "Turn any technical book PDF into a Claude Code skill — ready to study, reference, and use while you work.",
+      "w": "Telifli kitaptan üretilen skill'i paylaşma.",
+      "l": "Python",
+      "s": 32399,
+      "at": "2026-09-25",
+      "src": {
+        "t": "the_coding_wizard",
+        "u": "https://www.instagram.com/p/Dc-wvDXkaJU/"
+      },
+      "archived": false,
+      "pushed": "2026-09-22"
+    },
+    {
+      "r": "x1xhlol/system-prompts-and-models-of-ai-tools",
+      "f": "skill",
+      "k": "kaynak",
+      "tr": "Cursor, Claude Code, Devin, Lovable gibi araçların sistem prompt'larının toplandığı arşiv.",
+      "d": "FULL Augment Code, Claude Code, Cluely, CodeBuddy, Comet, Cursor, Devin AI, Junie, Kiro, Leap.new, Lovable, Manus, NotionAI, Orchids.app, Perplexity, Poke, Qoder, Replit, Same.dev, Trae, Traycer AI, VSCode Agent, Warp.dev, Windsurf, Xcode, Z.ai Code, Dia & v0. (And other Open Sourced) System Prompts, Internal Tools & AI Models",
+      "w": "",
+      "l": null,
+      "s": 143864,
+      "at": "2025-12-17",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-08-11"
+    },
+    {
+      "r": "davila7/claude-code-templates",
+      "f": "ajan",
+      "k": "ajan",
+      "a": [
+        "claude"
+      ],
+      "tr": "Claude Code'u ayarlama ve izleme aracı; hazır ajan, komut ve ayar şablonları.",
+      "d": "CLI tool for configuring and monitoring Claude Code",
+      "w": "",
+      "l": "Python",
+      "s": 31803,
+      "at": "2026-06-10",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "ZeframLou/call-me",
+      "f": "ajan",
+      "k": "ajan",
+      "a": [
+        "claude"
+      ],
+      "tr": "Claude Code işini bitirince seni telefonla arayan eklenti.",
+      "d": "Minimal plugin that lets Claude Code call you on the phone.",
+      "w": "",
+      "l": "TypeScript",
+      "s": 2643,
+      "at": "2026-01-11",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-04-07"
+    },
+    {
+      "r": "pingdotgg/t3code",
+      "f": "ajan",
+      "k": "uygulama",
+      "tr": "Kodlama ajanları için açık kaynak arayüz. Sunucuda çalışır, telefondan ya da tarayıcıdan bağlanırsın.",
+      "d": "",
+      "w": "Çok erken aşama, hata bekleniyor.",
+      "l": "TypeScript",
+      "s": 23554,
+      "at": "2026-09-25",
+      "src": {
+        "t": "Isaac Dyor",
+        "u": "https://www.instagram.com/reel/Ddsfjsqjgaz/"
+      },
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "vercel-labs/agent-browser",
+      "f": "ajan",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "AI ajanları için hızlı tarayıcı otomasyonu. Uygulamayı test eder, PR'a eklemek için imleçli video kaydı alır.",
+      "d": "Browser automation CLI for AI agents",
+      "w": "",
+      "l": "Rust",
+      "s": 43184,
+      "at": "2026-09-25",
+      "src": {
+        "t": "Isaac Dyor",
+        "u": "https://www.instagram.com/reel/Ddsfjsqjgaz/"
+      },
+      "archived": false,
+      "pushed": "2026-09-24"
+    },
+    {
+      "r": "microsoft/playwright-mcp",
+      "f": "ajan",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Claude'a gerçek bir tarayıcı verir: sayfayı açar, tıklar, ekran görüntüsü alır, konsolu okur. Bu bilgisayarda kurulu.",
+      "d": "Playwright MCP server",
+      "w": "",
+      "l": "TypeScript",
+      "s": 37565,
+      "at": "2026-09-25",
+      "src": {
+        "t": "Nate Herk",
+        "u": "https://www.instagram.com/reel/DbLuwUVlE9Z/"
+      },
+      "archived": false,
+      "pushed": "2026-09-18"
+    },
+    {
+      "r": "diegosouzapw/OmniRoute",
+      "f": "ajan",
+      "k": "uygulama",
+      "tr": "Yerel, OpenAI uyumlu AI ağ geçidi. İstekleri 350'den fazla sağlayıcıya dağıtır, kota bitince başkasına geçer.",
+      "d": "Never stop coding. Free MIT AI gateway: one endpoint, 359 providers (150+ free), 1200+ models Kimi, Claude, GPT, Gemini, GLM, DeepSeek, MiniMax. Works with Claude Code, Codex, Cursor, OpenCode, Cline & Copilot. Quota-aware auto-fallback, RTK+Caveman compression saves 15-95% tokens, MCP/A2A, Desktop/PWA. Built by hundreds of contributors",
+      "w": "Bazı sağlayıcıların kullanım şartlarına aykırı olabilir.",
+      "l": "TypeScript",
+      "s": 70142,
+      "at": "2026-09-25",
+      "src": {
+        "t": "the_coding_wizard",
+        "u": "https://www.instagram.com/p/Dc-wvDXkaJU/"
+      },
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "EmpiricaAI/empirica",
+      "f": "ajan",
+      "k": "ajan",
+      "a": [
+        "claude"
+      ],
+      "tr": "AI ajanlarının ne kadar güvenilir çalıştığını ölçer; Claude Code ile kullanılabilir.",
+      "d": "  Make AI agents and AI workflows measurably reliable. Epistemic measurement, Noetic RAG, Sentinel gating, and grounded calibration for Claude Code  and beyond",
+      "w": "",
+      "l": "Python",
+      "s": 249,
+      "at": "2026-01-07",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "microsoft/autogen",
+      "f": "ajan",
+      "k": "proje",
+      "tr": "Microsoft'un yapay zekâ ajanı geliştirme framework'ü.",
+      "d": "A programming framework for agentic AI",
+      "w": "",
+      "l": "Python",
+      "s": 61163,
+      "at": "2025-12-24",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-04-15"
+    },
+    {
+      "r": "MadsLorentzen/ai-job-search",
+      "f": "ajan",
+      "k": "uygulama",
+      "tr": "İş arama için Claude Code şablonu: ilan tarar, ilana özel CV ve ön yazı hazırlar, mülakata hazırlar.",
+      "d": "The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor CVs, write cover letters, prep interviews. Fork it and own it.",
+      "w": "İlan tarayıcıları Danimarka sitelerine göre yazılmış. Fork her zaman herkese açık olur ve kurulum kişisel bilgilerini (maaş beklentisi dahil) dosyalara yazar; README'nin önerdiği gibi gizli bir repo kullan.",
+      "l": "Python",
+      "s": 43960,
+      "at": "2026-09-25",
+      "src": {
+        "t": "the_coding_wizard",
+        "u": "https://www.instagram.com/p/Dc-wvDXkaJU/"
+      },
+      "archived": false,
+      "pushed": "2026-09-21"
+    },
+    {
+      "r": "unclecode/crawl4ai",
+      "f": "veri",
+      "k": "proje",
+      "tr": "Web sitelerini tarayıp LLM'in okuyacağı temiz Markdown'a çevirir.",
+      "d": "Open-source web crawler and scraper for LLMs and AI agents: any website into clean, LLM-ready Markdown. Run it yourself, or use Crawl4AI Cloud with one key.",
+      "w": "",
+      "l": "Python",
+      "s": 84257,
+      "at": "2026-09-14",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "NirDiamant/RAG_Techniques",
+      "f": "veri",
+      "k": "kaynak",
+      "tr": "İleri RAG tekniklerini notebook'larla anlatan eğitim reposu.",
+      "d": "This repository showcases various advanced techniques for Retrieval-Augmented Generation (RAG) systems. Each technique has a detailed notebook tutorial.",
+      "w": "",
+      "l": "Jupyter Notebook",
+      "s": 29600,
+      "at": "2026-07-19",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-09-21"
+    },
+    {
+      "r": "AlexsJones/llmfit",
+      "f": "veri",
+      "k": "uygulama",
+      "tr": "Bilgisayarında hangi modelin çalışacağını tek komutla söyler.",
+      "d": "Hundreds of models & providers. One command to find what runs on your hardware.",
+      "w": "",
+      "l": "Rust",
+      "s": 37157,
+      "at": "2026-07-22",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-09-24"
+    },
+    {
+      "r": "dataease/SQLBot",
+      "f": "veri",
+      "k": "uygulama",
+      "tr": "Doğal dille soru sor, SQL'i o yazsın; LLM ve RAG ile sohbetle veri analizi.",
+      "d": "🔥 基于大模型和 RAG 的智能问数系统，对话式数据分析神器。Text-to-SQL Generation via LLMs using RAG.",
+      "w": "Proje Çince.",
+      "l": "JavaScript",
+      "s": 6851,
+      "at": "2025-10-01",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-09-24"
+    },
+    {
+      "r": "lfnovo/open-notebook",
+      "f": "veri",
+      "k": "uygulama",
+      "tr": "Kendi sunucunda çalışan NotebookLM alternatifi: PDF, video ve web sayfalarıyla sohbet, podcast üretimi.",
+      "d": "An Open Source implementation of Notebook LM with more flexibility and features",
+      "w": "",
+      "l": "TypeScript",
+      "s": 39497,
+      "at": "2026-09-25",
+      "src": {
+        "t": "the_coding_wizard",
+        "u": "https://www.instagram.com/p/Dc-wvDXkaJU/"
+      },
+      "archived": false,
+      "pushed": "2026-09-20"
+    },
+    {
+      "r": "deepbeepmeep/Wan2GP",
+      "f": "medya",
+      "k": "uygulama",
+      "tr": "Zayıf ekran kartında bile çalışan AI video üretici (Wan, LTX, Hunyuan, Flux).",
+      "d": "A fast AI Video Generator for the GPU Poor. Supports Wan 2.1/2.2, LTX-2, Qwen Image, Hunyuan Video, LTX  Video and Flux.",
+      "w": "",
+      "l": "Python",
+      "s": 9612,
+      "at": "2026-08-14",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-09-24"
+    },
+    {
+      "r": "abus-aikorea/voice-pro",
+      "f": "medya",
+      "k": "uygulama",
+      "tr": "Metni sese çevirme, ses klonlama ve Whisper ile konuşmayı yazıya dökme arayüzü.",
+      "d": "Gradio WebUI for creators and developers, featuring key TTS (Edge-TTS, kokoro) and zero-shot Voice Cloning (E2 & F5-TTS, CosyVoice), with Whisper audio processing, YouTube download, Demucs vocal isolation, and multilingual translation.",
+      "w": "",
+      "l": "Python",
+      "s": 12931,
+      "at": "2026-08-02",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-07-13"
+    },
+    {
+      "r": "Anil-matcha/Open-Generative-AI",
+      "f": "medya",
+      "k": "uygulama",
+      "tr": "Görsel, video ve dudak senkronu üretimi için tek arayüz; yüzlerce model.",
+      "d": "Unrestricted Open-source alternative to AI video platforms — Free AI image & video generation studio with 600+ models (Flux, Midjourney, Kling, Sora, Veo). No content filters. Self-hosted, MIT licensed.",
+      "w": "Bulut modelleri ücretli MuAPI servisi üzerinden çalışıyor.",
+      "l": "JavaScript",
+      "s": 29205,
+      "at": "2026-09-25",
+      "src": {
+        "t": "the_coding_wizard",
+        "u": "https://www.instagram.com/p/Dc-wvDXkaJU/"
+      },
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "latent-spaces/brag",
+      "f": "medya",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Yaptığın projeden tek komutla kısa bir tanıtım videosu çıkarır.",
+      "d": "You built it. Now brag. Turn the project you just created into a short, shareable launch video with one command.",
+      "w": "",
+      "l": "Python",
+      "s": 7842,
+      "at": "2026-09-23",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-09-24"
+    },
+    {
+      "r": "HKUDS/Vibe-Trading",
+      "f": "finans",
+      "k": "uygulama",
+      "tr": "Kişisel alım-satım (trading) ajanı.",
+      "d": "\"Vibe-Trading: Your Personal Trading Agent\"",
+      "w": "",
+      "l": "Python",
+      "s": 34033,
+      "at": "2026-08-10",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "Fincept-Corporation/FinceptTerminal",
+      "f": "finans",
+      "k": "uygulama",
+      "tr": "Piyasa analizi, yatırım araştırması ve ekonomik veri terminali.",
+      "d": "FinceptTerminal is a modern finance application offering advanced market analytics, investment research, and economic data tools, designed for interactive exploration and data-driven decision-making in a user-friendly environment.",
+      "w": "",
+      "l": "C++",
+      "s": 31982,
+      "at": "2026-08-10",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-09-19"
+    },
+    {
+      "r": "we-promise/sure",
+      "f": "finans",
+      "k": "uygulama",
+      "tr": "Kişisel bütçe ve finans uygulaması.",
+      "d": "The personal finance app for everyone (by everyone)",
+      "w": "",
+      "l": "Ruby",
+      "s": 10038,
+      "at": "2025-12-21",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "jgm/pandoc",
+      "f": "arac",
+      "k": "uygulama",
+      "tr": "Belge formatlarını birbirine çeviren evrensel dönüştürücü (Markdown, Word, PDF...).",
+      "d": "Universal markup converter",
+      "w": "",
+      "l": "Haskell",
+      "s": 46407,
+      "at": "2026-08-03",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "C4illin/ConvertX",
+      "f": "arac",
+      "k": "uygulama",
+      "tr": "Kendi sunucunda çalışan dosya dönüştürücü; 1000'den fazla format.",
+      "d": "💾 Self-hosted online file converter. Supports 1000+ formats ⚙️",
+      "w": "",
+      "l": "TypeScript",
+      "s": 19059,
+      "at": "2025-12-17",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-09-23"
+    },
+    {
+      "r": "usekaneo/kaneo",
+      "f": "arac",
+      "k": "uygulama",
+      "tr": "Sade, açık kaynak proje yönetim aracı.",
+      "d": "🎯 All you need. Nothing you don't. Open source project management that works for you, not against you.",
+      "w": "",
+      "l": "TypeScript",
+      "s": 9200,
+      "at": "2026-08-01",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "BraveOPotato/FckSignups",
+      "f": "arac",
+      "k": "kaynak",
+      "tr": "Tarayıcıda çalışan ve üyelik istemeyen açık kaynak araçların listesi.",
+      "d": "A list of tools that are open-source, in-browser, and require no-signups!",
+      "w": "",
+      "l": "TypeScript",
+      "s": 4346,
+      "at": "2026-09-04",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-09-23"
+    },
+    {
+      "r": "Sonarr/Sonarr",
+      "f": "arac",
+      "k": "uygulama",
+      "tr": "Dizi indirmeyi otomatikleştiren araç (Usenet ve torrent).",
+      "d": "Smart PVR for newsgroup and bittorrent users.",
+      "w": "",
+      "l": "C#",
+      "s": 16527,
+      "at": "2026-09-10",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-09-24"
+    },
+    {
+      "r": "antitree/nfc_canary",
+      "f": "arac",
+      "k": "uygulama",
+      "tr": "Flipper Zero uygulaması: biri cebindeki kartı NFC ile okursa titreşimle uyarır.",
+      "d": "Flipper Zero app: a canary for your pocket — detects when someone scans you over NFC and alerts you by vibration",
+      "w": "",
+      "l": "C",
+      "s": 119,
+      "at": "2026-08-24",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-08-03"
+    },
+    {
+      "r": "ByteByteGoHq/system-design-101",
+      "f": "ogrenme",
+      "k": "kaynak",
+      "tr": "Sistem tasarımını görsellerle ve sade dille anlatır.",
+      "d": "Explain complex systems using visuals and simple terms. Help you prepare for system design interviews.",
+      "w": "",
+      "l": null,
+      "s": 89946,
+      "at": "2026-09-25",
+      "src": null,
+      "archived": false,
+      "pushed": "2025-04-04"
+    },
+    {
+      "r": "CyC2018/CS-Notes",
+      "f": "ogrenme",
+      "k": "kaynak",
+      "tr": "Teknik mülakat notları: LeetCode, işletim sistemleri, ağlar.",
+      "d": ":books: 技术面试必备基础知识、Leetcode、计算机操作系统、计算机网络、系统设计",
+      "w": "Proje Çince.",
+      "l": null,
+      "s": 186281,
+      "at": "2026-01-02",
+      "src": null,
+      "archived": false,
+      "pushed": "2024-08-21"
+    },
+    {
+      "r": "selahattinunlu/harika-github-repolari",
+      "f": "ogrenme",
+      "k": "kaynak",
+      "tr": "Türkçe hazırlanmış faydalı GitHub repoları listesi.",
+      "d": "",
+      "w": "",
+      "l": null,
+      "s": 462,
+      "at": "2026-05-20",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-08-20"
+    },
+    {
+      "r": "hasaneyldrm/exercises-dataset",
+      "f": "ogrenme",
+      "k": "proje",
+      "tr": "1.324 egzersizlik fitness veri seti; animasyonlar ve 6 dilde açıklamalar.",
+      "d": "1,324-exercise fitness dataset — animation GIFs, 180×180 thumbnails, muscle-group & equipment data, and step-by-step instructions in 6 languages. The exercise data layer behind the LogPress app.",
+      "w": "",
+      "l": "HTML",
+      "s": 22298,
+      "at": "2026-06-30",
+      "src": null,
+      "archived": false,
+      "pushed": "2026-07-16"
+    },
+    {
+      "r": "blader/humanizer",
+      "f": "skill",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Metindeki AI yazısı izlerini bulup anlamı değiştirmeden insan yazmış gibi yeniden yazar; kendi yazından örnek verirsen üslubuna uyar. No AI Slop ile aynı işi görür.",
+      "d": "Agent skill that removes signs of AI-generated writing from text",
+      "w": "",
+      "l": "Python",
+      "at": "2026-09-25",
+      "src": null,
+      "s": 52000,
+      "archived": false,
+      "pushed": "2026-09-06"
+    },
+    {
+      "r": "JuliusBrussee/caveman",
+      "f": "skill",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Kodlama ajanını çok kısa cümlelerle konuşturarak token harcamasını azaltan skill ve ara katman (proxy); 30'dan fazla ajanla çalışıyor.",
+      "d": "🪨 why use many token when few token do trick. Viral skill + proxy for coding agents that cuts 65% of tokens by talking like a caveman.",
+      "w": "Tasarruf oranı (%65) yazarın iddiası; lisans MIT ve BSL karışık.",
+      "l": "Go",
+      "at": "2026-09-25",
+      "src": null,
+      "s": 107837,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "google-labs-code/design.md",
+      "f": "tasarim",
+      "k": "proje",
+      "tr": "Google'ın DESIGN.md biçimi: renk, yazı tipi, köşe ve boşluk değerlerini (YAML) ve tasarımın gerekçesini tek dosyada tanımlar; kodlama ajanları arayüzü bu dosyaya göre üretir.",
+      "d": "A format specification for describing a visual identity to coding agents. DESIGN.md gives agents a persistent, structured understanding of a design system.",
+      "w": "",
+      "l": "TypeScript",
+      "at": "2026-09-25",
+      "src": {
+        "t": "divyannshisharma",
+        "u": "https://www.instagram.com/p/Dc3vmYCEvpu/"
+      },
+      "s": 28108,
+      "archived": false,
+      "pushed": "2026-09-14"
+    },
+    {
+      "r": "VoltAgent/awesome-design-md",
+      "f": "tasarim",
+      "k": "proje",
+      "tr": "Tanınmış markaların tasarım sistemlerinden çıkarılmış hazır DESIGN.md dosyaları. Birini projene koyup ajana \"buna benzeyen bir sayfa yap\" dersin, arayüz o tasarım diline tutarlı çıkar.",
+      "d": "A collection of DESIGN.md files analysis by popular brand design systems. Drop one into your project and let coding agents generate a matching UI.",
+      "w": "",
+      "l": null,
+      "at": "2026-09-25",
+      "src": {
+        "t": "divyannshisharma",
+        "u": "https://www.instagram.com/p/Dc3vmYCEvpu/"
+      },
+      "s": 117896,
+      "archived": false,
+      "pushed": "2026-09-21"
+    },
+    {
+      "r": "hardikpandya/stop-slop",
+      "f": "skill",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Metindeki AI yazım kalıplarını (klişe girişler, gereksiz zarflar, \"X değil, Y\" karşıtlıkları) yakalayıp temizleyen skill. No AI Slop ve Humanizer ile aynı işi görür.",
+      "d": "A skill file for removing AI tells from prose",
+      "w": "",
+      "l": null,
+      "at": "2026-09-25",
+      "src": {
+        "t": "divyannshisharma",
+        "u": "https://www.instagram.com/p/Dc3vmYCEvpu/"
+      },
+      "s": 17572,
+      "archived": false,
+      "pushed": "2026-03-17"
+    },
+    {
+      "r": "cathrynlavery/diagram-design",
+      "f": "tasarim",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Dergi kalitesinde diyagram çizdiren skill: akış, sistem mimarisi, Sankey, balık kılçığı, veritabanı şeması gibi 20'den fazla tür. Tek dosyalık HTML + SVG üretir; Mermaid ve draw.io çizimlerini de yeniden çizer.",
+      "d": "Editorial diagram design for Claude Code, Codex, and Pi. Self-contained HTML + SVG. No shadows. No Mermaid slop.",
+      "w": "",
+      "l": "HTML",
+      "at": "2026-09-25",
+      "src": {
+        "t": "divyannshisharma",
+        "u": "https://www.instagram.com/p/Dc3vmYCEvpu/"
+      },
+      "s": 42396,
+      "archived": false,
+      "pushed": "2026-09-19"
+    },
+    {
+      "r": "zarazhangrui/frontend-slides",
+      "f": "tasarim",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Kodlama ajanına HTML sunum hazırlatan skill; sıfırdan ya da PowerPoint'ten çevirerek. Stil önizlemeleri gösterip seçtirir, bağımlılığı olmayan tek bir HTML dosyası üretir.",
+      "d": "Create beautiful slides on the web using a coding agent's frontend skills",
+      "w": "",
+      "l": "JavaScript",
+      "at": "2026-09-25",
+      "src": {
+        "t": "divyannshisharma",
+        "u": "https://www.instagram.com/p/Dc3vmYCEvpu/"
+      },
+      "s": 29819,
+      "archived": false,
+      "pushed": "2026-06-23"
+    },
+    {
+      "r": "Egonex-AI/Understand-Anything",
+      "f": "skill",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Kod tabanını analiz edip her dosya, fonksiyon ve bağımlılığın etkileşimli bilgi grafiğini çıkaran Claude Code eklentisi; grafikte gezinip soru sorarak büyük bir projeyi hızlı tanırsın.",
+      "d": "Graphs that teach > graphs that impress. Turn any code into an interactive knowledge graph you can explore, search, and ask questions about. Works with Claude Code, Codex, Cursor, Copilot, Gemini CLI, and more.",
+      "w": "",
+      "l": "TypeScript",
+      "at": "2026-09-25",
+      "src": {
+        "t": "divyannshisharma",
+        "u": "https://www.instagram.com/p/Dc3vmYCEvpu/"
+      },
+      "s": 84179,
+      "archived": false,
+      "pushed": "2026-09-12"
+    },
+    {
+      "r": "ruvnet/ruflo",
+      "f": "ajan",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Claude Code ve Codex'in etrafına kurulan ajan altyapısı: 100'den fazla uzman ajanı ekip halinde çalıştırır, oturumlar arası öğrenen hafıza ve görevi uygun modele yönlendirme ekler. npx ruflo init ile kurulur.",
+      "d": "🌊 The original agent harness. Deploy intelligent multi-player swarms, coordinate autonomous workflows, and build conversational AI systems. Features adaptive memory, self-learning intelligence, federation, vector RAG integration, and native Claude Code / Codex / Hermes and many more Integrated",
+      "w": "Videodaki %50 token tasarrufu ve Claude Code'u %250 daha uzun kullanma iddiaları doğrulanmadı; büyük ve karmaşık bir sistem. Tam kurulum (npx ruflo init) projeye .claude/, .claude-flow/, CLAUDE.md ve hook'lar yazar; eklenti olarak kurulursa projeye dosya yazmaz ama daha az özellik gelir.",
+      "l": "TypeScript",
+      "at": "2026-09-25",
+      "src": {
+        "t": "petergriffin.ai",
+        "u": "https://www.instagram.com/reel/Da5be6dJ6Fi/"
+      },
+      "s": 73261,
+      "archived": false,
+      "pushed": "2026-09-24"
+    },
+    {
+      "r": "NousResearch/hermes-agent",
+      "f": "ajan",
+      "k": "uygulama",
+      "tr": "Nous Research'ün kendini geliştiren AI ajanı: deneyimden skill üretip kullandıkça iyileştirir, geçmiş konuşmalarını arayıp seni oturumlar arasında hatırlar. Ucuz bir VPS'te çalışır, Telegram gibi kanallardan konuşulur; OpenRouter, OpenAI gibi istediğin modelle çalışır.",
+      "d": "The agent that grows with you",
+      "w": "",
+      "l": "Python",
+      "at": "2026-09-25",
+      "src": null,
+      "s": 248932,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "karpathy/llm-council",
+      "f": "ajan",
+      "k": "uygulama",
+      "tr": "Soruyu OpenRouter üzerinden birden çok modele sorar, modellere birbirlerinin cevaplarını isimsiz olarak puanlatır ve bir başkan modele son cevabı yazdırır. Andrej Karpathy'nin yerel web uygulaması.",
+      "d": "LLM Council works together to answer your hardest questions",
+      "w": "Lisans dosyası yok ve yazar bakım yapmayacağını söylüyor; OpenRouter kredisi ister.",
+      "l": "Python",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.instagram.com/reel/Dbpyz7FCLC3/",
+        "t": "benburhankocabiyik"
+      },
+      "s": 24994,
+      "archived": false,
+      "pushed": "2025-11-22"
+    },
+    {
+      "r": "SessionLoops/PitchNet",
+      "f": "medya",
+      "k": "uygulama",
+      "tr": "Vokal perdesini piyano rulosunda düzelten bağımsız uygulama ve ses eklentisi (VST3/AU, isteğe bağlı AAX, ARA desteği). Perdeyi FCPE/RMVPE sinir ağlarıyla bulur, düzenlemeyi nöral vocoder ile yeniden sentezleyip anında dinletir; WAV ve MIDI dışa aktarır.",
+      "d": "A lightweight pitch editor built with JUCE, featuring neural pitch detection and vocoder resynthesis for real-time preview.git",
+      "w": "AGPL-3.0; HachiTune'dan türetilmiş, sürüm 0.6 ile erken aşamada. 'Ücretsiz Melodyne alternatifi' kalitesi yazarın iddiası (sitede Melodyne ile ses karşılaştırması var).",
+      "l": "C++",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.instagram.com/reel/DdCOhLJAEAs/",
+        "t": "selahattin.unlu"
+      },
+      "s": 96,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "gitroomhq/postiz-app",
+      "f": "arac",
+      "k": "uygulama",
+      "tr": "Instagram, YouTube, LinkedIn, X, TikTok, Bluesky gibi platformlara gönderi zamanlayan, analiz ve ekip çalışması sunan sosyal medya yönetim aracı. Kendi sunucunda barındırılabilir; API, MCP ve CLI ile yapay zekâ ajanlarından kullanılabilir.",
+      "d": "📨 The ultimate agentic social media scheduling tool 🤖",
+      "w": "AGPL-3.0. Kendi sunucunda her platform için kendi geliştirici uygulamanı açıp onay alman gerekir (Meta, YouTube, TikTok haftalar sürebilir); AI özellikleri kendi API anahtarını ister, bulut sürümü ücretli abonelik.",
+      "l": "TypeScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/b66fksMVR-E",
+        "t": "selahattin.unlu"
+      },
+      "s": 36318,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "getopenscreen/openscreen",
+      "f": "medya",
+      "k": "uygulama",
+      "tr": "Screen Studio'ya ücretsiz, açık kaynak alternatif masaüstü uygulaması: ekran ve ses kaydı, otomatik zoom, webcam, cihaz üstünde altyazı, MP4/GIF dışa aktarım. Windows, macOS ve Linux.",
+      "d": "Record your screen, ship a demo. Free and open-source, GPU-accelerated, no watermarks, no subscriptions. Windows, macOS, Linux. Actively maintained.",
+      "w": "Asıl yazarın reposu (siddharthvaddem/openscreen) arşivlendi; geliştirme onun onayıyla aynı ad ve MIT lisansıyla bu repoda sürüyor.",
+      "l": "TypeScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/6GvXRk8NRZY",
+        "t": "selahattin.unlu"
+      },
+      "s": 3224,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "remotion-dev/remotion",
+      "f": "medya",
+      "k": "proje",
+      "tr": "Videoyu React bileşenleri olarak kodlayıp render eden framework; render Node.js, AWS Lambda, Vercel veya tarayıcıda yapılabilir. Kodlama ajanlarıyla video üretmek için Agent Skills de sunar.",
+      "d": "🎥      Make videos programmatically with React",
+      "w": "Özel lisans: bireyler, en fazla 3 çalışanlı şirketler ve kâr amacı gütmeyenler için ücretsiz; daha büyük kâr amaçlı şirketler ücretli Company License almalı. Remotion 5.0'da sözleşmeli çalışanların da ekip sayısına katılması planlanıyor.",
+      "l": "TypeScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/w1MOSKvJSx0",
+        "t": "selahattin.unlu"
+      },
+      "s": 60400,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "openai/whisper",
+      "f": "medya",
+      "k": "proje",
+      "tr": "OpenAI'nin çok dilli konuşma tanıma modeli: sesi yazıya döker, İngilizceye çevirir ve dili tespit eder. Python paketi olarak kurulur, yanında whisper komut satırı aracı da gelir.",
+      "d": "Robust Speech Recognition via Large-Scale Weak Supervision",
+      "w": "Modele göre ~1 GB (tiny) ile ~10 GB (large) VRAM gerekir ve ffmpeg kurulu olmalı. Varsayılan turbo modeli çeviri yapmaz.",
+      "l": "Python",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/X-5ZLxh1yWY",
+        "t": "selahattin.unlu"
+      },
+      "s": 109589,
+      "archived": false,
+      "pushed": "2026-08-31"
+    },
+    {
+      "r": "AnmolSaini16/mapcn",
+      "f": "tasarim",
+      "k": "proje",
+      "tr": "React için hazır harita bileşenleri: işaretçi, popup, rota ve zoom/pusula kontrolleri. MapLibre GL üzerine kurulu, Tailwind ile stillenir, shadcn/ui ile aynı yapıyı kullanır.",
+      "d": "Beautiful map components. 100% Free, Zero config, one command setup.",
+      "w": "Varsayılan CARTO altlık haritalarının ticari kullanımı CARTO Enterprise lisansı ister; OpenStreetMap, MapTiler, Stadia gibi başka bir tile sağlayıcıya geçilebilir.",
+      "l": "TypeScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/AQ_OUlDcTOM",
+        "t": "selahattin.unlu"
+      },
+      "s": 12124,
+      "archived": false,
+      "pushed": "2026-09-06"
+    },
+    {
+      "r": "recharts/recharts",
+      "f": "tasarim",
+      "k": "proje",
+      "tr": "React için bileşen tabanlı grafik kütüphanesi; D3 üzerine kurulu, SVG ile çizer. Eksen, tooltip, çizgi gibi parçalar ayrı React bileşenleri olarak birleştirilir.",
+      "d": "Redefined chart library built with React and D3",
+      "w": "",
+      "l": "TypeScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/TBoP5k6QFtk",
+        "t": "selahattin.unlu"
+      },
+      "s": 27590,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "airbnb/lottie-web",
+      "f": "tasarim",
+      "k": "proje",
+      "tr": "After Effects animasyonlarını Bodymovin eklentisiyle JSON olarak dışa aktarıp web'de SVG, canvas veya HTML ile oynatan JavaScript oynatıcı. Framework'e bağlı değil (düz JS); npm veya CDN ile eklenir.",
+      "d": "Render After Effects animations natively on Web, Android and iOS, and React Native. http://airbnb.io/lottie/",
+      "w": "Animasyon üretmek için After Effects (ücretli Adobe) ve Bodymovin eklentisi gerekir. Ana dalda son commit Kasım 2024 (5.13.0).",
+      "l": "JavaScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/86W1YfgPnYk",
+        "t": "selahattin.unlu"
+      },
+      "s": 32127,
+      "archived": false,
+      "pushed": "2025-09-01"
+    },
+    {
+      "r": "greensock/GSAP",
+      "f": "tasarim",
+      "k": "proje",
+      "tr": "Framework'e bağlı olmayan, bağımlılıksız JavaScript animasyon kütüphanesi; düz JS, React, Vue, CSS, SVG, canvas ve WebGL ile çalışır. ScrollTrigger, SplitText, MorphSVG gibi eklentiler dahil; React için @gsap/react paketi (useGSAP) var.",
+      "d": "GSAP (GreenSock Animation Platform), a JavaScript animation library for the modern web",
+      "w": "MIT değil, GreenSock'un 'no charge' lisansı: tüm eklentiler dahil ticari kullanım ücretsiz, ama kod açık kaynak sayılmaz. Webflow'un görsel animasyon araçlarıyla rakip olan kodsuz animasyon araçlarında kullanılması yasak.",
+      "l": "JavaScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/nSu_xsf8kSY",
+        "t": "selahattin.unlu"
+      },
+      "s": 28629,
+      "archived": false,
+      "pushed": "2026-04-13"
+    },
+    {
+      "r": "motiondivision/motion",
+      "f": "tasarim",
+      "k": "proje",
+      "tr": "React, düz JavaScript ve Vue için animasyon kütüphanesi (Framer Motion'ın yeni adı). Yaylı animasyonlar, layout geçişleri, scroll'a bağlı efektler, zaman çizelgeleri ve dokunma/sürükleme hareketleri içerir.",
+      "d": "A modern animation library for React and JavaScript",
+      "w": "Çekirdek MIT ve ücretsiz; Motion+ ücretli (ek örnekler, premium API'ler). npx motion-ai, Claude Code ve başka ajanlar için /motion skill'i ile MCP sunucularını da kurar.",
+      "l": "TypeScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/3gPLR82bmeQ",
+        "t": "selahattin.unlu"
+      },
+      "s": 33725,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "tremorlabs/tremor",
+      "f": "tasarim",
+      "k": "proje",
+      "tr": "Grafik ve dashboard için 35+ kopyala-yapıştır React bileşeni. Tailwind CSS ve Radix UI üzerine kurulu, grafikleri Recharts ile çizer.",
+      "d": "Copy & Paste React components to build modern web applications. ",
+      "w": "Tremor Vercel'e katıldı; bu repoda son kod değişikliği Nisan 2025 (Tailwind v4), sonrasında yalnızca CI temizliği var. Başka bir repoya taşındığına dair not yok; eski npm paketi (@tremor/react, tremor-npm reposu) da Ocak 2025'ten beri güncellenmedi.",
+      "l": "TypeScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/Rf5jRfYtXiY",
+        "t": "selahattin.unlu"
+      },
+      "s": 3633,
+      "archived": false,
+      "pushed": "2025-10-10"
+    },
+    {
+      "r": "saadeghi/daisyui",
+      "f": "tasarim",
+      "k": "proje",
+      "tr": "Tailwind CSS'e eklenti olarak kurulan, hazır CSS sınıflarıyla kullanılan bileşen kütüphanesi. Framework'e bağlı değil: React, Vue, Svelte, Angular, Laravel, Django, Rails gibi Tailwind çalışan her projeye uyar.",
+      "d": "🌼 🌼 🌼 🌼 🌼  The most popular, free and open-source Tailwind CSS component library",
+      "w": "",
+      "l": "JavaScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/zKrNYSI-qd4",
+        "t": "selahattin.unlu"
+      },
+      "s": 42475,
+      "archived": false,
+      "pushed": "2026-09-24"
+    },
+    {
+      "r": "DavidHDev/react-bits",
+      "f": "tasarim",
+      "k": "proje",
+      "tr": "Metin animasyonu, arka plan, UI ve mikro etkileşim için 200+ animasyonlu React bileşeni; her biri JS/TS ve düz CSS/Tailwind olmak üzere 4 varyantla gelir. Vue ve Svelte için resmi portları ayrı sitelerde.",
+      "d": "An open source collection of animated, interactive & fully customizable React components for building memorable websites.",
+      "w": "Lisans MIT + Commons Clause: uygulama veya sitede ticari kullanım serbest, ama bileşenlerin kendisini tek tek, paket halinde ya da port ederek satmak veya yeniden dağıtmak yasak. OSI anlamında açık kaynak değil.",
+      "l": "JavaScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/7XzSweUGnr4",
+        "t": "selahattin.unlu"
+      },
+      "s": 48087,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "magicuidesign/magicui",
+      "f": "tasarim",
+      "k": "proje",
+      "tr": "Landing page ve tanıtım sayfaları için animasyonlu, kopyala-yapıştır bileşenler. React ve Tailwind ile çalışır, animasyonların çoğu Motion kütüphanesiyle yapılır; kurulumu shadcn/ui ile aynıdır.",
+      "d": "UI Library for Design Engineers. Animated components and effects you can copy and paste into your apps. Free. Open Source.",
+      "w": "",
+      "l": "MDX",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/103EGz7WTE4",
+        "t": "selahattin.unlu"
+      },
+      "s": 22388,
+      "archived": false,
+      "pushed": "2026-09-20"
+    },
+    {
+      "r": "shadcn-ui/ui",
+      "f": "tasarim",
+      "k": "proje",
+      "tr": "Kodu doğrudan projeye kopyalanan, erişilebilir React bileşenleri; Tailwind CSS ile stillenir, altta Radix, Base UI veya React Aria kullanır. CLI ile eklenir; Next.js, Vite, Remix, Astro, TanStack ve Laravel için kurulum rehberi var.",
+      "d": "Composable, accessible components with thoughtful defaults. Build your own component library with code you can customize, extend, and make your own.",
+      "w": "Kodlama ajanları için skill (npx skills add shadcn/ui) ve bileşen registry'lerine erişen bir MCP sunucusu da var.",
+      "l": "TypeScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/GkbkS7U1a_Y",
+        "t": "selahattin.unlu"
+      },
+      "s": 124583,
+      "archived": false,
+      "pushed": "2026-09-24"
+    },
+    {
+      "r": "ollama/ollama",
+      "f": "veri",
+      "k": "uygulama",
+      "tr": "Açık modelleri (Gemma, Qwen, DeepSeek...) kendi bilgisayarında çalıştırır ve REST API sunar; Claude Code, Codex gibi ajanları yerel modelle başlatan `ollama launch` entegrasyonu var.",
+      "d": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
+      "w": "Yerel model çalıştırmak donanıma bağlı; büyük modeller yüksek RAM ve GPU ister.",
+      "l": "Go",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/jXPcLQuP3hI",
+        "t": "selahattin.unlu"
+      },
+      "s": 181711,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "microsoft/markitdown",
+      "f": "veri",
+      "k": "proje",
+      "tr": "PDF, Word, Excel, PowerPoint, HTML, görsel ve ses dosyalarını LLM'e verilecek Markdown'a çeviren Python aracı; başlık, liste, tablo gibi yapıyı korur.",
+      "d": "Python tool for converting files and office documents to Markdown.",
+      "w": "Çalıştığı sürecin yetkisiyle dosya ve URL okur; güvenilmeyen girdiyi doğrudan verme. Komut satırından (markitdown dosya.pdf) ve markitdown-mcp paketiyle ajandan da kullanılabilir.",
+      "l": "Python",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/NqjHYFCcJss",
+        "t": "selahattin.unlu"
+      },
+      "s": 187014,
+      "archived": false,
+      "pushed": "2026-09-21"
+    },
+    {
+      "r": "marcelscruz/public-apis",
+      "f": "ogrenme",
+      "k": "kaynak",
+      "tr": "Kategorilere ayrılmış herkese açık API listesi (AI, hava durumu, finans, spor...); her API için kimlik doğrulama türü ve CORS desteği belirtilir.",
+      "d": "A collaborative list of public APIs for developers",
+      "w": "Çoğu API anahtar ister, bazılarında ticari kullanım kısıtı var (ör. Open-Meteo yalnızca ticari olmayan kullanım); koşulları tek tek kontrol et.",
+      "l": "JavaScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/Z81e6l27wJI",
+        "t": "selahattin.unlu"
+      },
+      "s": 9501,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "ripienaar/free-for-dev",
+      "f": "ogrenme",
+      "k": "kaynak",
+      "tr": "Ücretsiz katmanı olan SaaS, PaaS ve IaaS hizmetlerinin listesi (hosting, veritabanı, e-posta, izleme, CI...). Yalnızca deneme sürümü değil, gerçek ücretsiz katman sunanlar alınır.",
+      "d": "A list of SaaS, PaaS and IaaS offerings that have free tiers of interest to devops and infradev",
+      "w": "Ücretsiz katman limitleri sık değişir; kullanmadan önce sağlayıcının güncel sayfasına bak.",
+      "l": "HTML",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/fMWlswvNw34",
+        "t": "selahattin.unlu"
+      },
+      "s": 138482,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "prometheus/prometheus",
+      "f": "altyapi",
+      "k": "uygulama",
+      "tr": "Hedeflerden belirli aralıklarla metrik toplayan izleme sistemi ve zaman serisi veritabanı; PromQL ile sorgular, koşul sağlanınca alarm tetikler.",
+      "d": "The Prometheus monitoring system and time series database.",
+      "w": "",
+      "l": "Go",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/_Megzvq771M",
+        "t": "selahattin.unlu"
+      },
+      "s": 66228,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "umami-software/umami",
+      "f": "altyapi",
+      "k": "uygulama",
+      "tr": "Çerez kullanmayan, gizlilik odaklı web analitiği; trafik, kampanya, dönüşüm ve gelir tek panelde, kendi sunucunda veya bulutta.",
+      "d": "Umami is a privacy-first analytics platform. Traffic, campaigns, behavior, conversions, and revenue in one place — no cookies, no surveillance, self-hosted or in the cloud.",
+      "w": "PostgreSQL ister; kurulumda oluşan admin/umami girişinin şifresini hemen değiştir.",
+      "l": "TypeScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/CQN7e1TyZZ0",
+        "t": "selahattin.unlu"
+      },
+      "s": 39009,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "grafana/grafana",
+      "f": "altyapi",
+      "k": "uygulama",
+      "tr": "Metrik, log ve trace verilerini (Prometheus, Loki, Postgres...) panolarda görselleştirir; tanımlanan kural aşılınca Slack, PagerDuty gibi kanallara alarm gönderir.",
+      "d": "The open and composable observability and data visualization platform. Visualize metrics, logs, and traces from multiple sources like Prometheus, Loki, Elasticsearch, InfluxDB, Postgres and many more. ",
+      "w": "AGPL-3.0-only: değiştirip ağ üzerinden hizmet olarak sunarsan kaynak kodunu paylaşman gerekir; bazı parçalar için Apache-2.0 istisnaları LICENSING.md'de.",
+      "l": "TypeScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/EJJc2CE1gqc",
+        "t": "selahattin.unlu"
+      },
+      "s": 76906,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "openreplay/openreplay",
+      "f": "altyapi",
+      "k": "uygulama",
+      "tr": "Kendi sunucunda çalışan oturum kaydı (session replay), ürün analitiği ve canlı ortak tarama; hatayı kullanıcının gördüğü haliyle, konsol ve ağ kayıtlarıyla izlersin.",
+      "d": "Session replay, cobrowsing and product analytics you can self-host. Best for reproducing issues and iterating on your product.",
+      "w": "Çekirdek AGPLv3, tracker SDK'ları MIT, ee/ klasörü ticari Enterprise lisansı; en az 2 vCPU, 8 GB RAM, 50 GB disk ister. Kullanıcı oturumlarını kaydeder: girdileri maskele, KVKK aydınlatmasını ekle.",
+      "l": "TypeScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/KJTo0pluq7M",
+        "t": "selahattin.unlu"
+      },
+      "s": 12900,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "microsoft/playwright",
+      "f": "yayin",
+      "k": "proje",
+      "tr": "Chromium, Firefox ve WebKit'i tek API ile süren uçtan uca test çatısı; otomatik bekleme, paralel test ve hata anında trace/ekran görüntüsü kaydı.",
+      "d": "Playwright is a framework for Web Testing and Automation. It allows testing Chromium, Firefox and WebKit with a single API. ",
+      "w": "Ajanlar için ayrı yollar da var: Playwright MCP (claude mcp add playwright npx @playwright/mcp@latest) ve @playwright/cli.",
+      "l": "TypeScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/9rUwfGPO0QI",
+        "t": "selahattin.unlu"
+      },
+      "s": 96673,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "octopusreview/octopus",
+      "f": "yayin",
+      "k": "uygulama",
+      "tr": "Pull request'lere AI kod incelemesi yapar: özet, önem derecesine göre sıralı bulgular ve önerilen düzeltmeler (GitHub, GitLab, Bitbucket, Forgejo). Bulut sürümü veya Docker Compose ile kendi sunucunda çalışır.",
+      "d": "AI-powered PR review tool — multi-armed code analysis, no bug escapes 🐙",
+      "w": "Lisans 'Modified MIT' (source available): ticari üründe kullanılır ve ürün aylık 10.000 aktif kullanıcıyı veya 100.000 dolar aylık geliri aşarsa arayüzde 'Octopus Code Review' göstermek zorunlu. AI sağlayıcı maliyeti sende, Cloud kullanım bazlı ücretli; kod AI servislerine gönderilir.",
+      "l": "TypeScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/3vpDdeP6P-0",
+        "t": "selahattin.unlu"
+      },
+      "s": 103,
+      "archived": false,
+      "pushed": "2026-09-24"
+    },
+    {
+      "r": "webpro-nl/knip",
+      "f": "yayin",
+      "k": "proje",
+      "tr": "JavaScript/TypeScript projelerinde kullanılmayan dosya, bağımlılık ve export'ları bulup temizler; yayın öncesi ölü kodu atmak için.",
+      "d": "✂️  Find unused files, dependencies and exports in your JavaScript and TypeScript projects. Knip it before you ship it!",
+      "w": "Ajanlar için resmi @knip/mcp paketi ve VS Code eklentisi de var.",
+      "l": "TypeScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/7KwDz7tYfpc",
+        "t": "selahattin.unlu"
+      },
+      "s": 12342,
+      "archived": false,
+      "pushed": "2026-09-23"
+    },
+    {
+      "r": "google/osv-scanner",
+      "f": "yayin",
+      "k": "uygulama",
+      "tr": "Projenin bağımlılıklarını (npm, pip, go, cargo...) ve container imajlarını OSV.dev veritabanına karşı tarayıp bilinen güvenlik açıklarını bulur; lisans kontrolü ve sürüm yükseltme önerisi de yapar.",
+      "d": "Vulnerability scanner written in Go which uses the data provided by https://osv.dev",
+      "w": "Paket adı ve sürümlerini OSV.dev/deps.dev API'lerine gönderir (kaynak kod gitmez), istenirse --offline çalışır. Deneysel `fix` komutu güvenilmeyen projede script çalıştırabilir.",
+      "l": "Go",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/WEYL8-AAsEs",
+        "t": "selahattin.unlu"
+      },
+      "s": 11087,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "fastlane/fastlane",
+      "f": "altyapi",
+      "k": "proje",
+      "tr": "iOS ve Android uygulamalarında ekran görüntüsü üretme, provisioning profile yönetimi ve mağazaya yayınlama gibi işleri otomatikleştirir. Proje içindeki Fastfile ile tanımlanır.",
+      "d": "🚀 The easiest way to automate building and releasing your iOS and Android apps",
+      "w": "Varsayılan olarak anonim kullanım metrikleri gönderir; Fastfile'a opt_out_usage ekleyerek kapatılır.",
+      "l": "Ruby",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/Mmj01VKVXeU",
+        "t": "selahattin.unlu"
+      },
+      "s": 42159,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "Dokploy/dokploy",
+      "f": "altyapi",
+      "k": "uygulama",
+      "tr": "Kendi VPS'inde çalışan Vercel/Heroku/Netlify alternatifi PaaS: uygulama ve veritabanı deploy, Docker Compose, otomatik yedek, Traefik ile yönlendirme ve kaynak izleme.",
+      "d": "Open Source Alternative to Vercel, Netlify and Heroku.",
+      "w": "Çekirdek Apache-2.0; /proprietary klasörlerindeki özellikler (SSO, denetim kaydı, roller, white-label, lisans anahtarı) kaynağı açık ama üretimde kullanmak için Dokploy ile ticari sözleşme ister (DSAL).",
+      "l": "TypeScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/vpHbCG8ag1M",
+        "t": "selahattin.unlu"
+      },
+      "s": 37511,
+      "archived": false,
+      "pushed": "2026-09-24"
+    },
+    {
+      "r": "coollabsio/coolify",
+      "f": "altyapi",
+      "k": "uygulama",
+      "tr": "Kendi sunucunda çalışan Vercel/Heroku/Netlify alternatifi: Git push ile deploy, veritabanı, otomatik HTTPS, yedekleme ve 300'den fazla tek tıkla kurulan servis. SSH erişimi olan bir VPS yeterli; dashboard, API, CLI ve MCP ile yönetilir.",
+      "d": "An open-source, self-hostable PaaS alternative to Vercel, Heroku & Netlify that lets you easily deploy static sites, databases, full-stack applications and 280+ one-click services on your own servers.",
+      "w": "Önerilen kurulumda Coolify bir sunucuda, uygulamalar ayrı sunucularda çalışır; yönetilen Coolify Cloud ücretli.",
+      "l": "PHP",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/PrlqXvx3LPk",
+        "t": "selahattin.unlu"
+      },
+      "s": 62269,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "NVIDIA/SkillSpector",
+      "f": "skill",
+      "k": "uygulama",
+      "tr": "Agent skill'lerini kurmadan önce güvenlik açısından tarar: prompt injection, veri sızdırma, tedarik zinciri gibi 17 kategoride 71 kalıp arar. Statik analiz ve isteğe bağlı LLM değerlendirmesiyle 0-100 risk puanı verir; MCP olarak ajana da eklenebilir.",
+      "d": "Security scanner for AI agent skills. Detect vulnerabilities, malicious patterns, security risks, prompt injection, data exfiltration, and supply-chain risks in Claude Code, Codex, and MCP skills before you install them.",
+      "w": "LLM analizi için API anahtarı ya da yerel claude/codex CLI gerekir (--no-llm ile yalnız statik tarama). MCP modu `skillspector[mcp]` ekiyle kurulmalı ve stdio'da bilinen bir başlatma takılması (issue #199) var.",
+      "l": "Python",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.instagram.com/reel/DdUQEYRALZj/",
+        "t": "selahattin.unlu"
+      },
+      "s": 18296,
+      "archived": false,
+      "pushed": "2026-09-24"
+    },
+    {
+      "r": "google/artemis",
+      "f": "yayin",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Doğal dilde verilen talimatlarla gerçek Android cihazda ya da emülatörde uçtan uca test ve otomasyon yapar. MCP ile Claude Code ve Codex'e bağlanır, logcat ve ekran görüntüsü toplar.",
+      "d": "ARTEMIS turns natural-language instructions into reliable Android automation. It automates end-to-end workflows, captures logs, and integrates seamlessly with AI coding assistants such as Antigravity, Codex, and Claude Code.  It also achieves 99%+ success rate on AndroidWorld Benchmark.",
+      "w": "Repo klonlanıp yerel servis çalıştırılır ve cihazı yöneten ajan için Gemini/OpenAI/Anthropic gibi bir LLM API anahtarı gerekir; ekran görüntüleri bu sağlayıcıya gider. Telefona bir erişilebilirlik servisi kurar; AndroidWorld'de %99+ başarı yazarın iddiası.",
+      "l": "Python",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.instagram.com/reel/DdMh1Fhg7Zg/",
+        "t": "selahattin.unlu"
+      },
+      "s": 9838,
+      "archived": false,
+      "pushed": "2026-09-12"
+    },
+    {
+      "r": "shanraisshan/claude-code-best-practice",
+      "f": "ogrenme",
+      "k": "kaynak",
+      "tr": "Claude Code'un alt ajan, komut, skill, hook, MCP ve bellek özelliklerini örnek uygulamalarla anlatan rehber. Claude ekibinden ve topluluktan derlenmiş 83 ipucu içerir.",
+      "d": "from vibe coding to agentic engineering - practice makes claude perfect",
+      "w": "",
+      "l": "HTML",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/cToXyrYtFTs",
+        "t": "selahattin.unlu"
+      },
+      "s": 66352,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "nexu-io/open-design",
+      "f": "tasarim",
+      "k": "uygulama",
+      "tr": "Claude Design'ın açık kaynak alternatifi olan masaüstü uygulaması: bilgisayardaki kodlama ajanını (Claude Code, Codex vb.) kullanarak prototip, landing page, sunum, görsel ve video üretir; HTML/PDF/PPTX/MP4 olarak dışa aktarır.",
+      "d": "🎨 Best DeepSeek Harness Design Plugin. The open-source Claude Design alternative. 🖥️ Local-first desktop app. 🖼️ Your coding agent becomes the design engine: prototypes, landing pages, dashboards, slides, images & video — real files, HTML/PDF/PPTX/MP4 export. 🤖 Claude Code / Codex / Cursor / DeepSeek Harness / OpenCode & 20+ CLIs via BYOK.",
+      "w": "Güvenlik ve güvenilirlik telemetrisi her zaman açık (ürün analitiği onaya bağlı); README ücretli OpenDesign Cloud hizmetini öne çıkarıyor. Arayüzsüz kullanım için `od mcp install claude|codex` ile ajana MCP olarak da eklenir.",
+      "l": "TypeScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/9dIxRgyANn0",
+        "t": "selahattin.unlu"
+      },
+      "s": 98077,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "HKUDS/CLI-Anything",
+      "f": "ajan",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "GIMP, Blender gibi bir yazılım için kaynak koddan ya da repodan ajanların kullanabileceği, JSON çıktı veren bir CLI üretir. Hazır CLI'lar CLI-Hub'dan kurulabilir.",
+      "d": "\"CLI-Anything: Making ALL Software Agent-Native\" -- CLI-Hub: https://clianything.cc/",
+      "w": "Codex desteği deneysel ve topluluk etiketli. Üretilen CLI'lar asıl programın kurulu olmasını ister; Windows'ta Git Bash ya da WSL gerekir.",
+      "l": "Python",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/NYx647nbybw",
+        "t": "selahattin.unlu"
+      },
+      "s": 50521,
+      "archived": false,
+      "pushed": "2026-09-22"
+    },
+    {
+      "r": "BloopAI/vibe-kanban",
+      "f": "ajan",
+      "k": "uygulama",
+      "tr": "İşleri kanban panosunda planlayıp her görevi ayrı bir çalışma alanında (branch, terminal, dev sunucusu) Claude Code, Codex gibi ajanlara yaptırır. Diff'i inceleyip satır içi yorum bırakır, PR açarsın.",
+      "d": "Get 10X more out of Claude Code, Codex or any coding agent",
+      "w": "Arkasındaki şirket Bloop Nisan 2026'da kapandı; proje topluluk bakımına geçti, bulut özellikleri kaldırıldı, yerel kullanım sürüyor.",
+      "l": "Rust",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/4VSJbVoeJRA",
+        "t": "selahattin.unlu"
+      },
+      "s": 28190,
+      "archived": false,
+      "pushed": "2026-09-19"
+    },
+    {
+      "r": "microsoft/Webwright",
+      "f": "ajan",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Kodlama ajanını tarayıcı ajanına çevirir: web görevini adım adım tıklamak yerine yeniden çalıştırılabilir bir Playwright Python betiği yazarak çözer. Claude Code ve Codex'e plugin olarak eklenir.",
+      "d": "A simple SWE style browser agent framework that achieves SOTA results on long horizon web tasks. ",
+      "w": "Plugin yolunda da repo klonlanıp `pip install -e .` ve Playwright Chromium kurulur. Tek başına CLI olarak çalıştırmak OpenAI/Anthropic/OpenRouter API anahtarı ister; benchmark sonuçları yazarın iddiası.",
+      "l": "Python",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/yv7toIYKwyU",
+        "t": "selahattin.unlu"
+      },
+      "s": 6020,
+      "archived": false,
+      "pushed": "2026-08-03"
+    },
+    {
+      "r": "wentong2022-arch/flowforge-skill",
+      "f": "tasarim",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Doğal dille anlatılan akış şeması, mimari ya da karşılaştırma diyagramını düzenlenebilir draw.io (.drawio) dosyası olarak üretir. XML'i yazmadan önce ASCII taslağını onaylatır.",
+      "d": "Generate professional draw.io diagrams from natural language — a Claude Code skill",
+      "w": "Çok erken aşama (4 commit, yaklaşık 140 yıldız).",
+      "l": "Python",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/0r_6gbFup7o",
+        "t": "selahattin.unlu"
+      },
+      "s": 137,
+      "archived": false,
+      "pushed": "2026-07-04"
+    },
+    {
+      "r": "Kronop/vibe-aso",
+      "f": "yayin",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "iOS uygulamasını App Store'a hazırlayan skill: anahtar kelime araştırması, 50 dile kadar mağaza metni, yerelleştirilmiş ekran görüntüleri, ülke bazlı fiyatlandırma ve uygulama içi çeviri.",
+      "d": "You vibe-coded the app — now vibe the ASO. A Claude Code skill: keyword research, 50-locale App Store metadata, localized screenshots, worldwide pricing, in-app localization.",
+      "w": "Çok erken aşama (3 commit). App Manager rolünde App Store Connect API anahtarı ister, mağaza kaydını ve fiyatları doğrudan değiştirir; yalnız macOS.",
+      "l": "JavaScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/u1z2feSfXB8",
+        "t": "selahattin.unlu"
+      },
+      "s": 420,
+      "archived": false,
+      "pushed": "2026-08-12"
+    },
+    {
+      "r": "bradautomates/claude-video",
+      "f": "ajan",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Ajana video izletir: /watch bir URL'yi ya da yerel video dosyasını zaman damgalı karelere ve transkripte çevirip ajana verir.",
+      "d": "Give Claude the ability to watch any video. /watch downloads, extracts frames, transcribes, hands it all to Claude.",
+      "w": "GEMINI_API_KEY tanımlıysa videolar (yerel dosyalar dahil) Google'a yüklenir; anahtarsız yerel mod ffmpeg ve yt-dlp ister. Groq/OpenAI transkripsiyonu ayrı API anahtarı ister.",
+      "l": "Python",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/pkJkn0TyGQc",
+        "t": "selahattin.unlu"
+      },
+      "s": 17659,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "mvanhorn/last30days-skill",
+      "f": "veri",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Bir konuyu son 30 gün içinde Reddit, X, YouTube, Hacker News, Polymarket ve web üzerinde araştırır; sonuçları beğeni ve oy gibi etkileşimlere göre sıralayıp kaynaklı bir özet çıkarır.",
+      "d": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary",
+      "w": "X, TikTok, Instagram gibi kaynaklar kendi API anahtarlarını (ScrapeCreators 10.000 çağrıdan sonra ücretli) ya da tarayıcı oturum çerezlerini ister; araç tarayıcıdan çerez okuyabilir.",
+      "l": "Python",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/KZZr5SoBbzo",
+        "t": "selahattin.unlu"
+      },
+      "s": 62806,
+      "archived": false,
+      "pushed": "2026-09-23"
+    },
+    {
+      "r": "Graphify-Labs/graphify",
+      "f": "veri",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Kod tabanını (dokümanlar, PDF'ler ve SQL şemaları dahil) sorgulanabilir bir bilgi grafiğine çevirir; ajan dosyaları grep'lemek yerine grafiği sorgular. Kod yerelde tree-sitter ile, LLM kullanmadan ayrıştırılır.",
+      "d": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
+      "w": "Önce `graphifyy` (çift y) Python CLI'ı kurulur, benzer adlı PyPI paketleri resmi değil. Doküman/PDF/görsel analizi asistanın modeline ya da API anahtarına gider; benchmark sonuçları yazarın iddiası.",
+      "l": "Python",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/y4VLxJY0JbU",
+        "t": "selahattin.unlu"
+      },
+      "s": 121404,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "mksglu/context-mode",
+      "f": "ajan",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Araç çıktılarını sandbox'ta tutup bağlama yalnızca sonucu koyan MCP sunucusu ve hook seti. Oturum olaylarını yerel SQLite'ta indeksler, bağlam sıkıştırıldıktan sonra ajanın kaldığı yerden devam etmesini sağlar.",
+      "d": "Context window optimization for AI coding agents. Sandboxes tool output (98% reduction), persists session memory, and   enforces routing across 17 platforms via MCP + hooks.",
+      "w": "Elastic License 2.0: kaynak açık ama barındırılan servis olarak sunulamaz. Hook'larla araç çağrılarını yönlendirir; '%98 azalma' ve 'kullanan şirketler' rozetleri yazarın iddiası.",
+      "l": "TypeScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/zdwAXTaxL5Y",
+        "t": "selahattin.unlu"
+      },
+      "s": 24059,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "composio-community/awesome-codex-skills",
+      "f": "skill",
+      "k": "ajan",
+      "a": [
+        "codex"
+      ],
+      "tr": "Codex için pratik skill'lerin derlendiği liste; bir kısmı repoda hazır gelir (PR yorumlarını işleme, CI hatası düzeltme, MCP sunucusu yazma, toplantı notu çıkarma gibi). Kurulum betiği seçilen skill'i ~/.codex/skills altına koyar.",
+      "d": "A curated list of practical Codex skills for automating workflows across the Codex CLI and API.",
+      "w": "Repoda lisans dosyası yok. Maddelerin bir kısmı dış repolara link; bazı skill'ler Composio CLI/hesabı gerektirir (liste Composio tarafından yayımlanıyor).",
+      "l": "Python",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/hSb1TAXAwTA",
+        "t": "selahattin.unlu"
+      },
+      "s": 16652,
+      "archived": false,
+      "pushed": "2026-07-26"
+    },
+    {
+      "r": "openai/codex-plugin-cc",
+      "f": "ajan",
+      "k": "ajan",
+      "a": [
+        "claude"
+      ],
+      "tr": "Claude Code içinden Codex'i kullandıran resmi OpenAI eklentisi: Codex'e kod review yaptırır, görevi Codex'e devreder, arka plandaki işleri izler. İsteğe bağlı review kapısı Claude'un yanıtlarını Codex'e kontrol ettirir.",
+      "d": "Use Codex from Claude Code to review code or delegate tasks.",
+      "w": "ChatGPT hesabı veya OpenAI API anahtarı ve yerel Codex CLI gerekir; kullanım Codex limitlerinden düşer. Review kapısı uzun bir Claude/Codex döngüsüne girip limiti hızla tüketebilir.",
+      "l": "JavaScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/uISmT8Bv4Fo",
+        "t": "selahattin.unlu"
+      },
+      "s": 33586,
+      "archived": false,
+      "pushed": "2026-07-08"
+    },
+    {
+      "r": "msitarzewski/agency-agents",
+      "f": "skill",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Mühendislik, tasarım, pazarlama, satış gibi bölümlerde 230'dan fazla uzman ajan kişiliği (alt ajan tanımı). Kurulum betiği aynı ajanları Claude Code, Codex, Cursor gibi araçların biçimine çevirip kurar.",
+      "d": "A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables.",
+      "w": "",
+      "l": "Shell",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/eTrgWvRYdNE",
+        "t": "selahattin.unlu"
+      },
+      "s": 154617,
+      "archived": false,
+      "pushed": "2026-09-22"
+    },
+    {
+      "r": "coreyhaines31/marketingskills",
+      "f": "skill",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Pazarlama işleri için skill koleksiyonu: dönüşüm optimizasyonu, metin yazarlığı, SEO, analitik, reklam ve büyüme. Skill'ler önce ürün ve hedef kitle bilgisini tutan product-marketing skill'ini okur.",
+      "d": "Marketing skills for Claude Code and AI agents. CRO, copywriting, SEO, analytics, and growth engineering.",
+      "w": "",
+      "l": "JavaScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/dE4hFAW9cpk",
+        "t": "selahattin.unlu"
+      },
+      "s": 51501,
+      "archived": false,
+      "pushed": "2026-09-05"
+    },
+    {
+      "r": "addyosmani/agent-skills",
+      "f": "skill",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Kıdemli mühendis iş akışlarını 25 skill olarak paketler: spesifikasyon, planlama, TDD, kod review, performans denetimi ve yayına alma. /spec, /plan, /build, /test, /review, /ship komutlarıyla geliştirme döngüsünü izletir.",
+      "d": "Production-grade engineering skills for AI coding agents.",
+      "w": "",
+      "l": "JavaScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/Kg7eV4wv_3A",
+        "t": "selahattin.unlu"
+      },
+      "s": 99030,
+      "archived": false,
+      "pushed": "2026-09-23"
+    },
+    {
+      "r": "addyosmani/web-quality-skills",
+      "f": "yayin",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Lighthouse, Core Web Vitals, WCAG ve SEO temelli web kalite skill'leri. Ajan önce ölçer (Lighthouse, DevTools izi, CrUX), sonra performans, erişilebilirlik ve SEO düzeltmeleri önerir.",
+      "d": "Agent Skills for optimizing web quality based on Lighthouse and Core Web Vitals.",
+      "w": "",
+      "l": "Shell",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/vkKtohvoBS8",
+        "t": "selahattin.unlu"
+      },
+      "s": 2840,
+      "archived": false,
+      "pushed": "2026-08-24"
+    },
+    {
+      "r": "garrytan/gstack",
+      "f": "skill",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Claude Code'u sanal bir ekibe çeviren slash komut seti: ürün sorgulama, mimari ve tasarım incelemesi, kod review, gerçek tarayıcıda QA, güvenlik denetimi ve PR'ı yayınlama. Her adım çıktısını bir sonrakine devreder.",
+      "d": "Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO, Designer, Eng Manager, Release Manager, Doc Engineer, and QA",
+      "w": "Verimlilik rakamları (ör. 2013'e göre ~810 kat) yazarın iddiası. Bun gerektirir, tarayıcı çerezlerini içe aktarabilir; telemetri isteğe bağlı (opt-in).",
+      "l": "TypeScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/HB3hNzdIa6o",
+        "t": "selahattin.unlu"
+      },
+      "s": 134203,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "open-gsd/gsd-core",
+      "f": "ajan",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Ajanı tartış, planla, uygula, doğrula, yayınla döngüsüyle çalıştıran spesifikasyon odaklı geliştirme sistemi. Ağır işleri temiz bağlamlı alt ajanlara verip ana oturumu hafif tutar.",
+      "d": "Git. Ship. Done - Core",
+      "w": "Eski adı gsd-build/get-shit-done; o repo arşivlendi ve geliştirme burada sürüyor. Kurulum: npx @opengsd/gsd-core@latest (Claude Code, Codex ve diğer ajanları sorar).",
+      "l": "JavaScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/hxUSmmj7Qek",
+        "t": "selahattin.unlu"
+      },
+      "s": 9848,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "obra/superpowers",
+      "f": "skill",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Kodlama ajanına baştan sona bir çalışma yöntemi kuran skill seti: önce soru sorup tasarımı netleştirir, plan yazar, TDD ile alt ajanlara uygulatır ve kodu gözden geçirir. Skill'ler kendiliğinden devreye girer.",
+      "d": "An agentic skills framework & software development methodology that works.",
+      "w": "Görsel eşlikçi özelliği kullanılan sürüm bilgisini yazarın sitesine gönderir; SUPERPOWERS_DISABLE_TELEMETRY ile kapatılır.",
+      "l": "Shell",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/uSbLXkV0tl4",
+        "t": "selahattin.unlu"
+      },
+      "s": 291566,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "upstash/context7",
+      "f": "ajan",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Kütüphanelerin güncel, sürüme özel dokümantasyonunu ve kod örneklerini ajanın bağlamına getirir; eski ya da uydurma API önerilerini azaltır. MCP sunucusu veya ctx7 CLI + skill olarak çalışır.",
+      "d": "Context7 Platform -- Up-to-date code documentation for LLMs and AI code editors",
+      "w": "Upstash'in barındırılan servisine bağlıdır (arka uç açık kaynak değil), sorgular context7.com'a gider; ücretsiz API anahtarı öneriliyor. Dokümanlar topluluk katkılı, doğruluk garanti edilmiyor.",
+      "l": "TypeScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/d8-m2nxVOl4",
+        "t": "selahattin.unlu"
+      },
+      "s": 62421,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "thedotmack/claude-mem",
+      "f": "ajan",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Kodlama ajanının oturumlarda yaptıklarını kaydeder, AI ile özetler ve sonraki oturumlara ilgili bağlamı geri verir. Hook'larla kendiliğinden çalışır; geçmiş yerel SQLite'ta tutulur ve MCP araçlarıyla aranır.",
+      "d": "Persistent Context Across Sessions for Every Agent –  Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions. Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More",
+      "w": "Kurulum varsayılan olarak hesap açtırıp barındırılan hafıza servisine yönlendirir (30 gün ücretsiz, sonra abonelik; --provider ile atlanır). Tüm oturum etkinliğini kaydeder; README ayrıca bir kripto tokenı (CMEM) tanıtıyor.",
+      "l": "TypeScript",
+      "at": "2026-09-25",
+      "src": {
+        "u": "https://www.youtube.com/shorts/hPKyPjy505s",
+        "t": "selahattin.unlu"
+      },
+      "s": 94688,
+      "archived": false,
+      "pushed": "2026-09-25"
+    },
+    {
+      "r": "paperclipai/paperclip",
+      "f": "ajan",
+      "k": "uygulama",
+      "tr": "Birden çok AI ajanını (Claude Code, Codex, Cursor, OpenClaw...) bir şirket gibi yöneten açık kaynak uygulama: hedef verirsin, ajanlara rol ve bütçe atarsın, işleri ve maliyeti tek panelden izlersin.",
+      "d": "The open-source app everyone uses to manage agents at work",
+      "w": "Ajanlar sürekli çalışınca API maliyeti hızla birikir; bütçe sınırını baştan koy. Kendi sunucunda çalışır, hesap gerekmez.",
+      "l": "TypeScript",
+      "at": "2026-09-25",
+      "src": null,
+      "s": 84357,
+      "archived": false,
+      "pushed": "2026-09-25"
+    }
+  ]
+}

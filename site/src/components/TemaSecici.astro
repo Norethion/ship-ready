@@ -1,0 +1,119 @@
+---
+// Tema seçici: Starlight'ın seçim kutusu yerine sitenin görünümünde açılır menü. Tarayıcının kendi açılır listesi
+// koyu temaya uymuyor ve "Otomatik" sabit genişliğe sığmıyordu. Seçim Starlight'ın yerinde (localStorage "starlight-theme")
+// tutulur; sayfa açılırken Starlight'ın ThemeProvider'ı uygular. Hem üst çubukta hem telefon menüsünün altında çıkar.
+import { Icon } from '@astrojs/starlight/components';
+
+const SECENEKLER = [
+	{ deger: 'dark', ad: 'Koyu', simge: 'moon' },
+	{ deger: 'light', ad: 'Açık', simge: 'sun' },
+	{ deger: 'auto', ad: 'Otomatik', simge: 'laptop' },
+] as const;
+---
+
+<ship-tema class="tema">
+	<button type="button" class="tema-dugme" aria-haspopup="menu" aria-expanded="false" aria-label="Tema seç">
+		{
+			SECENEKLER.map((s) => (
+				<span class="tema-secili" data-deger={s.deger} hidden={s.deger !== 'auto'}>
+					<Icon name={s.simge} />
+					{s.ad}
+				</span>
+			))
+		}
+		<Icon name="down-caret" class="tema-ok" />
+	</button>
+	<ul class="tema-menu" role="menu" aria-label="Tema" hidden>
+		{
+			SECENEKLER.map((s) => (
+				<li role="none">
+					<button type="button" class="tema-oge" role="menuitemradio" aria-checked={String(s.deger === 'auto')} data-deger={s.deger}>
+						<Icon name={s.simge} />
+						<span>{s.ad}</span>
+						<Icon name="approve-check" class="tema-isaret" />
+					</button>
+				</li>
+			))
+		}
+	</ul>
+</ship-tema>
+{/* Seçili tema, sayfa çizilmeden gösterilsin diye hemen işaretlenir. */}
+<script is:inline>
+	(() => {
+		try {
+			const t = localStorage.getItem('starlight-theme') || 'auto';
+			const el = document.currentScript.previousElementSibling;
+			el.querySelectorAll('.tema-secili').forEach((s) => (s.hidden = s.dataset.deger !== t));
+			el.querySelectorAll('.tema-oge').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.deger === t)));
+		} catch {}
+	})();
+</script>
+
+<script>
+	type Tema = 'auto' | 'dark' | 'light';
+	const ANAHTAR = 'starlight-theme';
+	const oku = (): Tema => {
+		try {
+			const t = localStorage.getItem(ANAHTAR);
+			return t === 'dark' || t === 'light' ? t : 'auto';
+		} catch {
+			return 'auto';
+		}
+	};
+	const sistem = () => (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+
+	function uygula(t: Tema) {
+		document.documentElement.dataset.theme = t === 'auto' ? sistem() : t;
+		try {
+			localStorage.setItem(ANAHTAR, t === 'auto' ? '' : t);
+		} catch {}
+		document.querySelectorAll<TemaSecici>('ship-tema').forEach((el) => el.goster(t));
+	}
+	matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => {
+		if (oku() === 'auto') uygula('auto');
+	});
+
+	class TemaSecici extends HTMLElement {
+		connectedCallback() {
+			const dugme = this.querySelector<HTMLButtonElement>('.tema-dugme')!;
+			const menu = this.querySelector<HTMLElement>('.tema-menu')!;
+			const ogeler = [...menu.querySelectorAll<HTMLButtonElement>('.tema-oge')];
+			const kapat = (odakla = false) => {
+				menu.hidden = true;
+				dugme.setAttribute('aria-expanded', 'false');
+				if (odakla) dugme.focus();
+			};
+			dugme.addEventListener('click', () => {
+				if (!menu.hidden) return kapat();
+				menu.hidden = false;
+				dugme.setAttribute('aria-expanded', 'true');
+				ogeler.find((b) => b.getAttribute('aria-checked') === 'true')?.focus();
+			});
+			menu.addEventListener('click', (e) => {
+				const b = (e.target as HTMLElement).closest<HTMLButtonElement>('.tema-oge');
+				if (!b) return;
+				uygula(b.dataset.deger as Tema);
+				kapat(true);
+			});
+			this.addEventListener('keydown', (e) => {
+				if (menu.hidden) return;
+				if (e.key === 'Escape') kapat(true);
+				if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+					e.preventDefault();
+					const i = ogeler.indexOf(document.activeElement as HTMLButtonElement);
+					ogeler[(i + (e.key === 'ArrowDown' ? 1 : ogeler.length - 1)) % ogeler.length].focus();
+				}
+			});
+			document.addEventListener('click', (e) => {
+				if (!this.contains(e.target as Node)) kapat();
+			});
+			this.goster(oku());
+		}
+
+		goster(t: Tema) {
+			this.querySelectorAll<HTMLElement>('.tema-secili').forEach((s) => (s.hidden = s.dataset.deger !== t));
+			this.querySelectorAll('.tema-oge').forEach((b) => b.setAttribute('aria-checked', String((b as HTMLElement).dataset.deger === t)));
+		}
+	}
+	customElements.define('ship-tema', TemaSecici);
+</script>

@@ -1,0 +1,4722 @@
+{
+ "aciklama": "ship-ready kataloğu: kontrol listeleri (maddeler kalıcı kimlikleriyle), rehber öğeleri ve doğrulanmış GitHub repoları.",
+ "belgeler": [
+  {
+   "baslik": "Yayına almadan önce: 87 benzersiz iş",
+   "adres": "/listeler/yayin-oncesi/",
+   "grup": "Kontrol listeleri",
+   "liste": "yayin-oncesi",
+   "ozet": "Yayına çıkmadan önce kontrol edilecek güvenlik, kimlik doğrulama, veri, başlık, ödeme, operasyon, tedarik zinciri, mobil, SEO, içerik, KVKK ve alan adı maddeleri. Hukuki maddeler bilgilendirme amaçlıdır, hukuki tavsiye değildir; kendi durumun için bir hukukçuya danış."
+  },
+  {
+   "baslik": "App Store incelemesi",
+   "adres": "/listeler/app-store/",
+   "grup": "Kontrol listeleri",
+   "liste": "app-store",
+   "ozet": "En sık 26 red sebebi ve her biri için ne yapılacağı. Apple uygulamayı reddederken çoğu zaman sadece bir kural numarası ve iki cümle yazar; hangi ekranda neyin eksik olduğunu söylemez. Bu sebeplerin çoğu kod hatası değil; eksik anlatılan, unutulan ya da yanlış girilen ayarlar. Liste bu videodan ve aynı hesabın 24 maddelik ikinci listesinden alındı; kural numaraları 25.09.2026'da App Review Guidelines sayfasından doğrulandı."
+  },
+  {
+   "baslik": "Google Play incelemesi",
+   "adres": "/listeler/google-play/",
+   "grup": "Kontrol listeleri",
+   "liste": "google-play",
+   "ozet": "Google Play'in uygulamayı reddetmesine ya da kaldırmasına en sık yol açan 24 madde ve her biri için ne yapılacağı. Çoğu kod hatası değil; Play Console'daki formların eksik ya da gerçekle uyumsuz doldurulması. Maddeler 25.09.2026'da Google Play politika merkezinden ve Play Console Yardım sayfalarından doğrulandı; tarih ve API seviyeleri her yıl değişir."
+  },
+  {
+   "baslik": "Paywall dönüşümü",
+   "adres": "/listeler/paywall/",
+   "grup": "Kontrol listeleri",
+   "liste": "paywall",
+   "ozet": "Satın alma ekranı (paywall) az satıyorsa en sık 27 sebep ve her biri için ne yapılacağı. Liste bir videodaki 27 maddelik listeden alındı; videodaki \"hepsi ölçüldü\" iddiası ve etki oranları doğrulanmadı, her maddeyi kendi uygulamanda A/B testiyle dene. Mağaza kuralına dokunan maddeler (fiyatın gösterimi, deneme süresi, şartlar, geri yükleme) Apple'ın abonelik sayfasından doğrulandı ve App Store incelemesi sekmesine bağlandı. Paywall'ı kodsuz değiştirip test etmek için Superwall ya da RevenueCat Gelir & analitik sekmesinde."
+  },
+  {
+   "baslik": "UI/UX: stiller ve araçlar",
+   "adres": "/rehberler/ui-ux-tasarim-stilleri/",
+   "grup": "Rehberler",
+   "liste": null,
+   "ozet": "Claude'a arayüz yaptırırken stilin İngilizce adını prompt'a yazmak yeterli, örneğin \"Bento Grid düzeninde, Glassmorphism kartlarla bir özellik sayfası\". İşe yarayan tasarım skill'leri: Impeccable, Taste Skill, UI/UX Pro Max. Arayüzün her sayfada aynı kalması için projeye bir DESIGN.md koy: renkleri, yazı tiplerini ve boşlukları tanımlar, ajan arayüzü buna göre üretir; hazır örnekler awesome-design-md reposunda."
+  },
+  {
+   "baslik": "Gelir & analitik",
+   "adres": "/rehberler/gelir-analitik/",
+   "grup": "Rehberler",
+   "liste": null,
+   "ozet": "Uygulamadan para kazanırken sık birlikte kullanılan araçlar: satın alma altyapısı, satın alma ekranı ve kullanıcı analitiği. Ücretler 25.09.2026'da sitelerinden alındı."
+  },
+  {
+   "baslik": "Yayına alma & barındırma",
+   "adres": "/rehberler/yayina-alma-barindirma/",
+   "grup": "Rehberler",
+   "liste": null,
+   "ozet": "Projeyi yayına alırken kullanılan servisler ve yayın öncesi listesinde bunlarla çözülen maddeler. Ücretler 25.09.2026'da sitelerinden alındı."
+  },
+  {
+   "baslik": "AI geliştirme akışı",
+   "adres": "/rehberler/ai-gelistirme-akisi/",
+   "grup": "Rehberler",
+   "liste": null,
+   "ozet": "Claude Code ile proje geliştirirken işe yarayan komutlar, MCP sunucuları, skill'ler ve hazır prompt'lar."
+  }
+ ],
+ "listeler": [
+  {
+   "id": "yayin-oncesi",
+   "baslik": "Yayına almadan önce: 87 benzersiz iş",
+   "adres": "/listeler/yayin-oncesi/",
+   "bicim": "liste",
+   "bolumler": [
+    {
+     "baslik": "Sırlar & erişim",
+     "maddeler": [
+      {
+       "id": "yo-secret-koddan-cikar",
+       "no": 1,
+       "baslik": "API anahtarlarını/secret'ları koddan çıkar, env'e taşı; JWT secret'ı güçlü olsun, token kısa ömürlü olsun, algoritma sabitlensin (alg: none reddedilsin)",
+       "metin": "API anahtarlarını/secret'ları koddan çıkar, env'e taşı; JWT secret'ı güçlü olsun, token kısa ömürlü olsun, algoritma sabitlensin (alg: none reddedilsin)",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-env-gecmisten-temizle",
+       "no": 2,
+       "baslik": ".env'i git geçmişinden temizle ve sızan anahtarları rotate et; /.env ve /.git web'den açılmasın, staging/dev ortamları dışarıya kapalı olsun, canlıda debug modu kapalı olsun",
+       "metin": ".env'i git geçmişinden temizle ve sızan anahtarları rotate et; /.env ve /.git web'den açılmasın, staging/dev ortamları dışarıya kapalı olsun, canlıda debug modu kapalı olsun",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-en-az-yetki",
+       "no": 3,
+       "baslik": "Veritabanı kullanıcısına ve üçüncü parti API anahtarlarına sadece gereken yetkiyi ver (least privilege); uygulama ana (master) anahtarla değil, kısıtlı anahtarla çalışsın (ör. Supabase'de service_role yerine anon anahtar ve RLS, Stripe'ta restricted key)",
+       "metin": "Veritabanı kullanıcısına ve üçüncü parti API anahtarlarına sadece gereken yetkiyi ver (least privilege); uygulama ana (master) anahtarla değil, kısıtlı anahtarla çalışsın (ör. Supabase'de service_role yerine anon anahtar ve RLS, Stripe'ta restricted key)",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-directory-listing",
+       "no": 4,
+       "baslik": "Directory listing'i kapat",
+       "metin": "Directory listing'i kapat",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-admin-rotasi-rol",
+       "no": 5,
+       "baslik": "Varsayılan/tahmin edilebilir admin route'unu kaldır + admin'e rol tabanlı yetki koy",
+       "metin": "Varsayılan/tahmin edilebilir admin route'unu kaldır + admin'e rol tabanlı yetki koy",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-varsayilan-sifreler",
+       "no": 6,
+       "baslik": "Tüm varsayılan şifreleri değiştir (admin paneli, veritabanı, sunucu ve yönetim araçları)",
+       "metin": "Tüm varsayılan şifreleri değiştir (admin paneli, veritabanı, sunucu ve yönetim araçları)",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-source-map-kapali",
+       "no": 7,
+       "baslik": "Canlı ortamda source map dosyalarını kapat ya da herkese açık yerden kaldır",
+       "metin": "Canlı ortamda source map dosyalarını kapat ya da herkese açık yerden kaldır",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-hesaplarda-2fa",
+       "no": 8,
+       "baslik": "GitHub, bulut, alan adı, ödeme ve e-posta hesaplarında ve admin panelinde iki adımlı doğrulamayı (2FA) aç; bu hesaplardan biri ele geçirilirse koddaki güvenliğin anlamı kalmaz",
+       "metin": "GitHub, bulut, alan adı, ödeme ve e-posta hesaplarında ve admin panelinde iki adımlı doğrulamayı (2FA) aç; bu hesaplardan biri ele geçirilirse koddaki güvenliğin anlamı kalmaz",
+       "alanlar": {}
+      }
+     ]
+    },
+    {
+     "baslik": "Kimlik doğrulama & oturum",
+     "maddeler": [
+      {
+       "id": "yo-yetki-sunucuda",
+       "no": 9,
+       "baslik": "Yetki kontrolünü sunucuda tut, client'tan gelen id/role'a güvenme",
+       "metin": "Yetki kontrolünü sunucuda tut, client'tan gelen id/role'a güvenme",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-sahiplik-kontrolu",
+       "no": 10,
+       "baslik": "Ownership/izin kurallarını her sorguda açıkça uygula",
+       "metin": "Ownership/izin kurallarını her sorguda açıkça uygula",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-sifre-hash",
+       "no": 11,
+       "baslik": "Şifreleri güçlü algoritmayla hash'le",
+       "metin": "Şifreleri güçlü algoritmayla hash'le",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-guvenli-cerez",
+       "no": 12,
+       "baslik": "Çerezlere HttpOnly + Secure + SameSite ver",
+       "metin": "Çerezlere HttpOnly + Secure + SameSite ver",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-csrf",
+       "no": 13,
+       "baslik": "CSRF token'ları ekle",
+       "metin": "CSRF token'ları ekle",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-oturum-yonetimi",
+       "no": 14,
+       "baslik": "Şifre değişiminde tüm oturumları sıfırla; girişte oturum kimliğini yenile, oturuma boşta kalma ve toplam süre sınırı koy, çıkışta oturumu sunucuda da geçersiz kıl",
+       "metin": "Şifre değişiminde tüm oturumları sıfırla; girişte oturum kimliğini yenile, oturuma boşta kalma ve toplam süre sınırı koy, çıkışta oturumu sunucuda da geçersiz kıl",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-sifirlama-linki",
+       "no": 15,
+       "baslik": "Şifre sıfırlama linklerini süreli ve tek kullanımlık yap",
+       "metin": "Şifre sıfırlama linklerini süreli ve tek kullanımlık yap",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-kullanici-enumerasyonu",
+       "no": 16,
+       "baslik": "Kullanıcı enumerasyonunu engelle (jenerik hata mesajı)",
+       "metin": "Kullanıcı enumerasyonunu engelle (jenerik hata mesajı)",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-hesap-kilitleme",
+       "no": 17,
+       "baslik": "Başarısız girişlerden sonra hesabı kilitle / kademeli gecikme",
+       "metin": "Başarısız girişlerden sonra hesabı kilitle / kademeli gecikme",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-rate-limit-bot-korumasi",
+       "no": 18,
+       "baslik": "Tüm API'ye genel rate limit koy; login ve şifre sıfırlamaya daha sıkı limit uygula; kayıt, iletişim ve bülten gibi herkese açık formlara bot koruması koy (Cloudflare Turnstile, reCAPTCHA)",
+       "metin": "Tüm API'ye genel rate limit koy; login ve şifre sıfırlamaya daha sıkı limit uygula; kayıt, iletişim ve bülten gibi herkese açık formlara bot koruması koy (Cloudflare Turnstile, reCAPTCHA)",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-otp-sms-limit",
+       "no": 19,
+       "baslik": "OTP kodlarını kısa süreli ve tek kullanımlık yap, deneme ve yeniden gönderme sayısını sınırla; SMS'i sadece hizmet verdiğin ülkelere gönder, yoksa sahte numaralara toplu SMS attırılıp fatura şişirilir (SMS pumping)",
+       "metin": "OTP kodlarını kısa süreli ve tek kullanımlık yap, deneme ve yeniden gönderme sayısını sınırla; SMS'i sadece hizmet verdiğin ülkelere gönder, yoksa sahte numaralara toplu SMS attırılıp fatura şişirilir (SMS pumping)",
+       "alanlar": {}
+      }
+     ]
+    },
+    {
+     "baslik": "Girdi & veri",
+     "maddeler": [
+      {
+       "id": "yo-girdi-dogrulama",
+       "no": 20,
+       "baslik": "Girdiyi sunucuda şema ile doğrula",
+       "metin": "Girdiyi sunucuda şema ile doğrula",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-sanitize",
+       "no": 21,
+       "baslik": "Kaydetmeden önce sanitize et",
+       "metin": "Kaydetmeden önce sanitize et",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-xss-escape",
+       "no": 22,
+       "baslik": "Çıktıyı XSS'e karşı escape et",
+       "metin": "Çıktıyı XSS'e karşı escape et",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-sql-parametre",
+       "no": 23,
+       "baslik": "SQL sorgularını parametrele",
+       "metin": "SQL sorgularını parametrele",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-istek-boyutu",
+       "no": 24,
+       "baslik": "Request body boyutunu sınırla",
+       "metin": "Request body boyutunu sınırla",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-dosya-yukleme",
+       "no": 25,
+       "baslik": "Dosya yüklemede tip whitelist'i + boyut sınırı; gerçek tipi dosya içeriğinden (magic byte) kontrol et, dosyaya rastgele ad ver, çalıştırılamayan bir yerde sakla",
+       "metin": "Dosya yüklemede tip whitelist'i + boyut sınırı; gerçek tipi dosya içeriğinden (magic byte) kontrol et, dosyaya rastgele ad ver, çalıştırılamayan bir yerde sakla",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-path-traversal",
+       "no": 26,
+       "baslik": "Dosya yolu kullanıcı girdisinden oluşuyorsa normalize et, izin verilen klasörün dışına çıkmayı (../) engelle (path traversal)",
+       "metin": "Dosya yolu kullanıcı girdisinden oluşuyorsa normalize et, izin verilen klasörün dışına çıkmayı (../) engelle (path traversal)",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-ssrf",
+       "no": 27,
+       "baslik": "Sunucunun kullanıcının verdiği URL'ye istek attığı yerlerde whitelist kullan; iç adresleri (127.0.0.1, 169.254.169.254, 10.x, 192.168.x) engelle (SSRF)",
+       "metin": "Sunucunun kullanıcının verdiği URL'ye istek attığı yerlerde whitelist kullan; iç adresleri (127.0.0.1, 169.254.169.254, 10.x, 192.168.x) engelle (SSRF)",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-fazla-alan-mass-assignment",
+       "no": 28,
+       "baslik": "API yanıtında sadece gereken alanları döndür (başka kullanıcıların e-postası, telefonu ya da iç alanlar gitmesin); girdide sadece izin verilen alanları kabul et, role, isAdmin, ownerId gibi alanları istemciden alma (mass assignment)",
+       "metin": "API yanıtında sadece gereken alanları döndür (başka kullanıcıların e-postası, telefonu ya da iç alanlar gitmesin); girdide sadece izin verilen alanları kabul et, role, isAdmin, ownerId gibi alanları istemciden alma (mass assignment)",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-depolama-erisimi",
+       "no": 29,
+       "baslik": "Dosya depolamayı (S3, R2, Firebase Storage, Supabase Storage) herkese açık bırakma; kullanıcı sadece kendi dosyasına erişsin, özel dosyaları süreli imzalı linkle ver",
+       "metin": "Dosya depolamayı (S3, R2, Firebase Storage, Supabase Storage) herkese açık bırakma; kullanıcı sadece kendi dosyasına erişsin, özel dosyaları süreli imzalı linkle ver",
+       "alanlar": {}
+      }
+     ]
+    },
+    {
+     "baslik": "Taşıma & başlıklar",
+     "maddeler": [
+      {
+       "id": "yo-https-hsts",
+       "no": 30,
+       "baslik": "HTTPS zorunlu + HSTS",
+       "metin": "HTTPS zorunlu + HSTS",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-guvenlik-basliklari",
+       "no": 31,
+       "baslik": "Güvenlik başlıkları (CSP, X-Frame-Options, nosniff, Referrer-Policy, Permissions-Policy)",
+       "metin": "Güvenlik başlıkları (CSP, X-Frame-Options, nosniff, Referrer-Policy, Permissions-Policy)",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-cors",
+       "no": 32,
+       "baslik": "CORS'u whitelist ile kilitle",
+       "metin": "CORS'u whitelist ile kilitle",
+       "alanlar": {}
+      }
+     ]
+    },
+    {
+     "baslik": "Entegrasyon, ödeme, AI",
+     "maddeler": [
+      {
+       "id": "yo-webhook-imzasi",
+       "no": 33,
+       "baslik": "Webhook imzalarını doğrula (ödeme webhook'ları dahil)",
+       "metin": "Webhook imzalarını doğrula (ödeme webhook'ları dahil)",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-fiyat-sunucuda",
+       "no": 34,
+       "baslik": "Fiyatları sunucu tarafında belirle",
+       "metin": "Fiyatları sunucu tarafında belirle",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-prompt-injection",
+       "no": 35,
+       "baslik": "Prompt injection'a karşı savunma ekle",
+       "metin": "Prompt injection'a karşı savunma ekle",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-ai-ajan-yetkisi",
+       "no": 36,
+       "baslik": "Uygulamadaki AI ajanına sadece gereken araç ve veriye erişim ver; silme, ödeme, e-posta gönderme gibi geri alınamaz işlemleri kullanıcı onayına bağla",
+       "metin": "Uygulamadaki AI ajanına sadece gereken araç ve veriye erişim ver; silme, ödeme, e-posta gönderme gibi geri alınamaz işlemleri kullanıcı onayına bağla",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-maliyet-kotasi",
+       "no": 37,
+       "baslik": "AI kullanımına ve SMS, e-posta gibi maliyeti olan uç noktalara kullanıcı başına kota/tavan koy",
+       "metin": "AI kullanımına ve SMS, e-posta gibi maliyeti olan uç noktalara kullanıcı başına kota/tavan koy",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-harcama-uyarisi",
+       "no": 38,
+       "baslik": "Harcama uyarısı (billing alert) kur",
+       "metin": "Harcama uyarısı (billing alert) kur",
+       "alanlar": {}
+      }
+     ]
+    },
+    {
+     "baslik": "Operasyon & dayanıklılık",
+     "maddeler": [
+      {
+       "id": "yo-hata-mesajlari",
+       "no": 39,
+       "baslik": "Hata mesajlarını kıs (stack trace/iç detay sızdırma)",
+       "metin": "Hata mesajlarını kıs (stack trace/iç detay sızdırma)",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-log-hassas-veri",
+       "no": 40,
+       "baslik": "Loglardan hassas veriyi temizle; log dosyaları ve log sayfaları herkese açık olmasın",
+       "metin": "Loglardan hassas veriyi temizle; log dosyaları ve log sayfaları herkese açık olmasın",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-guvenlik-logu",
+       "no": 41,
+       "baslik": "Güvenlik olaylarını logla (audit trail)",
+       "metin": "Güvenlik olaylarını logla (audit trail)",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-bagimlilik-denetimi",
+       "no": 42,
+       "baslik": "Bağımlılıkları denetle (audit / otomatik güncelleme)",
+       "metin": "Bağımlılıkları denetle (audit / otomatik güncelleme)",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-yedekleme",
+       "no": 43,
+       "baslik": "Otomatik yedekleme kur + geri yükleme testi yap",
+       "metin": "Otomatik yedekleme kur + geri yükleme testi yap",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-hesap-silme",
+       "no": 44,
+       "baslik": "Hesap silme gerçekten silsin (kalıcı silme)",
+       "metin": "Hesap silme gerçekten silsin (kalıcı silme)",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-pentest",
+       "no": 45,
+       "baslik": "Saldırgan gibi test et (pentest / düşmanca inceleme)",
+       "metin": "Saldırgan gibi test et (pentest / düşmanca inceleme)",
+       "alanlar": {}
+      }
+     ]
+    },
+    {
+     "baslik": "Tedarik zinciri & CI",
+     "maddeler": [
+      {
+       "id": "yo-lock-dosyasi",
+       "no": 46,
+       "baslik": "Lock dosyasını (package-lock.json, pnpm-lock.yaml) commit'le, CI'da ve sunucuda lock'a sadık komutla kur (npm ci, pnpm install --frozen-lockfile); paket sürümleri kendiliğinden yükselmesin",
+       "metin": "Lock dosyasını (package-lock.json, pnpm-lock.yaml) commit'le, CI'da ve sunucuda lock'a sadık komutla kur (npm ci, pnpm install --frozen-lockfile); paket sürümleri kendiliğinden yükselmesin",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-kurulum-scriptleri",
+       "no": 47,
+       "baslik": "Paketlerin kurulum script'lerini kapat (npm config set ignore-scripts true, pnpm'de sadece izin verdiğin paketler); kötü amaçlı bir paket kurulurken bilgisayarında ya da CI'da kod çalıştıramasın",
+       "metin": "Paketlerin kurulum script'lerini kapat (npm config set ignore-scripts true, pnpm'de sadece izin verdiğin paketler); kötü amaçlı bir paket kurulurken bilgisayarında ya da CI'da kod çalıştıramasın",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-fork-pr-secret",
+       "no": 48,
+       "baslik": "Fork'tan gelen PR'ların kodunu secret'lara erişen iş akışında çalıştırma (GitHub Actions'ta pull_request_target ile PR kodunu checkout etme); CI secret'ları dışarıdan gelen koda açılmasın",
+       "metin": "Fork'tan gelen PR'ların kodunu secret'lara erişen iş akışında çalıştırma (GitHub Actions'ta pull_request_target ile PR kodunu checkout etme); CI secret'ları dışarıdan gelen koda açılmasın",
+       "alanlar": {}
+      }
+     ]
+    },
+    {
+     "baslik": "Mobil uygulama",
+     "maddeler": [
+      {
+       "id": "yo-mobil-pakette-anahtar",
+       "no": 49,
+       "baslik": "Uygulama paketine (APK, AAB, IPA) gizli anahtar koyma; paket açılıp okunabilir, istemcide sadece herkese açık anahtarlar kalsın (ör. Supabase anon key), gizli işlemler sunucudan geçsin",
+       "metin": "Uygulama paketine (APK, AAB, IPA) gizli anahtar koyma; paket açılıp okunabilir, istemcide sadece herkese açık anahtarlar kalsın (ör. Supabase anon key), gizli işlemler sunucudan geçsin",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-mobil-guvenli-depolama",
+       "no": 50,
+       "baslik": "Oturum token'larını ve hassas veriyi iOS'ta Keychain'de, Android'de Keystore ile şifrelenmiş depoda sakla; AsyncStorage, SharedPreferences ya da UserDefaults'a düz metin yazma",
+       "metin": "Oturum token'larını ve hassas veriyi iOS'ta Keychain'de, Android'de Keystore ile şifrelenmiş depoda sakla; AsyncStorage, SharedPreferences ya da UserDefaults'a düz metin yazma",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-android-yedekleme",
+       "no": 51,
+       "baslik": "Android'de uygulama verisinin yedeklenmesini kapat ya da hassas dosyaları yedekten çıkar (android:allowBackup=\"false\", dataExtractionRules); yedekten token ve veritabanı çıkarılamasın",
+       "metin": "Android'de uygulama verisinin yedeklenmesini kapat ya da hassas dosyaları yedekten çıkar (android:allowBackup=\"false\", dataExtractionRules); yedekten token ve veritabanı çıkarılamasın",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-firebase-app-check",
+       "no": 52,
+       "baslik": "Firebase kullanıyorsan App Check'i aç ve zorunlu kıl (enforce); istekler sadece gerçek uygulamandan gelsin (iOS'ta App Attest, Android'de Play Integrity)",
+       "metin": "Firebase kullanıyorsan App Check'i aç ve zorunlu kıl (enforce); istekler sadece gerçek uygulamandan gelsin (iOS'ta App Attest, Android'de Play Integrity)",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-android-r8",
+       "no": 53,
+       "baslik": "Android sürümünde kod küçültme ve karartmayı aç (R8, isMinifyEnabled = true); tersine mühendisliği zorlaştırır ama gizli anahtarı korumaz",
+       "metin": "Android sürümünde kod küçültme ve karartmayı aç (R8, isMinifyEnabled = true); tersine mühendisliği zorlaştırır ama gizli anahtarı korumaz",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-deep-link",
+       "no": 54,
+       "baslik": "Deep link'leri doğrula: Android App Links (autoVerify) ve iOS Universal Links kullan, linkten gelen parametrelere güvenme, giriş ya da ödeme gibi işlemleri sadece linkle tetikleme",
+       "metin": "Deep link'leri doğrula: Android App Links (autoVerify) ve iOS Universal Links kullan, linkten gelen parametrelere güvenme, giriş ya da ödeme gibi işlemleri sadece linkle tetikleme",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-sertifika-sabitleme",
+       "no": 55,
+       "baslik": "Hassas API'lerde sertifika sabitlemeyi (certificate pinning) değerlendir; yedek anahtar ve son kullanma tarihi koy, yoksa sertifika yenilenince uygulama sunucuya bağlanamaz",
+       "metin": "Hassas API'lerde sertifika sabitlemeyi (certificate pinning) değerlendir; yedek anahtar ve son kullanma tarihi koy, yoksa sertifika yenilenince uygulama sunucuya bağlanamaz",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-mobil-izinler",
+       "no": 56,
+       "baslik": "Sadece gerçekten kullandığın izinleri iste (kamera, konum, rehber, bildirim); kullanılmayan izin saldırı yüzeyini büyütür ve mağaza incelemesinde sorun çıkarır",
+       "metin": "Sadece gerçekten kullandığın izinleri iste (kamera, konum, rehber, bildirim); kullanılmayan izin saldırı yüzeyini büyütür ve mağaza incelemesinde sorun çıkarır",
+       "alanlar": {}
+      }
+     ]
+    },
+    {
+     "baslik": "SEO & teknik site",
+     "maddeler": [
+      {
+       "id": "yo-404-sayfasi",
+       "no": 57,
+       "baslik": "Özel 404 sayfası",
+       "metin": "Özel 404 sayfası",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-sayfa-basliklari",
+       "no": 58,
+       "baslik": "Benzersiz sayfa başlıkları",
+       "metin": "Benzersiz sayfa başlıkları",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-meta-description",
+       "no": 59,
+       "baslik": "Meta description'lar",
+       "metin": "Meta description'lar",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-og-gorseli",
+       "no": 60,
+       "baslik": "Sosyal paylaşım görseli (OG/Twitter card)",
+       "metin": "Sosyal paylaşım görseli (OG/Twitter card)",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-robots-txt",
+       "no": 61,
+       "baslik": "robots.txt",
+       "metin": "robots.txt",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-yapisal-veri",
+       "no": 62,
+       "baslik": "Yapısal veri / schema (local schema dahil)",
+       "metin": "Yapısal veri / schema (local schema dahil)",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-breadcrumb",
+       "no": 63,
+       "baslik": "Breadcrumb'lar",
+       "metin": "Breadcrumb'lar",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-ic-linkler",
+       "no": 64,
+       "baslik": "İç linkler",
+       "metin": "İç linkler",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-alt-text",
+       "no": 65,
+       "baslik": "Görsellerde alt text",
+       "metin": "Görsellerde alt text",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-analitik",
+       "no": 66,
+       "baslik": "Google Analytics",
+       "metin": "Google Analytics",
+       "alanlar": {}
+      }
+     ]
+    },
+    {
+     "baslik": "İçerik & dönüşüm",
+     "maddeler": [
+      {
+       "id": "yo-cta-ust",
+       "no": 67,
+       "baslik": "CTA'yı fold üstüne koy",
+       "metin": "CTA'yı fold üstüne koy",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-sticky-cta",
+       "no": 68,
+       "baslik": "Mobilde sticky CTA",
+       "metin": "Mobilde sticky CTA",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-tesekkur-sayfasi",
+       "no": 69,
+       "baslik": "Teşekkür (thank you) sayfası",
+       "metin": "Teşekkür (thank you) sayfası",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-sss",
+       "no": 70,
+       "baslik": "5 soruluk SSS",
+       "metin": "5 soruluk SSS",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-vaka-calismalari",
+       "no": 71,
+       "baslik": "Vaka çalışmaları",
+       "metin": "Vaka çalışmaları",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-kullanici-yorumlari",
+       "no": 72,
+       "baslik": "Gerçek kullanıcı yorumları",
+       "metin": "Gerçek kullanıcı yorumları",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-yanit-suresi-taahhudu",
+       "no": 73,
+       "baslik": "Yanıt süresi taahhüdü",
+       "metin": "Yanıt süresi taahhüdü",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-harita-yol-tarifi",
+       "no": 74,
+       "baslik": "Harita + yol tarifi",
+       "metin": "Harita + yol tarifi",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-ekip-fotografi",
+       "no": 75,
+       "baslik": "Ekip fotoğrafı",
+       "metin": "Ekip fotoğrafı",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-gizlilik-politikasi",
+       "no": 76,
+       "baslik": "Gizlilik politikası sayfası",
+       "metin": "Gizlilik politikası sayfası",
+       "alanlar": {}
+      }
+     ]
+    },
+    {
+     "baslik": "Hukuki & KVKK",
+     "maddeler": [
+      {
+       "id": "yo-yerel-fontlar",
+       "no": 77,
+       "baslik": "Fontları (Google Fonts dahil) kendi sunucundan ver; ziyaretçinin IP adresi yurt dışına gitmesin (KVKK / GDPR)",
+       "metin": "Fontları (Google Fonts dahil) kendi sunucundan ver; ziyaretçinin IP adresi yurt dışına gitmesin (KVKK / GDPR)",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-oturum-kaydi-maskeleme",
+       "no": 78,
+       "baslik": "Oturum kaydı ve ısı haritası araçlarında (Clarity vb.) form alanlarını maskele, çerez onayı olmadan başlatma, aydınlatma metninde belirt",
+       "metin": "Oturum kaydı ve ısı haritası araçlarında (Clarity vb.) form alanlarını maskele, çerez onayı olmadan başlatma, aydınlatma metninde belirt",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-ticari-ileti",
+       "no": 79,
+       "baslik": "Ticari e-posta ve SMS için önceden onay al, İYS'ye kayıt ol, her iletide ret (abonelikten çıkma) linki ve gönderenin kimliği olsun: tacirse ticaret unvanı ve MERSİS numarası, esnafsa adı soyadı ve T.C. kimlik numarası, ayrıca en az bir iletişim bilgisi (6563 sayılı Kanun, Ticari İletişim Yönetmeliği); ABD'ye gönderiyorsan posta adresi de şart (CAN-SPAM)",
+       "metin": "Ticari e-posta ve SMS için önceden onay al, İYS'ye kayıt ol, her iletide ret (abonelikten çıkma) linki ve gönderenin kimliği olsun: tacirse ticaret unvanı ve MERSİS numarası, esnafsa adı soyadı ve T.C. kimlik numarası, ayrıca en az bir iletişim bilgisi (6563 sayılı Kanun, Ticari İletişim Yönetmeliği); ABD'ye gönderiyorsan posta adresi de şart (CAN-SPAM)",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-abonelik-sartlari",
+       "no": 80,
+       "baslik": "Abonelik satılıyorsa yenileme şartlarını ve iptal yolunu abone ol butonunun yanında göster, iptal abone olmak kadar kolay olsun (6502 sayılı Kanun, Mesafeli Sözleşmeler Yönetmeliği)",
+       "metin": "Abonelik satılıyorsa yenileme şartlarını ve iptal yolunu abone ol butonunun yanında göster, iptal abone olmak kadar kolay olsun (6502 sayılı Kanun, Mesafeli Sözleşmeler Yönetmeliği)",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-yas-kontrolu",
+       "no": 81,
+       "baslik": "Kayıtta yaş sor ya da çocukların kaydını engelle; ABD'de 13 yaş altı çocukların verisini ebeveyn onayı olmadan toplamak COPPA ihlalidir ve ceza ihlal başınadır. Uygulama çocuklara yönelikse mağazaların çocuk kategorisi kurallarına da uy",
+       "metin": "Kayıtta yaş sor ya da çocukların kaydını engelle; ABD'de 13 yaş altı çocukların verisini ebeveyn onayı olmadan toplamak COPPA ihlalidir ve ceza ihlal başınadır. Uygulama çocuklara yönelikse mağazaların çocuk kategorisi kurallarına da uy",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-telif-sikayeti",
+       "no": 82,
+       "baslik": "Kullanıcılar görsel ya da dosya yüklüyorsa telif şikâyeti yolu kur: kaldırma talebi için iletişim adresi ve süreç yaz. ABD'li kullanıcıların varsa DMCA temsilcini ABD Telif Ofisi'ne kaydet (6 $); kayıt yoksa yüklenen içerikteki telif ihlalinden sen de sorumlu tutulabilirsin",
+       "metin": "Kullanıcılar görsel ya da dosya yüklüyorsa telif şikâyeti yolu kur: kaldırma talebi için iletişim adresi ve süreç yaz. ABD'li kullanıcıların varsa DMCA temsilcini ABD Telif Ofisi'ne kaydet (6 $); kayıt yoksa yüklenen içerikteki telif ihlalinden sen de sorumlu tutulabilirsin",
+       "alanlar": {}
+      }
+     ]
+    },
+    {
+     "baslik": "Alan adı, e-posta & indeksleme",
+     "maddeler": [
+      {
+       "id": "yo-alt-alan-adi",
+       "no": 83,
+       "baslik": "Uygulamayı alt alan adında yayınla (app.alanadi.com), tanıtım sayfaları ana alan adında kalsın (alanadi.com); ikisi ayrı ekiplerce birbirini bozmadan değiştirilebilsin (DNS'te app için CNAME kaydı)",
+       "metin": "Uygulamayı alt alan adında yayınla (app.alanadi.com), tanıtım sayfaları ana alan adında kalsın (alanadi.com); ikisi ayrı ekiplerce birbirini bozmadan değiştirilebilsin (DNS'te app için CNAME kaydı)",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-eposta-alt-alan",
+       "no": 84,
+       "baslik": "E-postaları ana alan adından değil ayrı alt alan adlarından gönder: uygulama e-postaları (fatura, kayıt, şifre sıfırlama) mail.alanadi.com, pazarlama e-postaları (bülten, kampanya) news.alanadi.com; her biri için SPF, DKIM ve DMARC kayıtlarını kur (ör. Resend), spam bildirimi ana alan adının itibarını düşürmesin",
+       "metin": "E-postaları ana alan adından değil ayrı alt alan adlarından gönder: uygulama e-postaları (fatura, kayıt, şifre sıfırlama) mail.alanadi.com, pazarlama e-postaları (bülten, kampanya) news.alanadi.com; her biri için SPF, DKIM ve DMARC kayıtlarını kur (ör. Resend), spam bildirimi ana alan adının itibarını düşürmesin",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-sitemap",
+       "no": 85,
+       "baslik": "Herkese açık sayfalar için sitemap.xml oluştur ve Google Search Console'da Dizin oluşturma > Site haritaları bölümünden gönder",
+       "metin": "Herkese açık sayfalar için sitemap.xml oluştur ve Google Search Console'da Dizin oluşturma > Site haritaları bölümünden gönder",
+       "alanlar": {}
+      }
+     ]
+    },
+    {
+     "baslik": "Sürüm çıkarma & geri dönüş",
+     "maddeler": [
+      {
+       "id": "yo-kesintisiz-surum",
+       "no": 86,
+       "baslik": "Yeni sürümü canlıyı bozmadan yayına al ve sorun çıkarsa önceki sürüme dakikalar içinde dönebil (blue-green ya da sağlık kontrollü kesintisiz güncelleme; istersen önce trafiğin küçük bir kısmına aç ve hata oranını izleyerek artır: canary); geri dönüşü yayından önce bir kez dene",
+       "metin": "Yeni sürümü canlıyı bozmadan yayına al ve sorun çıkarsa önceki sürüme dakikalar içinde dönebil (blue-green ya da sağlık kontrollü kesintisiz güncelleme; istersen önce trafiğin küçük bir kısmına aç ve hata oranını izleyerek artır: canary); geri dönüşü yayından önce bir kez dene",
+       "alanlar": {}
+      },
+      {
+       "id": "yo-geriye-uyumlu-sema",
+       "no": 87,
+       "baslik": "Veritabanı değişikliklerini geriye uyumlu yap (genişlet-daralt): sütunu yeniden adlandırma ya da silme yerine önce yenisini ekle, iki yapıyı da okuyan kodu çıkar, veriyi taşı, eskisini sonraki sürümde kaldır; yoksa eski sürüme dönüş veritabanında kırılır",
+       "metin": "Veritabanı değişikliklerini geriye uyumlu yap (genişlet-daralt): sütunu yeniden adlandırma ya da silme yerine önce yenisini ekle, iki yapıyı da okuyan kodu çıkar, veriyi taşı, eskisini sonraki sürümde kaldır; yoksa eski sürüme dönüş veritabanında kırılır",
+       "alanlar": {}
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "app-store",
+   "baslik": "App Store incelemesi",
+   "adres": "/listeler/app-store/",
+   "bicim": "tablo",
+   "bolumler": [
+    {
+     "baslik": "Ödeme ve abonelik",
+     "maddeler": [
+      {
+       "id": "as-paywall-linkleri",
+       "no": 1,
+       "baslik": "Satın alma ekranında (paywall) link yok",
+       "metin": "Satın alma ekranında (paywall) link yok Abonelik ekranına Kullanım Koşulları (EULA) ve Gizlilik Politikası linklerini koy; ayrıca App Store Connect'teki uygulama açıklamasına da ekle. 3.1.2",
+       "alanlar": {
+        "Ne yapmalı": "Abonelik ekranına Kullanım Koşulları (EULA) ve Gizlilik Politikası linklerini koy; ayrıca App Store Connect'teki uygulama açıklamasına da ekle.",
+        "Kural": "3.1.2"
+       }
+      },
+      {
+       "id": "as-fiyat-bilgisi",
+       "no": 2,
+       "baslik": "Fiyat yazmıyor",
+       "metin": "Fiyat yazmıyor Kullanıcı abone olmadan önce ne alacağını, fiyatı, süreyi ve deneme bitince ne kadar ödeyeceğini açıkça görsün; \"Premium'a geç\" tek başına yetmez. 3.1.2(a), 3.1.2(c)",
+       "alanlar": {
+        "Ne yapmalı": "Kullanıcı abone olmadan önce ne alacağını, fiyatı, süreyi ve deneme bitince ne kadar ödeyeceğini açıkça görsün; \"Premium'a geç\" tek başına yetmez.",
+        "Kural": "3.1.2(a), 3.1.2(c)"
+       }
+      },
+      {
+       "id": "as-geri-yukleme",
+       "no": 3,
+       "baslik": "Satın almayı geri yükleme (restore) yok",
+       "metin": "Satın almayı geri yükleme (restore) yok Geri yüklenebilen satın almalar için \"Satın almaları geri yükle\" düğmesi olsun. 3.1.1",
+       "alanlar": {
+        "Ne yapmalı": "Geri yüklenebilen satın almalar için \"Satın almaları geri yükle\" düğmesi olsun.",
+        "Kural": "3.1.1"
+       }
+      },
+      {
+       "id": "as-dis-odeme-linki",
+       "no": 4,
+       "baslik": "Dış ödeme linki",
+       "metin": "Dış ödeme linki Dijital ürün ve abonelikleri uygulama dışında satın aldıran düğme ya da link koyma. ABD mağazasında bu yasak uygulanmıyor; diğer ülkelerde reddedilir. 3.1.1(a)",
+       "alanlar": {
+        "Ne yapmalı": "Dijital ürün ve abonelikleri uygulama dışında satın aldıran düğme ya da link koyma. ABD mağazasında bu yasak uygulanmıyor; diğer ülkelerde reddedilir.",
+        "Kural": "3.1.1(a)"
+       }
+      }
+     ]
+    },
+    {
+     "baslik": "Gizlilik ve izinler",
+     "maddeler": [
+      {
+       "id": "as-hesap-silme",
+       "no": 5,
+       "baslik": "Hesap silme yok",
+       "metin": "Hesap silme yok Uygulamada hesap açılabiliyorsa hesap silme de uygulamanın içinden yapılabilmeli; sadece e-posta ile talep yetmez. 5.1.1(v)",
+       "alanlar": {
+        "Ne yapmalı": "Uygulamada hesap açılabiliyorsa hesap silme de uygulamanın içinden yapılabilmeli; sadece e-posta ile talep yetmez.",
+        "Kural": "5.1.1(v)"
+       }
+      },
+      {
+       "id": "as-izin-gerekcesi",
+       "no": 6,
+       "baslik": "İzin gerekçesi yok",
+       "metin": "İzin gerekçesi yok Kamera, konum, rehber gibi izin isteklerinde verinin neden ve nasıl kullanılacağını açıkça yaz; \"Kamera erişimi gerekli\" yetmez. 5.1.1(ii)",
+       "alanlar": {
+        "Ne yapmalı": "Kamera, konum, rehber gibi izin isteklerinde verinin neden ve nasıl kullanılacağını açıkça yaz; \"Kamera erişimi gerekli\" yetmez.",
+        "Kural": "5.1.1(ii)"
+       }
+      },
+      {
+       "id": "as-takip-izni",
+       "no": 7,
+       "baslik": "Takip izni yok",
+       "metin": "Takip izni yok Kullanıcıyı başka uygulama ve sitelerde takip ediyorsan (reklam kimliği, bazı analitik SDK'ları) App Tracking Transparency izni iste. 5.1.2(i)",
+       "alanlar": {
+        "Ne yapmalı": "Kullanıcıyı başka uygulama ve sitelerde takip ediyorsan (reklam kimliği, bazı analitik SDK'ları) App Tracking Transparency izni iste.",
+        "Kural": "5.1.2(i)"
+       }
+      },
+      {
+       "id": "as-gizlilik-etiketi",
+       "no": 8,
+       "baslik": "Gizlilik etiketi yanlış",
+       "metin": "Gizlilik etiketi yanlış App Store Connect'teki gizlilik bilgileri, uygulamanın ve eklediğin SDK'ların (analitik, reklam, çökme raporu) gerçekte topladığı veriyle birebir aynı olsun. 2.3, 5.1.1(i)",
+       "alanlar": {
+        "Ne yapmalı": "App Store Connect'teki gizlilik bilgileri, uygulamanın ve eklediğin SDK'ların (analitik, reklam, çökme raporu) gerçekte topladığı veriyle birebir aynı olsun.",
+        "Kural": "2.3, 5.1.1(i)"
+       }
+      },
+      {
+       "id": "as-gizlilik-politikasi-linki",
+       "no": 9,
+       "baslik": "Gizlilik politikası linki yok",
+       "metin": "Gizlilik politikası linki yok Gizlilik politikası linkini hem App Store Connect'teki alana hem de uygulamanın içinde kolay bulunur bir yere koy; sadece satın alma ekranında olması yetmez. 5.1.1(i)",
+       "alanlar": {
+        "Ne yapmalı": "Gizlilik politikası linkini hem App Store Connect'teki alana hem de uygulamanın içinde kolay bulunur bir yere koy; sadece satın alma ekranında olması yetmez.",
+        "Kural": "5.1.1(i)"
+       }
+      },
+      {
+       "id": "as-esdeger-giris-secenegi",
+       "no": 10,
+       "baslik": "Eşdeğer giriş seçeneği yok",
+       "metin": "Eşdeğer giriş seçeneği yok Google, Facebook gibi bir hesapla giriş varsa yanında veriyi ad ve e-postayla sınırlayan, e-postayı gizlemeye izin veren ve reklam için izlemeyen bir giriş seçeneği daha sun; Apple ile Giriş bu şartları karşılar. Sadece kendi e-posta ve şifre girişin varsa gerekmez. 4.8",
+       "alanlar": {
+        "Ne yapmalı": "Google, Facebook gibi bir hesapla giriş varsa yanında veriyi ad ve e-postayla sınırlayan, e-postayı gizlemeye izin veren ve reklam için izlemeyen bir giriş seçeneği daha sun; Apple ile Giriş bu şartları karşılar. Sadece kendi e-posta ve şifre girişin varsa gerekmez.",
+        "Kural": "4.8"
+       }
+      }
+     ]
+    },
+    {
+     "baslik": "İnceleme hazırlığı",
+     "maddeler": [
+      {
+       "id": "as-yer-tutucu-icerik",
+       "no": 11,
+       "baslik": "Yer tutucu içerik",
+       "metin": "Yer tutucu içerik \"Lorem ipsum\", boş ekran, çalışmayan link ya da \"yakında\" sayfası bırakma; gönderilen sürüm son sürüm olmalı. 2.1(a)",
+       "alanlar": {
+        "Ne yapmalı": "\"Lorem ipsum\", boş ekran, çalışmayan link ya da \"yakında\" sayfası bırakma; gönderilen sürüm son sürüm olmalı.",
+        "Kural": "2.1(a)"
+       }
+      },
+      {
+       "id": "as-demo-hesap",
+       "no": 12,
+       "baslik": "Demo hesap yok",
+       "metin": "Demo hesap yok Giriş gerektiren her şey için çalışan ve inceleme sürerken süresi dolmayacak bir demo hesap (ya da tam demo modu) ve gerekiyorsa örnek QR kodu gibi ek bilgileri inceleme notlarına yaz. 2.1(a)",
+       "alanlar": {
+        "Ne yapmalı": "Giriş gerektiren her şey için çalışan ve inceleme sürerken süresi dolmayacak bir demo hesap (ya da tam demo modu) ve gerekiyorsa örnek QR kodu gibi ek bilgileri inceleme notlarına yaz.",
+        "Kural": "2.1(a)"
+       }
+      },
+      {
+       "id": "as-gizli-ozellik",
+       "no": 13,
+       "baslik": "Gizli özellik",
+       "metin": "Gizli özellik Gizli, kapalı bekleyen ya da belgelenmemiş özellik bırakma; yeni özellikleri inceleme notlarında ayrıntılı anlat ve inceleme ekibinin her özelliğe (ör. satın alma ekranına) nasıl ulaşacağını adım adım yaz, genel açıklama reddedilir. 2.3.1(a)",
+       "alanlar": {
+        "Ne yapmalı": "Gizli, kapalı bekleyen ya da belgelenmemiş özellik bırakma; yeni özellikleri inceleme notlarında ayrıntılı anlat ve inceleme ekibinin her özelliğe (ör. satın alma ekranına) nasıl ulaşacağını adım adım yaz, genel açıklama reddedilir.",
+        "Kural": "2.3.1(a)"
+       }
+      },
+      {
+       "id": "as-ekran-goruntuleri",
+       "no": 14,
+       "baslik": "Ekran görüntüsü yanlış",
+       "metin": "Ekran görüntüsü yanlış Ekran görüntüleri uygulamanın kullanımını göstermeli; sadece logo, giriş ya da açılış ekranı olmaz. 2.3.3",
+       "alanlar": {
+        "Ne yapmalı": "Ekran görüntüleri uygulamanın kullanımını göstermeli; sadece logo, giriş ya da açılış ekranı olmaz.",
+        "Kural": "2.3.3"
+       }
+      },
+      {
+       "id": "as-cokme",
+       "no": 15,
+       "baslik": "Çöküyor",
+       "metin": "Çöküyor Göndermeden önce gerçek cihazda test et; çöken ya da belirgin hatası olan sürüm reddedilir. 2.1(a)",
+       "alanlar": {
+        "Ne yapmalı": "Göndermeden önce gerçek cihazda test et; çöken ya da belirgin hatası olan sürüm reddedilir.",
+        "Kural": "2.1(a)"
+       }
+      },
+      {
+       "id": "as-destek-linki",
+       "no": 16,
+       "baslik": "Destek linki çalışmıyor",
+       "metin": "Destek linki çalışmıyor App Store Connect'teki destek linki (Support URL) açılmalı ve sana ulaşmanın kolay bir yolunu göstermeli; boş ya da hata veren sayfa bırakma. 1.5",
+       "alanlar": {
+        "Ne yapmalı": "App Store Connect'teki destek linki (Support URL) açılmalı ve sana ulaşmanın kolay bir yolunu göstermeli; boş ya da hata veren sayfa bırakma.",
+        "Kural": "1.5"
+       }
+      },
+      {
+       "id": "as-yas-derecelendirmesi",
+       "no": 17,
+       "baslik": "Yaş sınırı yanlış",
+       "metin": "Yaş sınırı yanlış App Store Connect'teki yaş derecelendirmesi sorularını dürüst cevapla; kullanıcı içeriği, sohbet, kumar ya da yetişkin içerik varsa belirt. 2.3.6",
+       "alanlar": {
+        "Ne yapmalı": "App Store Connect'teki yaş derecelendirmesi sorularını dürüst cevapla; kullanıcı içeriği, sohbet, kumar ya da yetişkin içerik varsa belirt.",
+        "Kural": "2.3.6"
+       }
+      }
+     ]
+    },
+    {
+     "baslik": "İçerik ve işlevsellik",
+     "maddeler": [
+      {
+       "id": "as-web-gorunumu",
+       "no": 18,
+       "baslik": "Sadece web görünümü",
+       "metin": "Sadece web görünümü Uygulama, paketlenmiş bir web sitesinden fazlası olmalı: uygulamaya özgü özellik, içerik ve arayüz. 4.2",
+       "alanlar": {
+        "Ne yapmalı": "Uygulama, paketlenmiş bir web sitesinden fazlası olmalı: uygulamaya özgü özellik, içerik ve arayüz.",
+        "Kural": "4.2"
+       }
+      },
+      {
+       "id": "as-minimum-islevsellik",
+       "no": 19,
+       "baslik": "Minimum işlevsellik",
+       "metin": "Minimum işlevsellik Sadece reklam, link koleksiyonu ya da çok basit tek işlev olan uygulamalar reddedilir. 4.2, 4.2.2",
+       "alanlar": {
+        "Ne yapmalı": "Sadece reklam, link koleksiyonu ya da çok basit tek işlev olan uygulamalar reddedilir.",
+        "Kural": "4.2, 4.2.2"
+       }
+      },
+      {
+       "id": "as-cocuk-kategorisi",
+       "no": 20,
+       "baslik": "Çocuk kategorisi",
+       "metin": "Çocuk kategorisi Çocuk kategorisindeysen dışarıya link, satın alma ve reklam ebeveyn kilidinin arkasında olmalı; kişisel ve cihaz verisi üçüncü taraflara gitmemeli. 1.3",
+       "alanlar": {
+        "Ne yapmalı": "Çocuk kategorisindeysen dışarıya link, satın alma ve reklam ebeveyn kilidinin arkasında olmalı; kişisel ve cihaz verisi üçüncü taraflara gitmemeli.",
+        "Kural": "1.3"
+       }
+      },
+      {
+       "id": "as-kullanici-icerigi",
+       "no": 21,
+       "baslik": "Kullanıcı içeriği",
+       "metin": "Kullanıcı içeriği Kullanıcılar içerik paylaşabiliyorsa uygunsuz içeriği filtreleme, şikâyet etme, kullanıcı engelleme ve iletişim bilgisi şart. 1.2",
+       "alanlar": {
+        "Ne yapmalı": "Kullanıcılar içerik paylaşabiliyorsa uygunsuz içeriği filtreleme, şikâyet etme, kullanıcı engelleme ve iletişim bilgisi şart.",
+        "Kural": "1.2"
+       }
+      },
+      {
+       "id": "as-baskasinin-markasi",
+       "no": 22,
+       "baslik": "Başkasının markası",
+       "metin": "Başkasının markası Başka markanın adını, logosunu ya da telifli içeriğini izinsiz kullanma; başka uygulamanın ikonunu ya da adını taklit etme. Açıklamada ve ekran görüntülerinde Android gibi başka platformların adı ya da görseli de geçmesin. 5.2.1, 4.1(c), 2.3.10",
+       "alanlar": {
+        "Ne yapmalı": "Başka markanın adını, logosunu ya da telifli içeriğini izinsiz kullanma; başka uygulamanın ikonunu ya da adını taklit etme. Açıklamada ve ekran görüntülerinde Android gibi başka platformların adı ya da görseli de geçmesin.",
+        "Kural": "5.2.1, 4.1(c), 2.3.10"
+       }
+      },
+      {
+       "id": "as-saglik-iddiasi",
+       "no": 23,
+       "baslik": "Sağlık iddiası",
+       "metin": "Sağlık iddiası Sağlıkla ilgili ölçüm ya da etki iddiasının verisini ve yöntemini göster; doğrulanamayan iddia (\"stresi tedavi eder\") reddedilir. 1.4.1",
+       "alanlar": {
+        "Ne yapmalı": "Sağlıkla ilgili ölçüm ya da etki iddiasının verisini ve yöntemini göster; doğrulanamayan iddia (\"stresi tedavi eder\") reddedilir.",
+        "Kural": "1.4.1"
+       }
+      },
+      {
+       "id": "as-sablon-uygulama",
+       "no": 24,
+       "baslik": "Şablon uygulama",
+       "metin": "Şablon uygulama Hazır şablonla ya da uygulama üretme servisiyle yapılıp başkası adına gönderilen uygulama reddedilir; içerik sahibi kendi hesabından göndermeli ve uygulama özgün olmalı. 4.2.6",
+       "alanlar": {
+        "Ne yapmalı": "Hazır şablonla ya da uygulama üretme servisiyle yapılıp başkası adına gönderilen uygulama reddedilir; içerik sahibi kendi hesabından göndermeli ve uygulama özgün olmalı.",
+        "Kural": "4.2.6"
+       }
+      },
+      {
+       "id": "as-olmayan-ozellik-vaadi",
+       "no": 25,
+       "baslik": "Olmayan özellik vaadi",
+       "metin": "Olmayan özellik vaadi Açıklama, ekran görüntüleri ve önizleme videosu uygulamanın gerçekte yaptığını göstermeli; olmayan özelliği ya da yanlış fiyatı vaat etme. 2.3, 2.3.1(a)",
+       "alanlar": {
+        "Ne yapmalı": "Açıklama, ekran görüntüleri ve önizleme videosu uygulamanın gerçekte yaptığını göstermeli; olmayan özelliği ya da yanlış fiyatı vaat etme.",
+        "Kural": "2.3, 2.3.1(a)"
+       }
+      }
+     ]
+    },
+    {
+     "baslik": "Reddedilince",
+     "maddeler": [
+      {
+       "id": "as-red-cevabi",
+       "no": 26,
+       "baslik": "Cevap yazmıyorsun",
+       "metin": "Cevap yazmıyorsun Sessizce yeni sürüm göndermek yerine App Store Connect'te uygulamanın App Review bölümünden inceleme ekibine yaz; neyin eksik olduğunu sor ya da neden kurala uyduğunu açıkla. App Review",
+       "alanlar": {
+        "Ne yapmalı": "Sessizce yeni sürüm göndermek yerine App Store Connect'te uygulamanın App Review bölümünden inceleme ekibine yaz; neyin eksik olduğunu sor ya da neden kurala uyduğunu açıkla.",
+        "Kural": "App Review"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "google-play",
+   "baslik": "Google Play incelemesi",
+   "adres": "/listeler/google-play/",
+   "bicim": "tablo",
+   "bolumler": [
+    {
+     "baslik": "Veri ve gizlilik",
+     "maddeler": [
+      {
+       "id": "gp-veri-guvenligi-formu",
+       "no": 1,
+       "baslik": "Veri güvenliği formu uyumsuz",
+       "metin": "Veri güvenliği formu uyumsuz Play Console'daki Veri güvenliği (Data safety) formunu uygulamanın ve eklediğin SDK'ların gerçekte topladığı ve paylaştığı veriyle, gizlilik politikanla tutarlı doldur. Hiç veri toplamasan da formu doldurman gerekir; uyumsuzluk güncellemelerin engellenmesine ya da kaldırmaya yol açar. Data safety",
+       "alanlar": {
+        "Ne yapmalı": "Play Console'daki Veri güvenliği (Data safety) formunu uygulamanın ve eklediğin SDK'ların gerçekte topladığı ve paylaştığı veriyle, gizlilik politikanla tutarlı doldur. Hiç veri toplamasan da formu doldurman gerekir; uyumsuzluk güncellemelerin engellenmesine ya da kaldırmaya yol açar.",
+        "Politika": "Data safety"
+       }
+      },
+      {
+       "id": "gp-gizlilik-politikasi",
+       "no": 2,
+       "baslik": "Gizlilik politikası yok",
+       "metin": "Gizlilik politikası yok Veri toplamasa bile her uygulama Play Console'daki alana ve uygulamanın içine gizlilik politikası linki koymalı. Sayfa herkese açık olmalı, PDF olmamalı; geliştirici adını, iletişim bilgisini, verinin ne kadar saklanıp nasıl silindiğini içermeli. User Data",
+       "alanlar": {
+        "Ne yapmalı": "Veri toplamasa bile her uygulama Play Console'daki alana ve uygulamanın içine gizlilik politikası linki koymalı. Sayfa herkese açık olmalı, PDF olmamalı; geliştirici adını, iletişim bilgisini, verinin ne kadar saklanıp nasıl silindiğini içermeli.",
+        "Politika": "User Data"
+       }
+      },
+      {
+       "id": "gp-belirgin-aciklama-onay",
+       "no": 3,
+       "baslik": "Belirgin açıklama ve onay yok",
+       "metin": "Belirgin açıklama ve onay yok Kullanıcının beklemeyeceği veri kullanımında (ör. arka planda toplama) izin isteğinden hemen önce uygulama içinde açıklama göster ve kullanıcı bir düğmeyle onaylasın; geri tuşu ya da kendiliğinden kapanan mesaj onay sayılmaz. User Data",
+       "alanlar": {
+        "Ne yapmalı": "Kullanıcının beklemeyeceği veri kullanımında (ör. arka planda toplama) izin isteğinden hemen önce uygulama içinde açıklama göster ve kullanıcı bir düğmeyle onaylasın; geri tuşu ya da kendiliğinden kapanan mesaj onay sayılmaz.",
+        "Politika": "User Data"
+       }
+      },
+      {
+       "id": "gp-hesap-silme",
+       "no": 4,
+       "baslik": "Hesap silme yok",
+       "metin": "Hesap silme yok Uygulamada hesap açılabiliyorsa hem uygulama içinden hesap ve veri silme yolu, hem de silme talebi için bir web sayfası olmalı (linki Veri güvenliği formundaki alana). Hesabı dondurmak ya da pasifleştirmek silme sayılmaz. Hesap silme",
+       "alanlar": {
+        "Ne yapmalı": "Uygulamada hesap açılabiliyorsa hem uygulama içinden hesap ve veri silme yolu, hem de silme talebi için bir web sayfası olmalı (linki Veri güvenliği formundaki alana). Hesabı dondurmak ya da pasifleştirmek silme sayılmaz.",
+        "Politika": "Hesap silme"
+       }
+      }
+     ]
+    },
+    {
+     "baslik": "İzinler",
+     "maddeler": [
+      {
+       "id": "gp-hassas-izin-beyani",
+       "no": 5,
+       "baslik": "Hassas izin beyanı yok",
+       "metin": "Hassas izin beyanı yok SMS ve arama kaydı, tüm dosyalara erişim (MANAGE_EXTERNAL_STORAGE), yüklü uygulamaları görme (QUERY_ALL_PACKAGES), erişilebilirlik API'si, fotoğraf ve video (READ_MEDIA_*) izinlerini sadece ana işlev gerçekten gerektiriyorsa iste ve Play Console'da beyan formunu doldur. Fotoğraf için mümkünse sistemin fotoğraf seçicisini kullan. Hassas izinler",
+       "alanlar": {
+        "Ne yapmalı": "SMS ve arama kaydı, tüm dosyalara erişim (MANAGE_EXTERNAL_STORAGE), yüklü uygulamaları görme (QUERY_ALL_PACKAGES), erişilebilirlik API'si, fotoğraf ve video (READ_MEDIA_*) izinlerini sadece ana işlev gerçekten gerektiriyorsa iste ve Play Console'da beyan formunu doldur. Fotoğraf için mümkünse sistemin fotoğraf seçicisini kullan.",
+        "Politika": "Hassas izinler"
+       }
+      },
+      {
+       "id": "gp-arka-plan-konum",
+       "no": 6,
+       "baslik": "Arka planda konum",
+       "metin": "Arka planda konum Arka planda konum sadece ana işlev için olabilir, reklam ya da analitik için asla. Beyan formu, video gösterimi, uygulama içi açıklama ve gizlilik politikası ister. Konum izinleri",
+       "alanlar": {
+        "Ne yapmalı": "Arka planda konum sadece ana işlev için olabilir, reklam ya da analitik için asla. Beyan formu, video gösterimi, uygulama içi açıklama ve gizlilik politikası ister.",
+        "Politika": "Konum izinleri"
+       }
+      },
+      {
+       "id": "gp-on-plan-servisi",
+       "no": 7,
+       "baslik": "Ön plan servisi beyanı yok",
+       "metin": "Ön plan servisi beyanı yok Android 14 ve üstünü hedefliyorsan her ön plan servisi türünü App content sayfasında açıklama, kullanıcıya etkisi ve video linkiyle beyan et. Tam ekran bildirim (USE_FULL_SCREEN_INTENT) ve kesin alarm (USE_EXACT_ALARM, sadece alarm, zamanlayıcı ve takvim uygulamaları) da beyan ister. Ön plan servisleri",
+       "alanlar": {
+        "Ne yapmalı": "Android 14 ve üstünü hedefliyorsan her ön plan servisi türünü App content sayfasında açıklama, kullanıcıya etkisi ve video linkiyle beyan et. Tam ekran bildirim (USE_FULL_SCREEN_INTENT) ve kesin alarm (USE_EXACT_ALARM, sadece alarm, zamanlayıcı ve takvim uygulamaları) da beyan ister.",
+        "Politika": "Ön plan servisleri"
+       }
+      }
+     ]
+    },
+    {
+     "baslik": "Teknik gereksinimler",
+     "maddeler": [
+      {
+       "id": "gp-hedef-api-seviyesi",
+       "no": 8,
+       "baslik": "Hedef API seviyesi düşük",
+       "metin": "Hedef API seviyesi düşük 31 Ağustos 2026'dan itibaren yeni uygulamalar ve güncellemeler telefon ve tablette Android 16'yı (API 36) hedeflemeli. Mevcut uygulamalar en az API 35 olmalı, yoksa yeni Android sürümlerindeki yeni kullanıcılardan gizlenir. 1 Kasım 2026'ya kadar uzatma istenebilir. Hedef API",
+       "alanlar": {
+        "Ne yapmalı": "31 Ağustos 2026'dan itibaren yeni uygulamalar ve güncellemeler telefon ve tablette Android 16'yı (API 36) hedeflemeli. Mevcut uygulamalar en az API 35 olmalı, yoksa yeni Android sürümlerindeki yeni kullanıcılardan gizlenir. 1 Kasım 2026'ya kadar uzatma istenebilir.",
+        "Politika": "Hedef API"
+       }
+      },
+      {
+       "id": "gp-16kb-sayfa",
+       "no": 9,
+       "baslik": "16 KB sayfa boyutu desteği yok",
+       "metin": "16 KB sayfa boyutu desteği yok Android 15 ve üstünü hedefleyen, native kod (NDK ya da native kütüphane içeren bir SDK) kullanan uygulamalar 64 bit cihazlarda 16 KB bellek sayfasını desteklemeli. Sadece Java/Kotlin uygulamalar zaten uyumlu. 1 Şubat 2027'den itibaren desteklemeyen güncellemeler yayınlanamaz. 16 KB sayfa",
+       "alanlar": {
+        "Ne yapmalı": "Android 15 ve üstünü hedefleyen, native kod (NDK ya da native kütüphane içeren bir SDK) kullanan uygulamalar 64 bit cihazlarda 16 KB bellek sayfasını desteklemeli. Sadece Java/Kotlin uygulamalar zaten uyumlu. 1 Şubat 2027'den itibaren desteklemeyen güncellemeler yayınlanamaz.",
+        "Politika": "16 KB sayfa"
+       }
+      },
+      {
+       "id": "gp-app-bundle-64bit",
+       "no": 10,
+       "baslik": "App Bundle ya da 64 bit yok",
+       "metin": "App Bundle ya da 64 bit yok Yeni uygulamalar Android App Bundle (AAB) olarak yüklenmeli; native kod içeren uygulamalar 64 bit sürüm de içermeli. App Bundle",
+       "alanlar": {
+        "Ne yapmalı": "Yeni uygulamalar Android App Bundle (AAB) olarak yüklenmeli; native kod içeren uygulamalar 64 bit sürüm de içermeli.",
+        "Politika": "App Bundle"
+       }
+      },
+      {
+       "id": "gp-paket-kaydi",
+       "no": 11,
+       "baslik": "Paket adı kayıtlı değil",
+       "metin": "Paket adı kayıtlı değil Android geliştirici doğrulaması kapsamında 30 Eylül 2026'dan itibaren kayıtlı olmayan Play paketleri kaldırılır. Play uygulamaların çoğunu kendisi kaydediyor; Play Console ana sayfasında kaydedilmemiş uygulama uyarısı olup olmadığına bak. Geliştirici doğrulaması",
+       "alanlar": {
+        "Ne yapmalı": "Android geliştirici doğrulaması kapsamında 30 Eylül 2026'dan itibaren kayıtlı olmayan Play paketleri kaldırılır. Play uygulamaların çoğunu kendisi kaydediyor; Play Console ana sayfasında kaydedilmemiş uygulama uyarısı olup olmadığına bak.",
+        "Politika": "Geliştirici doğrulaması"
+       }
+      },
+      {
+       "id": "gp-cokme",
+       "no": 12,
+       "baslik": "Çöküyor ya da çalışmıyor",
+       "metin": "Çöküyor ya da çalışmıyor Çöken, donan, yüklenmeyen ya da açılmayan uygulamalar reddedilir. Android vitals'da çökme oranını %1,09'un, ANR oranını %0,47'nin altında tut. İşlevsellik",
+       "alanlar": {
+        "Ne yapmalı": "Çöken, donan, yüklenmeyen ya da açılmayan uygulamalar reddedilir. Android vitals'da çökme oranını %1,09'un, ANR oranını %0,47'nin altında tut.",
+        "Politika": "İşlevsellik"
+       }
+      }
+     ]
+    },
+    {
+     "baslik": "Ödeme ve abonelik",
+     "maddeler": [
+      {
+       "id": "gp-play-faturalandirma",
+       "no": 13,
+       "baslik": "Play Faturalandırma dışında ödeme",
+       "metin": "Play Faturalandırma dışında ödeme Dijital ürün ve abonelikleri Google Play Faturalandırma ile sat; uygulama içinde başka ödeme yöntemine yönlendiren link ya da düğme koyma. ABD'de Ekim 2025'ten beri bu zorunluluk yok; AB, Birleşik Krallık, Japonya gibi bazı ülkelerde kayıt olarak alternatif faturalandırma kullanılabiliyor. Türkiye bu ülke listelerinde yok. Fiziksel ürün ve hizmetler Play Faturalandırma kullanmaz. Ödemeler",
+       "alanlar": {
+        "Ne yapmalı": "Dijital ürün ve abonelikleri Google Play Faturalandırma ile sat; uygulama içinde başka ödeme yöntemine yönlendiren link ya da düğme koyma. ABD'de Ekim 2025'ten beri bu zorunluluk yok; AB, Birleşik Krallık, Japonya gibi bazı ülkelerde kayıt olarak alternatif faturalandırma kullanılabiliyor. Türkiye bu ülke listelerinde yok. Fiziksel ürün ve hizmetler Play Faturalandırma kullanmaz.",
+        "Politika": "Ödemeler"
+       }
+      },
+      {
+       "id": "gp-abonelik-sartlari",
+       "no": 14,
+       "baslik": "Abonelik şartları belirsiz",
+       "metin": "Abonelik şartları belirsiz Fiyatı, fatura dönemini, otomatik yenilemeyi, denemenin ne zaman ve kaça dönüşeceğini ve nasıl iptal edileceğini açıkça göster. Yıllık planda aylık fiyatı öne çıkarma, kapatma düğmesi görünür olsun, uygulamada kolay bir iptal yolu (ör. Play abonelik merkezine link) bulunsun. Abonelikler",
+       "alanlar": {
+        "Ne yapmalı": "Fiyatı, fatura dönemini, otomatik yenilemeyi, denemenin ne zaman ve kaça dönüşeceğini ve nasıl iptal edileceğini açıkça göster. Yıllık planda aylık fiyatı öne çıkarma, kapatma düğmesi görünür olsun, uygulamada kolay bir iptal yolu (ör. Play abonelik merkezine link) bulunsun.",
+        "Politika": "Abonelikler"
+       }
+      }
+     ]
+    },
+    {
+     "baslik": "Mağaza sayfası ve içerik",
+     "maddeler": [
+      {
+       "id": "gp-yaniltici-magaza-bilgisi",
+       "no": 15,
+       "baslik": "Yanıltıcı mağaza bilgisi",
+       "metin": "Yanıltıcı mağaza bilgisi Başlık en fazla 30 karakter olsun; başlıkta, ikonda ve geliştirici adında emoji, tamamı büyük harf, \"#1\", \"En iyi\", fiyat ya da promosyon olmasın. Alakasız anahtar kelime ve kaynaksız yorum kullanma; ekran görüntüleri uygulamanın gerçek halini göstersin. Meta veri",
+       "alanlar": {
+        "Ne yapmalı": "Başlık en fazla 30 karakter olsun; başlıkta, ikonda ve geliştirici adında emoji, tamamı büyük harf, \"#1\", \"En iyi\", fiyat ya da promosyon olmasın. Alakasız anahtar kelime ve kaynaksız yorum kullanma; ekran görüntüleri uygulamanın gerçek halini göstersin.",
+        "Politika": "Meta veri"
+       }
+      },
+      {
+       "id": "gp-icerik-derecelendirmesi",
+       "no": 16,
+       "baslik": "İçerik derecelendirmesi yok",
+       "metin": "İçerik derecelendirmesi yok IARC içerik derecelendirme anketini doldur, içerik değişince yeniden doldur; derecelendirmesiz uygulamaya izin verilmez. İçerik derecelendirme",
+       "alanlar": {
+        "Ne yapmalı": "IARC içerik derecelendirme anketini doldur, içerik değişince yeniden doldur; derecelendirmesiz uygulamaya izin verilmez.",
+        "Politika": "İçerik derecelendirme"
+       }
+      },
+      {
+       "id": "gp-hedef-kitle-cocuklar",
+       "no": 17,
+       "baslik": "Hedef kitle ve çocuklar",
+       "metin": "Hedef kitle ve çocuklar Hedef yaş gruplarını beyan et. Çocuklar da hedefteyse Aileler politikasına uy: çocuklardan cihaz kimliği (reklam kimliği, IMEI vb.) gönderme, sadece onaylı reklam SDK'larını kullan, ilgiye dayalı reklam gösterme. Hedef kitle",
+       "alanlar": {
+        "Ne yapmalı": "Hedef yaş gruplarını beyan et. Çocuklar da hedefteyse Aileler politikasına uy: çocuklardan cihaz kimliği (reklam kimliği, IMEI vb.) gönderme, sadece onaylı reklam SDK'larını kullan, ilgiye dayalı reklam gösterme.",
+        "Politika": "Hedef kitle"
+       }
+      },
+      {
+       "id": "gp-kullanici-icerigi",
+       "no": 18,
+       "baslik": "Kullanıcı içeriği",
+       "metin": "Kullanıcı içeriği Kullanıcı paylaşım yapabiliyorsa önce kullanım koşullarını kabul etsin; sürekli moderasyon, içerik ve kullanıcı şikâyeti ile engelleme olsun. Sohbet, sosyal ve flört uygulamaları çocuk güvenliği standartlarını yayınlamalı. Kullanıcı içeriği",
+       "alanlar": {
+        "Ne yapmalı": "Kullanıcı paylaşım yapabiliyorsa önce kullanım koşullarını kabul etsin; sürekli moderasyon, içerik ve kullanıcı şikâyeti ile engelleme olsun. Sohbet, sosyal ve flört uygulamaları çocuk güvenliği standartlarını yayınlamalı.",
+        "Politika": "Kullanıcı içeriği"
+       }
+      },
+      {
+       "id": "gp-taklit-fikri-mulkiyet",
+       "no": 19,
+       "baslik": "Taklit ve fikri mülkiyet",
+       "metin": "Taklit ve fikri mülkiyet Başka bir marka ya da kurumla olmayan bir ilişkiyi ima etme, izinsiz marka ve telifli içerik kullanma. İzinle kullanıyorsan göndermeden önce Google Play'e bildir. Taklit",
+       "alanlar": {
+        "Ne yapmalı": "Başka bir marka ya da kurumla olmayan bir ilişkiyi ima etme, izinsiz marka ve telifli içerik kullanma. İzinle kullanıyorsan göndermeden önce Google Play'e bildir.",
+        "Politika": "Taklit"
+       }
+      },
+      {
+       "id": "gp-web-gorunumu",
+       "no": 20,
+       "baslik": "Sadece web görünümü, sınırlı işlev",
+       "metin": "Sadece web görünümü, sınırlı işlev Sahibinin izni olmadan bir sitenin web görünümünden ibaret, statik metin ya da PDF gösteren veya başka bir uygulamanın kopyası olan uygulamalar reddedilir. Spam ve minimum işlev",
+       "alanlar": {
+        "Ne yapmalı": "Sahibinin izni olmadan bir sitenin web görünümünden ibaret, statik metin ya da PDF gösteren veya başka bir uygulamanın kopyası olan uygulamalar reddedilir.",
+        "Politika": "Spam ve minimum işlev"
+       }
+      },
+      {
+       "id": "gp-reklam-kurallari",
+       "no": 21,
+       "baslik": "Reklam kuralları",
+       "metin": "Reklam kuralları Reklam sistem ya da uygulama arayüzünü taklit etmesin; uygulama dışında, açılışta, çıkışta ya da beklenmedik anda tam ekran reklam gösterme; geçiş reklamı en geç 15 saniyede kapatılabilsin. \"Reklam içerir\" beyanı doğru olsun; SDK'ların uyumundan sen sorumlusun. Reklamlar",
+       "alanlar": {
+        "Ne yapmalı": "Reklam sistem ya da uygulama arayüzünü taklit etmesin; uygulama dışında, açılışta, çıkışta ya da beklenmedik anda tam ekran reklam gösterme; geçiş reklamı en geç 15 saniyede kapatılabilsin. \"Reklam içerir\" beyanı doğru olsun; SDK'ların uyumundan sen sorumlusun.",
+        "Politika": "Reklamlar"
+       }
+      },
+      {
+       "id": "gp-saglik-finans-beyanlari",
+       "no": 22,
+       "baslik": "Sağlık ve finans beyanları",
+       "metin": "Sağlık ve finans beyanları Bu özellikler olmasa bile Sağlık uygulamaları ve Finansal özellikler beyan formlarını doldur. Tıbbi cihaz olmayan sağlık uygulaması bunu açıklamasında belirtmeli; sağlık ve finans uygulamaları Kuruluş hesabı ister. Sağlık",
+       "alanlar": {
+        "Ne yapmalı": "Bu özellikler olmasa bile Sağlık uygulamaları ve Finansal özellikler beyan formlarını doldur. Tıbbi cihaz olmayan sağlık uygulaması bunu açıklamasında belirtmeli; sağlık ve finans uygulamaları Kuruluş hesabı ister.",
+        "Politika": "Sağlık"
+       }
+      }
+     ]
+    },
+    {
+     "baslik": "İnceleme hazırlığı",
+     "maddeler": [
+      {
+       "id": "gp-giris-bilgisi",
+       "no": 23,
+       "baslik": "Giriş bilgisi yok",
+       "metin": "Giriş bilgisi yok Uygulama giriş gerektiriyorsa App content > Giriş bilgileri (Sign-in details) bölümüne çalışan bir demo hesap ve gerekiyorsa tek kullanımlık şifre, QR kodu gibi talimatları yaz; eski bilgi verme. Play Console gereksinimleri",
+       "alanlar": {
+        "Ne yapmalı": "Uygulama giriş gerektiriyorsa App content > Giriş bilgileri (Sign-in details) bölümüne çalışan bir demo hesap ve gerekiyorsa tek kullanımlık şifre, QR kodu gibi talimatları yaz; eski bilgi verme.",
+        "Politika": "Play Console gereksinimleri"
+       }
+      },
+      {
+       "id": "gp-kapali-test",
+       "no": 24,
+       "baslik": "Kapalı test şartı",
+       "metin": "Kapalı test şartı 13 Kasım 2023'ten sonra açılan kişisel geliştirici hesapları üretime çıkmadan önce en az 12 test kullanıcısıyla kesintisiz 14 günlük kapalı test yapmalı. Kuruluş hesabı D-U-N-S numarası ister; alınması 30 güne kadar sürebilir. Test şartı",
+       "alanlar": {
+        "Ne yapmalı": "13 Kasım 2023'ten sonra açılan kişisel geliştirici hesapları üretime çıkmadan önce en az 12 test kullanıcısıyla kesintisiz 14 günlük kapalı test yapmalı. Kuruluş hesabı D-U-N-S numarası ister; alınması 30 güne kadar sürebilir.",
+        "Politika": "Test şartı"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "paywall",
+   "baslik": "Paywall dönüşümü",
+   "adres": "/listeler/paywall/",
+   "bicim": "tablo",
+   "bolumler": [
+    {
+     "baslik": "Zamanlama ve akış",
+     "maddeler": [
+      {
+       "id": "pw-yanlis-anda-gosteriliyor",
+       "no": 1,
+       "baslik": "Yanlış anda gösteriliyor",
+       "metin": "Yanlış anda gösteriliyor Paywall'ı kullanıcı değeri gördüğü anda göster: ilk sonucu aldıktan ya da bir işi tamamladıktan sonra; uygulama açılır açılmaz değil.",
+       "alanlar": {
+        "Ne yapmalı": "Paywall'ı kullanıcı değeri gördüğü anda göster: ilk sonucu aldıktan ya da bir işi tamamladıktan sonra; uygulama açılır açılmaz değil."
+       }
+      },
+      {
+       "id": "pw-tek-ekrana-sikistirilmis",
+       "no": 2,
+       "baslik": "Tek ekrana sıkıştırılmış",
+       "metin": "Tek ekrana sıkıştırılmış Karşılamayı (onboarding) birkaç kısa adıma böl, paywall son adım olsun; kullanıcı önce ne kazanacağını görsün.",
+       "alanlar": {
+        "Ne yapmalı": "Karşılamayı (onboarding) birkaç kısa adıma böl, paywall son adım olsun; kullanıcı önce ne kazanacağını görsün."
+       }
+      },
+      {
+       "id": "pw-tek-paywall",
+       "no": 3,
+       "baslik": "Tek paywall var",
+       "metin": "Tek paywall var Farklı yerler ve kullanıcılar için birden fazla paywall kur ve A/B testiyle karşılaştır.",
+       "alanlar": {
+        "Ne yapmalı": "Farklı yerler ve kullanıcılar için birden fazla paywall kur ve A/B testiyle karşılaştır."
+       }
+      },
+      {
+       "id": "pw-gec-yukleniyor",
+       "no": 4,
+       "baslik": "Geç yükleniyor",
+       "metin": "Geç yükleniyor Ürün ve fiyat bilgisini paywall açılmadan önce yükle; dönen yükleme göstergesi kullanıcı kaybettirir.",
+       "alanlar": {
+        "Ne yapmalı": "Ürün ve fiyat bilgisini paywall açılmadan önce yükle; dönen yükleme göstergesi kullanıcı kaybettirir."
+       }
+      }
+     ]
+    },
+    {
+     "baslik": "İçerik ve tasarım",
+     "maddeler": [
+      {
+       "id": "pw-karsilastirma-tablosu",
+       "no": 5,
+       "baslik": "Karşılaştırma tablosu",
+       "metin": "Karşılaştırma tablosu Ücretsiz ve ücretli özellik tablosu yerine 3–4 kısa fayda maddesi yaz.",
+       "alanlar": {
+        "Ne yapmalı": "Ücretsiz ve ücretli özellik tablosu yerine 3–4 kısa fayda maddesi yaz."
+       }
+      },
+      {
+       "id": "pw-ozellik-yazilmis",
+       "no": 6,
+       "baslik": "Özellik yazılmış",
+       "metin": "Özellik yazılmış \"Sınırsız proje\" gibi özellik yerine kullanıcının elde edeceği sonucu yaz.",
+       "alanlar": {
+        "Ne yapmalı": "\"Sınırsız proje\" gibi özellik yerine kullanıcının elde edeceği sonucu yaz."
+       }
+      },
+      {
+       "id": "pw-baslik-baglamdan-kopuk",
+       "no": 7,
+       "baslik": "Başlık bağlamdan kopuk",
+       "metin": "Başlık bağlamdan kopuk Paywall'ı açan özelliğe göre başlığı değiştir; kullanıcı neye dokunduysa başlık onu anlatsın.",
+       "alanlar": {
+        "Ne yapmalı": "Paywall'ı açan özelliğe göre başlığı değiştir; kullanıcı neye dokunduysa başlık onu anlatsın."
+       }
+      },
+      {
+       "id": "pw-dugme-metni-sert",
+       "no": 8,
+       "baslik": "Düğme metni sert",
+       "metin": "Düğme metni sert \"Satın al\" yerine \"Ücretsiz dene\" ya da \"Devam et\" gibi daha yumuşak bir metin kullan; deneme varsa düğme bunu söylesin.",
+       "alanlar": {
+        "Ne yapmalı": "\"Satın al\" yerine \"Ücretsiz dene\" ya da \"Devam et\" gibi daha yumuşak bir metin kullan; deneme varsa düğme bunu söylesin."
+       }
+      },
+      {
+       "id": "pw-dugme-kayboluyor",
+       "no": 9,
+       "baslik": "Düğme kayboluyor",
+       "metin": "Düğme kayboluyor Satın alma düğmesi sayfa kaydırılınca da ekranın altında sabit dursun.",
+       "alanlar": {
+        "Ne yapmalı": "Satın alma düğmesi sayfa kaydırılınca da ekranın altında sabit dursun."
+       }
+      },
+      {
+       "id": "pw-kalabalik",
+       "no": 10,
+       "baslik": "Kalabalık",
+       "metin": "Kalabalık Tek odak, az metin, tek ana düğme; dikkat dağıtan link ve animasyonları çıkar.",
+       "alanlar": {
+        "Ne yapmalı": "Tek odak, az metin, tek ana düğme; dikkat dağıtan link ve animasyonları çıkar."
+       }
+      },
+      {
+       "id": "pw-cevrilmemis",
+       "no": 11,
+       "baslik": "Çevrilmemiş",
+       "metin": "Çevrilmemiş Paywall metnini kullanıcının dilinde göster; uygulama çevrilip paywall İngilizce kalmasın.",
+       "alanlar": {
+        "Ne yapmalı": "Paywall metnini kullanıcının dilinde göster; uygulama çevrilip paywall İngilizce kalmasın."
+       }
+      }
+     ]
+    },
+    {
+     "baslik": "Fiyat ve planlar",
+     "maddeler": [
+      {
+       "id": "pw-fiyat-ilk-ekranda",
+       "no": 12,
+       "baslik": "Fiyat ilk ekranda değil",
+       "metin": "Fiyat ilk ekranda değil Fiyat ve süre ilk ekranda, düğmenin yakınında görünsün; kaydırma ya da ikinci ekran gerektirmesin (App Store {{no:as-fiyat-bilgisi}}. madde).",
+       "alanlar": {
+        "Ne yapmalı": "Fiyat ve süre ilk ekranda, düğmenin yakınında görünsün; kaydırma ya da ikinci ekran gerektirmesin (App Store {{no:as-fiyat-bilgisi}}. madde)."
+       }
+      },
+      {
+       "id": "pw-yillik-plan-secili",
+       "no": 13,
+       "baslik": "Yıllık plan seçili değil",
+       "metin": "Yıllık plan seçili değil Yıllık planı varsayılan olarak seçili getir ve aylığa göre tasarrufu yaz.",
+       "alanlar": {
+        "Ne yapmalı": "Yıllık planı varsayılan olarak seçili getir ve aylığa göre tasarrufu yaz."
+       }
+      },
+      {
+       "id": "pw-yillik-fiyat-buyuk",
+       "no": 14,
+       "baslik": "Yıllık fiyat büyük görünüyor",
+       "metin": "Yıllık fiyat büyük görünüyor Yıllık fiyatın yanında haftalık ya da aylık karşılığını göster; ama Apple tahsil edilecek tutarın en belirgin fiyat olmasını istiyor, bölünmüş fiyat daha küçük ve ikinci planda kalmalı.",
+       "alanlar": {
+        "Ne yapmalı": "Yıllık fiyatın yanında haftalık ya da aylık karşılığını göster; ama Apple tahsil edilecek tutarın en belirgin fiyat olmasını istiyor, bölünmüş fiyat daha küçük ve ikinci planda kalmalı."
+       }
+      },
+      {
+       "id": "pw-fazla-plan",
+       "no": 15,
+       "baslik": "Çok fazla plan",
+       "metin": "Çok fazla plan En fazla üç plan göster; seçenek arttıkça karar zorlaşır.",
+       "alanlar": {
+        "Ne yapmalı": "En fazla üç plan göster; seçenek arttıkça karar zorlaşır."
+       }
+      },
+      {
+       "id": "pw-teklif-yok",
+       "no": 16,
+       "baslik": "Teklif yok",
+       "metin": "Teklif yok Giriş indirimi ya da ilk ay indirimi gibi bir teklif sun (App Store tanıtım teklifi, Google Play giriş fiyatı).",
+       "alanlar": {
+        "Ne yapmalı": "Giriş indirimi ya da ilk ay indirimi gibi bir teklif sun (App Store tanıtım teklifi, Google Play giriş fiyatı)."
+       }
+      }
+     ]
+    },
+    {
+     "baslik": "Deneme süresi",
+     "maddeler": [
+      {
+       "id": "pw-deneme-yok",
+       "no": 17,
+       "baslik": "Deneme yok",
+       "metin": "Deneme yok Ücretsiz deneme sun; deneme varsa süresini ve bitince alınacak ücreti açıkça yaz (Apple bunu istiyor).",
+       "alanlar": {
+        "Ne yapmalı": "Ücretsiz deneme sun; deneme varsa süresini ve bitince alınacak ücreti açıkça yaz (Apple bunu istiyor)."
+       }
+      },
+      {
+       "id": "pw-deneme-kisa",
+       "no": 18,
+       "baslik": "Deneme kısa",
+       "metin": "Deneme kısa Ürünün değeri birkaç günde anlaşılmıyorsa denemeyi uzat ve farkı ölç.",
+       "alanlar": {
+        "Ne yapmalı": "Ürünün değeri birkaç günde anlaşılmıyorsa denemeyi uzat ve farkı ölç."
+       }
+      },
+      {
+       "id": "pw-deneme-takvimi",
+       "no": 19,
+       "baslik": "Ne olacağı belirsiz",
+       "metin": "Ne olacağı belirsiz Deneme takvimini göster: bugün başlar, bitmeden önce hatırlatılır, şu gün ücret alınır.",
+       "alanlar": {
+        "Ne yapmalı": "Deneme takvimini göster: bugün başlar, bitmeden önce hatırlatılır, şu gün ücret alınır."
+       }
+      },
+      {
+       "id": "pw-ucret-hatirlatma",
+       "no": 20,
+       "baslik": "Ücret sürpriz oluyor",
+       "metin": "Ücret sürpriz oluyor Deneme bitmeden önce bildirimle hatırlat; iade ve şikâyet azalır, güven artar.",
+       "alanlar": {
+        "Ne yapmalı": "Deneme bitmeden önce bildirimle hatırlat; iade ve şikâyet azalır, güven artar."
+       }
+      }
+     ]
+    },
+    {
+     "baslik": "Güven ve teknik",
+     "maddeler": [
+      {
+       "id": "pw-sosyal-kanit-asagida",
+       "no": 21,
+       "baslik": "Sosyal kanıt aşağıda",
+       "metin": "Sosyal kanıt aşağıda Puanı ve kullanıcı yorumlarını paywall'ın üst kısmına koy.",
+       "alanlar": {
+        "Ne yapmalı": "Puanı ve kullanıcı yorumlarını paywall'ın üst kısmına koy."
+       }
+      },
+      {
+       "id": "pw-kapatma-dugmesi-gizli",
+       "no": 22,
+       "baslik": "Kapatma düğmesi gizli",
+       "metin": "Kapatma düğmesi gizli Kapatma düğmesini gizleme ya da geciktirme; kullanıcı kandırıldığını hisseder.",
+       "alanlar": {
+        "Ne yapmalı": "Kapatma düğmesini gizleme ya da geciktirme; kullanıcı kandırıldığını hisseder."
+       }
+      },
+      {
+       "id": "pw-sartlar-geri-yukleme",
+       "no": 23,
+       "baslik": "Şartlar ve geri yükleme yok",
+       "metin": "Şartlar ve geri yükleme yok Kullanım Koşulları ve Gizlilik Politikası linkleri ile \"Satın almaları geri yükle\" düğmesi paywall'da olsun; App Store'da zorunlu (App Store {{no:as-paywall-linkleri}} ve {{no:as-geri-yukleme}}. maddeler).",
+       "alanlar": {
+        "Ne yapmalı": "Kullanım Koşulları ve Gizlilik Politikası linkleri ile \"Satın almaları geri yükle\" düğmesi paywall'da olsun; App Store'da zorunlu (App Store {{no:as-paywall-linkleri}} ve {{no:as-geri-yukleme}}. maddeler)."
+       }
+      },
+      {
+       "id": "pw-bos-ekran",
+       "no": 24,
+       "baslik": "Boş ekran",
+       "metin": "Boş ekran Ürünler mağazadan yüklenemezse boş paywall gösterme; hata mesajı ve \"Tekrar dene\" düğmesi göster. İnceleme ekibi satın alma ekranını boş görürse uygulamayı reddeder.",
+       "alanlar": {
+        "Ne yapmalı": "Ürünler mağazadan yüklenemezse boş paywall gösterme; hata mesajı ve \"Tekrar dene\" düğmesi göster. İnceleme ekibi satın alma ekranını boş görürse uygulamayı reddeder."
+       }
+      },
+      {
+       "id": "pw-fiyat-koda-yazilmis",
+       "no": 25,
+       "baslik": "Fiyat koda yazılmış",
+       "metin": "Fiyat koda yazılmış Fiyatı sabit yazma; StoreKit ya da Google Play Billing'den kullanıcının ülkesine ve para birimine göre çek.",
+       "alanlar": {
+        "Ne yapmalı": "Fiyatı sabit yazma; StoreKit ya da Google Play Billing'den kullanıcının ülkesine ve para birimine göre çek."
+       }
+      },
+      {
+       "id": "pw-kapatan-kaybediliyor",
+       "no": 26,
+       "baslik": "Kapatan kaybediliyor",
+       "metin": "Kapatan kaybediliyor Paywall'ı kapatan kullanıcıya daha sonra indirimli bir teklif göster.",
+       "alanlar": {
+        "Ne yapmalı": "Paywall'ı kapatan kullanıcıya daha sonra indirimli bir teklif göster."
+       }
+      },
+      {
+       "id": "pw-test-edilmiyor",
+       "no": 27,
+       "baslik": "Test edilmiyor",
+       "metin": "Test edilmiyor Satın almayı ayda bir test hesabıyla (sandbox) baştan sona dene; mağaza, SDK ya da ürün ayarı değişince paywall sessizce bozulabilir.",
+       "alanlar": {
+        "Ne yapmalı": "Satın almayı ayda bir test hesabıyla (sandbox) baştan sona dene; mağaza, SDK ya da ürün ayarı değişince paywall sessizce bozulabilir."
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "ogeler": [
+  {
+   "ad": "Claymorphism",
+   "url": null,
+   "tur": "Stil",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Stiller",
+   "alanlar": {
+    "Nasıl görünür": "Kil ya da hamurdan yapılmış gibi şişkin, yumuşak 3B şekiller; iç ve dış yumuşak gölgeler, pastel renkler, çok yuvarlak köşeler.",
+    "Nerede işe yarar": "Eğlenceli uygulamalar, eğitim ve çocuk ürünleri, ikon ve illüstrasyonlar"
+   }
+  },
+  {
+   "ad": "Cybercore",
+   "url": null,
+   "tur": "Stil",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Stiller",
+   "alanlar": {
+    "Nasıl görünür": "Erken internet ve dijital dünya estetiği: ikili kod, piksel grafikler, eski işletim sistemi pencereleri, parlak mavi ve yeşil.",
+    "Nerede işe yarar": "Teknoloji meraklısı kitle, etkinlik ve kampanya sayfaları"
+   }
+  },
+  {
+   "ad": "Neo-Brutalism",
+   "url": null,
+   "tur": "Stil",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Stiller",
+   "alanlar": {
+    "Nasıl görünür": "Kalın siyah kenarlıklar, bulanıklığı olmayan sert gölgeler, doygun düz renkler, bilerek \"ham\" bırakılmış görünüm.",
+    "Nerede işe yarar": "Startup ve ürün tanıtımı, genç kitleye hitap eden markalar"
+   }
+  },
+  {
+   "ad": "Scrapbook",
+   "url": null,
+   "tur": "Stil",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Stiller",
+   "alanlar": {
+    "Nasıl görünür": "Karalama defteri kolajı: yırtık kâğıt, bant, çıkartma, el yazısı, polaroid fotoğraflar.",
+    "Nerede işe yarar": "Kişisel blog, portfolyo, etkinlik, hobi markaları"
+   }
+  },
+  {
+   "ad": "Surrealism",
+   "url": null,
+   "tur": "Stil",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Stiller",
+   "alanlar": {
+    "Nasıl görünür": "Rüya gibi, mantık dışı kompozisyonlar; beklenmedik nesne birleşimleri, gerçeküstü 3B sahneler.",
+    "Nerede işe yarar": "Sanat projeleri, kampanya ve açılış (hero) görselleri, marka hikâyesi"
+   }
+  },
+  {
+   "ad": "Y2K Aesthetic",
+   "url": null,
+   "tur": "Stil",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Stiller",
+   "alanlar": {
+    "Nasıl görünür": "2000'lerin başı: krom ve metalik yüzeyler, holografik gradyanlar, kabarcık yazılar, parlak pembe ve mavi.",
+    "Nerede işe yarar": "Moda, müzik, genç kitle"
+   }
+  },
+  {
+   "ad": "Pixel Art",
+   "url": null,
+   "tur": "Stil",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Stiller",
+   "alanlar": {
+    "Nasıl görünür": "Piksel piksel çizilmiş düşük çözünürlüklü grafikler, bitmap fontlar, retro oyun hissi.",
+    "Nerede işe yarar": "Oyunlar, nostaljik markalar, eğlenceli küçük etkileşimler"
+   }
+  },
+  {
+   "ad": "Synthwave",
+   "url": null,
+   "tur": "Stil",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Stiller",
+   "alanlar": {
+    "Nasıl görünür": "80'ler retro-fütürizmi: neon pembe, mor ve turkuaz, gün batımı, ızgara zemin, krom yazılar.",
+    "Nerede işe yarar": "Müzik, oyun, etkinlik sayfaları"
+   }
+  },
+  {
+   "ad": "Glassmorphism",
+   "url": null,
+   "tur": "Stil",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Stiller",
+   "alanlar": {
+    "Nasıl görünür": "Buzlu cam paneller: yarı saydam yüzey, arkasını bulanıklaştırma, ince açık kenarlık, renkli arka plan. Metnin okunabilirliğine dikkat.",
+    "Nerede işe yarar": "Dashboard kartları, modal ve açılır pencereler, iOS/macOS benzeri arayüzler"
+   }
+  },
+  {
+   "ad": "Neumorphism",
+   "url": null,
+   "tur": "Stil",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Stiller",
+   "alanlar": {
+    "Nasıl görünür": "Arka planla aynı renkte, açık ve koyu iki gölgeyle kabartılmış ya da gömülmüş öğeler. Kontrast düşük olduğu için erişilebilirlik zayıf.",
+    "Nerede işe yarar": "Kontrol panelleri, akıllı ev ve müzik çalar arayüzleri; küçük alanlarda"
+   }
+  },
+  {
+   "ad": "Bento Grid",
+   "url": null,
+   "tur": "Stil",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Stiller",
+   "alanlar": {
+    "Nasıl görünür": "Farklı boyutlarda, yuvarlak köşeli kutulardan oluşan ızgara; Apple'ın tanıtım sayfalarındaki gibi.",
+    "Nerede işe yarar": "Özellik tanıtımı, dashboard, portfolyo"
+   }
+  },
+  {
+   "ad": "Editorial Design",
+   "url": null,
+   "tur": "Stil",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Stiller",
+   "alanlar": {
+    "Nasıl görünür": "Dergi ve gazete düzeni: güçlü başlık hiyerarşisi, çok sütun, büyük görseller, bol beyaz alan.",
+    "Nerede işe yarar": "Blog, haber ve içerik siteleri, vaka çalışmaları"
+   }
+  },
+  {
+   "ad": "Swiss Design",
+   "url": null,
+   "tur": "Stil",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Stiller",
+   "alanlar": {
+    "Nasıl görünür": "Katı ızgara, sans-serif fontlar (Helvetica tarzı), asimetrik ama düzenli yerleşim, az renk, net hiyerarşi.",
+    "Nerede işe yarar": "Kurumsal siteler, ajanslar, bilgi yoğun sayfalar"
+   }
+  },
+  {
+   "ad": "Minimalism",
+   "url": null,
+   "tur": "Stil",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Stiller",
+   "alanlar": {
+    "Nasıl görünür": "Az öğe, bol boşluk, sınırlı renk paleti; sadece gerekeni gösterir.",
+    "Nerede işe yarar": "SaaS ve ürün sayfaları, portfolyo; çoğu proje için güvenli varsayılan"
+   }
+  },
+  {
+   "ad": "Maximalism",
+   "url": null,
+   "tur": "Stil",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Stiller",
+   "alanlar": {
+    "Nasıl görünür": "Bilinçli fazlalık: yoğun renk, desen ve katman, karışık fontlar, cesur kompozisyon.",
+    "Nerede işe yarar": "Moda, sanat, yaratıcı ajanslar, dikkat çekmesi gereken kampanyalar"
+   }
+  },
+  {
+   "ad": "Luxury Typography",
+   "url": null,
+   "tur": "Stil",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Stiller",
+   "alanlar": {
+    "Nasıl görünür": "İnce serif fontlar, geniş harf aralığı, büyük başlıklar, siyah-beyaz-altın, bol boşluk.",
+    "Nerede işe yarar": "Lüks ürün, otel, parfüm, mücevher, emlak"
+   }
+  },
+  {
+   "ad": "Conceptual Sketch",
+   "url": null,
+   "tur": "Stil",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Stiller",
+   "alanlar": {
+    "Nasıl görünür": "Elle çizilmiş eskiz görünümü: kalem çizgileri, taslak ikonlar, kâğıt dokusu.",
+    "Nerede işe yarar": "Fikir ve süreç anlatımı, eğitim içerikleri, taslak hissi verilmek istenen sayfalar"
+   }
+  },
+  {
+   "ad": "Ethereal",
+   "url": null,
+   "tur": "Stil",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Stiller",
+   "alanlar": {
+    "Nasıl görünür": "Rüya gibi hafif ve havadar: soluk pastel tonlar, yumuşak ışık ve gradyanlar, bulanıklık.",
+    "Nerede işe yarar": "Sağlık ve wellness, güzellik, meditasyon"
+   }
+  },
+  {
+   "ad": "Bohemian",
+   "url": null,
+   "tur": "Stil",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Stiller",
+   "alanlar": {
+    "Nasıl görünür": "Doğal ve el yapımı hissi: toprak tonları, organik dokular, bitki ve desen motifleri, el yazısı fontlar.",
+    "Nerede işe yarar": "El yapımı ürünler, kafe, yoga, seyahat"
+   }
+  },
+  {
+   "ad": "Victorian",
+   "url": null,
+   "tur": "Stil",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Stiller",
+   "alanlar": {
+    "Nasıl görünür": "19. yüzyıl süslemesi: süslü serif fontlar, çerçeveler, gravür illüstrasyonlar, bordo, koyu yeşil ve altın.",
+    "Nerede işe yarar": "Tarihi markalar, kitapçı, özel etkinlik, vintage ürünler"
+   }
+  },
+  {
+   "ad": "Cyberpunk",
+   "url": null,
+   "tur": "Stil",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Stiller",
+   "alanlar": {
+    "Nasıl görünür": "Distopik gelecek: koyu zemin, neon sarı, camgöbeği ve pembe, glitch efektleri, HUD tarzı arayüz çizgileri.",
+    "Nerede işe yarar": "Oyun, teknoloji ürünleri, etkinlik"
+   }
+  },
+  {
+   "ad": "Wabi-Sabi",
+   "url": null,
+   "tur": "Stil",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Stiller",
+   "alanlar": {
+    "Nasıl görünür": "Japon \"kusurun güzelliği\" estetiği: doğal malzeme dokuları, asimetri, sade toprak renkleri, sakinlik.",
+    "Nerede işe yarar": "Seramik ve el işi, mimari, çay ve kahve markaları"
+   }
+  },
+  {
+   "ad": "21st.dev",
+   "url": "https://21st.dev/",
+   "tur": "Site",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Siteler ve kütüphaneler",
+   "alanlar": {
+    "Tür": "Bileşen kütüphanesi",
+    "Ne işe yarar": "12.000'den fazla React ve Tailwind bileşeni, şablon ve shadcn teması; canlı önizlemeli. Bileşen shadcn CLI ile tek komutla projeye kopyalanır, kod senin olur.",
+    "Altyapı": "React + Tailwind, shadcn kurulu proje (Next.js ya da Vite)",
+    "Başka altyapıda": "Doğrudan kurulmaz; örnek alınıp çevrilir",
+    "Ücret": "Gezinmek ücretsiz, günde 2 kopyalama; sınırsız kopyalama ve 21st AI ücretli"
+   }
+  },
+  {
+   "ad": "Aceternity UI",
+   "url": "https://ui.aceternity.com/",
+   "tur": "Site",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Siteler ve kütüphaneler",
+   "alanlar": {
+    "Tür": "Bileşen kütüphanesi",
+    "Ne işe yarar": "React, Tailwind ve Motion ile yapılmış 200'den fazla animasyonlu bileşen, blok ve şablon. Kopyala-yapıştır ya da shadcn ile eklenir.",
+    "Altyapı": "React + Tailwind + Motion (Next.js ya da Vite)",
+    "Başka altyapıda": "Doğrudan kurulmaz; örnek alınıp çevrilir. Animasyonlar Motion kütüphanesine bağlı olduğu için çevirmek daha çok emek ister",
+    "Ücret": "Bileşenlerin bir kısmı ücretsiz, hazır blok ve şablonlar ücretli (All-Access Pass)"
+   }
+  },
+  {
+   "ad": "Kinetics",
+   "url": "https://kinetics.colorion.co",
+   "tur": "Site",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Siteler ve kütüphaneler",
+   "alanlar": {
+    "Tür": "Animasyon",
+    "Ne işe yarar": "Yay fiziğiyle çalışan 153 arayüz animasyonu: buton, slider, sürükleme, form, yükleniyor, liste, modal. Sertlik ve sönümü ayarlayıp CSS, React ya da hazır AI prompt'u olarak kopyalarsın.",
+    "Altyapı": "Her web projesi (düz CSS); React bileşeni olarak da alınır",
+    "Başka altyapıda": "CSS hâli her web altyapısında çalışır; mobil gibi web dışı ortamlar için hazır AI prompt'u kullanılır",
+    "Ücret": "Ücretsiz, açık kaynak"
+   }
+  },
+  {
+   "ad": "Animated Buttons",
+   "url": "https://animatedbuttons.colorion.co",
+   "tur": "Site",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Siteler ve kütüphaneler",
+   "alanlar": {
+    "Tür": "Animasyon",
+    "Ne işe yarar": "Sadece CSS ile yapılmış 99 hover efektli buton; JavaScript ya da bağımlılık yok, kopyala-yapıştır.",
+    "Altyapı": "Her web projesi: düz HTML, React, Vue, Angular, Blazor, PHP",
+    "Başka altyapıda": "Web dışında (mobil) sadece örnek alınır",
+    "Ücret": "Ücretsiz, MIT lisansı"
+   }
+  },
+  {
+   "ad": "VibePrompt",
+   "url": "https://vibeprompts.dev",
+   "tur": "Site",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Siteler ve kütüphaneler",
+   "alanlar": {
+    "Tür": "Prompt kütüphanesi",
+    "Ne işe yarar": "15 kategoride 286'dan fazla arayüz prompt'u ve Tailwind kodu: giriş formu, dashboard, yorumlar vb. Prompt'u AI aracına yapıştırıp bileşeni ürettirirsin.",
+    "Altyapı": "Tailwind kullanan her proje (HTML, React, Vue, Svelte)",
+    "Başka altyapıda": "Tailwind yoksa prompt'a kendi altyapını yazarsın (\"Bootstrap ile\", \"düz CSS ile\")",
+    "Ücret": "Ücretsiz"
+   }
+  },
+  {
+   "ad": "MotionSites",
+   "url": "https://motionsites.ai/",
+   "tur": "Site",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Siteler ve kütüphaneler",
+   "alanlar": {
+    "Tür": "Prompt kütüphanesi",
+    "Ne işe yarar": "Claude, Lovable, Bolt, Cursor gibi AI site yapıcılar için hazır prompt'lar; landing page, portfolyo ve 3B siteler.",
+    "Altyapı": "Altyapıdan bağımsız; çıkan kod kullandığın AI aracına bağlı",
+    "Başka altyapıda": "Prompt'a altyapıyı eklemen yeterli (\"Vue 3 ile\", \"düz HTML ile\")",
+    "Ücret": "Bir kısmı ücretsiz, sınırsız erişim ücretli"
+   }
+  },
+  {
+   "ad": "Stitch",
+   "url": "https://stitch.withgoogle.com",
+   "tur": "Site",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Siteler ve kütüphaneler",
+   "alanlar": {
+    "Tür": "Arayüz tasarımı (AI)",
+    "Ne işe yarar": "Google'ın aracı: metinden, eskizden ya da ekran görüntüsünden web ve mobil arayüz tasarlar, HTML/CSS koduna çevirir; Figma'ya, AI Studio'ya ya da Antigravity'ye aktarır.",
+    "Altyapı": "Her proje: çıktı HTML/CSS",
+    "Başka altyapıda": "Kodu Claude'a kendi altyapına çevirttirirsin",
+    "Ücret": "Fiyat belirtilmemiş, kotalı; Google Labs deneyi, 18+"
+   }
+  },
+  {
+   "ad": "Forma - Icon Creator",
+   "url": "https://iconcreator.dev",
+   "tur": "Site",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Siteler ve kütüphaneler",
+   "alanlar": {
+    "Tür": "İkon",
+    "Ne işe yarar": "Tabler, Lucide, Phosphor, Iconoir ve Heroicons ikonlarından uygulama ikonu tasarlayıp SVG ya da PNG olarak indirirsin.",
+    "Altyapı": "Her proje: SVG ve PNG web, mobil ve masaüstünde kullanılır (uygulama ikonu, favicon)",
+    "Başka altyapıda": "Fark yok",
+    "Ücret": "Sitede belirtilmemiş"
+   }
+  },
+  {
+   "ad": "Invoice Generator",
+   "url": "https://invoicegenerator.io",
+   "tur": "Site",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Siteler ve kütüphaneler",
+   "alanlar": {
+    "Tür": "Fatura (UI dışı)",
+    "Ne işe yarar": "Tarayıcıda fatura hazırlayıp PDF indirirsin; veriler cihazında kalır, sunucuya gönderilmez. 30'dan fazla para birimi, vergi, indirim, kargo alanları.",
+    "Altyapı": "Kod değil; tarayıcıda doğrudan kullanılan araç",
+    "Başka altyapıda": "Uygulamana fatura ekranı yapacaksan düzeni örnek alınabilir",
+    "Ücret": "Ücretsiz, üyelik ve filigran yok"
+   }
+  },
+  {
+   "ad": "shadcn/ui",
+   "url": "https://github.com/shadcn-ui/ui",
+   "tur": "Site",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Siteler ve kütüphaneler",
+   "alanlar": {
+    "Tür": "Bileşen kütüphanesi",
+    "Ne işe yarar": "Kodu doğrudan projeye kopyalanan, erişilebilir bileşenler; CLI ile eklenir. 21st.dev ve Aceternity bileşenleri de shadcn CLI ile eklenir.",
+    "Altyapı": "React + Tailwind (Next.js, Vite, Remix, Astro, TanStack, Laravel)",
+    "Başka altyapıda": "Doğrudan kurulmaz; örnek alınıp çevrilir",
+    "Ücret": "Ücretsiz, MIT"
+   }
+  },
+  {
+   "ad": "Magic UI",
+   "url": "https://github.com/magicuidesign/magicui",
+   "tur": "Site",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Siteler ve kütüphaneler",
+   "alanlar": {
+    "Tür": "Animasyonlu bileşen",
+    "Ne işe yarar": "Landing page ve tanıtım sayfaları için animasyonlu, kopyala-yapıştır bileşenler; kurulumu shadcn/ui ile aynı.",
+    "Altyapı": "React + Tailwind + Motion",
+    "Başka altyapıda": "Doğrudan kurulmaz; örnek alınıp çevrilir",
+    "Ücret": "Ücretsiz, MIT"
+   }
+  },
+  {
+   "ad": "React Bits",
+   "url": "https://github.com/DavidHDev/react-bits",
+   "tur": "Site",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Siteler ve kütüphaneler",
+   "alanlar": {
+    "Tür": "Animasyonlu bileşen",
+    "Ne işe yarar": "Metin animasyonu, arka plan ve mikro etkileşim için 200'den fazla bileşen; her biri JS/TS ve düz CSS ya da Tailwind hâliyle gelir.",
+    "Altyapı": "React (CSS ya da Tailwind)",
+    "Başka altyapıda": "Vue ve Svelte için resmi portları ayrı sitelerde",
+    "Ücret": "Ücretsiz; MIT + Commons Clause: sitende ticari kullanım serbest, bileşenleri satmak ya da yeniden dağıtmak yasak"
+   }
+  },
+  {
+   "ad": "daisyUI",
+   "url": "https://github.com/saadeghi/daisyui",
+   "tur": "Site",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Siteler ve kütüphaneler",
+   "alanlar": {
+    "Tür": "Tailwind eklentisi",
+    "Ne işe yarar": "Tailwind'e eklenti olarak kurulur, btn, card gibi hazır CSS sınıflarıyla kullanılır.",
+    "Altyapı": "Tailwind çalışan her proje: React, Vue, Svelte, Angular, Laravel, Django, Rails",
+    "Başka altyapıda": "Tailwind yoksa kullanılamaz",
+    "Ücret": "Ücretsiz, MIT"
+   }
+  },
+  {
+   "ad": "Tremor",
+   "url": "https://github.com/tremorlabs/tremor",
+   "tur": "Site",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Siteler ve kütüphaneler",
+   "alanlar": {
+    "Tür": "Grafik ve dashboard",
+    "Ne işe yarar": "Grafik ve dashboard için 35'ten fazla kopyala-yapıştır bileşen; grafikleri Recharts ile çizer.",
+    "Altyapı": "React + Tailwind + Radix",
+    "Başka altyapıda": "Doğrudan kurulmaz; örnek alınır",
+    "Ücret": "Ücretsiz, Apache-2.0; Tremor Vercel'e katıldı, kodu Nisan 2025'ten beri güncellenmiyor"
+   }
+  },
+  {
+   "ad": "Motion",
+   "url": "https://github.com/motiondivision/motion",
+   "tur": "Site",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Siteler ve kütüphaneler",
+   "alanlar": {
+    "Tür": "Animasyon",
+    "Ne işe yarar": "Framer Motion'ın yeni adı: yaylı animasyonlar, sayfa düzeni geçişleri, kaydırmaya bağlı efektler, sürükleme. Aceternity ve Magic UI bileşenleri bunu kullanır.",
+    "Altyapı": "React, düz JavaScript, Vue",
+    "Başka altyapıda": "Web dışında kullanılmaz",
+    "Ücret": "Çekirdek ücretsiz, MIT; Motion+ ücretli"
+   }
+  },
+  {
+   "ad": "GSAP",
+   "url": "https://github.com/greensock/GSAP",
+   "tur": "Site",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Siteler ve kütüphaneler",
+   "alanlar": {
+    "Tür": "Animasyon",
+    "Ne işe yarar": "Bağımlılıksız animasyon kütüphanesi; ScrollTrigger, SplitText, MorphSVG gibi eklentiler dahil, React için useGSAP.",
+    "Altyapı": "Her web projesi: düz JS, React, Vue, SVG, canvas",
+    "Başka altyapıda": "Web dışında kullanılmaz",
+    "Ücret": "Tüm eklentiler dahil ücretsiz, ticari kullanım serbest; açık kaynak değil (GreenSock lisansı)"
+   }
+  },
+  {
+   "ad": "Lottie Web",
+   "url": "https://github.com/airbnb/lottie-web",
+   "tur": "Site",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Siteler ve kütüphaneler",
+   "alanlar": {
+    "Tür": "Animasyon oynatıcı",
+    "Ne işe yarar": "After Effects'te yapılıp JSON'a aktarılan animasyonları web'de oynatır.",
+    "Altyapı": "Her web projesi (düz JS, npm ya da CDN)",
+    "Başka altyapıda": "Mobil için Lottie'nin iOS ve Android kütüphaneleri ayrı",
+    "Ücret": "Ücretsiz, MIT; animasyonu üretmek için After Effects gerekir, bir yıldan uzun süredir güncellenmiyor"
+   }
+  },
+  {
+   "ad": "Recharts",
+   "url": "https://github.com/recharts/recharts",
+   "tur": "Site",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Siteler ve kütüphaneler",
+   "alanlar": {
+    "Tür": "Grafik",
+    "Ne işe yarar": "Bileşen tabanlı grafik kütüphanesi; eksen, tooltip, çizgi gibi parçalar ayrı bileşen olarak birleştirilir, SVG ile çizer.",
+    "Altyapı": "React",
+    "Başka altyapıda": "Doğrudan kurulmaz; örnek alınır",
+    "Ücret": "Ücretsiz, MIT"
+   }
+  },
+  {
+   "ad": "mapcn",
+   "url": "https://github.com/AnmolSaini16/mapcn",
+   "tur": "Site",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Siteler ve kütüphaneler",
+   "alanlar": {
+    "Tür": "Harita",
+    "Ne işe yarar": "Hazır harita bileşenleri: işaretçi, popup, rota, zoom ve pusula; shadcn/ui ile aynı yapıda.",
+    "Altyapı": "React + Tailwind, MapLibre GL",
+    "Başka altyapıda": "Doğrudan kurulmaz; örnek alınır",
+    "Ücret": "Ücretsiz, MIT; varsayılan CARTO haritalarının ticari kullanımı lisans ister, OpenStreetMap gibi başka sağlayıcıya geçilebilir"
+   }
+  },
+  {
+   "ad": "Basılı tutarak onayla",
+   "url": null,
+   "tur": "Kalıp",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Tehlikeli işlemler",
+   "alanlar": {
+    "Ne yapmalı": "\"Emin misin?\" penceresi yerine düğmeyi kısa bir süre basılı tutturup halka dolunca sil; erken bırakılırsa hiçbir şey olmaz.",
+    "Neden": "Onay pencereleri alışkanlıkla okunmadan geçilir."
+   }
+  },
+  {
+   "ad": "İşi adıyla yaz",
+   "url": null,
+   "tur": "Kalıp",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Tehlikeli işlemler",
+   "alanlar": {
+    "Ne yapmalı": "Düğmelerde \"Evet\" ve \"Hayır\" yerine \"Projeyi sil\" ve \"Projeyi tut\" yaz.",
+    "Neden": "Fiil, uyarının kendisidir."
+   }
+  },
+  {
+   "ad": "Ana yoldan uzak tut",
+   "url": null,
+   "tur": "Kalıp",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Tehlikeli işlemler",
+   "alanlar": {
+    "Ne yapmalı": "Sil düğmesini ana düğmenin yerine koyma; kaydet ya da iptal ana yerde kalsın, sil ayrı ve uzakta dursun.",
+    "Neden": "Kas hafızası okumadan tıklar."
+   }
+  },
+  {
+   "ad": "Kırmızıyı idareli kullan",
+   "url": null,
+   "tur": "Kalıp",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Tehlikeli işlemler",
+   "alanlar": {
+    "Ne yapmalı": "Kırmızıyı sadece yıkıcı işlemlere ayır; uyarı, bildirim ve açık-kapalı düğmelerinde kullanma.",
+    "Neden": "Her yer kırmızıysa gerçek tehlike fark edilmez."
+   }
+  },
+  {
+   "ad": "Tehlikeli bölge",
+   "url": null,
+   "tur": "Kalıp",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Tehlikeli işlemler",
+   "alanlar": {
+    "Ne yapmalı": "Hesap ya da proje silme, sahipliği devretme gibi işlemleri ayarlar sayfasının en altında, çerçeveli ve başlıklı bir \"Tehlikeli bölge\"de topla.",
+    "Neden": "Konum sürtünme yaratır; oraya yanlışlıkla gidilmez."
+   }
+  },
+  {
+   "ad": "Vazgeçme süresi",
+   "url": null,
+   "tur": "Kalıp",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Tehlikeli işlemler",
+   "alanlar": {
+    "Ne yapmalı": "Hesap silmeyi hemen yapma; örneğin 14 gün sonra kalıcı sil, bu sürede tek tıkla iptal ettir.",
+    "Neden": "Son savunma hattı; süre dolunca veri yine gerçekten silinmeli (yayın öncesi {{no:yo-hesap-silme}}. madde)."
+   }
+  },
+  {
+   "ad": "Signal Blue + Porcelain",
+   "url": null,
+   "tur": "Renk çifti",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Renk çiftleri",
+   "alanlar": {
+    "Renkler": "Yazı #0057FF, zemin #F8F7F4",
+    "Kontrast": "5,1:1 (AA)"
+   }
+  },
+  {
+   "ad": "Butter Yellow + Royal Iris",
+   "url": null,
+   "tur": "Renk çifti",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Renk çiftleri",
+   "alanlar": {
+    "Renkler": "Yazı #3A0CA3, zemin #FFF275",
+    "Kontrast": "10,3:1 (AAA)"
+   }
+  },
+  {
+   "ad": "Lime Spark + Graphite",
+   "url": null,
+   "tur": "Renk çifti",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Renk çiftleri",
+   "alanlar": {
+    "Renkler": "Yazı #B6FF2E, zemin #23262F",
+    "Kontrast": "12,5:1 (AAA)"
+   }
+  },
+  {
+   "ad": "Dragonfruit + Night Violet",
+   "url": null,
+   "tur": "Renk çifti",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Renk çiftleri",
+   "alanlar": {
+    "Renkler": "Yazı #FF4696, zemin #1E1033",
+    "Kontrast": "5,6:1 (AA)"
+   }
+  },
+  {
+   "ad": "Emerald Ink + Champagne",
+   "url": null,
+   "tur": "Renk çifti",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Renk çiftleri",
+   "alanlar": {
+    "Renkler": "Yazı #064E3B, zemin #F8E7C9",
+    "Kontrast": "8,0:1 (AAA)"
+   }
+  },
+  {
+   "ad": "Ultra Violet + Soft Apricot",
+   "url": null,
+   "tur": "Renk çifti",
+   "belge": "/rehberler/ui-ux-tasarim-stilleri/",
+   "bolum": "Renk çiftleri",
+   "alanlar": {
+    "Renkler": "Yazı #6A00F4, zemin #FFD6A5",
+    "Kontrast": "5,3:1 (AA)"
+   }
+  },
+  {
+   "ad": "RevenueCat",
+   "url": "https://www.revenuecat.com",
+   "tur": "Araç",
+   "belge": "/rehberler/gelir-analitik/",
+   "bolum": "Araçlar",
+   "alanlar": {
+    "Tür": "Abonelik altyapısı",
+    "Ne işe yarar": "App Store ve Google Play satın almalarını tek yerde toplar: makbuzu doğrular, kullanıcının hangi özelliklere erişimi olduğunu tutar, aylık gelir ve abonelik iptali panelleri ve webhook'lar sunar. Satın alma ekranı, A/B testi ve web'den satış özellikleri de var.",
+    "Ücret": "Aylık 2.500 $ gelire kadar ücretsiz, sonrası gelirin %1'i"
+   }
+  },
+  {
+   "ad": "Superwall",
+   "url": "https://superwall.com",
+   "tur": "Araç",
+   "belge": "/rehberler/gelir-analitik/",
+   "bolum": "Araçlar",
+   "alanlar": {
+    "Tür": "Satın alma ekranı ve A/B testi",
+    "Ne işe yarar": "Kodsuz editörle tasarlanan, uygulamayı güncellemeden değiştirilebilen satın alma ekranları (paywall). Hangi tasarımın, fiyatın ve ekranın gösterildiği yerin daha çok sattığını A/B testiyle ölçer. Kendi abonelik altyapısı da var. iOS, Android, React Native, Flutter, Expo, Unity ve web.",
+    "Ücret": "Altyapısı her ölçekte ücretsiz; paywall, paywall'dan gelen aylık 10.000 $ gelire kadar ücretsiz, sonrası sadece o gelirin %1'i"
+   }
+  },
+  {
+   "ad": "Mixpanel",
+   "url": "https://mixpanel.com",
+   "tur": "Araç",
+   "belge": "/rehberler/gelir-analitik/",
+   "bolum": "Araçlar",
+   "alanlar": {
+    "Tür": "Ürün analitiği",
+    "Ne işe yarar": "Kullanıcının uygulamada yaptığı her işlemi kaydeder: kayıt ya da satın alma adımlarında kaç kişinin düştüğü, kullanıcıların geri gelip gelmediği, davranışa göre kullanıcı grupları. Oturum kaydı, A/B testi ve özellik açma-kapama da var. Google Analytics'ten farkı, sayfa ziyaretinden çok ürün içindeki davranışa odaklanması.",
+    "Ücret": "Ayda 1 milyon işleme kadar ücretsiz; veri ABD ya da AB'de tutulabiliyor"
+   }
+  },
+  {
+   "ad": "Umami",
+   "url": "https://github.com/umami-software/umami",
+   "tur": "Araç",
+   "belge": "/rehberler/gelir-analitik/",
+   "bolum": "Araçlar",
+   "alanlar": {
+    "Tür": "Web analitiği",
+    "Ne işe yarar": "Çerez kullanmayan, gizlilik odaklı web analitiği: trafik, kampanya, dönüşüm ve gelir tek panelde. Google Analytics'e kendi sunucunda çalışan alternatif; veri yurt dışına gitmez.",
+    "Ücret": "Kendi sunucunda ücretsiz (MIT, PostgreSQL ister); bulut sürümü de var"
+   }
+  },
+  {
+   "ad": "OpenReplay",
+   "url": "https://github.com/openreplay/openreplay",
+   "tur": "Araç",
+   "belge": "/rehberler/gelir-analitik/",
+   "bolum": "Araçlar",
+   "alanlar": {
+    "Tür": "Oturum kaydı",
+    "Ne işe yarar": "Kullanıcının oturumunu konsol ve ağ kayıtlarıyla birlikte izletir; \"bende çalışmıyor\" diyen kullanıcının gördüğünü görürsün. Ürün analitiği ve canlı ortak tarama da var; kendi sunucunda çalışır, veri üçüncü tarafa gitmez.",
+    "Ücret": "Kendi sunucunda ücretsiz (AGPL; sitene eklenen izleme kodu MIT); en az 2 vCPU ve 8 GB RAM ister"
+   }
+  },
+  {
+   "ad": "Coolify",
+   "url": "https://coolify.io",
+   "tur": "Servis",
+   "belge": "/rehberler/yayina-alma-barindirma/",
+   "bolum": "Servisler",
+   "alanlar": {
+    "Tür": "Kendi sunucunda PaaS",
+    "Ne işe yarar": "Vercel, Heroku, Netlify ve Railway'e açık kaynak alternatif; kendi sunucuna (VPS, Raspberry Pi, bulut) kurulur. Git'e push edince uygulamayı yayına alır, 300'den fazla hazır servisi (veritabanları dahil) tek tıkla kurar, Let's Encrypt SSL sertifikasını otomatik alır, veritabanı yedeklerini S3 uyumlu depoya gönderir.",
+    "Ne zaman": "Backend, veritabanı ya da Docker gerektiren projeler",
+    "Ücret": "Kendi sunucunda ücretsiz ve açık kaynak; yönetilen Coolify Cloud ücretli"
+   }
+  },
+  {
+   "ad": "Dokploy",
+   "url": "https://github.com/Dokploy/dokploy",
+   "tur": "Servis",
+   "belge": "/rehberler/yayina-alma-barindirma/",
+   "bolum": "Servisler",
+   "alanlar": {
+    "Tür": "Kendi sunucunda PaaS",
+    "Ne işe yarar": "Coolify'a benzer açık kaynak alternatif: uygulama ve veritabanı yayına alma, Docker Compose, otomatik yedek, Traefik ile yönlendirme ve kaynak izleme; tek komutla kurulur.",
+    "Ne zaman": "Coolify yerine; ikisinden birini seç",
+    "Ücret": "Kendi sunucunda ücretsiz (çekirdek Apache-2.0; SSO ve roller gibi kurumsal özellikler ticari lisans ister); Dokploy Cloud ücretli"
+   }
+  },
+  {
+   "ad": "fastlane",
+   "url": "https://github.com/fastlane/fastlane",
+   "tur": "Servis",
+   "belge": "/rehberler/yayina-alma-barindirma/",
+   "bolum": "Servisler",
+   "alanlar": {
+    "Tür": "Mobil yayın otomasyonu",
+    "Ne işe yarar": "iOS ve Android'de ekran görüntüsü üretme, imzalama (provisioning profile) ve App Store ya da Google Play'e yükleme işlerini tek komuta bağlar; proje içindeki Fastfile ile tanımlanır.",
+    "Ne zaman": "Mobil uygulamayı sık yayınlıyorsan",
+    "Ücret": "Ücretsiz, MIT; anonim kullanım verisi gönderir, opt_out_usage ile kapatılır"
+   }
+  },
+  {
+   "ad": "Prometheus ve Grafana",
+   "url": "https://github.com/prometheus/prometheus",
+   "tur": "Servis",
+   "belge": "/rehberler/yayina-alma-barindirma/",
+   "bolum": "Servisler",
+   "alanlar": {
+    "Tür": "İzleme ve alarm",
+    "Ne işe yarar": "Prometheus sunucudan ve uygulamadan metrik toplar, Grafana bunları panolarda gösterir ve eşik aşılınca Slack gibi kanallara alarm gönderir.",
+    "Ne zaman": "Kendi sunucunda çalışan uygulamalar",
+    "Ücret": "Kendi sunucunda ücretsiz; Prometheus Apache-2.0, Grafana AGPL-3.0"
+   }
+  },
+  {
+   "ad": "Cloudflare",
+   "url": "https://www.cloudflare.com",
+   "tur": "Servis",
+   "belge": "/rehberler/yayina-alma-barindirma/",
+   "bolum": "Servisler",
+   "alanlar": {
+    "Tür": "DNS, CDN ve güvenlik",
+    "Ne işe yarar": "Alan adının DNS'i; trafiği önbelleğe alan ve saldırılara karşı koruyan proxy, ücretsiz SSL, DDoS koruması, güvenlik ve rate limiting kuralları.",
+    "Ne zaman": "Her projenin önünde",
+    "Ücret": "Ücretsiz planda SSL, CDN ve DDoS koruması var"
+   }
+  },
+  {
+   "ad": "Cloudflare Workers ve Pages",
+   "url": "https://workers.cloudflare.com",
+   "tur": "Servis",
+   "belge": "/rehberler/yayina-alma-barindirma/",
+   "bolum": "Servisler",
+   "alanlar": {
+    "Tür": "Site ve sunucusuz barındırma",
+    "Ne işe yarar": "Statik siteleri ve küçük API'leri barındırır; Git'e push edince yayına alır. Webhook alıcıları ve yönlendirmeler için de uygun.",
+    "Ne zaman": "Tanıtım siteleri, hafif backend işleri",
+    "Ücret": "Ücretsiz planda günde 100.000 istek; statik dosya istekleri ücretsiz ve sınırsız"
+   }
+  },
+  {
+   "ad": "Cloudflare R2",
+   "url": "https://www.cloudflare.com/developer-platform/products/r2/",
+   "tur": "Servis",
+   "belge": "/rehberler/yayina-alma-barindirma/",
+   "bolum": "Servisler",
+   "alanlar": {
+    "Tür": "Dosya depolama",
+    "Ne işe yarar": "S3 uyumlu depolama; dışarı veri çıkışı (egress) ücretsiz.",
+    "Ne zaman": "Kullanıcı dosyaları, görseller, yedekler",
+    "Ücret": "Ayda 10 GB, 1 milyon yazma ve 10 milyon okuma işlemine kadar ücretsiz"
+   }
+  },
+  {
+   "ad": "Cloudflare Tunnel",
+   "url": "https://www.cloudflare.com/products/tunnel/",
+   "tur": "Servis",
+   "belge": "/rehberler/yayina-alma-barindirma/",
+   "bolum": "Servisler",
+   "alanlar": {
+    "Tür": "Güvenli erişim",
+    "Ne işe yarar": "Sunucuda port açmadan uygulamayı internete ya da sadece ekibe açar.",
+    "Ne zaman": "Ev ya da ofis sunucusu, iç araçlar, staging",
+    "Ücret": "Ücretsiz"
+   }
+  },
+  {
+   "ad": "Cloudflare Turnstile",
+   "url": "https://www.cloudflare.com/products/turnstile/",
+   "tur": "Servis",
+   "belge": "/rehberler/yayina-alma-barindirma/",
+   "bolum": "Servisler",
+   "alanlar": {
+    "Tür": "Bot koruması",
+    "Ne işe yarar": "CAPTCHA yerine görünmez doğrulama; giriş, kayıt ve iletişim formlarını botlardan korur.",
+    "Ne zaman": "Herkese açık formlar",
+    "Ücret": "Ücretsiz"
+   }
+  },
+  {
+   "ad": "/init",
+   "url": null,
+   "tur": "Komut",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "Claude Code komutları",
+   "alanlar": {
+    "Ne yapar": "Projeyi inceleyip CLAUDE.md oluşturur; Claude sonraki oturumlarda projeyi buradan tanır."
+   }
+  },
+  {
+   "ad": "/code-review",
+   "url": null,
+   "tur": "Komut",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "Claude Code komutları",
+   "alanlar": {
+    "Ne yapar": "Değişiklikleri hata açısından inceler. --fix bulguları düzeltir, ultra bulutta çok ajanlı derin inceleme yapar."
+   }
+  },
+  {
+   "ad": "/security-review",
+   "url": null,
+   "tur": "Komut",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "Claude Code komutları",
+   "alanlar": {
+    "Ne yapar": "Daldaki değişiklikleri güvenlik açısından inceler."
+   }
+  },
+  {
+   "ad": "/simplify",
+   "url": null,
+   "tur": "Komut",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "Claude Code komutları",
+   "alanlar": {
+    "Ne yapar": "Değişen kodu tekrar, sadelik ve verimlilik açısından gözden geçirip düzeltir."
+   }
+  },
+  {
+   "ad": "/run",
+   "url": null,
+   "tur": "Komut",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "Claude Code komutları",
+   "alanlar": {
+    "Ne yapar": "Uygulamayı başlatıp değişikliğin gerçekten çalıştığını görür."
+   }
+  },
+  {
+   "ad": "/loop",
+   "url": null,
+   "tur": "Komut",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "Claude Code komutları",
+   "alanlar": {
+    "Ne yapar": "Bir komutu belli aralıklarla tekrar çalıştırır; örneğin yayına almanın durumunu 5 dakikada bir kontrol etmek."
+   }
+  },
+  {
+   "ad": "/schedule",
+   "url": null,
+   "tur": "Komut",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "Claude Code komutları",
+   "alanlar": {
+    "Ne yapar": "Bulutta zamanlanmış ajan (routine) kurar."
+   }
+  },
+  {
+   "ad": "/remote-control",
+   "url": null,
+   "tur": "Komut",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "Claude Code komutları",
+   "alanlar": {
+    "Ne yapar": "Bu bilgisayardaki oturumu telefondaki Claude uygulamasından ya da claude.ai/code'dan sürdürür. Team ve Enterprise planında yöneticinin açması gerekir."
+   }
+  },
+  {
+   "ad": "/voice",
+   "url": null,
+   "tur": "Komut",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "Claude Code komutları",
+   "alanlar": {
+    "Ne yapar": "Yazmak yerine konuşarak prompt verirsin: Space'i basılı tutup konuş ya da /voice tap ile dokunarak başlat. Türkçe için /config'te dili tr yap. claude.ai hesabıyla giriş ister; ses Anthropic'in sunucusunda yazıya dökülür, mesaj hakkından düşmez."
+   }
+  },
+  {
+   "ad": "/chrome",
+   "url": null,
+   "tur": "Komut",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "Claude Code komutları",
+   "alanlar": {
+    "Ne yapar": "Claude Code'u Chrome'daki \"Claude in Chrome\" eklentisine bağlar (claude --chrome ile de açılır): senin oturumunla sayfaları açar, form doldurur, konsolu okur, GIF kaydeder. Pro, Max, Team ya da Enterprise planı ve /login ile giriş ister."
+   }
+  },
+  {
+   "ad": "/agents",
+   "url": null,
+   "tur": "Komut",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "Claude Code komutları",
+   "alanlar": {
+    "Ne yapar": "Alt ajanlar (subagent) .claude/agents/ (proje) ya da ~/.claude/agents/ (tüm projeler) altında Markdown dosyasıdır; Claude'a \"şu işi yapan bir alt ajan oluştur\" demen yeter, ana ajan işi uygun alt ajana devreder."
+   }
+  },
+  {
+   "ad": "/fewer-permission-prompts",
+   "url": null,
+   "tur": "Komut",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "Claude Code komutları",
+   "alanlar": {
+    "Ne yapar": "Sık kullanılan salt okunur komutlar için izin listesi ekleyip onay sorularını azaltır."
+   }
+  },
+  {
+   "ad": "Playwright MCP",
+   "url": "https://github.com/microsoft/playwright-mcp",
+   "tur": "Sunucu",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "MCP sunucuları",
+   "alanlar": {
+    "Ne işe yarar": "Claude'a tarayıcı verir: sayfayı açar, tıklar, form doldurur, ekran görüntüsü alır; yaptığı işi kendisi test eder."
+   }
+  },
+  {
+   "ad": "Chrome DevTools MCP",
+   "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+   "tur": "Sunucu",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "MCP sunucuları",
+   "alanlar": {
+    "Ne işe yarar": "Chrome'u geliştirici araçlarıyla kontrol eder: konsol, ağ istekleri, performans kaydı, Lighthouse denetimi, farklı cihaz ve ağ hızı taklidi."
+   }
+  },
+  {
+   "ad": "Figma MCP",
+   "url": "https://developers.figma.com/docs/figma-mcp-server/",
+   "tur": "Sunucu",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "MCP sunucuları",
+   "alanlar": {
+    "Ne işe yarar": "Figma tasarımını okuyup frame'i koda çevirir."
+   }
+  },
+  {
+   "ad": "Context7",
+   "url": "https://github.com/upstash/context7",
+   "tur": "Sunucu",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "MCP sunucuları",
+   "alanlar": {
+    "Ne işe yarar": "Kütüphanelerin güncel, sürüme özel dokümanını ve kod örneklerini ajana verir; eski ya da uydurma API önerilerini azaltır. Sorgular context7.com'a gider."
+   }
+  },
+  {
+   "ad": "RevenueCat MCP",
+   "url": "https://www.revenuecat.com/docs/tools/mcp",
+   "tur": "Sunucu",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "MCP sunucuları",
+   "alanlar": {
+    "Ne işe yarar": "Abonelik uygulamanın ürün, teklif, yetki (entitlement) ve gelir verisini Claude'a sordurur ve düzenletir; OAuth ile bağlanır."
+   }
+  },
+  {
+   "ad": "Buffer MCP",
+   "url": "https://buffer.com/mcp",
+   "tur": "Sunucu",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "MCP sunucuları",
+   "alanlar": {
+    "Ne işe yarar": "Instagram, LinkedIn, X, TikTok gibi 9 platforma gönderi taslağı hazırlatır, zamanlar ve paylaşır, istatistikleri getirir; ücretsiz planda da açık."
+   }
+  },
+  {
+   "ad": "Meta Ads MCP",
+   "url": null,
+   "tur": "Sunucu",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "MCP sunucuları",
+   "alanlar": {
+    "Ne işe yarar": "Meta'nın resmi reklam bağlayıcısı (mcp.facebook.com/ads, Nisan 2026): kampanya performansını raporlar, kampanya ve reklam oluşturur; yeni kampanyalar varsayılan olarak duraklatılmış başlar."
+   }
+  },
+  {
+   "ad": "ElevenLabs MCP",
+   "url": "https://github.com/elevenlabs/elevenlabs-mcp",
+   "tur": "Sunucu",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "MCP sunucuları",
+   "alanlar": {
+    "Ne işe yarar": "Metni sese çevirir, ses klonlar, konuşmayı yazıya döker; Claude'un cevabını seslendirmek için. Yerel sunucu artık bakımda değil, barındırılan sürüm (api.elevenlabs.io/v1/mcp) öneriliyor; ElevenLabs hesabı ister."
+   }
+  },
+  {
+   "ad": "Gmail ve Google Takvim",
+   "url": null,
+   "tur": "Sunucu",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "MCP sunucuları",
+   "alanlar": {
+    "Ne işe yarar": "claude.ai'deki Bağlayıcılar sayfasından (claude.ai/customize/connectors) eklenir; claude.ai hesabıyla girişte Claude Code'da kendiliğinden görünür, /mcp ile yönetilir. claude mcp add ile yerelde kurulamaz."
+   }
+  },
+  {
+   "ad": "Artemis",
+   "url": "https://github.com/google/artemis",
+   "tur": "Sunucu",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "MCP sunucuları",
+   "alanlar": {
+    "Ne işe yarar": "Android uygulamanı doğal dille verilen talimatlarla gerçek cihazda ya da emülatörde test ettirir; logcat ve ekran görüntüsü toplar. Bir LLM API anahtarı ister."
+   }
+  },
+  {
+   "ad": "Stitch",
+   "url": "https://stitch.withgoogle.com",
+   "tur": "Araç",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "Google'ın AI araçları",
+   "alanlar": {
+    "Ne işe yarar": "Metinden, eskizden ya da ekran görüntüsünden web ve mobil arayüz tasarlar, HTML/CSS koduna çevirir; Figma, AI Studio ya da Antigravity'ye aktarır. Google Labs deneyi, 18+.",
+    "Ücret": "Fiyat belirtilmemiş, kotalı"
+   }
+  },
+  {
+   "ad": "AI Studio",
+   "url": "https://aistudio.google.com",
+   "tur": "Araç",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "Google'ın AI araçları",
+   "alanlar": {
+    "Ne işe yarar": "Gemini modellerini dener, prompt'tan tam yığın web ya da Android uygulaması üretir, Gemini API anahtarı verir. Ücretsiz kullanımda girdiğin içerik ürün geliştirmede kullanılabilir; gizli veri ya da anahtar yapıştırma.",
+    "Ücret": "Ücretsiz; Gemini API'de sınırlı ücretsiz katman"
+   }
+  },
+  {
+   "ad": "Antigravity",
+   "url": "https://antigravity.google",
+   "tur": "Araç",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "Google'ın AI araçları",
+   "alanlar": {
+    "Ne işe yarar": "Google'ın ajan öncelikli geliştirme platformu: IDE, birden çok ajanı yöneten masaüstü uygulaması, CLI ve SDK. Bireysel kullanıcılar için Gemini CLI'ın yerini aldı; içinde Claude modelleri de seçilebiliyor. Kişisel Google hesabı ister.",
+    "Ücret": "Haftalık limitli ücretsiz plan; yüksek limit Google AI Pro ya da Ultra ile"
+   }
+  },
+  {
+   "ad": "Gemini Notebook",
+   "url": "https://notebooklm.google",
+   "tur": "Araç",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "Google'ın AI araçları",
+   "alanlar": {
+    "Ne işe yarar": "NotebookLM'in yeni adı: yüklediğin PDF, site, video ve dokümanlara dayanarak kaynak göstererek cevap verir; sesli ve videolu özet, bilgi kartı üretir. Bir kütüphanenin dokümanını yükleyip ona soru sormak için.",
+    "Ücret": "Ücretsiz, limitli"
+   }
+  },
+  {
+   "ad": "Pomelli",
+   "url": "https://labs.google.com/pomelli/about",
+   "tur": "Araç",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "Google'ın AI araçları",
+   "alanlar": {
+    "Ne işe yarar": "Siteni tarayıp markanın tarzını çıkarır, buna uygun sosyal medya kampanyası ve ürün görselleri üretir; yayından sonra tanıtım için. Sadece İngilizce, 18+.",
+    "Ücret": "Şimdilik ücretsiz, birkaç yüz üretimle sınırlı"
+   }
+  },
+  {
+   "ad": "Flow",
+   "url": "https://flow.google.com",
+   "tur": "Araç",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "Google'ın AI araçları",
+   "alanlar": {
+    "Ne işe yarar": "Veo ve Nano Banana modelleriyle video ve görsel üretir; tanıtım videosu ve mağaza görselleri için. Abone olmayanlar akşam yoğun saatlerde video üretemeyebilir.",
+    "Ücret": "Günde 50 ücretsiz kredi, görsel üretimi ücretsiz; aboneler daha fazla"
+   }
+  },
+  {
+   "ad": "Flow Music",
+   "url": "https://www.flowmusic.app",
+   "tur": "Araç",
+   "belge": "/rehberler/ai-gelistirme-akisi/",
+   "bolum": "Google'ın AI araçları",
+   "alanlar": {
+    "Ne işe yarar": "Şarkı ve arka plan müziği üretir (eski adı ProducerAI); tanıtım videosu için. Türkiye'de açık olup olmadığı resmi sayfalardan doğrulanamadı, ticari kullanım şartları belirtilmemiş.",
+    "Ücret": "Ücretsiz plan var; ücretli planlar ayda 6–48 $"
+   }
+  }
+ ],
+ "klasorler": [
+  {
+   "id": "yayin",
+   "ad": "🚀 Yayın Öncesi"
+  },
+  {
+   "id": "altyapi",
+   "ad": "🏗️ Yayına alma & izleme"
+  },
+  {
+   "id": "tasarim",
+   "ad": "🎨 Tasarım & Arayüz"
+  },
+  {
+   "id": "skill",
+   "ad": "🧩 Skill & Prompt"
+  },
+  {
+   "id": "ajan",
+   "ad": "🤖 Ajan Araçları"
+  },
+  {
+   "id": "veri",
+   "ad": "📚 AI Veri & RAG"
+  },
+  {
+   "id": "medya",
+   "ad": "🎬 Medya Üretimi"
+  },
+  {
+   "id": "finans",
+   "ad": "💰 Finans"
+  },
+  {
+   "id": "arac",
+   "ad": "🛠️ Araçlar"
+  },
+  {
+   "id": "ogrenme",
+   "ad": "📖 Öğrenme"
+  }
+ ],
+ "repolar": [
+  {
+   "repo": "usestrix/strix",
+   "klasor": "yayin",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Uygulamanı saldırgan gibi deneyen AI pentest ajanları. Bulduğu açığı çalışan bir örnekle doğrular, düzeltme önerir, rapor çıkarır.",
+   "uyari": "Sadece test etme yetkin olan sistemlerde kullan. Docker ve LLM API anahtarı ister.",
+   "dil": "Python",
+   "yildiz": 64805,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "the_coding_wizard",
+    "url": "https://www.instagram.com/p/Dc-wvDXkaJU/"
+   }
+  },
+  {
+   "repo": "every-app/open-seo",
+   "klasor": "yayin",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Semrush/Ahrefs'e açık kaynak alternatif: anahtar kelime, sıralama takibi, rakip analizi, backlink, site denetimi. MCP sunucusu var.",
+   "uyari": "Her sorgu DataForSEO'ya ücretli.",
+   "dil": "TypeScript",
+   "yildiz": 21035,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-20",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "the_coding_wizard",
+    "url": "https://www.instagram.com/p/Dc-wvDXkaJU/"
+   }
+  },
+  {
+   "repo": "alibaba/open-code-review",
+   "klasor": "yayin",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Kural tabanlı kontrollerle bir LLM ajanını birleştiren kod inceleme aracı; satır satır yorum yazar.",
+   "uyari": "",
+   "dil": "Go",
+   "yildiz": 41245,
+   "eklenme": "2026-09-21",
+   "son_guncelleme": "2026-09-24",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "nextlevelbuilder/ui-ux-pro-max-skill",
+   "klasor": "tasarim",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Farklı platformlarda profesyonel arayüz tasarlamak için tasarım bilgisi veren AI skill'i.",
+   "uyari": "",
+   "dil": "Python",
+   "yildiz": 130612,
+   "eklenme": "2026-06-10",
+   "son_guncelleme": "2026-09-21",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "pbakaus/impeccable",
+   "klasor": "tasarim",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Ajanın tipik \"AI yapmış\" görünümünden çıkmasını sağlayan tasarım skill'i. audit, polish, typeset, layout gibi ~24 komut.",
+   "uyari": "",
+   "dil": "JavaScript",
+   "yildiz": 71086,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "Nate Herk",
+    "url": "https://www.instagram.com/reel/DbLuwUVlE9Z/"
+   }
+  },
+  {
+   "repo": "Leonxlnx/taste-skill",
+   "klasor": "tasarim",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Ajanı daha premium görünen arayüzlere yönlendiren SKILL.md dosyaları; çeşitlilik, animasyon ve yoğunluk için 1–10 ayarları.",
+   "uyari": "",
+   "dil": "JavaScript",
+   "yildiz": 90086,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-23",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "Nate Herk",
+    "url": "https://www.instagram.com/reel/DbLuwUVlE9Z/"
+   }
+  },
+  {
+   "repo": "emilkowalski/skills",
+   "klasor": "tasarim",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Emil Kowalski'nin (Linear) bakışıyla yazılmış skill'ler. Ağırlık animasyon ve easing; genel UI kuralları da var.",
+   "uyari": "",
+   "dil": "Markdown",
+   "yildiz": 41112,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-23",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "Nate Herk",
+    "url": "https://www.instagram.com/reel/DbLuwUVlE9Z/"
+   }
+  },
+  {
+   "repo": "figma/mcp-server-guide",
+   "klasor": "tasarim",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Figma'nın resmi MCP sunucusunun rehberi. Claude'a Figma tasarımını okutup koda çevirtir.",
+   "uyari": "",
+   "dil": "Python",
+   "yildiz": 2021,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "Nate Herk",
+    "url": "https://www.instagram.com/reel/DbLuwUVlE9Z/"
+   }
+  },
+  {
+   "repo": "anthropics/html-effectiveness",
+   "klasor": "tasarim",
+   "kurulum": [
+    "kaynak"
+   ],
+   "aciklama": "Anthropic'in etkili HTML çıktısı örnekleri.",
+   "uyari": "",
+   "dil": "HTML",
+   "yildiz": 660,
+   "eklenme": "2026-07-05",
+   "son_guncelleme": "2026-07-03",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "vercel-labs/skills",
+   "klasor": "skill",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "\"npx skills add\" komutunun kendisi: GitHub'daki skill'leri Claude Code, Cursor, Codex'e kurar ve yönetir.",
+   "uyari": "",
+   "dil": "TypeScript",
+   "yildiz": 32472,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-18",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "Nate Herk",
+    "url": "https://www.instagram.com/reel/DbLuwUVlE9Z/"
+   }
+  },
+  {
+   "repo": "vercel-labs/agent-skills",
+   "klasor": "skill",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Vercel'in resmi ajan skill koleksiyonu.",
+   "uyari": "",
+   "dil": "JavaScript",
+   "yildiz": 31532,
+   "eklenme": "2026-01-14",
+   "son_guncelleme": "2026-08-28",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "vibeforge1111/vibeship-spawner-skills",
+   "klasor": "skill",
+   "kurulum": [
+    "claude"
+   ],
+   "aciklama": "Uzmanlaşmış ajanlar için skill dizini.",
+   "uyari": "",
+   "dil": "JavaScript",
+   "yildiz": 882,
+   "eklenme": "2026-01-09",
+   "son_guncelleme": "2026-01-02",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "petergyang/no-ai-slop",
+   "klasor": "skill",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Metindeki 20'den fazla tipik AI yazım kalıbını temizler, senin üslubunu korur.",
+   "uyari": "",
+   "dil": "Python",
+   "yildiz": 11267,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-02",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "the_coding_wizard",
+    "url": "https://www.instagram.com/p/Dc-wvDXkaJU/"
+   }
+  },
+  {
+   "repo": "ayghri/i-have-adhd",
+   "klasor": "skill",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Ajanın cevaplarını kısa ve net yapan 10 kural: önce yapılacak iş, numaralı adımlar, gereksiz giriş ve kapanış yok.",
+   "uyari": "",
+   "dil": "Python",
+   "yildiz": 51166,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-19",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "the_coding_wizard",
+    "url": "https://www.instagram.com/p/Dc-wvDXkaJU/"
+   }
+  },
+  {
+   "repo": "virgiliojr94/book-to-skill",
+   "klasor": "skill",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Kitap ya da doküman setini bölüm bölüm ajan skill'ine çevirir; ajan sadece ilgili bölümü yükler.",
+   "uyari": "Telifli kitaptan üretilen skill'i paylaşma.",
+   "dil": "Python",
+   "yildiz": 32399,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-22",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "the_coding_wizard",
+    "url": "https://www.instagram.com/p/Dc-wvDXkaJU/"
+   }
+  },
+  {
+   "repo": "x1xhlol/system-prompts-and-models-of-ai-tools",
+   "klasor": "skill",
+   "kurulum": [
+    "kaynak"
+   ],
+   "aciklama": "Cursor, Claude Code, Devin, Lovable gibi araçların sistem prompt'larının toplandığı arşiv.",
+   "uyari": "",
+   "dil": null,
+   "yildiz": 143864,
+   "eklenme": "2025-12-17",
+   "son_guncelleme": "2026-08-11",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "davila7/claude-code-templates",
+   "klasor": "ajan",
+   "kurulum": [
+    "claude"
+   ],
+   "aciklama": "Claude Code'u ayarlama ve izleme aracı; hazır ajan, komut ve ayar şablonları.",
+   "uyari": "",
+   "dil": "Python",
+   "yildiz": 31803,
+   "eklenme": "2026-06-10",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "ZeframLou/call-me",
+   "klasor": "ajan",
+   "kurulum": [
+    "claude"
+   ],
+   "aciklama": "Claude Code işini bitirince seni telefonla arayan eklenti.",
+   "uyari": "",
+   "dil": "TypeScript",
+   "yildiz": 2643,
+   "eklenme": "2026-01-11",
+   "son_guncelleme": "2026-04-07",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "pingdotgg/t3code",
+   "klasor": "ajan",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Kodlama ajanları için açık kaynak arayüz. Sunucuda çalışır, telefondan ya da tarayıcıdan bağlanırsın.",
+   "uyari": "Çok erken aşama, hata bekleniyor.",
+   "dil": "TypeScript",
+   "yildiz": 23554,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "Isaac Dyor",
+    "url": "https://www.instagram.com/reel/Ddsfjsqjgaz/"
+   }
+  },
+  {
+   "repo": "vercel-labs/agent-browser",
+   "klasor": "ajan",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "AI ajanları için hızlı tarayıcı otomasyonu. Uygulamayı test eder, PR'a eklemek için imleçli video kaydı alır.",
+   "uyari": "",
+   "dil": "Rust",
+   "yildiz": 43184,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-24",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "Isaac Dyor",
+    "url": "https://www.instagram.com/reel/Ddsfjsqjgaz/"
+   }
+  },
+  {
+   "repo": "microsoft/playwright-mcp",
+   "klasor": "ajan",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Claude'a gerçek bir tarayıcı verir: sayfayı açar, tıklar, ekran görüntüsü alır, konsolu okur. Bu bilgisayarda kurulu.",
+   "uyari": "",
+   "dil": "TypeScript",
+   "yildiz": 37565,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-18",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "Nate Herk",
+    "url": "https://www.instagram.com/reel/DbLuwUVlE9Z/"
+   }
+  },
+  {
+   "repo": "diegosouzapw/OmniRoute",
+   "klasor": "ajan",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Yerel, OpenAI uyumlu AI ağ geçidi. İstekleri 350'den fazla sağlayıcıya dağıtır, kota bitince başkasına geçer.",
+   "uyari": "Bazı sağlayıcıların kullanım şartlarına aykırı olabilir.",
+   "dil": "TypeScript",
+   "yildiz": 70142,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "the_coding_wizard",
+    "url": "https://www.instagram.com/p/Dc-wvDXkaJU/"
+   }
+  },
+  {
+   "repo": "EmpiricaAI/empirica",
+   "klasor": "ajan",
+   "kurulum": [
+    "claude"
+   ],
+   "aciklama": "AI ajanlarının ne kadar güvenilir çalıştığını ölçer; Claude Code ile kullanılabilir.",
+   "uyari": "",
+   "dil": "Python",
+   "yildiz": 249,
+   "eklenme": "2026-01-07",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "microsoft/autogen",
+   "klasor": "ajan",
+   "kurulum": [
+    "proje"
+   ],
+   "aciklama": "Microsoft'un yapay zekâ ajanı geliştirme framework'ü.",
+   "uyari": "",
+   "dil": "Python",
+   "yildiz": 61163,
+   "eklenme": "2025-12-24",
+   "son_guncelleme": "2026-04-15",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "MadsLorentzen/ai-job-search",
+   "klasor": "ajan",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "İş arama için Claude Code şablonu: ilan tarar, ilana özel CV ve ön yazı hazırlar, mülakata hazırlar.",
+   "uyari": "İlan tarayıcıları Danimarka sitelerine göre yazılmış. Fork her zaman herkese açık olur ve kurulum kişisel bilgilerini (maaş beklentisi dahil) dosyalara yazar; README'nin önerdiği gibi gizli bir repo kullan.",
+   "dil": "Python",
+   "yildiz": 43960,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-21",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "the_coding_wizard",
+    "url": "https://www.instagram.com/p/Dc-wvDXkaJU/"
+   }
+  },
+  {
+   "repo": "unclecode/crawl4ai",
+   "klasor": "veri",
+   "kurulum": [
+    "proje"
+   ],
+   "aciklama": "Web sitelerini tarayıp LLM'in okuyacağı temiz Markdown'a çevirir.",
+   "uyari": "",
+   "dil": "Python",
+   "yildiz": 84257,
+   "eklenme": "2026-09-14",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "NirDiamant/RAG_Techniques",
+   "klasor": "veri",
+   "kurulum": [
+    "kaynak"
+   ],
+   "aciklama": "İleri RAG tekniklerini notebook'larla anlatan eğitim reposu.",
+   "uyari": "",
+   "dil": "Jupyter Notebook",
+   "yildiz": 29600,
+   "eklenme": "2026-07-19",
+   "son_guncelleme": "2026-09-21",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "AlexsJones/llmfit",
+   "klasor": "veri",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Bilgisayarında hangi modelin çalışacağını tek komutla söyler.",
+   "uyari": "",
+   "dil": "Rust",
+   "yildiz": 37157,
+   "eklenme": "2026-07-22",
+   "son_guncelleme": "2026-09-24",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "dataease/SQLBot",
+   "klasor": "veri",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Doğal dille soru sor, SQL'i o yazsın; LLM ve RAG ile sohbetle veri analizi.",
+   "uyari": "Proje Çince.",
+   "dil": "JavaScript",
+   "yildiz": 6851,
+   "eklenme": "2025-10-01",
+   "son_guncelleme": "2026-09-24",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "lfnovo/open-notebook",
+   "klasor": "veri",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Kendi sunucunda çalışan NotebookLM alternatifi: PDF, video ve web sayfalarıyla sohbet, podcast üretimi.",
+   "uyari": "",
+   "dil": "TypeScript",
+   "yildiz": 39497,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-20",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "the_coding_wizard",
+    "url": "https://www.instagram.com/p/Dc-wvDXkaJU/"
+   }
+  },
+  {
+   "repo": "deepbeepmeep/Wan2GP",
+   "klasor": "medya",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Zayıf ekran kartında bile çalışan AI video üretici (Wan, LTX, Hunyuan, Flux).",
+   "uyari": "",
+   "dil": "Python",
+   "yildiz": 9612,
+   "eklenme": "2026-08-14",
+   "son_guncelleme": "2026-09-24",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "abus-aikorea/voice-pro",
+   "klasor": "medya",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Metni sese çevirme, ses klonlama ve Whisper ile konuşmayı yazıya dökme arayüzü.",
+   "uyari": "",
+   "dil": "Python",
+   "yildiz": 12931,
+   "eklenme": "2026-08-02",
+   "son_guncelleme": "2026-07-13",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "Anil-matcha/Open-Generative-AI",
+   "klasor": "medya",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Görsel, video ve dudak senkronu üretimi için tek arayüz; yüzlerce model.",
+   "uyari": "Bulut modelleri ücretli MuAPI servisi üzerinden çalışıyor.",
+   "dil": "JavaScript",
+   "yildiz": 29205,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "the_coding_wizard",
+    "url": "https://www.instagram.com/p/Dc-wvDXkaJU/"
+   }
+  },
+  {
+   "repo": "latent-spaces/brag",
+   "klasor": "medya",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Yaptığın projeden tek komutla kısa bir tanıtım videosu çıkarır.",
+   "uyari": "",
+   "dil": "Python",
+   "yildiz": 7842,
+   "eklenme": "2026-09-23",
+   "son_guncelleme": "2026-09-24",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "HKUDS/Vibe-Trading",
+   "klasor": "finans",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Kişisel alım-satım (trading) ajanı.",
+   "uyari": "",
+   "dil": "Python",
+   "yildiz": 34033,
+   "eklenme": "2026-08-10",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "Fincept-Corporation/FinceptTerminal",
+   "klasor": "finans",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Piyasa analizi, yatırım araştırması ve ekonomik veri terminali.",
+   "uyari": "",
+   "dil": "C++",
+   "yildiz": 31982,
+   "eklenme": "2026-08-10",
+   "son_guncelleme": "2026-09-19",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "we-promise/sure",
+   "klasor": "finans",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Kişisel bütçe ve finans uygulaması.",
+   "uyari": "",
+   "dil": "Ruby",
+   "yildiz": 10038,
+   "eklenme": "2025-12-21",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "jgm/pandoc",
+   "klasor": "arac",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Belge formatlarını birbirine çeviren evrensel dönüştürücü (Markdown, Word, PDF...).",
+   "uyari": "",
+   "dil": "Haskell",
+   "yildiz": 46407,
+   "eklenme": "2026-08-03",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "C4illin/ConvertX",
+   "klasor": "arac",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Kendi sunucunda çalışan dosya dönüştürücü; 1000'den fazla format.",
+   "uyari": "",
+   "dil": "TypeScript",
+   "yildiz": 19059,
+   "eklenme": "2025-12-17",
+   "son_guncelleme": "2026-09-23",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "usekaneo/kaneo",
+   "klasor": "arac",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Sade, açık kaynak proje yönetim aracı.",
+   "uyari": "",
+   "dil": "TypeScript",
+   "yildiz": 9200,
+   "eklenme": "2026-08-01",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "BraveOPotato/FckSignups",
+   "klasor": "arac",
+   "kurulum": [
+    "kaynak"
+   ],
+   "aciklama": "Tarayıcıda çalışan ve üyelik istemeyen açık kaynak araçların listesi.",
+   "uyari": "",
+   "dil": "TypeScript",
+   "yildiz": 4346,
+   "eklenme": "2026-09-04",
+   "son_guncelleme": "2026-09-23",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "Sonarr/Sonarr",
+   "klasor": "arac",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Dizi indirmeyi otomatikleştiren araç (Usenet ve torrent).",
+   "uyari": "",
+   "dil": "C#",
+   "yildiz": 16527,
+   "eklenme": "2026-09-10",
+   "son_guncelleme": "2026-09-24",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "antitree/nfc_canary",
+   "klasor": "arac",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Flipper Zero uygulaması: biri cebindeki kartı NFC ile okursa titreşimle uyarır.",
+   "uyari": "",
+   "dil": "C",
+   "yildiz": 119,
+   "eklenme": "2026-08-24",
+   "son_guncelleme": "2026-08-03",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "ByteByteGoHq/system-design-101",
+   "klasor": "ogrenme",
+   "kurulum": [
+    "kaynak"
+   ],
+   "aciklama": "Sistem tasarımını görsellerle ve sade dille anlatır.",
+   "uyari": "",
+   "dil": null,
+   "yildiz": 89946,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2025-04-04",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "CyC2018/CS-Notes",
+   "klasor": "ogrenme",
+   "kurulum": [
+    "kaynak"
+   ],
+   "aciklama": "Teknik mülakat notları: LeetCode, işletim sistemleri, ağlar.",
+   "uyari": "Proje Çince.",
+   "dil": null,
+   "yildiz": 186281,
+   "eklenme": "2026-01-02",
+   "son_guncelleme": "2024-08-21",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "selahattinunlu/harika-github-repolari",
+   "klasor": "ogrenme",
+   "kurulum": [
+    "kaynak"
+   ],
+   "aciklama": "Türkçe hazırlanmış faydalı GitHub repoları listesi.",
+   "uyari": "",
+   "dil": null,
+   "yildiz": 462,
+   "eklenme": "2026-05-20",
+   "son_guncelleme": "2026-08-20",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "hasaneyldrm/exercises-dataset",
+   "klasor": "ogrenme",
+   "kurulum": [
+    "proje"
+   ],
+   "aciklama": "1.324 egzersizlik fitness veri seti; animasyonlar ve 6 dilde açıklamalar.",
+   "uyari": "",
+   "dil": "HTML",
+   "yildiz": 22298,
+   "eklenme": "2026-06-30",
+   "son_guncelleme": "2026-07-16",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "blader/humanizer",
+   "klasor": "skill",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Metindeki AI yazısı izlerini bulup anlamı değiştirmeden insan yazmış gibi yeniden yazar; kendi yazından örnek verirsen üslubuna uyar. No AI Slop ile aynı işi görür.",
+   "uyari": "",
+   "dil": "Python",
+   "yildiz": 52000,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-06",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "JuliusBrussee/caveman",
+   "klasor": "skill",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Kodlama ajanını çok kısa cümlelerle konuşturarak token harcamasını azaltan skill ve ara katman (proxy); 30'dan fazla ajanla çalışıyor.",
+   "uyari": "Tasarruf oranı (%65) yazarın iddiası; lisans MIT ve BSL karışık.",
+   "dil": "Go",
+   "yildiz": 107837,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "google-labs-code/design.md",
+   "klasor": "tasarim",
+   "kurulum": [
+    "proje"
+   ],
+   "aciklama": "Google'ın DESIGN.md biçimi: renk, yazı tipi, köşe ve boşluk değerlerini (YAML) ve tasarımın gerekçesini tek dosyada tanımlar; kodlama ajanları arayüzü bu dosyaya göre üretir.",
+   "uyari": "",
+   "dil": "TypeScript",
+   "yildiz": 28108,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-14",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "divyannshisharma",
+    "url": "https://www.instagram.com/p/Dc3vmYCEvpu/"
+   }
+  },
+  {
+   "repo": "VoltAgent/awesome-design-md",
+   "klasor": "tasarim",
+   "kurulum": [
+    "proje"
+   ],
+   "aciklama": "Tanınmış markaların tasarım sistemlerinden çıkarılmış hazır DESIGN.md dosyaları. Birini projene koyup ajana \"buna benzeyen bir sayfa yap\" dersin, arayüz o tasarım diline tutarlı çıkar.",
+   "uyari": "",
+   "dil": null,
+   "yildiz": 117896,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-21",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "divyannshisharma",
+    "url": "https://www.instagram.com/p/Dc3vmYCEvpu/"
+   }
+  },
+  {
+   "repo": "hardikpandya/stop-slop",
+   "klasor": "skill",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Metindeki AI yazım kalıplarını (klişe girişler, gereksiz zarflar, \"X değil, Y\" karşıtlıkları) yakalayıp temizleyen skill. No AI Slop ve Humanizer ile aynı işi görür.",
+   "uyari": "",
+   "dil": null,
+   "yildiz": 17572,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-03-17",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "divyannshisharma",
+    "url": "https://www.instagram.com/p/Dc3vmYCEvpu/"
+   }
+  },
+  {
+   "repo": "cathrynlavery/diagram-design",
+   "klasor": "tasarim",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Dergi kalitesinde diyagram çizdiren skill: akış, sistem mimarisi, Sankey, balık kılçığı, veritabanı şeması gibi 20'den fazla tür. Tek dosyalık HTML + SVG üretir; Mermaid ve draw.io çizimlerini de yeniden çizer.",
+   "uyari": "",
+   "dil": "HTML",
+   "yildiz": 42396,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-19",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "divyannshisharma",
+    "url": "https://www.instagram.com/p/Dc3vmYCEvpu/"
+   }
+  },
+  {
+   "repo": "zarazhangrui/frontend-slides",
+   "klasor": "tasarim",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Kodlama ajanına HTML sunum hazırlatan skill; sıfırdan ya da PowerPoint'ten çevirerek. Stil önizlemeleri gösterip seçtirir, bağımlılığı olmayan tek bir HTML dosyası üretir.",
+   "uyari": "",
+   "dil": "JavaScript",
+   "yildiz": 29819,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-06-23",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "divyannshisharma",
+    "url": "https://www.instagram.com/p/Dc3vmYCEvpu/"
+   }
+  },
+  {
+   "repo": "Egonex-AI/Understand-Anything",
+   "klasor": "skill",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Kod tabanını analiz edip her dosya, fonksiyon ve bağımlılığın etkileşimli bilgi grafiğini çıkaran Claude Code eklentisi; grafikte gezinip soru sorarak büyük bir projeyi hızlı tanırsın.",
+   "uyari": "",
+   "dil": "TypeScript",
+   "yildiz": 84179,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-12",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "divyannshisharma",
+    "url": "https://www.instagram.com/p/Dc3vmYCEvpu/"
+   }
+  },
+  {
+   "repo": "ruvnet/ruflo",
+   "klasor": "ajan",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Claude Code ve Codex'in etrafına kurulan ajan altyapısı: 100'den fazla uzman ajanı ekip halinde çalıştırır, oturumlar arası öğrenen hafıza ve görevi uygun modele yönlendirme ekler. npx ruflo init ile kurulur.",
+   "uyari": "Videodaki %50 token tasarrufu ve Claude Code'u %250 daha uzun kullanma iddiaları doğrulanmadı; büyük ve karmaşık bir sistem. Tam kurulum (npx ruflo init) projeye .claude/, .claude-flow/, CLAUDE.md ve hook'lar yazar; eklenti olarak kurulursa projeye dosya yazmaz ama daha az özellik gelir.",
+   "dil": "TypeScript",
+   "yildiz": 73261,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-24",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "petergriffin.ai",
+    "url": "https://www.instagram.com/reel/Da5be6dJ6Fi/"
+   }
+  },
+  {
+   "repo": "NousResearch/hermes-agent",
+   "klasor": "ajan",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Nous Research'ün kendini geliştiren AI ajanı: deneyimden skill üretip kullandıkça iyileştirir, geçmiş konuşmalarını arayıp seni oturumlar arasında hatırlar. Ucuz bir VPS'te çalışır, Telegram gibi kanallardan konuşulur; OpenRouter, OpenAI gibi istediğin modelle çalışır.",
+   "uyari": "",
+   "dil": "Python",
+   "yildiz": 248932,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": null
+  },
+  {
+   "repo": "karpathy/llm-council",
+   "klasor": "ajan",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Soruyu OpenRouter üzerinden birden çok modele sorar, modellere birbirlerinin cevaplarını isimsiz olarak puanlatır ve bir başkan modele son cevabı yazdırır. Andrej Karpathy'nin yerel web uygulaması.",
+   "uyari": "Lisans dosyası yok ve yazar bakım yapmayacağını söylüyor; OpenRouter kredisi ister.",
+   "dil": "Python",
+   "yildiz": 24994,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2025-11-22",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "benburhankocabiyik",
+    "url": "https://www.instagram.com/reel/Dbpyz7FCLC3/"
+   }
+  },
+  {
+   "repo": "SessionLoops/PitchNet",
+   "klasor": "medya",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Vokal perdesini piyano rulosunda düzelten bağımsız uygulama ve ses eklentisi (VST3/AU, isteğe bağlı AAX, ARA desteği). Perdeyi FCPE/RMVPE sinir ağlarıyla bulur, düzenlemeyi nöral vocoder ile yeniden sentezleyip anında dinletir; WAV ve MIDI dışa aktarır.",
+   "uyari": "AGPL-3.0; HachiTune'dan türetilmiş, sürüm 0.6 ile erken aşamada. 'Ücretsiz Melodyne alternatifi' kalitesi yazarın iddiası (sitede Melodyne ile ses karşılaştırması var).",
+   "dil": "C++",
+   "yildiz": 96,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.instagram.com/reel/DdCOhLJAEAs/"
+   }
+  },
+  {
+   "repo": "gitroomhq/postiz-app",
+   "klasor": "arac",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Instagram, YouTube, LinkedIn, X, TikTok, Bluesky gibi platformlara gönderi zamanlayan, analiz ve ekip çalışması sunan sosyal medya yönetim aracı. Kendi sunucunda barındırılabilir; API, MCP ve CLI ile yapay zekâ ajanlarından kullanılabilir.",
+   "uyari": "AGPL-3.0. Kendi sunucunda her platform için kendi geliştirici uygulamanı açıp onay alman gerekir (Meta, YouTube, TikTok haftalar sürebilir); AI özellikleri kendi API anahtarını ister, bulut sürümü ücretli abonelik.",
+   "dil": "TypeScript",
+   "yildiz": 36318,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/b66fksMVR-E"
+   }
+  },
+  {
+   "repo": "getopenscreen/openscreen",
+   "klasor": "medya",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Screen Studio'ya ücretsiz, açık kaynak alternatif masaüstü uygulaması: ekran ve ses kaydı, otomatik zoom, webcam, cihaz üstünde altyazı, MP4/GIF dışa aktarım. Windows, macOS ve Linux.",
+   "uyari": "Asıl yazarın reposu (siddharthvaddem/openscreen) arşivlendi; geliştirme onun onayıyla aynı ad ve MIT lisansıyla bu repoda sürüyor.",
+   "dil": "TypeScript",
+   "yildiz": 3224,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/6GvXRk8NRZY"
+   }
+  },
+  {
+   "repo": "remotion-dev/remotion",
+   "klasor": "medya",
+   "kurulum": [
+    "proje"
+   ],
+   "aciklama": "Videoyu React bileşenleri olarak kodlayıp render eden framework; render Node.js, AWS Lambda, Vercel veya tarayıcıda yapılabilir. Kodlama ajanlarıyla video üretmek için Agent Skills de sunar.",
+   "uyari": "Özel lisans: bireyler, en fazla 3 çalışanlı şirketler ve kâr amacı gütmeyenler için ücretsiz; daha büyük kâr amaçlı şirketler ücretli Company License almalı. Remotion 5.0'da sözleşmeli çalışanların da ekip sayısına katılması planlanıyor.",
+   "dil": "TypeScript",
+   "yildiz": 60400,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/w1MOSKvJSx0"
+   }
+  },
+  {
+   "repo": "openai/whisper",
+   "klasor": "medya",
+   "kurulum": [
+    "proje"
+   ],
+   "aciklama": "OpenAI'nin çok dilli konuşma tanıma modeli: sesi yazıya döker, İngilizceye çevirir ve dili tespit eder. Python paketi olarak kurulur, yanında whisper komut satırı aracı da gelir.",
+   "uyari": "Modele göre ~1 GB (tiny) ile ~10 GB (large) VRAM gerekir ve ffmpeg kurulu olmalı. Varsayılan turbo modeli çeviri yapmaz.",
+   "dil": "Python",
+   "yildiz": 109589,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-08-31",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/X-5ZLxh1yWY"
+   }
+  },
+  {
+   "repo": "AnmolSaini16/mapcn",
+   "klasor": "tasarim",
+   "kurulum": [
+    "proje"
+   ],
+   "aciklama": "React için hazır harita bileşenleri: işaretçi, popup, rota ve zoom/pusula kontrolleri. MapLibre GL üzerine kurulu, Tailwind ile stillenir, shadcn/ui ile aynı yapıyı kullanır.",
+   "uyari": "Varsayılan CARTO altlık haritalarının ticari kullanımı CARTO Enterprise lisansı ister; OpenStreetMap, MapTiler, Stadia gibi başka bir tile sağlayıcıya geçilebilir.",
+   "dil": "TypeScript",
+   "yildiz": 12124,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-06",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/AQ_OUlDcTOM"
+   }
+  },
+  {
+   "repo": "recharts/recharts",
+   "klasor": "tasarim",
+   "kurulum": [
+    "proje"
+   ],
+   "aciklama": "React için bileşen tabanlı grafik kütüphanesi; D3 üzerine kurulu, SVG ile çizer. Eksen, tooltip, çizgi gibi parçalar ayrı React bileşenleri olarak birleştirilir.",
+   "uyari": "",
+   "dil": "TypeScript",
+   "yildiz": 27590,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/TBoP5k6QFtk"
+   }
+  },
+  {
+   "repo": "airbnb/lottie-web",
+   "klasor": "tasarim",
+   "kurulum": [
+    "proje"
+   ],
+   "aciklama": "After Effects animasyonlarını Bodymovin eklentisiyle JSON olarak dışa aktarıp web'de SVG, canvas veya HTML ile oynatan JavaScript oynatıcı. Framework'e bağlı değil (düz JS); npm veya CDN ile eklenir.",
+   "uyari": "Animasyon üretmek için After Effects (ücretli Adobe) ve Bodymovin eklentisi gerekir. Ana dalda son commit Kasım 2024 (5.13.0).",
+   "dil": "JavaScript",
+   "yildiz": 32127,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2025-09-01",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/86W1YfgPnYk"
+   }
+  },
+  {
+   "repo": "greensock/GSAP",
+   "klasor": "tasarim",
+   "kurulum": [
+    "proje"
+   ],
+   "aciklama": "Framework'e bağlı olmayan, bağımlılıksız JavaScript animasyon kütüphanesi; düz JS, React, Vue, CSS, SVG, canvas ve WebGL ile çalışır. ScrollTrigger, SplitText, MorphSVG gibi eklentiler dahil; React için @gsap/react paketi (useGSAP) var.",
+   "uyari": "MIT değil, GreenSock'un 'no charge' lisansı: tüm eklentiler dahil ticari kullanım ücretsiz, ama kod açık kaynak sayılmaz. Webflow'un görsel animasyon araçlarıyla rakip olan kodsuz animasyon araçlarında kullanılması yasak.",
+   "dil": "JavaScript",
+   "yildiz": 28629,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-04-13",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/nSu_xsf8kSY"
+   }
+  },
+  {
+   "repo": "motiondivision/motion",
+   "klasor": "tasarim",
+   "kurulum": [
+    "proje"
+   ],
+   "aciklama": "React, düz JavaScript ve Vue için animasyon kütüphanesi (Framer Motion'ın yeni adı). Yaylı animasyonlar, layout geçişleri, scroll'a bağlı efektler, zaman çizelgeleri ve dokunma/sürükleme hareketleri içerir.",
+   "uyari": "Çekirdek MIT ve ücretsiz; Motion+ ücretli (ek örnekler, premium API'ler). npx motion-ai, Claude Code ve başka ajanlar için /motion skill'i ile MCP sunucularını da kurar.",
+   "dil": "TypeScript",
+   "yildiz": 33725,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/3gPLR82bmeQ"
+   }
+  },
+  {
+   "repo": "tremorlabs/tremor",
+   "klasor": "tasarim",
+   "kurulum": [
+    "proje"
+   ],
+   "aciklama": "Grafik ve dashboard için 35+ kopyala-yapıştır React bileşeni. Tailwind CSS ve Radix UI üzerine kurulu, grafikleri Recharts ile çizer.",
+   "uyari": "Tremor Vercel'e katıldı; bu repoda son kod değişikliği Nisan 2025 (Tailwind v4), sonrasında yalnızca CI temizliği var. Başka bir repoya taşındığına dair not yok; eski npm paketi (@tremor/react, tremor-npm reposu) da Ocak 2025'ten beri güncellenmedi.",
+   "dil": "TypeScript",
+   "yildiz": 3633,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2025-10-10",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/Rf5jRfYtXiY"
+   }
+  },
+  {
+   "repo": "saadeghi/daisyui",
+   "klasor": "tasarim",
+   "kurulum": [
+    "proje"
+   ],
+   "aciklama": "Tailwind CSS'e eklenti olarak kurulan, hazır CSS sınıflarıyla kullanılan bileşen kütüphanesi. Framework'e bağlı değil: React, Vue, Svelte, Angular, Laravel, Django, Rails gibi Tailwind çalışan her projeye uyar.",
+   "uyari": "",
+   "dil": "JavaScript",
+   "yildiz": 42475,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-24",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/zKrNYSI-qd4"
+   }
+  },
+  {
+   "repo": "DavidHDev/react-bits",
+   "klasor": "tasarim",
+   "kurulum": [
+    "proje"
+   ],
+   "aciklama": "Metin animasyonu, arka plan, UI ve mikro etkileşim için 200+ animasyonlu React bileşeni; her biri JS/TS ve düz CSS/Tailwind olmak üzere 4 varyantla gelir. Vue ve Svelte için resmi portları ayrı sitelerde.",
+   "uyari": "Lisans MIT + Commons Clause: uygulama veya sitede ticari kullanım serbest, ama bileşenlerin kendisini tek tek, paket halinde ya da port ederek satmak veya yeniden dağıtmak yasak. OSI anlamında açık kaynak değil.",
+   "dil": "JavaScript",
+   "yildiz": 48087,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/7XzSweUGnr4"
+   }
+  },
+  {
+   "repo": "magicuidesign/magicui",
+   "klasor": "tasarim",
+   "kurulum": [
+    "proje"
+   ],
+   "aciklama": "Landing page ve tanıtım sayfaları için animasyonlu, kopyala-yapıştır bileşenler. React ve Tailwind ile çalışır, animasyonların çoğu Motion kütüphanesiyle yapılır; kurulumu shadcn/ui ile aynıdır.",
+   "uyari": "",
+   "dil": "MDX",
+   "yildiz": 22388,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-20",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/103EGz7WTE4"
+   }
+  },
+  {
+   "repo": "shadcn-ui/ui",
+   "klasor": "tasarim",
+   "kurulum": [
+    "proje"
+   ],
+   "aciklama": "Kodu doğrudan projeye kopyalanan, erişilebilir React bileşenleri; Tailwind CSS ile stillenir, altta Radix, Base UI veya React Aria kullanır. CLI ile eklenir; Next.js, Vite, Remix, Astro, TanStack ve Laravel için kurulum rehberi var.",
+   "uyari": "Kodlama ajanları için skill (npx skills add shadcn/ui) ve bileşen registry'lerine erişen bir MCP sunucusu da var.",
+   "dil": "TypeScript",
+   "yildiz": 124583,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-24",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/GkbkS7U1a_Y"
+   }
+  },
+  {
+   "repo": "ollama/ollama",
+   "klasor": "veri",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Açık modelleri (Gemma, Qwen, DeepSeek...) kendi bilgisayarında çalıştırır ve REST API sunar; Claude Code, Codex gibi ajanları yerel modelle başlatan `ollama launch` entegrasyonu var.",
+   "uyari": "Yerel model çalıştırmak donanıma bağlı; büyük modeller yüksek RAM ve GPU ister.",
+   "dil": "Go",
+   "yildiz": 181711,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/jXPcLQuP3hI"
+   }
+  },
+  {
+   "repo": "microsoft/markitdown",
+   "klasor": "veri",
+   "kurulum": [
+    "proje"
+   ],
+   "aciklama": "PDF, Word, Excel, PowerPoint, HTML, görsel ve ses dosyalarını LLM'e verilecek Markdown'a çeviren Python aracı; başlık, liste, tablo gibi yapıyı korur.",
+   "uyari": "Çalıştığı sürecin yetkisiyle dosya ve URL okur; güvenilmeyen girdiyi doğrudan verme. Komut satırından (markitdown dosya.pdf) ve markitdown-mcp paketiyle ajandan da kullanılabilir.",
+   "dil": "Python",
+   "yildiz": 187014,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-21",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/NqjHYFCcJss"
+   }
+  },
+  {
+   "repo": "marcelscruz/public-apis",
+   "klasor": "ogrenme",
+   "kurulum": [
+    "kaynak"
+   ],
+   "aciklama": "Kategorilere ayrılmış herkese açık API listesi (AI, hava durumu, finans, spor...); her API için kimlik doğrulama türü ve CORS desteği belirtilir.",
+   "uyari": "Çoğu API anahtar ister, bazılarında ticari kullanım kısıtı var (ör. Open-Meteo yalnızca ticari olmayan kullanım); koşulları tek tek kontrol et.",
+   "dil": "JavaScript",
+   "yildiz": 9501,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/Z81e6l27wJI"
+   }
+  },
+  {
+   "repo": "ripienaar/free-for-dev",
+   "klasor": "ogrenme",
+   "kurulum": [
+    "kaynak"
+   ],
+   "aciklama": "Ücretsiz katmanı olan SaaS, PaaS ve IaaS hizmetlerinin listesi (hosting, veritabanı, e-posta, izleme, CI...). Yalnızca deneme sürümü değil, gerçek ücretsiz katman sunanlar alınır.",
+   "uyari": "Ücretsiz katman limitleri sık değişir; kullanmadan önce sağlayıcının güncel sayfasına bak.",
+   "dil": "HTML",
+   "yildiz": 138482,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/fMWlswvNw34"
+   }
+  },
+  {
+   "repo": "prometheus/prometheus",
+   "klasor": "altyapi",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Hedeflerden belirli aralıklarla metrik toplayan izleme sistemi ve zaman serisi veritabanı; PromQL ile sorgular, koşul sağlanınca alarm tetikler.",
+   "uyari": "",
+   "dil": "Go",
+   "yildiz": 66228,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/_Megzvq771M"
+   }
+  },
+  {
+   "repo": "umami-software/umami",
+   "klasor": "altyapi",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Çerez kullanmayan, gizlilik odaklı web analitiği; trafik, kampanya, dönüşüm ve gelir tek panelde, kendi sunucunda veya bulutta.",
+   "uyari": "PostgreSQL ister; kurulumda oluşan admin/umami girişinin şifresini hemen değiştir.",
+   "dil": "TypeScript",
+   "yildiz": 39009,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/CQN7e1TyZZ0"
+   }
+  },
+  {
+   "repo": "grafana/grafana",
+   "klasor": "altyapi",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Metrik, log ve trace verilerini (Prometheus, Loki, Postgres...) panolarda görselleştirir; tanımlanan kural aşılınca Slack, PagerDuty gibi kanallara alarm gönderir.",
+   "uyari": "AGPL-3.0-only: değiştirip ağ üzerinden hizmet olarak sunarsan kaynak kodunu paylaşman gerekir; bazı parçalar için Apache-2.0 istisnaları LICENSING.md'de.",
+   "dil": "TypeScript",
+   "yildiz": 76906,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/EJJc2CE1gqc"
+   }
+  },
+  {
+   "repo": "openreplay/openreplay",
+   "klasor": "altyapi",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Kendi sunucunda çalışan oturum kaydı (session replay), ürün analitiği ve canlı ortak tarama; hatayı kullanıcının gördüğü haliyle, konsol ve ağ kayıtlarıyla izlersin.",
+   "uyari": "Çekirdek AGPLv3, tracker SDK'ları MIT, ee/ klasörü ticari Enterprise lisansı; en az 2 vCPU, 8 GB RAM, 50 GB disk ister. Kullanıcı oturumlarını kaydeder: girdileri maskele, KVKK aydınlatmasını ekle.",
+   "dil": "TypeScript",
+   "yildiz": 12900,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/KJTo0pluq7M"
+   }
+  },
+  {
+   "repo": "microsoft/playwright",
+   "klasor": "yayin",
+   "kurulum": [
+    "proje"
+   ],
+   "aciklama": "Chromium, Firefox ve WebKit'i tek API ile süren uçtan uca test çatısı; otomatik bekleme, paralel test ve hata anında trace/ekran görüntüsü kaydı.",
+   "uyari": "Ajanlar için ayrı yollar da var: Playwright MCP (claude mcp add playwright npx @playwright/mcp@latest) ve @playwright/cli.",
+   "dil": "TypeScript",
+   "yildiz": 96673,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/9rUwfGPO0QI"
+   }
+  },
+  {
+   "repo": "octopusreview/octopus",
+   "klasor": "yayin",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Pull request'lere AI kod incelemesi yapar: özet, önem derecesine göre sıralı bulgular ve önerilen düzeltmeler (GitHub, GitLab, Bitbucket, Forgejo). Bulut sürümü veya Docker Compose ile kendi sunucunda çalışır.",
+   "uyari": "Lisans 'Modified MIT' (source available): ticari üründe kullanılır ve ürün aylık 10.000 aktif kullanıcıyı veya 100.000 dolar aylık geliri aşarsa arayüzde 'Octopus Code Review' göstermek zorunlu. AI sağlayıcı maliyeti sende, Cloud kullanım bazlı ücretli; kod AI servislerine gönderilir.",
+   "dil": "TypeScript",
+   "yildiz": 103,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-24",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/3vpDdeP6P-0"
+   }
+  },
+  {
+   "repo": "webpro-nl/knip",
+   "klasor": "yayin",
+   "kurulum": [
+    "proje"
+   ],
+   "aciklama": "JavaScript/TypeScript projelerinde kullanılmayan dosya, bağımlılık ve export'ları bulup temizler; yayın öncesi ölü kodu atmak için.",
+   "uyari": "Ajanlar için resmi @knip/mcp paketi ve VS Code eklentisi de var.",
+   "dil": "TypeScript",
+   "yildiz": 12342,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-23",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/7KwDz7tYfpc"
+   }
+  },
+  {
+   "repo": "google/osv-scanner",
+   "klasor": "yayin",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Projenin bağımlılıklarını (npm, pip, go, cargo...) ve container imajlarını OSV.dev veritabanına karşı tarayıp bilinen güvenlik açıklarını bulur; lisans kontrolü ve sürüm yükseltme önerisi de yapar.",
+   "uyari": "Paket adı ve sürümlerini OSV.dev/deps.dev API'lerine gönderir (kaynak kod gitmez), istenirse --offline çalışır. Deneysel `fix` komutu güvenilmeyen projede script çalıştırabilir.",
+   "dil": "Go",
+   "yildiz": 11087,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/WEYL8-AAsEs"
+   }
+  },
+  {
+   "repo": "fastlane/fastlane",
+   "klasor": "altyapi",
+   "kurulum": [
+    "proje"
+   ],
+   "aciklama": "iOS ve Android uygulamalarında ekran görüntüsü üretme, provisioning profile yönetimi ve mağazaya yayınlama gibi işleri otomatikleştirir. Proje içindeki Fastfile ile tanımlanır.",
+   "uyari": "Varsayılan olarak anonim kullanım metrikleri gönderir; Fastfile'a opt_out_usage ekleyerek kapatılır.",
+   "dil": "Ruby",
+   "yildiz": 42159,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/Mmj01VKVXeU"
+   }
+  },
+  {
+   "repo": "Dokploy/dokploy",
+   "klasor": "altyapi",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Kendi VPS'inde çalışan Vercel/Heroku/Netlify alternatifi PaaS: uygulama ve veritabanı deploy, Docker Compose, otomatik yedek, Traefik ile yönlendirme ve kaynak izleme.",
+   "uyari": "Çekirdek Apache-2.0; /proprietary klasörlerindeki özellikler (SSO, denetim kaydı, roller, white-label, lisans anahtarı) kaynağı açık ama üretimde kullanmak için Dokploy ile ticari sözleşme ister (DSAL).",
+   "dil": "TypeScript",
+   "yildiz": 37511,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-24",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/vpHbCG8ag1M"
+   }
+  },
+  {
+   "repo": "coollabsio/coolify",
+   "klasor": "altyapi",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Kendi sunucunda çalışan Vercel/Heroku/Netlify alternatifi: Git push ile deploy, veritabanı, otomatik HTTPS, yedekleme ve 300'den fazla tek tıkla kurulan servis. SSH erişimi olan bir VPS yeterli; dashboard, API, CLI ve MCP ile yönetilir.",
+   "uyari": "Önerilen kurulumda Coolify bir sunucuda, uygulamalar ayrı sunucularda çalışır; yönetilen Coolify Cloud ücretli.",
+   "dil": "PHP",
+   "yildiz": 62269,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/PrlqXvx3LPk"
+   }
+  },
+  {
+   "repo": "NVIDIA/SkillSpector",
+   "klasor": "skill",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Agent skill'lerini kurmadan önce güvenlik açısından tarar: prompt injection, veri sızdırma, tedarik zinciri gibi 17 kategoride 71 kalıp arar. Statik analiz ve isteğe bağlı LLM değerlendirmesiyle 0-100 risk puanı verir; MCP olarak ajana da eklenebilir.",
+   "uyari": "LLM analizi için API anahtarı ya da yerel claude/codex CLI gerekir (--no-llm ile yalnız statik tarama). MCP modu `skillspector[mcp]` ekiyle kurulmalı ve stdio'da bilinen bir başlatma takılması (issue #199) var.",
+   "dil": "Python",
+   "yildiz": 18296,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-24",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.instagram.com/reel/DdUQEYRALZj/"
+   }
+  },
+  {
+   "repo": "google/artemis",
+   "klasor": "yayin",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Doğal dilde verilen talimatlarla gerçek Android cihazda ya da emülatörde uçtan uca test ve otomasyon yapar. MCP ile Claude Code ve Codex'e bağlanır, logcat ve ekran görüntüsü toplar.",
+   "uyari": "Repo klonlanıp yerel servis çalıştırılır ve cihazı yöneten ajan için Gemini/OpenAI/Anthropic gibi bir LLM API anahtarı gerekir; ekran görüntüleri bu sağlayıcıya gider. Telefona bir erişilebilirlik servisi kurar; AndroidWorld'de %99+ başarı yazarın iddiası.",
+   "dil": "Python",
+   "yildiz": 9838,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-12",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.instagram.com/reel/DdMh1Fhg7Zg/"
+   }
+  },
+  {
+   "repo": "shanraisshan/claude-code-best-practice",
+   "klasor": "ogrenme",
+   "kurulum": [
+    "kaynak"
+   ],
+   "aciklama": "Claude Code'un alt ajan, komut, skill, hook, MCP ve bellek özelliklerini örnek uygulamalarla anlatan rehber. Claude ekibinden ve topluluktan derlenmiş 83 ipucu içerir.",
+   "uyari": "",
+   "dil": "HTML",
+   "yildiz": 66352,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/cToXyrYtFTs"
+   }
+  },
+  {
+   "repo": "nexu-io/open-design",
+   "klasor": "tasarim",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Claude Design'ın açık kaynak alternatifi olan masaüstü uygulaması: bilgisayardaki kodlama ajanını (Claude Code, Codex vb.) kullanarak prototip, landing page, sunum, görsel ve video üretir; HTML/PDF/PPTX/MP4 olarak dışa aktarır.",
+   "uyari": "Güvenlik ve güvenilirlik telemetrisi her zaman açık (ürün analitiği onaya bağlı); README ücretli OpenDesign Cloud hizmetini öne çıkarıyor. Arayüzsüz kullanım için `od mcp install claude|codex` ile ajana MCP olarak da eklenir.",
+   "dil": "TypeScript",
+   "yildiz": 98077,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/9dIxRgyANn0"
+   }
+  },
+  {
+   "repo": "HKUDS/CLI-Anything",
+   "klasor": "ajan",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "GIMP, Blender gibi bir yazılım için kaynak koddan ya da repodan ajanların kullanabileceği, JSON çıktı veren bir CLI üretir. Hazır CLI'lar CLI-Hub'dan kurulabilir.",
+   "uyari": "Codex desteği deneysel ve topluluk etiketli. Üretilen CLI'lar asıl programın kurulu olmasını ister; Windows'ta Git Bash ya da WSL gerekir.",
+   "dil": "Python",
+   "yildiz": 50521,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-22",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/NYx647nbybw"
+   }
+  },
+  {
+   "repo": "BloopAI/vibe-kanban",
+   "klasor": "ajan",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "İşleri kanban panosunda planlayıp her görevi ayrı bir çalışma alanında (branch, terminal, dev sunucusu) Claude Code, Codex gibi ajanlara yaptırır. Diff'i inceleyip satır içi yorum bırakır, PR açarsın.",
+   "uyari": "Arkasındaki şirket Bloop Nisan 2026'da kapandı; proje topluluk bakımına geçti, bulut özellikleri kaldırıldı, yerel kullanım sürüyor.",
+   "dil": "Rust",
+   "yildiz": 28190,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-19",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/4VSJbVoeJRA"
+   }
+  },
+  {
+   "repo": "microsoft/Webwright",
+   "klasor": "ajan",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Kodlama ajanını tarayıcı ajanına çevirir: web görevini adım adım tıklamak yerine yeniden çalıştırılabilir bir Playwright Python betiği yazarak çözer. Claude Code ve Codex'e plugin olarak eklenir.",
+   "uyari": "Plugin yolunda da repo klonlanıp `pip install -e .` ve Playwright Chromium kurulur. Tek başına CLI olarak çalıştırmak OpenAI/Anthropic/OpenRouter API anahtarı ister; benchmark sonuçları yazarın iddiası.",
+   "dil": "Python",
+   "yildiz": 6020,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-08-03",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/yv7toIYKwyU"
+   }
+  },
+  {
+   "repo": "wentong2022-arch/flowforge-skill",
+   "klasor": "tasarim",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Doğal dille anlatılan akış şeması, mimari ya da karşılaştırma diyagramını düzenlenebilir draw.io (.drawio) dosyası olarak üretir. XML'i yazmadan önce ASCII taslağını onaylatır.",
+   "uyari": "Çok erken aşama (4 commit, yaklaşık 140 yıldız).",
+   "dil": "Python",
+   "yildiz": 137,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-07-04",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/0r_6gbFup7o"
+   }
+  },
+  {
+   "repo": "Kronop/vibe-aso",
+   "klasor": "yayin",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "iOS uygulamasını App Store'a hazırlayan skill: anahtar kelime araştırması, 50 dile kadar mağaza metni, yerelleştirilmiş ekran görüntüleri, ülke bazlı fiyatlandırma ve uygulama içi çeviri.",
+   "uyari": "Çok erken aşama (3 commit). App Manager rolünde App Store Connect API anahtarı ister, mağaza kaydını ve fiyatları doğrudan değiştirir; yalnız macOS.",
+   "dil": "JavaScript",
+   "yildiz": 420,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-08-12",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/u1z2feSfXB8"
+   }
+  },
+  {
+   "repo": "bradautomates/claude-video",
+   "klasor": "ajan",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Ajana video izletir: /watch bir URL'yi ya da yerel video dosyasını zaman damgalı karelere ve transkripte çevirip ajana verir.",
+   "uyari": "GEMINI_API_KEY tanımlıysa videolar (yerel dosyalar dahil) Google'a yüklenir; anahtarsız yerel mod ffmpeg ve yt-dlp ister. Groq/OpenAI transkripsiyonu ayrı API anahtarı ister.",
+   "dil": "Python",
+   "yildiz": 17659,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/pkJkn0TyGQc"
+   }
+  },
+  {
+   "repo": "mvanhorn/last30days-skill",
+   "klasor": "veri",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Bir konuyu son 30 gün içinde Reddit, X, YouTube, Hacker News, Polymarket ve web üzerinde araştırır; sonuçları beğeni ve oy gibi etkileşimlere göre sıralayıp kaynaklı bir özet çıkarır.",
+   "uyari": "X, TikTok, Instagram gibi kaynaklar kendi API anahtarlarını (ScrapeCreators 10.000 çağrıdan sonra ücretli) ya da tarayıcı oturum çerezlerini ister; araç tarayıcıdan çerez okuyabilir.",
+   "dil": "Python",
+   "yildiz": 62806,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-23",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/KZZr5SoBbzo"
+   }
+  },
+  {
+   "repo": "Graphify-Labs/graphify",
+   "klasor": "veri",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Kod tabanını (dokümanlar, PDF'ler ve SQL şemaları dahil) sorgulanabilir bir bilgi grafiğine çevirir; ajan dosyaları grep'lemek yerine grafiği sorgular. Kod yerelde tree-sitter ile, LLM kullanmadan ayrıştırılır.",
+   "uyari": "Önce `graphifyy` (çift y) Python CLI'ı kurulur, benzer adlı PyPI paketleri resmi değil. Doküman/PDF/görsel analizi asistanın modeline ya da API anahtarına gider; benchmark sonuçları yazarın iddiası.",
+   "dil": "Python",
+   "yildiz": 121404,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/y4VLxJY0JbU"
+   }
+  },
+  {
+   "repo": "mksglu/context-mode",
+   "klasor": "ajan",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Araç çıktılarını sandbox'ta tutup bağlama yalnızca sonucu koyan MCP sunucusu ve hook seti. Oturum olaylarını yerel SQLite'ta indeksler, bağlam sıkıştırıldıktan sonra ajanın kaldığı yerden devam etmesini sağlar.",
+   "uyari": "Elastic License 2.0: kaynak açık ama barındırılan servis olarak sunulamaz. Hook'larla araç çağrılarını yönlendirir; '%98 azalma' ve 'kullanan şirketler' rozetleri yazarın iddiası.",
+   "dil": "TypeScript",
+   "yildiz": 24059,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/zdwAXTaxL5Y"
+   }
+  },
+  {
+   "repo": "composio-community/awesome-codex-skills",
+   "klasor": "skill",
+   "kurulum": [
+    "codex"
+   ],
+   "aciklama": "Codex için pratik skill'lerin derlendiği liste; bir kısmı repoda hazır gelir (PR yorumlarını işleme, CI hatası düzeltme, MCP sunucusu yazma, toplantı notu çıkarma gibi). Kurulum betiği seçilen skill'i ~/.codex/skills altına koyar.",
+   "uyari": "Repoda lisans dosyası yok. Maddelerin bir kısmı dış repolara link; bazı skill'ler Composio CLI/hesabı gerektirir (liste Composio tarafından yayımlanıyor).",
+   "dil": "Python",
+   "yildiz": 16652,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-07-26",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/hSb1TAXAwTA"
+   }
+  },
+  {
+   "repo": "openai/codex-plugin-cc",
+   "klasor": "ajan",
+   "kurulum": [
+    "claude"
+   ],
+   "aciklama": "Claude Code içinden Codex'i kullandıran resmi OpenAI eklentisi: Codex'e kod review yaptırır, görevi Codex'e devreder, arka plandaki işleri izler. İsteğe bağlı review kapısı Claude'un yanıtlarını Codex'e kontrol ettirir.",
+   "uyari": "ChatGPT hesabı veya OpenAI API anahtarı ve yerel Codex CLI gerekir; kullanım Codex limitlerinden düşer. Review kapısı uzun bir Claude/Codex döngüsüne girip limiti hızla tüketebilir.",
+   "dil": "JavaScript",
+   "yildiz": 33586,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-07-08",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/uISmT8Bv4Fo"
+   }
+  },
+  {
+   "repo": "msitarzewski/agency-agents",
+   "klasor": "skill",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Mühendislik, tasarım, pazarlama, satış gibi bölümlerde 230'dan fazla uzman ajan kişiliği (alt ajan tanımı). Kurulum betiği aynı ajanları Claude Code, Codex, Cursor gibi araçların biçimine çevirip kurar.",
+   "uyari": "",
+   "dil": "Shell",
+   "yildiz": 154617,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-22",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/eTrgWvRYdNE"
+   }
+  },
+  {
+   "repo": "coreyhaines31/marketingskills",
+   "klasor": "skill",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Pazarlama işleri için skill koleksiyonu: dönüşüm optimizasyonu, metin yazarlığı, SEO, analitik, reklam ve büyüme. Skill'ler önce ürün ve hedef kitle bilgisini tutan product-marketing skill'ini okur.",
+   "uyari": "",
+   "dil": "JavaScript",
+   "yildiz": 51501,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-05",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/dE4hFAW9cpk"
+   }
+  },
+  {
+   "repo": "addyosmani/agent-skills",
+   "klasor": "skill",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Kıdemli mühendis iş akışlarını 25 skill olarak paketler: spesifikasyon, planlama, TDD, kod review, performans denetimi ve yayına alma. /spec, /plan, /build, /test, /review, /ship komutlarıyla geliştirme döngüsünü izletir.",
+   "uyari": "",
+   "dil": "JavaScript",
+   "yildiz": 99030,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-23",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/Kg7eV4wv_3A"
+   }
+  },
+  {
+   "repo": "addyosmani/web-quality-skills",
+   "klasor": "yayin",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Lighthouse, Core Web Vitals, WCAG ve SEO temelli web kalite skill'leri. Ajan önce ölçer (Lighthouse, DevTools izi, CrUX), sonra performans, erişilebilirlik ve SEO düzeltmeleri önerir.",
+   "uyari": "",
+   "dil": "Shell",
+   "yildiz": 2840,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-08-24",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/vkKtohvoBS8"
+   }
+  },
+  {
+   "repo": "garrytan/gstack",
+   "klasor": "skill",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Claude Code'u sanal bir ekibe çeviren slash komut seti: ürün sorgulama, mimari ve tasarım incelemesi, kod review, gerçek tarayıcıda QA, güvenlik denetimi ve PR'ı yayınlama. Her adım çıktısını bir sonrakine devreder.",
+   "uyari": "Verimlilik rakamları (ör. 2013'e göre ~810 kat) yazarın iddiası. Bun gerektirir, tarayıcı çerezlerini içe aktarabilir; telemetri isteğe bağlı (opt-in).",
+   "dil": "TypeScript",
+   "yildiz": 134203,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/HB3hNzdIa6o"
+   }
+  },
+  {
+   "repo": "open-gsd/gsd-core",
+   "klasor": "ajan",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Ajanı tartış, planla, uygula, doğrula, yayınla döngüsüyle çalıştıran spesifikasyon odaklı geliştirme sistemi. Ağır işleri temiz bağlamlı alt ajanlara verip ana oturumu hafif tutar.",
+   "uyari": "Eski adı gsd-build/get-shit-done; o repo arşivlendi ve geliştirme burada sürüyor. Kurulum: npx @opengsd/gsd-core@latest (Claude Code, Codex ve diğer ajanları sorar).",
+   "dil": "JavaScript",
+   "yildiz": 9848,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/hxUSmmj7Qek"
+   }
+  },
+  {
+   "repo": "obra/superpowers",
+   "klasor": "skill",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Kodlama ajanına baştan sona bir çalışma yöntemi kuran skill seti: önce soru sorup tasarımı netleştirir, plan yazar, TDD ile alt ajanlara uygulatır ve kodu gözden geçirir. Skill'ler kendiliğinden devreye girer.",
+   "uyari": "Görsel eşlikçi özelliği kullanılan sürüm bilgisini yazarın sitesine gönderir; SUPERPOWERS_DISABLE_TELEMETRY ile kapatılır.",
+   "dil": "Shell",
+   "yildiz": 291566,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/uSbLXkV0tl4"
+   }
+  },
+  {
+   "repo": "upstash/context7",
+   "klasor": "ajan",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Kütüphanelerin güncel, sürüme özel dokümantasyonunu ve kod örneklerini ajanın bağlamına getirir; eski ya da uydurma API önerilerini azaltır. MCP sunucusu veya ctx7 CLI + skill olarak çalışır.",
+   "uyari": "Upstash'in barındırılan servisine bağlıdır (arka uç açık kaynak değil), sorgular context7.com'a gider; ücretsiz API anahtarı öneriliyor. Dokümanlar topluluk katkılı, doğruluk garanti edilmiyor.",
+   "dil": "TypeScript",
+   "yildiz": 62421,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/d8-m2nxVOl4"
+   }
+  },
+  {
+   "repo": "thedotmack/claude-mem",
+   "klasor": "ajan",
+   "kurulum": [
+    "claude",
+    "codex"
+   ],
+   "aciklama": "Kodlama ajanının oturumlarda yaptıklarını kaydeder, AI ile özetler ve sonraki oturumlara ilgili bağlamı geri verir. Hook'larla kendiliğinden çalışır; geçmiş yerel SQLite'ta tutulur ve MCP araçlarıyla aranır.",
+   "uyari": "Kurulum varsayılan olarak hesap açtırıp barındırılan hafıza servisine yönlendirir (30 gün ücretsiz, sonra abonelik; --provider ile atlanır). Tüm oturum etkinliğini kaydeder; README ayrıca bir kripto tokenı (CMEM) tanıtıyor.",
+   "dil": "TypeScript",
+   "yildiz": 94688,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": {
+    "ad": "selahattin.unlu",
+    "url": "https://www.youtube.com/shorts/hPKyPjy505s"
+   }
+  },
+  {
+   "repo": "paperclipai/paperclip",
+   "klasor": "ajan",
+   "kurulum": [
+    "uygulama"
+   ],
+   "aciklama": "Birden çok AI ajanını (Claude Code, Codex, Cursor, OpenClaw...) bir şirket gibi yöneten açık kaynak uygulama: hedef verirsin, ajanlara rol ve bütçe atarsın, işleri ve maliyeti tek panelden izlersin.",
+   "uyari": "Ajanlar sürekli çalışınca API maliyeti hızla birikir; bütçe sınırını baştan koy. Kendi sunucunda çalışır, hesap gerekmez.",
+   "dil": "TypeScript",
+   "yildiz": 84357,
+   "eklenme": "2026-09-25",
+   "son_guncelleme": "2026-09-25",
+   "arsiv": false,
+   "kaynak": null
+  }
+ ]
+}

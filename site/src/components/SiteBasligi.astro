@@ -1,0 +1,14 @@
+---
+// Üst çubuktaki site adı: eski sayfadaki gibi mavi kare içinde roket, altında kısa açıklama.
+import Simge from './Simge.astro';
+
+const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
+---
+
+<a href={siteTitleHref} class="marka">
+	<span class="marka-logo"><Simge ad="rocket" /></span>
+	<span class="marka-ad">
+		<b translate="no">{siteTitle}</b>
+		<small>AI ile proje geliştirme</small>
+	</span>
+</a>

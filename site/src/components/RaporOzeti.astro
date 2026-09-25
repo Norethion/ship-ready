@@ -1,0 +1,30 @@
+---
+// Bir raporun durum sayıları, tamam / kısmen / eksik çubuğu ve varsa önceki raporun sayıları.
+import { tarih, type Rapor } from '../yerel';
+
+interface Props {
+	rapor: Rapor;
+}
+const { rapor } = Astro.props;
+const c = rapor.sayilar;
+const n = c['✅'] + c['⚠'] + c['❌'] || 1;
+const p = rapor.onceki?.sayilar;
+---
+
+<div class="rapor-ozet not-content">
+	<p class="rapor-sayilar">
+		<span>✅ {c['✅']}</span><span>⚠️ {c['⚠']}</span><span>❌ {c['❌']}</span><span>➖ {c['➖']}</span>
+	</p>
+	<div class="rapor-cubuk" aria-hidden="true">
+		<span class="d-ok" style={`width:${(c['✅'] / n) * 100}%`}></span>
+		<span class="d-kismen" style={`width:${(c['⚠'] / n) * 100}%`}></span>
+		<span class="d-eksik" style={`width:${(c['❌'] / n) * 100}%`}></span>
+	</div>
+	{
+		rapor.onceki && p && (
+			<p class="rapor-onceki">
+				<a href={`/raporlar/${rapor.onceki.yol}/`}>Önceki ({tarih(rapor.onceki.tarih)})</a>: ✅ {p['✅']} · ⚠️ {p['⚠']} · ❌ {p['❌']}
+			</p>
+		)
+	}
+</div>

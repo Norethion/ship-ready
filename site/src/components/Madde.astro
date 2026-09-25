@@ -1,0 +1,22 @@
+---
+// Kontrol listesi maddesi: numara maddenin kalıcı bağlantısıdır (#kimlik), kimlik altta küçük yazılır.
+interface Props {
+	id: string;
+	no: number;
+	baslik?: string;
+	meta?: string;
+}
+const { id, no, baslik, meta } = Astro.props;
+---
+
+<div class="madde" id={id}>
+	<a class="madde-no" href={`#${id}`} aria-label={`${no}. madde, bağlantı`}>{no}</a>
+	<div class="madde-govde">
+		{baslik && <p class="madde-baslik">{baslik}</p>}
+		<div class="madde-metin"><slot /></div>
+		<p class="madde-alt">
+			{meta && <span>{meta}</span>}
+			<code class="madde-kimlik" title="Maddenin kalıcı kimliği; raporlarda bu yazılır">{id}</code>
+		</p>
+	</div>
+</div>
