@@ -21,4 +21,4 @@ Kataloğun tamamı JSON olarak: [katalog.json](/katalog.json)
 
 ## Repolar
 
-- [Repo kataloğu](/repolar/): 120 doğrulanmış GitHub reposu, kurulum yeri ve uyarılarıyla
+- [Repo kataloğu](/repolar/): 122 doğrulanmış GitHub reposu, kurulum yeri ve uyarılarıyla

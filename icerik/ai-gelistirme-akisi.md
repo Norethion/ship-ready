@@ -94,6 +94,7 @@ skillspector scan https://github.com/<sahip>/<skill-reposu>
 - **CLAUDE.md ve AGENTS.md:** Projenin nasıl çalıştığını, komutlarını ve kurallarını anlatır; Claude Code `CLAUDE.md`'yi, Codex ve diğer ajanlar `AGENTS.md`'yi okur.
 - **İkisini aynı tut:** Projede ikisi de varsa biri diğerinin birebir kopyası olsun; düzenleme tek dosyada yapılsın. ship-ready'de `uygulama/guncelle.py` bunu otomatik yapıyor.
 - **Kısa tut:** Sadece Claude'un koddan çıkaramayacağı şeyleri yaz: komutlar, kurallar, dikkat edilecekler.
+- **Davranış kuralları:** Modelin sık yaptığı hataları (basit işi karmaşıklaştırmak, talimatın dışına çıkmak, bitmemiş işi bitti saymak, olmayan API uydurmak) kısa kurallarla önler; hazır örneği Karpathy'nin gözlemlerinden çıkarılmış [andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills): kodlamadan önce düşün, en basit çözümü yaz, sadece isteneni değiştir, başarıyı doğrulanabilir hedefe bağla. Tüm projelerde geçerli olsun istiyorsan `~/.claude/CLAUDE.md`'ye eklenir.
 - **DESIGN.md:** `AGENTS.md` projenin nasıl kurulacağını, `DESIGN.md` nasıl görüneceğini anlatır: renk, yazı tipi, köşe ve boşluk değerleri ve tasarımın gerekçesi. Biçimi Google'ın [design.md](https://github.com/google-labs-code/design.md) reposunda, markalardan çıkarılmış hazır örnekleri [awesome-design-md](https://github.com/VoltAgent/awesome-design-md) reposunda.
 
 ## Google'ın AI araçları
