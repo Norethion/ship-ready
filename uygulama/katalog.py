@@ -13,7 +13,7 @@ Komut satırı:
   python uygulama/katalog.py ara <sorgu>    maddelerde, rehber öğelerinde ve repolarda arar
   python uygulama/katalog.py json           kataloğun tamamını JSON olarak yazar
 """
-import json, re, sys
+import json, math, re, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -208,8 +208,11 @@ def load():
     lists = [parse_list(d) for d in docs if d["liste"]]
     numbers = {m["id"]: m["no"] for l in lists for s in l["bolumler"] for m in s["maddeler"] if m["id"]}
     repos = json.loads(REPOS.read_text(encoding="utf-8")) if REPOS.exists() else {"folders": [], "repos": []}
+    names = {f["id"]: (f["name"], {a["id"]: a["name"] for a in f.get("alt", [])}) for f in repos["folders"]}
     for r in repos["repos"]:
         r["kurulum"] = setup_targets(r)
+        name, alts = names.get(r.get("f"), (r.get("f") or "", {}))
+        r["kategori"], r["alt_kategori"] = name, alts.get(r.get("af"), "")
     cat = {
         "belgeler": docs, "listeler": lists, "numaralar": numbers,
         "ogeler": [i for d in docs if not d["liste"] for i in parse_guide_items(d)],
@@ -260,16 +263,49 @@ def _fold(s):
     return (s or "").translate(str.maketrans("çğıöşüÇĞİÖŞÜÂÎÛâîû", "cgiosuCGIOSUAIUaiu")).lower()
 
 
+# Arama kuralları sitenin aramasıyla (site/src/arama.ts) aynıdır: dolgu kelimeleri atılır, ekli kelimeler kökünden eşleşir.
+FILLER = set("ve ile icin bir bu su ne nasil neden hangi hangisi mi mu da de ki gibi olan olarak var en cok daha her bana beni "
+             "benim ben lazim istiyorum yapmak yapan yapmaliyim yapmali olmali olsun nedir and or the for to of with how what".split())
+
+
+def terms(query):
+    """Sorgunun aranacak kelimeleri: harf farkı katlanmış, dolgu kelimeleri ve tek harfler atılmış."""
+    return [t for t in re.findall(r"[a-z0-9]+", _fold(query)) if len(t) > 1 and t not in FILLER]
+
+
+def match(term, text):
+    """Terimin katlanmış metindeki ağırlığı: tam 1, kökü (en az 4 harf ve terimin %60'ı) 0.7, yok 0.
+    İki harfli kelimeler başka kelimelerin içinde de geçtiği için sadece tam kelime olarak eşleşir."""
+    if len(term) < 3:
+        return 1 if re.search(rf"(?<![a-z0-9]){term}(?![a-z0-9])", text) else 0
+    if term in text:
+        return 1
+    for n in range(len(term) - 1, max(4, math.ceil(len(term) * 0.6)) - 1, -1):
+        if term[:n] in text:
+            return 0.7
+    return 0
+
+
+def match_all(query, text):
+    """Sorgunun bütün kelimeleri (kökünden de olur) metinde geçiyor mu; süzgeçlerde kullanılır."""
+    text = _fold(text)
+    return all(match(t, text) for t in terms(query))
+
+
 def search(cat, query, limit=20):
-    """Basit anahtar kelime araması; her sonuç tür, kimlik ya da ad, belge ve kısa metin taşır."""
-    terms = [t for t in re.findall(r"[a-z0-9]+", _fold(query)) if len(t) > 1]
-    if not terms:
+    """Anahtar kelime araması; kelimelerin en az yarısını içeren sonuçlar, hepsini içerenler önde.
+    Her sonuç tür, kimlik ya da ad, belge ve kısa metin taşır."""
+    qs = terms(query)
+    if not qs:
         return []
+    need = math.ceil(len(qs) / 2)
     hits = []
 
     def score(*parts):
         text = _fold(" ".join(p for p in parts if p))
-        return sum(text.count(t) for t in terms) if all(t in text for t in terms) else 0
+        weights = [match(t, text) for t in qs]
+        found = sum(1 for w in weights if w)
+        return found * 10 + sum(weights) if found >= need else 0
 
     for l in cat["listeler"]:
         for s in l["bolumler"]:
@@ -283,9 +319,9 @@ def search(cat, query, limit=20):
             hits.append((n + 1, {"tur": "oge", "ad": i["ad"], "url": i["url"], "belge": i["belge"], "bolum": i["bolum"],
                                   "metin": " · ".join(v for v in i["alanlar"].values() if v)[:300]}))
     for r in cat["repolar"]["repos"]:
-        n = score(r["r"], r.get("tr"), r.get("d"), r.get("w"), " ".join(r["kurulum"]))
+        n = score(r["r"], r.get("tr"), r.get("d"), r.get("w"), " ".join(r["kurulum"]), r["kategori"], r["alt_kategori"])
         if n:
-            hits.append((n, {"tur": "repo", "ad": r["r"], "url": f"https://github.com/{r['r']}", "klasor": r.get("f"),
+            hits.append((n, {"tur": "repo", "ad": r["r"], "url": f"https://github.com/{r['r']}", "klasor": r.get("f"), "alt_klasor": r.get("af"),
                              "kurulum": r["kurulum"], "metin": r.get("tr") or r.get("d") or ""}))
     hits.sort(key=lambda h: -h[0])
     return [h[1] for h in hits[:limit]]

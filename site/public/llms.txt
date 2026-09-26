@@ -3,7 +3,7 @@
 > AI ile kişisel proje geliştirip yayına çıkarırken başvurulan Türkçe kontrol listeleri, rehberler ve doğrulanmış araçlar.
 
 Kontrol listesi maddelerinin kalıcı kimlikleri vardır (ör. yo-hesap-silme, as-paywall-linkleri); denetim raporları bu kimliklerle yazılır.
-Kataloğun tamamı JSON olarak: [katalog.json](/katalog.json)
+Bütün içerik tek dosyada: [llms-full.txt](/llms-full.txt). Makinenin okuyacağı katalog: [katalog.json](/katalog.json).
 
 ## Kontrol listeleri
 
@@ -19,6 +19,87 @@ Kataloğun tamamı JSON olarak: [katalog.json](/katalog.json)
 - [Yayına alma & barındırma](/rehberler/yayina-alma-barindirma/): Projeyi yayına alırken kullanılan servisler ve yayın öncesi listesinde bunlarla çözülen maddeler. Ücretler 25.09.2026'da sitelerinden alındı.
 - [AI geliştirme akışı](/rehberler/ai-gelistirme-akisi/): Claude Code ile proje geliştirirken işe yarayan komutlar, MCP sunucuları, skill'ler ve hazır prompt'lar.
 
-## Repolar
+## Repo kataloğu
 
-- [Repo kataloğu](/repolar/): 122 doğrulanmış GitHub reposu, kurulum yeri ve uyarılarıyla
+122 doğrulanmış GitHub reposu amaca göre kategori ve alt kategoriye ayrılır; sayfası [/repolar/](/repolar/), açıklamaları ve kurulum yerleri llms-full.txt'te.
+
+### 🧠 Ajan skill'leri ve çalışma yöntemi
+
+Kodlama ajanının nasıl çalıştığını değiştiren skill'ler: plan, kod ve inceleme akışları, bağlam ve token tasarrufu, skill koleksiyonları.
+
+- Çalışma yöntemi: [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills), [chaseai-yt/claudex-loop](https://github.com/chaseai-yt/claudex-loop), [ruvnet/ruflo](https://github.com/ruvnet/ruflo), [openai/codex-plugin-cc](https://github.com/openai/codex-plugin-cc), [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents), [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills), [garrytan/gstack](https://github.com/garrytan/gstack), [open-gsd/gsd-core](https://github.com/open-gsd/gsd-core), [obra/superpowers](https://github.com/obra/superpowers)
+- Bağlam, bellek ve token: [ayghri/i-have-adhd](https://github.com/ayghri/i-have-adhd), [virgiliojr94/book-to-skill](https://github.com/virgiliojr94/book-to-skill), [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman), [mksglu/context-mode](https://github.com/mksglu/context-mode), [thedotmack/claude-mem](https://github.com/thedotmack/claude-mem)
+- Skill koleksiyonları ve eklentiler: [vercel-labs/skills](https://github.com/vercel-labs/skills), [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills), [vibeforge1111/vibeship-spawner-skills](https://github.com/vibeforge1111/vibeship-spawner-skills), [x1xhlol/system-prompts-and-models-of-ai-tools](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools), [davila7/claude-code-templates](https://github.com/davila7/claude-code-templates), [ZeframLou/call-me](https://github.com/ZeframLou/call-me), [composio-community/awesome-codex-skills](https://github.com/composio-community/awesome-codex-skills)
+- Skill güvenliği ve ölçüm: [EmpiricaAI/empirica](https://github.com/EmpiricaAI/empirica), [NVIDIA/SkillSpector](https://github.com/NVIDIA/SkillSpector)
+
+### 🌐 Ajana web, tarayıcı ve belge erişimi
+
+Ajanın tarayıcıyı kullanması; web sayfalarını, videoları, belgeleri ve kod tabanını okuyabilmesi için araçlar.
+
+- Tarayıcı ve uygulama kontrolü: [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser), [microsoft/playwright-mcp](https://github.com/microsoft/playwright-mcp), [HKUDS/CLI-Anything](https://github.com/HKUDS/CLI-Anything), [microsoft/Webwright](https://github.com/microsoft/Webwright)
+- Web, video ve sosyal medya okuma: [Panniantong/Agent-Reach](https://github.com/Panniantong/Agent-Reach), [unclecode/crawl4ai](https://github.com/unclecode/crawl4ai), [bradautomates/claude-video](https://github.com/bradautomates/claude-video), [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill)
+- Belge ve doküman: [firecrawl/pdf-inspector](https://github.com/firecrawl/pdf-inspector), [microsoft/markitdown](https://github.com/microsoft/markitdown), [upstash/context7](https://github.com/upstash/context7)
+- Kod tabanı haritası: [Egonex-AI/Understand-Anything](https://github.com/Egonex-AI/Understand-Anything), [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify)
+
+### 🖥️ Ajan yönetimi, modeller ve RAG
+
+Birden çok ajanı yöneten arayüzler, yerel model çalıştırma ve model yönlendirme, belgeyle sohbet (RAG).
+
+- Ajan arayüzleri ve ekipler: [pingdotgg/t3code](https://github.com/pingdotgg/t3code), [microsoft/autogen](https://github.com/microsoft/autogen), [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent), [karpathy/llm-council](https://github.com/karpathy/llm-council), [BloopAI/vibe-kanban](https://github.com/BloopAI/vibe-kanban), [paperclipai/paperclip](https://github.com/paperclipai/paperclip)
+- Yerel model ve yönlendirme: [diegosouzapw/OmniRoute](https://github.com/diegosouzapw/OmniRoute), [AlexsJones/llmfit](https://github.com/AlexsJones/llmfit), [ollama/ollama](https://github.com/ollama/ollama)
+- RAG ve belgeyle sohbet: [NirDiamant/RAG_Techniques](https://github.com/NirDiamant/RAG_Techniques), [dataease/SQLBot](https://github.com/dataease/SQLBot), [lfnovo/open-notebook](https://github.com/lfnovo/open-notebook)
+
+### 🎨 Tasarım & arayüz
+
+Arayüz bileşenleri, animasyon kütüphaneleri, tasarım skill'leri, tasarım sistemi dosyaları ve diyagram araçları.
+
+- Bileşen kütüphaneleri: [AnmolSaini16/mapcn](https://github.com/AnmolSaini16/mapcn), [recharts/recharts](https://github.com/recharts/recharts), [tremorlabs/tremor](https://github.com/tremorlabs/tremor), [saadeghi/daisyui](https://github.com/saadeghi/daisyui), [DavidHDev/react-bits](https://github.com/DavidHDev/react-bits), [magicuidesign/magicui](https://github.com/magicuidesign/magicui), [shadcn-ui/ui](https://github.com/shadcn-ui/ui)
+- Animasyon: [catdad/canvas-confetti](https://github.com/catdad/canvas-confetti), [Jakubantalik/thinking-orbs](https://github.com/Jakubantalik/thinking-orbs), [airbnb/lottie-web](https://github.com/airbnb/lottie-web), [greensock/GSAP](https://github.com/greensock/GSAP), [motiondivision/motion](https://github.com/motiondivision/motion)
+- Tasarım skill'leri: [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill), [pbakaus/impeccable](https://github.com/pbakaus/impeccable), [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill), [emilkowalski/skills](https://github.com/emilkowalski/skills)
+- Tasarım sistemi ve Figma: [figma/mcp-server-guide](https://github.com/figma/mcp-server-guide), [anthropics/html-effectiveness](https://github.com/anthropics/html-effectiveness), [google-labs-code/design.md](https://github.com/google-labs-code/design.md), [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md), [nexu-io/open-design](https://github.com/nexu-io/open-design)
+- Diyagram ve sunum: [cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design), [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides), [wentong2022-arch/flowforge-skill](https://github.com/wentong2022-arch/flowforge-skill)
+
+### 🔒 Güvenlik, test & kod kalitesi
+
+Güvenlik taraması, uçtan uca ve yük testi, kod inceleme ve kullanılmayan kodu temizleme.
+
+- Güvenlik: [OWASP/CheatSheetSeries](https://github.com/OWASP/CheatSheetSeries), [usestrix/strix](https://github.com/usestrix/strix), [google/osv-scanner](https://github.com/google/osv-scanner)
+- Test: [grafana/k6](https://github.com/grafana/k6), [microsoft/playwright](https://github.com/microsoft/playwright), [google/artemis](https://github.com/google/artemis), [addyosmani/web-quality-skills](https://github.com/addyosmani/web-quality-skills)
+- Kod inceleme ve temizlik: [alibaba/open-code-review](https://github.com/alibaba/open-code-review), [octopusreview/octopus](https://github.com/octopusreview/octopus), [webpro-nl/knip](https://github.com/webpro-nl/knip)
+
+### 🚀 Yayına alma & izleme
+
+Kendi sunucuna deploy, mağaza yayınını otomatikleştirme, izleme ve analitik.
+
+- Deploy ve mağaza yayını: [fastlane/fastlane](https://github.com/fastlane/fastlane), [Dokploy/dokploy](https://github.com/Dokploy/dokploy), [coollabsio/coolify](https://github.com/coollabsio/coolify)
+- İzleme ve analitik: [prometheus/prometheus](https://github.com/prometheus/prometheus), [umami-software/umami](https://github.com/umami-software/umami), [grafana/grafana](https://github.com/grafana/grafana), [openreplay/openreplay](https://github.com/openreplay/openreplay)
+
+### 📣 İçerik, SEO & pazarlama
+
+AI yazısını doğallaştırma, SEO ve App Store optimizasyonu, pazarlama ve sosyal medya.
+
+- AI yazısını temizleme: [petergyang/no-ai-slop](https://github.com/petergyang/no-ai-slop), [blader/humanizer](https://github.com/blader/humanizer), [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop)
+- SEO ve ASO: [every-app/open-seo](https://github.com/every-app/open-seo), [Kronop/vibe-aso](https://github.com/Kronop/vibe-aso)
+- Pazarlama ve sosyal medya: [gitroomhq/postiz-app](https://github.com/gitroomhq/postiz-app), [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)
+
+### 🎬 Medya üretimi
+
+Video, ses ve konuşma üretimi ve düzenlemesi.
+
+- Video: [deepbeepmeep/Wan2GP](https://github.com/deepbeepmeep/Wan2GP), [Anil-matcha/Open-Generative-AI](https://github.com/Anil-matcha/Open-Generative-AI), [latent-spaces/brag](https://github.com/latent-spaces/brag), [getopenscreen/openscreen](https://github.com/getopenscreen/openscreen), [remotion-dev/remotion](https://github.com/remotion-dev/remotion)
+- Ses ve konuşma: [abus-aikorea/voice-pro](https://github.com/abus-aikorea/voice-pro), [SessionLoops/PitchNet](https://github.com/SessionLoops/PitchNet), [openai/whisper](https://github.com/openai/whisper)
+
+### 📖 Öğrenme & listeler
+
+Sistem tasarımı ve Claude Code rehberleri, faydalı listeler ve veri setleri.
+
+- Rehberler ve notlar: [donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer), [ByteByteGoHq/system-design-101](https://github.com/ByteByteGoHq/system-design-101), [CyC2018/CS-Notes](https://github.com/CyC2018/CS-Notes), [shanraisshan/claude-code-best-practice](https://github.com/shanraisshan/claude-code-best-practice)
+- Listeler ve veri setleri: [BraveOPotato/FckSignups](https://github.com/BraveOPotato/FckSignups), [selahattinunlu/harika-github-repolari](https://github.com/selahattinunlu/harika-github-repolari), [hasaneyldrm/exercises-dataset](https://github.com/hasaneyldrm/exercises-dataset), [marcelscruz/public-apis](https://github.com/marcelscruz/public-apis), [ripienaar/free-for-dev](https://github.com/ripienaar/free-for-dev)
+
+### 🧰 Günlük araçlar
+
+Geliştirme dışı günlük işler: dosya dönüştürme, finans, kişisel verimlilik.
+
+- Dosya ve belge dönüştürme: [jgm/pandoc](https://github.com/jgm/pandoc), [C4illin/ConvertX](https://github.com/C4illin/ConvertX)
+- Finans: [HKUDS/Vibe-Trading](https://github.com/HKUDS/Vibe-Trading), [Fincept-Corporation/FinceptTerminal](https://github.com/Fincept-Corporation/FinceptTerminal), [we-promise/sure](https://github.com/we-promise/sure)
+- Kişisel ve verimlilik: [MadsLorentzen/ai-job-search](https://github.com/MadsLorentzen/ai-job-search), [usekaneo/kaneo](https://github.com/usekaneo/kaneo), [Sonarr/Sonarr](https://github.com/Sonarr/Sonarr), [antitree/nfc_canary](https://github.com/antitree/nfc_canary)

@@ -28,8 +28,8 @@ import { Icon } from '@astrojs/starlight/components';
 	const bilgi = pencere.querySelector<HTMLElement>('.ya-bilgi')!;
 	const EN_COK = 60;
 
-	// Türkçe büyük/küçük harf ve şapka, nokta farkı aramayı etkilemesin: "guvenlik" "Güvenlik"i bulur.
-	const katla = (s: string) => s.toLocaleLowerCase('tr').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ı/g, 'i');
+	// Eşleştirme kuralları src/arama.ts'te: harf farkı yok sayılır, dolgu kelimeleri atılır, ekli kelimeler kökünden eşleşir.
+	import { katla, terimler as terimleriAyir, eslesenParca } from '../arama';
 	const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
 	let dizin: Kayit[] | null = null;
 	const hazirla = () => (dizin ??= ((window as any).SHIP_ARAMA as Kayit[] || []).map((k) => ({ ...k, kb: katla(k.b), kx: katla(k.x || '') })));
@@ -43,9 +43,11 @@ import { Icon } from '@astrojs/starlight/components';
 		return new URL(p, kok).href + (parca ? '#' + parca : '');
 	};
 
-	const vurgula = (metin: string, katli: string, terimler: string[]) => {
+	// parcalar: her terimin kayıtta eşleşen kısmı (kelimenin tamamı ya da kökü); vurgulama bunlarla yapılır.
+	const vurgula = (metin: string, katli: string, parcalar: string[]) => {
 		const araliklar: [number, number][] = [];
-		for (const t of terimler) for (let i = katli.indexOf(t); i >= 0; i = katli.indexOf(t, i + t.length)) araliklar.push([i, i + t.length]);
+		// İki harfli kelimeler başka kelimelerin içinde de geçtiği için vurgulanmaz.
+		for (const t of parcalar.filter((p) => p.length > 2)) for (let i = katli.indexOf(t); i >= 0; i = katli.indexOf(t, i + t.length)) araliklar.push([i, i + t.length]);
 		araliklar.sort((a, b) => a[0] - b[0]);
 		let html = '', son = 0;
 		for (const [a, b] of araliklar) {
@@ -55,24 +57,41 @@ import { Icon } from '@astrojs/starlight/components';
 		}
 		return html + esc(metin.slice(son));
 	};
-	const parca = (k: Kayit, terimler: string[]) => {
-		const yerler = terimler.map((t) => k.kx!.indexOf(t)).filter((i) => i >= 0);
+	const parca = (k: Kayit, parcalar: string[]) => {
+		const yerler = parcalar.map((t) => k.kx!.indexOf(t)).filter((i) => i >= 0);
 		const i = yerler.length ? Math.min(...yerler) : 0;
 		const bas = Math.max(0, i - 60), bit = Math.min(k.x.length, bas + 220);
-		return (bas > 0 ? '…' : '') + vurgula(k.x.slice(bas, bit), k.kx!.slice(bas, bit), terimler) + (bit < k.x.length ? '…' : '');
+		return (bas > 0 ? '…' : '') + vurgula(k.x.slice(bas, bit), k.kx!.slice(bas, bit), parcalar) + (bit < k.x.length ? '…' : '');
 	};
 
+	// Kelimelerin en az yarısını içeren kayıtlar gösterilir: önce hepsini içerenler, sonra başlıkta ve tam kelimeyle tutanlar.
 	const ara = () => {
-		const terimler = katla(girdi.value).split(/\s+/).filter(Boolean);
+		const terimler = terimleriAyir(girdi.value);
 		if (!terimler.length) { liste.innerHTML = ''; bilgi.textContent = ''; return; }
+		const esik = Math.ceil(terimler.length / 2);
 		const bulunan = hazirla()
-			.map((k) => terimler.every((t) => k.kb!.includes(t) || k.kx!.includes(t)) ? { k, puan: terimler.reduce((n, t) => n + (k.kb!.includes(t) ? 3 : 1), 0) } : null)
-			.filter((x): x is { k: Kayit; puan: number } => !!x)
-			.sort((a, b) => b.puan - a.puan);
-		bilgi.textContent = bulunan.length ? `${bulunan.length} sonuç${bulunan.length > EN_COK ? `, ilk ${EN_COK} tanesi` : ''}` : 'Sonuç yok.';
-		liste.innerHTML = bulunan.slice(0, EN_COK).map(({ k }) =>
-			`<li><a href="${esc(adres(k.u))}"><span class="ya-sayfa">${esc(k.s)}</span><span class="ya-baslik">${vurgula(k.b, k.kb!, terimler)}</span>` +
-			(k.x ? `<span class="ya-metin">${parca(k, terimler)}</span>` : '') + '</a></li>').join('');
+			.map((k) => {
+				let tutan = 0, puan = 0;
+				const parcalar: string[] = [];
+				for (const t of terimler) {
+					const baslikta = eslesenParca(t, k.kb!);
+					const p = baslikta || eslesenParca(t, k.kx!);
+					if (!p) continue;
+					tutan++;
+					parcalar.push(p);
+					puan += (baslikta ? 3 : 1) * (p === t ? 1 : 0.7);
+				}
+				return tutan >= esik ? { k, tutan, puan, parcalar } : null;
+			})
+			.filter((x): x is { k: Kayit; tutan: number; puan: number; parcalar: string[] } => !!x)
+			.sort((a, b) => b.tutan - a.tutan || b.puan - a.puan);
+		const tam = bulunan.filter((x) => x.tutan === terimler.length).length;
+		bilgi.textContent = bulunan.length
+			? `${bulunan.length} sonuç` + (tam < bulunan.length ? `, ${tam} tanesi bütün kelimeleri içeriyor` : '') + (bulunan.length > EN_COK ? `; ilk ${EN_COK} tanesi` : '')
+			: 'Sonuç yok.';
+		liste.innerHTML = bulunan.slice(0, EN_COK).map(({ k, parcalar }) =>
+			`<li><a href="${esc(adres(k.u))}"><span class="ya-sayfa">${esc(k.s)}</span><span class="ya-baslik">${vurgula(k.b, k.kb!, parcalar)}</span>` +
+			(k.x ? `<span class="ya-metin">${parca(k, parcalar)}</span>` : '') + '</a></li>').join('');
 	};
 
 	const ac = () => { pencere.showModal(); girdi.select(); };

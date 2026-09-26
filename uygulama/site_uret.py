@@ -1,7 +1,7 @@
 """Starlight sitesinin içeriğini çekirdekten (uygulama/katalog.py) üretir. Üretilenler elle düzenlenmez:
   site/src/content/docs/   sayfalar (kontrol listeleri, rehberler, repo kataloğu, genel bakış)
   site/src/data/           katalog.json (bileşenler için) ve sidebar.json (kenar menü)
-  site/public/             katalog.json ve llms.txt (AI'lar için)
+  site/public/             katalog.json, llms.txt ve llms-full.txt (AI'lar için)
   site/src/yerel/          sadece yerel sayfanın verisi: raporlar, raporlu kenar menü, arama dizini
 Herkese açık site (npm run build) raporları içermez. Yerel sayfa aynı sitenin SHIP_YEREL=1 ile derlenmiş hâlidir:
 guncelle.py onu sayfa/ klasörüne derler, index.html oraya yönlendirir ve sunucusuz, çift tıklamayla açılır.
@@ -229,18 +229,21 @@ def guide_page(doc, tr, comp):
 
 def public_catalog(cat):
     """Siteye ve AI'lara açılan katalog: raporlar ve Türkçe açıklaması ya da kurulum yeri olmayan repolar dışarıda kalır."""
-    names = {f["id"]: f["name"] for f in cat["repolar"].get("folders", [])}
+    folders = cat["repolar"].get("folders", [])
     by_file = {d["dosya"]: d for d in cat["belgeler"]}
     list_doc = {d["liste"]: d for d in cat["belgeler"] if d["liste"]}
     repos = [r for r in cat["repolar"]["repos"] if r.get("tr") and r["kurulum"]]
     return {
-        "aciklama": "ship-ready kataloğu: kontrol listeleri (maddeler kalıcı kimlikleriyle), rehber öğeleri ve doğrulanmış GitHub repoları.",
+        "aciklama": "ship-ready kataloğu: kontrol listeleri (maddeler kalıcı kimlikleriyle), rehber öğeleri ve doğrulanmış GitHub repoları. Repolar amaca göre kategori (klasor) ve alt kategoriye (alt_klasor) ayrılır; kategori ve alt kategori adları hem her repoda hem klasorler listesinde yazar.",
         "belgeler": [{"baslik": d["baslik"], "adres": route(d), "grup": d["grup"], "liste": d["liste"], "ozet": d["ozet"]} for d in cat["belgeler"]],
         "listeler": [{"id": l["id"], "baslik": l["baslik"], "adres": route(list_doc[l["id"]]), "bicim": l["bicim"], "bolumler": l["bolumler"]}
                      for l in cat["listeler"]],
         "ogeler": [{**o, "belge": route(by_file[o["belge"]])} for o in cat["ogeler"]],
-        "klasorler": [{"id": f, "ad": n} for f, n in names.items() if any(r.get("f") == f for r in repos)],
-        "repolar": [{"repo": r["r"], "klasor": r.get("f"), "kurulum": r["kurulum"], "aciklama": r.get("tr", ""), "uyari": r.get("w") or "",
+        "klasorler": [{"id": f["id"], "ad": f["name"], "kisa": f.get("kisa", f["name"]), "aciklama": f.get("aciklama", ""),
+                       "alt": [{"id": a["id"], "ad": a["name"]} for a in f.get("alt", []) if any(r.get("f") == f["id"] and r.get("af") == a["id"] for r in repos)]}
+                      for f in folders if any(r.get("f") == f["id"] for r in repos)],
+        "repolar": [{"repo": r["r"], "klasor": r.get("f"), "alt_klasor": r.get("af"), "kategori": r["kategori"], "alt_kategori": r["alt_kategori"],
+                     "kurulum": r["kurulum"], "aciklama": r.get("tr", ""), "uyari": r.get("w") or "",
                      "dil": r.get("l"), "yildiz": r.get("s"), "eklenme": r.get("at") or None, "son_guncelleme": r.get("pushed") or None,
                      "arsiv": bool(r.get("archived")),
                      "kaynak": {"ad": r["src"]["t"], "url": r["src"]["u"]} if r.get("src") and r["src"].get("u") else None} for r in repos],
@@ -265,7 +268,7 @@ def home_page(cat, pub, tr, comp):
                    for d in cat["belgeler"] if d["liste"]])
     lines += ["## Rehberler", ""]
     lines += grid([tile(ikon=d["ikon"], baslik=d["kisa"], href=route(d), ozet=summary(d["ozet"])) for d in cat["belgeler"] if not d["liste"]])
-    info = f"repo · {len(pub['klasorler'])} klasör" + (f" · {'.'.join(reversed(synced[:10].split('-')))} güncellendi" if synced else "")
+    info = f"repo · {len(pub['klasorler'])} kategori" + (f" · {'.'.join(reversed(synced[:10].split('-')))} güncellendi" if synced else "")
     tiles = [tile(ikon="package", baslik="Repo kataloğu", href="/repolar/", sayi=len(repos), bilgi=info,
                   ozet="Türkçe açıklaması, kurulum yeri (proje, Claude, Codex, ayrı uygulama) ve uyarısıyla doğrulanmış GitHub repoları.")]
     warn = [f"{len(stale)} repo arşivlenmiş ya da 1+ yıldır güncellenmiyor" if stale else "", f"{len(tr.broken)} link açılmıyor" if tr.broken else ""]
@@ -275,7 +278,7 @@ def home_page(cat, pub, tr, comp):
     lines += ["## Katalog", ""] + grid(tiles)
     lines += ["<YerelTakip />", ""]
     lines += ["## AI'lar için", "",
-              "Kataloğun tamamı makinenin okuyacağı biçimde de yayımlanır: [katalog.json](/katalog.json) maddeleri kalıcı kimlikleriyle (ör. `yo-hesap-silme`), rehber öğelerini ve repoları, [llms.txt](/llms.txt) sayfaların özetini içerir.",
+              "Kataloğun tamamı makinenin okuyacağı biçimde de yayımlanır: [katalog.json](/katalog.json) maddeleri kalıcı kimlikleriyle (ör. `yo-hesap-silme`), rehber öğelerini ve repoları, [llms.txt](/llms.txt) sayfaların ve kategoriye göre dizilmiş repoların özetini, [llms-full.txt](/llms-full.txt) bütün içeriği tek dosyada verir.",
               "Denetim prompt'ları raporu bu kimliklerle ister; madde numaraları değişse de raporlar karşılaştırılabilir kalır."]
     return front(title="Genel bakış", description=DESCRIPTION, tableOfContents=False) + "\n" + "\n".join(lines) + "\n"
 
@@ -288,15 +291,54 @@ def repo_page(pub, comp):
             "Kurulum düğmeleri aracı kuracak ajana yapıştırılacak prompt'u kopyalar.\n\n<RepoKatalog />\n")
 
 
+KURULUM_METNI = {"proje": "projeye eklenir", "claude": "Claude Code'a kurulur", "codex": "Codex'e kurulur",
+                 "uygulama": "ayrı uygulama", "kaynak": "kaynak, kurulmaz"}
+
+
+def repo_groups(pub):
+    """Repolar kategori ve alt kategori sırasıyla: [(kategori, [(alt kategori, [repo])])]."""
+    return [(k, [(a, [r for r in pub["repolar"] if r["klasor"] == k["id"] and r["alt_klasor"] == a["id"]]) for a in k["alt"]])
+            for k in pub["klasorler"]]
+
+
 def llms(cat, pub):
+    """AI'lar için özet: sayfalar ve kategoriye göre dizilmiş repo listesi; ayrıntı llms-full.txt'te."""
     lines = ["# ship-ready", "", f"> {DESCRIPTION}", "",
              "Kontrol listesi maddelerinin kalıcı kimlikleri vardır (ör. yo-hesap-silme, as-paywall-linkleri); denetim raporları bu kimliklerle yazılır.",
-             "Kataloğun tamamı JSON olarak: [katalog.json](/katalog.json)", "", "## Kontrol listeleri", ""]
+             "Bütün içerik tek dosyada: [llms-full.txt](/llms-full.txt). Makinenin okuyacağı katalog: [katalog.json](/katalog.json).",
+             "", "## Kontrol listeleri", ""]
     lines += [f"- [{d['baslik']}]({route(d)}): {d['ozet']}" for d in cat["belgeler"] if d["liste"]]
     lines += ["", "## Rehberler", ""]
     lines += [f"- [{d['baslik']}]({route(d)}): {d['ozet']}" for d in cat["belgeler"] if not d["liste"]]
-    lines += ["", "## Repolar", "", f"- [Repo kataloğu](/repolar/): {len(pub['repolar'])} doğrulanmış GitHub reposu, kurulum yeri ve uyarılarıyla"]
+    lines += ["", "## Repo kataloğu", "",
+              f"{len(pub['repolar'])} doğrulanmış GitHub reposu amaca göre kategori ve alt kategoriye ayrılır; sayfası [/repolar/](/repolar/), açıklamaları ve kurulum yerleri llms-full.txt'te."]
+    for k, altlar in repo_groups(pub):
+        lines += ["", f"### {k['ad']}", "", k["aciklama"], ""]
+        lines += [f"- {a['ad']}: " + ", ".join(f"[{r['repo']}](https://github.com/{r['repo']})" for r in rs) for a, rs in altlar if rs]
     return "\n".join(lines) + "\n"
+
+
+def llms_full(cat, pub, tr):
+    """Bütün içerik tek Markdown dosyasında: listeler (maddeler kimlikleriyle), rehberler ve açıklamalı repo kataloğu."""
+    out = [f"# ship-ready: bütün içerik", "", f"> {DESCRIPTION}", "",
+           "Kontrol listelerinde her maddenin sonundaki köşeli parantez maddenin kalıcı kimliğidir; denetim raporu bu kimliklerle yazılır.",
+           "Adresler sitenin köküne göredir."]
+    for d in cat["belgeler"]:
+        body = katalog.ITEM_ID.sub(lambda m: f" [{m.group(1)}]", "\n".join(body_lines(d["metin"])))
+        out += ["", "---", "", f"# {d['baslik']}", "", f"Adres: {route(d)}", "", tr(body).strip()]
+    out += ["", "---", "", "# Repo kataloğu", "", "Adres: /repolar/", ""]
+    for k, altlar in repo_groups(pub):
+        out += [f"## {k['ad']}", "", k["aciklama"], ""]
+        for a, rs in altlar:
+            if not rs:
+                continue
+            out += [f"### {a['ad']}", ""]
+            for r in rs:
+                kur = ", ".join(KURULUM_METNI.get(x, x) for x in r["kurulum"])
+                out.append(f"- [{r['repo']}](https://github.com/{r['repo']}): {r['aciklama']} Kurulum: {kur}."
+                           + (f" Uyarı: {r['uyari']}" if r["uyari"] else ""))
+            out.append("")
+    return "\n".join(out).rstrip() + "\n"
 
 
 def sidebar(cat, pub):
@@ -432,7 +474,10 @@ def search_index(cat, pub, groups):
             else:
                 text.append(line_text(line))
     for r in pub["repolar"]:
-        add("Repo kataloğu", r["repo"], f"/repolar/#ara={r['repo']}", " ".join(x for x in (r["aciklama"], r["uyari"]) if x))
+        kat = next((k for k in pub["klasorler"] if k["id"] == r["klasor"]), {"ad": "", "alt": []})
+        alt = next((a["ad"] for a in kat["alt"] if a["id"] == r["alt_klasor"]), "")
+        add(f"Repo kataloğu · {kat['ad']}" + (f" › {alt}" if alt else ""), r["repo"], f"/repolar/#ara={r['repo']}",
+            " ".join(x for x in (r["aciklama"], r["uyari"], kat["ad"], alt) if x))
     for g in groups:
         for r in g["raporlar"]:
             lines = [l for l in r["metin"].split("\n") if l.strip() and not katalog.is_separator(l)]
@@ -479,6 +524,7 @@ def main(cat=None):
     write(DATA / "sidebar.json", json.dumps(sidebar(cat, pub), ensure_ascii=False, indent=1))
     write(PUBLIC / "katalog.json", data)
     write(PUBLIC / "llms.txt", llms(cat, pub))
+    write(PUBLIC / "llms-full.txt", llms_full(cat, pub, tr))
     local_data(cat, pub)
     pages = len(list(DOCS.rglob("*.md*")))
     print(f"site: {pages} sayfa, {sum(count(l) for l in cat['listeler'])} madde, {len(pub['ogeler'])} rehber öğesi, {len(pub['repolar'])} repo")

@@ -1,11 +1,14 @@
 ---
-// Doğrulanmış GitHub repoları: klasör, kurulum yeri ve durum filtresi, arama, sıralama; kartlar bento düzeninde dizilir.
+// Doğrulanmış GitHub repoları amaca göre kategori ve alt kategori başlıkları altında gruplu gösterilir.
+// Üstteki çiplerle kategori, alt kategori, kurulum yeri ve durum süzülür; arama ve sıralama grupların içinde çalışır,
+// boş kalan başlıklar gizlenir. Kartlar bento düzeninde dizilir. Arama kuralları src/arama.ts'te (yerel sayfanın aramasıyla aynı).
 import katalog from '../data/katalog.json';
 import PromptDugme from './PromptDugme.astro';
+import { katla } from '../arama';
 
 type Repo = (typeof katalog.repolar)[number];
 const repolar = katalog.repolar;
-const klasorler = katalog.klasorler.filter((f) => repolar.some((r) => r.klasor === f.id));
+const klasorler = katalog.klasorler;
 const yilOnce = new Date(Date.now() - 365 * 864e5).toISOString().slice(0, 10);
 const eski = (r: Repo) => !!r.son_guncelleme && r.son_guncelleme < yilOnce;
 const dikkat = (r: Repo) => r.arsiv || eski(r);
@@ -29,7 +32,7 @@ const say = (f: (r: Repo) => boolean) => repolar.filter(f).length;
 
 <div class="rk not-content">
 	<div class="rk-arac">
-		<input type="search" class="rk-ara" placeholder="Repo adı, açıklama ya da uyarı ara…" aria-label="Repolarda ara" />
+		<input type="search" class="rk-ara" placeholder="Repo adı, açıklama, kategori ya da uyarı ara…" aria-label="Repolarda ara" />
 		<div class="rk-sirala" role="group" aria-label="Sıralama">
 			<span class="rk-etiket">Sırala:</span>
 			<button type="button" class="sira" data-sira="at" aria-pressed="true">Yeni eklenen</button>
@@ -37,11 +40,20 @@ const say = (f: (r: Repo) => boolean) => repolar.filter(f).length;
 			<button type="button" class="sira" data-sira="ad" aria-pressed="false">Ad</button>
 		</div>
 	</div>
-	<div class="rk-cipler" role="group" aria-label="Klasör">
+	<div class="rk-cipler" role="group" aria-label="Kategori">
 		<button type="button" class="cip on" data-klasor="*">Tümü <span>{repolar.length}</span></button>
 		{say(dikkat) > 0 && <button type="button" class="cip uyari" data-klasor="!">⚠ Dikkat <span>{say(dikkat)}</span></button>}
-		{klasorler.map((f) => <button type="button" class="cip" data-klasor={f.id}>{f.ad} <span>{say((r) => r.klasor === f.id)}</span></button>)}
+		{klasorler.map((f) => <button type="button" class="cip" data-klasor={f.id} title={f.ad}>{f.kisa} <span>{say((r) => r.klasor === f.id)}</span></button>)}
 	</div>
+	{
+		klasorler.map((f) => (
+			<div class="rk-cipler kucuk rk-alt" role="group" aria-label={`${f.ad} alt kategorileri`} data-alt-for={f.id} hidden>
+				<span class="rk-etiket">Alt kategori:</span>
+				<button type="button" class="cip on" data-alt="*">Hepsi</button>
+				{f.alt.map((a) => <button type="button" class="cip" data-alt={a.id}>{a.ad} <span>{say((r) => r.klasor === f.id && r.alt_klasor === a.id)}</span></button>)}
+			</div>
+		))
+	}
 	<div class="rk-cipler kucuk" role="group" aria-label="Kurulum yeri">
 		<span class="rk-etiket">Kurulum:</span>
 		<button type="button" class="cip on" data-kurulum="*">Hepsi</button>
@@ -50,59 +62,75 @@ const say = (f: (r: Repo) => boolean) => repolar.filter(f).length;
 		))}
 	</div>
 	<p class="rk-sonuc" aria-live="polite"></p>
-	<div class="rk-izgara">
-		{
-			repolar.map((r) => {
-				const [sahip, ad] = r.repo.split('/');
-				const url = `https://github.com/${r.repo}`;
-				const kur = r.kurulum.filter((k) => k !== 'kaynak') as ('proje' | 'claude' | 'codex' | 'uygulama')[];
-				const ara = [r.repo, r.aciklama, r.uyari, r.kaynak?.ad, ...r.kurulum.map((k) => KURULUM[k as keyof typeof KURULUM].etiket)].join(' ').toLocaleLowerCase('tr');
-				const uzun = (r.aciklama.length + (r.uyari || '').length);
-				return (
-					<article class="repo" data-klasor={r.klasor} data-kurulum={r.kurulum.join(' ')} data-dikkat={dikkat(r) ? '1' : ''}
-						data-ara={ara} data-at={r.eklenme || ''} data-s={r.yildiz ?? 0} data-ad={r.repo.toLowerCase()} data-uzun={uzun}>
-						<div class="repo-ust">
-							<a class="repo-ad" href={url} target="_blank" rel="noopener">{ad}</a>
-							<span class="repo-yildiz">★ {yildiz(r.yildiz)}</span>
+	{
+		klasorler.map((f) => (
+			<section class="rk-bolum" id={`kategori-${f.id}`} data-klasor={f.id}>
+				<header class="rk-bolum-ust">
+					<h2 class="rk-bolum-baslik">{f.ad} <span class="rk-sayi">{say((r) => r.klasor === f.id)}</span></h2>
+					<p class="rk-bolum-aciklama">{f.aciklama}</p>
+				</header>
+				{f.alt.map((a) => (
+					<div class="rk-alt-bolum" data-alt={a.id}>
+						<h3 class="rk-alt-baslik">{a.ad} <span class="rk-sayi">{say((r) => r.klasor === f.id && r.alt_klasor === a.id)}</span></h3>
+						<div class="rk-izgara">
+							{repolar.filter((r) => r.klasor === f.id && r.alt_klasor === a.id).map((r) => {
+								const [sahip, ad] = r.repo.split('/');
+								const url = `https://github.com/${r.repo}`;
+								const kur = r.kurulum.filter((k) => k !== 'kaynak') as ('proje' | 'claude' | 'codex' | 'uygulama')[];
+								const ara = katla([r.repo, r.aciklama, r.uyari, r.kaynak?.ad, r.kategori, r.alt_kategori, ...r.kurulum.map((k) => KURULUM[k as keyof typeof KURULUM].etiket)].join(' '));
+								const uzun = r.aciklama.length + (r.uyari || '').length;
+								return (
+									<article class="repo" data-klasor={r.klasor} data-alt={r.alt_klasor} data-kurulum={r.kurulum.join(' ')} data-dikkat={dikkat(r) ? '1' : ''}
+										data-ara={ara} data-at={r.eklenme || ''} data-s={r.yildiz ?? 0} data-ad={r.repo.toLowerCase()} data-uzun={uzun}>
+										<div class="repo-ust">
+											<a class="repo-ad" href={url} target="_blank" rel="noopener">{ad}</a>
+											<span class="repo-yildiz">★ {yildiz(r.yildiz)}</span>
+										</div>
+										<p class="repo-sahip">{sahip}{r.dil && ` · ${r.dil}`}{r.eklenme && ` · ${tarih(r.eklenme)}`}</p>
+										<p class="repo-aciklama">{r.aciklama}</p>
+										{r.uyari && <p class="repo-uyari">⚠ {r.uyari}</p>}
+										<p class="repo-etiketler">
+											{r.kurulum.map((k) => <span class="etiket">{KURULUM[k as keyof typeof KURULUM].etiket}</span>)}
+											{r.kaynak && <a class="etiket kaynak" href={r.kaynak.url} target="_blank" rel="noopener">📷 {r.kaynak.ad}</a>}
+											{r.arsiv && <span class="etiket turuncu">Arşivlenmiş</span>}
+											{eski(r) && <span class="etiket turuncu" title={`Son güncelleme ${tarih(r.son_guncelleme)}`}>1+ yıldır güncellenmiyor</span>}
+										</p>
+										{kur.length > 0 && (
+											<div class="repo-kurulum">
+												<span>Kurulum prompt'u</span>
+												{kur.map((k) => <PromptDugme metin={PROMPT[k](url)} etiket={KURULUM[k].dugme} tur={KURULUM[k].tur} />)}
+											</div>
+										)}
+									</article>
+								);
+							})}
 						</div>
-						<p class="repo-sahip">{sahip}{r.dil && ` · ${r.dil}`}{r.eklenme && ` · ${tarih(r.eklenme)}`}</p>
-						<p class="repo-aciklama">{r.aciklama}</p>
-						{r.uyari && <p class="repo-uyari">⚠ {r.uyari}</p>}
-						<p class="repo-etiketler">
-							<span class="etiket cerceve">{katalog.klasorler.find((f) => f.id === r.klasor)?.ad}</span>
-							{r.kurulum.map((k) => <span class="etiket">{KURULUM[k as keyof typeof KURULUM].etiket}</span>)}
-							{r.kaynak && <a class="etiket kaynak" href={r.kaynak.url} target="_blank" rel="noopener">📷 {r.kaynak.ad}</a>}
-							{r.arsiv && <span class="etiket turuncu">Arşivlenmiş</span>}
-							{eski(r) && <span class="etiket turuncu" title={`Son güncelleme ${tarih(r.son_guncelleme)}`}>1+ yıldır güncellenmiyor</span>}
-						</p>
-						{kur.length > 0 && (
-							<div class="repo-kurulum">
-								<span>Kurulum prompt'u</span>
-								{kur.map((k) => <PromptDugme metin={PROMPT[k](url)} etiket={KURULUM[k].dugme} tur={KURULUM[k].tur} />)}
-							</div>
-						)}
-					</article>
-				);
-			})
-		}
-	</div>
+					</div>
+				))}
+			</section>
+		))
+	}
+	<p class="rk-bos" hidden>Sonuç yok; aramayı ya da süzgeci değiştir.</p>
 </div>
 
 <script>
-	// Filtre, arama ve sıralama tarayıcıda çalışır; kartlar içerikleri kadar satır kaplar (bento),
-	// içeriği en uzun %15'lik dilim üç ve daha çok sütunda iki sütun genişliğinde olur.
+	// Süzme, arama ve sıralama tarayıcıda çalışır. Her alt kategorinin ızgarası ayrı dizilir: kartlar içerikleri kadar
+	// satır kaplar (bento), içeriği en uzun %15'lik dilim üç ve daha çok sütunda iki sütun genişliğinde olur.
+	import { terimler, eslesme } from '../arama';
 	const kok = document.querySelector<HTMLElement>('.rk');
 	if (kok) {
-		const izgara = kok.querySelector<HTMLElement>('.rk-izgara')!;
-		const kartlar = [...izgara.querySelectorAll<HTMLElement>('.repo')];
+		const kartlar = [...kok.querySelectorAll<HTMLElement>('.repo')];
+		const izgaralar = [...kok.querySelectorAll<HTMLElement>('.rk-izgara')];
+		const bolumler = [...kok.querySelectorAll<HTMLElement>('.rk-bolum')];
 		const ara = kok.querySelector<HTMLInputElement>('.rk-ara')!;
 		const sonuc = kok.querySelector<HTMLElement>('.rk-sonuc')!;
-		let klasor = '*', kurulum = '*', sira = 'at';
+		const bos = kok.querySelector<HTMLElement>('.rk-bos')!;
+		let klasor = '*', alt = '*', kurulum = '*', sira = 'at';
 
-		const diz = () => {
+		const diz = (izgara: HTMLElement) => {
 			const st = getComputedStyle(izgara);
 			const sutun = st.gridTemplateColumns.split(' ').length;
-			const gorunen = kartlar.filter((k) => !k.hidden);
+			const gorunen = [...izgara.children].filter((k): k is HTMLElement => !(k as HTMLElement).hidden) as HTMLElement[];
 			const uzunluklar = gorunen.map((k) => +k.dataset.uzun!).sort((a, b) => a - b);
 			const esik = Math.max(170, uzunluklar[Math.floor(uzunluklar.length * 0.85)] || 0);
 			izgara.classList.toggle('tek', sutun < 2);
@@ -114,23 +142,41 @@ const say = (f: (r: Repo) => boolean) => repolar.filter(f).length;
 			gorunen.forEach((k, i) => { k.style.gridRow = `span ${aralik[i]}`; });
 			izgara.classList.remove('olc');
 		};
+		const dizHepsi = () => izgaralar.forEach((g) => { if (!g.closest('[hidden]')) diz(g); });
+
+		// Başlıklardaki sayı görünen kart sayısını gösterir; hiç kartı kalmayan başlık gizlenir.
+		const sayilariYaz = (kap: HTMLElement, secici: string) => {
+			const n = kap.querySelectorAll('.repo:not([hidden])').length;
+			kap.hidden = n === 0;
+			const sayi = kap.querySelector<HTMLElement>(secici);
+			if (sayi) sayi.textContent = String(n);
+			return n;
+		};
 
 		const uygula = () => {
-			const q = ara.value.trim().toLocaleLowerCase('tr').split(/\s+/).filter(Boolean);
+			const q = terimler(ara.value);
 			let n = 0;
 			for (const k of kartlar) {
 				const d = k.dataset;
 				const gor = (klasor === '*' || (klasor === '!' ? d.dikkat === '1' : d.klasor === klasor))
+					&& (alt === '*' || d.alt === alt)
 					&& (kurulum === '*' || d.kurulum!.split(' ').includes(kurulum))
-					&& q.every((t) => d.ara!.includes(t));
+					&& q.every((t) => eslesme(t, d.ara!) > 0);
 				k.hidden = !gor;
 				if (gor) n++;
 			}
 			const s = sira;
-			kartlar.slice().sort((a, b) => s === 's' ? +b.dataset.s! - +a.dataset.s! : s === 'ad' ? a.dataset.ad!.localeCompare(b.dataset.ad!) : b.dataset.at!.localeCompare(a.dataset.at!))
-				.forEach((k) => izgara.append(k));
+			for (const g of izgaralar) {
+				[...g.children as HTMLCollectionOf<HTMLElement>].sort((a, b) => s === 's' ? +b.dataset.s! - +a.dataset.s! : s === 'ad' ? a.dataset.ad!.localeCompare(b.dataset.ad!) : b.dataset.at!.localeCompare(a.dataset.at!))
+					.forEach((k) => g.append(k));
+			}
+			for (const b of bolumler) {
+				b.querySelectorAll<HTMLElement>('.rk-alt-bolum').forEach((a) => sayilariYaz(a, '.rk-alt-baslik .rk-sayi'));
+				sayilariYaz(b, '.rk-bolum-baslik .rk-sayi');
+			}
 			sonuc.textContent = n === kartlar.length ? `${n} repo` : `${n} / ${kartlar.length} repo`;
-			diz();
+			bos.hidden = n > 0;
+			dizHepsi();
 		};
 
 		kok.addEventListener('click', (e) => {
@@ -143,9 +189,19 @@ const say = (f: (r: Repo) => boolean) => repolar.filter(f).length;
 			}
 			const c = (e.target as HTMLElement).closest<HTMLButtonElement>('.cip');
 			if (!c) return;
-			const grup = c.dataset.klasor !== undefined ? 'klasor' : 'kurulum';
-			kok.querySelectorAll<HTMLElement>(`.cip[data-${grup}]`).forEach((x) => x.classList.toggle('on', x === c));
-			if (grup === 'klasor') klasor = c.dataset.klasor!; else kurulum = c.dataset.kurulum!;
+			const grup = c.dataset.klasor !== undefined ? 'klasor' : c.dataset.alt !== undefined ? 'alt' : 'kurulum';
+			const kapsam = grup === 'alt' ? c.parentElement! : kok;
+			kapsam.querySelectorAll<HTMLElement>(`.cip[data-${grup}]`).forEach((x) => x.classList.toggle('on', x === c));
+			if (grup === 'klasor') {
+				klasor = c.dataset.klasor!;
+				// Kategori değişince alt kategori sıfırlanır; sadece seçilen kategorinin alt kategorileri görünür.
+				alt = '*';
+				kok.querySelectorAll<HTMLElement>('.rk-alt').forEach((s) => {
+					s.hidden = s.dataset.altFor !== klasor;
+					s.querySelectorAll<HTMLElement>('.cip').forEach((x) => x.classList.toggle('on', x.dataset.alt === '*'));
+				});
+			} else if (grup === 'alt') alt = c.dataset.alt!;
+			else kurulum = c.dataset.kurulum!;
 			uygula();
 		});
 		ara.addEventListener('input', uygula);
@@ -159,7 +215,7 @@ const say = (f: (r: Repo) => boolean) => repolar.filter(f).length;
 		window.addEventListener('hashchange', adresten);
 		adresten();
 		let genislik = 0;
-		new ResizeObserver(() => { if (izgara.clientWidth !== genislik) { genislik = izgara.clientWidth; diz(); } }).observe(izgara);
+		new ResizeObserver(() => { if (kok.clientWidth !== genislik) { genislik = kok.clientWidth; dizHepsi(); } }).observe(kok);
 		uygula();
 	}
 </script>

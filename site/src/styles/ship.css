@@ -257,6 +257,9 @@
 	color: var(--sl-color-gray-2);
 	cursor: pointer;
 }
+.rk-alt[hidden] {
+	display: none;
+}
 .rk-cipler.kucuk .cip {
 	font-size: var(--sl-text-xs);
 }
@@ -1008,4 +1011,59 @@ a.kutucuk:hover {
 }
 .tema-oge[aria-checked='true'] .tema-isaret {
 	visibility: visible;
+}
+
+/* ---- Repo kataloğu: kategori ve alt kategori başlıkları ---- */
+.rk-bolum {
+	margin-top: 2.25rem;
+}
+.rk-bolum[hidden],
+.rk-alt-bolum[hidden] {
+	display: none;
+}
+.rk-bolum-ust {
+	padding-bottom: 0.6rem;
+	margin-bottom: 0.25rem;
+	border-bottom: 1px solid var(--sl-color-hairline);
+}
+.rk-bolum-baslik {
+	display: flex;
+	align-items: center;
+	gap: 0.55rem;
+	margin: 0;
+	font-size: var(--sl-text-2xl);
+	font-weight: 700;
+	line-height: 1.25;
+	color: var(--sl-color-white);
+}
+.rk-bolum-aciklama {
+	margin: 0.3rem 0 0;
+	font-size: var(--sl-text-sm);
+	color: var(--sl-color-gray-3);
+}
+.rk-alt-bolum {
+	margin-top: 1.25rem;
+}
+.rk-alt-baslik {
+	display: flex;
+	align-items: center;
+	gap: 0.45rem;
+	margin: 0 0 0.1rem;
+	font-size: var(--sl-text-base);
+	font-weight: 600;
+	color: var(--sl-color-gray-2);
+}
+.rk-sayi {
+	font-size: var(--sl-text-xs);
+	font-weight: 600;
+	line-height: 1.6;
+	padding: 0 0.5rem;
+	border-radius: 999px;
+	background: color-mix(in srgb, var(--sl-color-gray-3) 20%, transparent);
+	color: var(--sl-color-gray-2);
+	font-variant-numeric: tabular-nums;
+}
+.rk-bos {
+	margin-top: 1.25rem;
+	color: var(--sl-color-gray-3);
 }

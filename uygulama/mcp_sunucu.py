@@ -21,6 +21,7 @@ INSTRUCTIONS = (
     "ship-ready, kişisel projeleri AI ile geliştirip yayına çıkarırken başvurulan Türkçe bir kaynaktır: yayın öncesi, App Store, "
     "Google Play ve paywall kontrol listeleri; UI/UX, gelir, yayına alma ve AI geliştirme rehberleri; doğrulanmış GitHub repoları. "
     "Bir projeyi denetlerken kontrol_listesi ile maddeleri al, kodda kanıta dayanarak değerlendir, raporu rapor_kaydet ile kaydet. "
+    "Repolar amaca göre kategorilere ve alt kategorilere ayrılır ; repolar aracı klasor ve alt_klasor ile süzer ve kategorilerin listesini de döndürür. "
     "Araç, kütüphane ya da skill ararken arac_oner ve repolar kullan; her maddenin kalıcı bir kimliği vardır (ör. yo-hesap-silme)."
 )
 
@@ -82,24 +83,26 @@ def t_arac_oner(cat, ihtiyac, altyapi=None, kurulum=None, limit=10):
             "not": "Öğeler rehber tablolarından, repolar doğrulanmış GitHub kataloğundandır; kurmadan önce README'yi ve uyarıyı oku."}
 
 
-def t_repolar(cat, klasor=None, kurulum=None, sorgu=None, limit=30):
+def t_repolar(cat, klasor=None, alt_klasor=None, kurulum=None, sorgu=None, limit=30):
     data = cat["repolar"]
     names = {f["id"]: f["name"] for f in data.get("folders", [])}
-    q = [t for t in re.findall(r"[a-z0-9]+", katalog._fold(sorgu or "")) if len(t) > 1]
+    alts = {f["id"]: {a["id"]: a["name"] for a in f.get("alt", [])} for f in data.get("folders", [])}
     out = []
     for r in data["repos"]:
         if klasor and r.get("f") != klasor:
             continue
+        if alt_klasor and r.get("af") != alt_klasor:
+            continue
         if kurulum and kurulum not in r["kurulum"]:
             continue
-        text = katalog._fold(" ".join(str(r.get(k) or "") for k in ("r", "tr", "d", "w")))
-        if q and not all(t in text for t in q):
+        if sorgu and not katalog.match_all(sorgu, " ".join(str(r.get(k) or "") for k in ("r", "tr", "d", "w", "kategori", "alt_kategori"))):
             continue
         out.append({"repo": r["r"], "url": f"https://github.com/{r['r']}", "aciklama": r.get("tr") or r.get("d") or "",
-                    "uyari": r.get("w") or "", "klasor": names.get(r.get("f"), r.get("f")), "kurulum": r["kurulum"],
+                    "uyari": r.get("w") or "", "klasor": names.get(r.get("f"), r.get("f")),
+                    "alt_klasor": alts.get(r.get("f"), {}).get(r.get("af"), r.get("af")), "kurulum": r["kurulum"],
                     "yildiz": r.get("s"), "arsiv": bool(r.get("archived")), "son_guncelleme": r.get("pushed")})
     out.sort(key=lambda x: -(x["yildiz"] or 0))
-    return {"toplam": len(out), "klasorler": names, "repolar": out[:limit]}
+    return {"toplam": len(out), "klasorler": {k: {"ad": v, "alt": alts[k]} for k, v in names.items()}, "repolar": out[:limit]}
 
 
 def t_belge(cat, dosya=None):
@@ -187,7 +190,10 @@ def tools(cat):
                              limit={"type": "integer", "minimum": 1, "maximum": 30, "default": 10}), "required": ["ihtiyac"]}},
         {"name": "repolar", "title": "Repo kataloğunu listele",
          "description": "Repo kataloğundaki doğrulanmış GitHub repolarını klasöre, kurulum yerine (proje, claude, codex, uygulama, kaynak) ve sorguya göre süzerek Türkçe açıklama ve uyarılarıyla döndürür.",
-         "inputSchema": s(klasor={"type": "string", "description": "Klasör kimliği (ör. ajan, skill, tasarim, yayin, altyapi)"},
+         "inputSchema": s(klasor={"type": "string", "enum": [f["id"] for f in cat["repolar"]["folders"]],
+                                  "description": "Kategori: " + "; ".join(f"{f['id']} = {f['name']}" for f in cat["repolar"]["folders"])},
+                          alt_klasor={"type": "string", "description": "Alt kategori kimliği; klasor ile birlikte verilir. Kimlikler: " +
+                                      "; ".join(f"{f['id']}: " + ", ".join(f"{a['id']} ({a['name']})" for a in f["alt"]) for f in cat["repolar"]["folders"])},
                           kurulum={"type": "string", "enum": kur}, sorgu={"type": "string"},
                           limit={"type": "integer", "minimum": 1, "maximum": 150, "default": 30})},
         {"name": "belge", "title": "Belge oku",

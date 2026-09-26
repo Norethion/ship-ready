@@ -1,5 +1,5 @@
 {
- "aciklama": "ship-ready kataloğu: kontrol listeleri (maddeler kalıcı kimlikleriyle), rehber öğeleri ve doğrulanmış GitHub repoları.",
+ "aciklama": "ship-ready kataloğu: kontrol listeleri (maddeler kalıcı kimlikleriyle), rehber öğeleri ve doğrulanmış GitHub repoları. Repolar amaca göre kategori (klasor) ve alt kategoriye (alt_klasor) ayrılır; kategori ve alt kategori adları hem her repoda hem klasorler listesinde yazar.",
  "belgeler": [
   {
    "baslik": "Yayına almadan önce: 97 benzersiz iş",
@@ -2998,50 +2998,217 @@
  ],
  "klasorler": [
   {
-   "id": "yayin",
-   "ad": "🚀 Yayın Öncesi"
+   "id": "ajan-skill",
+   "ad": "🧠 Ajan skill'leri ve çalışma yöntemi",
+   "kisa": "🧠 Ajan skill'leri",
+   "aciklama": "Kodlama ajanının nasıl çalıştığını değiştiren skill'ler: plan, kod ve inceleme akışları, bağlam ve token tasarrufu, skill koleksiyonları.",
+   "alt": [
+    {
+     "id": "yontem",
+     "ad": "Çalışma yöntemi"
+    },
+    {
+     "id": "baglam",
+     "ad": "Bağlam, bellek ve token"
+    },
+    {
+     "id": "koleksiyon",
+     "ad": "Skill koleksiyonları ve eklentiler"
+    },
+    {
+     "id": "guven",
+     "ad": "Skill güvenliği ve ölçüm"
+    }
+   ]
   },
   {
-   "id": "altyapi",
-   "ad": "🏗️ Yayına alma & izleme"
+   "id": "ajan-erisim",
+   "ad": "🌐 Ajana web, tarayıcı ve belge erişimi",
+   "kisa": "🌐 Ajan erişimi",
+   "aciklama": "Ajanın tarayıcıyı kullanması; web sayfalarını, videoları, belgeleri ve kod tabanını okuyabilmesi için araçlar.",
+   "alt": [
+    {
+     "id": "tarayici",
+     "ad": "Tarayıcı ve uygulama kontrolü"
+    },
+    {
+     "id": "web",
+     "ad": "Web, video ve sosyal medya okuma"
+    },
+    {
+     "id": "belge",
+     "ad": "Belge ve doküman"
+    },
+    {
+     "id": "kod",
+     "ad": "Kod tabanı haritası"
+    }
+   ]
+  },
+  {
+   "id": "ajan-yonetim",
+   "ad": "🖥️ Ajan yönetimi, modeller ve RAG",
+   "kisa": "🖥️ Ajan yönetimi",
+   "aciklama": "Birden çok ajanı yöneten arayüzler, yerel model çalıştırma ve model yönlendirme, belgeyle sohbet (RAG).",
+   "alt": [
+    {
+     "id": "arayuz",
+     "ad": "Ajan arayüzleri ve ekipler"
+    },
+    {
+     "id": "model",
+     "ad": "Yerel model ve yönlendirme"
+    },
+    {
+     "id": "rag",
+     "ad": "RAG ve belgeyle sohbet"
+    }
+   ]
   },
   {
    "id": "tasarim",
-   "ad": "🎨 Tasarım & Arayüz"
+   "ad": "🎨 Tasarım & arayüz",
+   "kisa": "🎨 Tasarım",
+   "aciklama": "Arayüz bileşenleri, animasyon kütüphaneleri, tasarım skill'leri, tasarım sistemi dosyaları ve diyagram araçları.",
+   "alt": [
+    {
+     "id": "bilesen",
+     "ad": "Bileşen kütüphaneleri"
+    },
+    {
+     "id": "animasyon",
+     "ad": "Animasyon"
+    },
+    {
+     "id": "skill",
+     "ad": "Tasarım skill'leri"
+    },
+    {
+     "id": "sistem",
+     "ad": "Tasarım sistemi ve Figma"
+    },
+    {
+     "id": "diyagram",
+     "ad": "Diyagram ve sunum"
+    }
+   ]
   },
   {
-   "id": "skill",
-   "ad": "🧩 Skill & Prompt"
+   "id": "kalite",
+   "ad": "🔒 Güvenlik, test & kod kalitesi",
+   "kisa": "🔒 Güvenlik & test",
+   "aciklama": "Güvenlik taraması, uçtan uca ve yük testi, kod inceleme ve kullanılmayan kodu temizleme.",
+   "alt": [
+    {
+     "id": "guvenlik",
+     "ad": "Güvenlik"
+    },
+    {
+     "id": "test",
+     "ad": "Test"
+    },
+    {
+     "id": "inceleme",
+     "ad": "Kod inceleme ve temizlik"
+    }
+   ]
   },
   {
-   "id": "ajan",
-   "ad": "🤖 Ajan Araçları"
+   "id": "yayin",
+   "ad": "🚀 Yayına alma & izleme",
+   "kisa": "🚀 Yayına alma",
+   "aciklama": "Kendi sunucuna deploy, mağaza yayınını otomatikleştirme, izleme ve analitik.",
+   "alt": [
+    {
+     "id": "deploy",
+     "ad": "Deploy ve mağaza yayını"
+    },
+    {
+     "id": "izleme",
+     "ad": "İzleme ve analitik"
+    }
+   ]
   },
   {
-   "id": "veri",
-   "ad": "📚 AI Veri & RAG"
+   "id": "icerik",
+   "ad": "📣 İçerik, SEO & pazarlama",
+   "kisa": "📣 İçerik & SEO",
+   "aciklama": "AI yazısını doğallaştırma, SEO ve App Store optimizasyonu, pazarlama ve sosyal medya.",
+   "alt": [
+    {
+     "id": "yazi",
+     "ad": "AI yazısını temizleme"
+    },
+    {
+     "id": "seo",
+     "ad": "SEO ve ASO"
+    },
+    {
+     "id": "pazarlama",
+     "ad": "Pazarlama ve sosyal medya"
+    }
+   ]
   },
   {
    "id": "medya",
-   "ad": "🎬 Medya Üretimi"
-  },
-  {
-   "id": "finans",
-   "ad": "💰 Finans"
-  },
-  {
-   "id": "arac",
-   "ad": "🛠️ Araçlar"
+   "ad": "🎬 Medya üretimi",
+   "kisa": "🎬 Medya",
+   "aciklama": "Video, ses ve konuşma üretimi ve düzenlemesi.",
+   "alt": [
+    {
+     "id": "video",
+     "ad": "Video"
+    },
+    {
+     "id": "ses",
+     "ad": "Ses ve konuşma"
+    }
+   ]
   },
   {
    "id": "ogrenme",
-   "ad": "📖 Öğrenme"
+   "ad": "📖 Öğrenme & listeler",
+   "kisa": "📖 Öğrenme",
+   "aciklama": "Sistem tasarımı ve Claude Code rehberleri, faydalı listeler ve veri setleri.",
+   "alt": [
+    {
+     "id": "rehber",
+     "ad": "Rehberler ve notlar"
+    },
+    {
+     "id": "liste",
+     "ad": "Listeler ve veri setleri"
+    }
+   ]
+  },
+  {
+   "id": "gunluk",
+   "ad": "🧰 Günlük araçlar",
+   "kisa": "🧰 Günlük araçlar",
+   "aciklama": "Geliştirme dışı günlük işler: dosya dönüştürme, finans, kişisel verimlilik.",
+   "alt": [
+    {
+     "id": "belge",
+     "ad": "Dosya ve belge dönüştürme"
+    },
+    {
+     "id": "finans",
+     "ad": "Finans"
+    },
+    {
+     "id": "kisisel",
+     "ad": "Kişisel ve verimlilik"
+    }
+   ]
   }
  ],
  "repolar": [
   {
    "repo": "multica-ai/andrej-karpathy-skills",
-   "klasor": "skill",
+   "klasor": "ajan-skill",
+   "alt_klasor": "yontem",
+   "kategori": "🧠 Ajan skill'leri ve çalışma yöntemi",
+   "alt_kategori": "Çalışma yöntemi",
    "kurulum": [
     "claude",
     "codex"
@@ -3060,7 +3227,10 @@
   },
   {
    "repo": "Panniantong/Agent-Reach",
-   "klasor": "ajan",
+   "klasor": "ajan-erisim",
+   "alt_klasor": "web",
+   "kategori": "🌐 Ajana web, tarayıcı ve belge erişimi",
+   "alt_kategori": "Web, video ve sosyal medya okuma",
    "kurulum": [
     "claude",
     "codex"
@@ -3080,6 +3250,9 @@
   {
    "repo": "catdad/canvas-confetti",
    "klasor": "tasarim",
+   "alt_klasor": "animasyon",
+   "kategori": "🎨 Tasarım & arayüz",
+   "alt_kategori": "Animasyon",
    "kurulum": [
     "proje"
    ],
@@ -3097,7 +3270,10 @@
   },
   {
    "repo": "firecrawl/pdf-inspector",
-   "klasor": "veri",
+   "klasor": "ajan-erisim",
+   "alt_klasor": "belge",
+   "kategori": "🌐 Ajana web, tarayıcı ve belge erişimi",
+   "alt_kategori": "Belge ve doküman",
    "kurulum": [
     "proje"
    ],
@@ -3115,7 +3291,10 @@
   },
   {
    "repo": "chaseai-yt/claudex-loop",
-   "klasor": "skill",
+   "klasor": "ajan-skill",
+   "alt_klasor": "yontem",
+   "kategori": "🧠 Ajan skill'leri ve çalışma yöntemi",
+   "alt_kategori": "Çalışma yöntemi",
    "kurulum": [
     "claude",
     "codex"
@@ -3134,7 +3313,10 @@
   },
   {
    "repo": "grafana/k6",
-   "klasor": "altyapi",
+   "klasor": "kalite",
+   "alt_klasor": "test",
+   "kategori": "🔒 Güvenlik, test & kod kalitesi",
+   "alt_kategori": "Test",
    "kurulum": [
     "uygulama"
    ],
@@ -3152,7 +3334,10 @@
   },
   {
    "repo": "OWASP/CheatSheetSeries",
-   "klasor": "yayin",
+   "klasor": "kalite",
+   "alt_klasor": "guvenlik",
+   "kategori": "🔒 Güvenlik, test & kod kalitesi",
+   "alt_kategori": "Güvenlik",
    "kurulum": [
     "kaynak"
    ],
@@ -3171,6 +3356,9 @@
   {
    "repo": "donnemartin/system-design-primer",
    "klasor": "ogrenme",
+   "alt_klasor": "rehber",
+   "kategori": "📖 Öğrenme & listeler",
+   "alt_kategori": "Rehberler ve notlar",
    "kurulum": [
     "kaynak"
    ],
@@ -3189,6 +3377,9 @@
   {
    "repo": "Jakubantalik/thinking-orbs",
    "klasor": "tasarim",
+   "alt_klasor": "animasyon",
+   "kategori": "🎨 Tasarım & arayüz",
+   "alt_kategori": "Animasyon",
    "kurulum": [
     "proje"
    ],
@@ -3206,7 +3397,10 @@
   },
   {
    "repo": "usestrix/strix",
-   "klasor": "yayin",
+   "klasor": "kalite",
+   "alt_klasor": "guvenlik",
+   "kategori": "🔒 Güvenlik, test & kod kalitesi",
+   "alt_kategori": "Güvenlik",
    "kurulum": [
     "uygulama"
    ],
@@ -3224,7 +3418,10 @@
   },
   {
    "repo": "every-app/open-seo",
-   "klasor": "yayin",
+   "klasor": "icerik",
+   "alt_klasor": "seo",
+   "kategori": "📣 İçerik, SEO & pazarlama",
+   "alt_kategori": "SEO ve ASO",
    "kurulum": [
     "uygulama"
    ],
@@ -3242,7 +3439,10 @@
   },
   {
    "repo": "alibaba/open-code-review",
-   "klasor": "yayin",
+   "klasor": "kalite",
+   "alt_klasor": "inceleme",
+   "kategori": "🔒 Güvenlik, test & kod kalitesi",
+   "alt_kategori": "Kod inceleme ve temizlik",
    "kurulum": [
     "uygulama"
    ],
@@ -3258,6 +3458,9 @@
   {
    "repo": "nextlevelbuilder/ui-ux-pro-max-skill",
    "klasor": "tasarim",
+   "alt_klasor": "skill",
+   "kategori": "🎨 Tasarım & arayüz",
+   "alt_kategori": "Tasarım skill'leri",
    "kurulum": [
     "claude",
     "codex"
@@ -3274,6 +3477,9 @@
   {
    "repo": "pbakaus/impeccable",
    "klasor": "tasarim",
+   "alt_klasor": "skill",
+   "kategori": "🎨 Tasarım & arayüz",
+   "alt_kategori": "Tasarım skill'leri",
    "kurulum": [
     "claude",
     "codex"
@@ -3293,6 +3499,9 @@
   {
    "repo": "Leonxlnx/taste-skill",
    "klasor": "tasarim",
+   "alt_klasor": "skill",
+   "kategori": "🎨 Tasarım & arayüz",
+   "alt_kategori": "Tasarım skill'leri",
    "kurulum": [
     "claude",
     "codex"
@@ -3312,6 +3521,9 @@
   {
    "repo": "emilkowalski/skills",
    "klasor": "tasarim",
+   "alt_klasor": "skill",
+   "kategori": "🎨 Tasarım & arayüz",
+   "alt_kategori": "Tasarım skill'leri",
    "kurulum": [
     "claude",
     "codex"
@@ -3331,6 +3543,9 @@
   {
    "repo": "figma/mcp-server-guide",
    "klasor": "tasarim",
+   "alt_klasor": "sistem",
+   "kategori": "🎨 Tasarım & arayüz",
+   "alt_kategori": "Tasarım sistemi ve Figma",
    "kurulum": [
     "claude",
     "codex"
@@ -3350,6 +3565,9 @@
   {
    "repo": "anthropics/html-effectiveness",
    "klasor": "tasarim",
+   "alt_klasor": "sistem",
+   "kategori": "🎨 Tasarım & arayüz",
+   "alt_kategori": "Tasarım sistemi ve Figma",
    "kurulum": [
     "kaynak"
    ],
@@ -3364,7 +3582,10 @@
   },
   {
    "repo": "vercel-labs/skills",
-   "klasor": "skill",
+   "klasor": "ajan-skill",
+   "alt_klasor": "koleksiyon",
+   "kategori": "🧠 Ajan skill'leri ve çalışma yöntemi",
+   "alt_kategori": "Skill koleksiyonları ve eklentiler",
    "kurulum": [
     "claude",
     "codex"
@@ -3383,7 +3604,10 @@
   },
   {
    "repo": "vercel-labs/agent-skills",
-   "klasor": "skill",
+   "klasor": "ajan-skill",
+   "alt_klasor": "koleksiyon",
+   "kategori": "🧠 Ajan skill'leri ve çalışma yöntemi",
+   "alt_kategori": "Skill koleksiyonları ve eklentiler",
    "kurulum": [
     "claude",
     "codex"
@@ -3399,7 +3623,10 @@
   },
   {
    "repo": "vibeforge1111/vibeship-spawner-skills",
-   "klasor": "skill",
+   "klasor": "ajan-skill",
+   "alt_klasor": "koleksiyon",
+   "kategori": "🧠 Ajan skill'leri ve çalışma yöntemi",
+   "alt_kategori": "Skill koleksiyonları ve eklentiler",
    "kurulum": [
     "claude"
    ],
@@ -3414,7 +3641,10 @@
   },
   {
    "repo": "petergyang/no-ai-slop",
-   "klasor": "skill",
+   "klasor": "icerik",
+   "alt_klasor": "yazi",
+   "kategori": "📣 İçerik, SEO & pazarlama",
+   "alt_kategori": "AI yazısını temizleme",
    "kurulum": [
     "claude",
     "codex"
@@ -3433,7 +3663,10 @@
   },
   {
    "repo": "ayghri/i-have-adhd",
-   "klasor": "skill",
+   "klasor": "ajan-skill",
+   "alt_klasor": "baglam",
+   "kategori": "🧠 Ajan skill'leri ve çalışma yöntemi",
+   "alt_kategori": "Bağlam, bellek ve token",
    "kurulum": [
     "claude",
     "codex"
@@ -3452,7 +3685,10 @@
   },
   {
    "repo": "virgiliojr94/book-to-skill",
-   "klasor": "skill",
+   "klasor": "ajan-skill",
+   "alt_klasor": "baglam",
+   "kategori": "🧠 Ajan skill'leri ve çalışma yöntemi",
+   "alt_kategori": "Bağlam, bellek ve token",
    "kurulum": [
     "claude",
     "codex"
@@ -3471,7 +3707,10 @@
   },
   {
    "repo": "x1xhlol/system-prompts-and-models-of-ai-tools",
-   "klasor": "skill",
+   "klasor": "ajan-skill",
+   "alt_klasor": "koleksiyon",
+   "kategori": "🧠 Ajan skill'leri ve çalışma yöntemi",
+   "alt_kategori": "Skill koleksiyonları ve eklentiler",
    "kurulum": [
     "kaynak"
    ],
@@ -3486,7 +3725,10 @@
   },
   {
    "repo": "davila7/claude-code-templates",
-   "klasor": "ajan",
+   "klasor": "ajan-skill",
+   "alt_klasor": "koleksiyon",
+   "kategori": "🧠 Ajan skill'leri ve çalışma yöntemi",
+   "alt_kategori": "Skill koleksiyonları ve eklentiler",
    "kurulum": [
     "claude"
    ],
@@ -3501,7 +3743,10 @@
   },
   {
    "repo": "ZeframLou/call-me",
-   "klasor": "ajan",
+   "klasor": "ajan-skill",
+   "alt_klasor": "koleksiyon",
+   "kategori": "🧠 Ajan skill'leri ve çalışma yöntemi",
+   "alt_kategori": "Skill koleksiyonları ve eklentiler",
    "kurulum": [
     "claude"
    ],
@@ -3516,7 +3761,10 @@
   },
   {
    "repo": "pingdotgg/t3code",
-   "klasor": "ajan",
+   "klasor": "ajan-yonetim",
+   "alt_klasor": "arayuz",
+   "kategori": "🖥️ Ajan yönetimi, modeller ve RAG",
+   "alt_kategori": "Ajan arayüzleri ve ekipler",
    "kurulum": [
     "uygulama"
    ],
@@ -3534,7 +3782,10 @@
   },
   {
    "repo": "vercel-labs/agent-browser",
-   "klasor": "ajan",
+   "klasor": "ajan-erisim",
+   "alt_klasor": "tarayici",
+   "kategori": "🌐 Ajana web, tarayıcı ve belge erişimi",
+   "alt_kategori": "Tarayıcı ve uygulama kontrolü",
    "kurulum": [
     "claude",
     "codex"
@@ -3553,7 +3804,10 @@
   },
   {
    "repo": "microsoft/playwright-mcp",
-   "klasor": "ajan",
+   "klasor": "ajan-erisim",
+   "alt_klasor": "tarayici",
+   "kategori": "🌐 Ajana web, tarayıcı ve belge erişimi",
+   "alt_kategori": "Tarayıcı ve uygulama kontrolü",
    "kurulum": [
     "claude",
     "codex"
@@ -3572,7 +3826,10 @@
   },
   {
    "repo": "diegosouzapw/OmniRoute",
-   "klasor": "ajan",
+   "klasor": "ajan-yonetim",
+   "alt_klasor": "model",
+   "kategori": "🖥️ Ajan yönetimi, modeller ve RAG",
+   "alt_kategori": "Yerel model ve yönlendirme",
    "kurulum": [
     "uygulama"
    ],
@@ -3590,7 +3847,10 @@
   },
   {
    "repo": "EmpiricaAI/empirica",
-   "klasor": "ajan",
+   "klasor": "ajan-skill",
+   "alt_klasor": "guven",
+   "kategori": "🧠 Ajan skill'leri ve çalışma yöntemi",
+   "alt_kategori": "Skill güvenliği ve ölçüm",
    "kurulum": [
     "claude"
    ],
@@ -3605,7 +3865,10 @@
   },
   {
    "repo": "microsoft/autogen",
-   "klasor": "ajan",
+   "klasor": "ajan-yonetim",
+   "alt_klasor": "arayuz",
+   "kategori": "🖥️ Ajan yönetimi, modeller ve RAG",
+   "alt_kategori": "Ajan arayüzleri ve ekipler",
    "kurulum": [
     "proje"
    ],
@@ -3620,7 +3883,10 @@
   },
   {
    "repo": "MadsLorentzen/ai-job-search",
-   "klasor": "ajan",
+   "klasor": "gunluk",
+   "alt_klasor": "kisisel",
+   "kategori": "🧰 Günlük araçlar",
+   "alt_kategori": "Kişisel ve verimlilik",
    "kurulum": [
     "uygulama"
    ],
@@ -3638,7 +3904,10 @@
   },
   {
    "repo": "unclecode/crawl4ai",
-   "klasor": "veri",
+   "klasor": "ajan-erisim",
+   "alt_klasor": "web",
+   "kategori": "🌐 Ajana web, tarayıcı ve belge erişimi",
+   "alt_kategori": "Web, video ve sosyal medya okuma",
    "kurulum": [
     "proje"
    ],
@@ -3653,7 +3922,10 @@
   },
   {
    "repo": "NirDiamant/RAG_Techniques",
-   "klasor": "veri",
+   "klasor": "ajan-yonetim",
+   "alt_klasor": "rag",
+   "kategori": "🖥️ Ajan yönetimi, modeller ve RAG",
+   "alt_kategori": "RAG ve belgeyle sohbet",
    "kurulum": [
     "kaynak"
    ],
@@ -3668,7 +3940,10 @@
   },
   {
    "repo": "AlexsJones/llmfit",
-   "klasor": "veri",
+   "klasor": "ajan-yonetim",
+   "alt_klasor": "model",
+   "kategori": "🖥️ Ajan yönetimi, modeller ve RAG",
+   "alt_kategori": "Yerel model ve yönlendirme",
    "kurulum": [
     "uygulama"
    ],
@@ -3683,7 +3958,10 @@
   },
   {
    "repo": "dataease/SQLBot",
-   "klasor": "veri",
+   "klasor": "ajan-yonetim",
+   "alt_klasor": "rag",
+   "kategori": "🖥️ Ajan yönetimi, modeller ve RAG",
+   "alt_kategori": "RAG ve belgeyle sohbet",
    "kurulum": [
     "uygulama"
    ],
@@ -3698,7 +3976,10 @@
   },
   {
    "repo": "lfnovo/open-notebook",
-   "klasor": "veri",
+   "klasor": "ajan-yonetim",
+   "alt_klasor": "rag",
+   "kategori": "🖥️ Ajan yönetimi, modeller ve RAG",
+   "alt_kategori": "RAG ve belgeyle sohbet",
    "kurulum": [
     "uygulama"
    ],
@@ -3717,6 +3998,9 @@
   {
    "repo": "deepbeepmeep/Wan2GP",
    "klasor": "medya",
+   "alt_klasor": "video",
+   "kategori": "🎬 Medya üretimi",
+   "alt_kategori": "Video",
    "kurulum": [
     "uygulama"
    ],
@@ -3732,6 +4016,9 @@
   {
    "repo": "abus-aikorea/voice-pro",
    "klasor": "medya",
+   "alt_klasor": "ses",
+   "kategori": "🎬 Medya üretimi",
+   "alt_kategori": "Ses ve konuşma",
    "kurulum": [
     "uygulama"
    ],
@@ -3747,6 +4034,9 @@
   {
    "repo": "Anil-matcha/Open-Generative-AI",
    "klasor": "medya",
+   "alt_klasor": "video",
+   "kategori": "🎬 Medya üretimi",
+   "alt_kategori": "Video",
    "kurulum": [
     "uygulama"
    ],
@@ -3765,6 +4055,9 @@
   {
    "repo": "latent-spaces/brag",
    "klasor": "medya",
+   "alt_klasor": "video",
+   "kategori": "🎬 Medya üretimi",
+   "alt_kategori": "Video",
    "kurulum": [
     "claude",
     "codex"
@@ -3780,7 +4073,10 @@
   },
   {
    "repo": "HKUDS/Vibe-Trading",
-   "klasor": "finans",
+   "klasor": "gunluk",
+   "alt_klasor": "finans",
+   "kategori": "🧰 Günlük araçlar",
+   "alt_kategori": "Finans",
    "kurulum": [
     "uygulama"
    ],
@@ -3795,7 +4091,10 @@
   },
   {
    "repo": "Fincept-Corporation/FinceptTerminal",
-   "klasor": "finans",
+   "klasor": "gunluk",
+   "alt_klasor": "finans",
+   "kategori": "🧰 Günlük araçlar",
+   "alt_kategori": "Finans",
    "kurulum": [
     "uygulama"
    ],
@@ -3810,7 +4109,10 @@
   },
   {
    "repo": "we-promise/sure",
-   "klasor": "finans",
+   "klasor": "gunluk",
+   "alt_klasor": "finans",
+   "kategori": "🧰 Günlük araçlar",
+   "alt_kategori": "Finans",
    "kurulum": [
     "uygulama"
    ],
@@ -3825,7 +4127,10 @@
   },
   {
    "repo": "jgm/pandoc",
-   "klasor": "arac",
+   "klasor": "gunluk",
+   "alt_klasor": "belge",
+   "kategori": "🧰 Günlük araçlar",
+   "alt_kategori": "Dosya ve belge dönüştürme",
    "kurulum": [
     "uygulama"
    ],
@@ -3840,7 +4145,10 @@
   },
   {
    "repo": "C4illin/ConvertX",
-   "klasor": "arac",
+   "klasor": "gunluk",
+   "alt_klasor": "belge",
+   "kategori": "🧰 Günlük araçlar",
+   "alt_kategori": "Dosya ve belge dönüştürme",
    "kurulum": [
     "uygulama"
    ],
@@ -3855,7 +4163,10 @@
   },
   {
    "repo": "usekaneo/kaneo",
-   "klasor": "arac",
+   "klasor": "gunluk",
+   "alt_klasor": "kisisel",
+   "kategori": "🧰 Günlük araçlar",
+   "alt_kategori": "Kişisel ve verimlilik",
    "kurulum": [
     "uygulama"
    ],
@@ -3870,7 +4181,10 @@
   },
   {
    "repo": "BraveOPotato/FckSignups",
-   "klasor": "arac",
+   "klasor": "ogrenme",
+   "alt_klasor": "liste",
+   "kategori": "📖 Öğrenme & listeler",
+   "alt_kategori": "Listeler ve veri setleri",
    "kurulum": [
     "kaynak"
    ],
@@ -3885,7 +4199,10 @@
   },
   {
    "repo": "Sonarr/Sonarr",
-   "klasor": "arac",
+   "klasor": "gunluk",
+   "alt_klasor": "kisisel",
+   "kategori": "🧰 Günlük araçlar",
+   "alt_kategori": "Kişisel ve verimlilik",
    "kurulum": [
     "uygulama"
    ],
@@ -3900,7 +4217,10 @@
   },
   {
    "repo": "antitree/nfc_canary",
-   "klasor": "arac",
+   "klasor": "gunluk",
+   "alt_klasor": "kisisel",
+   "kategori": "🧰 Günlük araçlar",
+   "alt_kategori": "Kişisel ve verimlilik",
    "kurulum": [
     "uygulama"
    ],
@@ -3916,6 +4236,9 @@
   {
    "repo": "ByteByteGoHq/system-design-101",
    "klasor": "ogrenme",
+   "alt_klasor": "rehber",
+   "kategori": "📖 Öğrenme & listeler",
+   "alt_kategori": "Rehberler ve notlar",
    "kurulum": [
     "kaynak"
    ],
@@ -3931,6 +4254,9 @@
   {
    "repo": "CyC2018/CS-Notes",
    "klasor": "ogrenme",
+   "alt_klasor": "rehber",
+   "kategori": "📖 Öğrenme & listeler",
+   "alt_kategori": "Rehberler ve notlar",
    "kurulum": [
     "kaynak"
    ],
@@ -3946,6 +4272,9 @@
   {
    "repo": "selahattinunlu/harika-github-repolari",
    "klasor": "ogrenme",
+   "alt_klasor": "liste",
+   "kategori": "📖 Öğrenme & listeler",
+   "alt_kategori": "Listeler ve veri setleri",
    "kurulum": [
     "kaynak"
    ],
@@ -3961,6 +4290,9 @@
   {
    "repo": "hasaneyldrm/exercises-dataset",
    "klasor": "ogrenme",
+   "alt_klasor": "liste",
+   "kategori": "📖 Öğrenme & listeler",
+   "alt_kategori": "Listeler ve veri setleri",
    "kurulum": [
     "proje"
    ],
@@ -3975,7 +4307,10 @@
   },
   {
    "repo": "blader/humanizer",
-   "klasor": "skill",
+   "klasor": "icerik",
+   "alt_klasor": "yazi",
+   "kategori": "📣 İçerik, SEO & pazarlama",
+   "alt_kategori": "AI yazısını temizleme",
    "kurulum": [
     "claude",
     "codex"
@@ -3991,7 +4326,10 @@
   },
   {
    "repo": "JuliusBrussee/caveman",
-   "klasor": "skill",
+   "klasor": "ajan-skill",
+   "alt_klasor": "baglam",
+   "kategori": "🧠 Ajan skill'leri ve çalışma yöntemi",
+   "alt_kategori": "Bağlam, bellek ve token",
    "kurulum": [
     "claude",
     "codex"
@@ -4008,6 +4346,9 @@
   {
    "repo": "google-labs-code/design.md",
    "klasor": "tasarim",
+   "alt_klasor": "sistem",
+   "kategori": "🎨 Tasarım & arayüz",
+   "alt_kategori": "Tasarım sistemi ve Figma",
    "kurulum": [
     "proje"
    ],
@@ -4026,6 +4367,9 @@
   {
    "repo": "VoltAgent/awesome-design-md",
    "klasor": "tasarim",
+   "alt_klasor": "sistem",
+   "kategori": "🎨 Tasarım & arayüz",
+   "alt_kategori": "Tasarım sistemi ve Figma",
    "kurulum": [
     "proje"
    ],
@@ -4043,7 +4387,10 @@
   },
   {
    "repo": "hardikpandya/stop-slop",
-   "klasor": "skill",
+   "klasor": "icerik",
+   "alt_klasor": "yazi",
+   "kategori": "📣 İçerik, SEO & pazarlama",
+   "alt_kategori": "AI yazısını temizleme",
    "kurulum": [
     "claude",
     "codex"
@@ -4063,6 +4410,9 @@
   {
    "repo": "cathrynlavery/diagram-design",
    "klasor": "tasarim",
+   "alt_klasor": "diyagram",
+   "kategori": "🎨 Tasarım & arayüz",
+   "alt_kategori": "Diyagram ve sunum",
    "kurulum": [
     "claude",
     "codex"
@@ -4082,6 +4432,9 @@
   {
    "repo": "zarazhangrui/frontend-slides",
    "klasor": "tasarim",
+   "alt_klasor": "diyagram",
+   "kategori": "🎨 Tasarım & arayüz",
+   "alt_kategori": "Diyagram ve sunum",
    "kurulum": [
     "claude",
     "codex"
@@ -4100,7 +4453,10 @@
   },
   {
    "repo": "Egonex-AI/Understand-Anything",
-   "klasor": "skill",
+   "klasor": "ajan-erisim",
+   "alt_klasor": "kod",
+   "kategori": "🌐 Ajana web, tarayıcı ve belge erişimi",
+   "alt_kategori": "Kod tabanı haritası",
    "kurulum": [
     "claude",
     "codex"
@@ -4119,7 +4475,10 @@
   },
   {
    "repo": "ruvnet/ruflo",
-   "klasor": "ajan",
+   "klasor": "ajan-skill",
+   "alt_klasor": "yontem",
+   "kategori": "🧠 Ajan skill'leri ve çalışma yöntemi",
+   "alt_kategori": "Çalışma yöntemi",
    "kurulum": [
     "claude",
     "codex"
@@ -4138,7 +4497,10 @@
   },
   {
    "repo": "NousResearch/hermes-agent",
-   "klasor": "ajan",
+   "klasor": "ajan-yonetim",
+   "alt_klasor": "arayuz",
+   "kategori": "🖥️ Ajan yönetimi, modeller ve RAG",
+   "alt_kategori": "Ajan arayüzleri ve ekipler",
    "kurulum": [
     "uygulama"
    ],
@@ -4156,7 +4518,10 @@
   },
   {
    "repo": "karpathy/llm-council",
-   "klasor": "ajan",
+   "klasor": "ajan-yonetim",
+   "alt_klasor": "arayuz",
+   "kategori": "🖥️ Ajan yönetimi, modeller ve RAG",
+   "alt_kategori": "Ajan arayüzleri ve ekipler",
    "kurulum": [
     "uygulama"
    ],
@@ -4175,6 +4540,9 @@
   {
    "repo": "SessionLoops/PitchNet",
    "klasor": "medya",
+   "alt_klasor": "ses",
+   "kategori": "🎬 Medya üretimi",
+   "alt_kategori": "Ses ve konuşma",
    "kurulum": [
     "uygulama"
    ],
@@ -4192,7 +4560,10 @@
   },
   {
    "repo": "gitroomhq/postiz-app",
-   "klasor": "arac",
+   "klasor": "icerik",
+   "alt_klasor": "pazarlama",
+   "kategori": "📣 İçerik, SEO & pazarlama",
+   "alt_kategori": "Pazarlama ve sosyal medya",
    "kurulum": [
     "uygulama"
    ],
@@ -4211,6 +4582,9 @@
   {
    "repo": "getopenscreen/openscreen",
    "klasor": "medya",
+   "alt_klasor": "video",
+   "kategori": "🎬 Medya üretimi",
+   "alt_kategori": "Video",
    "kurulum": [
     "uygulama"
    ],
@@ -4229,6 +4603,9 @@
   {
    "repo": "remotion-dev/remotion",
    "klasor": "medya",
+   "alt_klasor": "video",
+   "kategori": "🎬 Medya üretimi",
+   "alt_kategori": "Video",
    "kurulum": [
     "proje"
    ],
@@ -4247,6 +4624,9 @@
   {
    "repo": "openai/whisper",
    "klasor": "medya",
+   "alt_klasor": "ses",
+   "kategori": "🎬 Medya üretimi",
+   "alt_kategori": "Ses ve konuşma",
    "kurulum": [
     "proje"
    ],
@@ -4265,6 +4645,9 @@
   {
    "repo": "AnmolSaini16/mapcn",
    "klasor": "tasarim",
+   "alt_klasor": "bilesen",
+   "kategori": "🎨 Tasarım & arayüz",
+   "alt_kategori": "Bileşen kütüphaneleri",
    "kurulum": [
     "proje"
    ],
@@ -4283,6 +4666,9 @@
   {
    "repo": "recharts/recharts",
    "klasor": "tasarim",
+   "alt_klasor": "bilesen",
+   "kategori": "🎨 Tasarım & arayüz",
+   "alt_kategori": "Bileşen kütüphaneleri",
    "kurulum": [
     "proje"
    ],
@@ -4301,6 +4687,9 @@
   {
    "repo": "airbnb/lottie-web",
    "klasor": "tasarim",
+   "alt_klasor": "animasyon",
+   "kategori": "🎨 Tasarım & arayüz",
+   "alt_kategori": "Animasyon",
    "kurulum": [
     "proje"
    ],
@@ -4319,6 +4708,9 @@
   {
    "repo": "greensock/GSAP",
    "klasor": "tasarim",
+   "alt_klasor": "animasyon",
+   "kategori": "🎨 Tasarım & arayüz",
+   "alt_kategori": "Animasyon",
    "kurulum": [
     "proje"
    ],
@@ -4337,6 +4729,9 @@
   {
    "repo": "motiondivision/motion",
    "klasor": "tasarim",
+   "alt_klasor": "animasyon",
+   "kategori": "🎨 Tasarım & arayüz",
+   "alt_kategori": "Animasyon",
    "kurulum": [
     "proje"
    ],
@@ -4355,6 +4750,9 @@
   {
    "repo": "tremorlabs/tremor",
    "klasor": "tasarim",
+   "alt_klasor": "bilesen",
+   "kategori": "🎨 Tasarım & arayüz",
+   "alt_kategori": "Bileşen kütüphaneleri",
    "kurulum": [
     "proje"
    ],
@@ -4373,6 +4771,9 @@
   {
    "repo": "saadeghi/daisyui",
    "klasor": "tasarim",
+   "alt_klasor": "bilesen",
+   "kategori": "🎨 Tasarım & arayüz",
+   "alt_kategori": "Bileşen kütüphaneleri",
    "kurulum": [
     "proje"
    ],
@@ -4391,6 +4792,9 @@
   {
    "repo": "DavidHDev/react-bits",
    "klasor": "tasarim",
+   "alt_klasor": "bilesen",
+   "kategori": "🎨 Tasarım & arayüz",
+   "alt_kategori": "Bileşen kütüphaneleri",
    "kurulum": [
     "proje"
    ],
@@ -4409,6 +4813,9 @@
   {
    "repo": "magicuidesign/magicui",
    "klasor": "tasarim",
+   "alt_klasor": "bilesen",
+   "kategori": "🎨 Tasarım & arayüz",
+   "alt_kategori": "Bileşen kütüphaneleri",
    "kurulum": [
     "proje"
    ],
@@ -4427,6 +4834,9 @@
   {
    "repo": "shadcn-ui/ui",
    "klasor": "tasarim",
+   "alt_klasor": "bilesen",
+   "kategori": "🎨 Tasarım & arayüz",
+   "alt_kategori": "Bileşen kütüphaneleri",
    "kurulum": [
     "proje"
    ],
@@ -4444,7 +4854,10 @@
   },
   {
    "repo": "ollama/ollama",
-   "klasor": "veri",
+   "klasor": "ajan-yonetim",
+   "alt_klasor": "model",
+   "kategori": "🖥️ Ajan yönetimi, modeller ve RAG",
+   "alt_kategori": "Yerel model ve yönlendirme",
    "kurulum": [
     "uygulama"
    ],
@@ -4462,7 +4875,10 @@
   },
   {
    "repo": "microsoft/markitdown",
-   "klasor": "veri",
+   "klasor": "ajan-erisim",
+   "alt_klasor": "belge",
+   "kategori": "🌐 Ajana web, tarayıcı ve belge erişimi",
+   "alt_kategori": "Belge ve doküman",
    "kurulum": [
     "proje"
    ],
@@ -4481,6 +4897,9 @@
   {
    "repo": "marcelscruz/public-apis",
    "klasor": "ogrenme",
+   "alt_klasor": "liste",
+   "kategori": "📖 Öğrenme & listeler",
+   "alt_kategori": "Listeler ve veri setleri",
    "kurulum": [
     "kaynak"
    ],
@@ -4499,6 +4918,9 @@
   {
    "repo": "ripienaar/free-for-dev",
    "klasor": "ogrenme",
+   "alt_klasor": "liste",
+   "kategori": "📖 Öğrenme & listeler",
+   "alt_kategori": "Listeler ve veri setleri",
    "kurulum": [
     "kaynak"
    ],
@@ -4516,7 +4938,10 @@
   },
   {
    "repo": "prometheus/prometheus",
-   "klasor": "altyapi",
+   "klasor": "yayin",
+   "alt_klasor": "izleme",
+   "kategori": "🚀 Yayına alma & izleme",
+   "alt_kategori": "İzleme ve analitik",
    "kurulum": [
     "uygulama"
    ],
@@ -4534,7 +4959,10 @@
   },
   {
    "repo": "umami-software/umami",
-   "klasor": "altyapi",
+   "klasor": "yayin",
+   "alt_klasor": "izleme",
+   "kategori": "🚀 Yayına alma & izleme",
+   "alt_kategori": "İzleme ve analitik",
    "kurulum": [
     "uygulama"
    ],
@@ -4552,7 +4980,10 @@
   },
   {
    "repo": "grafana/grafana",
-   "klasor": "altyapi",
+   "klasor": "yayin",
+   "alt_klasor": "izleme",
+   "kategori": "🚀 Yayına alma & izleme",
+   "alt_kategori": "İzleme ve analitik",
    "kurulum": [
     "uygulama"
    ],
@@ -4570,7 +5001,10 @@
   },
   {
    "repo": "openreplay/openreplay",
-   "klasor": "altyapi",
+   "klasor": "yayin",
+   "alt_klasor": "izleme",
+   "kategori": "🚀 Yayına alma & izleme",
+   "alt_kategori": "İzleme ve analitik",
    "kurulum": [
     "uygulama"
    ],
@@ -4588,7 +5022,10 @@
   },
   {
    "repo": "microsoft/playwright",
-   "klasor": "yayin",
+   "klasor": "kalite",
+   "alt_klasor": "test",
+   "kategori": "🔒 Güvenlik, test & kod kalitesi",
+   "alt_kategori": "Test",
    "kurulum": [
     "proje"
    ],
@@ -4606,7 +5043,10 @@
   },
   {
    "repo": "octopusreview/octopus",
-   "klasor": "yayin",
+   "klasor": "kalite",
+   "alt_klasor": "inceleme",
+   "kategori": "🔒 Güvenlik, test & kod kalitesi",
+   "alt_kategori": "Kod inceleme ve temizlik",
    "kurulum": [
     "uygulama"
    ],
@@ -4624,7 +5064,10 @@
   },
   {
    "repo": "webpro-nl/knip",
-   "klasor": "yayin",
+   "klasor": "kalite",
+   "alt_klasor": "inceleme",
+   "kategori": "🔒 Güvenlik, test & kod kalitesi",
+   "alt_kategori": "Kod inceleme ve temizlik",
    "kurulum": [
     "proje"
    ],
@@ -4642,7 +5085,10 @@
   },
   {
    "repo": "google/osv-scanner",
-   "klasor": "yayin",
+   "klasor": "kalite",
+   "alt_klasor": "guvenlik",
+   "kategori": "🔒 Güvenlik, test & kod kalitesi",
+   "alt_kategori": "Güvenlik",
    "kurulum": [
     "uygulama"
    ],
@@ -4660,7 +5106,10 @@
   },
   {
    "repo": "fastlane/fastlane",
-   "klasor": "altyapi",
+   "klasor": "yayin",
+   "alt_klasor": "deploy",
+   "kategori": "🚀 Yayına alma & izleme",
+   "alt_kategori": "Deploy ve mağaza yayını",
    "kurulum": [
     "proje"
    ],
@@ -4678,7 +5127,10 @@
   },
   {
    "repo": "Dokploy/dokploy",
-   "klasor": "altyapi",
+   "klasor": "yayin",
+   "alt_klasor": "deploy",
+   "kategori": "🚀 Yayına alma & izleme",
+   "alt_kategori": "Deploy ve mağaza yayını",
    "kurulum": [
     "uygulama"
    ],
@@ -4696,7 +5148,10 @@
   },
   {
    "repo": "coollabsio/coolify",
-   "klasor": "altyapi",
+   "klasor": "yayin",
+   "alt_klasor": "deploy",
+   "kategori": "🚀 Yayına alma & izleme",
+   "alt_kategori": "Deploy ve mağaza yayını",
    "kurulum": [
     "uygulama"
    ],
@@ -4714,7 +5169,10 @@
   },
   {
    "repo": "NVIDIA/SkillSpector",
-   "klasor": "skill",
+   "klasor": "ajan-skill",
+   "alt_klasor": "guven",
+   "kategori": "🧠 Ajan skill'leri ve çalışma yöntemi",
+   "alt_kategori": "Skill güvenliği ve ölçüm",
    "kurulum": [
     "uygulama"
    ],
@@ -4732,7 +5190,10 @@
   },
   {
    "repo": "google/artemis",
-   "klasor": "yayin",
+   "klasor": "kalite",
+   "alt_klasor": "test",
+   "kategori": "🔒 Güvenlik, test & kod kalitesi",
+   "alt_kategori": "Test",
    "kurulum": [
     "claude",
     "codex"
@@ -4752,6 +5213,9 @@
   {
    "repo": "shanraisshan/claude-code-best-practice",
    "klasor": "ogrenme",
+   "alt_klasor": "rehber",
+   "kategori": "📖 Öğrenme & listeler",
+   "alt_kategori": "Rehberler ve notlar",
    "kurulum": [
     "kaynak"
    ],
@@ -4770,6 +5234,9 @@
   {
    "repo": "nexu-io/open-design",
    "klasor": "tasarim",
+   "alt_klasor": "sistem",
+   "kategori": "🎨 Tasarım & arayüz",
+   "alt_kategori": "Tasarım sistemi ve Figma",
    "kurulum": [
     "uygulama"
    ],
@@ -4787,7 +5254,10 @@
   },
   {
    "repo": "HKUDS/CLI-Anything",
-   "klasor": "ajan",
+   "klasor": "ajan-erisim",
+   "alt_klasor": "tarayici",
+   "kategori": "🌐 Ajana web, tarayıcı ve belge erişimi",
+   "alt_kategori": "Tarayıcı ve uygulama kontrolü",
    "kurulum": [
     "claude",
     "codex"
@@ -4806,7 +5276,10 @@
   },
   {
    "repo": "BloopAI/vibe-kanban",
-   "klasor": "ajan",
+   "klasor": "ajan-yonetim",
+   "alt_klasor": "arayuz",
+   "kategori": "🖥️ Ajan yönetimi, modeller ve RAG",
+   "alt_kategori": "Ajan arayüzleri ve ekipler",
    "kurulum": [
     "uygulama"
    ],
@@ -4824,7 +5297,10 @@
   },
   {
    "repo": "microsoft/Webwright",
-   "klasor": "ajan",
+   "klasor": "ajan-erisim",
+   "alt_klasor": "tarayici",
+   "kategori": "🌐 Ajana web, tarayıcı ve belge erişimi",
+   "alt_kategori": "Tarayıcı ve uygulama kontrolü",
    "kurulum": [
     "claude",
     "codex"
@@ -4844,6 +5320,9 @@
   {
    "repo": "wentong2022-arch/flowforge-skill",
    "klasor": "tasarim",
+   "alt_klasor": "diyagram",
+   "kategori": "🎨 Tasarım & arayüz",
+   "alt_kategori": "Diyagram ve sunum",
    "kurulum": [
     "claude",
     "codex"
@@ -4862,7 +5341,10 @@
   },
   {
    "repo": "Kronop/vibe-aso",
-   "klasor": "yayin",
+   "klasor": "icerik",
+   "alt_klasor": "seo",
+   "kategori": "📣 İçerik, SEO & pazarlama",
+   "alt_kategori": "SEO ve ASO",
    "kurulum": [
     "claude",
     "codex"
@@ -4881,7 +5363,10 @@
   },
   {
    "repo": "bradautomates/claude-video",
-   "klasor": "ajan",
+   "klasor": "ajan-erisim",
+   "alt_klasor": "web",
+   "kategori": "🌐 Ajana web, tarayıcı ve belge erişimi",
+   "alt_kategori": "Web, video ve sosyal medya okuma",
    "kurulum": [
     "claude",
     "codex"
@@ -4900,7 +5385,10 @@
   },
   {
    "repo": "mvanhorn/last30days-skill",
-   "klasor": "veri",
+   "klasor": "ajan-erisim",
+   "alt_klasor": "web",
+   "kategori": "🌐 Ajana web, tarayıcı ve belge erişimi",
+   "alt_kategori": "Web, video ve sosyal medya okuma",
    "kurulum": [
     "claude",
     "codex"
@@ -4919,7 +5407,10 @@
   },
   {
    "repo": "Graphify-Labs/graphify",
-   "klasor": "veri",
+   "klasor": "ajan-erisim",
+   "alt_klasor": "kod",
+   "kategori": "🌐 Ajana web, tarayıcı ve belge erişimi",
+   "alt_kategori": "Kod tabanı haritası",
    "kurulum": [
     "claude",
     "codex"
@@ -4938,7 +5429,10 @@
   },
   {
    "repo": "mksglu/context-mode",
-   "klasor": "ajan",
+   "klasor": "ajan-skill",
+   "alt_klasor": "baglam",
+   "kategori": "🧠 Ajan skill'leri ve çalışma yöntemi",
+   "alt_kategori": "Bağlam, bellek ve token",
    "kurulum": [
     "claude",
     "codex"
@@ -4957,7 +5451,10 @@
   },
   {
    "repo": "composio-community/awesome-codex-skills",
-   "klasor": "skill",
+   "klasor": "ajan-skill",
+   "alt_klasor": "koleksiyon",
+   "kategori": "🧠 Ajan skill'leri ve çalışma yöntemi",
+   "alt_kategori": "Skill koleksiyonları ve eklentiler",
    "kurulum": [
     "codex"
    ],
@@ -4975,7 +5472,10 @@
   },
   {
    "repo": "openai/codex-plugin-cc",
-   "klasor": "ajan",
+   "klasor": "ajan-skill",
+   "alt_klasor": "yontem",
+   "kategori": "🧠 Ajan skill'leri ve çalışma yöntemi",
+   "alt_kategori": "Çalışma yöntemi",
    "kurulum": [
     "claude"
    ],
@@ -4993,7 +5493,10 @@
   },
   {
    "repo": "msitarzewski/agency-agents",
-   "klasor": "skill",
+   "klasor": "ajan-skill",
+   "alt_klasor": "yontem",
+   "kategori": "🧠 Ajan skill'leri ve çalışma yöntemi",
+   "alt_kategori": "Çalışma yöntemi",
    "kurulum": [
     "claude",
     "codex"
@@ -5012,7 +5515,10 @@
   },
   {
    "repo": "coreyhaines31/marketingskills",
-   "klasor": "skill",
+   "klasor": "icerik",
+   "alt_klasor": "pazarlama",
+   "kategori": "📣 İçerik, SEO & pazarlama",
+   "alt_kategori": "Pazarlama ve sosyal medya",
    "kurulum": [
     "claude",
     "codex"
@@ -5031,7 +5537,10 @@
   },
   {
    "repo": "addyosmani/agent-skills",
-   "klasor": "skill",
+   "klasor": "ajan-skill",
+   "alt_klasor": "yontem",
+   "kategori": "🧠 Ajan skill'leri ve çalışma yöntemi",
+   "alt_kategori": "Çalışma yöntemi",
    "kurulum": [
     "claude",
     "codex"
@@ -5050,7 +5559,10 @@
   },
   {
    "repo": "addyosmani/web-quality-skills",
-   "klasor": "yayin",
+   "klasor": "kalite",
+   "alt_klasor": "test",
+   "kategori": "🔒 Güvenlik, test & kod kalitesi",
+   "alt_kategori": "Test",
    "kurulum": [
     "claude",
     "codex"
@@ -5069,7 +5581,10 @@
   },
   {
    "repo": "garrytan/gstack",
-   "klasor": "skill",
+   "klasor": "ajan-skill",
+   "alt_klasor": "yontem",
+   "kategori": "🧠 Ajan skill'leri ve çalışma yöntemi",
+   "alt_kategori": "Çalışma yöntemi",
    "kurulum": [
     "claude",
     "codex"
@@ -5088,7 +5603,10 @@
   },
   {
    "repo": "open-gsd/gsd-core",
-   "klasor": "ajan",
+   "klasor": "ajan-skill",
+   "alt_klasor": "yontem",
+   "kategori": "🧠 Ajan skill'leri ve çalışma yöntemi",
+   "alt_kategori": "Çalışma yöntemi",
    "kurulum": [
     "claude",
     "codex"
@@ -5107,7 +5625,10 @@
   },
   {
    "repo": "obra/superpowers",
-   "klasor": "skill",
+   "klasor": "ajan-skill",
+   "alt_klasor": "yontem",
+   "kategori": "🧠 Ajan skill'leri ve çalışma yöntemi",
+   "alt_kategori": "Çalışma yöntemi",
    "kurulum": [
     "claude",
     "codex"
@@ -5126,7 +5647,10 @@
   },
   {
    "repo": "upstash/context7",
-   "klasor": "ajan",
+   "klasor": "ajan-erisim",
+   "alt_klasor": "belge",
+   "kategori": "🌐 Ajana web, tarayıcı ve belge erişimi",
+   "alt_kategori": "Belge ve doküman",
    "kurulum": [
     "claude",
     "codex"
@@ -5145,7 +5669,10 @@
   },
   {
    "repo": "thedotmack/claude-mem",
-   "klasor": "ajan",
+   "klasor": "ajan-skill",
+   "alt_klasor": "baglam",
+   "kategori": "🧠 Ajan skill'leri ve çalışma yöntemi",
+   "alt_kategori": "Bağlam, bellek ve token",
    "kurulum": [
     "claude",
     "codex"
@@ -5164,7 +5691,10 @@
   },
   {
    "repo": "paperclipai/paperclip",
-   "klasor": "ajan",
+   "klasor": "ajan-yonetim",
+   "alt_klasor": "arayuz",
+   "kategori": "🖥️ Ajan yönetimi, modeller ve RAG",
+   "alt_kategori": "Ajan arayüzleri ve ekipler",
    "kurulum": [
     "uygulama"
    ],

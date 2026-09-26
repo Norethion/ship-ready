@@ -1,0 +1,1006 @@
+# ship-ready: bütün içerik
+
+> AI ile kişisel proje geliştirip yayına çıkarırken başvurulan Türkçe kontrol listeleri, rehberler ve doğrulanmış araçlar.
+
+Kontrol listelerinde her maddenin sonundaki köşeli parantez maddenin kalıcı kimliğidir; denetim raporu bu kimliklerle yazılır.
+Adresler sitenin köküne göredir.
+
+---
+
+# Yayına almadan önce: 97 benzersiz iş
+
+Adres: /listeler/yayin-oncesi/
+
+Yayına çıkmadan önce kontrol edilecek güvenlik, kimlik doğrulama, veri, başlık, ödeme, operasyon, tedarik zinciri, mobil, SEO, içerik, KVKK ve alan adı maddeleri.
+Hukuki maddeler bilgilendirme amaçlıdır, hukuki tavsiye değildir; kendi durumun için bir hukukçuya danış.
+
+## Sırlar & erişim (8)
+
+1. API anahtarlarını/secret'ları koddan çıkar, env'e taşı; JWT secret'ı güçlü olsun, token kısa ömürlü olsun, algoritma sabitlensin (`alg: none` reddedilsin) [yo-secret-koddan-cikar]
+2. `.env`'i git geçmişinden temizle ve sızan anahtarları rotate et; `/.env` ve `/.git` web'den açılmasın, staging/dev ortamları dışarıya kapalı olsun, canlıda debug modu kapalı olsun [yo-env-gecmisten-temizle]
+3. Veritabanı kullanıcısına ve üçüncü parti API anahtarlarına sadece gereken yetkiyi ver (least privilege); uygulama ana (master) anahtarla değil, kısıtlı anahtarla çalışsın (ör. Supabase'de service_role yerine anon anahtar ve RLS, Stripe'ta restricted key) [yo-en-az-yetki]
+4. Directory listing'i kapat [yo-directory-listing]
+5. Varsayılan/tahmin edilebilir admin route'unu kaldır + admin'e rol tabanlı yetki koy [yo-admin-rotasi-rol]
+6. Tüm varsayılan şifreleri değiştir (admin paneli, veritabanı, sunucu ve yönetim araçları) [yo-varsayilan-sifreler]
+7. Canlı ortamda source map dosyalarını kapat ya da herkese açık yerden kaldır [yo-source-map-kapali]
+8. GitHub, bulut, alan adı, ödeme ve e-posta hesaplarında ve admin panelinde iki adımlı doğrulamayı (2FA) aç; bu hesaplardan biri ele geçirilirse koddaki güvenliğin anlamı kalmaz [yo-hesaplarda-2fa]
+
+## Kimlik doğrulama & oturum (11)
+
+9. Yetki kontrolünü sunucuda tut, client'tan gelen id/role'a güvenme [yo-yetki-sunucuda]
+10. Ownership/izin kurallarını her sorguda açıkça uygula [yo-sahiplik-kontrolu]
+11. Şifreleri güçlü algoritmayla hash'le [yo-sifre-hash]
+12. Çerezlere HttpOnly + Secure + SameSite ver [yo-guvenli-cerez]
+13. CSRF token'ları ekle [yo-csrf]
+14. Şifre değişiminde tüm oturumları sıfırla; girişte oturum kimliğini yenile, oturuma boşta kalma ve toplam süre sınırı koy, çıkışta oturumu sunucuda da geçersiz kıl [yo-oturum-yonetimi]
+15. Şifre sıfırlama linklerini süreli ve tek kullanımlık yap [yo-sifirlama-linki]
+16. Kullanıcı enumerasyonunu engelle (jenerik hata mesajı) [yo-kullanici-enumerasyonu]
+17. Başarısız girişlerden sonra hesabı kilitle / kademeli gecikme [yo-hesap-kilitleme]
+18. Tüm API'ye genel rate limit koy; login ve şifre sıfırlamaya daha sıkı limit uygula; kayıt, iletişim ve bülten gibi herkese açık formlara bot koruması koy (Cloudflare Turnstile, reCAPTCHA) [yo-rate-limit-bot-korumasi]
+19. OTP kodlarını kısa süreli ve tek kullanımlık yap, deneme ve yeniden gönderme sayısını sınırla; SMS'i sadece hizmet verdiğin ülkelere gönder, yoksa sahte numaralara toplu SMS attırılıp fatura şişirilir (SMS pumping) [yo-otp-sms-limit]
+
+## Girdi & veri (10)
+
+20. Girdiyi sunucuda şema ile doğrula [yo-girdi-dogrulama]
+21. Kaydetmeden önce sanitize et [yo-sanitize]
+22. Çıktıyı XSS'e karşı escape et [yo-xss-escape]
+23. SQL sorgularını parametrele [yo-sql-parametre]
+24. Request body boyutunu sınırla [yo-istek-boyutu]
+25. Dosya yüklemede tip whitelist'i + boyut sınırı; gerçek tipi dosya içeriğinden (magic byte) kontrol et, dosyaya rastgele ad ver, çalıştırılamayan bir yerde sakla [yo-dosya-yukleme]
+26. Dosya yolu kullanıcı girdisinden oluşuyorsa normalize et, izin verilen klasörün dışına çıkmayı (`../`) engelle (path traversal) [yo-path-traversal]
+27. Sunucunun kullanıcının verdiği URL'ye istek attığı yerlerde whitelist kullan; iç adresleri (`127.0.0.1`, `169.254.169.254`, `10.x`, `192.168.x`) engelle (SSRF) [yo-ssrf]
+28. API yanıtında sadece gereken alanları döndür (başka kullanıcıların e-postası, telefonu ya da iç alanlar gitmesin); girdide sadece izin verilen alanları kabul et, `role`, `isAdmin`, `ownerId` gibi alanları istemciden alma (mass assignment) [yo-fazla-alan-mass-assignment]
+29. Dosya depolamayı (S3, R2, Firebase Storage, Supabase Storage) herkese açık bırakma; kullanıcı sadece kendi dosyasına erişsin, özel dosyaları süreli imzalı linkle ver [yo-depolama-erisimi]
+
+## Taşıma & başlıklar (3)
+
+30. HTTPS zorunlu + HSTS [yo-https-hsts]
+31. Güvenlik başlıkları (CSP, X-Frame-Options, nosniff, Referrer-Policy, Permissions-Policy) [yo-guvenlik-basliklari]
+32. CORS'u whitelist ile kilitle [yo-cors]
+
+## Entegrasyon, ödeme, AI (13)
+
+33. Webhook imzalarını doğrula (ödeme webhook'ları dahil) [yo-webhook-imzasi]
+34. Fiyatları sunucu tarafında belirle [yo-fiyat-sunucuda]
+35. Prompt injection'a karşı savunma ekle [yo-prompt-injection]
+36. Uygulamadaki AI ajanına sadece gereken araç ve veriye erişim ver; silme, ödeme, e-posta gönderme gibi geri alınamaz işlemleri kullanıcı onayına bağla [yo-ai-ajan-yetkisi]
+37. AI kullanımına ve SMS, e-posta gibi maliyeti olan uç noktalara kullanıcı başına kota/tavan koy [yo-maliyet-kotasi]
+38. Harcama uyarısı (billing alert) kur [yo-harcama-uyarisi]
+39. AI çağrılarında değişmeyen kısmı (sistem prompt'u, araç tanımları, uzun doküman) başa koy ve prompt önbelleğini (prompt caching) aç; önbellekten okunan kısım çok daha ucuza gelir (Claude'da giriş fiyatının onda biri ya da daha azı), değişen kısım sona yazılsın; sık gelen aynı sorunun cevabını da anlamına göre önbellekten ver (semantic cache) [yo-prompt-onbellegi]
+40. Her isteği en pahalı modele gönderme: kolay istekleri küçük model karşılasın, emin olamadığında bir üst modele aktarsın (model cascade); aktarma eşiğini kendi test setinle ayarla [yo-model-kademesi]
+41. Modeli değiştirmeden önce yenisini gerçek isteklerin kopyasıyla arka planda çalıştır (shadow test) ve cevapları model adları gizli AI hakemlere karşılaştırt; açık farkla kazanmadıkça geçiş yapma [yo-model-golge-testi]
+42. Kodun işleyeceği AI cevaplarını (kategori, evet/hayır, alanlar) serbest metin yerine şemalı JSON olarak al (structured outputs) ve değerleri izin verilen listeye göre doğrula [yo-ai-semali-cikti]
+43. Belgelere dayanan AI cevaplarında (RAG) cevabın hangi belgeden geldiğini göster, belgede yoksa "bilmiyorum" dedirt; kullanıcının göremeyeceği belgeleri arama sorgusunun içinde süz, arama ve cevap kalitesini ayrı ölç [yo-rag-kaynak-yetki]
+44. LLM ve diğer dış API çağrılarına zaman aşımı koy; 429 ve 5xx hatasında hemen tekrar deneme, `Retry-After` başlığına uy, beklemeyi her denemede artırıp rastgele kaydır, deneme sayısını sınırla ve yoğun anlarda istekleri kuyruğa al [yo-api-yeniden-deneme]
+45. AI ajanının kayıt oluşturan işlemlerine (randevu, sipariş) idempotency key ver ki aynı mesaj iki kez gelince çift kayıt oluşmasın; "gelecek perşembe" gibi tarih ve saatleri model değil kod hesaplasın [yo-ajan-kayit-guvencesi]
+
+## Operasyon & dayanıklılık (8)
+
+46. Hata mesajlarını kıs (stack trace/iç detay sızdırma) [yo-hata-mesajlari]
+47. Loglardan hassas veriyi temizle; log dosyaları ve log sayfaları herkese açık olmasın [yo-log-hassas-veri]
+48. Güvenlik olaylarını logla (audit trail) [yo-guvenlik-logu]
+49. Bağımlılıkları denetle (audit / otomatik güncelleme) [yo-bagimlilik-denetimi]
+50. Otomatik yedekleme kur + geri yükleme testi yap [yo-yedekleme]
+51. Hesap silme gerçekten silsin (kalıcı silme) [yo-hesap-silme]
+52. Saldırgan gibi test et (pentest / düşmanca inceleme) [yo-pentest]
+53. Sık okunan veriyi önbelleğe al: statik dosyalara uzun `Cache-Control` ver, herkese açık sayfaları CDN'de tut, sık sorguları Redis gibi bir önbellekte sakla; her okuma veritabanına gitmesin, veri değişince önbelleği temizle [yo-onbellek-katmanlari]
+
+## Tedarik zinciri & CI (3)
+
+54. Lock dosyasını (`package-lock.json`, `pnpm-lock.yaml`) commit'le, CI'da ve sunucuda lock'a sadık komutla kur (`npm ci`, `pnpm install --frozen-lockfile`); paket sürümleri kendiliğinden yükselmesin [yo-lock-dosyasi]
+55. Paketlerin kurulum script'lerini kapat (`npm config set ignore-scripts true`, pnpm'de sadece izin verdiğin paketler); kötü amaçlı bir paket kurulurken bilgisayarında ya da CI'da kod çalıştıramasın [yo-kurulum-scriptleri]
+56. Fork'tan gelen PR'ların kodunu secret'lara erişen iş akışında çalıştırma (GitHub Actions'ta `pull_request_target` ile PR kodunu checkout etme); CI secret'ları dışarıdan gelen koda açılmasın [yo-fork-pr-secret]
+
+## Mobil uygulama (8)
+
+57. Uygulama paketine (APK, AAB, IPA) gizli anahtar koyma; paket açılıp okunabilir, istemcide sadece herkese açık anahtarlar kalsın (ör. Supabase anon key), gizli işlemler sunucudan geçsin [yo-mobil-pakette-anahtar]
+58. Oturum token'larını ve hassas veriyi iOS'ta Keychain'de, Android'de Keystore ile şifrelenmiş depoda sakla; AsyncStorage, SharedPreferences ya da UserDefaults'a düz metin yazma [yo-mobil-guvenli-depolama]
+59. Android'de uygulama verisinin yedeklenmesini kapat ya da hassas dosyaları yedekten çıkar (`android:allowBackup="false"`, `dataExtractionRules`); yedekten token ve veritabanı çıkarılamasın [yo-android-yedekleme]
+60. Firebase kullanıyorsan App Check'i aç ve zorunlu kıl (enforce); istekler sadece gerçek uygulamandan gelsin (iOS'ta App Attest, Android'de Play Integrity) [yo-firebase-app-check]
+61. Android sürümünde kod küçültme ve karartmayı aç (R8, `isMinifyEnabled = true`); tersine mühendisliği zorlaştırır ama gizli anahtarı korumaz [yo-android-r8]
+62. Deep link'leri doğrula: Android App Links (`autoVerify`) ve iOS Universal Links kullan, linkten gelen parametrelere güvenme, giriş ya da ödeme gibi işlemleri sadece linkle tetikleme [yo-deep-link]
+63. Hassas API'lerde sertifika sabitlemeyi (certificate pinning) değerlendir; yedek anahtar ve son kullanma tarihi koy, yoksa sertifika yenilenince uygulama sunucuya bağlanamaz [yo-sertifika-sabitleme]
+64. Sadece gerçekten kullandığın izinleri iste (kamera, konum, rehber, bildirim); kullanılmayan izin saldırı yüzeyini büyütür ve mağaza incelemesinde sorun çıkarır [yo-mobil-izinler]
+
+## SEO & teknik site (10)
+
+65. Özel 404 sayfası [yo-404-sayfasi]
+66. Benzersiz sayfa başlıkları [yo-sayfa-basliklari]
+67. Meta description'lar [yo-meta-description]
+68. Sosyal paylaşım görseli (OG/Twitter card) [yo-og-gorseli]
+69. robots.txt [yo-robots-txt]
+70. Yapısal veri / schema (local schema dahil) [yo-yapisal-veri]
+71. Breadcrumb'lar [yo-breadcrumb]
+72. İç linkler [yo-ic-linkler]
+73. Görsellerde alt text [yo-alt-text]
+74. Google Analytics [yo-analitik]
+
+## İçerik & dönüşüm (10)
+
+75. CTA'yı fold üstüne koy [yo-cta-ust]
+76. Mobilde sticky CTA [yo-sticky-cta]
+77. Teşekkür (thank you) sayfası [yo-tesekkur-sayfasi]
+78. 5 soruluk SSS [yo-sss]
+79. Vaka çalışmaları [yo-vaka-calismalari]
+80. Gerçek kullanıcı yorumları [yo-kullanici-yorumlari]
+81. Yanıt süresi taahhüdü [yo-yanit-suresi-taahhudu]
+82. Harita + yol tarifi [yo-harita-yol-tarifi]
+83. Ekip fotoğrafı [yo-ekip-fotografi]
+84. Gizlilik politikası sayfası [yo-gizlilik-politikasi]
+
+## Hukuki & KVKK (8)
+
+85. Fontları (Google Fonts dahil) kendi sunucundan ver; ziyaretçinin IP adresi yurt dışına gitmesin (KVKK / GDPR) [yo-yerel-fontlar]
+86. Oturum kaydı ve ısı haritası araçlarında (Clarity vb.) form alanlarını maskele, çerez onayı olmadan başlatma, aydınlatma metninde belirt [yo-oturum-kaydi-maskeleme]
+87. Ticari e-posta ve SMS için önceden onay al, İYS'ye kayıt ol, her iletide ret (abonelikten çıkma) linki ve gönderenin kimliği olsun: tacirse ticaret unvanı ve MERSİS numarası, esnafsa adı soyadı ve T.C. kimlik numarası, ayrıca en az bir iletişim bilgisi (6563 sayılı Kanun, Ticari İletişim Yönetmeliği); ABD'ye gönderiyorsan posta adresi de şart (CAN-SPAM) [yo-ticari-ileti]
+88. Abonelik satılıyorsa yenileme şartlarını ve iptal yolunu abone ol butonunun yanında göster, iptal abone olmak kadar kolay olsun (6502 sayılı Kanun, Mesafeli Sözleşmeler Yönetmeliği) [yo-abonelik-sartlari]
+89. Kayıtta yaş sor ya da çocukların kaydını engelle; ABD'de 13 yaş altı çocukların verisini ebeveyn onayı olmadan toplamak COPPA ihlalidir ve ceza ihlal başınadır. Uygulama çocuklara yönelikse mağazaların çocuk kategorisi kurallarına da uy [yo-yas-kontrolu]
+90. Kullanıcılar görsel ya da dosya yüklüyorsa telif şikâyeti yolu kur: kaldırma talebi için iletişim adresi ve süreç yaz. ABD'li kullanıcıların varsa DMCA temsilcini ABD Telif Ofisi'ne kaydet (6 $); kayıt yoksa yüklenen içerikteki telif ihlalinden sen de sorumlu tutulabilirsin [yo-telif-sikayeti]
+91. Uygulama mağazası dışında (web'den) dijital ürün ya da abonelik satıyorsan vergiyi baştan kur: AB'deki tüketiciye ilk satıştan itibaren onun ülkesinin KDV'si (VAT) uygulanır, ABD'de birçok eyalet satış eşiğini geçince satış vergisi ister; bunu Paddle ya da Lemon Squeezy gibi satıcı olarak kayıtlı (merchant of record) bir ödeme sağlayıcısına bırak ya da Stripe Tax ile hesaplat [yo-dijital-satis-vergisi]
+92. AB'deki tüketiciye dijital içerik satıyorsan 14 günlük cayma hakkı vardır; erişimi hemen veriyorsan ödeme ekranında müşterinin açık onayını ve cayma hakkını kaybettiğini kabul ettiğini al [yo-ab-cayma-hakki]
+
+## Alan adı, e-posta & indeksleme (3)
+
+93. Uygulamayı alt alan adında yayınla (`app.alanadi.com`), tanıtım sayfaları ana alan adında kalsın (`alanadi.com`); ikisi ayrı ekiplerce birbirini bozmadan değiştirilebilsin (DNS'te `app` için CNAME kaydı) [yo-alt-alan-adi]
+94. E-postaları ana alan adından değil ayrı alt alan adlarından gönder: uygulama e-postaları (fatura, kayıt, şifre sıfırlama) `mail.alanadi.com`, pazarlama e-postaları (bülten, kampanya) `news.alanadi.com`; her biri için SPF, DKIM ve DMARC kayıtlarını kur (ör. Resend), spam bildirimi ana alan adının itibarını düşürmesin [yo-eposta-alt-alan]
+95. Herkese açık sayfalar için `sitemap.xml` oluştur ve Google Search Console'da Dizin oluşturma > Site haritaları bölümünden gönder [yo-sitemap]
+
+## Sürüm çıkarma & geri dönüş (2)
+
+96. Yeni sürümü canlıyı bozmadan yayına al ve sorun çıkarsa önceki sürüme dakikalar içinde dönebil (blue-green ya da sağlık kontrollü kesintisiz güncelleme; istersen önce trafiğin küçük bir kısmına aç ve hata oranını izleyerek artır: canary); geri dönüşü yayından önce bir kez dene [yo-kesintisiz-surum]
+97. Veritabanı değişikliklerini geriye uyumlu yap (genişlet-daralt): sütunu yeniden adlandırma ya da silme yerine önce yenisini ekle, iki yapıyı da okuyan kodu çıkar, veriyi taşı, eskisini sonraki sürümde kaldır; yoksa eski sürüme dönüş veritabanında kırılır [yo-geriye-uyumlu-sema]
+
+---
+
+# App Store incelemesi
+
+Adres: /listeler/app-store/
+
+En sık 26 red sebebi ve her biri için ne yapılacağı.
+Apple uygulamayı reddederken çoğu zaman sadece bir kural numarası ve iki cümle yazar; hangi ekranda neyin eksik olduğunu söylemez.
+Bu sebeplerin çoğu kod hatası değil; eksik anlatılan, unutulan ya da yanlış girilen ayarlar.
+Liste [bu videodan](https://www.instagram.com/reel/DctdIykgb9C/) ve aynı hesabın 24 maddelik ikinci listesinden alındı; kural numaraları 25.09.2026'da [App Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) sayfasından doğrulandı.
+
+## Ödeme ve abonelik
+
+| # | Red sebebi | Ne yapmalı | Kural |
+|---|---|---|---|
+| 1 [as-paywall-linkleri] | Satın alma ekranında (paywall) link yok | Abonelik ekranına Kullanım Koşulları (EULA) ve Gizlilik Politikası linklerini koy; ayrıca App Store Connect'teki uygulama açıklamasına da ekle. | 3.1.2 |
+| 2 [as-fiyat-bilgisi] | Fiyat yazmıyor | Kullanıcı abone olmadan önce ne alacağını, fiyatı, süreyi ve deneme bitince ne kadar ödeyeceğini açıkça görsün; "Premium'a geç" tek başına yetmez. | 3.1.2(a), 3.1.2(c) |
+| 3 [as-geri-yukleme] | Satın almayı geri yükleme (restore) yok | Geri yüklenebilen satın almalar için "Satın almaları geri yükle" düğmesi olsun. | 3.1.1 |
+| 4 [as-dis-odeme-linki] | Dış ödeme linki | Dijital ürün ve abonelikleri uygulama dışında satın aldıran düğme ya da link koyma. ABD mağazasında bu yasak uygulanmıyor; diğer ülkelerde reddedilir. | 3.1.1(a) |
+
+## Gizlilik ve izinler
+
+| # | Red sebebi | Ne yapmalı | Kural |
+|---|---|---|---|
+| 5 [as-hesap-silme] | Hesap silme yok | Uygulamada hesap açılabiliyorsa hesap silme de uygulamanın içinden yapılabilmeli; sadece e-posta ile talep yetmez. | 5.1.1(v) |
+| 6 [as-izin-gerekcesi] | İzin gerekçesi yok | Kamera, konum, rehber gibi izin isteklerinde verinin neden ve nasıl kullanılacağını açıkça yaz; "Kamera erişimi gerekli" yetmez. | 5.1.1(ii) |
+| 7 [as-takip-izni] | Takip izni yok | Kullanıcıyı başka uygulama ve sitelerde takip ediyorsan (reklam kimliği, bazı analitik SDK'ları) App Tracking Transparency izni iste. | 5.1.2(i) |
+| 8 [as-gizlilik-etiketi] | Gizlilik etiketi yanlış | App Store Connect'teki gizlilik bilgileri, uygulamanın ve eklediğin SDK'ların (analitik, reklam, çökme raporu) gerçekte topladığı veriyle birebir aynı olsun. | 2.3, 5.1.1(i) |
+| 9 [as-gizlilik-politikasi-linki] | Gizlilik politikası linki yok | Gizlilik politikası linkini hem App Store Connect'teki alana hem de uygulamanın içinde kolay bulunur bir yere koy; sadece satın alma ekranında olması yetmez. | 5.1.1(i) |
+| 10 [as-esdeger-giris-secenegi] | Eşdeğer giriş seçeneği yok | Google, Facebook gibi bir hesapla giriş varsa yanında veriyi ad ve e-postayla sınırlayan, e-postayı gizlemeye izin veren ve reklam için izlemeyen bir giriş seçeneği daha sun; Apple ile Giriş bu şartları karşılar. Sadece kendi e-posta ve şifre girişin varsa gerekmez. | 4.8 |
+
+## İnceleme hazırlığı
+
+| # | Red sebebi | Ne yapmalı | Kural |
+|---|---|---|---|
+| 11 [as-yer-tutucu-icerik] | Yer tutucu içerik | "Lorem ipsum", boş ekran, çalışmayan link ya da "yakında" sayfası bırakma; gönderilen sürüm son sürüm olmalı. | 2.1(a) |
+| 12 [as-demo-hesap] | Demo hesap yok | Giriş gerektiren her şey için çalışan ve inceleme sürerken süresi dolmayacak bir demo hesap (ya da tam demo modu) ve gerekiyorsa örnek QR kodu gibi ek bilgileri inceleme notlarına yaz. | 2.1(a) |
+| 13 [as-gizli-ozellik] | Gizli özellik | Gizli, kapalı bekleyen ya da belgelenmemiş özellik bırakma; yeni özellikleri inceleme notlarında ayrıntılı anlat ve inceleme ekibinin her özelliğe (ör. satın alma ekranına) nasıl ulaşacağını adım adım yaz, genel açıklama reddedilir. | 2.3.1(a) |
+| 14 [as-ekran-goruntuleri] | Ekran görüntüsü yanlış | Ekran görüntüleri uygulamanın kullanımını göstermeli; sadece logo, giriş ya da açılış ekranı olmaz. | 2.3.3 |
+| 15 [as-cokme] | Çöküyor | Göndermeden önce gerçek cihazda test et; çöken ya da belirgin hatası olan sürüm reddedilir. | 2.1(a) |
+| 16 [as-destek-linki] | Destek linki çalışmıyor | App Store Connect'teki destek linki (Support URL) açılmalı ve sana ulaşmanın kolay bir yolunu göstermeli; boş ya da hata veren sayfa bırakma. | 1.5 |
+| 17 [as-yas-derecelendirmesi] | Yaş sınırı yanlış | App Store Connect'teki yaş derecelendirmesi sorularını dürüst cevapla; kullanıcı içeriği, sohbet, kumar ya da yetişkin içerik varsa belirt. | 2.3.6 |
+
+## İçerik ve işlevsellik
+
+| # | Red sebebi | Ne yapmalı | Kural |
+|---|---|---|---|
+| 18 [as-web-gorunumu] | Sadece web görünümü | Uygulama, paketlenmiş bir web sitesinden fazlası olmalı: uygulamaya özgü özellik, içerik ve arayüz. | 4.2 |
+| 19 [as-minimum-islevsellik] | Minimum işlevsellik | Sadece reklam, link koleksiyonu ya da çok basit tek işlev olan uygulamalar reddedilir. | 4.2, 4.2.2 |
+| 20 [as-cocuk-kategorisi] | Çocuk kategorisi | Çocuk kategorisindeysen dışarıya link, satın alma ve reklam ebeveyn kilidinin arkasında olmalı; kişisel ve cihaz verisi üçüncü taraflara gitmemeli. | 1.3 |
+| 21 [as-kullanici-icerigi] | Kullanıcı içeriği | Kullanıcılar içerik paylaşabiliyorsa uygunsuz içeriği filtreleme, şikâyet etme, kullanıcı engelleme ve iletişim bilgisi şart. | 1.2 |
+| 22 [as-baskasinin-markasi] | Başkasının markası | Başka markanın adını, logosunu ya da telifli içeriğini izinsiz kullanma; başka uygulamanın ikonunu ya da adını taklit etme. Açıklamada ve ekran görüntülerinde Android gibi başka platformların adı ya da görseli de geçmesin. | 5.2.1, 4.1(c), 2.3.10 |
+| 23 [as-saglik-iddiasi] | Sağlık iddiası | Sağlıkla ilgili ölçüm ya da etki iddiasının verisini ve yöntemini göster; doğrulanamayan iddia ("stresi tedavi eder") reddedilir. | 1.4.1 |
+| 24 [as-sablon-uygulama] | Şablon uygulama | Hazır şablonla ya da uygulama üretme servisiyle yapılıp başkası adına gönderilen uygulama reddedilir; içerik sahibi kendi hesabından göndermeli ve uygulama özgün olmalı. | 4.2.6 |
+| 25 [as-olmayan-ozellik-vaadi] | Olmayan özellik vaadi | Açıklama, ekran görüntüleri ve önizleme videosu uygulamanın gerçekte yaptığını göstermeli; olmayan özelliği ya da yanlış fiyatı vaat etme. | 2.3, 2.3.1(a) |
+
+## Reddedilince
+
+| # | Red sebebi | Ne yapmalı | Kural |
+|---|---|---|---|
+| 26 [as-red-cevabi] | Cevap yazmıyorsun | Sessizce yeni sürüm göndermek yerine App Store Connect'te uygulamanın App Review bölümünden inceleme ekibine yaz; neyin eksik olduğunu sor ya da neden kurala uyduğunu açıkla. | App Review |
+
+- **Önce yaz:** Ret mesajına App Store Connect'ten cevap vermek çoğu zaman yeni sürüm göndermekten hızlı sonuç verir.
+- **İtiraz:** Uygulamanın yanlış anlaşıldığını düşünüyorsan [App Review Board'a itiraz](https://developer.apple.com/contact/app-store/?topic=appeal) edebilirsin. Her ret için tek itiraz hakkı var; önce ekibin istediği ek bilgileri ver.
+- **Görüşme:** Apple, App Review ile 30 dakikalık Webex görüşmesi randevusu da veriyor ([App Review](https://developer.apple.com/distribute/app-review/) sayfasında).
+- **İlgili sekmeler:** Satın alma ekranı ve abonelik araçları [Gelir & analitik](/rehberler/gelir-analitik/) sekmesinde; abonelik şartları ve hesap silme [yayın öncesi listesinin](/listeler/yayin-oncesi/) 51. ve 88. maddelerinde.
+
+## Göndermeden önce kontrol prompt'u
+
+```
+Bu iOS uygulamasını App Store incelemesine göndermeden önce şu 26 red sebebine göre kontrol et: satın alma ekranında Kullanım Koşulları ve Gizlilik Politikası linkleri, fiyat ve deneme süresi açıklaması, satın almaları geri yükleme düğmesi, dış ödeme linki, uygulama içinden hesap silme, izin gerekçesi metinleri, App Tracking Transparency, gizlilik etiketinin SDK'larla uyumu, App Store Connect'te ve uygulama içinde gizlilik politikası linki, Google/Facebook girişinin yanında eşdeğer giriş seçeneği, yer tutucu içerik, demo hesap, gizli özellikler ve inceleme ekibinin özelliklere nasıl ulaşacağı, ekran görüntüleri, çökme, destek linki, yaş derecelendirmesi, web görünümünden ibaret olma, minimum işlevsellik, çocuk kategorisi kuralları, kullanıcı içeriği için filtreleme/şikâyet/engelleme, başkasının markası ve başka platform adları, sağlık iddiaları, şablon uygulama, açıklamadaki vaatlerin uygulamayla uyumu. Her madde için durumu (✅ ⚠️ ❌ ➖) ve ilgili dosyayı yaz, sonra inceleme notlarına yazılacak metni ve demo hesap bilgisi taslağını hazırla.
+```
+
+---
+
+# Google Play incelemesi
+
+Adres: /listeler/google-play/
+
+Google Play'in uygulamayı reddetmesine ya da kaldırmasına en sık yol açan 24 madde ve her biri için ne yapılacağı.
+Çoğu kod hatası değil; Play Console'daki formların eksik ya da gerçekle uyumsuz doldurulması.
+Maddeler 25.09.2026'da Google Play politika merkezinden ve Play Console Yardım sayfalarından doğrulandı; tarih ve API seviyeleri her yıl değişir.
+
+## Veri ve gizlilik
+
+| # | Red sebebi | Ne yapmalı | Politika |
+|---|---|---|---|
+| 1 [gp-veri-guvenligi-formu] | Veri güvenliği formu uyumsuz | Play Console'daki Veri güvenliği (Data safety) formunu uygulamanın ve eklediğin SDK'ların gerçekte topladığı ve paylaştığı veriyle, gizlilik politikanla tutarlı doldur. Hiç veri toplamasan da formu doldurman gerekir; uyumsuzluk güncellemelerin engellenmesine ya da kaldırmaya yol açar. | [Data safety](https://support.google.com/googleplay/android-developer/answer/10787469) |
+| 2 [gp-gizlilik-politikasi] | Gizlilik politikası yok | Veri toplamasa bile her uygulama Play Console'daki alana ve uygulamanın içine gizlilik politikası linki koymalı. Sayfa herkese açık olmalı, PDF olmamalı; geliştirici adını, iletişim bilgisini, verinin ne kadar saklanıp nasıl silindiğini içermeli. | [User Data](https://support.google.com/googleplay/android-developer/answer/10144311) |
+| 3 [gp-belirgin-aciklama-onay] | Belirgin açıklama ve onay yok | Kullanıcının beklemeyeceği veri kullanımında (ör. arka planda toplama) izin isteğinden hemen önce uygulama içinde açıklama göster ve kullanıcı bir düğmeyle onaylasın; geri tuşu ya da kendiliğinden kapanan mesaj onay sayılmaz. | [User Data](https://support.google.com/googleplay/android-developer/answer/10144311) |
+| 4 [gp-hesap-silme] | Hesap silme yok | Uygulamada hesap açılabiliyorsa hem uygulama içinden hesap ve veri silme yolu, hem de silme talebi için bir web sayfası olmalı (linki Veri güvenliği formundaki alana). Hesabı dondurmak ya da pasifleştirmek silme sayılmaz. | [Hesap silme](https://support.google.com/googleplay/android-developer/answer/13327111) |
+
+## İzinler
+
+| # | Red sebebi | Ne yapmalı | Politika |
+|---|---|---|---|
+| 5 [gp-hassas-izin-beyani] | Hassas izin beyanı yok | SMS ve arama kaydı, tüm dosyalara erişim (`MANAGE_EXTERNAL_STORAGE`), yüklü uygulamaları görme (`QUERY_ALL_PACKAGES`), erişilebilirlik API'si, fotoğraf ve video (`READ_MEDIA_*`) izinlerini sadece ana işlev gerçekten gerektiriyorsa iste ve Play Console'da beyan formunu doldur. Fotoğraf için mümkünse sistemin fotoğraf seçicisini kullan. | [Hassas izinler](https://support.google.com/googleplay/android-developer/answer/16558241) |
+| 6 [gp-arka-plan-konum] | Arka planda konum | Arka planda konum sadece ana işlev için olabilir, reklam ya da analitik için asla. Beyan formu, video gösterimi, uygulama içi açıklama ve gizlilik politikası ister. | [Konum izinleri](https://support.google.com/googleplay/android-developer/answer/9799150) |
+| 7 [gp-on-plan-servisi] | Ön plan servisi beyanı yok | Android 14 ve üstünü hedefliyorsan her ön plan servisi türünü App content sayfasında açıklama, kullanıcıya etkisi ve video linkiyle beyan et. Tam ekran bildirim (`USE_FULL_SCREEN_INTENT`) ve kesin alarm (`USE_EXACT_ALARM`, sadece alarm, zamanlayıcı ve takvim uygulamaları) da beyan ister. | [Ön plan servisleri](https://support.google.com/googleplay/android-developer/answer/13392821) |
+
+## Teknik gereksinimler
+
+| # | Red sebebi | Ne yapmalı | Politika |
+|---|---|---|---|
+| 8 [gp-hedef-api-seviyesi] | Hedef API seviyesi düşük | 31 Ağustos 2026'dan itibaren yeni uygulamalar ve güncellemeler telefon ve tablette Android 16'yı (API 36) hedeflemeli. Mevcut uygulamalar en az API 35 olmalı, yoksa yeni Android sürümlerindeki yeni kullanıcılardan gizlenir. 1 Kasım 2026'ya kadar uzatma istenebilir. | [Hedef API](https://support.google.com/googleplay/android-developer/answer/11926878) |
+| 9 [gp-16kb-sayfa] | 16 KB sayfa boyutu desteği yok | Android 15 ve üstünü hedefleyen, native kod (NDK ya da native kütüphane içeren bir SDK) kullanan uygulamalar 64 bit cihazlarda 16 KB bellek sayfasını desteklemeli. Sadece Java/Kotlin uygulamalar zaten uyumlu. 1 Şubat 2027'den itibaren desteklemeyen güncellemeler yayınlanamaz. | [16 KB sayfa](https://developer.android.com/guide/practices/page-sizes) |
+| 10 [gp-app-bundle-64bit] | App Bundle ya da 64 bit yok | Yeni uygulamalar Android App Bundle (AAB) olarak yüklenmeli; native kod içeren uygulamalar 64 bit sürüm de içermeli. | [App Bundle](https://developer.android.com/guide/app-bundle) |
+| 11 [gp-paket-kaydi] | Paket adı kayıtlı değil | Android geliştirici doğrulaması kapsamında 30 Eylül 2026'dan itibaren kayıtlı olmayan Play paketleri kaldırılır. Play uygulamaların çoğunu kendisi kaydediyor; Play Console ana sayfasında kaydedilmemiş uygulama uyarısı olup olmadığına bak. | [Geliştirici doğrulaması](https://developer.android.com/developer-verification) |
+| 12 [gp-cokme] | Çöküyor ya da çalışmıyor | Çöken, donan, yüklenmeyen ya da açılmayan uygulamalar reddedilir. Android vitals'da çökme oranını %1,09'un, ANR oranını %0,47'nin altında tut. | [İşlevsellik](https://support.google.com/googleplay/android-developer/answer/9898783) |
+
+## Ödeme ve abonelik
+
+| # | Red sebebi | Ne yapmalı | Politika |
+|---|---|---|---|
+| 13 [gp-play-faturalandirma] | Play Faturalandırma dışında ödeme | Dijital ürün ve abonelikleri Google Play Faturalandırma ile sat; uygulama içinde başka ödeme yöntemine yönlendiren link ya da düğme koyma. ABD'de Ekim 2025'ten beri bu zorunluluk yok; AB, Birleşik Krallık, Japonya gibi bazı ülkelerde kayıt olarak alternatif faturalandırma kullanılabiliyor. Türkiye bu ülke listelerinde yok. Fiziksel ürün ve hizmetler Play Faturalandırma kullanmaz. | [Ödemeler](https://support.google.com/googleplay/android-developer/answer/9858738) |
+| 14 [gp-abonelik-sartlari] | Abonelik şartları belirsiz | Fiyatı, fatura dönemini, otomatik yenilemeyi, denemenin ne zaman ve kaça dönüşeceğini ve nasıl iptal edileceğini açıkça göster. Yıllık planda aylık fiyatı öne çıkarma, kapatma düğmesi görünür olsun, uygulamada kolay bir iptal yolu (ör. Play abonelik merkezine link) bulunsun. | [Abonelikler](https://support.google.com/googleplay/android-developer/answer/9900533) |
+
+## Mağaza sayfası ve içerik
+
+| # | Red sebebi | Ne yapmalı | Politika |
+|---|---|---|---|
+| 15 [gp-yaniltici-magaza-bilgisi] | Yanıltıcı mağaza bilgisi | Başlık en fazla 30 karakter olsun; başlıkta, ikonda ve geliştirici adında emoji, tamamı büyük harf, "#1", "En iyi", fiyat ya da promosyon olmasın. Alakasız anahtar kelime ve kaynaksız yorum kullanma; ekran görüntüleri uygulamanın gerçek halini göstersin. | [Meta veri](https://support.google.com/googleplay/android-developer/answer/9898842) |
+| 16 [gp-icerik-derecelendirmesi] | İçerik derecelendirmesi yok | IARC içerik derecelendirme anketini doldur, içerik değişince yeniden doldur; derecelendirmesiz uygulamaya izin verilmez. | [İçerik derecelendirme](https://support.google.com/googleplay/android-developer/answer/9898843) |
+| 17 [gp-hedef-kitle-cocuklar] | Hedef kitle ve çocuklar | Hedef yaş gruplarını beyan et. Çocuklar da hedefteyse Aileler politikasına uy: çocuklardan cihaz kimliği (reklam kimliği, IMEI vb.) gönderme, sadece onaylı reklam SDK'larını kullan, ilgiye dayalı reklam gösterme. | [Hedef kitle](https://support.google.com/googleplay/android-developer/answer/9893335) |
+| 18 [gp-kullanici-icerigi] | Kullanıcı içeriği | Kullanıcı paylaşım yapabiliyorsa önce kullanım koşullarını kabul etsin; sürekli moderasyon, içerik ve kullanıcı şikâyeti ile engelleme olsun. Sohbet, sosyal ve flört uygulamaları çocuk güvenliği standartlarını yayınlamalı. | [Kullanıcı içeriği](https://support.google.com/googleplay/android-developer/answer/9876937) |
+| 19 [gp-taklit-fikri-mulkiyet] | Taklit ve fikri mülkiyet | Başka bir marka ya da kurumla olmayan bir ilişkiyi ima etme, izinsiz marka ve telifli içerik kullanma. İzinle kullanıyorsan göndermeden önce Google Play'e bildir. | [Taklit](https://support.google.com/googleplay/android-developer/answer/9888374) |
+| 20 [gp-web-gorunumu] | Sadece web görünümü, sınırlı işlev | Sahibinin izni olmadan bir sitenin web görünümünden ibaret, statik metin ya da PDF gösteren veya başka bir uygulamanın kopyası olan uygulamalar reddedilir. | [Spam ve minimum işlev](https://support.google.com/googleplay/android-developer/answer/9899034) |
+| 21 [gp-reklam-kurallari] | Reklam kuralları | Reklam sistem ya da uygulama arayüzünü taklit etmesin; uygulama dışında, açılışta, çıkışta ya da beklenmedik anda tam ekran reklam gösterme; geçiş reklamı en geç 15 saniyede kapatılabilsin. "Reklam içerir" beyanı doğru olsun; SDK'ların uyumundan sen sorumlusun. | [Reklamlar](https://support.google.com/googleplay/android-developer/answer/9857753) |
+| 22 [gp-saglik-finans-beyanlari] | Sağlık ve finans beyanları | Bu özellikler olmasa bile Sağlık uygulamaları ve Finansal özellikler beyan formlarını doldur. Tıbbi cihaz olmayan sağlık uygulaması bunu açıklamasında belirtmeli; sağlık ve finans uygulamaları Kuruluş hesabı ister. | [Sağlık](https://support.google.com/googleplay/android-developer/answer/16679511) |
+
+## İnceleme hazırlığı
+
+| # | Red sebebi | Ne yapmalı | Politika |
+|---|---|---|---|
+| 23 [gp-giris-bilgisi] | Giriş bilgisi yok | Uygulama giriş gerektiriyorsa App content > Giriş bilgileri (Sign-in details) bölümüne çalışan bir demo hesap ve gerekiyorsa tek kullanımlık şifre, QR kodu gibi talimatları yaz; eski bilgi verme. | [Play Console gereksinimleri](https://support.google.com/googleplay/android-developer/answer/10788890) |
+| 24 [gp-kapali-test] | Kapalı test şartı | 13 Kasım 2023'ten sonra açılan kişisel geliştirici hesapları üretime çıkmadan önce en az 12 test kullanıcısıyla kesintisiz 14 günlük kapalı test yapmalı. Kuruluş hesabı D-U-N-S numarası ister; alınması 30 güne kadar sürebilir. | [Test şartı](https://support.google.com/googleplay/android-developer/answer/14151465) |
+
+## Reddedilince
+
+- **Nerede:** Play Console'da uygulamanın Politika durumu (Policy status) sayfasında sebebi gör ve "Appeal" ile itiraz et ([yardım sayfası](https://support.google.com/googleplay/android-developer/answer/9842754)).
+- **Tek itiraz:** Her kaldırma, askıya alma ya da yaptırım için tek itiraz hakkın var; itirazlar İngilizce yazılmalı (Çince, Japonca ve Korece de kabul ediliyor).
+- **Yeniden gönderme:** Sorunu düzelt ve uyumsuz sürümleri tüm test ve yayın kanallarında devre dışı bırak; eski sürüm bir kanalda kalırsa ret sürer.
+- **Hesaba etkisi:** Ret hesabın durumunu etkilemez ama askıya alma bir ihlal (strike) sayılır.
+- **Süre:** İnceleme normalde 7 güne kadar sürebilir.
+- **İlgili sekmeler:** Abonelik ve ödeme araçları [Gelir & analitik](/rehberler/gelir-analitik/) sekmesinde; hesap silme ve abonelik şartları [yayın öncesi listesinin](/listeler/yayin-oncesi/) 51. ve 88. maddelerinde.
+
+## Yakında gelecekler
+
+| Tarih | Değişiklik |
+|---|---|
+| 27 Ocak 2027 | Arama kaydı (`READ_CALL_LOG`) telefonla hesap doğrulaması için gerekçe olmaktan çıkıyor; Android 17'yi hedefleyen uygulamalar kişilere erişimi sadece kişi seçici yetmiyorsa isteyebilecek; coğrafi çit (geofencing) ön plan servisi gerekçesi olmaktan çıkıyor. |
+| 1 Şubat 2027 | 16 KB sayfa boyutunu desteklemeyen güncellemeler yayınlanamayacak. |
+| Nisan 2027 | Giriş özelliği olan uygulamalar yeni cihazda girişi Restore Credentials API ile kendiliğinden geri yüklemeli. |
+
+## Göndermeden önce kontrol prompt'u
+
+```
+Bu Android uygulamasını Google Play incelemesine göndermeden önce şu maddelere göre kontrol et: Veri güvenliği formunun uygulama ve SDK'larla uyumu, uygulama içinde ve Play Console'da gizlilik politikası, beklenmedik veri kullanımı için belirgin açıklama ve onay, uygulama içi hesap silme ve silme web sayfası, hassas izinler ve beyan formları, arka planda konum, ön plan servisi türleri, hedef API seviyesi (API 36), native kod varsa 16 KB sayfa boyutu desteği, App Bundle ve 64 bit, çökme ve ANR riskleri, dijital satışlarda Play Faturalandırma, abonelik ekranındaki şartlar ve iptal yolu, mağaza başlığı ve açıklaması, içerik derecelendirmesi, hedef kitle ve çocuklar, kullanıcı içeriği için moderasyon, marka kullanımı, web görünümünden ibaret olma, reklam kuralları, sağlık ve finans beyanları. Her madde için durumu (✅ ⚠️ ❌ ➖) ve ilgili dosyayı yaz; Play Console'da doldurulması gereken formları (Veri güvenliği, izin beyanları, giriş bilgileri) ayrıca listele.
+```
+
+---
+
+# Paywall dönüşümü
+
+Adres: /listeler/paywall/
+
+Satın alma ekranı (paywall) az satıyorsa en sık 27 sebep ve her biri için ne yapılacağı.
+Liste bir videodaki 27 maddelik listeden alındı; videodaki "hepsi ölçüldü" iddiası ve etki oranları doğrulanmadı, her maddeyi kendi uygulamanda A/B testiyle dene.
+Mağaza kuralına dokunan maddeler (fiyatın gösterimi, deneme süresi, şartlar, geri yükleme) Apple'ın [abonelik sayfasından](https://developer.apple.com/app-store/subscriptions/) doğrulandı ve [App Store incelemesi](/listeler/app-store/) sekmesine bağlandı.
+Paywall'ı kodsuz değiştirip test etmek için Superwall ya da RevenueCat [Gelir & analitik](/rehberler/gelir-analitik/) sekmesinde.
+
+## Zamanlama ve akış
+
+| # | Sebep | Ne yapmalı |
+|---|---|---|
+| 1 [pw-yanlis-anda-gosteriliyor] | Yanlış anda gösteriliyor | Paywall'ı kullanıcı değeri gördüğü anda göster: ilk sonucu aldıktan ya da bir işi tamamladıktan sonra; uygulama açılır açılmaz değil. |
+| 2 [pw-tek-ekrana-sikistirilmis] | Tek ekrana sıkıştırılmış | Karşılamayı (onboarding) birkaç kısa adıma böl, paywall son adım olsun; kullanıcı önce ne kazanacağını görsün. |
+| 3 [pw-tek-paywall] | Tek paywall var | Farklı yerler ve kullanıcılar için birden fazla paywall kur ve A/B testiyle karşılaştır. |
+| 4 [pw-gec-yukleniyor] | Geç yükleniyor | Ürün ve fiyat bilgisini paywall açılmadan önce yükle; dönen yükleme göstergesi kullanıcı kaybettirir. |
+
+## İçerik ve tasarım
+
+| # | Sebep | Ne yapmalı |
+|---|---|---|
+| 5 [pw-karsilastirma-tablosu] | Karşılaştırma tablosu | Ücretsiz ve ücretli özellik tablosu yerine 3–4 kısa fayda maddesi yaz. |
+| 6 [pw-ozellik-yazilmis] | Özellik yazılmış | "Sınırsız proje" gibi özellik yerine kullanıcının elde edeceği sonucu yaz. |
+| 7 [pw-baslik-baglamdan-kopuk] | Başlık bağlamdan kopuk | Paywall'ı açan özelliğe göre başlığı değiştir; kullanıcı neye dokunduysa başlık onu anlatsın. |
+| 8 [pw-dugme-metni-sert] | Düğme metni sert | "Satın al" yerine "Ücretsiz dene" ya da "Devam et" gibi daha yumuşak bir metin kullan; deneme varsa düğme bunu söylesin. |
+| 9 [pw-dugme-kayboluyor] | Düğme kayboluyor | Satın alma düğmesi sayfa kaydırılınca da ekranın altında sabit dursun. |
+| 10 [pw-kalabalik] | Kalabalık | Tek odak, az metin, tek ana düğme; dikkat dağıtan link ve animasyonları çıkar. |
+| 11 [pw-cevrilmemis] | Çevrilmemiş | Paywall metnini kullanıcının dilinde göster; uygulama çevrilip paywall İngilizce kalmasın. |
+
+## Fiyat ve planlar
+
+| # | Sebep | Ne yapmalı |
+|---|---|---|
+| 12 [pw-fiyat-ilk-ekranda] | Fiyat ilk ekranda değil | Fiyat ve süre ilk ekranda, düğmenin yakınında görünsün; kaydırma ya da ikinci ekran gerektirmesin ([App Store 2. madde](/listeler/app-store/#as-fiyat-bilgisi)). |
+| 13 [pw-yillik-plan-secili] | Yıllık plan seçili değil | Yıllık planı varsayılan olarak seçili getir ve aylığa göre tasarrufu yaz. |
+| 14 [pw-yillik-fiyat-buyuk] | Yıllık fiyat büyük görünüyor | Yıllık fiyatın yanında haftalık ya da aylık karşılığını göster; ama Apple tahsil edilecek tutarın en belirgin fiyat olmasını istiyor, bölünmüş fiyat daha küçük ve ikinci planda kalmalı. |
+| 15 [pw-fazla-plan] | Çok fazla plan | En fazla üç plan göster; seçenek arttıkça karar zorlaşır. |
+| 16 [pw-teklif-yok] | Teklif yok | Giriş indirimi ya da ilk ay indirimi gibi bir teklif sun (App Store tanıtım teklifi, Google Play giriş fiyatı). |
+
+## Deneme süresi
+
+| # | Sebep | Ne yapmalı |
+|---|---|---|
+| 17 [pw-deneme-yok] | Deneme yok | Ücretsiz deneme sun; deneme varsa süresini ve bitince alınacak ücreti açıkça yaz (Apple bunu istiyor). |
+| 18 [pw-deneme-kisa] | Deneme kısa | Ürünün değeri birkaç günde anlaşılmıyorsa denemeyi uzat ve farkı ölç. |
+| 19 [pw-deneme-takvimi] | Ne olacağı belirsiz | Deneme takvimini göster: bugün başlar, bitmeden önce hatırlatılır, şu gün ücret alınır. |
+| 20 [pw-ucret-hatirlatma] | Ücret sürpriz oluyor | Deneme bitmeden önce bildirimle hatırlat; iade ve şikâyet azalır, güven artar. |
+
+## Güven ve teknik
+
+| # | Sebep | Ne yapmalı |
+|---|---|---|
+| 21 [pw-sosyal-kanit-asagida] | Sosyal kanıt aşağıda | Puanı ve kullanıcı yorumlarını paywall'ın üst kısmına koy. |
+| 22 [pw-kapatma-dugmesi-gizli] | Kapatma düğmesi gizli | Kapatma düğmesini gizleme ya da geciktirme; kullanıcı kandırıldığını hisseder. |
+| 23 [pw-sartlar-geri-yukleme] | Şartlar ve geri yükleme yok | Kullanım Koşulları ve Gizlilik Politikası linkleri ile "Satın almaları geri yükle" düğmesi paywall'da olsun; App Store'da zorunlu ([App Store 1 ve 3. maddeler](/listeler/app-store/#as-paywall-linkleri)). |
+| 24 [pw-bos-ekran] | Boş ekran | Ürünler mağazadan yüklenemezse boş paywall gösterme; hata mesajı ve "Tekrar dene" düğmesi göster. İnceleme ekibi satın alma ekranını boş görürse uygulamayı reddeder. |
+| 25 [pw-fiyat-koda-yazilmis] | Fiyat koda yazılmış | Fiyatı sabit yazma; StoreKit ya da Google Play Billing'den kullanıcının ülkesine ve para birimine göre çek. |
+| 26 [pw-kapatan-kaybediliyor] | Kapatan kaybediliyor | Paywall'ı kapatan kullanıcıya daha sonra indirimli bir teklif göster. |
+| 27 [pw-test-edilmiyor] | Test edilmiyor | Satın almayı ayda bir test hesabıyla (sandbox) baştan sona dene; mağaza, SDK ya da ürün ayarı değişince paywall sessizce bozulabilir. |
+
+## Kontrol prompt'u
+
+```
+Bu uygulamanın satın alma ekranını (paywall) şu 27 maddeye göre kontrol et: gösterildiği an, onboarding adımları, birden fazla paywall ve A/B testi, ürünlerin önceden yüklenmesi, karşılaştırma tablosu, fayda odaklı metin, bağlama göre başlık, düğme metni, sabit düğme, sadelik, çeviri, fiyatın ilk ekranda görünmesi, yıllık planın seçili gelmesi, haftalık karşılık ve tahsil edilecek tutarın en belirgin fiyat olması, plan sayısı, teklif, ücretsiz deneme ve açıklaması, deneme süresi, deneme takvimi, ücret öncesi hatırlatma, puan ve yorumların yeri, kapatma düğmesi, şartlar ve geri yükleme, ürün yüklenemezse boş ekran, fiyatın mağazadan çekilmesi, kapatan kullanıcıya teklif, satın alma testi. Her madde için durumu (✅ ⚠️ ❌ ➖) ve ilgili dosyayı yaz, sonra en çok etki edeceğini düşündüğün 3 değişikliği öner.
+```
+
+---
+
+# UI/UX: stiller ve araçlar
+
+Adres: /rehberler/ui-ux-tasarim-stilleri/
+
+Claude'a arayüz yaptırırken stilin İngilizce adını prompt'a yazmak yeterli, örneğin "Bento Grid düzeninde, Glassmorphism kartlarla bir özellik sayfası".
+İşe yarayan tasarım skill'leri: [Impeccable](https://github.com/pbakaus/impeccable), [Taste Skill](https://github.com/Leonxlnx/taste-skill), [UI/UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill).
+Arayüzün her sayfada aynı kalması için projeye bir `DESIGN.md` koy: renkleri, yazı tiplerini ve boşlukları tanımlar, ajan arayüzü buna göre üretir; hazır örnekler [awesome-design-md](https://github.com/VoltAgent/awesome-design-md) reposunda.
+
+## Stiller
+
+| Stil | Nasıl görünür | Nerede işe yarar |
+|---|---|---|
+| Claymorphism | Kil ya da hamurdan yapılmış gibi şişkin, yumuşak 3B şekiller; iç ve dış yumuşak gölgeler, pastel renkler, çok yuvarlak köşeler. | Eğlenceli uygulamalar, eğitim ve çocuk ürünleri, ikon ve illüstrasyonlar |
+| Cybercore | Erken internet ve dijital dünya estetiği: ikili kod, piksel grafikler, eski işletim sistemi pencereleri, parlak mavi ve yeşil. | Teknoloji meraklısı kitle, etkinlik ve kampanya sayfaları |
+| Neo-Brutalism | Kalın siyah kenarlıklar, bulanıklığı olmayan sert gölgeler, doygun düz renkler, bilerek "ham" bırakılmış görünüm. | Startup ve ürün tanıtımı, genç kitleye hitap eden markalar |
+| Scrapbook | Karalama defteri kolajı: yırtık kâğıt, bant, çıkartma, el yazısı, polaroid fotoğraflar. | Kişisel blog, portfolyo, etkinlik, hobi markaları |
+| Surrealism | Rüya gibi, mantık dışı kompozisyonlar; beklenmedik nesne birleşimleri, gerçeküstü 3B sahneler. | Sanat projeleri, kampanya ve açılış (hero) görselleri, marka hikâyesi |
+| Y2K Aesthetic | 2000'lerin başı: krom ve metalik yüzeyler, holografik gradyanlar, kabarcık yazılar, parlak pembe ve mavi. | Moda, müzik, genç kitle |
+| Pixel Art | Piksel piksel çizilmiş düşük çözünürlüklü grafikler, bitmap fontlar, retro oyun hissi. | Oyunlar, nostaljik markalar, eğlenceli küçük etkileşimler |
+| Synthwave | 80'ler retro-fütürizmi: neon pembe, mor ve turkuaz, gün batımı, ızgara zemin, krom yazılar. | Müzik, oyun, etkinlik sayfaları |
+| Glassmorphism | Buzlu cam paneller: yarı saydam yüzey, arkasını bulanıklaştırma, ince açık kenarlık, renkli arka plan. Metnin okunabilirliğine dikkat. | Dashboard kartları, modal ve açılır pencereler, iOS/macOS benzeri arayüzler |
+| Neumorphism | Arka planla aynı renkte, açık ve koyu iki gölgeyle kabartılmış ya da gömülmüş öğeler. Kontrast düşük olduğu için erişilebilirlik zayıf. | Kontrol panelleri, akıllı ev ve müzik çalar arayüzleri; küçük alanlarda |
+| Bento Grid | Farklı boyutlarda, yuvarlak köşeli kutulardan oluşan ızgara; Apple'ın tanıtım sayfalarındaki gibi. | Özellik tanıtımı, dashboard, portfolyo |
+| Editorial Design | Dergi ve gazete düzeni: güçlü başlık hiyerarşisi, çok sütun, büyük görseller, bol beyaz alan. | Blog, haber ve içerik siteleri, vaka çalışmaları |
+| Swiss Design | Katı ızgara, sans-serif fontlar (Helvetica tarzı), asimetrik ama düzenli yerleşim, az renk, net hiyerarşi. | Kurumsal siteler, ajanslar, bilgi yoğun sayfalar |
+| Minimalism | Az öğe, bol boşluk, sınırlı renk paleti; sadece gerekeni gösterir. | SaaS ve ürün sayfaları, portfolyo; çoğu proje için güvenli varsayılan |
+| Maximalism | Bilinçli fazlalık: yoğun renk, desen ve katman, karışık fontlar, cesur kompozisyon. | Moda, sanat, yaratıcı ajanslar, dikkat çekmesi gereken kampanyalar |
+| Luxury Typography | İnce serif fontlar, geniş harf aralığı, büyük başlıklar, siyah-beyaz-altın, bol boşluk. | Lüks ürün, otel, parfüm, mücevher, emlak |
+| Conceptual Sketch | Elle çizilmiş eskiz görünümü: kalem çizgileri, taslak ikonlar, kâğıt dokusu. | Fikir ve süreç anlatımı, eğitim içerikleri, taslak hissi verilmek istenen sayfalar |
+| Ethereal | Rüya gibi hafif ve havadar: soluk pastel tonlar, yumuşak ışık ve gradyanlar, bulanıklık. | Sağlık ve wellness, güzellik, meditasyon |
+| Bohemian | Doğal ve el yapımı hissi: toprak tonları, organik dokular, bitki ve desen motifleri, el yazısı fontlar. | El yapımı ürünler, kafe, yoga, seyahat |
+| Victorian | 19. yüzyıl süslemesi: süslü serif fontlar, çerçeveler, gravür illüstrasyonlar, bordo, koyu yeşil ve altın. | Tarihi markalar, kitapçı, özel etkinlik, vintage ürünler |
+| Cyberpunk | Distopik gelecek: koyu zemin, neon sarı, camgöbeği ve pembe, glitch efektleri, HUD tarzı arayüz çizgileri. | Oyun, teknoloji ürünleri, etkinlik |
+| Wabi-Sabi | Japon "kusurun güzelliği" estetiği: doğal malzeme dokuları, asimetri, sade toprak renkleri, sakinlik. | Seramik ve el işi, mimari, çay ve kahve markaları |
+
+## Siteler ve kütüphaneler
+
+React dışı bir projede (Vue, Angular, Blazor, mobil) bileşen kütüphaneleri doğrudan kurulamaz ama örnek alınabilir.
+Beğendiğin bileşenin kodunu Claude'a verip "bunu kendi altyapıma çevir" demek yeterli.
+
+| Site | Tür | Ne işe yarar | Altyapı | Başka altyapıda | Ücret |
+|---|---|---|---|---|---|
+| [21st.dev](https://21st.dev/) | Bileşen kütüphanesi | 12.000'den fazla React ve Tailwind bileşeni, şablon ve shadcn teması; canlı önizlemeli. Bileşen shadcn CLI ile tek komutla projeye kopyalanır, kod senin olur. | React + Tailwind, shadcn kurulu proje (Next.js ya da Vite) | Doğrudan kurulmaz; örnek alınıp çevrilir | Gezinmek ücretsiz, günde 2 kopyalama; sınırsız kopyalama ve 21st AI ücretli |
+| [Aceternity UI](https://ui.aceternity.com/) | Bileşen kütüphanesi | React, Tailwind ve Motion ile yapılmış 200'den fazla animasyonlu bileşen, blok ve şablon. Kopyala-yapıştır ya da shadcn ile eklenir. | React + Tailwind + Motion (Next.js ya da Vite) | Doğrudan kurulmaz; örnek alınıp çevrilir. Animasyonlar Motion kütüphanesine bağlı olduğu için çevirmek daha çok emek ister | Bileşenlerin bir kısmı ücretsiz, hazır blok ve şablonlar ücretli (All-Access Pass) |
+| [Kinetics](https://kinetics.colorion.co) | Animasyon | Yay fiziğiyle çalışan 153 arayüz animasyonu: buton, slider, sürükleme, form, yükleniyor, liste, modal. Sertlik ve sönümü ayarlayıp CSS, React ya da hazır AI prompt'u olarak kopyalarsın. | Her web projesi (düz CSS); React bileşeni olarak da alınır | CSS hâli her web altyapısında çalışır; mobil gibi web dışı ortamlar için hazır AI prompt'u kullanılır | Ücretsiz, açık kaynak |
+| [Animated Buttons](https://animatedbuttons.colorion.co) | Animasyon | Sadece CSS ile yapılmış 99 hover efektli buton; JavaScript ya da bağımlılık yok, kopyala-yapıştır. | Her web projesi: düz HTML, React, Vue, Angular, Blazor, PHP | Web dışında (mobil) sadece örnek alınır | Ücretsiz, MIT lisansı |
+| [VibePrompt](https://vibeprompts.dev) | Prompt kütüphanesi | 15 kategoride 286'dan fazla arayüz prompt'u ve Tailwind kodu: giriş formu, dashboard, yorumlar vb. Prompt'u AI aracına yapıştırıp bileşeni ürettirirsin. | Tailwind kullanan her proje (HTML, React, Vue, Svelte) | Tailwind yoksa prompt'a kendi altyapını yazarsın ("Bootstrap ile", "düz CSS ile") | Ücretsiz |
+| [MotionSites](https://motionsites.ai/) | Prompt kütüphanesi | Claude, Lovable, Bolt, Cursor gibi AI site yapıcılar için hazır prompt'lar; landing page, portfolyo ve 3B siteler. | Altyapıdan bağımsız; çıkan kod kullandığın AI aracına bağlı | Prompt'a altyapıyı eklemen yeterli ("Vue 3 ile", "düz HTML ile") | Bir kısmı ücretsiz, sınırsız erişim ücretli |
+| [Stitch](https://stitch.withgoogle.com) | Arayüz tasarımı (AI) | Google'ın aracı: metinden, eskizden ya da ekran görüntüsünden web ve mobil arayüz tasarlar, HTML/CSS koduna çevirir; Figma'ya, AI Studio'ya ya da Antigravity'ye aktarır. | Her proje: çıktı HTML/CSS | Kodu Claude'a kendi altyapına çevirttirirsin | Fiyat belirtilmemiş, kotalı; Google Labs deneyi, 18+ |
+| [Forma - Icon Creator](https://iconcreator.dev) | İkon | Tabler, Lucide, Phosphor, Iconoir ve Heroicons ikonlarından uygulama ikonu tasarlayıp SVG ya da PNG olarak indirirsin. | Her proje: SVG ve PNG web, mobil ve masaüstünde kullanılır (uygulama ikonu, favicon) | Fark yok | Sitede belirtilmemiş |
+| [Invoice Generator](https://invoicegenerator.io) | Fatura (UI dışı) | Tarayıcıda fatura hazırlayıp PDF indirirsin; veriler cihazında kalır, sunucuya gönderilmez. 30'dan fazla para birimi, vergi, indirim, kargo alanları. | Kod değil; tarayıcıda doğrudan kullanılan araç | Uygulamana fatura ekranı yapacaksan düzeni örnek alınabilir | Ücretsiz, üyelik ve filigran yok |
+| [shadcn/ui](https://github.com/shadcn-ui/ui) | Bileşen kütüphanesi | Kodu doğrudan projeye kopyalanan, erişilebilir bileşenler; CLI ile eklenir. 21st.dev ve Aceternity bileşenleri de shadcn CLI ile eklenir. | React + Tailwind (Next.js, Vite, Remix, Astro, TanStack, Laravel) | Doğrudan kurulmaz; örnek alınıp çevrilir | Ücretsiz, MIT |
+| [Magic UI](https://github.com/magicuidesign/magicui) | Animasyonlu bileşen | Landing page ve tanıtım sayfaları için animasyonlu, kopyala-yapıştır bileşenler; kurulumu shadcn/ui ile aynı. | React + Tailwind + Motion | Doğrudan kurulmaz; örnek alınıp çevrilir | Ücretsiz, MIT |
+| [React Bits](https://github.com/DavidHDev/react-bits) | Animasyonlu bileşen | Metin animasyonu, arka plan ve mikro etkileşim için 200'den fazla bileşen; her biri JS/TS ve düz CSS ya da Tailwind hâliyle gelir. | React (CSS ya da Tailwind) | Vue ve Svelte için resmi portları ayrı sitelerde | Ücretsiz; MIT + Commons Clause: sitende ticari kullanım serbest, bileşenleri satmak ya da yeniden dağıtmak yasak |
+| [daisyUI](https://github.com/saadeghi/daisyui) | Tailwind eklentisi | Tailwind'e eklenti olarak kurulur, `btn`, `card` gibi hazır CSS sınıflarıyla kullanılır. | Tailwind çalışan her proje: React, Vue, Svelte, Angular, Laravel, Django, Rails | Tailwind yoksa kullanılamaz | Ücretsiz, MIT |
+| [Tremor](https://github.com/tremorlabs/tremor) | Grafik ve dashboard | Grafik ve dashboard için 35'ten fazla kopyala-yapıştır bileşen; grafikleri Recharts ile çizer. | React + Tailwind + Radix | Doğrudan kurulmaz; örnek alınır | Ücretsiz, Apache-2.0; Tremor Vercel'e katıldı, kodu Nisan 2025'ten beri güncellenmiyor |
+| [Motion](https://github.com/motiondivision/motion) | Animasyon | Framer Motion'ın yeni adı: yaylı animasyonlar, sayfa düzeni geçişleri, kaydırmaya bağlı efektler, sürükleme. Aceternity ve Magic UI bileşenleri bunu kullanır. | React, düz JavaScript, Vue | Web dışında kullanılmaz | Çekirdek ücretsiz, MIT; Motion+ ücretli |
+| [GSAP](https://github.com/greensock/GSAP) | Animasyon | Bağımlılıksız animasyon kütüphanesi; ScrollTrigger, SplitText, MorphSVG gibi eklentiler dahil, React için `useGSAP`. | Her web projesi: düz JS, React, Vue, SVG, canvas | Web dışında kullanılmaz | Tüm eklentiler dahil ücretsiz, ticari kullanım serbest; açık kaynak değil (GreenSock lisansı) |
+| [canvas-confetti](https://github.com/catdad/canvas-confetti) | Animasyon | Tek fonksiyonla konfeti patlatan küçük kütüphane: parça sayısı, açı, renk ve şekil ayarlanır, canvas ile çizer; hareketi azalt tercihine uyması için `disableForReducedMotion: true` verilir (varsayılan kapalı). Ödeme ya da görev tamamlanınca ödül hissi vermek için. | Her web projesi (npm ya da CDN) | Web dışında kullanılmaz | Ücretsiz, ISC |
+| [Lottie Web](https://github.com/airbnb/lottie-web) | Animasyon oynatıcı | After Effects'te yapılıp JSON'a aktarılan animasyonları web'de oynatır. | Her web projesi (düz JS, npm ya da CDN) | Mobil için Lottie'nin iOS ve Android kütüphaneleri ayrı | Ücretsiz, MIT; animasyonu üretmek için After Effects gerekir, bir yıldan uzun süredir güncellenmiyor |
+| [Recharts](https://github.com/recharts/recharts) | Grafik | Bileşen tabanlı grafik kütüphanesi; eksen, tooltip, çizgi gibi parçalar ayrı bileşen olarak birleştirilir, SVG ile çizer. | React | Doğrudan kurulmaz; örnek alınır | Ücretsiz, MIT |
+| [Thinking Orbs](https://github.com/Jakubantalik/thinking-orbs) | Yükleniyor göstergesi | AI ve ajan arayüzleri için noktalı "düşünen küre" animasyonları: çalışıyor, arıyor, çözüyor, dinliyor, bağlanıyor gibi dokuz durum, sohbet için 64 ve satır içi 20 piksellik iki boyut. Sayfanın açık ya da koyu temasına kendiliğinden uyar; düz 2D canvas ile çizer (WebGL yok), ekrandan çıkınca durur, hareketi azalt tercihinde sabit kare gösterir. | React (`npm install thinking-orbs`) | Doğrudan kurulmaz; örnek alınıp çevrilir | Ücretsiz, MIT |
+| [mapcn](https://github.com/AnmolSaini16/mapcn) | Harita | Hazır harita bileşenleri: işaretçi, popup, rota, zoom ve pusula; shadcn/ui ile aynı yapıda. | React + Tailwind, MapLibre GL | Doğrudan kurulmaz; örnek alınır | Ücretsiz, MIT; varsayılan CARTO haritalarının ticari kullanımı lisans ister, OpenStreetMap gibi başka sağlayıcıya geçilebilir |
+
+## İlham siteleri
+
+Tasarıma başlarken ve takıldığında bakılan siteler; [bu gönderiden](https://www.instagram.com/p/DdRp-ZSCKeH/) ve hareket için [bu gönderiden](https://www.instagram.com/p/Ddd22v1CDlb/) alındı.
+Beğendiğin örneği kaydet ve neden beğendiğini not al; düzeni değil fikri al.
+Hareket (animasyon) sitelerinde örnekler durağan görsel değil çalışan hâliyle görünür; hissi not al, kendi versiyonunu yap.
+
+| İlham | Ne var | Ücret |
+|---|---|---|
+| [Recent](https://recent.design) | Her gün güncellenen seçilmiş tasarım örnekleri: web sayfaları, marka, ürün ekranları, tipografi, hareket (motion), 3B. Eski adı Godly; godly.website adresi buraya yönlenir. | Ücretsiz |
+| [Saaspo](https://saaspo.com) | Sadece SaaS siteleri; sayfa türüne (landing, fiyatlandırma, ürün, hakkında...), bölüme ve kullanılan altyapıya (Webflow, Next.js, Framer...) göre süzülür, OG görselleri de var. | Ücretsiz, haftalık bülten |
+| [Awwwards](https://www.awwwards.com/websites/) | Jürinin ödüllendirdiği siteler ve yıllar öncesine uzanan "günün sitesi" arşivi; kategori, teknoloji (React, Webflow, Three.js), yazı tipi ve etikete göre süzülür. | Gezinmek ücretsiz; kurslar ve Pro üyelik ücretli |
+| [Pinterest](https://www.pinterest.com) | "web design", "dashboard ui" gibi aramalarla geniş görsel arşiv; beğendiklerini panolara kaydedersin. | Ücretsiz |
+| [X](https://x.com) | Tasarımcı ve geliştiricilerin yeni işlerini paylaştığı akış; beğendiğin kişileri bir listede toplarsın. | Ücretsiz |
+| [Codrops](https://tympanus.net/codrops/) | Web animasyonu ve etkileşim deneyleri, kodu ve adım adım anlatımıyla (kaydırma efektleri, WebGL, metin animasyonları). | Ücretsiz |
+| [Design Spells](https://designspells.com) | Uygulama ve sitelerdeki küçük sihirli ayrıntılar: mikro etkileşimler, geçişler, gizli sürprizler (easter egg), 404 sayfaları, konfeti. | Ücretsiz |
+| [GSAP Showcase](https://gsap.com/showcase/) | GSAP ile yapılmış ödüllü sitelerin vitrini; animasyonun canlı sitede nasıl kullanıldığını gösterir. | Ücretsiz |
+| [Hoverstat.es](https://www.hoverstat.es) | Üzerine gelme efektleri, hareketli yazılar ve kaydırmaya tepki veren etkileşimleriyle seçilmiş siteler. | Ücretsiz |
+
+## Tehlikeli işlemler
+
+Silme gibi geri alınamaz işlemler için altı arayüz kalıbı; [bu videodan](https://www.instagram.com/reel/Da4-EmYNYAP/) alındı.
+
+| Kalıp | Ne yapmalı | Neden |
+|---|---|---|
+| Basılı tutarak onayla | "Emin misin?" penceresi yerine düğmeyi kısa bir süre basılı tutturup halka dolunca sil; erken bırakılırsa hiçbir şey olmaz. | Onay pencereleri alışkanlıkla okunmadan geçilir. |
+| İşi adıyla yaz | Düğmelerde "Evet" ve "Hayır" yerine "Projeyi sil" ve "Projeyi tut" yaz. | Fiil, uyarının kendisidir. |
+| Ana yoldan uzak tut | Sil düğmesini ana düğmenin yerine koyma; kaydet ya da iptal ana yerde kalsın, sil ayrı ve uzakta dursun. | Kas hafızası okumadan tıklar. |
+| Kırmızıyı idareli kullan | Kırmızıyı sadece yıkıcı işlemlere ayır; uyarı, bildirim ve açık-kapalı düğmelerinde kullanma. | Her yer kırmızıysa gerçek tehlike fark edilmez. |
+| Tehlikeli bölge | Hesap ya da proje silme, sahipliği devretme gibi işlemleri ayarlar sayfasının en altında, çerçeveli ve başlıklı bir "Tehlikeli bölge"de topla. | Konum sürtünme yaratır; oraya yanlışlıkla gidilmez. |
+| Vazgeçme süresi | Hesap silmeyi hemen yapma; örneğin 14 gün sonra kalıcı sil, bu sürede tek tıkla iptal ettir. | Son savunma hattı; süre dolunca veri yine gerçekten silinmeli ([yayın öncesi 51. madde](/listeler/yayin-oncesi/#yo-hesap-silme)). |
+
+## Etkileşim örnekleri
+
+Instagram'da görülen, kodu paylaşılmamış etkileşimler; kartın prompt'u etkileşimi projenin kendi altyapısında yaptırır.
+
+| Etkileşim | Nasıl çalışır | Nerede işe yarar | Kaynak |
+|---|---|---|---|
+| Sıvı sekme çubuğu | Seçili sekmenin üstünde bir damla durur, çubuk damlanın etrafında eriyormuş gibi kıvrılır ve hiç kırışmaz; damla çubuk boyunca sürüklenebilir. HTML, CSS ve JavaScript ile yapılmış. | Web ve mobil alt menü, sekme geçişi | [video](https://www.instagram.com/reel/DbfG6fuPE9y/) |
+| Yeni alt menü fikirleri | On mobil alt menü: sıvı yüzen çubuk, mıknatıslı dock, cam kapsül, bölümlü dinamik çubuk, yörüngeli menü, dalgalı gösterge, neon dock, biçim değiştiren damla, katmanlı kartlar, sade dock. | Mobil uygulamanın alt menüsü | [video](https://www.instagram.com/reel/DcNLxSRz08-/) |
+| Animasyonlu ödeme ekranı | Kart bilgisi yazıldıkça kart önizlemesi dolar, CVC alanına gelince kart arkası görünecek şekilde döner; ödeme sırasında kart parlar, sonra başarı geçişi gelir. React ve Motion ile yapılmış. | Ödeme ve abonelik ekranı | [video](https://www.instagram.com/reel/Dac7xfXzudX/) |
+| Fiş yazdırma | "Fişi yazdır"a basınca fiş yazıcıdan kayarak çıkar ve üstüne "ÖDENDİ" damgası vurulur; yeniden yazdırma, fişi koparma ve kopyalama düğmeleri var. | Ödeme sonrası onay, makbuz ve fatura ekranı | [video](https://www.instagram.com/reel/Dcptq4cI68U/) |
+| Kilitli şifre gücü göstergesi | Şifre güçlendikçe simge açık kapıdan ataşa, asma kilide, sürgülü kilide ve kasa kapısına döner; şifrenin entropisini (bit) ve tahmini kırılma süresini yazar, "Güçlü öner" düğmesi şifre üretir. GSAP ile yapılmış. | Kayıt ve şifre değiştirme formu | [video](https://www.instagram.com/reel/DayJ5FBPbmb/) |
+| Akıcı giriş formu | Logo çizilerek açılır; Giriş ve Kayıt sekmeleri, alanın altında anında hata mesajı, giriş düğmesinde yükleniyor simgesinden onay işaretine geçiş. Flutter ile yapılmış. | Mobil giriş ve kayıt ekranı | [video](https://www.instagram.com/reel/Ddg450QpmE2/) |
+| Etkileşimli dashboard | Cam görünümlü istatistik kartları üzerine gelince hafifçe yükselir; grafik, görev ve işlem listeleri kartlarda toplanır, mobilde alt alta dizilir. React, Motion ve Lucide ikonlarıyla yapılmış. | Yönetim paneli, analitik ekranı | [video](https://www.instagram.com/reel/Ddf-7oiz126/) |
+
+## Renk çiftleri
+
+Yazı ve zemin için altı renk çifti; [bu videodan](https://www.instagram.com/reel/Da7hPcluJUV/) alındı.
+Kontrast oranları WCAG formülüyle hesaplandı; hepsi normal metin için gereken 4,5:1 sınırını geçiyor.
+
+| Renk çifti | Renkler | Kontrast |
+|---|---|---|
+| <span class="pair" style="color:#0057FF;background:#F8F7F4"></span> Signal Blue + Porcelain | Yazı `#0057FF`, zemin `#F8F7F4` | 5,1:1 (AA) |
+| <span class="pair" style="color:#3A0CA3;background:#FFF275"></span> Butter Yellow + Royal Iris | Yazı `#3A0CA3`, zemin `#FFF275` | 10,3:1 (AAA) |
+| <span class="pair" style="color:#B6FF2E;background:#23262F"></span> Lime Spark + Graphite | Yazı `#B6FF2E`, zemin `#23262F` | 12,5:1 (AAA) |
+| <span class="pair" style="color:#FF4696;background:#1E1033"></span> Dragonfruit + Night Violet | Yazı `#FF4696`, zemin `#1E1033` | 5,6:1 (AA) |
+| <span class="pair" style="color:#064E3B;background:#F8E7C9"></span> Emerald Ink + Champagne | Yazı `#064E3B`, zemin `#F8E7C9` | 8,0:1 (AAA) |
+| <span class="pair" style="color:#6A00F4;background:#FFD6A5"></span> Ultra Violet + Soft Apricot | Yazı `#6A00F4`, zemin `#FFD6A5` | 5,3:1 (AA) |
+
+---
+
+# Gelir & analitik
+
+Adres: /rehberler/gelir-analitik/
+
+Uygulamadan para kazanırken sık birlikte kullanılan araçlar: satın alma altyapısı, satın alma ekranı ve kullanıcı analitiği.
+Ücretler 25.09.2026'da sitelerinden alındı.
+
+## Araçlar
+
+| Araç | Tür | Ne işe yarar | Ücret |
+|---|---|---|---|
+| [RevenueCat](https://www.revenuecat.com) | Abonelik altyapısı | App Store ve Google Play satın almalarını tek yerde toplar: makbuzu doğrular, kullanıcının hangi özelliklere erişimi olduğunu tutar, aylık gelir ve abonelik iptali panelleri ve webhook'lar sunar. Satın alma ekranı, A/B testi ve web'den satış özellikleri de var. | Aylık 2.500 $ gelire kadar ücretsiz, sonrası gelirin %1'i |
+| [Superwall](https://superwall.com) | Satın alma ekranı ve A/B testi | Kodsuz editörle tasarlanan, uygulamayı güncellemeden değiştirilebilen satın alma ekranları (paywall). Hangi tasarımın, fiyatın ve ekranın gösterildiği yerin daha çok sattığını A/B testiyle ölçer. Kendi abonelik altyapısı da var. iOS, Android, React Native, Flutter, Expo, Unity ve web. | Altyapısı her ölçekte ücretsiz; paywall, paywall'dan gelen aylık 10.000 $ gelire kadar ücretsiz, sonrası sadece o gelirin %1'i |
+| [Mixpanel](https://mixpanel.com) | Ürün analitiği | Kullanıcının uygulamada yaptığı her işlemi kaydeder: kayıt ya da satın alma adımlarında kaç kişinin düştüğü, kullanıcıların geri gelip gelmediği, davranışa göre kullanıcı grupları. Oturum kaydı, A/B testi ve özellik açma-kapama da var. Google Analytics'ten farkı, sayfa ziyaretinden çok ürün içindeki davranışa odaklanması. | Ayda 1 milyon işleme kadar ücretsiz; veri ABD ya da AB'de tutulabiliyor |
+| [Umami](https://github.com/umami-software/umami) | Web analitiği | Çerez kullanmayan, gizlilik odaklı web analitiği: trafik, kampanya, dönüşüm ve gelir tek panelde. Google Analytics'e kendi sunucunda çalışan alternatif; veri yurt dışına gitmez. | Kendi sunucunda ücretsiz (MIT, PostgreSQL ister); bulut sürümü de var |
+| [OpenReplay](https://github.com/openreplay/openreplay) | Oturum kaydı | Kullanıcının oturumunu konsol ve ağ kayıtlarıyla birlikte izletir; "bende çalışmıyor" diyen kullanıcının gördüğünü görürsün. Ürün analitiği ve canlı ortak tarama da var; kendi sunucunda çalışır, veri üçüncü tarafa gitmez. | Kendi sunucunda ücretsiz (AGPL; sitene eklenen izleme kodu MIT); en az 2 vCPU ve 8 GB RAM ister |
+
+## Birlikte kullanım ve dikkat
+
+- **Tipik düzen:** RevenueCat satın almayı yürütür, Superwall satın alma ekranını gösterip test eder, Mixpanel kullanıcının hangi adımda vazgeçtiğini gösterir.
+- **Tek altyapı seç:** Superwall artık kendi abonelik altyapısıyla geliyor. RevenueCat ile ikisinden biri altyapı olur; Superwall istenirse RevenueCat'in üstünde sadece satın alma ekranı olarak da kullanılabilir.
+- **Kim için:** RevenueCat ve Superwall uygulama içi aboneliği olan mobil uygulamalar içindir. Sadece web projesinde Mixpanel yeterli.
+- **Türkiye'den web satışı:** RevenueCat'in web satışı Stripe ya da Paddle üzerinden çalışıyor. Stripe Türkiye'deki şirketlere açık değil (stripe.com/global listesinde yok); Paddle'ın Türkiye'den satıcı kabul edip etmediği ayrıca kontrol edilmeli.
+- **Veri yurt dışına çıkmasın:** Umami ve OpenReplay kendi sunucunda çalışır; Google Analytics ya da Mixpanel yerine bunları seçersen kullanıcı verisi yurt dışına gitmez.
+- **Oturum kaydı:** Mixpanel'in ya da OpenReplay'in oturum kaydında form alanlarını maskele, çerez onayı olmadan başlatma; veri yurt dışına gittiği için KVKK aydınlatma metninde belirt ([yayın öncesi 86. madde](/listeler/yayin-oncesi/#yo-oturum-kaydi-maskeleme)).
+- **AI ile takip:** RevenueCat'in resmi MCP'si abonelik ve gelir verisini Claude'a sordurur; kurulumu ve Buffer, Meta Ads gibi pazarlama MCP'leri [AI geliştirme akışı](/rehberler/ai-gelistirme-akisi/) sekmesinde.
+- **Abonelik ekranı:** Yenileme şartları ve iptal yolu abone ol butonunun yanında görünsün; Superwall ya da RevenueCat ile tasarlanan ekranda bu metin kalmalı ([yayın öncesi 88. madde](/listeler/yayin-oncesi/#yo-abonelik-sartlari)).
+
+---
+
+# Yayına alma & barındırma
+
+Adres: /rehberler/yayina-alma-barindirma/
+
+Projeyi yayına alırken kullanılan servisler ve yayın öncesi listesinde bunlarla çözülen maddeler.
+Ücretler 25.09.2026'da sitelerinden alındı.
+
+## Servisler
+
+| Servis | Tür | Ne işe yarar | Ne zaman | Ücret |
+|---|---|---|---|---|
+| [Coolify](https://coolify.io) | Kendi sunucunda PaaS | Vercel, Heroku, Netlify ve Railway'e açık kaynak alternatif; kendi sunucuna (VPS, Raspberry Pi, bulut) kurulur. Git'e push edince uygulamayı yayına alır, 300'den fazla hazır servisi (veritabanları dahil) tek tıkla kurar, Let's Encrypt SSL sertifikasını otomatik alır, veritabanı yedeklerini S3 uyumlu depoya gönderir. | Backend, veritabanı ya da Docker gerektiren projeler | Kendi sunucunda ücretsiz ve açık kaynak; yönetilen Coolify Cloud ücretli |
+| [Dokploy](https://github.com/Dokploy/dokploy) | Kendi sunucunda PaaS | Coolify'a benzer açık kaynak alternatif: uygulama ve veritabanı yayına alma, Docker Compose, otomatik yedek, Traefik ile yönlendirme ve kaynak izleme; tek komutla kurulur. | Coolify yerine; ikisinden birini seç | Kendi sunucunda ücretsiz (çekirdek Apache-2.0; SSO ve roller gibi kurumsal özellikler ticari lisans ister); Dokploy Cloud ücretli |
+| [fastlane](https://github.com/fastlane/fastlane) | Mobil yayın otomasyonu | iOS ve Android'de ekran görüntüsü üretme, imzalama (provisioning profile) ve App Store ya da Google Play'e yükleme işlerini tek komuta bağlar; proje içindeki Fastfile ile tanımlanır. | Mobil uygulamayı sık yayınlıyorsan | Ücretsiz, MIT; anonim kullanım verisi gönderir, `opt_out_usage` ile kapatılır |
+| [Prometheus](https://github.com/prometheus/prometheus) ve [Grafana](https://github.com/grafana/grafana) | İzleme ve alarm | Prometheus sunucudan ve uygulamadan metrik toplar, Grafana bunları panolarda gösterir ve eşik aşılınca Slack gibi kanallara alarm gönderir. | Kendi sunucunda çalışan uygulamalar | Kendi sunucunda ücretsiz; Prometheus Apache-2.0, Grafana AGPL-3.0 |
+| [Cloudflare](https://www.cloudflare.com) | DNS, CDN ve güvenlik | Alan adının DNS'i; trafiği önbelleğe alan ve saldırılara karşı koruyan proxy, ücretsiz SSL, DDoS koruması, güvenlik ve rate limiting kuralları. | Her projenin önünde | Ücretsiz planda SSL, CDN ve DDoS koruması var |
+| [Cloudflare Workers ve Pages](https://workers.cloudflare.com) | Site ve sunucusuz barındırma | Statik siteleri ve küçük API'leri barındırır; Git'e push edince yayına alır. Webhook alıcıları ve yönlendirmeler için de uygun. | Tanıtım siteleri, hafif backend işleri | Ücretsiz planda günde 100.000 istek; statik dosya istekleri ücretsiz ve sınırsız |
+| [Cloudflare R2](https://www.cloudflare.com/developer-platform/products/r2/) | Dosya depolama | S3 uyumlu depolama; dışarı veri çıkışı (egress) ücretsiz. | Kullanıcı dosyaları, görseller, yedekler | Ayda 10 GB, 1 milyon yazma ve 10 milyon okuma işlemine kadar ücretsiz |
+| [Cloudflare Tunnel](https://www.cloudflare.com/products/tunnel/) | Güvenli erişim | Sunucuda port açmadan uygulamayı internete ya da sadece ekibe açar. | Ev ya da ofis sunucusu, iç araçlar, staging | Ücretsiz |
+| [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/) | Bot koruması | CAPTCHA yerine görünmez doğrulama; giriş, kayıt ve iletişim formlarını botlardan korur. | Herkese açık formlar | Ücretsiz |
+
+## Yayın öncesi maddeleriyle bağlantısı
+
+- **HTTPS ve HSTS ([30. madde](/listeler/yayin-oncesi/#yo-https-hsts)):** Coolify SSL sertifikasını otomatik alır; Cloudflare'de "Always Use HTTPS" ve HSTS açılır.
+- **Güvenlik başlıkları ([31. madde](/listeler/yayin-oncesi/#yo-guvenlik-basliklari)):** Uygulamada ya da Cloudflare'in yanıt başlığı kurallarıyla eklenir.
+- **Bot ve rate limit ([17–18. maddeler](/listeler/yayin-oncesi/#yo-hesap-kilitleme)):** Giriş ve kayıt formlarında Turnstile, API'de Cloudflare rate limiting kuralı.
+- **Staging dışarıya kapalı ([2. madde](/listeler/yayin-oncesi/#yo-env-gecmisten-temizle)):** Staging'i herkese açık alan adına koymak yerine Cloudflare Tunnel ile sadece ekibe aç.
+- **Alt alan adları ve e-posta ([93–94. maddeler](/listeler/yayin-oncesi/#yo-alt-alan-adi)):** `app.` için CNAME, `mail.` ve `news.` için SPF, DKIM ve DMARC kayıtları Cloudflare DNS'e girilir.
+- **Yedekleme ([50. madde](/listeler/yayin-oncesi/#yo-yedekleme)):** Coolify veritabanı yedeklerini zamanlayıp R2 gibi S3 uyumlu bir depoya gönderir; geri yükleme testini ayrıca yap.
+- **Bağımlılık denetimi ([49. madde](/listeler/yayin-oncesi/#yo-bagimlilik-denetimi)):** [OSV-Scanner](https://github.com/google/osv-scanner) bağımlılıkları ve container imajlarını bilinen açıklara karşı tarar (kaynak kod gönderilmez); JS/TS projesinde [Knip](https://github.com/webpro-nl/knip) kullanılmayan paket ve dosyaları bulur.
+- **Directory listing ve source map ([4 ve 7. maddeler](/listeler/yayin-oncesi/#yo-directory-listing)):** Barındırmada klasör listelemenin kapalı olduğunu ve `.map` dosyalarının yayına çıkmadığını kontrol et.
+- **Kesintisiz güncelleme ve geri dönüş ([96–97. maddeler](/listeler/yayin-oncesi/#yo-kesintisiz-surum)):** Coolify, sağlık kontrolü tanımlıysa yeni sürümü eskisiyle bir süre birlikte çalıştırarak günceller (rolling update); kesintisizliği garanti etmez, host'a port açılmışsa ya da Docker Compose kullanılıyorsa çalışmaz. Sorun çıkarsa Configuration > Rollback'ten sunucuda tutulan eski sürüme dönülür; ama bu veritabanı değişikliklerini geri almaz, şema değişiklikleri geriye uyumlu olmalı ([rolling update](https://coolify.io/docs/knowledge-base/rolling-updates), [rollback](https://coolify.io/docs/applications/deployments/rollbacks)).
+
+---
+
+# AI geliştirme akışı
+
+Adres: /rehberler/ai-gelistirme-akisi/
+
+Claude Code ile proje geliştirirken işe yarayan komutlar, MCP sunucuları, skill'ler ve hazır prompt'lar.
+
+## Claude Code komutları
+
+| Komut | Ne yapar |
+|---|---|
+| `/init` | Projeyi inceleyip `CLAUDE.md` oluşturur; Claude sonraki oturumlarda projeyi buradan tanır. |
+| `/code-review` | Değişiklikleri hata açısından inceler. `--fix` bulguları düzeltir, `ultra` bulutta çok ajanlı derin inceleme yapar. |
+| `/security-review` | Daldaki değişiklikleri güvenlik açısından inceler. |
+| `/simplify` | Değişen kodu tekrar, sadelik ve verimlilik açısından gözden geçirip düzeltir. |
+| `/run` | Uygulamayı başlatıp değişikliğin gerçekten çalıştığını görür. |
+| `/loop` | Bir komutu belli aralıklarla tekrar çalıştırır; örneğin yayına almanın durumunu 5 dakikada bir kontrol etmek. |
+| `/schedule` | Bulutta zamanlanmış ajan (routine) kurar. |
+| `/remote-control` | Bu bilgisayardaki oturumu telefondaki Claude uygulamasından ya da claude.ai/code'dan sürdürür. Team ve Enterprise planında yöneticinin açması gerekir. |
+| `/voice` | Yazmak yerine konuşarak prompt verirsin: `Space`'i basılı tutup konuş ya da `/voice tap` ile dokunarak başlat. Türkçe için `/config`'te dili `tr` yap. claude.ai hesabıyla giriş ister; ses Anthropic'in sunucusunda yazıya dökülür, mesaj hakkından düşmez. |
+| `/chrome` | Claude Code'u Chrome'daki "Claude in Chrome" eklentisine bağlar (`claude --chrome` ile de açılır): senin oturumunla sayfaları açar, form doldurur, konsolu okur, GIF kaydeder. Pro, Max, Team ya da Enterprise planı ve `/login` ile giriş ister. |
+| `/agents` | Alt ajanlar (subagent) `.claude/agents/` (proje) ya da `~/.claude/agents/` (tüm projeler) altında Markdown dosyasıdır; Claude'a "şu işi yapan bir alt ajan oluştur" demen yeter, ana ajan işi uygun alt ajana devreder. |
+| `/output-style` | Claude'un cevap biçimini değiştirir: `Concise` sonucu ilk cümlede verir, giriş, anlatım ve özet kısmını atar (işi yine tam yapar, hata ve güvenlik uyarılarını kısaltmaz); `Explanatory` kodun yanına kısa açıklama ekler, `Learning` bazı kodları sana yazdırır, `Proactive` rutin kararlarda sormadan ilerler. `/output-style concise` ya da `/config` ile seçilir, bir sonraki mesajdan itibaren geçerli olur; tüm projeler için `~/.claude/settings.json`'a `"outputStyle": "Concise"` yazılır. |
+| `/fewer-permission-prompts` | Sık kullanılan salt okunur komutlar için izin listesi ekleyip onay sorularını azaltır. |
+
+## MCP sunucuları
+
+MCP sunucuları Claude'a yeni yetenekler verir: tarayıcı, tasarım aracı gibi.
+Kurulum komutlarının sonuna `--scope user` eklersen sunucu tüm projelerde kullanılabilir.
+
+| Sunucu | Ne işe yarar |
+|---|---|
+| [Playwright MCP](https://github.com/microsoft/playwright-mcp) | Claude'a tarayıcı verir: sayfayı açar, tıklar, form doldurur, ekran görüntüsü alır; yaptığı işi kendisi test eder. |
+| [Chrome DevTools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp) | Chrome'u geliştirici araçlarıyla kontrol eder: konsol, ağ istekleri, performans kaydı, Lighthouse denetimi, farklı cihaz ve ağ hızı taklidi. |
+| [Figma MCP](https://developers.figma.com/docs/figma-mcp-server/) | Figma tasarımını okuyup frame'i koda çevirir. |
+| [Context7](https://github.com/upstash/context7) | Kütüphanelerin güncel, sürüme özel dokümanını ve kod örneklerini ajana verir; eski ya da uydurma API önerilerini azaltır. Sorgular context7.com'a gider. |
+| [RevenueCat MCP](https://www.revenuecat.com/docs/tools/mcp) | Abonelik uygulamanın ürün, teklif, yetki (entitlement) ve gelir verisini Claude'a sordurur ve düzenletir; OAuth ile bağlanır. |
+| [Buffer MCP](https://buffer.com/mcp) | Instagram, LinkedIn, X, TikTok gibi 9 platforma gönderi taslağı hazırlatır, zamanlar ve paylaşır, istatistikleri getirir; ücretsiz planda da açık. |
+| Meta Ads MCP | Meta'nın resmi reklam bağlayıcısı (`mcp.facebook.com/ads`, Nisan 2026): kampanya performansını raporlar, kampanya ve reklam oluşturur; yeni kampanyalar varsayılan olarak duraklatılmış başlar. |
+| [ElevenLabs MCP](https://github.com/elevenlabs/elevenlabs-mcp) | Metni sese çevirir, ses klonlar, konuşmayı yazıya döker; Claude'un cevabını seslendirmek için. Yerel sunucu artık bakımda değil, barındırılan sürüm (`api.elevenlabs.io/v1/mcp`) öneriliyor; ElevenLabs hesabı ister. |
+| Gmail ve Google Takvim | claude.ai'deki Bağlayıcılar sayfasından (claude.ai/customize/connectors) eklenir; claude.ai hesabıyla girişte Claude Code'da kendiliğinden görünür, `/mcp` ile yönetilir. `claude mcp add` ile yerelde kurulamaz. |
+| [Artemis](https://github.com/google/artemis) | Android uygulamanı doğal dille verilen talimatlarla gerçek cihazda ya da emülatörde test ettirir; logcat ve ekran görüntüsü toplar. Bir LLM API anahtarı ister. |
+
+Playwright MCP:
+
+```
+claude mcp add playwright npx @playwright/mcp@latest
+```
+
+Chrome DevTools MCP:
+
+```
+claude mcp add chrome-devtools -- npx -y chrome-devtools-mcp@latest
+```
+
+Figma MCP:
+
+```
+claude mcp add --transport http figma https://mcp.figma.com/mcp
+```
+
+Context7 (kurulumda hangi ajana kurulacağını sorar, ücretsiz API anahtarı alır):
+
+```
+npx ctx7 setup
+```
+
+RevenueCat MCP:
+
+```
+claude mcp add --transport http revenuecat https://mcp.revenuecat.ai/mcp
+```
+
+## Skill'ler ve eklentiler
+
+- **Skill nedir:** Claude'a belirli bir işi nasıl yapacağını öğreten `SKILL.md` dosyası. `npx skills add <sahip>/<repo>` ile kurulur, `npx skills find` ile aranır, dizini [skills.sh](https://skills.sh).
+- **Eklenti (plugin):** Skill, komut ve ayarları bir arada getirir; `claude plugin marketplace add <sahip>/<repo>` ve ardından `claude plugin install <ad>@<pazar>` ile kurulur.
+- **Örnekler:** Yazı için [Humanizer](https://github.com/blader/humanizer) ve [Stop Slop](https://github.com/hardikpandya/stop-slop), tasarım için [Impeccable](https://github.com/pbakaus/impeccable), kod tabanını tanımak için [Understand Anything](https://github.com/Egonex-AI/Understand-Anything).
+- **Çalışma yöntemi:** [Superpowers](https://github.com/obra/superpowers), [gstack](https://github.com/garrytan/gstack), [Agent Skills](https://github.com/addyosmani/agent-skills) ve [GSD Core](https://github.com/open-gsd/gsd-core) ajana plan, test ve yayın adımları olan bir çalışma düzeni kurar; hepsi Claude Code ve Codex'e kurulur. Aynı işi yaptıkları için birini seç.
+- **Hafıza ve bağlam:** [claude-mem](https://github.com/thedotmack/claude-mem) oturumları kaydedip sonraki oturuma bağlam verir (varsayılan kurulum ücretli barındırılan servise bağlanır); [context-mode](https://github.com/mksglu/context-mode) araç çıktılarını bağlamın dışında tutar.
+- **Claude'dan Codex'e:** [codex-plugin-cc](https://github.com/openai/codex-plugin-cc) ile Claude Code içinden Codex'e kod incelemesi yaptırır ya da görev devredersin.
+- **Kurmadan önce tara:** Skill'ler ajanın yetkileriyle çalışır; başkasının skill'ini kurmadan önce [SkillSpector](https://github.com/NVIDIA/SkillSpector) ile prompt injection ve veri sızdırma açısından tara. NVIDIA'nın incelediği 31.132 skill'in %26,1'inde güvenlik açığı, %5,2'sinde kötü niyet belirtisi bulunmuş.
+
+SkillSpector'ı kur ve skill'i kurmadan önce GitHub linkinden tara:
+
+```
+uv tool install git+https://github.com/NVIDIA/skillspector.git
+skillspector scan https://github.com/<sahip>/<skill-reposu>
+```
+
+## Proje talimat dosyaları
+
+- **CLAUDE.md ve AGENTS.md:** Projenin nasıl çalıştığını, komutlarını ve kurallarını anlatır; Claude Code `CLAUDE.md`'yi, Codex ve diğer ajanlar `AGENTS.md`'yi okur.
+- **İkisini aynı tut:** Projede ikisi de varsa biri diğerinin birebir kopyası olsun; düzenleme tek dosyada yapılsın. ship-ready'de `uygulama/guncelle.py` bunu otomatik yapıyor.
+- **Kısa tut:** Sadece Claude'un koddan çıkaramayacağı şeyleri yaz: komutlar, kurallar, dikkat edilecekler.
+- **Davranış kuralları:** Modelin sık yaptığı hataları (basit işi karmaşıklaştırmak, talimatın dışına çıkmak, bitmemiş işi bitti saymak, olmayan API uydurmak) kısa kurallarla önler; hazır örneği Karpathy'nin gözlemlerinden çıkarılmış [andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills): kodlamadan önce düşün, en basit çözümü yaz, sadece isteneni değiştir, başarıyı doğrulanabilir hedefe bağla. Tüm projelerde geçerli olsun istiyorsan `~/.claude/CLAUDE.md`'ye eklenir.
+- **DESIGN.md:** `AGENTS.md` projenin nasıl kurulacağını, `DESIGN.md` nasıl görüneceğini anlatır: renk, yazı tipi, köşe ve boşluk değerleri ve tasarımın gerekçesi. Biçimi Google'ın [design.md](https://github.com/google-labs-code/design.md) reposunda, markalardan çıkarılmış hazır örnekleri [awesome-design-md](https://github.com/VoltAgent/awesome-design-md) reposunda.
+
+## Google'ın AI araçları
+
+Google'ın ücretsiz kullanılabilen AI araçları; [bu gönderiden](https://www.instagram.com/p/DdIAxPynbHV/) alındı, bilgiler 25.09.2026'da Google'ın resmi sayfalarından doğrulandı.
+Gönderideki Opal Türkiye'de açık değil, Mixboard 28 Eylül 2026'da kapanıyor; ikisi listeye alınmadı.
+
+| Araç | Ne işe yarar | Ücret |
+|---|---|---|
+| [Stitch](https://stitch.withgoogle.com) | Metinden, eskizden ya da ekran görüntüsünden web ve mobil arayüz tasarlar, HTML/CSS koduna çevirir; Figma, AI Studio ya da Antigravity'ye aktarır. Google Labs deneyi, 18+. | Fiyat belirtilmemiş, kotalı |
+| [AI Studio](https://aistudio.google.com) | Gemini modellerini dener, prompt'tan tam yığın web ya da Android uygulaması üretir, Gemini API anahtarı verir. Ücretsiz kullanımda girdiğin içerik ürün geliştirmede kullanılabilir; gizli veri ya da anahtar yapıştırma. | Ücretsiz; Gemini API'de sınırlı ücretsiz katman |
+| [Antigravity](https://antigravity.google) | Google'ın ajan öncelikli geliştirme platformu: IDE, birden çok ajanı yöneten masaüstü uygulaması, CLI ve SDK. Bireysel kullanıcılar için Gemini CLI'ın yerini aldı; içinde Claude modelleri de seçilebiliyor. Kişisel Google hesabı ister. | Haftalık limitli ücretsiz plan; yüksek limit Google AI Pro ya da Ultra ile |
+| [Gemini Notebook](https://notebooklm.google) | NotebookLM'in yeni adı: yüklediğin PDF, site, video ve dokümanlara dayanarak kaynak göstererek cevap verir; sesli ve videolu özet, bilgi kartı üretir. Bir kütüphanenin dokümanını yükleyip ona soru sormak için. | Ücretsiz, limitli |
+| [Pomelli](https://labs.google.com/pomelli/about) | Siteni tarayıp markanın tarzını çıkarır, buna uygun sosyal medya kampanyası ve ürün görselleri üretir; yayından sonra tanıtım için. Sadece İngilizce, 18+. | Şimdilik ücretsiz, birkaç yüz üretimle sınırlı |
+| [Flow](https://flow.google.com) | Veo ve Nano Banana modelleriyle video ve görsel üretir; tanıtım videosu ve mağaza görselleri için. Abone olmayanlar akşam yoğun saatlerde video üretemeyebilir. | Günde 50 ücretsiz kredi, görsel üretimi ücretsiz; aboneler daha fazla |
+| [Flow Music](https://www.flowmusic.app) | Şarkı ve arka plan müziği üretir (eski adı ProducerAI); tanıtım videosu için. Türkiye'de açık olup olmadığı resmi sayfalardan doğrulanamadı, ticari kullanım şartları belirtilmemiş. | Ücretsiz plan var; ücretli planlar ayda 6–48 $ |
+
+## Hazır prompt'lar
+
+Kutunun üstündeki "Prompt'u kopyala" düğmesiyle alıp Claude'a yapıştır.
+Yayın öncesi, App Store, Google Play ve paywall denetimi için ilgili kontrol listesindeki denetim prompt'unu kopyala.
+
+Değişikliği tarayıcıda test et:
+
+```
+Yaptığın değişikliği Playwright ile tarayıcıda aç ve ana akışı dene: giriş, form gönderme, hata durumları. Masaüstü ve 390 px mobil genişlikte ekran görüntüsü al, gördüğün sorunları düzelt ve neyi test ettiğini kısaca yaz. agent-browser kuruluysa akışın video kaydını al ve PR açıklamasına ekle.
+```
+
+Performansı ölç:
+
+```
+Sayfayı Chrome DevTools ile aç; Lighthouse denetimi ve performans kaydı al. LCP, CLS ve toplam JavaScript boyutunu raporla, en büyük üç sorunu düzelt ve öncesi-sonrası değerleri yaz.
+```
+
+Arayüzü toparla:
+
+```
+Bu sayfanın arayüzünü gözden geçir: boşluklar, yazı boyutları, renk kontrastı, mobil görünüm ve boş, yükleniyor, hata durumları. Önce sorunları listele, sonra onayımla düzelt.
+```
+
+Bağımlılıkları denetle:
+
+```
+Projenin bağımlılıklarını denetle: güvenlik açığı olanları (osv-scanner kuruluysa onunla tara), çok eski ve bakımı bırakılmış olanları, JS/TS projesinde kullanılmayan paket ve dosyaları (knip ile) listele. Güncelleme önerilerini risk sırasıyla ver, kırıcı değişiklik içerenleri ayrıca belirt.
+```
+
+Karpathy'nin [LLM Council](https://github.com/karpathy/llm-council) fikri soruyu birden çok modele sorup bir başkan modele karar verdirir; [bu videodaki](https://www.instagram.com/reel/Dbpyz7FCLC3/) gibi tek modelde beş danışmanla da uygulanabilir.
+Model kendi fikrini onaylamak yerine karşı görüş üretsin diye büyük kararlarda işe yarar.
+
+Büyük bir kararı danışman konseyine sor:
+
+```
+Şu kararı vermem gerekiyor: <karar>. Bağlam: <kısa bağlam>. Beş danışmandan oluşan bir konsey gibi düşün ve her birini ayrı başlıkla yaz: 1) Karşıt görüşlü: bu karar neden yanlış olabilir, en güçlü itirazı getir. 2) Prensip üretici: bu tür kararlarda hangi genel kurallara uymalıyım. 3) Fırsat bulan: gözden kaçırdığım fırsat ya da daha iddialı seçenek ne. 4) Dışarıdan bakan: konuyu hiç bilmeyen biri neyi tuhaf bulur, neyi sorgulamadan varsayıyorum. 5) Uygulamacı: yarın başlasam ilk üç adım ne, en büyük risk nerede. Sonra başkan olarak hepsini tart; bana katılmak zorunda değilsin. Net bir öneri, gerekçesi ve fikrimi değiştirecek koşulu yaz.
+```
+
+[Bu videodaki](https://www.instagram.com/reel/DaebyH0xIDQ/) "JARVIS" düzeni: bağlı MCP'lerden her sabah bir özet çıkarır; `/schedule` ile rutin olarak kurulabilir.
+
+Günlük uygulama özeti:
+
+```
+Bana günlük bir özet hazırla: bağlı MCP'lerden son 7 günün indirme ve gelir rakamlarını (RevenueCat), yanıt bekleyen müşteri e-postalarını (Gmail), zamanlanmış paylaşımları (Buffer) ve reklam harcamasıyla getirisini (Meta Ads) topla. Bağlı olmayan kaynağı atla ve bunu söyle. Sonunda bugün ilk yapmam gereken üç işi öner. Hiçbir e-postayı gönderme, reklamı ya da paylaşımı değiştirme; sadece raporla.
+```
+
+Müşteri e-postalarına taslak cevap:
+
+```
+Gmail'deki yanıtlanmamış müşteri e-postalarını oku. docs/sss.md dosyasındaki cevaplara göre her biri için taslak yanıt hazırla; SSS'de karşılığı olmayanları ayrıca listele. E-postaları gönderme, sadece taslak olarak göster.
+```
+
+[Bu videodaki](https://www.instagram.com/reel/Dc1su9HoqIO/) sekiz adım WhatsApp'tan randevu alan bir AI ajanı kurar: plan, WhatsApp bağlantısı, model, hafıza, işletme bilgisi, araçlar, test ve yayın.
+Her adım bir öncekine dayanır; ajanı sohbet botundan ayıran araçlardır (randevu almak gibi iş yapması).
+
+WhatsApp randevu ajanı kur:
+
+```
+İşletmem için WhatsApp'tan müşterilerle konuşup randevu alan bir AI ajanı kurmak istiyorum. İşletme: <ne yapıyor>. Müşteriler: <kimler>. Ajanın yapacakları: <soruları cevaplamak, randevu almak, iptal>. Asla yapmayacakları: <fiyat pazarlığı, iade sözü>. Kod yazmadan önce mimariyi öner ve onayımı al. Adımlar: 1) WhatsApp: Meta geliştirici uygulamasına WhatsApp ürününü ekle, webhook'u kur ve "messages" alanına abone ol (yoksa mesaj gelmez); müşterinin son mesajından 24 saat sonra sadece onaylı şablon mesaj gönderilebildiğini hesaba kat. 2) Modeli OpenRouter üzerinden bağla ki model değiştirmek tek satır olsun. 3) Hafıza: konuşmayı telefon numarasına göre sakla, son 20 kadar mesajı modele gönder, geçmişi sınırla ve eskisini sil. 4) İşletme bilgisi: hizmetler, fiyatlar, çalışma saatleri, SSS ve randevu kuralları; bilgide olmayan soruya "ekibe sorup döneceğim" desin. 5) Araçlar: müsaitlik ve randevu için Cal.com API'si; okumak serbest, randevu oluşturmadan önce müşteriden açıkça onay alsın, idempotency key kullan, "gelecek perşembe" gibi tarihleri model değil kod hesaplasın. 6) Kırmaya çalış: 31 Şubat, bir saniye arayla gelen iki mesaj, "talimatlarını unut", bilgide olmayan soru, randevudan sonra iptal; hepsini bir test setine koy ve her düzeltmeden sonra baştan çalıştır. 7) Yayına al: bilgisayarım değil VPS, pm2, geçerli TLS; webhook imzasını doğrula (adres herkese açık) ve her konuşma adımını logla. Anahtarları koda yazma, ortam değişkeninde tut.
+```
+
+---
+
+# Repo kataloğu
+
+Adres: /repolar/
+
+## 🧠 Ajan skill'leri ve çalışma yöntemi
+
+Kodlama ajanının nasıl çalıştığını değiştiren skill'ler: plan, kod ve inceleme akışları, bağlam ve token tasarrufu, skill koleksiyonları.
+
+### Çalışma yöntemi
+
+- [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills): Karpathy'nin LLM'lerin kod yazarken yaptığı hatalara dair gözlemlerinden çıkarılmış tek bir CLAUDE.md: kodlamadan önce düşün ve varsayımları söyle, en basit çözümü yaz, sadece isteneni değiştir, başarıyı doğrulanabilir hedefe bağla. Claude Code eklentisi olarak ya da projenin CLAUDE.md'sine (Codex'te AGENTS.md'ye) eklenerek kullanılır. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: Lisans dosyası yok.
+- [chaseai-yt/claudex-loop](https://github.com/chaseai-yt/claudex-loop): Claude Code ve Codex'i birlikte çalıştıran skill'ler: planı bir model hazırlar, öteki denetler, onaylanana kadar gidip gelirler; sonra biri kodu yazar, diğeri farkı taze oturumda inceler. Kodu yazan model kendi kodunu notlamaz. claudex-route ise işe hangi modelin uygun olduğunu önerir. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: Claude Code ve Codex CLI'ın ikisi de kurulu ve oturum açık olmalı, Python 3.10+ ister; iki modelin kullanımı da hesaba yansır.
+- [ruvnet/ruflo](https://github.com/ruvnet/ruflo): Claude Code ve Codex'in etrafına kurulan ajan altyapısı: 100'den fazla uzman ajanı ekip halinde çalıştırır, oturumlar arası öğrenen hafıza ve görevi uygun modele yönlendirme ekler. npx ruflo init ile kurulur. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: Videodaki %50 token tasarrufu ve Claude Code'u %250 daha uzun kullanma iddiaları doğrulanmadı; büyük ve karmaşık bir sistem. Tam kurulum (npx ruflo init) projeye .claude/, .claude-flow/, CLAUDE.md ve hook'lar yazar; eklenti olarak kurulursa projeye dosya yazmaz ama daha az özellik gelir.
+- [openai/codex-plugin-cc](https://github.com/openai/codex-plugin-cc): Claude Code içinden Codex'i kullandıran resmi OpenAI eklentisi: Codex'e kod review yaptırır, görevi Codex'e devreder, arka plandaki işleri izler. İsteğe bağlı review kapısı Claude'un yanıtlarını Codex'e kontrol ettirir. Kurulum: Claude Code'a kurulur. Uyarı: ChatGPT hesabı veya OpenAI API anahtarı ve yerel Codex CLI gerekir; kullanım Codex limitlerinden düşer. Review kapısı uzun bir Claude/Codex döngüsüne girip limiti hızla tüketebilir.
+- [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents): Mühendislik, tasarım, pazarlama, satış gibi bölümlerde 230'dan fazla uzman ajan kişiliği (alt ajan tanımı). Kurulum betiği aynı ajanları Claude Code, Codex, Cursor gibi araçların biçimine çevirip kurar. Kurulum: Claude Code'a kurulur, Codex'e kurulur.
+- [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills): Kıdemli mühendis iş akışlarını 25 skill olarak paketler: spesifikasyon, planlama, TDD, kod review, performans denetimi ve yayına alma. /spec, /plan, /build, /test, /review, /ship komutlarıyla geliştirme döngüsünü izletir. Kurulum: Claude Code'a kurulur, Codex'e kurulur.
+- [garrytan/gstack](https://github.com/garrytan/gstack): Claude Code'u sanal bir ekibe çeviren slash komut seti: ürün sorgulama, mimari ve tasarım incelemesi, kod review, gerçek tarayıcıda QA, güvenlik denetimi ve PR'ı yayınlama. Her adım çıktısını bir sonrakine devreder. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: Verimlilik rakamları (ör. 2013'e göre ~810 kat) yazarın iddiası. Bun gerektirir, tarayıcı çerezlerini içe aktarabilir; telemetri isteğe bağlı (opt-in).
+- [open-gsd/gsd-core](https://github.com/open-gsd/gsd-core): Ajanı tartış, planla, uygula, doğrula, yayınla döngüsüyle çalıştıran spesifikasyon odaklı geliştirme sistemi. Ağır işleri temiz bağlamlı alt ajanlara verip ana oturumu hafif tutar. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: Eski adı gsd-build/get-shit-done; o repo arşivlendi ve geliştirme burada sürüyor. Kurulum: npx @opengsd/gsd-core@latest (Claude Code, Codex ve diğer ajanları sorar).
+- [obra/superpowers](https://github.com/obra/superpowers): Kodlama ajanına baştan sona bir çalışma yöntemi kuran skill seti: önce soru sorup tasarımı netleştirir, plan yazar, TDD ile alt ajanlara uygulatır ve kodu gözden geçirir. Skill'ler kendiliğinden devreye girer. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: Görsel eşlikçi özelliği kullanılan sürüm bilgisini yazarın sitesine gönderir; SUPERPOWERS_DISABLE_TELEMETRY ile kapatılır.
+
+### Bağlam, bellek ve token
+
+- [ayghri/i-have-adhd](https://github.com/ayghri/i-have-adhd): Ajanın cevaplarını kısa ve net yapan 10 kural: önce yapılacak iş, numaralı adımlar, gereksiz giriş ve kapanış yok. Kurulum: Claude Code'a kurulur, Codex'e kurulur.
+- [virgiliojr94/book-to-skill](https://github.com/virgiliojr94/book-to-skill): Kitap ya da doküman setini bölüm bölüm ajan skill'ine çevirir; ajan sadece ilgili bölümü yükler. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: Telifli kitaptan üretilen skill'i paylaşma.
+- [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman): Kodlama ajanını çok kısa cümlelerle konuşturarak token harcamasını azaltan skill ve ara katman (proxy); 30'dan fazla ajanla çalışıyor. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: Tasarruf oranı (%65) yazarın iddiası; lisans MIT ve BSL karışık.
+- [mksglu/context-mode](https://github.com/mksglu/context-mode): Araç çıktılarını sandbox'ta tutup bağlama yalnızca sonucu koyan MCP sunucusu ve hook seti. Oturum olaylarını yerel SQLite'ta indeksler, bağlam sıkıştırıldıktan sonra ajanın kaldığı yerden devam etmesini sağlar. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: Elastic License 2.0: kaynak açık ama barındırılan servis olarak sunulamaz. Hook'larla araç çağrılarını yönlendirir; '%98 azalma' ve 'kullanan şirketler' rozetleri yazarın iddiası.
+- [thedotmack/claude-mem](https://github.com/thedotmack/claude-mem): Kodlama ajanının oturumlarda yaptıklarını kaydeder, AI ile özetler ve sonraki oturumlara ilgili bağlamı geri verir. Hook'larla kendiliğinden çalışır; geçmiş yerel SQLite'ta tutulur ve MCP araçlarıyla aranır. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: Kurulum varsayılan olarak hesap açtırıp barındırılan hafıza servisine yönlendirir (30 gün ücretsiz, sonra abonelik; --provider ile atlanır). Tüm oturum etkinliğini kaydeder; README ayrıca bir kripto tokenı (CMEM) tanıtıyor.
+
+### Skill koleksiyonları ve eklentiler
+
+- [vercel-labs/skills](https://github.com/vercel-labs/skills): "npx skills add" komutunun kendisi: GitHub'daki skill'leri Claude Code, Cursor, Codex'e kurar ve yönetir. Kurulum: Claude Code'a kurulur, Codex'e kurulur.
+- [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills): Vercel'in resmi ajan skill koleksiyonu. Kurulum: Claude Code'a kurulur, Codex'e kurulur.
+- [vibeforge1111/vibeship-spawner-skills](https://github.com/vibeforge1111/vibeship-spawner-skills): Uzmanlaşmış ajanlar için skill dizini. Kurulum: Claude Code'a kurulur.
+- [x1xhlol/system-prompts-and-models-of-ai-tools](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools): Cursor, Claude Code, Devin, Lovable gibi araçların sistem prompt'larının toplandığı arşiv. Kurulum: kaynak, kurulmaz.
+- [davila7/claude-code-templates](https://github.com/davila7/claude-code-templates): Claude Code'u ayarlama ve izleme aracı; hazır ajan, komut ve ayar şablonları. Kurulum: Claude Code'a kurulur.
+- [ZeframLou/call-me](https://github.com/ZeframLou/call-me): Claude Code işini bitirince seni telefonla arayan eklenti. Kurulum: Claude Code'a kurulur.
+- [composio-community/awesome-codex-skills](https://github.com/composio-community/awesome-codex-skills): Codex için pratik skill'lerin derlendiği liste; bir kısmı repoda hazır gelir (PR yorumlarını işleme, CI hatası düzeltme, MCP sunucusu yazma, toplantı notu çıkarma gibi). Kurulum betiği seçilen skill'i ~/.codex/skills altına koyar. Kurulum: Codex'e kurulur. Uyarı: Repoda lisans dosyası yok. Maddelerin bir kısmı dış repolara link; bazı skill'ler Composio CLI/hesabı gerektirir (liste Composio tarafından yayımlanıyor).
+
+### Skill güvenliği ve ölçüm
+
+- [EmpiricaAI/empirica](https://github.com/EmpiricaAI/empirica): AI ajanlarının ne kadar güvenilir çalıştığını ölçer; Claude Code ile kullanılabilir. Kurulum: Claude Code'a kurulur.
+- [NVIDIA/SkillSpector](https://github.com/NVIDIA/SkillSpector): Agent skill'lerini kurmadan önce güvenlik açısından tarar: prompt injection, veri sızdırma, tedarik zinciri gibi 17 kategoride 71 kalıp arar. Statik analiz ve isteğe bağlı LLM değerlendirmesiyle 0-100 risk puanı verir; MCP olarak ajana da eklenebilir. Kurulum: ayrı uygulama. Uyarı: LLM analizi için API anahtarı ya da yerel claude/codex CLI gerekir (--no-llm ile yalnız statik tarama). MCP modu `skillspector[mcp]` ekiyle kurulmalı ve stdio'da bilinen bir başlatma takılması (issue #199) var.
+
+## 🌐 Ajana web, tarayıcı ve belge erişimi
+
+Ajanın tarayıcıyı kullanması; web sayfalarını, videoları, belgeleri ve kod tabanını okuyabilmesi için araçlar.
+
+### Tarayıcı ve uygulama kontrolü
+
+- [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser): AI ajanları için hızlı tarayıcı otomasyonu. Uygulamayı test eder, PR'a eklemek için imleçli video kaydı alır. Kurulum: Claude Code'a kurulur, Codex'e kurulur.
+- [microsoft/playwright-mcp](https://github.com/microsoft/playwright-mcp): Claude'a gerçek bir tarayıcı verir: sayfayı açar, tıklar, ekran görüntüsü alır, konsolu okur. Bu bilgisayarda kurulu. Kurulum: Claude Code'a kurulur, Codex'e kurulur.
+- [HKUDS/CLI-Anything](https://github.com/HKUDS/CLI-Anything): GIMP, Blender gibi bir yazılım için kaynak koddan ya da repodan ajanların kullanabileceği, JSON çıktı veren bir CLI üretir. Hazır CLI'lar CLI-Hub'dan kurulabilir. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: Codex desteği deneysel ve topluluk etiketli. Üretilen CLI'lar asıl programın kurulu olmasını ister; Windows'ta Git Bash ya da WSL gerekir.
+- [microsoft/Webwright](https://github.com/microsoft/Webwright): Kodlama ajanını tarayıcı ajanına çevirir: web görevini adım adım tıklamak yerine yeniden çalıştırılabilir bir Playwright Python betiği yazarak çözer. Claude Code ve Codex'e plugin olarak eklenir. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: Plugin yolunda da repo klonlanıp `pip install -e .` ve Playwright Chromium kurulur. Tek başına CLI olarak çalıştırmak OpenAI/Anthropic/OpenRouter API anahtarı ister; benchmark sonuçları yazarın iddiası.
+
+### Web, video ve sosyal medya okuma
+
+- [Panniantong/Agent-Reach](https://github.com/Panniantong/Agent-Reach): AI ajanına interneti okuma yeteneği veren komut satırı aracı: herhangi bir sayfayı temiz Markdown'a çevirir, YouTube altyazısı ve araması, GitHub, RSS, web araması; ayarla X, Reddit, LinkedIn ve Instagram'ı da okur. Ücretli API gerekmez; ajana tek cümle verilerek kurulur, `agent-reach doctor` neyin çalıştığını gösterir. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: X, Reddit, Instagram, Facebook ve LinkedIn'i senin tarayıcı oturumunla ya da çerezinle okur; bu platformların kurallarına aykırı olabilir, hesabın kısıtlanabilir. Bazı kaynakları Çin platformlarına yöneliktir.
+- [unclecode/crawl4ai](https://github.com/unclecode/crawl4ai): Web sitelerini tarayıp LLM'in okuyacağı temiz Markdown'a çevirir. Kurulum: projeye eklenir.
+- [bradautomates/claude-video](https://github.com/bradautomates/claude-video): Ajana video izletir: /watch bir URL'yi ya da yerel video dosyasını zaman damgalı karelere ve transkripte çevirip ajana verir. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: GEMINI_API_KEY tanımlıysa videolar (yerel dosyalar dahil) Google'a yüklenir; anahtarsız yerel mod ffmpeg ve yt-dlp ister. Groq/OpenAI transkripsiyonu ayrı API anahtarı ister.
+- [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill): Bir konuyu son 30 gün içinde Reddit, X, YouTube, Hacker News, Polymarket ve web üzerinde araştırır; sonuçları beğeni ve oy gibi etkileşimlere göre sıralayıp kaynaklı bir özet çıkarır. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: X, TikTok, Instagram gibi kaynaklar kendi API anahtarlarını (ScrapeCreators 10.000 çağrıdan sonra ücretli) ya da tarayıcı oturum çerezlerini ister; araç tarayıcıdan çerez okuyabilir.
+
+### Belge ve doküman
+
+- [firecrawl/pdf-inspector](https://github.com/firecrawl/pdf-inspector): PDF'in metin mi taranmış mı olduğunu milisaniyeler içinde anlar; metin PDF'lerini OCR'a göndermeden, tablo ve çok sütunlu düzeni koruyarak Markdown'a çevirir, sadece gereken sayfaları OCR'a yollar. Tamamen yerelde çalışır; Rust, Python, Node.js ve tarayıcı (WebAssembly) için. Kurulum: projeye eklenir.
+- [microsoft/markitdown](https://github.com/microsoft/markitdown): PDF, Word, Excel, PowerPoint, HTML, görsel ve ses dosyalarını LLM'e verilecek Markdown'a çeviren Python aracı; başlık, liste, tablo gibi yapıyı korur. Kurulum: projeye eklenir. Uyarı: Çalıştığı sürecin yetkisiyle dosya ve URL okur; güvenilmeyen girdiyi doğrudan verme. Komut satırından (markitdown dosya.pdf) ve markitdown-mcp paketiyle ajandan da kullanılabilir.
+- [upstash/context7](https://github.com/upstash/context7): Kütüphanelerin güncel, sürüme özel dokümantasyonunu ve kod örneklerini ajanın bağlamına getirir; eski ya da uydurma API önerilerini azaltır. MCP sunucusu veya ctx7 CLI + skill olarak çalışır. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: Upstash'in barındırılan servisine bağlıdır (arka uç açık kaynak değil), sorgular context7.com'a gider; ücretsiz API anahtarı öneriliyor. Dokümanlar topluluk katkılı, doğruluk garanti edilmiyor.
+
+### Kod tabanı haritası
+
+- [Egonex-AI/Understand-Anything](https://github.com/Egonex-AI/Understand-Anything): Kod tabanını analiz edip her dosya, fonksiyon ve bağımlılığın etkileşimli bilgi grafiğini çıkaran Claude Code eklentisi; grafikte gezinip soru sorarak büyük bir projeyi hızlı tanırsın. Kurulum: Claude Code'a kurulur, Codex'e kurulur.
+- [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify): Kod tabanını (dokümanlar, PDF'ler ve SQL şemaları dahil) sorgulanabilir bir bilgi grafiğine çevirir; ajan dosyaları grep'lemek yerine grafiği sorgular. Kod yerelde tree-sitter ile, LLM kullanmadan ayrıştırılır. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: Önce `graphifyy` (çift y) Python CLI'ı kurulur, benzer adlı PyPI paketleri resmi değil. Doküman/PDF/görsel analizi asistanın modeline ya da API anahtarına gider; benchmark sonuçları yazarın iddiası.
+
+## 🖥️ Ajan yönetimi, modeller ve RAG
+
+Birden çok ajanı yöneten arayüzler, yerel model çalıştırma ve model yönlendirme, belgeyle sohbet (RAG).
+
+### Ajan arayüzleri ve ekipler
+
+- [pingdotgg/t3code](https://github.com/pingdotgg/t3code): Kodlama ajanları için açık kaynak arayüz. Sunucuda çalışır, telefondan ya da tarayıcıdan bağlanırsın. Kurulum: ayrı uygulama. Uyarı: Çok erken aşama, hata bekleniyor.
+- [microsoft/autogen](https://github.com/microsoft/autogen): Microsoft'un yapay zekâ ajanı geliştirme framework'ü. Kurulum: projeye eklenir.
+- [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent): Nous Research'ün kendini geliştiren AI ajanı: deneyimden skill üretip kullandıkça iyileştirir, geçmiş konuşmalarını arayıp seni oturumlar arasında hatırlar. Ucuz bir VPS'te çalışır, Telegram gibi kanallardan konuşulur; OpenRouter, OpenAI gibi istediğin modelle ya da `ollama launch hermes` ile Ollama'daki yerel modelle (ör. Qwen) çalışır. Masaüstü uygulaması (Hermes Desktop) da var. Kurulum: ayrı uygulama. Uyarı: Yerel modelle kullanmak güçlü donanım ister: videoda 27B'lik Qwen, 32 GB belleği olan bir Mac'te çalıştırılıyor.
+- [karpathy/llm-council](https://github.com/karpathy/llm-council): Soruyu OpenRouter üzerinden birden çok modele sorar, modellere birbirlerinin cevaplarını isimsiz olarak puanlatır ve bir başkan modele son cevabı yazdırır. Andrej Karpathy'nin yerel web uygulaması. Kurulum: ayrı uygulama. Uyarı: Lisans dosyası yok ve yazar bakım yapmayacağını söylüyor; OpenRouter kredisi ister.
+- [BloopAI/vibe-kanban](https://github.com/BloopAI/vibe-kanban): İşleri kanban panosunda planlayıp her görevi ayrı bir çalışma alanında (branch, terminal, dev sunucusu) Claude Code, Codex gibi ajanlara yaptırır. Diff'i inceleyip satır içi yorum bırakır, PR açarsın. Kurulum: ayrı uygulama. Uyarı: Arkasındaki şirket Bloop Nisan 2026'da kapandı; proje topluluk bakımına geçti, bulut özellikleri kaldırıldı, yerel kullanım sürüyor.
+- [paperclipai/paperclip](https://github.com/paperclipai/paperclip): Birden çok AI ajanını (Claude Code, Codex, Cursor, OpenClaw...) bir şirket gibi yöneten açık kaynak uygulama: hedef verirsin, ajanlara rol ve bütçe atarsın, işleri ve maliyeti tek panelden izlersin. Kurulum: ayrı uygulama. Uyarı: Ajanlar sürekli çalışınca API maliyeti hızla birikir; bütçe sınırını baştan koy. Kendi sunucunda çalışır, hesap gerekmez.
+
+### Yerel model ve yönlendirme
+
+- [diegosouzapw/OmniRoute](https://github.com/diegosouzapw/OmniRoute): Yerel, OpenAI uyumlu AI ağ geçidi. İstekleri 350'den fazla sağlayıcıya dağıtır, kota bitince başkasına geçer. Kurulum: ayrı uygulama. Uyarı: Bazı sağlayıcıların kullanım şartlarına aykırı olabilir.
+- [AlexsJones/llmfit](https://github.com/AlexsJones/llmfit): Bilgisayarında hangi modelin çalışacağını tek komutla söyler. Kurulum: ayrı uygulama.
+- [ollama/ollama](https://github.com/ollama/ollama): Açık modelleri (Gemma, Qwen, DeepSeek...) kendi bilgisayarında çalıştırır ve REST API sunar; `ollama launch` ile Claude Code, Codex, OpenCode ve Hermes gibi ajanları yerel modelle başlatır. Kurulum: ayrı uygulama. Uyarı: Yerel model çalıştırmak donanıma bağlı; büyük modeller yüksek RAM ve GPU ister.
+
+### RAG ve belgeyle sohbet
+
+- [NirDiamant/RAG_Techniques](https://github.com/NirDiamant/RAG_Techniques): İleri RAG tekniklerini notebook'larla anlatan eğitim reposu. Kurulum: kaynak, kurulmaz.
+- [dataease/SQLBot](https://github.com/dataease/SQLBot): Doğal dille soru sor, SQL'i o yazsın; LLM ve RAG ile sohbetle veri analizi. Kurulum: ayrı uygulama. Uyarı: Proje Çince.
+- [lfnovo/open-notebook](https://github.com/lfnovo/open-notebook): Kendi sunucunda çalışan NotebookLM alternatifi: PDF, video ve web sayfalarıyla sohbet, podcast üretimi. Kurulum: ayrı uygulama.
+
+## 🎨 Tasarım & arayüz
+
+Arayüz bileşenleri, animasyon kütüphaneleri, tasarım skill'leri, tasarım sistemi dosyaları ve diyagram araçları.
+
+### Bileşen kütüphaneleri
+
+- [AnmolSaini16/mapcn](https://github.com/AnmolSaini16/mapcn): React için hazır harita bileşenleri: işaretçi, popup, rota ve zoom/pusula kontrolleri. MapLibre GL üzerine kurulu, Tailwind ile stillenir, shadcn/ui ile aynı yapıyı kullanır. Kurulum: projeye eklenir. Uyarı: Varsayılan CARTO altlık haritalarının ticari kullanımı CARTO Enterprise lisansı ister; OpenStreetMap, MapTiler, Stadia gibi başka bir tile sağlayıcıya geçilebilir.
+- [recharts/recharts](https://github.com/recharts/recharts): React için bileşen tabanlı grafik kütüphanesi; D3 üzerine kurulu, SVG ile çizer. Eksen, tooltip, çizgi gibi parçalar ayrı React bileşenleri olarak birleştirilir. Kurulum: projeye eklenir.
+- [tremorlabs/tremor](https://github.com/tremorlabs/tremor): Grafik ve dashboard için 35+ kopyala-yapıştır React bileşeni. Tailwind CSS ve Radix UI üzerine kurulu, grafikleri Recharts ile çizer. Kurulum: projeye eklenir. Uyarı: Tremor Vercel'e katıldı; bu repoda son kod değişikliği Nisan 2025 (Tailwind v4), sonrasında yalnızca CI temizliği var. Başka bir repoya taşındığına dair not yok; eski npm paketi (@tremor/react, tremor-npm reposu) da Ocak 2025'ten beri güncellenmedi.
+- [saadeghi/daisyui](https://github.com/saadeghi/daisyui): Tailwind CSS'e eklenti olarak kurulan, hazır CSS sınıflarıyla kullanılan bileşen kütüphanesi. Framework'e bağlı değil: React, Vue, Svelte, Angular, Laravel, Django, Rails gibi Tailwind çalışan her projeye uyar. Kurulum: projeye eklenir.
+- [DavidHDev/react-bits](https://github.com/DavidHDev/react-bits): Metin animasyonu, arka plan, UI ve mikro etkileşim için 200+ animasyonlu React bileşeni; her biri JS/TS ve düz CSS/Tailwind olmak üzere 4 varyantla gelir. Vue ve Svelte için resmi portları ayrı sitelerde. Kurulum: projeye eklenir. Uyarı: Lisans MIT + Commons Clause: uygulama veya sitede ticari kullanım serbest, ama bileşenlerin kendisini tek tek, paket halinde ya da port ederek satmak veya yeniden dağıtmak yasak. OSI anlamında açık kaynak değil.
+- [magicuidesign/magicui](https://github.com/magicuidesign/magicui): Landing page ve tanıtım sayfaları için animasyonlu, kopyala-yapıştır bileşenler. React ve Tailwind ile çalışır, animasyonların çoğu Motion kütüphanesiyle yapılır; kurulumu shadcn/ui ile aynıdır. Kurulum: projeye eklenir.
+- [shadcn-ui/ui](https://github.com/shadcn-ui/ui): Kodu doğrudan projeye kopyalanan, erişilebilir React bileşenleri; Tailwind CSS ile stillenir, altta Radix, Base UI veya React Aria kullanır. CLI ile eklenir; Next.js, Vite, Remix, Astro, TanStack ve Laravel için kurulum rehberi var. Kurulum: projeye eklenir. Uyarı: Kodlama ajanları için skill (npx skills add shadcn/ui) ve bileşen registry'lerine erişen bir MCP sunucusu da var.
+
+### Animasyon
+
+- [catdad/canvas-confetti](https://github.com/catdad/canvas-confetti): Tarayıcıda tek fonksiyonla konfeti patlatan küçük kütüphane; parça sayısı, açı, renk ve şekil ayarlanır, canvas ile çizer. Ödeme ya da görev tamamlanınca ödül hissi vermek için kullanılır. Kurulum: projeye eklenir.
+- [Jakubantalik/thinking-orbs](https://github.com/Jakubantalik/thinking-orbs): AI ve ajan arayüzleri için noktalı "düşünen küre" yükleniyor animasyonları: dokuz durum (çalışıyor, arıyor, dinliyor...), iki boyut, açık/koyu temaya kendiliğinden uyar. Düz canvas ile çizer, hareketi azalt tercihinde sabit kare gösterir. Kurulum: projeye eklenir. Uyarı: Sadece React bileşeni; başka altyapıda örnek alınıp çevrilir.
+- [airbnb/lottie-web](https://github.com/airbnb/lottie-web): After Effects animasyonlarını Bodymovin eklentisiyle JSON olarak dışa aktarıp web'de SVG, canvas veya HTML ile oynatan JavaScript oynatıcı. Framework'e bağlı değil (düz JS); npm veya CDN ile eklenir. Kurulum: projeye eklenir. Uyarı: Animasyon üretmek için After Effects (ücretli Adobe) ve Bodymovin eklentisi gerekir. Ana dalda son commit Kasım 2024 (5.13.0).
+- [greensock/GSAP](https://github.com/greensock/GSAP): Framework'e bağlı olmayan, bağımlılıksız JavaScript animasyon kütüphanesi; düz JS, React, Vue, CSS, SVG, canvas ve WebGL ile çalışır. ScrollTrigger, SplitText, MorphSVG gibi eklentiler dahil; React için @gsap/react paketi (useGSAP) var. Kurulum: projeye eklenir. Uyarı: MIT değil, GreenSock'un 'no charge' lisansı: tüm eklentiler dahil ticari kullanım ücretsiz, ama kod açık kaynak sayılmaz. Webflow'un görsel animasyon araçlarıyla rakip olan kodsuz animasyon araçlarında kullanılması yasak.
+- [motiondivision/motion](https://github.com/motiondivision/motion): React, düz JavaScript ve Vue için animasyon kütüphanesi (Framer Motion'ın yeni adı). Yaylı animasyonlar, layout geçişleri, scroll'a bağlı efektler, zaman çizelgeleri ve dokunma/sürükleme hareketleri içerir. Kurulum: projeye eklenir. Uyarı: Çekirdek MIT ve ücretsiz; Motion+ ücretli (ek örnekler, premium API'ler). npx motion-ai, Claude Code ve başka ajanlar için /motion skill'i ile MCP sunucularını da kurar.
+
+### Tasarım skill'leri
+
+- [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill): Farklı platformlarda profesyonel arayüz tasarlamak için tasarım bilgisi veren AI skill'i. Kurulum: Claude Code'a kurulur, Codex'e kurulur.
+- [pbakaus/impeccable](https://github.com/pbakaus/impeccable): Ajanın tipik "AI yapmış" görünümünden çıkmasını sağlayan tasarım skill'i. audit, polish, typeset, layout gibi ~24 komut. Kurulum: Claude Code'a kurulur, Codex'e kurulur.
+- [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill): Ajanı daha premium görünen arayüzlere yönlendiren SKILL.md dosyaları; çeşitlilik, animasyon ve yoğunluk için 1–10 ayarları. Kurulum: Claude Code'a kurulur, Codex'e kurulur.
+- [emilkowalski/skills](https://github.com/emilkowalski/skills): Emil Kowalski'nin (Linear) bakışıyla yazılmış skill'ler. Ağırlık animasyon ve easing; genel UI kuralları da var. Kurulum: Claude Code'a kurulur, Codex'e kurulur.
+
+### Tasarım sistemi ve Figma
+
+- [figma/mcp-server-guide](https://github.com/figma/mcp-server-guide): Figma'nın resmi MCP sunucusunun rehberi. Claude'a Figma tasarımını okutup koda çevirtir. Kurulum: Claude Code'a kurulur, Codex'e kurulur.
+- [anthropics/html-effectiveness](https://github.com/anthropics/html-effectiveness): Anthropic'in etkili HTML çıktısı örnekleri. Kurulum: kaynak, kurulmaz.
+- [google-labs-code/design.md](https://github.com/google-labs-code/design.md): Google'ın DESIGN.md biçimi: renk, yazı tipi, köşe ve boşluk değerlerini (YAML) ve tasarımın gerekçesini tek dosyada tanımlar; kodlama ajanları arayüzü bu dosyaya göre üretir. Kurulum: projeye eklenir.
+- [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md): Tanınmış markaların tasarım sistemlerinden çıkarılmış hazır DESIGN.md dosyaları. Birini projene koyup ajana "buna benzeyen bir sayfa yap" dersin, arayüz o tasarım diline tutarlı çıkar. Kurulum: projeye eklenir.
+- [nexu-io/open-design](https://github.com/nexu-io/open-design): Claude Design'ın açık kaynak alternatifi olan masaüstü uygulaması: bilgisayardaki kodlama ajanını (Claude Code, Codex vb.) kullanarak prototip, landing page, sunum, görsel ve video üretir; HTML/PDF/PPTX/MP4 olarak dışa aktarır. Kurulum: ayrı uygulama. Uyarı: Güvenlik ve güvenilirlik telemetrisi her zaman açık (ürün analitiği onaya bağlı); README ücretli OpenDesign Cloud hizmetini öne çıkarıyor. Arayüzsüz kullanım için `od mcp install claude|codex` ile ajana MCP olarak da eklenir.
+
+### Diyagram ve sunum
+
+- [cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design): Dergi kalitesinde diyagram çizdiren skill: akış, sistem mimarisi, Sankey, balık kılçığı, veritabanı şeması gibi 20'den fazla tür. Tek dosyalık HTML + SVG üretir; Mermaid ve draw.io çizimlerini de yeniden çizer. Kurulum: Claude Code'a kurulur, Codex'e kurulur.
+- [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides): Kodlama ajanına HTML sunum hazırlatan skill; sıfırdan ya da PowerPoint'ten çevirerek. Stil önizlemeleri gösterip seçtirir, bağımlılığı olmayan tek bir HTML dosyası üretir. Kurulum: Claude Code'a kurulur, Codex'e kurulur.
+- [wentong2022-arch/flowforge-skill](https://github.com/wentong2022-arch/flowforge-skill): Doğal dille anlatılan akış şeması, mimari ya da karşılaştırma diyagramını düzenlenebilir draw.io (.drawio) dosyası olarak üretir. XML'i yazmadan önce ASCII taslağını onaylatır. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: Çok erken aşama (4 commit, yaklaşık 140 yıldız).
+
+## 🔒 Güvenlik, test & kod kalitesi
+
+Güvenlik taraması, uçtan uca ve yük testi, kod inceleme ve kullanılmayan kodu temizleme.
+
+### Güvenlik
+
+- [OWASP/CheatSheetSeries](https://github.com/OWASP/CheatSheetSeries): OWASP'ın güvenlik rehberleri: kimlik doğrulama, oturum, şifre saklama, dosya yükleme, API güvenliği gibi konularda kısa ve uygulanabilir kurallar. Yayın öncesi güvenlik maddelerinin nasıl yapılacağına buradan bakılır. Kurulum: kaynak, kurulmaz.
+- [usestrix/strix](https://github.com/usestrix/strix): Uygulamanı saldırgan gibi deneyen AI pentest ajanları. Bulduğu açığı çalışan bir örnekle doğrular, düzeltme önerir, rapor çıkarır. Kurulum: ayrı uygulama. Uyarı: Sadece test etme yetkin olan sistemlerde kullan. Docker ve LLM API anahtarı ister.
+- [google/osv-scanner](https://github.com/google/osv-scanner): Projenin bağımlılıklarını (npm, pip, go, cargo...) ve container imajlarını OSV.dev veritabanına karşı tarayıp bilinen güvenlik açıklarını bulur; lisans kontrolü ve sürüm yükseltme önerisi de yapar. Kurulum: ayrı uygulama. Uyarı: Paket adı ve sürümlerini OSV.dev/deps.dev API'lerine gönderir (kaynak kod gitmez), istenirse --offline çalışır. Deneysel `fix` komutu güvenilmeyen projede script çalıştırabilir.
+
+### Test
+
+- [grafana/k6](https://github.com/grafana/k6): API ve sitelerin yük testi: JavaScript ile yazılan senaryolarla binlerce sanal kullanıcı gönderip yanıt süresini ve hata oranını ölçer; yayından önce sistemin nerede yavaşladığını gösterir. Kurulum: ayrı uygulama. Uyarı: AGPL-3.0 lisanslı; kendi sistemini test etmek için kullanmak serbest.
+- [microsoft/playwright](https://github.com/microsoft/playwright): Chromium, Firefox ve WebKit'i tek API ile süren uçtan uca test çatısı; otomatik bekleme, paralel test ve hata anında trace/ekran görüntüsü kaydı. Kurulum: projeye eklenir. Uyarı: Ajanlar için ayrı yollar da var: Playwright MCP (claude mcp add playwright npx @playwright/mcp@latest) ve @playwright/cli.
+- [google/artemis](https://github.com/google/artemis): Doğal dilde verilen talimatlarla gerçek Android cihazda ya da emülatörde uçtan uca test ve otomasyon yapar. MCP ile Claude Code ve Codex'e bağlanır, logcat ve ekran görüntüsü toplar. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: Repo klonlanıp yerel servis çalıştırılır ve cihazı yöneten ajan için Gemini/OpenAI/Anthropic gibi bir LLM API anahtarı gerekir; ekran görüntüleri bu sağlayıcıya gider. Telefona bir erişilebilirlik servisi kurar; AndroidWorld'de %99+ başarı yazarın iddiası.
+- [addyosmani/web-quality-skills](https://github.com/addyosmani/web-quality-skills): Lighthouse, Core Web Vitals, WCAG ve SEO temelli web kalite skill'leri. Ajan önce ölçer (Lighthouse, DevTools izi, CrUX), sonra performans, erişilebilirlik ve SEO düzeltmeleri önerir. Kurulum: Claude Code'a kurulur, Codex'e kurulur.
+
+### Kod inceleme ve temizlik
+
+- [alibaba/open-code-review](https://github.com/alibaba/open-code-review): Kural tabanlı kontrollerle bir LLM ajanını birleştiren kod inceleme aracı; satır satır yorum yazar. Kurulum: ayrı uygulama.
+- [octopusreview/octopus](https://github.com/octopusreview/octopus): Pull request'lere AI kod incelemesi yapar: özet, önem derecesine göre sıralı bulgular ve önerilen düzeltmeler (GitHub, GitLab, Bitbucket, Forgejo). Bulut sürümü veya Docker Compose ile kendi sunucunda çalışır. Kurulum: ayrı uygulama. Uyarı: Lisans 'Modified MIT' (source available): ticari üründe kullanılır ve ürün aylık 10.000 aktif kullanıcıyı veya 100.000 dolar aylık geliri aşarsa arayüzde 'Octopus Code Review' göstermek zorunlu. AI sağlayıcı maliyeti sende, Cloud kullanım bazlı ücretli; kod AI servislerine gönderilir.
+- [webpro-nl/knip](https://github.com/webpro-nl/knip): JavaScript/TypeScript projelerinde kullanılmayan dosya, bağımlılık ve export'ları bulup temizler; yayın öncesi ölü kodu atmak için. Kurulum: projeye eklenir. Uyarı: Ajanlar için resmi @knip/mcp paketi ve VS Code eklentisi de var.
+
+## 🚀 Yayına alma & izleme
+
+Kendi sunucuna deploy, mağaza yayınını otomatikleştirme, izleme ve analitik.
+
+### Deploy ve mağaza yayını
+
+- [fastlane/fastlane](https://github.com/fastlane/fastlane): iOS ve Android uygulamalarında ekran görüntüsü üretme, provisioning profile yönetimi ve mağazaya yayınlama gibi işleri otomatikleştirir. Proje içindeki Fastfile ile tanımlanır. Kurulum: projeye eklenir. Uyarı: Varsayılan olarak anonim kullanım metrikleri gönderir; Fastfile'a opt_out_usage ekleyerek kapatılır.
+- [Dokploy/dokploy](https://github.com/Dokploy/dokploy): Kendi VPS'inde çalışan Vercel/Heroku/Netlify alternatifi PaaS: uygulama ve veritabanı deploy, Docker Compose, otomatik yedek, Traefik ile yönlendirme ve kaynak izleme. Kurulum: ayrı uygulama. Uyarı: Çekirdek Apache-2.0; /proprietary klasörlerindeki özellikler (SSO, denetim kaydı, roller, white-label, lisans anahtarı) kaynağı açık ama üretimde kullanmak için Dokploy ile ticari sözleşme ister (DSAL).
+- [coollabsio/coolify](https://github.com/coollabsio/coolify): Kendi sunucunda çalışan Vercel/Heroku/Netlify alternatifi: Git push ile deploy, veritabanı, otomatik HTTPS, yedekleme ve 300'den fazla tek tıkla kurulan servis. SSH erişimi olan bir VPS yeterli; dashboard, API, CLI ve MCP ile yönetilir. Kurulum: ayrı uygulama. Uyarı: Önerilen kurulumda Coolify bir sunucuda, uygulamalar ayrı sunucularda çalışır; yönetilen Coolify Cloud ücretli.
+
+### İzleme ve analitik
+
+- [prometheus/prometheus](https://github.com/prometheus/prometheus): Hedeflerden belirli aralıklarla metrik toplayan izleme sistemi ve zaman serisi veritabanı; PromQL ile sorgular, koşul sağlanınca alarm tetikler. Kurulum: ayrı uygulama.
+- [umami-software/umami](https://github.com/umami-software/umami): Çerez kullanmayan, gizlilik odaklı web analitiği; trafik, kampanya, dönüşüm ve gelir tek panelde, kendi sunucunda veya bulutta. Kurulum: ayrı uygulama. Uyarı: PostgreSQL ister; kurulumda oluşan admin/umami girişinin şifresini hemen değiştir.
+- [grafana/grafana](https://github.com/grafana/grafana): Metrik, log ve trace verilerini (Prometheus, Loki, Postgres...) panolarda görselleştirir; tanımlanan kural aşılınca Slack, PagerDuty gibi kanallara alarm gönderir. Kurulum: ayrı uygulama. Uyarı: AGPL-3.0-only: değiştirip ağ üzerinden hizmet olarak sunarsan kaynak kodunu paylaşman gerekir; bazı parçalar için Apache-2.0 istisnaları LICENSING.md'de.
+- [openreplay/openreplay](https://github.com/openreplay/openreplay): Kendi sunucunda çalışan oturum kaydı (session replay), ürün analitiği ve canlı ortak tarama; hatayı kullanıcının gördüğü haliyle, konsol ve ağ kayıtlarıyla izlersin. Kurulum: ayrı uygulama. Uyarı: Çekirdek AGPLv3, tracker SDK'ları MIT, ee/ klasörü ticari Enterprise lisansı; en az 2 vCPU, 8 GB RAM, 50 GB disk ister. Kullanıcı oturumlarını kaydeder: girdileri maskele, KVKK aydınlatmasını ekle.
+
+## 📣 İçerik, SEO & pazarlama
+
+AI yazısını doğallaştırma, SEO ve App Store optimizasyonu, pazarlama ve sosyal medya.
+
+### AI yazısını temizleme
+
+- [petergyang/no-ai-slop](https://github.com/petergyang/no-ai-slop): Metindeki 20'den fazla tipik AI yazım kalıbını temizler, senin üslubunu korur. Kurulum: Claude Code'a kurulur, Codex'e kurulur.
+- [blader/humanizer](https://github.com/blader/humanizer): Metindeki AI yazısı izlerini bulup anlamı değiştirmeden insan yazmış gibi yeniden yazar; kendi yazından örnek verirsen üslubuna uyar. No AI Slop ile aynı işi görür. Kurulum: Claude Code'a kurulur, Codex'e kurulur.
+- [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop): Metindeki AI yazım kalıplarını (klişe girişler, gereksiz zarflar, "X değil, Y" karşıtlıkları) yakalayıp temizleyen skill. No AI Slop ve Humanizer ile aynı işi görür. Kurulum: Claude Code'a kurulur, Codex'e kurulur.
+
+### SEO ve ASO
+
+- [every-app/open-seo](https://github.com/every-app/open-seo): Semrush/Ahrefs'e açık kaynak alternatif: anahtar kelime, sıralama takibi, rakip analizi, backlink, site denetimi. MCP sunucusu var. Kurulum: ayrı uygulama. Uyarı: Her sorgu DataForSEO'ya ücretli.
+- [Kronop/vibe-aso](https://github.com/Kronop/vibe-aso): iOS uygulamasını App Store'a hazırlayan skill: anahtar kelime araştırması, 50 dile kadar mağaza metni, yerelleştirilmiş ekran görüntüleri, ülke bazlı fiyatlandırma ve uygulama içi çeviri. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: Çok erken aşama (3 commit). App Manager rolünde App Store Connect API anahtarı ister, mağaza kaydını ve fiyatları doğrudan değiştirir; yalnız macOS.
+
+### Pazarlama ve sosyal medya
+
+- [gitroomhq/postiz-app](https://github.com/gitroomhq/postiz-app): Instagram, YouTube, LinkedIn, X, TikTok, Bluesky gibi platformlara gönderi zamanlayan, analiz ve ekip çalışması sunan sosyal medya yönetim aracı. Kendi sunucunda barındırılabilir; API, MCP ve CLI ile yapay zekâ ajanlarından kullanılabilir. Kurulum: ayrı uygulama. Uyarı: AGPL-3.0. Kendi sunucunda her platform için kendi geliştirici uygulamanı açıp onay alman gerekir (Meta, YouTube, TikTok haftalar sürebilir); AI özellikleri kendi API anahtarını ister, bulut sürümü ücretli abonelik.
+- [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills): Pazarlama işleri için skill koleksiyonu: dönüşüm optimizasyonu, metin yazarlığı, SEO, analitik, reklam ve büyüme. Skill'ler önce ürün ve hedef kitle bilgisini tutan product-marketing skill'ini okur. Kurulum: Claude Code'a kurulur, Codex'e kurulur.
+
+## 🎬 Medya üretimi
+
+Video, ses ve konuşma üretimi ve düzenlemesi.
+
+### Video
+
+- [deepbeepmeep/Wan2GP](https://github.com/deepbeepmeep/Wan2GP): Zayıf ekran kartında bile çalışan AI video üretici (Wan, LTX, Hunyuan, Flux). Kurulum: ayrı uygulama.
+- [Anil-matcha/Open-Generative-AI](https://github.com/Anil-matcha/Open-Generative-AI): Görsel, video ve dudak senkronu üretimi için tek arayüz; yüzlerce model. Kurulum: ayrı uygulama. Uyarı: Bulut modelleri ücretli MuAPI servisi üzerinden çalışıyor.
+- [latent-spaces/brag](https://github.com/latent-spaces/brag): Yaptığın projeden tek komutla kısa bir tanıtım videosu çıkarır. Kurulum: Claude Code'a kurulur, Codex'e kurulur.
+- [getopenscreen/openscreen](https://github.com/getopenscreen/openscreen): Screen Studio'ya ücretsiz, açık kaynak alternatif masaüstü uygulaması: ekran ve ses kaydı, otomatik zoom, webcam, cihaz üstünde altyazı, MP4/GIF dışa aktarım. Windows, macOS ve Linux. Kurulum: ayrı uygulama. Uyarı: Asıl yazarın reposu (siddharthvaddem/openscreen) arşivlendi; geliştirme onun onayıyla aynı ad ve MIT lisansıyla bu repoda sürüyor.
+- [remotion-dev/remotion](https://github.com/remotion-dev/remotion): Videoyu React bileşenleri olarak kodlayıp render eden framework; render Node.js, AWS Lambda, Vercel veya tarayıcıda yapılabilir. Kodlama ajanlarıyla video üretmek için Agent Skills de sunar. Kurulum: projeye eklenir. Uyarı: Özel lisans: bireyler, en fazla 3 çalışanlı şirketler ve kâr amacı gütmeyenler için ücretsiz; daha büyük kâr amaçlı şirketler ücretli Company License almalı. Remotion 5.0'da sözleşmeli çalışanların da ekip sayısına katılması planlanıyor.
+
+### Ses ve konuşma
+
+- [abus-aikorea/voice-pro](https://github.com/abus-aikorea/voice-pro): Metni sese çevirme, ses klonlama ve Whisper ile konuşmayı yazıya dökme arayüzü. Kurulum: ayrı uygulama.
+- [SessionLoops/PitchNet](https://github.com/SessionLoops/PitchNet): Vokal perdesini piyano rulosunda düzelten bağımsız uygulama ve ses eklentisi (VST3/AU, isteğe bağlı AAX, ARA desteği). Perdeyi FCPE/RMVPE sinir ağlarıyla bulur, düzenlemeyi nöral vocoder ile yeniden sentezleyip anında dinletir; WAV ve MIDI dışa aktarır. Kurulum: ayrı uygulama. Uyarı: AGPL-3.0; HachiTune'dan türetilmiş, sürüm 0.6 ile erken aşamada. 'Ücretsiz Melodyne alternatifi' kalitesi yazarın iddiası (sitede Melodyne ile ses karşılaştırması var).
+- [openai/whisper](https://github.com/openai/whisper): OpenAI'nin çok dilli konuşma tanıma modeli: sesi yazıya döker, İngilizceye çevirir ve dili tespit eder. Python paketi olarak kurulur, yanında whisper komut satırı aracı da gelir. Kurulum: projeye eklenir. Uyarı: Modele göre ~1 GB (tiny) ile ~10 GB (large) VRAM gerekir ve ffmpeg kurulu olmalı. Varsayılan turbo modeli çeviri yapmaz.
+
+## 📖 Öğrenme & listeler
+
+Sistem tasarımı ve Claude Code rehberleri, faydalı listeler ve veri setleri.
+
+### Rehberler ve notlar
+
+- [donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer): Büyük ölçekli sistem tasarımını öğreten kaynak: önbellek, yük dengeleme, veritabanı ölçekleme, kuyruklar ve tutarlılık; örnek tasarımlar ve Anki kartları. Kurulum: kaynak, kurulmaz.
+- [ByteByteGoHq/system-design-101](https://github.com/ByteByteGoHq/system-design-101): Sistem tasarımını görsellerle ve sade dille anlatır. Kurulum: kaynak, kurulmaz.
+- [CyC2018/CS-Notes](https://github.com/CyC2018/CS-Notes): Teknik mülakat notları: LeetCode, işletim sistemleri, ağlar. Kurulum: kaynak, kurulmaz. Uyarı: Proje Çince.
+- [shanraisshan/claude-code-best-practice](https://github.com/shanraisshan/claude-code-best-practice): Claude Code'un alt ajan, komut, skill, hook, MCP ve bellek özelliklerini örnek uygulamalarla anlatan rehber. Claude ekibinden ve topluluktan derlenmiş 83 ipucu içerir. Kurulum: kaynak, kurulmaz.
+
+### Listeler ve veri setleri
+
+- [BraveOPotato/FckSignups](https://github.com/BraveOPotato/FckSignups): Tarayıcıda çalışan ve üyelik istemeyen açık kaynak araçların listesi. Kurulum: kaynak, kurulmaz.
+- [selahattinunlu/harika-github-repolari](https://github.com/selahattinunlu/harika-github-repolari): Türkçe hazırlanmış faydalı GitHub repoları listesi. Kurulum: kaynak, kurulmaz.
+- [hasaneyldrm/exercises-dataset](https://github.com/hasaneyldrm/exercises-dataset): 1.324 egzersizlik fitness veri seti; animasyonlar ve 6 dilde açıklamalar. Kurulum: projeye eklenir.
+- [marcelscruz/public-apis](https://github.com/marcelscruz/public-apis): Kategorilere ayrılmış herkese açık API listesi (AI, hava durumu, finans, spor...); her API için kimlik doğrulama türü ve CORS desteği belirtilir. Kurulum: kaynak, kurulmaz. Uyarı: Çoğu API anahtar ister, bazılarında ticari kullanım kısıtı var (ör. Open-Meteo yalnızca ticari olmayan kullanım); koşulları tek tek kontrol et.
+- [ripienaar/free-for-dev](https://github.com/ripienaar/free-for-dev): Ücretsiz katmanı olan SaaS, PaaS ve IaaS hizmetlerinin listesi (hosting, veritabanı, e-posta, izleme, CI...). Yalnızca deneme sürümü değil, gerçek ücretsiz katman sunanlar alınır. Kurulum: kaynak, kurulmaz. Uyarı: Ücretsiz katman limitleri sık değişir; kullanmadan önce sağlayıcının güncel sayfasına bak.
+
+## 🧰 Günlük araçlar
+
+Geliştirme dışı günlük işler: dosya dönüştürme, finans, kişisel verimlilik.
+
+### Dosya ve belge dönüştürme
+
+- [jgm/pandoc](https://github.com/jgm/pandoc): Belge formatlarını birbirine çeviren evrensel dönüştürücü (Markdown, Word, PDF...). Kurulum: ayrı uygulama.
+- [C4illin/ConvertX](https://github.com/C4illin/ConvertX): Kendi sunucunda çalışan dosya dönüştürücü; 1000'den fazla format. Kurulum: ayrı uygulama.
+
+### Finans
+
+- [HKUDS/Vibe-Trading](https://github.com/HKUDS/Vibe-Trading): Kişisel alım-satım (trading) ajanı. Kurulum: ayrı uygulama.
+- [Fincept-Corporation/FinceptTerminal](https://github.com/Fincept-Corporation/FinceptTerminal): Piyasa analizi, yatırım araştırması ve ekonomik veri terminali. Kurulum: ayrı uygulama.
+- [we-promise/sure](https://github.com/we-promise/sure): Kişisel bütçe ve finans uygulaması. Kurulum: ayrı uygulama.
+
+### Kişisel ve verimlilik
+
+- [MadsLorentzen/ai-job-search](https://github.com/MadsLorentzen/ai-job-search): İş arama için Claude Code şablonu: ilan tarar, ilana özel CV ve ön yazı hazırlar, mülakata hazırlar. Kurulum: ayrı uygulama. Uyarı: İlan tarayıcıları Danimarka sitelerine göre yazılmış. Fork her zaman herkese açık olur ve kurulum kişisel bilgilerini (maaş beklentisi dahil) dosyalara yazar; README'nin önerdiği gibi gizli bir repo kullan.
+- [usekaneo/kaneo](https://github.com/usekaneo/kaneo): Sade, açık kaynak proje yönetim aracı. Kurulum: ayrı uygulama.
+- [Sonarr/Sonarr](https://github.com/Sonarr/Sonarr): Dizi indirmeyi otomatikleştiren araç (Usenet ve torrent). Kurulum: ayrı uygulama.
+- [antitree/nfc_canary](https://github.com/antitree/nfc_canary): Flipper Zero uygulaması: biri cebindeki kartı NFC ile okursa titreşimle uyarır. Kurulum: ayrı uygulama.

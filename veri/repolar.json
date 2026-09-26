@@ -2,50 +2,215 @@
   "syncedAt": "2026-09-26T11:35:32+00:00",
   "folders": [
     {
-      "id": "yayin",
-      "name": "🚀 Yayın Öncesi"
+      "id": "ajan-skill",
+      "name": "🧠 Ajan skill'leri ve çalışma yöntemi",
+      "kisa": "🧠 Ajan skill'leri",
+      "aciklama": "Kodlama ajanının nasıl çalıştığını değiştiren skill'ler: plan, kod ve inceleme akışları, bağlam ve token tasarrufu, skill koleksiyonları.",
+      "alt": [
+        {
+          "id": "yontem",
+          "name": "Çalışma yöntemi"
+        },
+        {
+          "id": "baglam",
+          "name": "Bağlam, bellek ve token"
+        },
+        {
+          "id": "koleksiyon",
+          "name": "Skill koleksiyonları ve eklentiler"
+        },
+        {
+          "id": "guven",
+          "name": "Skill güvenliği ve ölçüm"
+        }
+      ]
     },
     {
-      "id": "altyapi",
-      "name": "🏗️ Yayına alma & izleme"
+      "id": "ajan-erisim",
+      "name": "🌐 Ajana web, tarayıcı ve belge erişimi",
+      "kisa": "🌐 Ajan erişimi",
+      "aciklama": "Ajanın tarayıcıyı kullanması; web sayfalarını, videoları, belgeleri ve kod tabanını okuyabilmesi için araçlar.",
+      "alt": [
+        {
+          "id": "tarayici",
+          "name": "Tarayıcı ve uygulama kontrolü"
+        },
+        {
+          "id": "web",
+          "name": "Web, video ve sosyal medya okuma"
+        },
+        {
+          "id": "belge",
+          "name": "Belge ve doküman"
+        },
+        {
+          "id": "kod",
+          "name": "Kod tabanı haritası"
+        }
+      ]
+    },
+    {
+      "id": "ajan-yonetim",
+      "name": "🖥️ Ajan yönetimi, modeller ve RAG",
+      "kisa": "🖥️ Ajan yönetimi",
+      "aciklama": "Birden çok ajanı yöneten arayüzler, yerel model çalıştırma ve model yönlendirme, belgeyle sohbet (RAG).",
+      "alt": [
+        {
+          "id": "arayuz",
+          "name": "Ajan arayüzleri ve ekipler"
+        },
+        {
+          "id": "model",
+          "name": "Yerel model ve yönlendirme"
+        },
+        {
+          "id": "rag",
+          "name": "RAG ve belgeyle sohbet"
+        }
+      ]
     },
     {
       "id": "tasarim",
-      "name": "🎨 Tasarım & Arayüz"
+      "name": "🎨 Tasarım & arayüz",
+      "kisa": "🎨 Tasarım",
+      "aciklama": "Arayüz bileşenleri, animasyon kütüphaneleri, tasarım skill'leri, tasarım sistemi dosyaları ve diyagram araçları.",
+      "alt": [
+        {
+          "id": "bilesen",
+          "name": "Bileşen kütüphaneleri"
+        },
+        {
+          "id": "animasyon",
+          "name": "Animasyon"
+        },
+        {
+          "id": "skill",
+          "name": "Tasarım skill'leri"
+        },
+        {
+          "id": "sistem",
+          "name": "Tasarım sistemi ve Figma"
+        },
+        {
+          "id": "diyagram",
+          "name": "Diyagram ve sunum"
+        }
+      ]
     },
     {
-      "id": "skill",
-      "name": "🧩 Skill & Prompt"
+      "id": "kalite",
+      "name": "🔒 Güvenlik, test & kod kalitesi",
+      "kisa": "🔒 Güvenlik & test",
+      "aciklama": "Güvenlik taraması, uçtan uca ve yük testi, kod inceleme ve kullanılmayan kodu temizleme.",
+      "alt": [
+        {
+          "id": "guvenlik",
+          "name": "Güvenlik"
+        },
+        {
+          "id": "test",
+          "name": "Test"
+        },
+        {
+          "id": "inceleme",
+          "name": "Kod inceleme ve temizlik"
+        }
+      ]
     },
     {
-      "id": "ajan",
-      "name": "🤖 Ajan Araçları"
+      "id": "yayin",
+      "name": "🚀 Yayına alma & izleme",
+      "kisa": "🚀 Yayına alma",
+      "aciklama": "Kendi sunucuna deploy, mağaza yayınını otomatikleştirme, izleme ve analitik.",
+      "alt": [
+        {
+          "id": "deploy",
+          "name": "Deploy ve mağaza yayını"
+        },
+        {
+          "id": "izleme",
+          "name": "İzleme ve analitik"
+        }
+      ]
     },
     {
-      "id": "veri",
-      "name": "📚 AI Veri & RAG"
+      "id": "icerik",
+      "name": "📣 İçerik, SEO & pazarlama",
+      "kisa": "📣 İçerik & SEO",
+      "aciklama": "AI yazısını doğallaştırma, SEO ve App Store optimizasyonu, pazarlama ve sosyal medya.",
+      "alt": [
+        {
+          "id": "yazi",
+          "name": "AI yazısını temizleme"
+        },
+        {
+          "id": "seo",
+          "name": "SEO ve ASO"
+        },
+        {
+          "id": "pazarlama",
+          "name": "Pazarlama ve sosyal medya"
+        }
+      ]
     },
     {
       "id": "medya",
-      "name": "🎬 Medya Üretimi"
-    },
-    {
-      "id": "finans",
-      "name": "💰 Finans"
-    },
-    {
-      "id": "arac",
-      "name": "🛠️ Araçlar"
+      "name": "🎬 Medya üretimi",
+      "kisa": "🎬 Medya",
+      "aciklama": "Video, ses ve konuşma üretimi ve düzenlemesi.",
+      "alt": [
+        {
+          "id": "video",
+          "name": "Video"
+        },
+        {
+          "id": "ses",
+          "name": "Ses ve konuşma"
+        }
+      ]
     },
     {
       "id": "ogrenme",
-      "name": "📖 Öğrenme"
+      "name": "📖 Öğrenme & listeler",
+      "kisa": "📖 Öğrenme",
+      "aciklama": "Sistem tasarımı ve Claude Code rehberleri, faydalı listeler ve veri setleri.",
+      "alt": [
+        {
+          "id": "rehber",
+          "name": "Rehberler ve notlar"
+        },
+        {
+          "id": "liste",
+          "name": "Listeler ve veri setleri"
+        }
+      ]
+    },
+    {
+      "id": "gunluk",
+      "name": "🧰 Günlük araçlar",
+      "kisa": "🧰 Günlük araçlar",
+      "aciklama": "Geliştirme dışı günlük işler: dosya dönüştürme, finans, kişisel verimlilik.",
+      "alt": [
+        {
+          "id": "belge",
+          "name": "Dosya ve belge dönüştürme"
+        },
+        {
+          "id": "finans",
+          "name": "Finans"
+        },
+        {
+          "id": "kisisel",
+          "name": "Kişisel ve verimlilik"
+        }
+      ]
     }
   ],
   "repos": [
     {
       "r": "multica-ai/andrej-karpathy-skills",
-      "f": "skill",
+      "f": "ajan-skill",
+      "af": "yontem",
       "k": "ajan",
       "a": [
         "claude",
@@ -66,7 +231,8 @@
     },
     {
       "r": "Panniantong/Agent-Reach",
-      "f": "ajan",
+      "f": "ajan-erisim",
+      "af": "web",
       "k": "ajan",
       "a": [
         "claude",
@@ -88,6 +254,7 @@
     {
       "r": "catdad/canvas-confetti",
       "f": "tasarim",
+      "af": "animasyon",
       "k": "proje",
       "tr": "Tarayıcıda tek fonksiyonla konfeti patlatan küçük kütüphane; parça sayısı, açı, renk ve şekil ayarlanır, canvas ile çizer. Ödeme ya da görev tamamlanınca ödül hissi vermek için kullanılır.",
       "d": "🎉 performant confetti animation in the browser",
@@ -104,7 +271,8 @@
     },
     {
       "r": "firecrawl/pdf-inspector",
-      "f": "veri",
+      "f": "ajan-erisim",
+      "af": "belge",
       "k": "proje",
       "tr": "PDF'in metin mi taranmış mı olduğunu milisaniyeler içinde anlar; metin PDF'lerini OCR'a göndermeden, tablo ve çok sütunlu düzeni koruyarak Markdown'a çevirir, sadece gereken sayfaları OCR'a yollar. Tamamen yerelde çalışır; Rust, Python, Node.js ve tarayıcı (WebAssembly) için.",
       "w": "",
@@ -121,7 +289,8 @@
     },
     {
       "r": "chaseai-yt/claudex-loop",
-      "f": "skill",
+      "f": "ajan-skill",
+      "af": "yontem",
       "k": "ajan",
       "a": [
         "claude",
@@ -142,7 +311,8 @@
     },
     {
       "r": "grafana/k6",
-      "f": "altyapi",
+      "f": "kalite",
+      "af": "test",
       "k": "uygulama",
       "tr": "API ve sitelerin yük testi: JavaScript ile yazılan senaryolarla binlerce sanal kullanıcı gönderip yanıt süresini ve hata oranını ölçer; yayından önce sistemin nerede yavaşladığını gösterir.",
       "w": "AGPL-3.0 lisanslı; kendi sistemini test etmek için kullanmak serbest.",
@@ -159,7 +329,8 @@
     },
     {
       "r": "OWASP/CheatSheetSeries",
-      "f": "yayin",
+      "f": "kalite",
+      "af": "guvenlik",
       "k": "kaynak",
       "tr": "OWASP'ın güvenlik rehberleri: kimlik doğrulama, oturum, şifre saklama, dosya yükleme, API güvenliği gibi konularda kısa ve uygulanabilir kurallar. Yayın öncesi güvenlik maddelerinin nasıl yapılacağına buradan bakılır.",
       "w": "",
@@ -177,6 +348,7 @@
     {
       "r": "donnemartin/system-design-primer",
       "f": "ogrenme",
+      "af": "rehber",
       "k": "kaynak",
       "tr": "Büyük ölçekli sistem tasarımını öğreten kaynak: önbellek, yük dengeleme, veritabanı ölçekleme, kuyruklar ve tutarlılık; örnek tasarımlar ve Anki kartları.",
       "w": "",
@@ -194,6 +366,7 @@
     {
       "r": "Jakubantalik/thinking-orbs",
       "f": "tasarim",
+      "af": "animasyon",
       "k": "proje",
       "tr": "AI ve ajan arayüzleri için noktalı \"düşünen küre\" yükleniyor animasyonları: dokuz durum (çalışıyor, arıyor, dinliyor...), iki boyut, açık/koyu temaya kendiliğinden uyar. Düz canvas ile çizer, hareketi azalt tercihinde sabit kare gösterir.",
       "d": "Dotted thought-orb loading indicators for AI & agent UIs, 9 tuned types, two sizes, auto dark/light",
@@ -210,7 +383,8 @@
     },
     {
       "r": "usestrix/strix",
-      "f": "yayin",
+      "f": "kalite",
+      "af": "guvenlik",
       "k": "uygulama",
       "tr": "Uygulamanı saldırgan gibi deneyen AI pentest ajanları. Bulduğu açığı çalışan bir örnekle doğrular, düzeltme önerir, rapor çıkarır.",
       "d": "Open-source AI penetration testing tool to find and fix your app’s vulnerabilities.",
@@ -227,7 +401,8 @@
     },
     {
       "r": "every-app/open-seo",
-      "f": "yayin",
+      "f": "icerik",
+      "af": "seo",
       "k": "uygulama",
       "tr": "Semrush/Ahrefs'e açık kaynak alternatif: anahtar kelime, sıralama takibi, rakip analizi, backlink, site denetimi. MCP sunucusu var.",
       "d": "Open source alternative to Semrush and Ahrefs",
@@ -244,7 +419,8 @@
     },
     {
       "r": "alibaba/open-code-review",
-      "f": "yayin",
+      "f": "kalite",
+      "af": "inceleme",
       "k": "uygulama",
       "tr": "Kural tabanlı kontrollerle bir LLM ajanını birleştiren kod inceleme aracı; satır satır yorum yazar.",
       "d": "Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible.",
@@ -259,6 +435,7 @@
     {
       "r": "nextlevelbuilder/ui-ux-pro-max-skill",
       "f": "tasarim",
+      "af": "skill",
       "k": "ajan",
       "a": [
         "claude",
@@ -277,6 +454,7 @@
     {
       "r": "pbakaus/impeccable",
       "f": "tasarim",
+      "af": "skill",
       "k": "ajan",
       "a": [
         "claude",
@@ -298,6 +476,7 @@
     {
       "r": "Leonxlnx/taste-skill",
       "f": "tasarim",
+      "af": "skill",
       "k": "ajan",
       "a": [
         "claude",
@@ -319,6 +498,7 @@
     {
       "r": "emilkowalski/skills",
       "f": "tasarim",
+      "af": "skill",
       "k": "ajan",
       "a": [
         "claude",
@@ -340,6 +520,7 @@
     {
       "r": "figma/mcp-server-guide",
       "f": "tasarim",
+      "af": "sistem",
       "k": "ajan",
       "a": [
         "claude",
@@ -361,6 +542,7 @@
     {
       "r": "anthropics/html-effectiveness",
       "f": "tasarim",
+      "af": "sistem",
       "k": "kaynak",
       "tr": "Anthropic'in etkili HTML çıktısı örnekleri.",
       "d": "HTML effectiveness examples",
@@ -374,7 +556,8 @@
     },
     {
       "r": "vercel-labs/skills",
-      "f": "skill",
+      "f": "ajan-skill",
+      "af": "koleksiyon",
       "k": "ajan",
       "a": [
         "claude",
@@ -395,7 +578,8 @@
     },
     {
       "r": "vercel-labs/agent-skills",
-      "f": "skill",
+      "f": "ajan-skill",
+      "af": "koleksiyon",
       "k": "ajan",
       "a": [
         "claude",
@@ -413,7 +597,8 @@
     },
     {
       "r": "vibeforge1111/vibeship-spawner-skills",
-      "f": "skill",
+      "f": "ajan-skill",
+      "af": "koleksiyon",
       "k": "ajan",
       "a": [
         "claude"
@@ -430,7 +615,8 @@
     },
     {
       "r": "petergyang/no-ai-slop",
-      "f": "skill",
+      "f": "icerik",
+      "af": "yazi",
       "k": "ajan",
       "a": [
         "claude",
@@ -451,7 +637,8 @@
     },
     {
       "r": "ayghri/i-have-adhd",
-      "f": "skill",
+      "f": "ajan-skill",
+      "af": "baglam",
       "k": "ajan",
       "a": [
         "claude",
@@ -472,7 +659,8 @@
     },
     {
       "r": "virgiliojr94/book-to-skill",
-      "f": "skill",
+      "f": "ajan-skill",
+      "af": "baglam",
       "k": "ajan",
       "a": [
         "claude",
@@ -493,7 +681,8 @@
     },
     {
       "r": "x1xhlol/system-prompts-and-models-of-ai-tools",
-      "f": "skill",
+      "f": "ajan-skill",
+      "af": "koleksiyon",
       "k": "kaynak",
       "tr": "Cursor, Claude Code, Devin, Lovable gibi araçların sistem prompt'larının toplandığı arşiv.",
       "d": "FULL Augment Code, Claude Code, Cluely, CodeBuddy, Comet, Cursor, Devin AI, Junie, Kiro, Leap.new, Lovable, Manus, NotionAI, Orchids.app, Perplexity, Poke, Qoder, Replit, Same.dev, Trae, Traycer AI, VSCode Agent, Warp.dev, Windsurf, Xcode, Z.ai Code, Dia & v0. (And other Open Sourced) System Prompts, Internal Tools & AI Models",
@@ -507,7 +696,8 @@
     },
     {
       "r": "davila7/claude-code-templates",
-      "f": "ajan",
+      "f": "ajan-skill",
+      "af": "koleksiyon",
       "k": "ajan",
       "a": [
         "claude"
@@ -524,7 +714,8 @@
     },
     {
       "r": "ZeframLou/call-me",
-      "f": "ajan",
+      "f": "ajan-skill",
+      "af": "koleksiyon",
       "k": "ajan",
       "a": [
         "claude"
@@ -541,7 +732,8 @@
     },
     {
       "r": "pingdotgg/t3code",
-      "f": "ajan",
+      "f": "ajan-yonetim",
+      "af": "arayuz",
       "k": "uygulama",
       "tr": "Kodlama ajanları için açık kaynak arayüz. Sunucuda çalışır, telefondan ya da tarayıcıdan bağlanırsın.",
       "d": "",
@@ -558,7 +750,8 @@
     },
     {
       "r": "vercel-labs/agent-browser",
-      "f": "ajan",
+      "f": "ajan-erisim",
+      "af": "tarayici",
       "k": "ajan",
       "a": [
         "claude",
@@ -579,7 +772,8 @@
     },
     {
       "r": "microsoft/playwright-mcp",
-      "f": "ajan",
+      "f": "ajan-erisim",
+      "af": "tarayici",
       "k": "ajan",
       "a": [
         "claude",
@@ -600,7 +794,8 @@
     },
     {
       "r": "diegosouzapw/OmniRoute",
-      "f": "ajan",
+      "f": "ajan-yonetim",
+      "af": "model",
       "k": "uygulama",
       "tr": "Yerel, OpenAI uyumlu AI ağ geçidi. İstekleri 350'den fazla sağlayıcıya dağıtır, kota bitince başkasına geçer.",
       "d": "Never stop coding. Free MIT AI gateway: one endpoint, 359 providers (150+ free), 1200+ models Kimi, Claude, GPT, Gemini, GLM, DeepSeek, MiniMax. Works with Claude Code, Codex, Cursor, OpenCode, Cline & Copilot. Quota-aware auto-fallback, RTK+Caveman compression saves 15-95% tokens, MCP/A2A, Desktop/PWA. Built by hundreds of contributors",
@@ -617,7 +812,8 @@
     },
     {
       "r": "EmpiricaAI/empirica",
-      "f": "ajan",
+      "f": "ajan-skill",
+      "af": "guven",
       "k": "ajan",
       "a": [
         "claude"
@@ -634,7 +830,8 @@
     },
     {
       "r": "microsoft/autogen",
-      "f": "ajan",
+      "f": "ajan-yonetim",
+      "af": "arayuz",
       "k": "proje",
       "tr": "Microsoft'un yapay zekâ ajanı geliştirme framework'ü.",
       "d": "A programming framework for agentic AI",
@@ -648,7 +845,8 @@
     },
     {
       "r": "MadsLorentzen/ai-job-search",
-      "f": "ajan",
+      "f": "gunluk",
+      "af": "kisisel",
       "k": "uygulama",
       "tr": "İş arama için Claude Code şablonu: ilan tarar, ilana özel CV ve ön yazı hazırlar, mülakata hazırlar.",
       "d": "The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor CVs, write cover letters, prep interviews. Fork it and own it.",
@@ -665,7 +863,8 @@
     },
     {
       "r": "unclecode/crawl4ai",
-      "f": "veri",
+      "f": "ajan-erisim",
+      "af": "web",
       "k": "proje",
       "tr": "Web sitelerini tarayıp LLM'in okuyacağı temiz Markdown'a çevirir.",
       "d": "Open-source web crawler and scraper for LLMs and AI agents: any website into clean, LLM-ready Markdown. Run it yourself, or use Crawl4AI Cloud with one key.",
@@ -679,7 +878,8 @@
     },
     {
       "r": "NirDiamant/RAG_Techniques",
-      "f": "veri",
+      "f": "ajan-yonetim",
+      "af": "rag",
       "k": "kaynak",
       "tr": "İleri RAG tekniklerini notebook'larla anlatan eğitim reposu.",
       "d": "This repository showcases various advanced techniques for Retrieval-Augmented Generation (RAG) systems. Each technique has a detailed notebook tutorial.",
@@ -693,7 +893,8 @@
     },
     {
       "r": "AlexsJones/llmfit",
-      "f": "veri",
+      "f": "ajan-yonetim",
+      "af": "model",
       "k": "uygulama",
       "tr": "Bilgisayarında hangi modelin çalışacağını tek komutla söyler.",
       "d": "Hundreds of models & providers. One command to find what runs on your hardware.",
@@ -707,7 +908,8 @@
     },
     {
       "r": "dataease/SQLBot",
-      "f": "veri",
+      "f": "ajan-yonetim",
+      "af": "rag",
       "k": "uygulama",
       "tr": "Doğal dille soru sor, SQL'i o yazsın; LLM ve RAG ile sohbetle veri analizi.",
       "d": "🔥 基于大模型和 RAG 的智能问数系统，对话式数据分析神器。Text-to-SQL Generation via LLMs using RAG.",
@@ -721,7 +923,8 @@
     },
     {
       "r": "lfnovo/open-notebook",
-      "f": "veri",
+      "f": "ajan-yonetim",
+      "af": "rag",
       "k": "uygulama",
       "tr": "Kendi sunucunda çalışan NotebookLM alternatifi: PDF, video ve web sayfalarıyla sohbet, podcast üretimi.",
       "d": "An Open Source implementation of Notebook LM with more flexibility and features",
@@ -739,6 +942,7 @@
     {
       "r": "deepbeepmeep/Wan2GP",
       "f": "medya",
+      "af": "video",
       "k": "uygulama",
       "tr": "Zayıf ekran kartında bile çalışan AI video üretici (Wan, LTX, Hunyuan, Flux).",
       "d": "A fast AI Video Generator for the GPU Poor. Supports Wan 2.1/2.2, LTX-2, Qwen Image, Hunyuan Video, LTX  Video and Flux.",
@@ -753,6 +957,7 @@
     {
       "r": "abus-aikorea/voice-pro",
       "f": "medya",
+      "af": "ses",
       "k": "uygulama",
       "tr": "Metni sese çevirme, ses klonlama ve Whisper ile konuşmayı yazıya dökme arayüzü.",
       "d": "Gradio WebUI for creators and developers, featuring key TTS (Edge-TTS, kokoro) and zero-shot Voice Cloning (E2 & F5-TTS, CosyVoice), with Whisper audio processing, YouTube download, Demucs vocal isolation, and multilingual translation.",
@@ -767,6 +972,7 @@
     {
       "r": "Anil-matcha/Open-Generative-AI",
       "f": "medya",
+      "af": "video",
       "k": "uygulama",
       "tr": "Görsel, video ve dudak senkronu üretimi için tek arayüz; yüzlerce model.",
       "d": "Unrestricted Open-source alternative to AI video platforms — Free AI image & video generation studio with 600+ models (Flux, Midjourney, Kling, Sora, Veo). No content filters. Self-hosted, MIT licensed.",
@@ -784,6 +990,7 @@
     {
       "r": "latent-spaces/brag",
       "f": "medya",
+      "af": "video",
       "k": "ajan",
       "a": [
         "claude",
@@ -801,7 +1008,8 @@
     },
     {
       "r": "HKUDS/Vibe-Trading",
-      "f": "finans",
+      "f": "gunluk",
+      "af": "finans",
       "k": "uygulama",
       "tr": "Kişisel alım-satım (trading) ajanı.",
       "d": "\"Vibe-Trading: Your Personal Trading Agent\"",
@@ -815,7 +1023,8 @@
     },
     {
       "r": "Fincept-Corporation/FinceptTerminal",
-      "f": "finans",
+      "f": "gunluk",
+      "af": "finans",
       "k": "uygulama",
       "tr": "Piyasa analizi, yatırım araştırması ve ekonomik veri terminali.",
       "d": "FinceptTerminal is a modern finance application offering advanced market analytics, investment research, and economic data tools, designed for interactive exploration and data-driven decision-making in a user-friendly environment.",
@@ -829,7 +1038,8 @@
     },
     {
       "r": "we-promise/sure",
-      "f": "finans",
+      "f": "gunluk",
+      "af": "finans",
       "k": "uygulama",
       "tr": "Kişisel bütçe ve finans uygulaması.",
       "d": "The personal finance app for everyone (by everyone)",
@@ -843,7 +1053,8 @@
     },
     {
       "r": "jgm/pandoc",
-      "f": "arac",
+      "f": "gunluk",
+      "af": "belge",
       "k": "uygulama",
       "tr": "Belge formatlarını birbirine çeviren evrensel dönüştürücü (Markdown, Word, PDF...).",
       "d": "Universal markup converter",
@@ -857,7 +1068,8 @@
     },
     {
       "r": "C4illin/ConvertX",
-      "f": "arac",
+      "f": "gunluk",
+      "af": "belge",
       "k": "uygulama",
       "tr": "Kendi sunucunda çalışan dosya dönüştürücü; 1000'den fazla format.",
       "d": "💾 Self-hosted online file converter. Supports 1000+ formats ⚙️",
@@ -871,7 +1083,8 @@
     },
     {
       "r": "usekaneo/kaneo",
-      "f": "arac",
+      "f": "gunluk",
+      "af": "kisisel",
       "k": "uygulama",
       "tr": "Sade, açık kaynak proje yönetim aracı.",
       "d": "🎯 All you need. Nothing you don't. Open source project management that works for you, not against you.",
@@ -885,7 +1098,8 @@
     },
     {
       "r": "BraveOPotato/FckSignups",
-      "f": "arac",
+      "f": "ogrenme",
+      "af": "liste",
       "k": "kaynak",
       "tr": "Tarayıcıda çalışan ve üyelik istemeyen açık kaynak araçların listesi.",
       "d": "A list of tools that are open-source, in-browser, and require no-signups!",
@@ -899,7 +1113,8 @@
     },
     {
       "r": "Sonarr/Sonarr",
-      "f": "arac",
+      "f": "gunluk",
+      "af": "kisisel",
       "k": "uygulama",
       "tr": "Dizi indirmeyi otomatikleştiren araç (Usenet ve torrent).",
       "d": "Smart PVR for newsgroup and bittorrent users.",
@@ -913,7 +1128,8 @@
     },
     {
       "r": "antitree/nfc_canary",
-      "f": "arac",
+      "f": "gunluk",
+      "af": "kisisel",
       "k": "uygulama",
       "tr": "Flipper Zero uygulaması: biri cebindeki kartı NFC ile okursa titreşimle uyarır.",
       "d": "Flipper Zero app: a canary for your pocket — detects when someone scans you over NFC and alerts you by vibration",
@@ -928,6 +1144,7 @@
     {
       "r": "ByteByteGoHq/system-design-101",
       "f": "ogrenme",
+      "af": "rehber",
       "k": "kaynak",
       "tr": "Sistem tasarımını görsellerle ve sade dille anlatır.",
       "d": "Explain complex systems using visuals and simple terms. Help you prepare for system design interviews.",
@@ -942,6 +1159,7 @@
     {
       "r": "CyC2018/CS-Notes",
       "f": "ogrenme",
+      "af": "rehber",
       "k": "kaynak",
       "tr": "Teknik mülakat notları: LeetCode, işletim sistemleri, ağlar.",
       "d": ":books: 技术面试必备基础知识、Leetcode、计算机操作系统、计算机网络、系统设计",
@@ -956,6 +1174,7 @@
     {
       "r": "selahattinunlu/harika-github-repolari",
       "f": "ogrenme",
+      "af": "liste",
       "k": "kaynak",
       "tr": "Türkçe hazırlanmış faydalı GitHub repoları listesi.",
       "d": "",
@@ -970,6 +1189,7 @@
     {
       "r": "hasaneyldrm/exercises-dataset",
       "f": "ogrenme",
+      "af": "liste",
       "k": "proje",
       "tr": "1.324 egzersizlik fitness veri seti; animasyonlar ve 6 dilde açıklamalar.",
       "d": "1,324-exercise fitness dataset — animation GIFs, 180×180 thumbnails, muscle-group & equipment data, and step-by-step instructions in 6 languages. The exercise data layer behind the LogPress app.",
@@ -983,7 +1203,8 @@
     },
     {
       "r": "blader/humanizer",
-      "f": "skill",
+      "f": "icerik",
+      "af": "yazi",
       "k": "ajan",
       "a": [
         "claude",
@@ -1001,7 +1222,8 @@
     },
     {
       "r": "JuliusBrussee/caveman",
-      "f": "skill",
+      "f": "ajan-skill",
+      "af": "baglam",
       "k": "ajan",
       "a": [
         "claude",
@@ -1020,6 +1242,7 @@
     {
       "r": "google-labs-code/design.md",
       "f": "tasarim",
+      "af": "sistem",
       "k": "proje",
       "tr": "Google'ın DESIGN.md biçimi: renk, yazı tipi, köşe ve boşluk değerlerini (YAML) ve tasarımın gerekçesini tek dosyada tanımlar; kodlama ajanları arayüzü bu dosyaya göre üretir.",
       "d": "A format specification for describing a visual identity to coding agents. DESIGN.md gives agents a persistent, structured understanding of a design system.",
@@ -1037,6 +1260,7 @@
     {
       "r": "VoltAgent/awesome-design-md",
       "f": "tasarim",
+      "af": "sistem",
       "k": "proje",
       "tr": "Tanınmış markaların tasarım sistemlerinden çıkarılmış hazır DESIGN.md dosyaları. Birini projene koyup ajana \"buna benzeyen bir sayfa yap\" dersin, arayüz o tasarım diline tutarlı çıkar.",
       "d": "A collection of DESIGN.md files analysis by popular brand design systems. Drop one into your project and let coding agents generate a matching UI.",
@@ -1053,7 +1277,8 @@
     },
     {
       "r": "hardikpandya/stop-slop",
-      "f": "skill",
+      "f": "icerik",
+      "af": "yazi",
       "k": "ajan",
       "a": [
         "claude",
@@ -1075,6 +1300,7 @@
     {
       "r": "cathrynlavery/diagram-design",
       "f": "tasarim",
+      "af": "diyagram",
       "k": "ajan",
       "a": [
         "claude",
@@ -1096,6 +1322,7 @@
     {
       "r": "zarazhangrui/frontend-slides",
       "f": "tasarim",
+      "af": "diyagram",
       "k": "ajan",
       "a": [
         "claude",
@@ -1116,7 +1343,8 @@
     },
     {
       "r": "Egonex-AI/Understand-Anything",
-      "f": "skill",
+      "f": "ajan-erisim",
+      "af": "kod",
       "k": "ajan",
       "a": [
         "claude",
@@ -1137,7 +1365,8 @@
     },
     {
       "r": "ruvnet/ruflo",
-      "f": "ajan",
+      "f": "ajan-skill",
+      "af": "yontem",
       "k": "ajan",
       "a": [
         "claude",
@@ -1158,7 +1387,8 @@
     },
     {
       "r": "NousResearch/hermes-agent",
-      "f": "ajan",
+      "f": "ajan-yonetim",
+      "af": "arayuz",
       "k": "uygulama",
       "tr": "Nous Research'ün kendini geliştiren AI ajanı: deneyimden skill üretip kullandıkça iyileştirir, geçmiş konuşmalarını arayıp seni oturumlar arasında hatırlar. Ucuz bir VPS'te çalışır, Telegram gibi kanallardan konuşulur; OpenRouter, OpenAI gibi istediğin modelle ya da `ollama launch hermes` ile Ollama'daki yerel modelle (ör. Qwen) çalışır. Masaüstü uygulaması (Hermes Desktop) da var.",
       "d": "The agent that grows with you",
@@ -1175,7 +1405,8 @@
     },
     {
       "r": "karpathy/llm-council",
-      "f": "ajan",
+      "f": "ajan-yonetim",
+      "af": "arayuz",
       "k": "uygulama",
       "tr": "Soruyu OpenRouter üzerinden birden çok modele sorar, modellere birbirlerinin cevaplarını isimsiz olarak puanlatır ve bir başkan modele son cevabı yazdırır. Andrej Karpathy'nin yerel web uygulaması.",
       "d": "LLM Council works together to answer your hardest questions",
@@ -1193,6 +1424,7 @@
     {
       "r": "SessionLoops/PitchNet",
       "f": "medya",
+      "af": "ses",
       "k": "uygulama",
       "tr": "Vokal perdesini piyano rulosunda düzelten bağımsız uygulama ve ses eklentisi (VST3/AU, isteğe bağlı AAX, ARA desteği). Perdeyi FCPE/RMVPE sinir ağlarıyla bulur, düzenlemeyi nöral vocoder ile yeniden sentezleyip anında dinletir; WAV ve MIDI dışa aktarır.",
       "d": "A lightweight pitch editor built with JUCE, featuring neural pitch detection and vocoder resynthesis for real-time preview.git",
@@ -1209,7 +1441,8 @@
     },
     {
       "r": "gitroomhq/postiz-app",
-      "f": "arac",
+      "f": "icerik",
+      "af": "pazarlama",
       "k": "uygulama",
       "tr": "Instagram, YouTube, LinkedIn, X, TikTok, Bluesky gibi platformlara gönderi zamanlayan, analiz ve ekip çalışması sunan sosyal medya yönetim aracı. Kendi sunucunda barındırılabilir; API, MCP ve CLI ile yapay zekâ ajanlarından kullanılabilir.",
       "d": "📨 The ultimate agentic social media scheduling tool 🤖",
@@ -1227,6 +1460,7 @@
     {
       "r": "getopenscreen/openscreen",
       "f": "medya",
+      "af": "video",
       "k": "uygulama",
       "tr": "Screen Studio'ya ücretsiz, açık kaynak alternatif masaüstü uygulaması: ekran ve ses kaydı, otomatik zoom, webcam, cihaz üstünde altyazı, MP4/GIF dışa aktarım. Windows, macOS ve Linux.",
       "d": "Record your screen, ship a demo. Free and open-source, GPU-accelerated, no watermarks, no subscriptions. Windows, macOS, Linux. Actively maintained.",
@@ -1244,6 +1478,7 @@
     {
       "r": "remotion-dev/remotion",
       "f": "medya",
+      "af": "video",
       "k": "proje",
       "tr": "Videoyu React bileşenleri olarak kodlayıp render eden framework; render Node.js, AWS Lambda, Vercel veya tarayıcıda yapılabilir. Kodlama ajanlarıyla video üretmek için Agent Skills de sunar.",
       "d": "🎥      Make videos programmatically with React",
@@ -1261,6 +1496,7 @@
     {
       "r": "openai/whisper",
       "f": "medya",
+      "af": "ses",
       "k": "proje",
       "tr": "OpenAI'nin çok dilli konuşma tanıma modeli: sesi yazıya döker, İngilizceye çevirir ve dili tespit eder. Python paketi olarak kurulur, yanında whisper komut satırı aracı da gelir.",
       "d": "Robust Speech Recognition via Large-Scale Weak Supervision",
@@ -1278,6 +1514,7 @@
     {
       "r": "AnmolSaini16/mapcn",
       "f": "tasarim",
+      "af": "bilesen",
       "k": "proje",
       "tr": "React için hazır harita bileşenleri: işaretçi, popup, rota ve zoom/pusula kontrolleri. MapLibre GL üzerine kurulu, Tailwind ile stillenir, shadcn/ui ile aynı yapıyı kullanır.",
       "d": "Beautiful map components. 100% Free, Zero config, one command setup.",
@@ -1295,6 +1532,7 @@
     {
       "r": "recharts/recharts",
       "f": "tasarim",
+      "af": "bilesen",
       "k": "proje",
       "tr": "React için bileşen tabanlı grafik kütüphanesi; D3 üzerine kurulu, SVG ile çizer. Eksen, tooltip, çizgi gibi parçalar ayrı React bileşenleri olarak birleştirilir.",
       "d": "Redefined chart library built with React and D3",
@@ -1312,6 +1550,7 @@
     {
       "r": "airbnb/lottie-web",
       "f": "tasarim",
+      "af": "animasyon",
       "k": "proje",
       "tr": "After Effects animasyonlarını Bodymovin eklentisiyle JSON olarak dışa aktarıp web'de SVG, canvas veya HTML ile oynatan JavaScript oynatıcı. Framework'e bağlı değil (düz JS); npm veya CDN ile eklenir.",
       "d": "Render After Effects animations natively on Web, Android and iOS, and React Native. http://airbnb.io/lottie/",
@@ -1329,6 +1568,7 @@
     {
       "r": "greensock/GSAP",
       "f": "tasarim",
+      "af": "animasyon",
       "k": "proje",
       "tr": "Framework'e bağlı olmayan, bağımlılıksız JavaScript animasyon kütüphanesi; düz JS, React, Vue, CSS, SVG, canvas ve WebGL ile çalışır. ScrollTrigger, SplitText, MorphSVG gibi eklentiler dahil; React için @gsap/react paketi (useGSAP) var.",
       "d": "GSAP (GreenSock Animation Platform), a JavaScript animation library for the modern web",
@@ -1346,6 +1586,7 @@
     {
       "r": "motiondivision/motion",
       "f": "tasarim",
+      "af": "animasyon",
       "k": "proje",
       "tr": "React, düz JavaScript ve Vue için animasyon kütüphanesi (Framer Motion'ın yeni adı). Yaylı animasyonlar, layout geçişleri, scroll'a bağlı efektler, zaman çizelgeleri ve dokunma/sürükleme hareketleri içerir.",
       "d": "A modern animation library for React and JavaScript",
@@ -1363,6 +1604,7 @@
     {
       "r": "tremorlabs/tremor",
       "f": "tasarim",
+      "af": "bilesen",
       "k": "proje",
       "tr": "Grafik ve dashboard için 35+ kopyala-yapıştır React bileşeni. Tailwind CSS ve Radix UI üzerine kurulu, grafikleri Recharts ile çizer.",
       "d": "Copy & Paste React components to build modern web applications. ",
@@ -1380,6 +1622,7 @@
     {
       "r": "saadeghi/daisyui",
       "f": "tasarim",
+      "af": "bilesen",
       "k": "proje",
       "tr": "Tailwind CSS'e eklenti olarak kurulan, hazır CSS sınıflarıyla kullanılan bileşen kütüphanesi. Framework'e bağlı değil: React, Vue, Svelte, Angular, Laravel, Django, Rails gibi Tailwind çalışan her projeye uyar.",
       "d": "🌼 🌼 🌼 🌼 🌼  The most popular, free and open-source Tailwind CSS component library",
@@ -1397,6 +1640,7 @@
     {
       "r": "DavidHDev/react-bits",
       "f": "tasarim",
+      "af": "bilesen",
       "k": "proje",
       "tr": "Metin animasyonu, arka plan, UI ve mikro etkileşim için 200+ animasyonlu React bileşeni; her biri JS/TS ve düz CSS/Tailwind olmak üzere 4 varyantla gelir. Vue ve Svelte için resmi portları ayrı sitelerde.",
       "d": "An open source collection of animated, interactive & fully customizable React components for building memorable websites.",
@@ -1414,6 +1658,7 @@
     {
       "r": "magicuidesign/magicui",
       "f": "tasarim",
+      "af": "bilesen",
       "k": "proje",
       "tr": "Landing page ve tanıtım sayfaları için animasyonlu, kopyala-yapıştır bileşenler. React ve Tailwind ile çalışır, animasyonların çoğu Motion kütüphanesiyle yapılır; kurulumu shadcn/ui ile aynıdır.",
       "d": "UI Library for Design Engineers. Animated components and effects you can copy and paste into your apps. Free. Open Source.",
@@ -1431,6 +1676,7 @@
     {
       "r": "shadcn-ui/ui",
       "f": "tasarim",
+      "af": "bilesen",
       "k": "proje",
       "tr": "Kodu doğrudan projeye kopyalanan, erişilebilir React bileşenleri; Tailwind CSS ile stillenir, altta Radix, Base UI veya React Aria kullanır. CLI ile eklenir; Next.js, Vite, Remix, Astro, TanStack ve Laravel için kurulum rehberi var.",
       "d": "Composable, accessible components with thoughtful defaults. Build your own component library with code you can customize, extend, and make your own.",
@@ -1447,7 +1693,8 @@
     },
     {
       "r": "ollama/ollama",
-      "f": "veri",
+      "f": "ajan-yonetim",
+      "af": "model",
       "k": "uygulama",
       "tr": "Açık modelleri (Gemma, Qwen, DeepSeek...) kendi bilgisayarında çalıştırır ve REST API sunar; `ollama launch` ile Claude Code, Codex, OpenCode ve Hermes gibi ajanları yerel modelle başlatır.",
       "d": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
@@ -1464,7 +1711,8 @@
     },
     {
       "r": "microsoft/markitdown",
-      "f": "veri",
+      "f": "ajan-erisim",
+      "af": "belge",
       "k": "proje",
       "tr": "PDF, Word, Excel, PowerPoint, HTML, görsel ve ses dosyalarını LLM'e verilecek Markdown'a çeviren Python aracı; başlık, liste, tablo gibi yapıyı korur.",
       "d": "Python tool for converting files and office documents to Markdown.",
@@ -1482,6 +1730,7 @@
     {
       "r": "marcelscruz/public-apis",
       "f": "ogrenme",
+      "af": "liste",
       "k": "kaynak",
       "tr": "Kategorilere ayrılmış herkese açık API listesi (AI, hava durumu, finans, spor...); her API için kimlik doğrulama türü ve CORS desteği belirtilir.",
       "d": "A collaborative list of public APIs for developers",
@@ -1499,6 +1748,7 @@
     {
       "r": "ripienaar/free-for-dev",
       "f": "ogrenme",
+      "af": "liste",
       "k": "kaynak",
       "tr": "Ücretsiz katmanı olan SaaS, PaaS ve IaaS hizmetlerinin listesi (hosting, veritabanı, e-posta, izleme, CI...). Yalnızca deneme sürümü değil, gerçek ücretsiz katman sunanlar alınır.",
       "d": "A list of SaaS, PaaS and IaaS offerings that have free tiers of interest to devops and infradev",
@@ -1515,7 +1765,8 @@
     },
     {
       "r": "prometheus/prometheus",
-      "f": "altyapi",
+      "f": "yayin",
+      "af": "izleme",
       "k": "uygulama",
       "tr": "Hedeflerden belirli aralıklarla metrik toplayan izleme sistemi ve zaman serisi veritabanı; PromQL ile sorgular, koşul sağlanınca alarm tetikler.",
       "d": "The Prometheus monitoring system and time series database.",
@@ -1532,7 +1783,8 @@
     },
     {
       "r": "umami-software/umami",
-      "f": "altyapi",
+      "f": "yayin",
+      "af": "izleme",
       "k": "uygulama",
       "tr": "Çerez kullanmayan, gizlilik odaklı web analitiği; trafik, kampanya, dönüşüm ve gelir tek panelde, kendi sunucunda veya bulutta.",
       "d": "Umami is a privacy-first analytics platform. Traffic, campaigns, behavior, conversions, and revenue in one place — no cookies, no surveillance, self-hosted or in the cloud.",
@@ -1549,7 +1801,8 @@
     },
     {
       "r": "grafana/grafana",
-      "f": "altyapi",
+      "f": "yayin",
+      "af": "izleme",
       "k": "uygulama",
       "tr": "Metrik, log ve trace verilerini (Prometheus, Loki, Postgres...) panolarda görselleştirir; tanımlanan kural aşılınca Slack, PagerDuty gibi kanallara alarm gönderir.",
       "d": "The open and composable observability and data visualization platform. Visualize metrics, logs, and traces from multiple sources like Prometheus, Loki, Elasticsearch, InfluxDB, Postgres and many more. ",
@@ -1566,7 +1819,8 @@
     },
     {
       "r": "openreplay/openreplay",
-      "f": "altyapi",
+      "f": "yayin",
+      "af": "izleme",
       "k": "uygulama",
       "tr": "Kendi sunucunda çalışan oturum kaydı (session replay), ürün analitiği ve canlı ortak tarama; hatayı kullanıcının gördüğü haliyle, konsol ve ağ kayıtlarıyla izlersin.",
       "d": "Session replay, cobrowsing and product analytics you can self-host. Best for reproducing issues and iterating on your product.",
@@ -1583,7 +1837,8 @@
     },
     {
       "r": "microsoft/playwright",
-      "f": "yayin",
+      "f": "kalite",
+      "af": "test",
       "k": "proje",
       "tr": "Chromium, Firefox ve WebKit'i tek API ile süren uçtan uca test çatısı; otomatik bekleme, paralel test ve hata anında trace/ekran görüntüsü kaydı.",
       "d": "Playwright is a framework for Web Testing and Automation. It allows testing Chromium, Firefox and WebKit with a single API. ",
@@ -1600,7 +1855,8 @@
     },
     {
       "r": "octopusreview/octopus",
-      "f": "yayin",
+      "f": "kalite",
+      "af": "inceleme",
       "k": "uygulama",
       "tr": "Pull request'lere AI kod incelemesi yapar: özet, önem derecesine göre sıralı bulgular ve önerilen düzeltmeler (GitHub, GitLab, Bitbucket, Forgejo). Bulut sürümü veya Docker Compose ile kendi sunucunda çalışır.",
       "d": "AI-powered PR review tool — multi-armed code analysis, no bug escapes 🐙",
@@ -1617,7 +1873,8 @@
     },
     {
       "r": "webpro-nl/knip",
-      "f": "yayin",
+      "f": "kalite",
+      "af": "inceleme",
       "k": "proje",
       "tr": "JavaScript/TypeScript projelerinde kullanılmayan dosya, bağımlılık ve export'ları bulup temizler; yayın öncesi ölü kodu atmak için.",
       "d": "✂️  Find unused files, dependencies and exports in your JavaScript and TypeScript projects. Knip it before you ship it!",
@@ -1634,7 +1891,8 @@
     },
     {
       "r": "google/osv-scanner",
-      "f": "yayin",
+      "f": "kalite",
+      "af": "guvenlik",
       "k": "uygulama",
       "tr": "Projenin bağımlılıklarını (npm, pip, go, cargo...) ve container imajlarını OSV.dev veritabanına karşı tarayıp bilinen güvenlik açıklarını bulur; lisans kontrolü ve sürüm yükseltme önerisi de yapar.",
       "d": "Vulnerability scanner written in Go which uses the data provided by https://osv.dev",
@@ -1651,7 +1909,8 @@
     },
     {
       "r": "fastlane/fastlane",
-      "f": "altyapi",
+      "f": "yayin",
+      "af": "deploy",
       "k": "proje",
       "tr": "iOS ve Android uygulamalarında ekran görüntüsü üretme, provisioning profile yönetimi ve mağazaya yayınlama gibi işleri otomatikleştirir. Proje içindeki Fastfile ile tanımlanır.",
       "d": "🚀 The easiest way to automate building and releasing your iOS and Android apps",
@@ -1668,7 +1927,8 @@
     },
     {
       "r": "Dokploy/dokploy",
-      "f": "altyapi",
+      "f": "yayin",
+      "af": "deploy",
       "k": "uygulama",
       "tr": "Kendi VPS'inde çalışan Vercel/Heroku/Netlify alternatifi PaaS: uygulama ve veritabanı deploy, Docker Compose, otomatik yedek, Traefik ile yönlendirme ve kaynak izleme.",
       "d": "Open Source Alternative to Vercel, Netlify and Heroku.",
@@ -1685,7 +1945,8 @@
     },
     {
       "r": "coollabsio/coolify",
-      "f": "altyapi",
+      "f": "yayin",
+      "af": "deploy",
       "k": "uygulama",
       "tr": "Kendi sunucunda çalışan Vercel/Heroku/Netlify alternatifi: Git push ile deploy, veritabanı, otomatik HTTPS, yedekleme ve 300'den fazla tek tıkla kurulan servis. SSH erişimi olan bir VPS yeterli; dashboard, API, CLI ve MCP ile yönetilir.",
       "d": "An open-source, self-hostable PaaS alternative to Vercel, Heroku & Netlify that lets you easily deploy static sites, databases, full-stack applications and 280+ one-click services on your own servers.",
@@ -1702,7 +1963,8 @@
     },
     {
       "r": "NVIDIA/SkillSpector",
-      "f": "skill",
+      "f": "ajan-skill",
+      "af": "guven",
       "k": "uygulama",
       "tr": "Agent skill'lerini kurmadan önce güvenlik açısından tarar: prompt injection, veri sızdırma, tedarik zinciri gibi 17 kategoride 71 kalıp arar. Statik analiz ve isteğe bağlı LLM değerlendirmesiyle 0-100 risk puanı verir; MCP olarak ajana da eklenebilir.",
       "d": "Security scanner for AI agent skills. Detect vulnerabilities, malicious patterns, security risks, prompt injection, data exfiltration, and supply-chain risks in Claude Code, Codex, and MCP skills before you install them.",
@@ -1719,7 +1981,8 @@
     },
     {
       "r": "google/artemis",
-      "f": "yayin",
+      "f": "kalite",
+      "af": "test",
       "k": "ajan",
       "a": [
         "claude",
@@ -1741,6 +2004,7 @@
     {
       "r": "shanraisshan/claude-code-best-practice",
       "f": "ogrenme",
+      "af": "rehber",
       "k": "kaynak",
       "tr": "Claude Code'un alt ajan, komut, skill, hook, MCP ve bellek özelliklerini örnek uygulamalarla anlatan rehber. Claude ekibinden ve topluluktan derlenmiş 83 ipucu içerir.",
       "d": "from vibe coding to agentic engineering - practice makes claude perfect",
@@ -1758,6 +2022,7 @@
     {
       "r": "nexu-io/open-design",
       "f": "tasarim",
+      "af": "sistem",
       "k": "uygulama",
       "tr": "Claude Design'ın açık kaynak alternatifi olan masaüstü uygulaması: bilgisayardaki kodlama ajanını (Claude Code, Codex vb.) kullanarak prototip, landing page, sunum, görsel ve video üretir; HTML/PDF/PPTX/MP4 olarak dışa aktarır.",
       "d": "🎨 Best DeepSeek Harness Design Plugin. The open-source Claude Design alternative. 🖥️ Local-first desktop app. 🖼️ Your coding agent becomes the design engine: prototypes, landing pages, dashboards, slides, images & video — real files, HTML/PDF/PPTX/MP4 export. 🤖 Claude Code / Codex / Cursor / DeepSeek Harness / OpenCode & 20+ CLIs via BYOK.",
@@ -1774,7 +2039,8 @@
     },
     {
       "r": "HKUDS/CLI-Anything",
-      "f": "ajan",
+      "f": "ajan-erisim",
+      "af": "tarayici",
       "k": "ajan",
       "a": [
         "claude",
@@ -1795,7 +2061,8 @@
     },
     {
       "r": "BloopAI/vibe-kanban",
-      "f": "ajan",
+      "f": "ajan-yonetim",
+      "af": "arayuz",
       "k": "uygulama",
       "tr": "İşleri kanban panosunda planlayıp her görevi ayrı bir çalışma alanında (branch, terminal, dev sunucusu) Claude Code, Codex gibi ajanlara yaptırır. Diff'i inceleyip satır içi yorum bırakır, PR açarsın.",
       "d": "Get 10X more out of Claude Code, Codex or any coding agent",
@@ -1812,7 +2079,8 @@
     },
     {
       "r": "microsoft/Webwright",
-      "f": "ajan",
+      "f": "ajan-erisim",
+      "af": "tarayici",
       "k": "ajan",
       "a": [
         "claude",
@@ -1834,6 +2102,7 @@
     {
       "r": "wentong2022-arch/flowforge-skill",
       "f": "tasarim",
+      "af": "diyagram",
       "k": "ajan",
       "a": [
         "claude",
@@ -1854,7 +2123,8 @@
     },
     {
       "r": "Kronop/vibe-aso",
-      "f": "yayin",
+      "f": "icerik",
+      "af": "seo",
       "k": "ajan",
       "a": [
         "claude",
@@ -1875,7 +2145,8 @@
     },
     {
       "r": "bradautomates/claude-video",
-      "f": "ajan",
+      "f": "ajan-erisim",
+      "af": "web",
       "k": "ajan",
       "a": [
         "claude",
@@ -1896,7 +2167,8 @@
     },
     {
       "r": "mvanhorn/last30days-skill",
-      "f": "veri",
+      "f": "ajan-erisim",
+      "af": "web",
       "k": "ajan",
       "a": [
         "claude",
@@ -1917,7 +2189,8 @@
     },
     {
       "r": "Graphify-Labs/graphify",
-      "f": "veri",
+      "f": "ajan-erisim",
+      "af": "kod",
       "k": "ajan",
       "a": [
         "claude",
@@ -1938,7 +2211,8 @@
     },
     {
       "r": "mksglu/context-mode",
-      "f": "ajan",
+      "f": "ajan-skill",
+      "af": "baglam",
       "k": "ajan",
       "a": [
         "claude",
@@ -1959,7 +2233,8 @@
     },
     {
       "r": "composio-community/awesome-codex-skills",
-      "f": "skill",
+      "f": "ajan-skill",
+      "af": "koleksiyon",
       "k": "ajan",
       "a": [
         "codex"
@@ -1979,7 +2254,8 @@
     },
     {
       "r": "openai/codex-plugin-cc",
-      "f": "ajan",
+      "f": "ajan-skill",
+      "af": "yontem",
       "k": "ajan",
       "a": [
         "claude"
@@ -1999,7 +2275,8 @@
     },
     {
       "r": "msitarzewski/agency-agents",
-      "f": "skill",
+      "f": "ajan-skill",
+      "af": "yontem",
       "k": "ajan",
       "a": [
         "claude",
@@ -2020,7 +2297,8 @@
     },
     {
       "r": "coreyhaines31/marketingskills",
-      "f": "skill",
+      "f": "icerik",
+      "af": "pazarlama",
       "k": "ajan",
       "a": [
         "claude",
@@ -2041,7 +2319,8 @@
     },
     {
       "r": "addyosmani/agent-skills",
-      "f": "skill",
+      "f": "ajan-skill",
+      "af": "yontem",
       "k": "ajan",
       "a": [
         "claude",
@@ -2062,7 +2341,8 @@
     },
     {
       "r": "addyosmani/web-quality-skills",
-      "f": "yayin",
+      "f": "kalite",
+      "af": "test",
       "k": "ajan",
       "a": [
         "claude",
@@ -2083,7 +2363,8 @@
     },
     {
       "r": "garrytan/gstack",
-      "f": "skill",
+      "f": "ajan-skill",
+      "af": "yontem",
       "k": "ajan",
       "a": [
         "claude",
@@ -2104,7 +2385,8 @@
     },
     {
       "r": "open-gsd/gsd-core",
-      "f": "ajan",
+      "f": "ajan-skill",
+      "af": "yontem",
       "k": "ajan",
       "a": [
         "claude",
@@ -2125,7 +2407,8 @@
     },
     {
       "r": "obra/superpowers",
-      "f": "skill",
+      "f": "ajan-skill",
+      "af": "yontem",
       "k": "ajan",
       "a": [
         "claude",
@@ -2146,7 +2429,8 @@
     },
     {
       "r": "upstash/context7",
-      "f": "ajan",
+      "f": "ajan-erisim",
+      "af": "belge",
       "k": "ajan",
       "a": [
         "claude",
@@ -2167,7 +2451,8 @@
     },
     {
       "r": "thedotmack/claude-mem",
-      "f": "ajan",
+      "f": "ajan-skill",
+      "af": "baglam",
       "k": "ajan",
       "a": [
         "claude",
@@ -2188,7 +2473,8 @@
     },
     {
       "r": "paperclipai/paperclip",
-      "f": "ajan",
+      "f": "ajan-yonetim",
+      "af": "arayuz",
       "k": "uygulama",
       "tr": "Birden çok AI ajanını (Claude Code, Codex, Cursor, OpenClaw...) bir şirket gibi yöneten açık kaynak uygulama: hedef verirsin, ajanlara rol ve bütçe atarsın, işleri ve maliyeti tek panelden izlersin.",
       "d": "The open-source app everyone uses to manage agents at work",
