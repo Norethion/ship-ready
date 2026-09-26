@@ -70,7 +70,7 @@ Maddeler 25.09.2026'da Google Play politika merkezinden ve Play Console Yardım 
 - **Yeniden gönderme:** Sorunu düzelt ve uyumsuz sürümleri tüm test ve yayın kanallarında devre dışı bırak; eski sürüm bir kanalda kalırsa ret sürer.
 - **Hesaba etkisi:** Ret hesabın durumunu etkilemez ama askıya alma bir ihlal (strike) sayılır.
 - **Süre:** İnceleme normalde 7 güne kadar sürebilir.
-- **İlgili sekmeler:** Abonelik ve ödeme araçları [Gelir & analitik](gelir-analitik.md) sekmesinde; hesap silme ve abonelik şartları [yayın öncesi listesinin](yayin-oncesi-maddeler.md) 47. ve 84. maddelerinde.
+- **İlgili sekmeler:** Abonelik ve ödeme araçları [Gelir & analitik](gelir-analitik.md) sekmesinde; hesap silme ve abonelik şartları [yayın öncesi listesinin](yayin-oncesi-maddeler.md) 51. ve 88. maddelerinde.
 
 ## Yakında gelecekler
 

@@ -1,4 +1,4 @@
-# Yayına almadan önce: 91 benzersiz iş
+# Yayına almadan önce: 97 benzersiz iş
 
 <!-- sira: 1 -->
 <!-- liste: yayin-oncesi -->
@@ -52,7 +52,7 @@ Hukuki maddeler bilgilendirme amaçlıdır, hukuki tavsiye değildir; kendi duru
 31. Güvenlik başlıkları (CSP, X-Frame-Options, nosniff, Referrer-Policy, Permissions-Policy) <!-- id: yo-guvenlik-basliklari -->
 32. CORS'u whitelist ile kilitle <!-- id: yo-cors -->
 
-## Entegrasyon, ödeme, AI (9)
+## Entegrasyon, ödeme, AI (13)
 
 33. Webhook imzalarını doğrula (ödeme webhook'ları dahil) <!-- id: yo-webhook-imzasi -->
 34. Fiyatları sunucu tarafında belirle <!-- id: yo-fiyat-sunucuda -->
@@ -60,80 +60,86 @@ Hukuki maddeler bilgilendirme amaçlıdır, hukuki tavsiye değildir; kendi duru
 36. Uygulamadaki AI ajanına sadece gereken araç ve veriye erişim ver; silme, ödeme, e-posta gönderme gibi geri alınamaz işlemleri kullanıcı onayına bağla <!-- id: yo-ai-ajan-yetkisi -->
 37. AI kullanımına ve SMS, e-posta gibi maliyeti olan uç noktalara kullanıcı başına kota/tavan koy <!-- id: yo-maliyet-kotasi -->
 38. Harcama uyarısı (billing alert) kur <!-- id: yo-harcama-uyarisi -->
-39. AI çağrılarında değişmeyen kısmı (sistem prompt'u, araç tanımları, uzun doküman) başa koy ve prompt önbelleğini (prompt caching) aç; önbellekten okunan kısım çok daha ucuza gelir (Claude'da giriş fiyatının onda biri ya da daha azı), değişen kısım sona yazılsın <!-- id: yo-prompt-onbellegi -->
+39. AI çağrılarında değişmeyen kısmı (sistem prompt'u, araç tanımları, uzun doküman) başa koy ve prompt önbelleğini (prompt caching) aç; önbellekten okunan kısım çok daha ucuza gelir (Claude'da giriş fiyatının onda biri ya da daha azı), değişen kısım sona yazılsın; sık gelen aynı sorunun cevabını da anlamına göre önbellekten ver (semantic cache) <!-- id: yo-prompt-onbellegi -->
 40. Her isteği en pahalı modele gönderme: kolay istekleri küçük model karşılasın, emin olamadığında bir üst modele aktarsın (model cascade); aktarma eşiğini kendi test setinle ayarla <!-- id: yo-model-kademesi -->
-41. AI ajanının kayıt oluşturan işlemlerine (randevu, sipariş) idempotency key ver ki aynı mesaj iki kez gelince çift kayıt oluşmasın; "gelecek perşembe" gibi tarih ve saatleri model değil kod hesaplasın <!-- id: yo-ajan-kayit-guvencesi -->
+41. Modeli değiştirmeden önce yenisini gerçek isteklerin kopyasıyla arka planda çalıştır (shadow test) ve cevapları model adları gizli AI hakemlere karşılaştırt; açık farkla kazanmadıkça geçiş yapma <!-- id: yo-model-golge-testi -->
+42. Kodun işleyeceği AI cevaplarını (kategori, evet/hayır, alanlar) serbest metin yerine şemalı JSON olarak al (structured outputs) ve değerleri izin verilen listeye göre doğrula <!-- id: yo-ai-semali-cikti -->
+43. Belgelere dayanan AI cevaplarında (RAG) cevabın hangi belgeden geldiğini göster, belgede yoksa "bilmiyorum" dedirt; kullanıcının göremeyeceği belgeleri arama sorgusunun içinde süz, arama ve cevap kalitesini ayrı ölç <!-- id: yo-rag-kaynak-yetki -->
+44. LLM ve diğer dış API çağrılarına zaman aşımı koy; 429 ve 5xx hatasında hemen tekrar deneme, `Retry-After` başlığına uy, beklemeyi her denemede artırıp rastgele kaydır, deneme sayısını sınırla ve yoğun anlarda istekleri kuyruğa al <!-- id: yo-api-yeniden-deneme -->
+45. AI ajanının kayıt oluşturan işlemlerine (randevu, sipariş) idempotency key ver ki aynı mesaj iki kez gelince çift kayıt oluşmasın; "gelecek perşembe" gibi tarih ve saatleri model değil kod hesaplasın <!-- id: yo-ajan-kayit-guvencesi -->
 
 ## Operasyon & dayanıklılık (8)
 
-42. Hata mesajlarını kıs (stack trace/iç detay sızdırma) <!-- id: yo-hata-mesajlari -->
-43. Loglardan hassas veriyi temizle; log dosyaları ve log sayfaları herkese açık olmasın <!-- id: yo-log-hassas-veri -->
-44. Güvenlik olaylarını logla (audit trail) <!-- id: yo-guvenlik-logu -->
-45. Bağımlılıkları denetle (audit / otomatik güncelleme) <!-- id: yo-bagimlilik-denetimi -->
-46. Otomatik yedekleme kur + geri yükleme testi yap <!-- id: yo-yedekleme -->
-47. Hesap silme gerçekten silsin (kalıcı silme) <!-- id: yo-hesap-silme -->
-48. Saldırgan gibi test et (pentest / düşmanca inceleme) <!-- id: yo-pentest -->
-49. Sık okunan veriyi önbelleğe al: statik dosyalara uzun `Cache-Control` ver, herkese açık sayfaları CDN'de tut, sık sorguları Redis gibi bir önbellekte sakla; her okuma veritabanına gitmesin, veri değişince önbelleği temizle <!-- id: yo-onbellek-katmanlari -->
+46. Hata mesajlarını kıs (stack trace/iç detay sızdırma) <!-- id: yo-hata-mesajlari -->
+47. Loglardan hassas veriyi temizle; log dosyaları ve log sayfaları herkese açık olmasın <!-- id: yo-log-hassas-veri -->
+48. Güvenlik olaylarını logla (audit trail) <!-- id: yo-guvenlik-logu -->
+49. Bağımlılıkları denetle (audit / otomatik güncelleme) <!-- id: yo-bagimlilik-denetimi -->
+50. Otomatik yedekleme kur + geri yükleme testi yap <!-- id: yo-yedekleme -->
+51. Hesap silme gerçekten silsin (kalıcı silme) <!-- id: yo-hesap-silme -->
+52. Saldırgan gibi test et (pentest / düşmanca inceleme) <!-- id: yo-pentest -->
+53. Sık okunan veriyi önbelleğe al: statik dosyalara uzun `Cache-Control` ver, herkese açık sayfaları CDN'de tut, sık sorguları Redis gibi bir önbellekte sakla; her okuma veritabanına gitmesin, veri değişince önbelleği temizle <!-- id: yo-onbellek-katmanlari -->
 
 ## Tedarik zinciri & CI (3)
 
-50. Lock dosyasını (`package-lock.json`, `pnpm-lock.yaml`) commit'le, CI'da ve sunucuda lock'a sadık komutla kur (`npm ci`, `pnpm install --frozen-lockfile`); paket sürümleri kendiliğinden yükselmesin <!-- id: yo-lock-dosyasi -->
-51. Paketlerin kurulum script'lerini kapat (`npm config set ignore-scripts true`, pnpm'de sadece izin verdiğin paketler); kötü amaçlı bir paket kurulurken bilgisayarında ya da CI'da kod çalıştıramasın <!-- id: yo-kurulum-scriptleri -->
-52. Fork'tan gelen PR'ların kodunu secret'lara erişen iş akışında çalıştırma (GitHub Actions'ta `pull_request_target` ile PR kodunu checkout etme); CI secret'ları dışarıdan gelen koda açılmasın <!-- id: yo-fork-pr-secret -->
+54. Lock dosyasını (`package-lock.json`, `pnpm-lock.yaml`) commit'le, CI'da ve sunucuda lock'a sadık komutla kur (`npm ci`, `pnpm install --frozen-lockfile`); paket sürümleri kendiliğinden yükselmesin <!-- id: yo-lock-dosyasi -->
+55. Paketlerin kurulum script'lerini kapat (`npm config set ignore-scripts true`, pnpm'de sadece izin verdiğin paketler); kötü amaçlı bir paket kurulurken bilgisayarında ya da CI'da kod çalıştıramasın <!-- id: yo-kurulum-scriptleri -->
+56. Fork'tan gelen PR'ların kodunu secret'lara erişen iş akışında çalıştırma (GitHub Actions'ta `pull_request_target` ile PR kodunu checkout etme); CI secret'ları dışarıdan gelen koda açılmasın <!-- id: yo-fork-pr-secret -->
 
 ## Mobil uygulama (8)
 
-53. Uygulama paketine (APK, AAB, IPA) gizli anahtar koyma; paket açılıp okunabilir, istemcide sadece herkese açık anahtarlar kalsın (ör. Supabase anon key), gizli işlemler sunucudan geçsin <!-- id: yo-mobil-pakette-anahtar -->
-54. Oturum token'larını ve hassas veriyi iOS'ta Keychain'de, Android'de Keystore ile şifrelenmiş depoda sakla; AsyncStorage, SharedPreferences ya da UserDefaults'a düz metin yazma <!-- id: yo-mobil-guvenli-depolama -->
-55. Android'de uygulama verisinin yedeklenmesini kapat ya da hassas dosyaları yedekten çıkar (`android:allowBackup="false"`, `dataExtractionRules`); yedekten token ve veritabanı çıkarılamasın <!-- id: yo-android-yedekleme -->
-56. Firebase kullanıyorsan App Check'i aç ve zorunlu kıl (enforce); istekler sadece gerçek uygulamandan gelsin (iOS'ta App Attest, Android'de Play Integrity) <!-- id: yo-firebase-app-check -->
-57. Android sürümünde kod küçültme ve karartmayı aç (R8, `isMinifyEnabled = true`); tersine mühendisliği zorlaştırır ama gizli anahtarı korumaz <!-- id: yo-android-r8 -->
-58. Deep link'leri doğrula: Android App Links (`autoVerify`) ve iOS Universal Links kullan, linkten gelen parametrelere güvenme, giriş ya da ödeme gibi işlemleri sadece linkle tetikleme <!-- id: yo-deep-link -->
-59. Hassas API'lerde sertifika sabitlemeyi (certificate pinning) değerlendir; yedek anahtar ve son kullanma tarihi koy, yoksa sertifika yenilenince uygulama sunucuya bağlanamaz <!-- id: yo-sertifika-sabitleme -->
-60. Sadece gerçekten kullandığın izinleri iste (kamera, konum, rehber, bildirim); kullanılmayan izin saldırı yüzeyini büyütür ve mağaza incelemesinde sorun çıkarır <!-- id: yo-mobil-izinler -->
+57. Uygulama paketine (APK, AAB, IPA) gizli anahtar koyma; paket açılıp okunabilir, istemcide sadece herkese açık anahtarlar kalsın (ör. Supabase anon key), gizli işlemler sunucudan geçsin <!-- id: yo-mobil-pakette-anahtar -->
+58. Oturum token'larını ve hassas veriyi iOS'ta Keychain'de, Android'de Keystore ile şifrelenmiş depoda sakla; AsyncStorage, SharedPreferences ya da UserDefaults'a düz metin yazma <!-- id: yo-mobil-guvenli-depolama -->
+59. Android'de uygulama verisinin yedeklenmesini kapat ya da hassas dosyaları yedekten çıkar (`android:allowBackup="false"`, `dataExtractionRules`); yedekten token ve veritabanı çıkarılamasın <!-- id: yo-android-yedekleme -->
+60. Firebase kullanıyorsan App Check'i aç ve zorunlu kıl (enforce); istekler sadece gerçek uygulamandan gelsin (iOS'ta App Attest, Android'de Play Integrity) <!-- id: yo-firebase-app-check -->
+61. Android sürümünde kod küçültme ve karartmayı aç (R8, `isMinifyEnabled = true`); tersine mühendisliği zorlaştırır ama gizli anahtarı korumaz <!-- id: yo-android-r8 -->
+62. Deep link'leri doğrula: Android App Links (`autoVerify`) ve iOS Universal Links kullan, linkten gelen parametrelere güvenme, giriş ya da ödeme gibi işlemleri sadece linkle tetikleme <!-- id: yo-deep-link -->
+63. Hassas API'lerde sertifika sabitlemeyi (certificate pinning) değerlendir; yedek anahtar ve son kullanma tarihi koy, yoksa sertifika yenilenince uygulama sunucuya bağlanamaz <!-- id: yo-sertifika-sabitleme -->
+64. Sadece gerçekten kullandığın izinleri iste (kamera, konum, rehber, bildirim); kullanılmayan izin saldırı yüzeyini büyütür ve mağaza incelemesinde sorun çıkarır <!-- id: yo-mobil-izinler -->
 
 ## SEO & teknik site (10)
 
-61. Özel 404 sayfası <!-- id: yo-404-sayfasi -->
-62. Benzersiz sayfa başlıkları <!-- id: yo-sayfa-basliklari -->
-63. Meta description'lar <!-- id: yo-meta-description -->
-64. Sosyal paylaşım görseli (OG/Twitter card) <!-- id: yo-og-gorseli -->
-65. robots.txt <!-- id: yo-robots-txt -->
-66. Yapısal veri / schema (local schema dahil) <!-- id: yo-yapisal-veri -->
-67. Breadcrumb'lar <!-- id: yo-breadcrumb -->
-68. İç linkler <!-- id: yo-ic-linkler -->
-69. Görsellerde alt text <!-- id: yo-alt-text -->
-70. Google Analytics <!-- id: yo-analitik -->
+65. Özel 404 sayfası <!-- id: yo-404-sayfasi -->
+66. Benzersiz sayfa başlıkları <!-- id: yo-sayfa-basliklari -->
+67. Meta description'lar <!-- id: yo-meta-description -->
+68. Sosyal paylaşım görseli (OG/Twitter card) <!-- id: yo-og-gorseli -->
+69. robots.txt <!-- id: yo-robots-txt -->
+70. Yapısal veri / schema (local schema dahil) <!-- id: yo-yapisal-veri -->
+71. Breadcrumb'lar <!-- id: yo-breadcrumb -->
+72. İç linkler <!-- id: yo-ic-linkler -->
+73. Görsellerde alt text <!-- id: yo-alt-text -->
+74. Google Analytics <!-- id: yo-analitik -->
 
 ## İçerik & dönüşüm (10)
 
-71. CTA'yı fold üstüne koy <!-- id: yo-cta-ust -->
-72. Mobilde sticky CTA <!-- id: yo-sticky-cta -->
-73. Teşekkür (thank you) sayfası <!-- id: yo-tesekkur-sayfasi -->
-74. 5 soruluk SSS <!-- id: yo-sss -->
-75. Vaka çalışmaları <!-- id: yo-vaka-calismalari -->
-76. Gerçek kullanıcı yorumları <!-- id: yo-kullanici-yorumlari -->
-77. Yanıt süresi taahhüdü <!-- id: yo-yanit-suresi-taahhudu -->
-78. Harita + yol tarifi <!-- id: yo-harita-yol-tarifi -->
-79. Ekip fotoğrafı <!-- id: yo-ekip-fotografi -->
-80. Gizlilik politikası sayfası <!-- id: yo-gizlilik-politikasi -->
+75. CTA'yı fold üstüne koy <!-- id: yo-cta-ust -->
+76. Mobilde sticky CTA <!-- id: yo-sticky-cta -->
+77. Teşekkür (thank you) sayfası <!-- id: yo-tesekkur-sayfasi -->
+78. 5 soruluk SSS <!-- id: yo-sss -->
+79. Vaka çalışmaları <!-- id: yo-vaka-calismalari -->
+80. Gerçek kullanıcı yorumları <!-- id: yo-kullanici-yorumlari -->
+81. Yanıt süresi taahhüdü <!-- id: yo-yanit-suresi-taahhudu -->
+82. Harita + yol tarifi <!-- id: yo-harita-yol-tarifi -->
+83. Ekip fotoğrafı <!-- id: yo-ekip-fotografi -->
+84. Gizlilik politikası sayfası <!-- id: yo-gizlilik-politikasi -->
 
-## Hukuki & KVKK (6)
+## Hukuki & KVKK (8)
 
-81. Fontları (Google Fonts dahil) kendi sunucundan ver; ziyaretçinin IP adresi yurt dışına gitmesin (KVKK / GDPR) <!-- id: yo-yerel-fontlar -->
-82. Oturum kaydı ve ısı haritası araçlarında (Clarity vb.) form alanlarını maskele, çerez onayı olmadan başlatma, aydınlatma metninde belirt <!-- id: yo-oturum-kaydi-maskeleme -->
-83. Ticari e-posta ve SMS için önceden onay al, İYS'ye kayıt ol, her iletide ret (abonelikten çıkma) linki ve gönderenin kimliği olsun: tacirse ticaret unvanı ve MERSİS numarası, esnafsa adı soyadı ve T.C. kimlik numarası, ayrıca en az bir iletişim bilgisi (6563 sayılı Kanun, Ticari İletişim Yönetmeliği); ABD'ye gönderiyorsan posta adresi de şart (CAN-SPAM) <!-- id: yo-ticari-ileti -->
-84. Abonelik satılıyorsa yenileme şartlarını ve iptal yolunu abone ol butonunun yanında göster, iptal abone olmak kadar kolay olsun (6502 sayılı Kanun, Mesafeli Sözleşmeler Yönetmeliği) <!-- id: yo-abonelik-sartlari -->
-85. Kayıtta yaş sor ya da çocukların kaydını engelle; ABD'de 13 yaş altı çocukların verisini ebeveyn onayı olmadan toplamak COPPA ihlalidir ve ceza ihlal başınadır. Uygulama çocuklara yönelikse mağazaların çocuk kategorisi kurallarına da uy <!-- id: yo-yas-kontrolu -->
-86. Kullanıcılar görsel ya da dosya yüklüyorsa telif şikâyeti yolu kur: kaldırma talebi için iletişim adresi ve süreç yaz. ABD'li kullanıcıların varsa DMCA temsilcini ABD Telif Ofisi'ne kaydet (6 $); kayıt yoksa yüklenen içerikteki telif ihlalinden sen de sorumlu tutulabilirsin <!-- id: yo-telif-sikayeti -->
+85. Fontları (Google Fonts dahil) kendi sunucundan ver; ziyaretçinin IP adresi yurt dışına gitmesin (KVKK / GDPR) <!-- id: yo-yerel-fontlar -->
+86. Oturum kaydı ve ısı haritası araçlarında (Clarity vb.) form alanlarını maskele, çerez onayı olmadan başlatma, aydınlatma metninde belirt <!-- id: yo-oturum-kaydi-maskeleme -->
+87. Ticari e-posta ve SMS için önceden onay al, İYS'ye kayıt ol, her iletide ret (abonelikten çıkma) linki ve gönderenin kimliği olsun: tacirse ticaret unvanı ve MERSİS numarası, esnafsa adı soyadı ve T.C. kimlik numarası, ayrıca en az bir iletişim bilgisi (6563 sayılı Kanun, Ticari İletişim Yönetmeliği); ABD'ye gönderiyorsan posta adresi de şart (CAN-SPAM) <!-- id: yo-ticari-ileti -->
+88. Abonelik satılıyorsa yenileme şartlarını ve iptal yolunu abone ol butonunun yanında göster, iptal abone olmak kadar kolay olsun (6502 sayılı Kanun, Mesafeli Sözleşmeler Yönetmeliği) <!-- id: yo-abonelik-sartlari -->
+89. Kayıtta yaş sor ya da çocukların kaydını engelle; ABD'de 13 yaş altı çocukların verisini ebeveyn onayı olmadan toplamak COPPA ihlalidir ve ceza ihlal başınadır. Uygulama çocuklara yönelikse mağazaların çocuk kategorisi kurallarına da uy <!-- id: yo-yas-kontrolu -->
+90. Kullanıcılar görsel ya da dosya yüklüyorsa telif şikâyeti yolu kur: kaldırma talebi için iletişim adresi ve süreç yaz. ABD'li kullanıcıların varsa DMCA temsilcini ABD Telif Ofisi'ne kaydet (6 $); kayıt yoksa yüklenen içerikteki telif ihlalinden sen de sorumlu tutulabilirsin <!-- id: yo-telif-sikayeti -->
+91. Uygulama mağazası dışında (web'den) dijital ürün ya da abonelik satıyorsan vergiyi baştan kur: AB'deki tüketiciye ilk satıştan itibaren onun ülkesinin KDV'si (VAT) uygulanır, ABD'de birçok eyalet satış eşiğini geçince satış vergisi ister; bunu Paddle ya da Lemon Squeezy gibi satıcı olarak kayıtlı (merchant of record) bir ödeme sağlayıcısına bırak ya da Stripe Tax ile hesaplat <!-- id: yo-dijital-satis-vergisi -->
+92. AB'deki tüketiciye dijital içerik satıyorsan 14 günlük cayma hakkı vardır; erişimi hemen veriyorsan ödeme ekranında müşterinin açık onayını ve cayma hakkını kaybettiğini kabul ettiğini al <!-- id: yo-ab-cayma-hakki -->
 
 ## Alan adı, e-posta & indeksleme (3)
 
-87. Uygulamayı alt alan adında yayınla (`app.alanadi.com`), tanıtım sayfaları ana alan adında kalsın (`alanadi.com`); ikisi ayrı ekiplerce birbirini bozmadan değiştirilebilsin (DNS'te `app` için CNAME kaydı) <!-- id: yo-alt-alan-adi -->
-88. E-postaları ana alan adından değil ayrı alt alan adlarından gönder: uygulama e-postaları (fatura, kayıt, şifre sıfırlama) `mail.alanadi.com`, pazarlama e-postaları (bülten, kampanya) `news.alanadi.com`; her biri için SPF, DKIM ve DMARC kayıtlarını kur (ör. Resend), spam bildirimi ana alan adının itibarını düşürmesin <!-- id: yo-eposta-alt-alan -->
-89. Herkese açık sayfalar için `sitemap.xml` oluştur ve Google Search Console'da Dizin oluşturma > Site haritaları bölümünden gönder <!-- id: yo-sitemap -->
+93. Uygulamayı alt alan adında yayınla (`app.alanadi.com`), tanıtım sayfaları ana alan adında kalsın (`alanadi.com`); ikisi ayrı ekiplerce birbirini bozmadan değiştirilebilsin (DNS'te `app` için CNAME kaydı) <!-- id: yo-alt-alan-adi -->
+94. E-postaları ana alan adından değil ayrı alt alan adlarından gönder: uygulama e-postaları (fatura, kayıt, şifre sıfırlama) `mail.alanadi.com`, pazarlama e-postaları (bülten, kampanya) `news.alanadi.com`; her biri için SPF, DKIM ve DMARC kayıtlarını kur (ör. Resend), spam bildirimi ana alan adının itibarını düşürmesin <!-- id: yo-eposta-alt-alan -->
+95. Herkese açık sayfalar için `sitemap.xml` oluştur ve Google Search Console'da Dizin oluşturma > Site haritaları bölümünden gönder <!-- id: yo-sitemap -->
 
 ## Sürüm çıkarma & geri dönüş (2)
 
-90. Yeni sürümü canlıyı bozmadan yayına al ve sorun çıkarsa önceki sürüme dakikalar içinde dönebil (blue-green ya da sağlık kontrollü kesintisiz güncelleme; istersen önce trafiğin küçük bir kısmına aç ve hata oranını izleyerek artır: canary); geri dönüşü yayından önce bir kez dene <!-- id: yo-kesintisiz-surum -->
-91. Veritabanı değişikliklerini geriye uyumlu yap (genişlet-daralt): sütunu yeniden adlandırma ya da silme yerine önce yenisini ekle, iki yapıyı da okuyan kodu çıkar, veriyi taşı, eskisini sonraki sürümde kaldır; yoksa eski sürüme dönüş veritabanında kırılır <!-- id: yo-geriye-uyumlu-sema -->
+96. Yeni sürümü canlıyı bozmadan yayına al ve sorun çıkarsa önceki sürüme dakikalar içinde dönebil (blue-green ya da sağlık kontrollü kesintisiz güncelleme; istersen önce trafiğin küçük bir kısmına aç ve hata oranını izleyerek artır: canary); geri dönüşü yayından önce bir kez dene <!-- id: yo-kesintisiz-surum -->
+97. Veritabanı değişikliklerini geriye uyumlu yap (genişlet-daralt): sütunu yeniden adlandırma ya da silme yerine önce yenisini ekle, iki yapıyı da okuyan kodu çıkar, veriyi taşı, eskisini sonraki sürümde kaldır; yoksa eski sürüme dönüş veritabanında kırılır <!-- id: yo-geriye-uyumlu-sema -->

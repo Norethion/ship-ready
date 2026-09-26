@@ -21,6 +21,7 @@ Claude Code ile proje geliştirirken işe yarayan komutlar, MCP sunucuları, ski
 | `/voice` | Yazmak yerine konuşarak prompt verirsin: `Space`'i basılı tutup konuş ya da `/voice tap` ile dokunarak başlat. Türkçe için `/config`'te dili `tr` yap. claude.ai hesabıyla giriş ister; ses Anthropic'in sunucusunda yazıya dökülür, mesaj hakkından düşmez. |
 | `/chrome` | Claude Code'u Chrome'daki "Claude in Chrome" eklentisine bağlar (`claude --chrome` ile de açılır): senin oturumunla sayfaları açar, form doldurur, konsolu okur, GIF kaydeder. Pro, Max, Team ya da Enterprise planı ve `/login` ile giriş ister. |
 | `/agents` | Alt ajanlar (subagent) `.claude/agents/` (proje) ya da `~/.claude/agents/` (tüm projeler) altında Markdown dosyasıdır; Claude'a "şu işi yapan bir alt ajan oluştur" demen yeter, ana ajan işi uygun alt ajana devreder. |
+| `/output-style` | Claude'un cevap biçimini değiştirir: `Concise` sonucu ilk cümlede verir, giriş, anlatım ve özet kısmını atar (işi yine tam yapar, hata ve güvenlik uyarılarını kısaltmaz); `Explanatory` kodun yanına kısa açıklama ekler, `Learning` bazı kodları sana yazdırır, `Proactive` rutin kararlarda sormadan ilerler. `/output-style concise` ya da `/config` ile seçilir, bir sonraki mesajdan itibaren geçerli olur; tüm projeler için `~/.claude/settings.json`'a `"outputStyle": "Concise"` yazılır. |
 | `/fewer-permission-prompts` | Sık kullanılan salt okunur komutlar için izin listesi ekleyip onay sorularını azaltır. |
 
 ## MCP sunucuları

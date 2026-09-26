@@ -60,6 +60,7 @@ Beğendiğin bileşenin kodunu Claude'a verip "bunu kendi altyapıma çevir" dem
 | [Tremor](https://github.com/tremorlabs/tremor) | Grafik ve dashboard | Grafik ve dashboard için 35'ten fazla kopyala-yapıştır bileşen; grafikleri Recharts ile çizer. | React + Tailwind + Radix | Doğrudan kurulmaz; örnek alınır | Ücretsiz, Apache-2.0; Tremor Vercel'e katıldı, kodu Nisan 2025'ten beri güncellenmiyor |
 | [Motion](https://github.com/motiondivision/motion) | Animasyon | Framer Motion'ın yeni adı: yaylı animasyonlar, sayfa düzeni geçişleri, kaydırmaya bağlı efektler, sürükleme. Aceternity ve Magic UI bileşenleri bunu kullanır. | React, düz JavaScript, Vue | Web dışında kullanılmaz | Çekirdek ücretsiz, MIT; Motion+ ücretli |
 | [GSAP](https://github.com/greensock/GSAP) | Animasyon | Bağımlılıksız animasyon kütüphanesi; ScrollTrigger, SplitText, MorphSVG gibi eklentiler dahil, React için `useGSAP`. | Her web projesi: düz JS, React, Vue, SVG, canvas | Web dışında kullanılmaz | Tüm eklentiler dahil ücretsiz, ticari kullanım serbest; açık kaynak değil (GreenSock lisansı) |
+| [canvas-confetti](https://github.com/catdad/canvas-confetti) | Animasyon | Tek fonksiyonla konfeti patlatan küçük kütüphane: parça sayısı, açı, renk ve şekil ayarlanır, canvas ile çizer; hareketi azalt tercihine uyması için `disableForReducedMotion: true` verilir (varsayılan kapalı). Ödeme ya da görev tamamlanınca ödül hissi vermek için. | Her web projesi (npm ya da CDN) | Web dışında kullanılmaz | Ücretsiz, ISC |
 | [Lottie Web](https://github.com/airbnb/lottie-web) | Animasyon oynatıcı | After Effects'te yapılıp JSON'a aktarılan animasyonları web'de oynatır. | Her web projesi (düz JS, npm ya da CDN) | Mobil için Lottie'nin iOS ve Android kütüphaneleri ayrı | Ücretsiz, MIT; animasyonu üretmek için After Effects gerekir, bir yıldan uzun süredir güncellenmiyor |
 | [Recharts](https://github.com/recharts/recharts) | Grafik | Bileşen tabanlı grafik kütüphanesi; eksen, tooltip, çizgi gibi parçalar ayrı bileşen olarak birleştirilir, SVG ile çizer. | React | Doğrudan kurulmaz; örnek alınır | Ücretsiz, MIT |
 | [Thinking Orbs](https://github.com/Jakubantalik/thinking-orbs) | Yükleniyor göstergesi | AI ve ajan arayüzleri için noktalı "düşünen küre" animasyonları: çalışıyor, arıyor, çözüyor, dinliyor, bağlanıyor gibi dokuz durum, sohbet için 64 ve satır içi 20 piksellik iki boyut. Sayfanın açık ya da koyu temasına kendiliğinden uyar; düz 2D canvas ile çizer (WebGL yok), ekrandan çıkınca durur, hareketi azalt tercihinde sabit kare gösterir. | React (`npm install thinking-orbs`) | Doğrudan kurulmaz; örnek alınıp çevrilir | Ücretsiz, MIT |
@@ -67,8 +68,9 @@ Beğendiğin bileşenin kodunu Claude'a verip "bunu kendi altyapıma çevir" dem
 
 ## İlham siteleri
 
-Tasarıma başlarken ve takıldığında bakılan siteler; [bu gönderiden](https://www.instagram.com/p/DdRp-ZSCKeH/) alındı.
+Tasarıma başlarken ve takıldığında bakılan siteler; [bu gönderiden](https://www.instagram.com/p/DdRp-ZSCKeH/) ve hareket için [bu gönderiden](https://www.instagram.com/p/Ddd22v1CDlb/) alındı.
 Beğendiğin örneği kaydet ve neden beğendiğini not al; düzeni değil fikri al.
+Hareket (animasyon) sitelerinde örnekler durağan görsel değil çalışan hâliyle görünür; hissi not al, kendi versiyonunu yap.
 
 | İlham | Ne var | Ücret |
 |---|---|---|
@@ -77,6 +79,10 @@ Beğendiğin örneği kaydet ve neden beğendiğini not al; düzeni değil fikri
 | [Awwwards](https://www.awwwards.com/websites/) | Jürinin ödüllendirdiği siteler ve yıllar öncesine uzanan "günün sitesi" arşivi; kategori, teknoloji (React, Webflow, Three.js), yazı tipi ve etikete göre süzülür. | Gezinmek ücretsiz; kurslar ve Pro üyelik ücretli |
 | [Pinterest](https://www.pinterest.com) | "web design", "dashboard ui" gibi aramalarla geniş görsel arşiv; beğendiklerini panolara kaydedersin. | Ücretsiz |
 | [X](https://x.com) | Tasarımcı ve geliştiricilerin yeni işlerini paylaştığı akış; beğendiğin kişileri bir listede toplarsın. | Ücretsiz |
+| [Codrops](https://tympanus.net/codrops/) | Web animasyonu ve etkileşim deneyleri, kodu ve adım adım anlatımıyla (kaydırma efektleri, WebGL, metin animasyonları). | Ücretsiz |
+| [Design Spells](https://designspells.com) | Uygulama ve sitelerdeki küçük sihirli ayrıntılar: mikro etkileşimler, geçişler, gizli sürprizler (easter egg), 404 sayfaları, konfeti. | Ücretsiz |
+| [GSAP Showcase](https://gsap.com/showcase/) | GSAP ile yapılmış ödüllü sitelerin vitrini; animasyonun canlı sitede nasıl kullanıldığını gösterir. | Ücretsiz |
+| [Hoverstat.es](https://www.hoverstat.es) | Üzerine gelme efektleri, hareketli yazılar ve kaydırmaya tepki veren etkileşimleriyle seçilmiş siteler. | Ücretsiz |
 
 ## Tehlikeli işlemler
 
