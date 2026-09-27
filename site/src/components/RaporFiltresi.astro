@@ -1,0 +1,42 @@
+---
+// Rapor satırlarını durum simgesine göre tarayıcıda süzer; sayılar rapor özetiyle aynı kaynaktan gelir.
+interface Props {
+	sayilar: Record<'✅' | '⚠' | '❌' | '➖', number>;
+}
+const { sayilar } = Astro.props;
+const durumlar = ['✅', '⚠', '❌', '➖'] as const;
+const toplam = durumlar.reduce((n, durum) => n + sayilar[durum], 0);
+---
+
+<div class="rapor-filtre not-content" data-rapor-filtresi>
+	<span class="rapor-filtre-etiket">Durum</span>
+	<div class="rapor-filtre-dugmeler" role="group" aria-label="Rapor satırlarını duruma göre filtrele">
+		<button type="button" data-durum="" aria-pressed="true">Tümü <span>{toplam}</span></button>
+		{durumlar.map((durum) => <button type="button" data-durum={durum} aria-pressed="false">{durum} <span>{sayilar[durum]}</span></button>)}
+	</div>
+	<span class="rapor-filtre-sonuc" aria-live="polite">{toplam} madde</span>
+</div>
+
+<script>
+	const filtre = document.querySelector<HTMLElement>('[data-rapor-filtresi]');
+	const icerik = document.querySelector<HTMLElement>('[data-rapor-icerik]');
+	if (filtre && icerik) {
+		const dugmeler = [...filtre.querySelectorAll<HTMLButtonElement>('button[data-durum]')];
+		const satirlar = [...icerik.querySelectorAll<HTMLTableRowElement>('tbody tr')];
+		const sonuc = filtre.querySelector<HTMLElement>('.rapor-filtre-sonuc');
+
+		filtre.addEventListener('click', (event) => {
+			const dugme = (event.target as HTMLElement).closest<HTMLButtonElement>('button[data-durum]');
+			if (!dugme) return;
+			const durum = dugme.dataset.durum ?? '';
+			let gorunen = 0;
+			for (const satir of satirlar) {
+				const eslesiyor = !durum || satir.cells[2]?.textContent?.trim().startsWith(durum);
+				satir.hidden = !eslesiyor;
+				if (eslesiyor) gorunen++;
+			}
+			for (const secenek of dugmeler) secenek.setAttribute('aria-pressed', String(secenek === dugme));
+			if (sonuc) sonuc.textContent = durum ? `${gorunen} / ${satirlar.length} madde` : `${satirlar.length} madde`;
+		});
+	}
+</script>
