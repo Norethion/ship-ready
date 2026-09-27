@@ -857,6 +857,64 @@ a.kutucuk:hover {
 .rapor-ozet p {
 	margin: 0;
 }
+.rapor-filtre {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.5rem 0.75rem;
+	margin-top: 1rem;
+}
+.rapor-filtre-etiket {
+	font-weight: 600;
+}
+.rapor-filtre-dugmeler {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem;
+}
+.rapor-filtre-dugmeler button {
+	padding: 0.25rem 0.6rem;
+	border: 1px solid var(--sl-color-hairline);
+	border-radius: 999px;
+	background: var(--sl-color-bg-nav);
+	color: var(--sl-color-text);
+	cursor: pointer;
+}
+.rapor-filtre-dugmeler button:hover {
+	border-color: var(--sl-color-gray-3);
+}
+.rapor-filtre-dugmeler button[aria-pressed='true'] {
+	border-color: var(--sl-color-accent);
+	background: color-mix(in srgb, var(--sl-color-accent) 14%, transparent);
+	color: var(--sl-color-white);
+}
+.rapor-filtre-dugmeler button span,
+.rapor-filtre-sonuc {
+	font-variant-numeric: tabular-nums;
+}
+.rapor-filtre-sonuc {
+	color: var(--sl-color-gray-3);
+	font-size: var(--sl-text-sm);
+}
+.sl-markdown-content .rapor-icerik table {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+}
+.rapor-icerik :is(th, td):nth-child(1) {
+	width: 16%;
+	overflow-wrap: anywhere;
+}
+.rapor-icerik :is(th, td):nth-child(2) {
+	width: 31%;
+}
+.rapor-icerik :is(th, td):nth-child(3) {
+	width: 8rem;
+	white-space: nowrap;
+}
+.rapor-icerik :is(th, td):nth-child(4) {
+	width: auto;
+}
 .rapor-sayilar {
 	display: flex;
 	flex-wrap: wrap;

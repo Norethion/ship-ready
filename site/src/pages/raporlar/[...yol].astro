@@ -5,6 +5,7 @@ import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import { getEntry, render } from 'astro:content';
 import katalog from '../../data/katalog.json';
 import DenetimPrompt from '../../components/DenetimPrompt.astro';
+import RaporFiltresi from '../../components/RaporFiltresi.astro';
 import RaporOzeti from '../../components/RaporOzeti.astro';
 import Simge from '../../components/Simge.astro';
 import { YEREL, raporVerisi, tarih, type Rapor, type RaporGrubu } from '../../yerel';
@@ -96,6 +97,7 @@ const LISTELER = katalog.listeler.map((l) => ({ id: l.id, ad: l.baslik.split(':'
 		rapor && grup && (
 			<>
 				<RaporOzeti rapor={rapor} />
+				<RaporFiltresi sayilar={rapor.sayilar} />
 				{rapor.fark && (Object.keys(FARK) as (keyof typeof FARK)[]).some((k) => rapor.fark![k].length) && (
 					<div class="rapor-fark not-content">
 						{(Object.keys(FARK) as (keyof typeof FARK)[]).map((k) => {
@@ -119,7 +121,7 @@ const LISTELER = katalog.listeler.map((l) => ({ id: l.id, ad: l.baslik.split(':'
 						})}
 					</div>
 				)}
-				{icerik && <icerik.Content />}
+				{icerik && <div class="rapor-icerik" data-rapor-icerik><icerik.Content /></div>}
 			</>
 		)
 	}
