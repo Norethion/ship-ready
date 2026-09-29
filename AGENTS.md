@@ -46,4 +46,5 @@ Veritabanı ve tarayıcı testi bulunmaz.
 
 `main` üzerinden kısa ömürlü dalda çalış, `main` dalına PR aç ve PR'ı kimseye atama; `test` dalı yoktur.
 PR'ı sahibi normal merge commit ile birleştirir.
+Commit mesajları ve PR metinleri (başlık, açıklama, yorumlar) Türkçe yazılır.
 Commit ve push yalnızca sahibi istediğinde yapılır.
