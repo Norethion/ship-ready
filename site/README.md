@@ -1,7 +1,7 @@
 # ship-ready sitesi
 
-Bu klasör ship-ready'nin herkese açık sitesidir; Astro Starlight ile derlenir.
-İçerik elle yazılmaz: `python uygulama/guncelle.py` (ya da `python uygulama/site_uret.py`) `src/content/docs/`, `src/data/` ve `public/` altındaki dosyaları `icerik/` ve `veri/` klasörlerinden üretir.
+Bu klasör ship-ready'nin herkese açık site derlemesidir; Astro Starlight ile üretilir.
+İçerik elle yazılmaz: depo kökünden `python uygulama/guncelle.py` (ya da `python uygulama/site_uret.py`) çalıştırıldığında `src/content/docs/`, `src/data/` ve `public/` altındaki dosyalar `icerik/` ve `veri/` klasörlerinden üretilir.
 Kurallar üst klasördeki `AGENTS.md`'dedir.
 
 | Komut | Ne yapar |
