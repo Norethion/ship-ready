@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="yukseklik" content="420">
+<title>Ana yoldan uzak tut</title>
+<style>
+/* ── Ortak görsel dil: altı "tehlikeli işlem" örneğinde aynıdır ── */
+:root{
+  --zemin:#0e0f14;
+  --izgara:rgba(255,255,255,.035);
+  --yuzey:#17181f;
+  --yuzey-2:#20212a;
+  --cizgi:#2c2e39;
+  --metin:#eef0f5;
+  --soluk:#a0a3b0;
+  --kirmizi:#f26d6d;         /* yıkıcı işlem yazısı, halka */
+  --kirmizi-dolgu:#c9343c;   /* yıkıcı düğme zemini (beyaz yazıyla 5:1) */
+  --kirmizi-zemin:rgba(242,109,109,.12);
+  --yesil:#2fd3b5;           /* güvenli sonuç */
+  --yesil-dolgu:#22c4a8;
+  --yesil-zemin:rgba(47,211,181,.12);
+  --amber:#f2a93b;           /* bekleyen iş, uyarı */
+  --amber-zemin:rgba(242,169,59,.12);
+  --yaricap:12px;
+  --font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%}
+body{
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;justify-content:safe center;gap:14px;padding:12px;
+  font:14px/1.4 var(--font);color:var(--metin);-webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(90% 70% at 50% 45%,rgba(255,255,255,.045),transparent 70%),
+    linear-gradient(var(--izgara) 1px,transparent 1px) 0 0/24px 24px,
+    linear-gradient(90deg,var(--izgara) 1px,transparent 1px) 0 0/24px 24px,
+    var(--zemin);
+}
+.ikon{flex:none;width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ikon.kucuk{width:12px;height:12px;stroke-width:2.5}
+.kart{background:var(--yuzey);border:1px solid var(--cizgi);border-radius:var(--yaricap);box-shadow:0 12px 32px rgba(0,0,0,.35)}
+.rozet{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:999px;font-size:10.5px;font-weight:700;letter-spacing:.12em;white-space:nowrap;color:var(--soluk);background:var(--yuzey-2);border:1px solid var(--cizgi)}
+.rozet.kirmizi{color:var(--kirmizi);background:var(--kirmizi-zemin);border-color:rgba(242,109,109,.3)}
+.rozet.yesil{color:var(--yesil);background:var(--yesil-zemin);border-color:rgba(47,211,181,.3)}
+.rozet.amber{color:var(--amber);background:var(--amber-zemin);border-color:rgba(242,169,59,.3)}
+.dugme{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:34px;padding:0 14px;border-radius:8px;border:1px solid var(--cizgi);background:var(--yuzey-2);color:var(--metin);font:600 13px/1 var(--font);white-space:nowrap;cursor:pointer;transition:background-color .15s,border-color .15s,color .15s,transform .1s}
+.dugme:hover{background:#2a2c37}
+.dugme:active{transform:scale(.97)}
+.dugme.kucuk{height:30px;padding:0 11px;font-size:12.5px}
+.dugme.birincil{background:var(--metin);border-color:var(--metin);color:#111218}
+.dugme.birincil:hover{background:#fff}
+.dugme.tehlike{background:var(--kirmizi-dolgu);border-color:var(--kirmizi-dolgu);color:#fff}
+.dugme.tehlike:hover{background:#b52d35}
+.dugme.tehlike-cizgi{background:transparent;border-color:rgba(242,109,109,.45);color:var(--kirmizi)}
+.dugme.tehlike-cizgi:hover{background:var(--kirmizi-zemin)}
+.dugme.yesil{background:var(--yesil-dolgu);border-color:var(--yesil-dolgu);color:#04201b}
+.dugme.yesil:hover{background:var(--yesil)}
+.dugme:disabled{opacity:.45;cursor:not-allowed;transform:none}
+:focus-visible{outline:2px solid var(--yesil);outline-offset:2px}
+.baslik{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.baslik h1{margin:0;font-size:clamp(22px,5vw,30px);font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.not{margin:0;padding:7px 14px;border-radius:10px;font-size:13.5px;font-weight:700;text-align:center;color:var(--soluk);background:var(--yuzey-2);border:1px solid var(--cizgi)}
+.not.yesil{color:var(--yesil);background:var(--yesil-zemin);border-color:rgba(47,211,181,.25)}
+.gizli{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* Kart içindeki alçak çerçevede başlık ve alt not gizlenir; tam ekranda görünür */
+@media (max-height:479px){.vitrin{display:none!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* ── Bu örnek: iki pencere, dar ekranda alt alta ── */
+.karsilastir{width:100%;max-width:760px;display:grid;gap:8px}
+.orn{min-width:0;display:flex;flex-direction:column;gap:5px}
+.orn-ust{display:flex;align-items:center;justify-content:space-between;gap:8px}
+@media (min-width:560px){
+  .karsilastir{grid-template-columns:1fr 1fr;gap:16px}
+  .orn-ust{min-height:26px}   /* yan yana iken iki pencerenin ana yeri aynı hizada */
+}
+.dugme.tekrar{height:26px;padding:0 9px;font-size:12px}
+.pencere{position:relative;flex:1;display:flex;flex-direction:column;padding:11px 14px}
+.p-baslik{margin:0 0 2px;font-size:15px;font-weight:700}
+.p-metin{margin:0 0 8px;font-size:12.5px;color:var(--soluk)}
+.p-metin b{color:var(--metin)}
+.p-uzak{margin-bottom:6px}
+.p-alt{margin-top:auto;display:flex;justify-content:flex-end;gap:8px}
+.dugme.basildi{transform:scale(.94);box-shadow:0 0 0 4px rgba(255,255,255,.14)}
+
+/* Kör tıklayan imleç ve izi (yalnızca gösterim sırasında görünür) */
+.iz,.imlec{position:absolute;pointer-events:none;opacity:0;transition:opacity .2s}
+.iz{left:0;top:0;width:100%;height:100%;overflow:visible}
+.iz path{fill:none;stroke:rgba(255,255,255,.3);stroke-width:1.5;stroke-dasharray:3 5}
+.imlec{left:0;top:0;width:22px;height:22px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5))}
+.imlec path{fill:#fff;stroke:#111218;stroke-width:1.2;stroke-linejoin:round}
+.oynuyor .iz,.oynuyor .imlec{opacity:1}
+
+.sonuc{margin:0;min-height:24px;display:flex;align-items:center;padding:3px 10px;border-radius:8px;font-size:12px;font-weight:600;color:var(--soluk);background:var(--yuzey);border:1px solid var(--cizgi)}
+.sonuc:empty{visibility:hidden}
+.sonuc.kirmizi{color:var(--kirmizi);background:var(--kirmizi-zemin);border-color:rgba(242,109,109,.25)}
+.sonuc.yesil{color:var(--yesil);background:var(--yesil-zemin);border-color:rgba(47,211,181,.25)}
+</style>
+</head>
+<body>
+
+<header class="vitrin baslik">
+  <span class="rozet">KALIP 03 · YERLEŞİM</span>
+  <h1>Ana yoldan uzak tut</h1>
+</header>
+
+<main class="karsilastir">
+  <!-- Yanlış: sil, ana düğmenin yerinde -->
+  <section class="orn">
+    <div class="orn-ust">
+      <span class="rozet kirmizi">SİL ANA YERDE</span>
+      <button class="dugme tekrar" type="button" id="tekrar" aria-label="Gösterimi tekrar oynat">
+        <svg class="ikon kucuk" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Tekrar
+      </button>
+    </div>
+    <div class="kart pencere" role="group" aria-labelledby="b1">
+      <p class="p-baslik" id="b1">Düzenleyici kapatılsın mı?</p>
+      <p class="p-metin"><b>taslak-kapak.fig</b> kaydedilmedi.</p>
+      <div class="p-alt">
+        <button class="dugme" type="button" data-is="vazgec">Vazgeç</button>
+        <button class="dugme tehlike ana" type="button" data-is="sil">Taslağı sil</button>
+      </div>
+      <svg class="iz" aria-hidden="true"><path/></svg>
+      <svg class="imlec" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3v16l4.5-4.2 3 6.2 2.6-1.2-3-6.1H18z"/></svg>
+    </div>
+    <p class="sonuc" role="status"></p>
+  </section>
+
+  <!-- Doğru: ana yerde kaydet, sil ayrı ve uzakta -->
+  <section class="orn">
+    <div class="orn-ust"><span class="rozet yesil">SİL UZAKTA</span></div>
+    <div class="kart pencere" role="group" aria-labelledby="b2">
+      <p class="p-baslik" id="b2">Düzenleyici kapatılsın mı?</p>
+      <p class="p-metin"><b>taslak-kapak.fig</b> kaydedilmedi.</p>
+      <div class="p-uzak"><button class="dugme kucuk tehlike-cizgi" type="button" data-is="sil">Taslağı sil</button></div>
+      <div class="p-alt">
+        <button class="dugme" type="button" data-is="vazgec">Vazgeç</button>
+        <button class="dugme birincil ana" type="button" data-is="kaydet">Kaydet</button>
+      </div>
+      <svg class="iz" aria-hidden="true"><path/></svg>
+      <svg class="imlec" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3v16l4.5-4.2 3 6.2 2.6-1.2-3-6.1H18z"/></svg>
+    </div>
+    <p class="sonuc" role="status"></p>
+  </section>
+</main>
+
+<p class="vitrin not">Kas hafızası körlemesine tıklar.</p>
+
+<script>
+(function () {
+  var SURE = 1100;   // imlecin ana düğmeye varış süresi (ms)
+  var azHareket = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var pencereler = [].slice.call(document.querySelectorAll('.pencere'));
+  var animler = [], zamanlar = [];
+  var SONUC = {
+    sil: ['✕ Taslak silindi', 'kirmizi', ' — kör tıklama'],
+    kaydet: ['✓ Taslak kaydedildi', 'yesil', ' — aynı tıklama'],
+    vazgec: ['Düzenleyici açık kaldı', '', '']
+  };
+
+  function sonucYaz(dugme, gosterimde) {
+    var s = dugme.closest('.orn').querySelector('.sonuc'), m = SONUC[dugme.dataset.is];
+    s.textContent = m[0] + (gosterimde ? m[2] : '');
+    s.className = 'sonuc ' + m[1];
+  }
+
+  // İkinci dereceden eğri üzerinde bir nokta
+  function egri(a, k, b, t) { var u = 1 - t; return u * u * a + 2 * u * t * k + t * t * b; }
+
+  function durdur() {
+    zamanlar.forEach(clearTimeout);
+    zamanlar = [];
+    animler.forEach(function (a) { a.cancel(); });
+    animler = [];
+    pencereler.forEach(function (p) {
+      p.classList.remove('oynuyor');
+      p.querySelector('.ana').classList.remove('basildi');
+    });
+  }
+
+  // Aynı kör hareket iki pencerede: imleç sağ alttaki ana yere gider ve tıklar
+  function oynat() {
+    durdur();
+    var sure = azHareket ? 0 : SURE;
+    pencereler.forEach(function (p) {
+      var hedef = p.querySelector('.ana'), imlec = p.querySelector('.imlec');
+      var pk = p.getBoundingClientRect(), hk = hedef.getBoundingClientRect();
+      var x0 = pk.width * 0.4, y0 = 22;
+      var x1 = hk.left - pk.left + hk.width * 0.5, y1 = hk.top - pk.top + hk.height * 0.6;
+      var kx = x1 + 12, ky = y0 + 8;   // sağa doğru kavis
+      p.querySelector('.iz path').setAttribute('d', 'M' + x0 + ' ' + y0 + 'Q' + kx + ' ' + ky + ' ' + x1 + ' ' + y1);
+      var kareler = [];
+      for (var i = 0; i <= 12; i++) {
+        var t = i / 12;   // imlecin ucu (4, 3) noktasında
+        kareler.push({ transform: 'translate(' + (egri(x0, kx, x1, t) - 4) + 'px,' + (egri(y0, ky, y1, t) - 3) + 'px)' });
+      }
+      p.classList.add('oynuyor');
+      animler.push(imlec.animate(kareler, { duration: sure, easing: 'ease-in-out', fill: 'forwards' }));
+    });
+    zamanlar.push(setTimeout(function () {
+      pencereler.forEach(function (p) {
+        var hedef = p.querySelector('.ana');
+        hedef.classList.add('basildi');
+        sonucYaz(hedef, true);
+      });
+    }, sure));
+    zamanlar.push(setTimeout(function () {
+      pencereler.forEach(function (p) { p.querySelector('.ana').classList.remove('basildi'); });
+    }, sure + 220));
+    zamanlar.push(setTimeout(function () {
+      pencereler.forEach(function (p) { p.classList.remove('oynuyor'); });
+    }, sure + 1600));
+  }
+
+  // Kullanıcı kendisi tıklarsa gösterim durur
+  document.querySelectorAll('[data-is]').forEach(function (d) {
+    d.addEventListener('click', function () { durdur(); sonucYaz(d, false); });
+  });
+  document.getElementById('tekrar').addEventListener('click', oynat);
+
+  if (!azHareket) zamanlar.push(setTimeout(oynat, 700));
+})();
+</script>
+</body>
+</html>

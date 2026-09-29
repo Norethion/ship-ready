@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="yukseklik" content="560">
+<title>Açılır kenar çubuğu</title>
+<style>
+/* Renkler: açık tema */
+.sahne {
+  --zemin: #e8ecf1;
+  --yuzey: #ffffff;
+  --yazi: #273040;
+  --ikincil: #4f5866;
+  --silik: #697180;
+  --cizgi: #e4e8ee;
+  --cip: #f1f3f6;
+  --vurgu: #0a62d0;
+  --vurgu-zemin: #e5efff;
+  --dolu: #0a62d0;
+  --golge: 0 18px 48px rgb(28 38 58 / .14);
+  color-scheme: light;
+}
+/* Koyu tema: alttaki tema kutusu işaretliyken */
+.sahne:has(.tema-kutu:checked) {
+  --zemin: #0c1015;
+  --yuzey: #1a1e25;
+  --yazi: #e8ebf0;
+  --ikincil: #aeb5c1;
+  --silik: #8f97a4;
+  --cizgi: #2a3039;
+  --cip: #242a33;
+  --vurgu: #5aa2ff;
+  --vurgu-zemin: #1b2b44;
+  --golge: 0 18px 48px rgb(0 0 0 / .5);
+  color-scheme: dark;
+}
+
+html, body { margin: 0; height: 100%; }
+body { font: 14px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+.sahne {
+  min-height: 100%;
+  background: var(--zemin);
+  color: var(--yazi);
+  transition: background-color .3s, color .3s;
+}
+.ikon {
+  width: 20px; height: 20px; flex: none;
+  fill: none; stroke: currentColor; stroke-width: 1.75;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.gorunmez { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* Kenar çubuğu. --t: 0 kapalı, 1 açık; iç öğelerin konum ve saydamlığı bununla hesaplanır */
+.kenar {
+  --oge: clamp(30px, 5.8vh, 44px);
+  --eylem: clamp(28px, 5.4vh, 40px);
+  --dar: 84px;
+  --genis: min(264px, 100vw - 64px);
+  --t: 0;
+  position: fixed; top: 8px; bottom: 8px; left: 8px; z-index: 2;
+  box-sizing: border-box;
+  width: var(--dar);
+  padding: 12px calc((var(--dar) - var(--oge)) / 2);
+  display: flex; flex-direction: column; gap: 8px;
+  overflow: hidden; white-space: nowrap;
+  background: var(--yuzey);
+  border-radius: 22px;
+  box-shadow: var(--golge);
+  transition: width .35s ease, background-color .3s;
+}
+.kenar:hover,
+.kenar:has(:focus-visible),
+.sahne:has(.acik-kutu:checked) .kenar { --t: 1; width: var(--genis); }
+
+/* Açılırken metinler biraz gecikmeli belirir, kapanırken hemen söner */
+.solan {
+  opacity: var(--t);
+  transition: opacity .2s;
+  transition-delay: calc(var(--t) * .12s);
+}
+
+/* Profil */
+.profil { display: flex; align-items: center; gap: 10px; flex: none; }
+.avatar {
+  width: var(--oge); height: var(--oge); flex: none;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1d4ed8, #7c3aed);
+  color: #fff; font-size: 12px; font-weight: 700;
+}
+.kim { display: grid; line-height: 1.25; flex: 1; min-width: 0; }
+.kim b { font-size: 14px; }
+.kim small { font-size: 12px; color: var(--silik); }
+.kim > * { overflow: hidden; text-overflow: ellipsis; }
+.profil .ikon { width: 18px; color: var(--silik); }
+
+/* Arama: kapalıyken kare ikon kutusu, açıkken tam genişlik alan */
+.ara {
+  position: relative; flex: none;
+  height: var(--oge);
+  border: 1px solid var(--cizgi); border-radius: 10px;
+  box-sizing: border-box;
+}
+.ara input {
+  position: absolute; inset: 0; width: 100%;
+  box-sizing: border-box;
+  padding: 0 34px 0 12px;
+  border: 0; border-radius: inherit;
+  background: transparent; color: var(--yazi); font: inherit; font-size: 13px;
+}
+.ara input::placeholder { color: var(--silik); }
+.ara input:focus { outline: none; }
+.ara:has(input:focus-visible) { border-color: var(--vurgu); }
+.ara .ikon {
+  position: absolute; top: 50%; translate: 0 -50%;
+  right: calc((1 - var(--t)) * (var(--oge) / 2 - 10px) + var(--t) * 10px);
+  width: 18px; color: var(--silik); pointer-events: none;
+  transition: right .35s ease;
+}
+
+/* Menü öğeleri: radyo düğmesi seçili sayfayı tutar */
+nav { display: flex; flex-direction: column; flex: none; }
+.oge {
+  position: relative;
+  display: flex; align-items: center;
+  height: var(--oge);
+  border-radius: 10px;
+  color: var(--ikincil);
+  cursor: pointer;
+  transition: color .2s, background-color .2s;
+}
+.oge input { position: absolute; opacity: 0; pointer-events: none; }
+.oge > .ikon { margin-inline: calc((var(--oge) - 20px) / 2); }
+.oge:hover { color: var(--vurgu); }
+.oge:has(input:checked) { color: var(--vurgu); background: var(--vurgu-zemin); }
+.oge:has(input:focus-visible) { outline: 2px solid var(--vurgu); outline-offset: -2px; }
+nav hr { width: 100%; height: 1px; margin: 5px 0; border: 0; background: var(--cizgi); }
+
+/* Rozet: kapalıyken ikonun köşesinde, açıkken satırın sonunda */
+.rozet {
+  position: absolute;
+  top: calc(3px + var(--t) * (50% - 3px));
+  right: calc((1 - var(--t)) * (var(--oge) / 2 - 20px) + var(--t) * 8px);
+  translate: 0 calc(var(--t) * -50%);
+  min-width: 18px; height: 18px; padding: 0 5px;
+  box-sizing: border-box;
+  display: grid; place-items: center;
+  border-radius: 9px;
+  background: var(--dolu); color: #fff;
+  font-size: 11px; font-weight: 700;
+  transition: top .35s ease, right .35s ease, translate .35s ease;
+}
+
+/* Alt eylemler: kapalıyken üst üste, açıkken yan yana dizilir */
+.eylemler {
+  --adim-y: calc(var(--eylem) + 5px);
+  --adim-x: calc((var(--genis) - var(--dar)) / 3);
+  position: relative; flex: none;
+  margin-top: auto;
+  height: calc(var(--eylem) + (1 - var(--t)) * 3 * var(--adim-y));
+  transition: height .35s ease;
+}
+.eylem {
+  position: absolute; bottom: 0;
+  left: calc((var(--oge) - var(--eylem)) / 2);
+  width: var(--eylem); height: var(--eylem);
+  display: grid; place-items: center;
+  padding: 0; border: 0; border-radius: 10px;
+  background: var(--cip); color: var(--ikincil);
+  cursor: pointer;
+  translate: calc(var(--t) * var(--i) * var(--adim-x)) calc((var(--t) - 1) * var(--i) * var(--adim-y));
+  transition: translate .35s ease, background-color .2s, color .2s;
+}
+.eylem .ikon { width: 18px; height: 18px; }
+.eylem:hover { background: var(--dolu); color: #fff; }
+.eylem:focus-visible,
+.eylem:has(input:focus-visible) { outline: 2px solid var(--vurgu); outline-offset: 2px; }
+.eylem input { position: absolute; opacity: 0; pointer-events: none; }
+.eylem .gunes,
+.sahne:has(.tema-kutu:checked) .eylem .ay { display: none; }
+.sahne:has(.tema-kutu:checked) .eylem .gunes { display: block; }
+
+/* Sayfa içeriği */
+.sayfa {
+  box-sizing: border-box;
+  padding: 18px 16px 18px calc(84px + 8px + 18px);
+}
+.baslik { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+h1 { margin: 0; font-size: 18px; line-height: 1.25; }
+.not { margin: 8px 0 0; color: var(--ikincil); font-size: 13px; }
+.ac-kapa {
+  position: relative; flex: none;
+  width: 36px; height: 36px;
+  display: grid; place-items: center;
+  border-radius: 10px;
+  background: var(--yuzey); color: var(--ikincil);
+  box-shadow: 0 2px 8px rgb(28 38 58 / .08);
+  cursor: pointer;
+}
+.ac-kapa input { position: absolute; opacity: 0; pointer-events: none; }
+.ac-kapa:has(input:checked) { background: var(--dolu); color: #fff; }
+.ac-kapa:has(input:focus-visible) { outline: 2px solid var(--vurgu); outline-offset: 2px; }
+.iskelet {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 12px; margin-top: 18px;
+}
+.iskelet span {
+  height: 72px; border-radius: 16px;
+  background:
+    linear-gradient(var(--cizgi), var(--cizgi)) 14px 18px / 40% 10px no-repeat,
+    linear-gradient(var(--cip), var(--cip)) 14px 40px / 70% 8px no-repeat,
+    linear-gradient(var(--cip), var(--cip)) 14px 56px / 55% 8px no-repeat,
+    var(--yuzey);
+  transition: background-color .3s;
+}
+.iskelet span:first-child { grid-column: 1 / -1; height: 100px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0s !important; transition-delay: 0s !important; }
+}
+</style>
+</head>
+<body>
+<!-- Lucide tarzı çizgi ikonlar -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-panel" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></symbol>
+  <symbol id="i-kisi" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M5 21a7 7 0 0 1 14 0"/></symbol>
+  <symbol id="i-kisiler" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0M16 4.3a4 4 0 0 1 0 7.4M22 21a7 7 0 0 0-4-6.3"/></symbol>
+  <symbol id="i-bilet" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2.5a2.5 2.5 0 0 0 0 5V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2.5a2.5 2.5 0 0 0 0-5z"/><path d="M14 5v2M14 11v2M14 17v2"/></symbol>
+  <symbol id="i-gorev" viewBox="0 0 24 24"><rect x="3" y="4" width="6" height="6" rx="1"/><path d="m3 17 2 2 4-4M13 6h8M13 12h8M13 18h8"/></symbol>
+  <symbol id="i-agac" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4M6 16v-2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/></symbol>
+  <symbol id="i-posta" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+  <symbol id="i-kisi-ayar" viewBox="0 0 24 24"><circle cx="10" cy="8" r="4"/><path d="M3 21a7 7 0 0 1 10-6.3"/><circle cx="18" cy="17" r="2.5"/><path d="M18 13v1.5M18 19.5V21M22 17h-1.5M15.5 17H14"/></symbol>
+  <symbol id="i-ara" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+  <symbol id="i-asagi" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-ay" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
+  <symbol id="i-gunes" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-ayar" viewBox="0 0 24 24"><path d="M10.27 4.8l.08-2.26h3.3l.08 2.26a7.4 7.4 0 0 1 2.14.89l1.65-1.54 2.33 2.33-1.54 1.65a7.4 7.4 0 0 1 .89 2.14l2.26.08v3.3l-2.26.08a7.4 7.4 0 0 1-.89 2.14l1.54 1.65-2.33 2.33-1.65-1.54a7.4 7.4 0 0 1-2.14.89l-.08 2.26h-3.3l-.08-2.26a7.4 7.4 0 0 1-2.14-.89l-1.65 1.54-2.33-2.33 1.54-1.65a7.4 7.4 0 0 1-.89-2.14l-2.26-.08v-3.3l2.26-.08a7.4 7.4 0 0 1 .89-2.14L4.15 6.48l2.33-2.33 1.65 1.54a7.4 7.4 0 0 1 2.14-.89z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-arti" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-cikis" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></symbol>
+  <symbol id="i-yan-panel" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M14 9l3 3-3 3"/></symbol>
+</svg>
+
+<div class="sahne">
+  <aside class="kenar" aria-label="Ana menü">
+    <div class="profil">
+      <span class="avatar" aria-hidden="true">ZA</span>
+      <span class="kim solan"><b>Zeynep Arslan</b><small>Yönetici</small></span>
+      <svg class="ikon solan" aria-hidden="true"><use href="#i-asagi"/></svg>
+    </div>
+
+    <label class="ara">
+      <input class="solan" type="text" placeholder="Panelde ara" aria-label="Panelde ara">
+      <svg class="ikon" aria-hidden="true"><use href="#i-ara"/></svg>
+    </label>
+
+    <nav aria-label="Sayfalar">
+      <label class="oge"><input type="radio" name="sayfa" checked><svg class="ikon" aria-hidden="true"><use href="#i-panel"/></svg><span class="solan">Panel</span></label>
+      <label class="oge"><input type="radio" name="sayfa"><svg class="ikon" aria-hidden="true"><use href="#i-kisi"/></svg><span class="solan">Destek</span></label>
+      <label class="oge"><input type="radio" name="sayfa"><svg class="ikon" aria-hidden="true"><use href="#i-kisiler"/></svg><span class="solan">Müşteriler</span></label>
+      <label class="oge"><input type="radio" name="sayfa"><svg class="ikon" aria-hidden="true"><use href="#i-bilet"/></svg><span class="solan">Talepler</span></label>
+      <hr>
+      <label class="oge"><input type="radio" name="sayfa"><svg class="ikon" aria-hidden="true"><use href="#i-gorev"/></svg><span class="solan">Görevler</span><span class="rozet">2<span class="gorunmez"> yeni</span></span></label>
+      <label class="oge"><input type="radio" name="sayfa"><svg class="ikon" aria-hidden="true"><use href="#i-agac"/></svg><span class="solan">Projeler</span></label>
+      <label class="oge"><input type="radio" name="sayfa"><svg class="ikon" aria-hidden="true"><use href="#i-posta"/></svg><span class="solan">Başvurular</span></label>
+      <label class="oge"><input type="radio" name="sayfa"><svg class="ikon" aria-hidden="true"><use href="#i-kisi-ayar"/></svg><span class="solan">Kullanıcı yönetimi</span></label>
+    </nav>
+
+    <!-- --i: düğmenin sırası; konumu bu sayıdan hesaplanır -->
+    <div class="eylemler">
+      <label class="eylem" style="--i:0" title="Temayı değiştir">
+        <input class="tema-kutu" type="checkbox" aria-label="Koyu tema">
+        <svg class="ikon ay" aria-hidden="true"><use href="#i-ay"/></svg>
+        <svg class="ikon gunes" aria-hidden="true"><use href="#i-gunes"/></svg>
+      </label>
+      <button class="eylem" style="--i:1" type="button" title="Ayarlar" aria-label="Ayarlar"><svg class="ikon" aria-hidden="true"><use href="#i-ayar"/></svg></button>
+      <button class="eylem" style="--i:2" type="button" title="Yeni ekle" aria-label="Yeni ekle"><svg class="ikon" aria-hidden="true"><use href="#i-arti"/></svg></button>
+      <button class="eylem" style="--i:3" type="button" title="Çıkış yap" aria-label="Çıkış yap"><svg class="ikon" aria-hidden="true"><use href="#i-cikis"/></svg></button>
+    </div>
+  </aside>
+
+  <main class="sayfa">
+    <div class="baslik">
+      <h1>Günaydın, Zeynep</h1>
+      <label class="ac-kapa" title="Menüyü açık tut">
+        <input class="acik-kutu" type="checkbox" aria-label="Menüyü açık tut">
+        <svg class="ikon" aria-hidden="true"><use href="#i-yan-panel"/></svg>
+      </label>
+    </div>
+    <p class="not">Menünün üzerine gel ya da Tab ile içine gir; dokunmatikte sağ üstteki düğmeyle açık tut.</p>
+    <div class="iskelet" aria-hidden="true"><span></span><span></span><span></span></div>
+  </main>
+</div>
+</body>
+</html>

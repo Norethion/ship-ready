@@ -1,23 +1,48 @@
 ---
-// Rehber tablolarının kart hâli: başlık (link olabilir), tür etiketi, isteğe bağlı stil önizlemesi ya da renk örneği, prompt düğmesi.
+// Rehber tablolarının kart hâli, shadcn/ui kart yapısında: isteğe bağlı üst önizleme (stil örneği ya da canlı örnek),
+// başlık kısmı (ad; altında tür ve kaynak; sağ üstte eylem), açıklama ve alanlar (slot, site_uret.py üretir), alt şerit.
+// Kart, Kartlar'ın ızgarasında satır satır hizalanır (subgrid): satir, kartın kapladığı ızgara satırı sayısıdır ve
+// kartın doğrudan çocuklarının sayısına eşittir; aynı sıradaki kartlarda başlık, açıklama, her alan ve düğmeler aynı hizada durur.
+// Canlı örnek public/ornekler/<ad>.html dosyasıdır: bölümdeki bütün kartlarda örnek varsa kartın üstünde çalışır,
+// sadece bazılarında varsa "Örneği aç" onu pencerede açar; kodu kopyalanır, tam ekran açılır.
+import fs from 'node:fs';
+import path from 'node:path';
 import PromptDugme from './PromptDugme.astro';
 
 interface Props {
 	baslik: string;
+	satir: number;
 	href?: string;
 	tur?: string;
+	/** Tablonun Kaynak sütunundaki bağlantı; başlığın altında görünür. */
+	kaynak?: { ad: string; url: string };
 	onizleme?: string;
 	renk?: { yazi: string; zemin: string };
+	/** public/ornekler/ altındaki canlı örneğin adı (md'de <!-- ornek: ad -->). */
+	ornek?: string;
+	ornekYeri?: 'ust' | 'pencere';
 	prompt?: string;
 	promptEtiket?: string;
 	promptTur?: 'kullanim' | 'tasarim';
 	/** Son link kontrolünde açılmadıysa hatası (ör. 404). */
 	kirik?: string;
 }
-const { baslik, href, tur, onizleme, renk, prompt, promptEtiket = "Kullanım prompt'u", promptTur = 'kullanim', kirik } = Astro.props;
+const { baslik, satir, href, tur, kaynak, onizleme, renk, ornek, ornekYeri = 'ust', prompt, promptEtiket = "Kullanım prompt'u", promptTur = 'kullanim', kirik } =
+	Astro.props;
+const ornekAdres = ornek && `/ornekler/${ornek}.html`;
+const ornekKod = ornek ? fs.readFileSync(path.join(process.cwd(), 'public', 'ornekler', `${ornek}.html`), 'utf-8') : '';
+// Örnek kendi yüksekliğini <meta name="yukseklik"> ile söyler.
+const yukseklik = Number(ornekKod.match(/<meta name="yukseklik" content="(\d+)"/)?.[1] ?? 420);
+const ustte = !!ornekAdres && ornekYeri === 'ust';
+// Sağ üstteki eylem: üstte örneği olan kartta örneği tam ekran açar, bağlantılı kartta siteyi yeni sekmede açar.
+const eylem = ustte
+	? { href: ornekAdres, etiket: `${baslik} örneğini tam ekran aç`, tam: true }
+	: href
+		? { href, etiket: `${baslik} sitesini yeni sekmede aç`, tam: false }
+		: null;
 ---
 
-<article class="kart">
+<article class="kart" style={`grid-row: span ${satir}`}>
 	{
 		onizleme && (
 			<div class={`pv pv-${onizleme}`} aria-hidden="true">
@@ -30,13 +55,70 @@ const { baslik, href, tur, onizleme, renk, prompt, promptEtiket = "Kullanım pro
 			</div>
 		)
 	}
-	<div class="kart-govde">
-		<p class="kart-baslik">
+	{ustte && <iframe class="kart-ornek" src={ornekAdres} title={`${baslik}: canlı örnek`} loading="lazy" style={`min-height:${yukseklik}px`} />}
+	<div class="k-bas">
+		<span class="k-ad">
 			{renk && <span class="renk" style={`color:${renk.yazi};background:${renk.zemin}`} aria-hidden="true">Aa</span>}
 			{href ? <a href={href} title={kirik && `Son kontrolde açılmadı (${kirik})`}>{baslik}{kirik && ' ⚠'}</a> : <span>{baslik}</span>}
-			{tur && <span class="kart-tur">{tur}</span>}
-		</p>
-		<div class="kart-metin"><slot /></div>
-		{prompt && <PromptDugme metin={prompt} etiket={promptEtiket} tur={promptTur} />}
+		</span>
+		{
+			(tur || kaynak) && (
+				<span class="k-tur">
+					{tur}
+					{tur && kaynak && ' · '}
+					{kaynak && <a href={kaynak.url}>{kaynak.ad}</a>}
+				</span>
+			)
+		}
+		{
+			eylem && (
+				<a class="k-eylem" href={eylem.href} target="_blank" rel="noopener" aria-label={eylem.etiket} title={eylem.etiket}>
+					{eylem.tam ? (
+						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>
+					) : (
+						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" /></svg>
+					)}
+				</a>
+			)
+		}
 	</div>
+	<slot />
+	<div class="k-alt">
+		{prompt && <PromptDugme metin={prompt} etiket={promptEtiket} tur={promptTur} ana />}
+		{
+			ornekAdres && !ustte && (
+				<button type="button" class="prompt-dugme" data-ornek-ac>
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l12-8z" /></svg>
+					<span>Örneği aç</span>
+				</button>
+			)
+		}
+		{ornekAdres && <span class="k-alt-sag"><PromptDugme metin={ornekKod} etiket="Kodu kopyala" tur="kod" simge={!ustte} /></span>}
+	</div>
+	{
+		ornekAdres && !ustte && (
+			<dialog class="ornek-pencere" aria-label={`${baslik}: canlı örnek`}>
+				<div class="op-ust">
+					<span>{baslik}</span>
+					<a class="prompt-dugme" href={ornekAdres} target="_blank" rel="noopener">Tam ekran</a>
+					<button type="button" class="prompt-dugme" data-ornek-kapat>Kapat</button>
+				</div>
+				<iframe src={ornekAdres} title={`${baslik}: canlı örnek`} loading="lazy" style={`height:${yukseklik}px`} />
+			</dialog>
+		)
+	}
 </article>
+
+<script>
+	// "Örneği aç" kartın penceresini açar; Kapat düğmesi, Esc ya da pencerenin dışına tıklamak kapatır.
+	document.addEventListener('click', (e) => {
+		const hedef = e.target as HTMLElement;
+		const ac = hedef.closest('[data-ornek-ac]');
+		if (ac) {
+			ac.closest('.kart')?.querySelector('dialog')?.showModal();
+			return;
+		}
+		if (hedef.closest('[data-ornek-kapat]')) hedef.closest('dialog')?.close();
+		else if (hedef instanceof HTMLDialogElement) hedef.close();
+	});
+</script>

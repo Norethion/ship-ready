@@ -180,7 +180,11 @@ def list_page(doc, lst, tr, comp):
 
 
 def cards(heads, rows, tr):
+    """Tablo satırlarını kart yapar: başlık kısmı, açıklama, alanlar (sütun sırasıyla, boş olsa da yeri korunur), alt şerit.
+    Tür ve Kaynak sütunları başlığın altında görünür. Kart, kapladığı ızgara satırı sayısını (satir) bilir ki aynı sıradaki
+    kartların satırları hizalansın. Bütün satırlarda canlı örnek varsa örnek kartın üstünde, yoksa pencerede açılır."""
     label, kind, make = CARD_PROMPTS.get(heads[0], TOOL_PROMPT)
+    all_examples = all(katalog.EXAMPLE.search(r[0]) for r in rows)
     out = ["<Kartlar>", ""]
     for row in rows:
         cell0 = row[0]
@@ -189,23 +193,33 @@ def cards(heads, rows, tr):
         title = katalog.plain(cell0)
         fields = [(h, v) for h, v in zip(heads[1:], row[1:]) if h]
         tur = next((v for h, v in fields if h == "Tür"), None)
-        rest = [(h, v) for h, v in fields if h != "Tür"]
+        source = re.search(r"\[([^\]]+)\]\((https?://[^)\s]+)\)", next((v for h, v in fields if h == "Kaynak"), ""))
+        rest = [(h, v) for h, v in fields if h not in ("Tür", "Kaynak")]
         main = rest[0][1] if rest else ""
-        props = [f"baslik={js(title)}"]
+        meta = rest[1:]
+        example = katalog.EXAMPLE.search(cell0)
+        top = heads[0] == "Stil" or bool(example and all_examples)
+        props = [f"baslik={js(title)}", f"satir={{{int(top) + 3 + len(meta)}}}"]
         if link:
             props.append(f"href={js(link.group(1))}")
             if link.group(1) in tr.broken:
                 props.append(f"kirik={js(tr.broken[link.group(1)])}")
         if tur:
             props.append(f"tur={js(katalog.plain(tur))}")
+        if source:
+            props.append(f"kaynak={js({'ad': source.group(1), 'url': source.group(2)})}")
         if heads[0] == "Stil":
             props.append(f"onizleme={js(slug(title))}")
+        if example:
+            props += [f"ornek={js(example.group(1))}", f"ornekYeri={js('ust' if top else 'pencere')}"]
         if color:
             props.append(f"renk={js({'yazi': color.group(1), 'zemin': color.group(2)})}")
         prompt = make(title, katalog.plain(tr(main)), link.group(1) if link else None)
         props += [f"prompt={js(prompt)}", f"promptEtiket={js(label)}", f"promptTur={js(kind)}"]
-        out += [f"<Kart {' '.join(props)}>", "", esc(tr(main)), ""]
-        out += [f'<span class="meta">**{h}:** {esc(tr(v))}</span>' for h, v in rest[1:] if v.strip()]
+        out += [f"<Kart {' '.join(props)}>", "", esc(tr(main)) if main.strip() else "<span></span>", ""]
+        for i, (h, v) in enumerate(meta):
+            cls = "k-alan" + (" ilk" if i == 0 else "") + (" son" if i == len(meta) - 1 else "")
+            out.append(f'<span class="{cls}"><span class="k-etiket">{esc(h)}</span><span class="k-deger">{esc(tr(v))}</span></span>')
         out += ["", "</Kart>", ""]
     return out + ["</Kartlar>", ""]
 
@@ -325,6 +339,7 @@ def llms_full(cat, pub, tr):
            "Adresler sitenin köküne göredir."]
     for d in cat["belgeler"]:
         body = katalog.ITEM_ID.sub(lambda m: f" [{m.group(1)}]", "\n".join(body_lines(d["metin"])))
+        body = katalog.EXAMPLE.sub(lambda m: f" ([canlı örnek](/ornekler/{m.group(1)}.html))", body)
         out += ["", "---", "", f"# {d['baslik']}", "", f"Adres: {route(d)}", "", tr(body).strip()]
     out += ["", "---", "", "# Repo kataloğu", "", "Adres: /repolar/", ""]
     for k, altlar in repo_groups(pub):

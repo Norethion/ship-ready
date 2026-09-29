@@ -1,7 +1,8 @@
 ---
 // Doğrulanmış GitHub repoları amaca göre kategori ve alt kategori başlıkları altında gruplu gösterilir.
 // Üstteki çiplerle kategori, alt kategori, kurulum yeri ve durum süzülür; arama ve sıralama grupların içinde çalışır,
-// boş kalan başlıklar gizlenir. Kartlar bento düzeninde dizilir. Arama kuralları src/arama.ts'te (yerel sayfanın aramasıyla aynı).
+// boş kalan başlıklar gizlenir. Kartlar rehber kartlarıyla aynı yapıdadır (başlık, açıklama, uyarı, alanlar, alt şerit) ve satır satır
+// hizalı ızgarada durur. Arama kuralları src/arama.ts'te (yerel sayfanın aramasıyla aynı).
 import katalog from '../data/katalog.json';
 import PromptDugme from './PromptDugme.astro';
 import { katla } from '../arama';
@@ -13,11 +14,11 @@ const yilOnce = new Date(Date.now() - 365 * 864e5).toISOString().slice(0, 10);
 const eski = (r: Repo) => !!r.son_guncelleme && r.son_guncelleme < yilOnce;
 const dikkat = (r: Repo) => r.arsiv || eski(r);
 const KURULUM = {
-	proje: { etiket: '📦 Projeye eklenir', dugme: 'Proje', tur: 'kurulum' },
-	claude: { etiket: "🧰 Claude'a kurulur", dugme: 'Claude', tur: 'claude' },
-	codex: { etiket: "🧰 Codex'e kurulur", dugme: 'Codex', tur: 'codex' },
-	uygulama: { etiket: '💻 Ayrı uygulama', dugme: 'Uygulama', tur: 'uygulama' },
-	kaynak: { etiket: '📖 Kaynak · kurulmaz', dugme: '', tur: '' },
+	proje: { etiket: '📦 Projeye eklenir', kart: 'Projeye eklenir', dugme: 'Proje', tur: 'kurulum' },
+	claude: { etiket: "🧰 Claude'a kurulur", kart: 'Claude', dugme: 'Claude', tur: 'claude' },
+	codex: { etiket: "🧰 Codex'e kurulur", kart: 'Codex', dugme: 'Codex', tur: 'codex' },
+	uygulama: { etiket: '💻 Ayrı uygulama', kart: 'Ayrı uygulama', dugme: 'Uygulama', tur: 'uygulama' },
+	kaynak: { etiket: '📖 Kaynak · kurulmaz', kart: 'Kurulmaz, okunur', dugme: '', tur: '' },
 } as const;
 const PROMPT = {
 	proje: (u: string) => `Şu aracı bu projede kullanmak istiyorum: ${u}\nREADME'sini oku; bu projenin diline ve altyapısına uygun mu söyle. Uygunsa projeye ekle ve nasıl kullanılacağını kısaca göster.`,
@@ -27,6 +28,8 @@ const PROMPT = {
 };
 const yildiz = (n: number | null) => (n == null ? '' : n >= 1000 ? (n / 1000).toFixed(n >= 10000 ? 0 : 1).replace('.', ',') + 'k' : String(n));
 const tarih = (d: string | null) => (d ? d.split('-').reverse().join('.') : '');
+const PLATFORM: Record<string, string> = { 'instagram.com': 'Instagram', 'youtube.com': 'YouTube', 'youtu.be': 'YouTube' };
+const platform = (u: string) => { const h = new URL(u).hostname.replace(/^www\./, ''); return PLATFORM[h] ?? h; };
 const say = (f: (r: Repo) => boolean) => repolar.filter(f).length;
 ---
 
@@ -82,25 +85,29 @@ const say = (f: (r: Repo) => boolean) => repolar.filter(f).length;
 								return (
 									<article class="repo" data-klasor={r.klasor} data-alt={r.alt_klasor} data-kurulum={r.kurulum.join(' ')} data-dikkat={dikkat(r) ? '1' : ''}
 										data-ara={ara} data-at={r.eklenme || ''} data-s={r.yildiz ?? 0} data-ad={r.repo.toLowerCase()} data-uzun={uzun}>
-										<div class="repo-ust">
-											<a class="repo-ad" href={url} target="_blank" rel="noopener">{ad}</a>
-											<span class="repo-yildiz">★ {yildiz(r.yildiz)}</span>
+										<div class="k-bas">
+											<span class="k-ad"><a href={url} target="_blank" rel="noopener">{ad}</a></span>
+											<span class="k-tur">{sahip}{r.dil && ` · ${r.dil}`}{r.eklenme && ` · ${tarih(r.eklenme)}`}</span>
+											<span class="repo-yildiz" title={`${r.yildiz ?? 0} yıldız`}>★ {yildiz(r.yildiz)}</span>
 										</div>
-										<p class="repo-sahip">{sahip}{r.dil && ` · ${r.dil}`}{r.eklenme && ` · ${tarih(r.eklenme)}`}</p>
 										<p class="repo-aciklama">{r.aciklama}</p>
-										{r.uyari && <p class="repo-uyari">⚠ {r.uyari}</p>}
-										<p class="repo-etiketler">
-											{r.kurulum.map((k) => <span class="etiket">{KURULUM[k as keyof typeof KURULUM].etiket}</span>)}
-											{r.kaynak && <a class="etiket kaynak" href={r.kaynak.url} target="_blank" rel="noopener">📷 {r.kaynak.ad}</a>}
+										<div class:list={['repo-uyarilar', { bos: !r.uyari && !dikkat(r) }]}>
+											{r.uyari && <p class="repo-uyari">{r.uyari}</p>}
 											{r.arsiv && <span class="etiket turuncu">Arşivlenmiş</span>}
 											{eski(r) && <span class="etiket turuncu" title={`Son güncelleme ${tarih(r.son_guncelleme)}`}>1+ yıldır güncellenmiyor</span>}
-										</p>
-										{kur.length > 0 && (
-											<div class="repo-kurulum">
-												<span>Kurulum prompt'u</span>
-												{kur.map((k) => <PromptDugme metin={PROMPT[k](url)} etiket={KURULUM[k].dugme} tur={KURULUM[k].tur} />)}
-											</div>
-										)}
+										</div>
+										<div class="k-alan ilk">
+											<span class="k-etiket">Kurulum</span>
+											<span class="k-deger repo-cipler">{r.kurulum.map((k) => <span class="etiket cerceve">{KURULUM[k as keyof typeof KURULUM].kart}</span>)}</span>
+										</div>
+										<div class="k-alan son">
+											<span class="k-etiket">Kaynak</span>
+											<span class="k-deger">{r.kaynak ? <a href={r.kaynak.url} target="_blank" rel="noopener">{platform(r.kaynak.url)} · {r.kaynak.ad}</a> : 'Belirtilmemiş'}</span>
+										</div>
+										<div class="k-alt">
+											<span class="repo-alt-etiket">{kur.length > 0 ? "Kurulum prompt'u" : 'Kurulmaz; README okunur'}</span>
+											{kur.map((k) => <PromptDugme metin={PROMPT[k](url)} etiket={KURULUM[k].dugme} tur={KURULUM[k].tur} />)}
+										</div>
 									</article>
 								);
 							})}
@@ -114,8 +121,8 @@ const say = (f: (r: Repo) => boolean) => repolar.filter(f).length;
 </div>
 
 <script>
-	// Süzme, arama ve sıralama tarayıcıda çalışır. Her alt kategorinin ızgarası ayrı dizilir: kartlar içerikleri kadar
-	// satır kaplar (bento), içeriği en uzun %15'lik dilim üç ve daha çok sütunda iki sütun genişliğinde olur.
+	// Süzme, arama ve sıralama tarayıcıda çalışır. Kartlar satır satır hizalı ızgarada durur; her alt kategoride
+	// içeriği en uzun %15'lik dilim üç ve daha çok sütunda iki sütun genişliğinde olur.
 	import { terimler, eslesme } from '../arama';
 	const kok = document.querySelector<HTMLElement>('.rk');
 	if (kok) {
@@ -128,19 +135,11 @@ const say = (f: (r: Repo) => boolean) => repolar.filter(f).length;
 		let klasor = '*', alt = '*', kurulum = '*', sira = 'at';
 
 		const diz = (izgara: HTMLElement) => {
-			const st = getComputedStyle(izgara);
-			const sutun = st.gridTemplateColumns.split(' ').length;
+			const sutun = getComputedStyle(izgara).gridTemplateColumns.split(' ').length;
 			const gorunen = [...izgara.children].filter((k): k is HTMLElement => !(k as HTMLElement).hidden) as HTMLElement[];
 			const uzunluklar = gorunen.map((k) => +k.dataset.uzun!).sort((a, b) => a - b);
 			const esik = Math.max(170, uzunluklar[Math.floor(uzunluklar.length * 0.85)] || 0);
-			izgara.classList.toggle('tek', sutun < 2);
-			if (sutun < 2) { gorunen.forEach((k) => { k.classList.remove('genis'); k.style.gridRow = ''; }); return; }
-			const bosluk = parseFloat(st.rowGap), adim = parseFloat(st.gridAutoRows) + bosluk;
-			izgara.classList.add('olc');
-			gorunen.forEach((k) => { k.classList.toggle('genis', sutun >= 3 && +k.dataset.uzun! > esik); k.style.gridRow = ''; });
-			const aralik = gorunen.map((k) => Math.ceil((k.offsetHeight + bosluk) / adim));
-			gorunen.forEach((k, i) => { k.style.gridRow = `span ${aralik[i]}`; });
-			izgara.classList.remove('olc');
+			gorunen.forEach((k) => k.classList.toggle('genis', sutun >= 3 && +k.dataset.uzun! > esik));
 		};
 		const dizHepsi = () => izgaralar.forEach((g) => { if (!g.closest('[hidden]')) diz(g); });
 

@@ -6,6 +6,7 @@ Kavramlar:
   liste   <!-- liste: kimlik --> satırı olan md; maddeleri numaralı satır ya da ilk sütunu "#" olan tablo satırıdır
   madde   her maddenin değişmeyen kimliği vardır: listede satır sonunda, tabloda "#" hücresinde <!-- id: ... -->
   öğe     rehber md'lerindeki tablo satırları (araç, servis, stil, komut...)
+  örnek   öğenin ilk hücresindeki <!-- ornek: ad --> site/public/ornekler/<ad>.html canlı örneğini karta bağlar
   atıf    md'lerde {{no:kimlik}} yazılır, maddenin o anki numarasına çevrilir
 
 Komut satırı:
@@ -20,10 +21,12 @@ ROOT = Path(__file__).resolve().parent.parent
 CONTENT = ROOT / "icerik"
 REPOS = ROOT / "veri" / "repolar.json"
 REPORTS = ROOT / "veri" / "raporlar"
+EXAMPLES = ROOT / "site" / "public" / "ornekler"
 STATUS_SYMBOLS = ["✅", "⚠", "❌", "➖"]
 ID_PATTERN = r"[a-z0-9]+(?:-[a-z0-9]+)+"
 REF = re.compile(r"\{\{no:([^}]*)\}\}")
 ITEM_ID = re.compile(r"\s*<!--\s*id:\s*(\S*)\s*-->")
+EXAMPLE = re.compile(r"\s*<!--\s*ornek:\s*(\S*)\s*-->")
 SETUP_TARGETS = ("proje", "uygulama", "kaynak")
 
 
@@ -250,6 +253,9 @@ def check(cat):
         for ref in REF.findall(d["metin"]):
             if ref not in cat["numaralar"]:
                 problems.append(f"{d['dosya']}: bilinmeyen atıf {{{{no:{ref}}}}}")
+        for name in EXAMPLE.findall(d["metin"]):
+            if not (EXAMPLES / f"{name}.html").is_file():
+                problems.append(f"{d['dosya']}: örnek dosyası yok: site/public/ornekler/{name}.html")
     known = set(cat["numaralar"])
     for g in cat["raporlar"]:
         for r in g["raporlar"]:

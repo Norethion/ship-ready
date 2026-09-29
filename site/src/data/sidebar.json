@@ -15,7 +15,7 @@
     "attrs": {
      "data-ikon": "shield"
     },
-    "badge": "97"
+    "badge": "98"
    },
    {
     "label": "App Store incelemesi",
@@ -73,6 +73,13 @@
     "attrs": {
      "data-ikon": "sparkles"
     }
+   },
+   {
+    "label": "Günlük siteler",
+    "link": "/rehberler/gunluk-siteler/",
+    "attrs": {
+     "data-ikon": "globe"
+    }
    }
   ]
  },
@@ -85,7 +92,7 @@
     "attrs": {
      "data-ikon": "package"
     },
-    "badge": "122"
+    "badge": "141"
    }
   ]
  }

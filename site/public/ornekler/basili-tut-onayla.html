@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="yukseklik" content="320">
+<title>Basılı tutarak onayla</title>
+<style>
+/* ── Ortak görsel dil: altı "tehlikeli işlem" örneğinde aynıdır ── */
+:root{
+  --zemin:#0e0f14;
+  --izgara:rgba(255,255,255,.035);
+  --yuzey:#17181f;
+  --yuzey-2:#20212a;
+  --cizgi:#2c2e39;
+  --metin:#eef0f5;
+  --soluk:#a0a3b0;
+  --kirmizi:#f26d6d;         /* yıkıcı işlem yazısı, halka */
+  --kirmizi-dolgu:#c9343c;   /* yıkıcı düğme zemini (beyaz yazıyla 5:1) */
+  --kirmizi-zemin:rgba(242,109,109,.12);
+  --yesil:#2fd3b5;           /* güvenli sonuç */
+  --yesil-dolgu:#22c4a8;
+  --yesil-zemin:rgba(47,211,181,.12);
+  --amber:#f2a93b;           /* bekleyen iş, uyarı */
+  --amber-zemin:rgba(242,169,59,.12);
+  --yaricap:12px;
+  --font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%}
+body{
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;justify-content:safe center;gap:14px;padding:12px;
+  font:14px/1.4 var(--font);color:var(--metin);-webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(90% 70% at 50% 45%,rgba(255,255,255,.045),transparent 70%),
+    linear-gradient(var(--izgara) 1px,transparent 1px) 0 0/24px 24px,
+    linear-gradient(90deg,var(--izgara) 1px,transparent 1px) 0 0/24px 24px,
+    var(--zemin);
+}
+.ikon{flex:none;width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ikon.kucuk{width:12px;height:12px;stroke-width:2.5}
+.kart{background:var(--yuzey);border:1px solid var(--cizgi);border-radius:var(--yaricap);box-shadow:0 12px 32px rgba(0,0,0,.35)}
+.rozet{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:999px;font-size:10.5px;font-weight:700;letter-spacing:.12em;white-space:nowrap;color:var(--soluk);background:var(--yuzey-2);border:1px solid var(--cizgi)}
+.rozet.kirmizi{color:var(--kirmizi);background:var(--kirmizi-zemin);border-color:rgba(242,109,109,.3)}
+.rozet.yesil{color:var(--yesil);background:var(--yesil-zemin);border-color:rgba(47,211,181,.3)}
+.rozet.amber{color:var(--amber);background:var(--amber-zemin);border-color:rgba(242,169,59,.3)}
+.dugme{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:34px;padding:0 14px;border-radius:8px;border:1px solid var(--cizgi);background:var(--yuzey-2);color:var(--metin);font:600 13px/1 var(--font);white-space:nowrap;cursor:pointer;transition:background-color .15s,border-color .15s,color .15s,transform .1s}
+.dugme:hover{background:#2a2c37}
+.dugme:active{transform:scale(.97)}
+.dugme.kucuk{height:30px;padding:0 11px;font-size:12.5px}
+.dugme.birincil{background:var(--metin);border-color:var(--metin);color:#111218}
+.dugme.birincil:hover{background:#fff}
+.dugme.tehlike{background:var(--kirmizi-dolgu);border-color:var(--kirmizi-dolgu);color:#fff}
+.dugme.tehlike:hover{background:#b52d35}
+.dugme.tehlike-cizgi{background:transparent;border-color:rgba(242,109,109,.45);color:var(--kirmizi)}
+.dugme.tehlike-cizgi:hover{background:var(--kirmizi-zemin)}
+.dugme.yesil{background:var(--yesil-dolgu);border-color:var(--yesil-dolgu);color:#04201b}
+.dugme.yesil:hover{background:var(--yesil)}
+.dugme:disabled{opacity:.45;cursor:not-allowed;transform:none}
+:focus-visible{outline:2px solid var(--yesil);outline-offset:2px}
+.baslik{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.baslik h1{margin:0;font-size:clamp(22px,5vw,30px);font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.not{margin:0;padding:7px 14px;border-radius:10px;font-size:13.5px;font-weight:700;text-align:center;color:var(--soluk);background:var(--yuzey-2);border:1px solid var(--cizgi)}
+.not.yesil{color:var(--yesil);background:var(--yesil-zemin);border-color:rgba(47,211,181,.25)}
+.gizli{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* Kart içindeki alçak çerçevede başlık ve alt not gizlenir; tam ekranda görünür */
+@media (max-height:479px){.vitrin{display:none!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* ── Bu örnek: basılı tutarak onay ── */
+.sahne{width:100%;max-width:400px;display:flex;flex-direction:column;gap:12px}
+.ikon-kutu{flex:none;width:38px;height:38px;border-radius:9px;display:grid;place-items:center;background:var(--yuzey-2);border:1px solid var(--cizgi);color:var(--soluk)}
+.dosya{display:flex;align-items:center;gap:12px;min-height:64px;padding:12px 14px;transition:border-color .2s,box-shadow .3s}
+.dosya.tehlikede{border-color:rgba(242,109,109,.4)}
+.dosya.kurtuldu{border-color:rgba(47,211,181,.45);box-shadow:0 0 0 4px rgba(47,211,181,.08),0 12px 32px rgba(0,0,0,.35)}
+.dosya.silindi{justify-content:space-between;animation:belir .25s ease}
+.dosya-metin{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.dosya-ad{font-weight:700;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dosya-bilgi{font-size:12px;color:var(--soluk);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@keyframes belir{from{opacity:0;transform:translateY(4px)}}
+
+/* Basılı tutulan düğme: dokunmada kaydırma, seçim ve uzun basma menüsü kapalı */
+.tut{width:100%;display:flex;align-items:center;gap:12px;min-height:64px;padding:10px 14px;font:inherit;color:inherit;text-align:left;cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;transition:transform .12s,border-color .2s}
+.tut.basili{transform:scale(.985);border-color:rgba(242,109,109,.45)}
+.tut:disabled{opacity:.45;cursor:not-allowed}
+.halka{position:relative;flex:none;width:44px;height:44px;display:grid;place-items:center;color:var(--soluk);transition:color .2s}
+.halka-iz{position:absolute;inset:0;transform:rotate(-90deg)}
+.halka-iz circle{fill:none;stroke-width:3}
+.halka-iz .arka{stroke:rgba(255,255,255,.09)}
+.halka-iz .on{stroke:var(--kirmizi);stroke-linecap:round}
+.tut.basili .halka{color:var(--kirmizi)}
+.tut-metin{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.tut-baslik{font-weight:700;font-size:15px}
+.tut-alt{font-size:12px;color:var(--soluk)}
+.yuzde{flex:none;min-width:3.4em;text-align:right;font-weight:700;font-size:15px;color:var(--kirmizi);font-variant-numeric:tabular-nums}
+
+.durum{display:flex;flex-direction:column;align-items:center;gap:6px}
+.cubuk{display:block;width:60%;height:3px;border-radius:3px;overflow:hidden;background:rgba(255,255,255,.07)}
+.cubuk span{display:block;height:100%;background:var(--kirmizi);transform-origin:left;transform:scaleX(0)}
+.durum-yazi{margin:0;font-size:11.5px;font-weight:700;letter-spacing:.12em;text-align:center;color:var(--soluk)}
+.durum-yazi.kirmizi{color:var(--kirmizi)}
+.durum-yazi.yesil{color:var(--yesil)}
+</style>
+</head>
+<body>
+
+<header class="vitrin baslik">
+  <span class="rozet yesil">KALIP 01 · BASILI TUT</span>
+  <h1>Halka, onayın kendisi</h1>
+</header>
+
+<main class="sahne">
+  <!-- Silinecek dosya -->
+  <div class="kart dosya" id="dosya">
+    <span class="ikon-kutu" aria-hidden="true">
+      <svg class="ikon" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>
+    </span>
+    <span class="dosya-metin">
+      <span class="dosya-ad">marka-yenileme.fig</span>
+      <span class="dosya-bilgi">38 MB · 2 sa önce · Mert Aksoy</span>
+    </span>
+    <span class="rozet yesil" id="durdu" hidden>
+      <svg class="ikon kucuk" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>DURUYOR
+    </span>
+  </div>
+
+  <!-- Silindikten sonra aynı yerde "Geri al" -->
+  <div class="kart dosya silindi" id="silindi" hidden>
+    <span class="dosya-metin">
+      <span class="dosya-ad">Dosya silindi</span>
+      <span class="dosya-bilgi">marka-yenileme.fig çöp kutusunda</span>
+    </span>
+    <button class="dugme kucuk" id="geri-al" type="button">
+      <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14L4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/></svg>Geri al
+    </button>
+  </div>
+
+  <!-- Basılı tutulan düğme -->
+  <button class="kart tut" id="tut" type="button" aria-describedby="tut-ipucu">
+    <span class="halka" aria-hidden="true">
+      <svg class="halka-iz" viewBox="0 0 44 44"><circle class="arka" cx="22" cy="22" r="19"/><circle class="on" id="halka" cx="22" cy="22" r="19"/></svg>
+      <svg class="ikon" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg>
+    </span>
+    <span class="tut-metin">
+      <span class="tut-baslik">Silmek için basılı tut</span>
+      <span class="tut-alt" id="tut-ipucu">1 saniye · Boşluk ya da Enter da olur</span>
+    </span>
+    <span class="yuzde" id="yuzde" aria-hidden="true">%0</span>
+  </button>
+
+  <div class="durum">
+    <span class="cubuk" aria-hidden="true"><span id="cubuk"></span></span>
+    <p class="durum-yazi" id="durum" role="status">HAZIR</p>
+  </div>
+</main>
+
+<p class="vitrin not yesil">Erken bırak, hiçbir şey silinmez.</p>
+
+<script>
+(function () {
+  var SURE = 1000;                  // halkanın dolma süresi (ms)
+  var CEVRE = 2 * Math.PI * 19;     // halkanın çevresi (r = 19)
+  var azHareket = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $(id) { return document.getElementById(id); }
+  var tut = $('tut'), halka = $('halka'), yuzde = $('yuzde'), cubuk = $('cubuk'), durum = $('durum'),
+      dosya = $('dosya'), durdu = $('durdu'), silindi = $('silindi'), geriAl = $('geri-al');
+  var ilerleme = 0, baslangic = 0, kare = 0, basili = false, tus = null, demo = 0;
+
+  halka.style.strokeDasharray = CEVRE;
+
+  function ciz(p) {
+    halka.style.strokeDashoffset = CEVRE * (1 - p);
+    halka.style.opacity = p > 0.01 ? 1 : 0;   // boşken yuvarlak uç nokta gibi görünmesin
+    yuzde.textContent = '%' + Math.round(p * 100);
+    cubuk.style.transform = 'scaleX(' + p + ')';
+  }
+  function yaz(metin, renk) {
+    durum.textContent = metin;
+    durum.className = 'durum-yazi ' + (renk || '');
+  }
+  function isaretle(tur) {
+    dosya.classList.toggle('tehlikede', tur === 'tehlikede');
+    dosya.classList.toggle('kurtuldu', tur === 'kurtuldu');
+    durdu.hidden = tur !== 'kurtuldu';
+  }
+
+  // Basınca halka dolmaya başlar
+  function basla() {
+    if (basili || tut.disabled) return;
+    basili = true;
+    cancelAnimationFrame(kare);
+    baslangic = performance.now() - ilerleme * SURE;   // boşalırken yeniden basılırsa kaldığı yerden sürer
+    tut.classList.add('basili');
+    isaretle('tehlikede');
+    yaz('BASILI TUTULUYOR', 'kirmizi');
+    kare = requestAnimationFrame(doldur);
+  }
+  function doldur(an) {
+    ilerleme = Math.min(1, Math.max(0, (an - baslangic) / SURE));
+    ciz(ilerleme);
+    if (ilerleme === 1) sil();
+    else kare = requestAnimationFrame(doldur);
+  }
+
+  // Erken bırakınca hiçbir şey olmaz; halka geri boşalır
+  function birak() {
+    if (!basili) return;
+    basili = false;
+    cancelAnimationFrame(kare);
+    tut.classList.remove('basili');
+    isaretle('kurtuldu');
+    yaz('BIRAKILDI · HİÇBİR ŞEY SİLİNMEDİ', 'yesil');
+    if (azHareket) { ilerleme = 0; ciz(0); return; }
+    var bas = ilerleme, t0 = performance.now();
+    kare = requestAnimationFrame(function bosalt(an) {
+      ilerleme = bas * Math.min(1, Math.max(0, 1 - (an - t0) / 300));
+      ciz(ilerleme);
+      if (ilerleme > 0) kare = requestAnimationFrame(bosalt);
+    });
+  }
+
+  // Halka dolunca silinir; "Geri al" aynı yerde çıkar
+  function sil() {
+    var klavyeyle = tus;
+    basili = false;
+    tut.classList.remove('basili');
+    tut.disabled = true;
+    isaretle('');
+    dosya.hidden = true;
+    silindi.hidden = false;
+    yaz('SİLİNDİ', 'kirmizi');
+    // Klavyeyle silindiyse odağı tuş bırakılınca taşı; yoksa bırakılan tuş "Geri al"a basar
+    if (klavyeyle) {
+      document.addEventListener('keyup', function odakla() {
+        document.removeEventListener('keyup', odakla);
+        tus = null;
+        geriAl.focus();
+      });
+    } else {
+      geriAl.focus();
+    }
+  }
+  geriAl.addEventListener('click', function () {
+    ilerleme = 0;
+    ciz(0);
+    tut.disabled = false;
+    silindi.hidden = true;
+    dosya.hidden = false;
+    isaretle('kurtuldu');
+    yaz('GERİ ALINDI · DOSYA YERİNDE', 'yesil');
+    tut.focus();
+  });
+
+  // Fare ve dokunma
+  tut.addEventListener('pointerdown', function (e) {
+    if (e.button !== 0) return;
+    demoyuDurdur();
+    tut.setPointerCapture(e.pointerId);
+    basla();
+  });
+  ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(function (ad) {
+    tut.addEventListener(ad, birak);
+  });
+  tut.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+
+  // Klavye: Boşluk ya da Enter basılı tutulur, Esc vazgeçer
+  tut.addEventListener('keydown', function (e) {
+    if (e.key === ' ' || e.key === 'Enter') {
+      e.preventDefault();
+      if (!e.repeat && !tus) { demoyuDurdur(); tus = e.key; basla(); }
+    } else if (e.key === 'Escape') {
+      birak();
+    }
+  });
+  tut.addEventListener('keyup', function (e) {
+    if (e.key === tus) { e.preventDefault(); tus = null; birak(); }
+  });
+  tut.addEventListener('blur', function () { tus = null; birak(); });
+
+  // Açılışta kısa gösterim: %45'e kadar tutup erken bırakır
+  function demoyuDurdur() { clearTimeout(demo); demo = 0; }
+  if (!azHareket) {
+    demo = setTimeout(function () {
+      basla();
+      demo = setTimeout(function () { demo = 0; birak(); }, 450);
+    }, 900);
+  }
+
+  ciz(0);
+})();
+</script>
+</body>
+</html>

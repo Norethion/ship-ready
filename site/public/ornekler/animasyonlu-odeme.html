@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="yukseklik" content="560">
+<title>Animasyonlu ödeme</title>
+<style>
+  :root {
+    --zemin: #e8eaf3;
+    --yumusak: #f6f7fb;
+    --metin: #151a2d;
+    --soluk: #5a6378;
+    --ipucu: #687186;
+    --cizgi: #dde2ec;
+    --vurgu: #2e4cd6;
+    --vurgu-koyu: #1f2f96;
+    --basari: #15803d;
+    --hata: #d92d20;
+    --isik-islem: 240, 71, 106;
+    --isik-basari: 34, 197, 94;
+    --mono: ui-monospace, Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body { padding: 10px; overflow: hidden; font: 14px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--metin); background: var(--zemin); }
+  button { font: inherit; cursor: pointer; }
+  button:focus-visible { outline: 2px solid var(--vurgu); outline-offset: 2px; }
+  [tabindex="-1"]:focus { outline: none; }
+  .i { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+  /* Çerçeve ve adım çubuğu */
+  .app { height: 100%; display: flex; flex-direction: column; overflow: hidden; background: #fff; border-radius: 16px; box-shadow: 0 12px 32px rgba(20, 26, 45, .1); }
+  .ust { flex: none; display: flex; align-items: center; justify-content: space-between; height: 46px; padding: 0 14px; border-bottom: 1px solid var(--cizgi); font-size: 13px; }
+  .logo { display: flex; align-items: center; gap: 8px; letter-spacing: .05em; color: var(--soluk); }
+  .logo b { color: var(--metin); }
+  .logo .i { box-sizing: content-box; padding: 5px; border-radius: 8px; color: #fff; background: linear-gradient(135deg, #3d5cf0, var(--vurgu-koyu)); }
+  .adimlar { align-self: stretch; display: flex; gap: 16px; margin: 0; padding: 0; list-style: none; font-size: 12px; color: var(--soluk); }
+  .adimlar li { display: flex; align-items: center; gap: 6px; }
+  .adimlar li::before { content: "✓"; display: grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; font-size: 11px; color: #fff; background: #16a34a; }
+  .adimlar [aria-current] { font-weight: 600; color: var(--vurgu); box-shadow: inset 0 -2px 0 var(--vurgu); }
+  .adimlar [aria-current]::before { content: "3"; background: var(--vurgu); }
+
+  /* Gövde: dar ekranda alt alta, genişte yan yana */
+  .govde { flex: 1; min-height: 0; display: grid; }
+  .sahne { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 14px 12px; background: linear-gradient(#f8f9fd, #eef0f8); }
+  .form { display: flex; flex-direction: column; gap: 10px; padding: 14px 16px 16px; }
+  [data-adim="form"] .sonuc, [data-adim]:not([data-adim="form"]) .form { display: none; }
+
+  /* Kart önizlemesi: formun aynası, CVC alanında 3B döner */
+  .kart-kap { --k: 220px; position: relative; flex: none; width: var(--k); height: calc(var(--k) * .63); perspective: 1000px; view-transition-name: kart; }
+  .kart { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .7s cubic-bezier(.3, .7, .2, 1); }
+  .kart.cevrik { transform: rotateY(180deg); }
+  .yuz {
+    position: absolute; inset: 0; overflow: hidden; color: #fff; border-radius: calc(var(--k) * .055);
+    background: radial-gradient(90% 120% at 100% 0%, rgba(130, 155, 255, .35), transparent 55%), linear-gradient(135deg, #2a3a86, #141d4d 55%, #0b1030);
+    box-shadow: 0 14px 28px rgba(18, 26, 69, .28);
+    -webkit-backface-visibility: hidden; backface-visibility: hidden;
+  }
+  .on { display: flex; flex-direction: column; justify-content: space-between; padding: calc(var(--k) * .07); }
+  .on::after { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .3) 50%, transparent 65%); transform: translateX(-120%); }
+  .kart-ust { display: flex; align-items: center; gap: 6px; }
+  .cip { width: calc(var(--k) * .13); height: calc(var(--k) * .1); border-radius: 5px; background: linear-gradient(135deg, #f7da80, #c79f36); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15); }
+  .seviye { margin-left: auto; font-size: calc(var(--k) * .036); font-weight: 600; letter-spacing: .18em; }
+  .kart-no { font: 500 calc(var(--k) * .064)/1 var(--mono); letter-spacing: .06em; white-space: nowrap; }
+  .kart-alt { display: flex; align-items: flex-end; gap: calc(var(--k) * .07); font-size: calc(var(--k) * .043); font-weight: 600; letter-spacing: .06em; white-space: nowrap; }
+  .kart-alt small { display: block; font-size: 70%; color: rgba(255, 255, 255, .75); }
+  .kart-ad { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+  .marka { font-size: 1.75em; font-weight: 800; font-style: italic; line-height: 1; }
+  .kart:not([data-marka="visa"]) .marka { font-size: 1.35em; font-style: normal; }
+  [data-alan] { border-radius: 4px; outline: 1.5px solid transparent; outline-offset: 3px; transition: outline-color .2s; }
+  [data-alan].aktif { outline-color: rgba(255, 255, 255, .6); }
+  .arka { transform: rotateY(180deg); padding-top: 9%; font-size: calc(var(--k) * .028); letter-spacing: .12em; color: rgba(255, 255, 255, .75); }
+  .serit { height: 22%; background: #05070d; }
+  .arka small { display: block; margin: 5% 7% 3px; text-align: right; }
+  .imza { display: flex; justify-content: flex-end; height: calc(var(--k) * .1); margin: 0 7%; border-radius: 4px; background: repeating-linear-gradient(-45deg, #eceef3 0 4px, #d9dde7 4px 8px); }
+  .cvc { display: grid; place-items: center; min-width: 28%; color: #111; background: #fff; font: italic 700 calc(var(--k) * .05)/1 var(--mono); }
+
+  /* İşlem ve başarı */
+  [data-adim]:not([data-adim="form"]) .kart-kap { --k: min(300px, calc(100vw - 64px)); }
+  [data-adim="isleniyor"] .on { box-shadow: 0 0 0 2px rgba(var(--isik-islem), .75), 0 0 36px 6px rgba(var(--isik-islem), .45); animation: nabiz 1.1s ease-in-out infinite alternate; }
+  [data-adim="isleniyor"] .on::after { animation: isilti 1.4s ease-in-out infinite; }
+  [data-adim="basarili"] .on { box-shadow: 0 0 0 2.5px rgba(var(--isik-basari), .85), 0 0 36px 6px rgba(var(--isik-basari), .4); }
+  [data-adim="isleniyor"] .basarili, [data-adim="basarili"] .yukleniyor { display: none; }
+  .sonuc { text-align: center; }
+  .yukleniyor { display: flex; align-items: center; gap: 8px; margin: 0; font-weight: 600; }
+  .donen { width: 16px; height: 16px; border: 2px solid; border-right-color: transparent; border-radius: 50%; animation: don .7s linear infinite; }
+  .basarili { animation: belir .4s ease both; }
+  .onay { width: 46px; height: 46px; color: var(--basari); stroke-width: 2.5; }
+  .onay * { stroke-dasharray: 1; stroke-dashoffset: 1; animation: ciz .5s ease-out forwards; }
+  .onay circle { transform: rotate(-90deg); transform-origin: center; transform-box: fill-box; }
+  .onay path { animation-duration: .35s; animation-delay: .45s; }
+  .basarili h2 { margin: 4px 0 0; font-size: 17px; }
+  .basarili p { margin: 4px 0 12px; font-size: 13px; color: var(--soluk); }
+  .ikincil { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 16px; font-size: 13px; font-weight: 600; color: var(--metin); background: #fff; border: 1px solid var(--cizgi); border-radius: 10px; }
+
+  /* Form */
+  .form-bas { display: flex; align-items: center; justify-content: space-between; }
+  .form h2 { margin: 0; font-size: 15px; }
+  .test { display: flex; align-items: center; gap: 5px; padding: 5px 10px; font-size: 12px; font-weight: 600; color: var(--vurgu); background: #eef1fd; border: 0; border-radius: 99px; }
+  label { display: block; margin-bottom: 4px; font-size: 10.5px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--soluk); }
+  .kutu { position: relative; display: flex; align-items: center; }
+  .kutu .i { position: absolute; left: 11px; color: var(--ipucu); }
+  input { width: 100%; height: 38px; padding: 0 12px 0 34px; font: inherit; font-size: 16px; color: var(--metin); background: var(--yumusak); border: 1px solid var(--cizgi); border-radius: 10px; outline: none; transition: border-color .15s, box-shadow .15s; }
+  input::placeholder { color: var(--ipucu); }
+  input:focus { border-color: var(--vurgu); background: #fff; box-shadow: 0 0 0 3px rgba(46, 76, 214, .2); }
+  input[aria-invalid="true"] { border-color: var(--hata); box-shadow: 0 0 0 3px rgba(217, 45, 32, .15); }
+  .girdi-marka { display: none; position: absolute; right: 12px; font-size: 12px; font-weight: 800; font-style: italic; color: var(--vurgu-koyu); }
+  .sira { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .ode { display: flex; align-items: center; justify-content: center; gap: 8px; height: 42px; font-weight: 700; color: #fff; background: linear-gradient(#3654e0, #2238b8); border: 0; border-radius: 11px; box-shadow: 0 6px 16px rgba(46, 76, 214, .3); }
+  .ode:hover { filter: brightness(1.07); }
+  .ode .donen, .ode.yukleniyor .i { display: none; }
+  .ode.yukleniyor .donen { display: block; }
+
+  @media (min-width: 600px) {
+    [data-adim="form"] .govde { grid-template-columns: 1fr 1fr; }
+    [data-adim="form"] .sahne { border-right: 1px solid var(--cizgi); }
+    .kart-kap { --k: min(300px, 40vw); }
+    .form { justify-content: center; gap: 12px; padding: 20px 24px; }
+    .girdi-marka { display: block; }
+    #no { padding-right: 70px; }
+  }
+  @media (max-width: 599px) { .adimlar li:not([aria-current]) { display: none; } }
+
+  @keyframes nabiz { from { box-shadow: 0 0 0 1.5px rgba(var(--isik-islem), .4), 0 10px 26px rgba(var(--isik-islem), .2); } }
+  @keyframes isilti { to { transform: translateX(120%); } }
+  @keyframes don { to { transform: rotate(360deg); } }
+  @keyframes ciz { to { stroke-dashoffset: 0; } }
+  @keyframes belir { from { opacity: 0; transform: translateY(8px); } }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  }
+</style>
+</head>
+<body>
+<div class="app" id="app" data-adim="form">
+  <header class="ust">
+    <div class="logo"><svg class="i" viewBox="0 0 24 24"><path d="M12 3 3 8l9 5 9-5zM3 13l9 5 9-5"/></svg><span><b>NOVA</b> ÖDEME</span></div>
+    <ol class="adimlar" aria-label="Sipariş adımları"><li>Sepet</li><li>Teslimat</li><li aria-current="step">Ödeme</li></ol>
+  </header>
+
+  <main class="govde">
+    <section class="sahne">
+      <!-- Kart formun görsel yansıması olduğu için ekran okuyucudan gizli -->
+      <div class="kart-kap" aria-hidden="true">
+        <div class="kart" id="kart">
+          <div class="yuz on">
+            <div class="kart-ust">
+              <span class="cip"></span>
+              <svg class="i" viewBox="0 0 24 24"><path d="M7 8a5.5 5.5 0 0 1 0 8M10.5 5.5a9 9 0 0 1 0 13M14 3a12.5 12.5 0 0 1 0 18"/></svg>
+              <span class="seviye">PLATİN</span>
+            </div>
+            <div class="kart-no" data-alan="no" id="kNo"></div>
+            <div class="kart-alt">
+              <div class="kart-ad" data-alan="ad"><small>KART SAHİBİ</small><span id="kAd"></span></div>
+              <div data-alan="skt"><small>SKT</small><span id="kSkt"></span></div>
+              <b class="marka" id="kMarka"></b>
+            </div>
+          </div>
+          <div class="yuz arka">
+            <div class="serit"></div>
+            <small>GÜVENLİK KODU</small>
+            <div class="imza"><span class="cvc" data-alan="cvc" id="kCvc"></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="sonuc">
+        <p class="yukleniyor"><span class="donen"></span>Güvenli işlem yapılıyor…</p>
+        <div class="basarili">
+          <svg class="i onay" viewBox="0 0 52 52"><circle cx="26" cy="26" r="23" pathLength="1"/><path d="m16 27 7 7 13-14" pathLength="1"/></svg>
+          <h2>Ödeme başarılı!</h2>
+          <p>1.234,00 ₺ tutarındaki ödemeniz onaylandı.</p>
+          <button type="button" class="ikincil" id="yeni"><svg class="i" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5"/></svg>Yeni ödeme</button>
+        </div>
+      </div>
+    </section>
+
+    <form class="form" id="form" novalidate>
+      <div class="form-bas">
+        <h2 id="formBaslik" tabindex="-1">Kart bilgileri</h2>
+        <button type="button" class="test" id="test"><svg class="i" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Test verisi</button>
+      </div>
+      <div>
+        <label for="ad">Kart sahibi</label>
+        <div class="kutu">
+          <svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+          <input id="ad" autocomplete="cc-name" placeholder="Ad Soyad" maxlength="26" spellcheck="false">
+        </div>
+      </div>
+      <div>
+        <label for="no">Kart numarası</label>
+        <div class="kutu">
+          <svg class="i" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+          <input id="no" inputmode="numeric" autocomplete="cc-number" placeholder="0000 0000 0000 0000">
+          <b class="girdi-marka" id="iMarka"></b>
+        </div>
+      </div>
+      <div class="sira">
+        <div>
+          <label for="skt">Son kullanma</label>
+          <div class="kutu">
+            <svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            <input id="skt" inputmode="numeric" autocomplete="cc-exp" placeholder="AA/YY">
+          </div>
+        </div>
+        <div>
+          <label for="cvc">CVC</label>
+          <div class="kutu">
+            <svg class="i" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+            <input id="cvc" inputmode="numeric" autocomplete="cc-csc" placeholder="•••">
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="ode" id="ode"><span class="donen"></span><span id="odeMetin">1.234,00 ₺ öde</span><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </form>
+  </main>
+  <p class="sr" role="status" id="durum"></p>
+</div>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var app = $('app'), form = $('form'), kart = $('kart'), ode = $('ode'), yeni = $('yeni');
+  var alanlar = { ad: $('ad'), no: $('no'), skt: $('skt'), cvc: $('cvc') };
+  var azHareket = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var MARKA_ADI = { visa: 'VISA', mastercard: 'mastercard', troy: 'troy', '': '' };
+  var zamanlar = [], testZaman = null, mesgul = false;
+
+  /* Biçimlendiriciler: ham metni alanın biçimine çevirir */
+  var BICIM = {
+    ad: function (v) { return v; },
+    no: function (v) { return v.replace(/\D/g, '').slice(0, 16).replace(/(\d{4})(?=\d)/g, '$1 '); },
+    skt: function (v) {
+      var d = v.replace(/\D/g, '');
+      if (/^[2-9]/.test(d)) d = '0' + d; // "5" yazılınca "05" olur
+      d = d.slice(0, 4);
+      return d.length > 2 ? d.slice(0, 2) + '/' + d.slice(2) : d;
+    },
+    cvc: function (v) { return v.replace(/\D/g, '').slice(0, 3); }
+  };
+
+  // Kart türünü numaranın ilk hanelerinden tahmin et
+  function markaBul(r) {
+    if (/^4/.test(r)) return 'visa';
+    if (/^(5[1-5]|222[1-9]|22[3-9]\d|2[3-6]\d\d|27[01]\d|2720)/.test(r)) return 'mastercard';
+    if (/^9792/.test(r)) return 'troy';
+    return '';
+  }
+
+  // Yazılmamış haneler şablondan gelir: "4242 42•• •••• ••••"
+  function sablonla(deger, sablon) { return deger + sablon.slice(deger.length); }
+
+  function guncelle() {
+    $('kNo').textContent = sablonla(alanlar.no.value, '•••• •••• •••• ••••');
+    $('kAd').textContent = alanlar.ad.value.trim().toLocaleUpperCase('tr-TR') || 'AD SOYAD';
+    $('kSkt').textContent = sablonla(alanlar.skt.value, 'AA/YY');
+    $('kCvc').textContent = sablonla(alanlar.cvc.value, '•••');
+    var marka = markaBul(alanlar.no.value.replace(/\D/g, ''));
+    kart.dataset.marka = marka;
+    $('kMarka').textContent = $('iMarka').textContent = MARKA_ADI[marka];
+  }
+
+  // Biçimlerken imleci aynı rakamın arkasında tut
+  function bicimle(g, fn) {
+    var eski = g.value, imlec = g.selectionStart, yeni = fn(eski);
+    if (yeni === eski) return;
+    var konum = yeni.length;
+    if (imlec < eski.length) {
+      var once = eski.slice(0, imlec).replace(/\D/g, '').length;
+      for (konum = 0; konum < yeni.length && once > 0; konum++) if (/\d/.test(yeni[konum])) once--;
+    }
+    g.value = yeni;
+    g.setSelectionRange(konum, konum);
+  }
+
+  // Odaktaki alanı kartta çerçevele; CVC'de kartı çevir
+  function alanVurgula(ad) {
+    kart.querySelectorAll('[data-alan]').forEach(function (el) { el.classList.toggle('aktif', el.dataset.alan === ad); });
+    kart.classList.toggle('cevrik', ad === 'cvc');
+  }
+
+  Object.keys(alanlar).forEach(function (k) {
+    var g = alanlar[k];
+    g.addEventListener('input', function () { testDurdur(); bicimle(g, BICIM[k]); g.removeAttribute('aria-invalid'); guncelle(); });
+    g.addEventListener('focus', function () { testDurdur(); alanVurgula(k); });
+    g.addEventListener('blur', function () { alanVurgula(null); });
+  });
+
+  /* Test verisi: alanlar harf harf dolar, kart canlı güncellenir */
+  function testDurdur() { clearTimeout(testZaman); }
+  $('test').addEventListener('click', function () {
+    var sira = [['ad', 'Ayşe Yılmaz'], ['no', '4242424242424242'], ['skt', '1230'], ['cvc', '123']];
+    var i = 0, j = 0, hemen = azHareket.matches;
+    testDurdur();
+    form.reset();
+    (function yaz() {
+      var ad = sira[i][0], metin = sira[i][1];
+      j = hemen ? metin.length : j + 1;
+      alanlar[ad].value = BICIM[ad](metin.slice(0, j));
+      alanlar[ad].removeAttribute('aria-invalid');
+      alanVurgula(ad);
+      guncelle();
+      if (j === metin.length) { i++; j = 0; }
+      if (i < sira.length) testZaman = setTimeout(yaz, hemen ? 0 : 40);
+      else testZaman = setTimeout(alanVurgula, hemen ? 0 : 700, null);
+    })();
+  });
+
+  function hatalariBul() {
+    var s = alanlar.skt.value.match(/^(\d\d)\/(\d\d)$/), ay = s ? +s[1] : 0;
+    return Object.keys(alanlar).filter(function (k) {
+      if (k === 'ad') return alanlar.ad.value.trim().length < 3;
+      if (k === 'no') return alanlar.no.value.replace(/\D/g, '').length !== 16;
+      if (k === 'cvc') return alanlar.cvc.value.length !== 3;
+      // Son kullanma ayının ertesi ayı geldiyse kartın süresi dolmuştur
+      return !s || ay < 1 || ay > 12 || new Date(2000 + +s[2], ay) <= new Date();
+    });
+  }
+
+  /* Adım geçişi: destekleyen tarayıcıda View Transitions kartı yumuşakça taşır */
+  function adimaGec(adim) {
+    var uygula = function () { app.dataset.adim = adim; };
+    if (document.startViewTransition && !azHareket.matches) {
+      var gecis = document.startViewTransition(uygula);
+      gecis.ready.catch(function () {});
+      return gecis.updateCallbackDone;
+    }
+    uygula();
+    return Promise.resolve();
+  }
+  function sonra(ms, fn) { zamanlar.push(setTimeout(fn, ms)); }
+  function duyur(metin) { $('durum').textContent = metin; }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (mesgul) return;
+    testDurdur();
+    var hatali = hatalariBul();
+    Object.keys(alanlar).forEach(function (k) {
+      if (hatali.indexOf(k) > -1) alanlar[k].setAttribute('aria-invalid', 'true');
+      else alanlar[k].removeAttribute('aria-invalid');
+    });
+    if (hatali.length) {
+      alanlar[hatali[0]].focus({ preventScroll: true });
+      return duyur('Lütfen işaretli alanları kontrol edin.');
+    }
+    // Sahte ödeme: düğmede yükleniyor → kart parlar → başarı
+    mesgul = true;
+    alanVurgula(null);
+    ode.classList.add('yukleniyor');
+    ode.setAttribute('aria-disabled', 'true');
+    $('odeMetin').textContent = 'İşleniyor…';
+    duyur('Ödeme işleniyor.');
+    sonra(600, function () {
+      adimaGec('isleniyor');
+      sonra(2200, function () {
+        adimaGec('basarili').then(function () { yeni.focus({ preventScroll: true }); });
+        duyur('Ödeme başarılı. 1.234,00 ₺ tahsil edildi.');
+      });
+    });
+  });
+
+  yeni.addEventListener('click', function () {
+    zamanlar.forEach(clearTimeout);
+    zamanlar = [];
+    mesgul = false;
+    form.reset();
+    guncelle();
+    ode.classList.remove('yukleniyor');
+    ode.removeAttribute('aria-disabled');
+    $('odeMetin').textContent = '1.234,00 ₺ öde';
+    duyur('');
+    adimaGec('form').then(function () { $('formBaslik').focus({ preventScroll: true }); });
+  });
+
+  guncelle();
+})();
+</script>
+</body>
+</html>

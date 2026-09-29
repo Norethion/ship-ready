@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="yukseklik" content="420">
+<title>Kırmızıyı idareli kullan</title>
+<style>
+/* ── Ortak görsel dil: altı "tehlikeli işlem" örneğinde aynıdır ── */
+:root{
+  --zemin:#0e0f14;
+  --izgara:rgba(255,255,255,.035);
+  --yuzey:#17181f;
+  --yuzey-2:#20212a;
+  --cizgi:#2c2e39;
+  --metin:#eef0f5;
+  --soluk:#a0a3b0;
+  --kirmizi:#f26d6d;         /* yıkıcı işlem yazısı, halka */
+  --kirmizi-dolgu:#c9343c;   /* yıkıcı düğme zemini (beyaz yazıyla 5:1) */
+  --kirmizi-zemin:rgba(242,109,109,.12);
+  --yesil:#2fd3b5;           /* güvenli sonuç */
+  --yesil-dolgu:#22c4a8;
+  --yesil-zemin:rgba(47,211,181,.12);
+  --amber:#f2a93b;           /* bekleyen iş, uyarı */
+  --amber-zemin:rgba(242,169,59,.12);
+  --yaricap:12px;
+  --font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%}
+body{
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;justify-content:safe center;gap:14px;padding:12px;
+  font:14px/1.4 var(--font);color:var(--metin);-webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(90% 70% at 50% 45%,rgba(255,255,255,.045),transparent 70%),
+    linear-gradient(var(--izgara) 1px,transparent 1px) 0 0/24px 24px,
+    linear-gradient(90deg,var(--izgara) 1px,transparent 1px) 0 0/24px 24px,
+    var(--zemin);
+}
+.ikon{flex:none;width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ikon.kucuk{width:12px;height:12px;stroke-width:2.5}
+.kart{background:var(--yuzey);border:1px solid var(--cizgi);border-radius:var(--yaricap);box-shadow:0 12px 32px rgba(0,0,0,.35)}
+.rozet{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:999px;font-size:10.5px;font-weight:700;letter-spacing:.12em;white-space:nowrap;color:var(--soluk);background:var(--yuzey-2);border:1px solid var(--cizgi)}
+.rozet.kirmizi{color:var(--kirmizi);background:var(--kirmizi-zemin);border-color:rgba(242,109,109,.3)}
+.rozet.yesil{color:var(--yesil);background:var(--yesil-zemin);border-color:rgba(47,211,181,.3)}
+.rozet.amber{color:var(--amber);background:var(--amber-zemin);border-color:rgba(242,169,59,.3)}
+.dugme{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:34px;padding:0 14px;border-radius:8px;border:1px solid var(--cizgi);background:var(--yuzey-2);color:var(--metin);font:600 13px/1 var(--font);white-space:nowrap;cursor:pointer;transition:background-color .15s,border-color .15s,color .15s,transform .1s}
+.dugme:hover{background:#2a2c37}
+.dugme:active{transform:scale(.97)}
+.dugme.kucuk{height:30px;padding:0 11px;font-size:12.5px}
+.dugme.birincil{background:var(--metin);border-color:var(--metin);color:#111218}
+.dugme.birincil:hover{background:#fff}
+.dugme.tehlike{background:var(--kirmizi-dolgu);border-color:var(--kirmizi-dolgu);color:#fff}
+.dugme.tehlike:hover{background:#b52d35}
+.dugme.tehlike-cizgi{background:transparent;border-color:rgba(242,109,109,.45);color:var(--kirmizi)}
+.dugme.tehlike-cizgi:hover{background:var(--kirmizi-zemin)}
+.dugme.yesil{background:var(--yesil-dolgu);border-color:var(--yesil-dolgu);color:#04201b}
+.dugme.yesil:hover{background:var(--yesil)}
+.dugme:disabled{opacity:.45;cursor:not-allowed;transform:none}
+:focus-visible{outline:2px solid var(--yesil);outline-offset:2px}
+.baslik{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.baslik h1{margin:0;font-size:clamp(22px,5vw,30px);font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.not{margin:0;padding:7px 14px;border-radius:10px;font-size:13.5px;font-weight:700;text-align:center;color:var(--soluk);background:var(--yuzey-2);border:1px solid var(--cizgi)}
+.not.yesil{color:var(--yesil);background:var(--yesil-zemin);border-color:rgba(47,211,181,.25)}
+.gizli{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* Kart içindeki alçak çerçevede başlık ve alt not gizlenir; tam ekranda görünür */
+@media (max-height:479px){.vitrin{display:none!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* ── Bu örnek: aynı ayarlar menüsü iki renk düzeniyle ── */
+body{gap:10px}
+.sahne{width:100%;max-width:400px;display:flex;flex-direction:column;align-items:center;gap:10px}
+
+/* Görünüm seçici */
+.secim{align-self:stretch;display:flex;gap:3px;padding:3px;border-radius:10px;background:var(--yuzey);border:1px solid var(--cizgi)}
+.secenek{flex:1;height:30px;border:0;border-radius:7px;background:transparent;color:var(--soluk);font:600 12.5px var(--font);cursor:pointer}
+.secenek[aria-pressed="true"]{background:var(--yuzey-2);color:var(--metin);box-shadow:inset 0 0 0 1px var(--cizgi)}
+
+/* Ayarlar kartı */
+.ayarlar{align-self:stretch;padding:12px 14px 4px}
+.a-ust{display:flex;align-items:center;justify-content:space-between}
+.a-ust h2{margin:0;font-size:16px}
+.zil{position:relative;width:28px;height:28px;display:grid;place-items:center;color:var(--soluk)}
+.zil .sayi{position:absolute;top:0;right:0;min-width:15px;height:15px;padding:0 4px;border-radius:99px;font-size:10px;font-weight:700;line-height:15px;text-align:center}
+.sekmeler{display:flex;gap:16px;margin:4px 0 8px;border-bottom:1px solid var(--cizgi);font-size:13px;font-weight:600;color:var(--soluk)}
+.sekme{padding:5px 0 7px}
+.uyari{display:flex;align-items:center;gap:8px;margin:0;padding:7px 10px;border-radius:8px;border:1px solid;font-size:12px;font-weight:600}
+.satir{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 0;border-top:1px solid var(--cizgi)}
+.uyari + .satir{border-top:0;margin-top:4px}
+.s-metin{min-width:0;display:flex;flex-direction:column}
+.s-metin b{font-size:13px}
+.s-metin small{font-size:11.5px;color:var(--soluk)}
+.anahtar{flex:none;position:relative;width:38px;height:22px;border:0;border-radius:99px;background:#4a4d5a;cursor:pointer}
+.anahtar::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .2s}
+.anahtar[aria-checked="true"]::after{transform:translateX(16px)}
+
+/* Renkler: "idareli" düzen varsayılan, "her-yer" düzeni kırmızıyı her yere yayar */
+.k{transition:color .3s,background-color .3s,border-color .3s,box-shadow .3s}
+.gecis .k{transition-delay:calc(var(--s) * 90ms)}   /* görünüm değişince sırayla boyanır */
+.sekme.etkin{color:var(--metin);box-shadow:inset 0 -2px 0 var(--metin)}
+.sayi{background:#3a3c48;color:var(--metin)}
+.uyari{color:var(--amber);background:var(--amber-zemin);border-color:rgba(242,169,59,.28)}
+.anahtar[aria-checked="true"]{background:var(--yesil-dolgu)}
+[data-gorunum="her-yer"] .sekme.etkin{color:var(--kirmizi);box-shadow:inset 0 -2px 0 var(--kirmizi)}
+[data-gorunum="her-yer"] .sayi{background:var(--kirmizi-dolgu);color:#fff}
+[data-gorunum="her-yer"] .uyari{color:var(--kirmizi);background:var(--kirmizi-zemin);border-color:rgba(242,109,109,.3)}
+[data-gorunum="her-yer"] .cikis{color:var(--kirmizi);background:transparent;border-color:rgba(242,109,109,.45)}
+[data-gorunum="her-yer"] .anahtar[aria-checked="true"]{background:var(--kirmizi-dolgu)}
+
+/* Kırmızı öğe sayacı */
+.sayac{display:flex;align-items:center;gap:12px;padding:7px 14px;border-radius:10px;background:var(--yuzey);border:1px solid var(--cizgi)}
+.sayac-etiket{font-size:10.5px;font-weight:700;letter-spacing:.12em;color:var(--soluk)}
+.sayac b{min-width:1ch;font-size:22px;font-weight:800;line-height:1;color:var(--kirmizi);font-variant-numeric:tabular-nums}
+.noktalar{display:flex;gap:5px}
+.noktalar i{width:7px;height:7px;border-radius:50%;background:#3a3c48;transition:background-color .2s}
+.noktalar i.on{background:var(--kirmizi)}
+</style>
+</head>
+<body>
+
+<header class="vitrin baslik">
+  <span class="rozet">KALIP 04 · KIRMIZI BÜTÇE</span>
+  <h1>Kırmızı bir bütçedir</h1>
+</header>
+
+<main class="sahne">
+  <div class="secim" role="group" aria-label="Kırmızı kullanımı">
+    <button class="secenek" type="button" data-gorunum="her-yer" aria-pressed="true">Her yer kırmızı</button>
+    <button class="secenek" type="button" data-gorunum="idareli" aria-pressed="false">Sadece silme</button>
+  </div>
+
+  <section class="kart ayarlar" id="ayarlar" data-gorunum="her-yer" aria-labelledby="a-baslik">
+    <div class="a-ust">
+      <h2 id="a-baslik">Ayarlar</h2>
+      <span class="zil" role="img" aria-label="3 yeni bildirim">
+        <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 21h4"/></svg>
+        <span class="sayi k" style="--s:1" aria-hidden="true">3</span>
+      </span>
+    </div>
+    <div class="sekmeler">
+      <span class="sekme etkin k" style="--s:0">Hesap</span><span class="sekme">Gizlilik</span><span class="sekme">Faturalama</span>
+    </div>
+    <p class="uyari k" style="--s:2">
+      <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3L2 20h20z"/><path d="M12 10v4M12 17h.01"/></svg>Deneme süren doldu.
+    </p>
+    <div class="satir">
+      <div class="s-metin"><b>Oturumlar</b><small id="oturum">4 cihazda açık</small></div>
+      <button class="dugme kucuk cikis k" style="--s:3" type="button" id="cikis">
+        <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H5v16h4"/><path d="M14 8l4 4-4 4M18 12H9"/></svg>Çıkış yap
+      </button>
+    </div>
+    <div class="satir">
+      <div class="s-metin"><b id="bulten">E-posta bülteni</b><small>Haberler ve kampanyalar</small></div>
+      <button class="anahtar k" style="--s:4" type="button" role="switch" aria-checked="true" aria-labelledby="bulten" id="anahtar"></button>
+    </div>
+    <div class="satir">
+      <div class="s-metin"><b>Hesap silme</b><small id="sil-not">Geri alınamaz.</small></div>
+      <button class="dugme kucuk tehlike" type="button" id="sil">
+        <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>Hesabı sil
+      </button>
+    </div>
+  </section>
+
+  <div class="sayac">
+    <span class="sayac-etiket">KIRMIZI ÖĞE</span>
+    <b id="sayi">6</b>
+    <span class="noktalar" id="noktalar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+  </div>
+</main>
+
+<p class="vitrin not">Kırmızıyı yalnızca yıkıma harca.</p>
+
+<script>
+(function () {
+  var azHareket = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $(id) { return document.getElementById(id); }
+  var ayarlar = $('ayarlar'), anahtar = $('anahtar'), sayi = $('sayi');
+  var secenekler = [].slice.call(document.querySelectorAll('.secenek'));
+  var noktalar = [].slice.call($('noktalar').children);
+  var gorunum = 'her-yer', adim = 0, gecis = 0, demo = 0;
+
+  // Şu an kaç öğe kırmızı?
+  function kirmiziSayisi() {
+    if (gorunum === 'idareli') return 1;   // sadece "Hesabı sil"
+    return anahtar.getAttribute('aria-checked') === 'true' ? 6 : 5;
+  }
+  function sayaciCiz(n) {
+    sayi.textContent = n;
+    noktalar.forEach(function (d, i) { d.classList.toggle('on', i >= noktalar.length - n); });
+  }
+  // Sayaç hedefe birer birer yürür (öğelerin sırayla boyanmasıyla aynı tempoda)
+  function sayacaGit(hedef) {
+    clearInterval(adim);
+    if (azHareket) return sayaciCiz(hedef);
+    adim = setInterval(function () {
+      var n = +sayi.textContent;
+      if (n === hedef) return clearInterval(adim);
+      sayaciCiz(n + (hedef > n ? 1 : -1));
+    }, 90);
+  }
+
+  function gorunumSec(yeni) {
+    gorunum = yeni;
+    ayarlar.classList.add('gecis');
+    ayarlar.dataset.gorunum = yeni;
+    clearTimeout(gecis);
+    gecis = setTimeout(function () { ayarlar.classList.remove('gecis'); }, 800);
+    secenekler.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.gorunum === yeni); });
+    sayacaGit(kirmiziSayisi());
+  }
+
+  secenekler.forEach(function (b) {
+    b.addEventListener('click', function () { clearTimeout(demo); gorunumSec(b.dataset.gorunum); });
+  });
+  anahtar.addEventListener('click', function () {
+    clearTimeout(demo);
+    anahtar.setAttribute('aria-checked', anahtar.getAttribute('aria-checked') !== 'true');
+    sayacaGit(kirmiziSayisi());
+  });
+  $('cikis').addEventListener('click', function () {
+    clearTimeout(demo);
+    $('oturum').textContent = 'Sadece bu cihazda';
+  });
+  $('sil').addEventListener('click', function () {
+    clearTimeout(demo);
+    $('sil-not').textContent = 'Gösterim: hesap silinmedi.';
+  });
+
+  // Açılışta bir kez "her yer kırmızı"dan "sadece silme"ye geçer
+  sayaciCiz(6);
+  if (!azHareket) demo = setTimeout(function () { gorunumSec('idareli'); }, 1600);
+})();
+</script>
+</body>
+</html>

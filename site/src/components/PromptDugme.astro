@@ -1,13 +1,17 @@
 ---
 // Prompt'u panoya kopyalayan düğme. Ne yaptığı adında ve simgesinde yazar; üzerine gelince prompt'un kendisi görünür.
+// tur="kod" canlı örneğin HTML kodunu kopyalar; ipucunda kod yerine ne kopyalanacağı yazar. ana, kartın asıl eylemini dolu düğme yapar;
+// simge, etiketi sadece ekran okuyucuya bırakıp düğmeyi simgeye indirir (dar alt şeritler için).
 import { Icon } from '@astrojs/starlight/components';
 
 interface Props {
 	metin: string;
 	etiket: string;
-	tur?: 'denetim' | 'kurulum' | 'claude' | 'codex' | 'uygulama' | 'kullanim' | 'tasarim';
+	tur?: 'denetim' | 'kurulum' | 'claude' | 'codex' | 'uygulama' | 'kullanim' | 'tasarim' | 'kod';
+	ana?: boolean;
+	simge?: boolean;
 }
-const { metin, etiket, tur = 'kullanim' } = Astro.props;
+const { metin, etiket, tur = 'kullanim', ana = false, simge = false } = Astro.props;
 const SIMGE = {
 	denetim: 'approve-check-circle',
 	kurulum: 'download',
@@ -16,11 +20,15 @@ const SIMGE = {
 	uygulama: 'desktop',
 	kullanim: 'setting',
 	tasarim: 'pencil',
+	kod: 'document',
 } as const;
-const ipucu = `Kopyalanacak prompt:\n\n${metin.length > 500 ? metin.slice(0, 500) + '…' : metin}`;
+const ipucu =
+	tur === 'kod'
+		? 'Örneğin tek dosyalık HTML kodunu (CSS ve JavaScript içinde) kopyalar'
+		: `Kopyalanacak prompt:\n\n${metin.length > 500 ? metin.slice(0, 500) + '…' : metin}`;
 ---
 
-<button type="button" class={`prompt-dugme t-${tur}`} data-kopya={metin} title={ipucu}>
+<button type="button" class={`prompt-dugme t-${tur}${ana ? ' ana' : ''}${simge ? ' simge' : ''}`} data-kopya={metin} title={simge ? `${etiket}: ${ipucu}` : ipucu}>
 	<Icon name={SIMGE[tur]} size="1em" />
 	<span>{etiket}</span>
 </button>

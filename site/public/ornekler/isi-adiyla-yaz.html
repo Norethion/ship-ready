@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="yukseklik" content="420">
+<title>İşi adıyla yaz</title>
+<style>
+/* ── Ortak görsel dil: altı "tehlikeli işlem" örneğinde aynıdır ── */
+:root{
+  --zemin:#0e0f14;
+  --izgara:rgba(255,255,255,.035);
+  --yuzey:#17181f;
+  --yuzey-2:#20212a;
+  --cizgi:#2c2e39;
+  --metin:#eef0f5;
+  --soluk:#a0a3b0;
+  --kirmizi:#f26d6d;         /* yıkıcı işlem yazısı, halka */
+  --kirmizi-dolgu:#c9343c;   /* yıkıcı düğme zemini (beyaz yazıyla 5:1) */
+  --kirmizi-zemin:rgba(242,109,109,.12);
+  --yesil:#2fd3b5;           /* güvenli sonuç */
+  --yesil-dolgu:#22c4a8;
+  --yesil-zemin:rgba(47,211,181,.12);
+  --amber:#f2a93b;           /* bekleyen iş, uyarı */
+  --amber-zemin:rgba(242,169,59,.12);
+  --yaricap:12px;
+  --font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%}
+body{
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;justify-content:safe center;gap:14px;padding:12px;
+  font:14px/1.4 var(--font);color:var(--metin);-webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(90% 70% at 50% 45%,rgba(255,255,255,.045),transparent 70%),
+    linear-gradient(var(--izgara) 1px,transparent 1px) 0 0/24px 24px,
+    linear-gradient(90deg,var(--izgara) 1px,transparent 1px) 0 0/24px 24px,
+    var(--zemin);
+}
+.ikon{flex:none;width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ikon.kucuk{width:12px;height:12px;stroke-width:2.5}
+.kart{background:var(--yuzey);border:1px solid var(--cizgi);border-radius:var(--yaricap);box-shadow:0 12px 32px rgba(0,0,0,.35)}
+.rozet{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:999px;font-size:10.5px;font-weight:700;letter-spacing:.12em;white-space:nowrap;color:var(--soluk);background:var(--yuzey-2);border:1px solid var(--cizgi)}
+.rozet.kirmizi{color:var(--kirmizi);background:var(--kirmizi-zemin);border-color:rgba(242,109,109,.3)}
+.rozet.yesil{color:var(--yesil);background:var(--yesil-zemin);border-color:rgba(47,211,181,.3)}
+.rozet.amber{color:var(--amber);background:var(--amber-zemin);border-color:rgba(242,169,59,.3)}
+.dugme{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:34px;padding:0 14px;border-radius:8px;border:1px solid var(--cizgi);background:var(--yuzey-2);color:var(--metin);font:600 13px/1 var(--font);white-space:nowrap;cursor:pointer;transition:background-color .15s,border-color .15s,color .15s,transform .1s}
+.dugme:hover{background:#2a2c37}
+.dugme:active{transform:scale(.97)}
+.dugme.kucuk{height:30px;padding:0 11px;font-size:12.5px}
+.dugme.birincil{background:var(--metin);border-color:var(--metin);color:#111218}
+.dugme.birincil:hover{background:#fff}
+.dugme.tehlike{background:var(--kirmizi-dolgu);border-color:var(--kirmizi-dolgu);color:#fff}
+.dugme.tehlike:hover{background:#b52d35}
+.dugme.tehlike-cizgi{background:transparent;border-color:rgba(242,109,109,.45);color:var(--kirmizi)}
+.dugme.tehlike-cizgi:hover{background:var(--kirmizi-zemin)}
+.dugme.yesil{background:var(--yesil-dolgu);border-color:var(--yesil-dolgu);color:#04201b}
+.dugme.yesil:hover{background:var(--yesil)}
+.dugme:disabled{opacity:.45;cursor:not-allowed;transform:none}
+:focus-visible{outline:2px solid var(--yesil);outline-offset:2px}
+.baslik{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.baslik h1{margin:0;font-size:clamp(22px,5vw,30px);font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.not{margin:0;padding:7px 14px;border-radius:10px;font-size:13.5px;font-weight:700;text-align:center;color:var(--soluk);background:var(--yuzey-2);border:1px solid var(--cizgi)}
+.not.yesil{color:var(--yesil);background:var(--yesil-zemin);border-color:rgba(47,211,181,.25)}
+.gizli{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* Kart içindeki alçak çerçevede başlık ve alt not gizlenir; tam ekranda görünür */
+@media (max-height:479px){.vitrin{display:none!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* ── Bu örnek: iki onay penceresi, dar ekranda alt alta ── */
+.karsilastir{width:100%;max-width:760px;display:grid;gap:8px}
+@media (min-width:560px){.karsilastir{grid-template-columns:1fr 1fr;gap:16px}}
+.orn{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:5px}
+.pencere{align-self:stretch;flex:1;display:flex;flex-direction:column;padding:11px 14px}
+.p-baslik{margin:0 0 2px;font-size:15px;font-weight:700}
+.p-metin{margin:0 0 10px;font-size:12.5px;color:var(--soluk)}
+.p-metin b{color:var(--metin)}
+.p-alt{margin-top:auto;display:flex;justify-content:flex-end;gap:8px}
+
+/* Tıklamanın sonucu */
+.sonuc{align-self:stretch;margin:0;min-height:24px;display:flex;align-items:center;padding:3px 10px;border-radius:8px;font-size:12px;font-weight:600;color:var(--soluk);background:var(--yuzey);border:1px solid var(--cizgi)}
+.sonuc.kirmizi{color:var(--kirmizi);background:var(--kirmizi-zemin);border-color:rgba(242,109,109,.25)}
+.sonuc.yesil{color:var(--yesil);background:var(--yesil-zemin);border-color:rgba(47,211,181,.25)}
+.sonuc.yeni{animation:belir .25s ease}
+@keyframes belir{from{opacity:0;transform:translateY(-3px)}}
+</style>
+</head>
+<body>
+
+<header class="vitrin baslik">
+  <span class="rozet">KALIP 02 · ETİKETLER</span>
+  <h1>İşi adıyla yaz</h1>
+</header>
+
+<main class="karsilastir">
+  <!-- Yanlış: soru ve Evet/Hayır, hiçbiri ne olacağını söylemiyor -->
+  <section class="orn">
+    <span class="rozet kirmizi">BÖYLE DEĞİL</span>
+    <div class="kart pencere" role="group" aria-labelledby="y-baslik">
+      <p class="p-baslik" id="y-baslik">Emin misin?</p>
+      <p class="p-metin"><b>Q3 Kampanyası</b> ve 84 dosyası herkes için kalıcı olarak silinir.</p>
+      <div class="p-alt">
+        <button class="dugme" type="button" data-sonuc="Proje duruyor. Ama “Hayır” neye?">Hayır</button>
+        <button class="dugme birincil" type="button" data-sonuc="✕ Proje silindi. “Evet” neye evetti?" data-renk="kirmizi">Evet</button>
+      </div>
+    </div>
+    <p class="sonuc kirmizi" role="status">“Evet” neyi onaylıyor? Kör tıklanır.</p>
+  </section>
+
+  <!-- Doğru: düğmeler işin adını taşıyor -->
+  <section class="orn">
+    <span class="rozet yesil">BÖYLE</span>
+    <div class="kart pencere" role="group" aria-labelledby="d-baslik">
+      <p class="p-baslik" id="d-baslik">Bu proje silinsin mi?</p>
+      <p class="p-metin"><b>Q3 Kampanyası</b> ve 84 dosyası herkes için kalıcı olarak silinir.</p>
+      <div class="p-alt">
+        <button class="dugme" type="button" data-sonuc="✓ Proje duruyor, bilerek tutuldu." data-renk="yesil">Projeyi tut</button>
+        <button class="dugme tehlike" type="button" data-sonuc="✓ Okunarak silindi: fiil uyardı." data-renk="yesil">Projeyi sil</button>
+      </div>
+    </div>
+    <p class="sonuc yesil" role="status">“Projeyi sil”: fiil uyarının kendisi.</p>
+  </section>
+</main>
+
+<p class="vitrin not yesil">Fiil, uyarının kendisidir.</p>
+
+<script>
+(function () {
+  // Düğmeye basınca sonucu kendi örneğinin altına yaz
+  document.querySelectorAll('[data-sonuc]').forEach(function (dugme) {
+    dugme.addEventListener('click', function () {
+      var sonuc = dugme.closest('.orn').querySelector('.sonuc');
+      sonuc.textContent = dugme.dataset.sonuc;
+      sonuc.className = 'sonuc ' + (dugme.dataset.renk || '');
+      void sonuc.offsetWidth;          // animasyonu yeniden başlatmak için
+      sonuc.classList.add('yeni');
+    });
+  });
+})();
+</script>
+</body>
+</html>
