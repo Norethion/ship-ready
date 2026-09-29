@@ -31,7 +31,7 @@ Komutları aksi belirtilmedikçe depo kökünden çalıştır.
 | Kimlik, atıf ve rapor doğrulaması | `python uygulama/katalog.py dogrula` |
 | GitHub verilerini ve içerik linklerini denetle | `python uygulama/guncelle.py --github` |
 
-`site/package.json` içinde lint, typecheck veya test komutu yoktur; bu depoda `.github/workflows` ve PR için tanımlı CI kontrolü de yoktur.
+`site/package.json` içinde lint, typecheck veya test komutu yoktur; PR'larda [CI](.github/workflows/ci.yml) içindeki `Katalog doğrulama` (`python uygulama/katalog.py dogrula`) ve `Site build` (herkese açık sitenin derlenmesi) zorunlu kontrollerdir.
 Veritabanı ve tarayıcı testi bulunmaz.
 
 ## Korunacak sınırlar
