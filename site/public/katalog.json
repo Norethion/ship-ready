@@ -5709,24 +5709,6 @@
     "ad": "selahattin.unlu",
     "url": "https://www.youtube.com/shorts/hPKyPjy505s"
    }
-  },
-  {
-   "repo": "paperclipai/paperclip",
-   "klasor": "ajan-yonetim",
-   "alt_klasor": "arayuz",
-   "kategori": "🖥️ Ajan yönetimi, modeller ve RAG",
-   "alt_kategori": "Ajan arayüzleri ve ekipler",
-   "kurulum": [
-    "uygulama"
-   ],
-   "aciklama": "Birden çok AI ajanını (Claude Code, Codex, Cursor, OpenClaw...) bir şirket gibi yöneten açık kaynak uygulama: hedef verirsin, ajanlara rol ve bütçe atarsın, işleri ve maliyeti tek panelden izlersin.",
-   "uyari": "Ajanlar sürekli çalışınca API maliyeti hızla birikir; bütçe sınırını baştan koy. Kendi sunucunda çalışır, hesap gerekmez.",
-   "dil": "TypeScript",
-   "yildiz": 86851,
-   "eklenme": "2026-09-25",
-   "son_guncelleme": "2026-09-26",
-   "arsiv": false,
-   "kaynak": null
   }
  ]
 }

@@ -21,7 +21,7 @@ Bütün içerik tek dosyada: [llms-full.txt](/llms-full.txt). Makinenin okuyaca�
 
 ## Repo kataloğu
 
-123 doğrulanmış GitHub reposu amaca göre kategori ve alt kategoriye ayrılır; sayfası [/repolar/](/repolar/), açıklamaları ve kurulum yerleri llms-full.txt'te.
+122 doğrulanmış GitHub reposu amaca göre kategori ve alt kategoriye ayrılır; sayfası [/repolar/](/repolar/), açıklamaları ve kurulum yerleri llms-full.txt'te.
 
 ### 🧠 Ajan skill'leri ve çalışma yöntemi
 
@@ -45,7 +45,7 @@ Ajanın tarayıcıyı kullanması; web sayfalarını, videoları, belgeleri ve k
 
 Birden çok ajanı yöneten arayüzler, yerel model çalıştırma ve model yönlendirme, belgeyle sohbet (RAG).
 
-- Ajan arayüzleri ve ekipler: [1jehuang/jcode](https://github.com/1jehuang/jcode), [pingdotgg/t3code](https://github.com/pingdotgg/t3code), [microsoft/autogen](https://github.com/microsoft/autogen), [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent), [karpathy/llm-council](https://github.com/karpathy/llm-council), [BloopAI/vibe-kanban](https://github.com/BloopAI/vibe-kanban), [paperclipai/paperclip](https://github.com/paperclipai/paperclip)
+- Ajan arayüzleri ve ekipler: [1jehuang/jcode](https://github.com/1jehuang/jcode), [pingdotgg/t3code](https://github.com/pingdotgg/t3code), [microsoft/autogen](https://github.com/microsoft/autogen), [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent), [karpathy/llm-council](https://github.com/karpathy/llm-council), [BloopAI/vibe-kanban](https://github.com/BloopAI/vibe-kanban)
 - Yerel model ve yönlendirme: [diegosouzapw/OmniRoute](https://github.com/diegosouzapw/OmniRoute), [AlexsJones/llmfit](https://github.com/AlexsJones/llmfit), [ollama/ollama](https://github.com/ollama/ollama)
 - RAG ve belgeyle sohbet: [NirDiamant/RAG_Techniques](https://github.com/NirDiamant/RAG_Techniques), [dataease/SQLBot](https://github.com/dataease/SQLBot), [lfnovo/open-notebook](https://github.com/lfnovo/open-notebook)
 
