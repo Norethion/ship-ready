@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="yukseklik" content="560">
+<title>Akıcı giriş formu</title>
+<style>
+  /* Renkler tek yerde */
+  :root {
+    --sayfa: #0d0e12;
+    --koyu: #111318;
+    --kart: #ffffff;
+    --alan: #f2f3f7;
+    --metin: #16181d;
+    --soluk: #5b6270;
+    --ipucu: #636977;
+    --simge: #7b8190;
+    --mavi: #2563eb;
+    --mavi-koyu: #1d4fd0;
+    --mavi-acik: #5b9bff;
+    --hata: #d02a44;
+    --hata-zemin: #fdf0f2;
+    --hata-kenar: #f2a7b3;
+    --yumusak: cubic-bezier(.2, .8, .2, 1);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    display: grid; place-items: center; overflow: hidden;
+    font: 14px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--metin);
+    background: radial-gradient(70% 60% at 50% 40%, #1e2230 0%, var(--sayfa) 70%);
+  }
+  button, input { font: inherit; color: inherit; }
+  button { cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--mavi); outline-offset: 2px; }
+  .kutu input:focus-visible { outline: 0; }
+  .gizli { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* Telefon çerçevesi */
+  .telefon {
+    width: min(300px, 100vw - 16px); height: min(544px, 100vh - 16px);
+    padding: 6px; border-radius: 42px; background: #050507;
+    box-shadow: 0 0 0 1px #2b2e36, 0 24px 50px -20px rgba(0, 0, 0, .8);
+  }
+  .ekran {
+    position: relative; height: 100%; overflow: hidden; border-radius: 36px;
+    display: flex; flex-direction: column;
+    background: radial-gradient(90% 45% at 72% 0%, #1f2a46 0%, transparent 70%), var(--koyu);
+  }
+  .durum {
+    flex: none; height: 30px; padding: 0 22px; position: relative; z-index: 4;
+    display: flex; align-items: center;
+    color: #fff; font-size: 12.5px; font-weight: 650;
+  }
+  .durum .ada { position: absolute; left: 50%; top: 7px; width: 72px; height: 20px; margin-left: -36px; border-radius: 12px; background: #000; }
+
+  /* Açılış: logo çizilir, sonra kaybolur */
+  .acilis {
+    position: absolute; inset: 0; z-index: 3;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+    background: var(--koyu); color: #fff;
+    transition: opacity .45s ease, transform .6s var(--yumusak), visibility 0s .6s;
+  }
+  .hazir .acilis { opacity: 0; transform: scale(1.08); visibility: hidden; }
+  .acilis svg { width: 76px; height: 76px; overflow: visible; }
+  .cizgi { fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1 2; stroke-dashoffset: 1; }
+  .govde { stroke: #fff; stroke-width: 1.4; fill: #fff; fill-opacity: 0; }
+  .dalga { stroke: #3b82f6; stroke-width: 3.4; }
+  .ciz .govde { animation: ciz 1.1s ease-in-out forwards, doldur .45s ease 1.05s forwards; }
+  .ciz .dalga { animation: ciz .6s ease-in-out .55s forwards; }
+  .ciz .dalga + .dalga { animation-delay: .75s; }
+  .acilis-ad { margin: 0; opacity: 0; transform: translateY(6px); }
+  .ciz .acilis-ad { animation: belir .5s ease 1.2s forwards; }
+  @keyframes ciz { to { stroke-dashoffset: 0; } }
+  @keyframes doldur { to { fill-opacity: 1; } }
+  @keyframes belir { to { opacity: 1; transform: none; } }
+
+  .marka-ad { font: italic 700 16px Georgia, "Times New Roman", serif; color: #fff; }
+  .marka-ad em { color: var(--mavi-acik); }
+  .acilis-ad.marka-ad { font-size: 24px; }
+
+  /* Uygulama: başlık ve alttan kayan beyaz sayfa */
+  .uygulama { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+  .bas {
+    flex: none; padding: 6px 16px 16px; text-align: center; color: #fff;
+    opacity: 0; transform: translateY(-10px);
+    transition: opacity .5s ease .15s, transform .6s var(--yumusak) .15s;
+  }
+  .hazir .bas { opacity: 1; transform: none; }
+  .marka { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px; }
+  .marka svg { width: 26px; height: 26px; }
+  .bas h1 { margin: 0; font: italic 700 22px/1.25 Georgia, "Times New Roman", serif; }
+  .alt { margin: 4px 0 0; font-size: 12.5px; color: #a2a8b6; }
+
+  /* Açılıp kapanan bloklar (grid satırı 0fr ↔ 1fr) */
+  .ac-kapa { display: grid; grid-template-rows: 1fr; transition: grid-template-rows .4s var(--yumusak), opacity .3s ease; }
+  .ac-kapa > div { min-height: 0; overflow: hidden; }
+  .ac-kapa.kapali { grid-template-rows: 0fr; opacity: 0; }
+
+  .sayfa {
+    flex: 0 1 auto; min-height: 0; margin-top: auto; overflow-y: auto; scrollbar-width: none;
+    padding: 16px 18px 18px; border-radius: 26px 26px 0 0; background: var(--kart);
+    transform: translateY(105%); transition: transform .65s var(--yumusak) .2s;
+  }
+  .hazir .sayfa { transform: none; }
+
+  /* Sekmeler ve kayan gösterge */
+  .sekmeler {
+    position: relative; display: grid; grid-template-columns: 1fr 1fr;
+    padding: 4px; border-radius: 12px; background: #eef0f4;
+  }
+  .gosterge {
+    position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 4px);
+    border-radius: 9px; background: #14161b; transition: transform .38s var(--yumusak);
+  }
+  .ekran[data-mod="kayit"] .gosterge { transform: translateX(100%); }
+  .sekmeler button {
+    position: relative; height: 30px; border: 0; border-radius: 9px; background: none;
+    font-size: 13.5px; font-weight: 600; color: var(--soluk); transition: color .3s;
+  }
+  .sekmeler button[aria-selected="true"] { color: #fff; }
+
+  /* Alanlar */
+  .alan { padding-top: 10px; }
+  .kutu {
+    display: flex; align-items: center; gap: 10px; height: 42px; padding: 0 5px 0 13px;
+    border-radius: 13px; border: 1.5px solid transparent; background: var(--alan);
+    transition: background .2s, border-color .2s, box-shadow .2s;
+  }
+  .kutu:focus-within { background: #fff; border-color: var(--mavi); box-shadow: 0 0 0 3px rgba(37, 99, 235, .15); }
+  .kutu svg { width: 17px; height: 17px; flex: none; color: var(--simge); fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+  .kutu input { flex: 1; min-width: 0; height: 100%; border: 0; outline: 0; background: none; font-size: 14px; }
+  .kutu input::placeholder { color: var(--ipucu); }
+  .alan.hatali .kutu { background: var(--hata-zemin); border-color: var(--hata-kenar); }
+  .alan.hatali .kutu:focus-within { border-color: var(--hata); box-shadow: 0 0 0 3px rgba(208, 42, 68, .14); }
+  .alan.hatali .kutu > svg, .alan.hatali input::placeholder { color: var(--hata); }
+  .goz { flex: none; width: 32px; height: 32px; display: grid; place-items: center; border: 0; border-radius: 9px; background: none; color: var(--simge); }
+  .goz:hover { background: rgba(0, 0, 0, .05); }
+  .goz[aria-pressed="false"] .cizik { display: none; }
+
+  .hata-sar { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .25s var(--yumusak); }
+  .alan.hatali .hata-sar { grid-template-rows: 1fr; }
+  .hata { min-height: 0; overflow: hidden; margin: 0; font-size: 12px; line-height: 15px; color: var(--hata); }
+  .hata span { display: flex; align-items: center; gap: 6px; padding: 4px 0 0 4px; }
+  .hata span::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex: none; }
+  .hata span:empty::before { display: none; }
+
+  .satir { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 12px; font-size: 12.5px; }
+  .onay { display: flex; align-items: center; gap: 6px; color: var(--soluk); }
+  .onay input { width: 16px; height: 16px; margin: 0; accent-color: var(--mavi); }
+  .baglanti { padding: 0; border: 0; background: none; font-weight: 600; font-size: 12.5px; color: var(--mavi); }
+  .baglanti:hover { text-decoration: underline; }
+
+  /* Gönder düğmesi: daralır → dönen halka → onay işareti */
+  .gonder-sar { display: flex; justify-content: center; margin-top: 14px; }
+  .gonder {
+    position: relative; width: 100%; height: 44px; border: 0; border-radius: 13px;
+    overflow: hidden; white-space: nowrap; background: var(--mavi); color: #fff;
+    font-size: 14.5px; font-weight: 650; box-shadow: 0 8px 18px -8px rgba(37, 99, 235, .75);
+    transition: width .45s var(--yumusak), border-radius .45s var(--yumusak), background .2s, transform .1s;
+  }
+  .gonder:hover { background: var(--mavi-koyu); }
+  .gonder:active { transform: scale(.98); }
+  .gonder.yukleniyor, .gonder.tamam { width: 44px; border-radius: 22px; background: var(--mavi); }
+  .gonder-yazi { transition: opacity .15s; }
+  .yukleniyor .gonder-yazi, .tamam .gonder-yazi { opacity: 0; }
+  .gonder svg {
+    position: absolute; inset: 0; margin: auto; width: 22px; height: 22px; opacity: 0;
+    fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round;
+  }
+  .donen circle { stroke-dasharray: 38 100; }
+  .yukleniyor .donen { opacity: 1; transition: opacity .2s .25s; animation: don .8s linear infinite; }
+  .tik path { stroke-dasharray: 1 2; stroke-dashoffset: 1; transition: stroke-dashoffset .35s ease-out .05s; }
+  .tamam .tik { opacity: 1; }
+  .tamam .tik path { stroke-dashoffset: 0; }
+  @keyframes don { to { transform: rotate(360deg); } }
+
+  .alt-not { margin: 12px 0 0; text-align: center; font-size: 12.5px; color: var(--soluk); }
+
+  /* Kısa bildirim */
+  .bildirim {
+    position: absolute; z-index: 5; top: 38px; left: 50%; max-width: 88%; margin: 0;
+    padding: 8px 14px; border-radius: 999px; background: #262a33; color: #fff;
+    font-size: 12.5px; text-align: center;
+    opacity: 0; transform: translate(-50%, -10px); pointer-events: none;
+    transition: opacity .25s, transform .35s var(--yumusak);
+  }
+  .bildirim.goster { opacity: 1; transform: translate(-50%, 0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: .001ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important;
+      transition-duration: .001ms !important; transition-delay: 0s !important;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="telefon">
+  <div class="ekran" id="ekran" data-mod="giris">
+    <div class="durum" aria-hidden="true">
+      <span>09:41</span><i class="ada"></i>
+    </div>
+
+    <div class="uygulama" id="uygulama" inert>
+      <header class="bas">
+        <div class="ac-kapa daralan"><div>
+          <div class="marka">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 6h20l10 10v22a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4V10a4 4 0 0 1 4-4z" fill="#fff"/><path d="M15 22c3-4 7-4 10 0s7 4 10 0M15 31c3-4 7-4 10 0s7 4 10 0" fill="none" stroke="#3b82f6" stroke-width="3.4" stroke-linecap="round"/></svg>
+            <span class="marka-ad">Akış<em>UI</em></span>
+          </div>
+        </div></div>
+        <h1 id="baslik">Tekrar hoş geldin.</h1>
+        <div class="ac-kapa daralan"><div><p class="alt">Kaldığın yerden devam et.</p></div></div>
+      </header>
+
+      <section class="sayfa">
+        <div class="sekmeler" role="tablist" aria-label="Hesap">
+          <span class="gosterge" aria-hidden="true"></span>
+          <button type="button" role="tab" id="sekme-giris" data-mod="giris" aria-selected="true" aria-controls="form">Giriş</button>
+          <button type="button" role="tab" id="sekme-kayit" data-mod="kayit" aria-selected="false" aria-controls="form" tabindex="-1">Kayıt</button>
+        </div>
+
+        <form id="form" role="tabpanel" aria-labelledby="sekme-giris" novalidate>
+          <div class="ac-kapa kapali" data-mod="kayit" inert><div>
+            <div class="alan" data-alan="ad">
+              <label class="gizli" for="ad">Ad soyad</label>
+              <div class="kutu">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+                <input id="ad" name="ad" autocomplete="name" placeholder="Ad soyad" aria-describedby="ad-hata">
+              </div>
+              <div class="hata-sar"><p class="hata" id="ad-hata"><span></span></p></div>
+            </div>
+          </div></div>
+
+          <div class="alan" data-alan="eposta">
+            <label class="gizli" for="eposta">E-posta adresi</label>
+            <div class="kutu">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+              <input id="eposta" name="eposta" type="email" inputmode="email" autocomplete="email" placeholder="E-posta adresi" aria-describedby="eposta-hata">
+            </div>
+            <div class="hata-sar"><p class="hata" id="eposta-hata"><span></span></p></div>
+          </div>
+
+          <div class="alan" data-alan="sifre">
+            <label class="gizli" for="sifre">Şifre</label>
+            <div class="kutu">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+              <input id="sifre" name="sifre" type="password" autocomplete="current-password" placeholder="Şifre" aria-describedby="sifre-hata">
+              <button type="button" class="goz" id="goz" aria-pressed="false" aria-label="Şifreyi göster">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path class="cizik" d="M4 4l16 16"/></svg>
+              </button>
+            </div>
+            <div class="hata-sar"><p class="hata" id="sifre-hata"><span></span></p></div>
+          </div>
+
+          <div class="ac-kapa kapali" data-mod="kayit" inert><div>
+            <div class="alan" data-alan="sifre2">
+              <label class="gizli" for="sifre2">Şifre tekrarı</label>
+              <div class="kutu">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><path d="M9.5 16l1.8 1.8 3.2-3.3"/></svg>
+                <input id="sifre2" name="sifre2" type="password" autocomplete="new-password" placeholder="Şifre tekrarı" aria-describedby="sifre2-hata">
+              </div>
+              <div class="hata-sar"><p class="hata" id="sifre2-hata"><span></span></p></div>
+            </div>
+          </div></div>
+
+          <div class="ac-kapa" data-mod="giris"><div>
+            <div class="satir">
+              <label class="onay"><input type="checkbox" checked> Beni hatırla</label>
+              <button type="button" class="baglanti" id="unuttum">Şifremi unuttum?</button>
+            </div>
+          </div></div>
+
+          <div class="gonder-sar">
+            <button type="submit" class="gonder" id="gonder">
+              <span class="gonder-yazi" id="gonder-yazi">Giriş yap</span>
+              <svg class="donen" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/></svg>
+              <svg class="tik" viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="M6 12.5l4 4 8-9"/></svg>
+            </button>
+          </div>
+        </form>
+
+        <p class="alt-not"><span id="gecis-soru">Hesabın yok mu?</span> <button type="button" class="baglanti" id="gecis">Kayıt ol</button></p>
+      </section>
+    </div>
+
+    <div class="acilis" id="acilis" aria-hidden="true">
+      <svg viewBox="0 0 48 48">
+        <path class="cizgi govde" pathLength="1" d="M12 6h20l10 10v22a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4V10a4 4 0 0 1 4-4z"/>
+        <path class="cizgi dalga" pathLength="1" d="M15 22c3-4 7-4 10 0s7 4 10 0"/>
+        <path class="cizgi dalga" pathLength="1" d="M15 31c3-4 7-4 10 0s7 4 10 0"/>
+      </svg>
+      <p class="acilis-ad marka-ad">Akış<em>UI</em></p>
+    </div>
+
+    <p class="bildirim" id="bildirim" role="status"></p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var ekran = document.getElementById('ekran');
+  var uygulama = document.getElementById('uygulama');
+  var acilis = document.getElementById('acilis');
+  var form = document.getElementById('form');
+  var gonder = document.getElementById('gonder');
+  var bildirim = document.getElementById('bildirim');
+  var sekmeler = Array.from(document.querySelectorAll('[role="tab"]'));
+  var azHareket = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var mod = 'giris';
+  var mesgul = false;
+
+  var METIN = {
+    giris: { baslik: 'Tekrar hoş geldin.', dugme: 'Giriş yap', soru: 'Hesabın yok mu?', gecis: 'Kayıt ol', basari: 'Giriş başarılı. Hoş geldin!' },
+    kayit: { baslik: 'Aramıza katıl.', dugme: 'Hesap oluştur', soru: 'Zaten üye misin?', gecis: 'Giriş yap', basari: 'Hesabın oluşturuldu.' }
+  };
+
+  // Alan kuralları: boş dizge = geçerli
+  var KURALLAR = {
+    ad: function (v) {
+      v = v.trim();
+      return !v ? 'Adını gir.' : v.length < 2 ? 'Ad en az 2 harf olmalı.' : '';
+    },
+    eposta: function (v) {
+      v = v.trim();
+      return !v ? 'E-posta adresini gir.' : !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? 'Geçerli bir e-posta adresi gir.' : '';
+    },
+    sifre: function (v) {
+      return !v ? 'Şifreni gir.' : mod === 'kayit' && v.length < 8 ? 'Şifre en az 8 karakter olmalı.' : '';
+    },
+    sifre2: function (v) {
+      return !v ? 'Şifreni tekrar gir.' : v !== alanlar.sifre.girdi.value ? 'Şifreler eşleşmiyor.' : '';
+    }
+  };
+
+  var alanlar = {};
+  var liste = Array.from(document.querySelectorAll('.alan'), function (el) {
+    var a = { ad: el.dataset.alan, el: el, girdi: el.querySelector('input'), metin: el.querySelector('.hata span'), dokunuldu: false };
+    return (alanlar[a.ad] = a);
+  });
+
+  function gorunur(a) {
+    var sar = a.el.closest('.ac-kapa');
+    return !sar || !sar.classList.contains('kapali');
+  }
+
+  function hataGoster(a, mesaj) {
+    a.el.classList.toggle('hatali', !!mesaj);
+    a.girdi.setAttribute('aria-invalid', mesaj ? 'true' : 'false');
+    a.metin.textContent = mesaj;
+  }
+
+  function dogrula(a) {
+    var mesaj = KURALLAR[a.ad](a.girdi.value);
+    hataGoster(a, mesaj);
+    return !mesaj;
+  }
+
+  // Hata, alandan çıkınca ya da gönderince başlar; sonra yazarken canlı güncellenir
+  liste.forEach(function (a) {
+    a.girdi.addEventListener('input', function () {
+      if (a.dokunuldu) dogrula(a);
+      if (a.ad === 'sifre' && alanlar.sifre2.dokunuldu) dogrula(alanlar.sifre2);
+    });
+    a.girdi.addEventListener('blur', function () {
+      if (a.girdi.value && !mesgul) { a.dokunuldu = true; dogrula(a); }
+    });
+  });
+
+  function bildir(metin) {
+    bildirim.textContent = metin;
+    bildirim.classList.add('goster');
+    clearTimeout(bildir.zaman);
+    bildir.zaman = setTimeout(function () { bildirim.classList.remove('goster'); }, 2600);
+  }
+
+  // Giriş / Kayıt geçişi
+  function modAyarla(yeni) {
+    if (yeni === mod || mesgul) return;
+    mod = yeni;
+    var m = METIN[mod];
+    ekran.dataset.mod = mod;
+    sekmeler.forEach(function (s) {
+      var secili = s.dataset.mod === mod;
+      s.setAttribute('aria-selected', String(secili));
+      s.tabIndex = secili ? 0 : -1;
+    });
+    form.setAttribute('aria-labelledby', 'sekme-' + mod);
+    document.querySelectorAll('.ac-kapa[data-mod]').forEach(function (b) {
+      var acik = b.dataset.mod === mod;
+      b.classList.toggle('kapali', !acik);
+      b.toggleAttribute('inert', !acik);
+    });
+    // Kayıtta başlık daralır, form büyüdüğü için yer açılır
+    document.querySelectorAll('.daralan').forEach(function (b) { b.classList.toggle('kapali', mod === 'kayit'); });
+    alanlar.sifre.girdi.autocomplete = mod === 'kayit' ? 'new-password' : 'current-password';
+    liste.forEach(function (a) { a.dokunuldu = false; hataGoster(a, ''); });
+
+    var baslik = document.getElementById('baslik');
+    baslik.textContent = m.baslik;
+    document.getElementById('gonder-yazi').textContent = m.dugme;
+    document.getElementById('gecis-soru').textContent = m.soru;
+    document.getElementById('gecis').textContent = m.gecis;
+    if (!azHareket && baslik.animate) {
+      baslik.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: 320, easing: 'ease-out' });
+    }
+  }
+
+  sekmeler.forEach(function (s) {
+    s.addEventListener('click', function () { modAyarla(s.dataset.mod); });
+  });
+  document.querySelector('[role="tablist"]').addEventListener('keydown', function (e) {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    e.preventDefault();
+    var diger = mod === 'giris' ? 'kayit' : 'giris';
+    modAyarla(diger);
+    document.getElementById('sekme-' + diger).focus();
+  });
+  document.getElementById('gecis').addEventListener('click', function () {
+    modAyarla(mod === 'giris' ? 'kayit' : 'giris');
+  });
+
+  // Şifre göster/gizle (tekrar alanı da birlikte)
+  var goz = document.getElementById('goz');
+  goz.addEventListener('click', function () {
+    var goster = goz.getAttribute('aria-pressed') !== 'true';
+    goz.setAttribute('aria-pressed', String(goster));
+    goz.setAttribute('aria-label', goster ? 'Şifreyi gizle' : 'Şifreyi göster');
+    alanlar.sifre.girdi.type = alanlar.sifre2.girdi.type = goster ? 'text' : 'password';
+  });
+
+  document.getElementById('unuttum').addEventListener('click', function () {
+    bildir('Sıfırlama bağlantısı gönderildi (örnek).');
+  });
+
+  // Gönderim: gerçek istek yok, setTimeout ile taklit
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (mesgul) return;
+    var ilkHatali = null;
+    liste.forEach(function (a) {
+      if (!gorunur(a)) return;
+      a.dokunuldu = true;
+      if (!dogrula(a) && !ilkHatali) ilkHatali = a;
+    });
+    if (ilkHatali) { ilkHatali.girdi.focus(); return; }
+
+    mesgul = true;
+    liste.forEach(function (a) { a.girdi.readOnly = true; });
+    gonder.setAttribute('aria-label', mod === 'kayit' ? 'Hesap oluşturuluyor' : 'Giriş yapılıyor');
+    gonder.classList.add('yukleniyor');
+
+    setTimeout(function () {
+      gonder.classList.replace('yukleniyor', 'tamam');
+      bildir(METIN[mod].basari);
+      setTimeout(function () {
+        gonder.classList.remove('tamam');
+        gonder.removeAttribute('aria-label');
+        liste.forEach(function (a) { a.girdi.readOnly = false; });
+        mesgul = false;
+      }, 1800);
+    }, 1500);
+  });
+
+  // Açılış: logo çizilir, sonra başlık iner ve beyaz sayfa alttan kayar
+  function hazirla() {
+    ekran.classList.add('hazir');
+    uygulama.removeAttribute('inert');
+  }
+  function acilisiBaslat() {
+    if (azHareket) { hazirla(); return; }
+    acilis.classList.add('ciz');
+    setTimeout(hazirla, 2100);
+  }
+
+  // Kart görünür olunca başlat (iframe tembel yüklenir, açılış kaçmasın)
+  if ('IntersectionObserver' in window) {
+    var gozcu = new IntersectionObserver(function (g) {
+      if (g[0].isIntersecting) { gozcu.disconnect(); acilisiBaslat(); }
+    }, { threshold: 0.4 });
+    gozcu.observe(ekran);
+  } else {
+    acilisiBaslat();
+  }
+})();
+</script>
+</body>
+</html>

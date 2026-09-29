@@ -13,84 +13,84 @@ Projeyi yayına alırken kullanılan servisler ve yayın öncesi listesinde bunl
 
 <Kartlar>
 
-<Kart baslik={"Coolify"} href={"https://coolify.io"} tur={"Kendi sunucunda PaaS"} prompt={"Coolify (https://coolify.io) aracını bu projede kullanmak istiyorum. Ne işe yarar: Vercel, Heroku, Netlify ve Railway'e açık kaynak alternatif; kendi sunucuna (VPS, Raspberry Pi, bulut) kurulur. Git'e push edince uygulamayı yayına alır, 300'den fazla hazır servisi (veritabanları dahil) tek tıkla kurar, Let's Encrypt SSL sertifikasını otomatik alır, veritabanı yedeklerini S3 uyumlu depoya gönderir. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"Coolify"} satir={5} href={"https://coolify.io"} tur={"Kendi sunucunda PaaS"} prompt={"Coolify (https://coolify.io) aracını bu projede kullanmak istiyorum. Ne işe yarar: Vercel, Heroku, Netlify ve Railway'e açık kaynak alternatif; kendi sunucuna (VPS, Raspberry Pi, bulut) kurulur. Git'e push edince uygulamayı yayına alır, 300'den fazla hazır servisi (veritabanları dahil) tek tıkla kurar, Let's Encrypt SSL sertifikasını otomatik alır, veritabanı yedeklerini S3 uyumlu depoya gönderir. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Vercel, Heroku, Netlify ve Railway'e açık kaynak alternatif; kendi sunucuna (VPS, Raspberry Pi, bulut) kurulur. Git'e push edince uygulamayı yayına alır, 300'den fazla hazır servisi (veritabanları dahil) tek tıkla kurar, Let's Encrypt SSL sertifikasını otomatik alır, veritabanı yedeklerini S3 uyumlu depoya gönderir.
 
-<span class="meta">**Ne zaman:** Backend, veritabanı ya da Docker gerektiren projeler</span>
-<span class="meta">**Ücret:** Kendi sunucunda ücretsiz ve açık kaynak; yönetilen Coolify Cloud ücretli</span>
+<span class="k-alan ilk"><span class="k-etiket">Ne zaman</span><span class="k-deger">Backend, veritabanı ya da Docker gerektiren projeler</span></span>
+<span class="k-alan son"><span class="k-etiket">Ücret</span><span class="k-deger">Kendi sunucunda ücretsiz ve açık kaynak; yönetilen Coolify Cloud ücretli</span></span>
 
 </Kart>
 
-<Kart baslik={"Dokploy"} href={"https://github.com/Dokploy/dokploy"} tur={"Kendi sunucunda PaaS"} prompt={"Dokploy (https://github.com/Dokploy/dokploy) aracını bu projede kullanmak istiyorum. Ne işe yarar: Coolify'a benzer açık kaynak alternatif: uygulama ve veritabanı yayına alma, Docker Compose, otomatik yedek, Traefik ile yönlendirme ve kaynak izleme; tek komutla kurulur. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"Dokploy"} satir={5} href={"https://github.com/Dokploy/dokploy"} tur={"Kendi sunucunda PaaS"} prompt={"Dokploy (https://github.com/Dokploy/dokploy) aracını bu projede kullanmak istiyorum. Ne işe yarar: Coolify'a benzer açık kaynak alternatif: uygulama ve veritabanı yayına alma, Docker Compose, otomatik yedek, Traefik ile yönlendirme ve kaynak izleme; tek komutla kurulur. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Coolify'a benzer açık kaynak alternatif: uygulama ve veritabanı yayına alma, Docker Compose, otomatik yedek, Traefik ile yönlendirme ve kaynak izleme; tek komutla kurulur.
 
-<span class="meta">**Ne zaman:** Coolify yerine; ikisinden birini seç</span>
-<span class="meta">**Ücret:** Kendi sunucunda ücretsiz (çekirdek Apache-2.0; SSO ve roller gibi kurumsal özellikler ticari lisans ister); Dokploy Cloud ücretli</span>
+<span class="k-alan ilk"><span class="k-etiket">Ne zaman</span><span class="k-deger">Coolify yerine; ikisinden birini seç</span></span>
+<span class="k-alan son"><span class="k-etiket">Ücret</span><span class="k-deger">Kendi sunucunda ücretsiz (çekirdek Apache-2.0; SSO ve roller gibi kurumsal özellikler ticari lisans ister); Dokploy Cloud ücretli</span></span>
 
 </Kart>
 
-<Kart baslik={"fastlane"} href={"https://github.com/fastlane/fastlane"} tur={"Mobil yayın otomasyonu"} prompt={"fastlane (https://github.com/fastlane/fastlane) aracını bu projede kullanmak istiyorum. Ne işe yarar: iOS ve Android'de ekran görüntüsü üretme, imzalama (provisioning profile) ve App Store ya da Google Play'e yükleme işlerini tek komuta bağlar; proje içindeki Fastfile ile tanımlanır. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"fastlane"} satir={5} href={"https://github.com/fastlane/fastlane"} tur={"Mobil yayın otomasyonu"} prompt={"fastlane (https://github.com/fastlane/fastlane) aracını bu projede kullanmak istiyorum. Ne işe yarar: iOS ve Android'de ekran görüntüsü üretme, imzalama (provisioning profile) ve App Store ya da Google Play'e yükleme işlerini tek komuta bağlar; proje içindeki Fastfile ile tanımlanır. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 iOS ve Android'de ekran görüntüsü üretme, imzalama (provisioning profile) ve App Store ya da Google Play'e yükleme işlerini tek komuta bağlar; proje içindeki Fastfile ile tanımlanır.
 
-<span class="meta">**Ne zaman:** Mobil uygulamayı sık yayınlıyorsan</span>
-<span class="meta">**Ücret:** Ücretsiz, MIT; anonim kullanım verisi gönderir, `opt_out_usage` ile kapatılır</span>
+<span class="k-alan ilk"><span class="k-etiket">Ne zaman</span><span class="k-deger">Mobil uygulamayı sık yayınlıyorsan</span></span>
+<span class="k-alan son"><span class="k-etiket">Ücret</span><span class="k-deger">Ücretsiz, MIT; anonim kullanım verisi gönderir, `opt_out_usage` ile kapatılır</span></span>
 
 </Kart>
 
-<Kart baslik={"Prometheus ve Grafana"} href={"https://github.com/prometheus/prometheus"} tur={"İzleme ve alarm"} prompt={"Prometheus ve Grafana (https://github.com/prometheus/prometheus) aracını bu projede kullanmak istiyorum. Ne işe yarar: Prometheus sunucudan ve uygulamadan metrik toplar, Grafana bunları panolarda gösterir ve eşik aşılınca Slack gibi kanallara alarm gönderir. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"Prometheus ve Grafana"} satir={5} href={"https://github.com/prometheus/prometheus"} tur={"İzleme ve alarm"} prompt={"Prometheus ve Grafana (https://github.com/prometheus/prometheus) aracını bu projede kullanmak istiyorum. Ne işe yarar: Prometheus sunucudan ve uygulamadan metrik toplar, Grafana bunları panolarda gösterir ve eşik aşılınca Slack gibi kanallara alarm gönderir. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Prometheus sunucudan ve uygulamadan metrik toplar, Grafana bunları panolarda gösterir ve eşik aşılınca Slack gibi kanallara alarm gönderir.
 
-<span class="meta">**Ne zaman:** Kendi sunucunda çalışan uygulamalar</span>
-<span class="meta">**Ücret:** Kendi sunucunda ücretsiz; Prometheus Apache-2.0, Grafana AGPL-3.0</span>
+<span class="k-alan ilk"><span class="k-etiket">Ne zaman</span><span class="k-deger">Kendi sunucunda çalışan uygulamalar</span></span>
+<span class="k-alan son"><span class="k-etiket">Ücret</span><span class="k-deger">Kendi sunucunda ücretsiz; Prometheus Apache-2.0, Grafana AGPL-3.0</span></span>
 
 </Kart>
 
-<Kart baslik={"Cloudflare"} href={"https://www.cloudflare.com"} tur={"DNS, CDN ve güvenlik"} prompt={"Cloudflare (https://www.cloudflare.com) aracını bu projede kullanmak istiyorum. Ne işe yarar: Alan adının DNS'i; trafiği önbelleğe alan ve saldırılara karşı koruyan proxy, ücretsiz SSL, DDoS koruması, güvenlik ve rate limiting kuralları. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"Cloudflare"} satir={5} href={"https://www.cloudflare.com"} tur={"DNS, CDN ve güvenlik"} prompt={"Cloudflare (https://www.cloudflare.com) aracını bu projede kullanmak istiyorum. Ne işe yarar: Alan adının DNS'i; trafiği önbelleğe alan ve saldırılara karşı koruyan proxy, ücretsiz SSL, DDoS koruması, güvenlik ve rate limiting kuralları. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Alan adının DNS'i; trafiği önbelleğe alan ve saldırılara karşı koruyan proxy, ücretsiz SSL, DDoS koruması, güvenlik ve rate limiting kuralları.
 
-<span class="meta">**Ne zaman:** Her projenin önünde</span>
-<span class="meta">**Ücret:** Ücretsiz planda SSL, CDN ve DDoS koruması var</span>
+<span class="k-alan ilk"><span class="k-etiket">Ne zaman</span><span class="k-deger">Her projenin önünde</span></span>
+<span class="k-alan son"><span class="k-etiket">Ücret</span><span class="k-deger">Ücretsiz planda SSL, CDN ve DDoS koruması var</span></span>
 
 </Kart>
 
-<Kart baslik={"Cloudflare Workers ve Pages"} href={"https://workers.cloudflare.com"} tur={"Site ve sunucusuz barındırma"} prompt={"Cloudflare Workers ve Pages (https://workers.cloudflare.com) aracını bu projede kullanmak istiyorum. Ne işe yarar: Statik siteleri ve küçük API'leri barındırır; Git'e push edince yayına alır. Webhook alıcıları ve yönlendirmeler için de uygun. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"Cloudflare Workers ve Pages"} satir={5} href={"https://workers.cloudflare.com"} tur={"Site ve sunucusuz barındırma"} prompt={"Cloudflare Workers ve Pages (https://workers.cloudflare.com) aracını bu projede kullanmak istiyorum. Ne işe yarar: Statik siteleri ve küçük API'leri barındırır; Git'e push edince yayına alır. Webhook alıcıları ve yönlendirmeler için de uygun. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Statik siteleri ve küçük API'leri barındırır; Git'e push edince yayına alır. Webhook alıcıları ve yönlendirmeler için de uygun.
 
-<span class="meta">**Ne zaman:** Tanıtım siteleri, hafif backend işleri</span>
-<span class="meta">**Ücret:** Ücretsiz planda günde 100.000 istek; statik dosya istekleri ücretsiz ve sınırsız</span>
+<span class="k-alan ilk"><span class="k-etiket">Ne zaman</span><span class="k-deger">Tanıtım siteleri, hafif backend işleri</span></span>
+<span class="k-alan son"><span class="k-etiket">Ücret</span><span class="k-deger">Ücretsiz planda günde 100.000 istek; statik dosya istekleri ücretsiz ve sınırsız</span></span>
 
 </Kart>
 
-<Kart baslik={"Cloudflare R2"} href={"https://www.cloudflare.com/developer-platform/products/r2/"} tur={"Dosya depolama"} prompt={"Cloudflare R2 (https://www.cloudflare.com/developer-platform/products/r2/) aracını bu projede kullanmak istiyorum. Ne işe yarar: S3 uyumlu depolama; dışarı veri çıkışı (egress) ücretsiz. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"Cloudflare R2"} satir={5} href={"https://www.cloudflare.com/developer-platform/products/r2/"} tur={"Dosya depolama"} prompt={"Cloudflare R2 (https://www.cloudflare.com/developer-platform/products/r2/) aracını bu projede kullanmak istiyorum. Ne işe yarar: S3 uyumlu depolama; dışarı veri çıkışı (egress) ücretsiz. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 S3 uyumlu depolama; dışarı veri çıkışı (egress) ücretsiz.
 
-<span class="meta">**Ne zaman:** Kullanıcı dosyaları, görseller, yedekler</span>
-<span class="meta">**Ücret:** Ayda 10 GB, 1 milyon yazma ve 10 milyon okuma işlemine kadar ücretsiz</span>
+<span class="k-alan ilk"><span class="k-etiket">Ne zaman</span><span class="k-deger">Kullanıcı dosyaları, görseller, yedekler</span></span>
+<span class="k-alan son"><span class="k-etiket">Ücret</span><span class="k-deger">Ayda 10 GB, 1 milyon yazma ve 10 milyon okuma işlemine kadar ücretsiz</span></span>
 
 </Kart>
 
-<Kart baslik={"Cloudflare Tunnel"} href={"https://www.cloudflare.com/products/tunnel/"} tur={"Güvenli erişim"} prompt={"Cloudflare Tunnel (https://www.cloudflare.com/products/tunnel/) aracını bu projede kullanmak istiyorum. Ne işe yarar: Sunucuda port açmadan uygulamayı internete ya da sadece ekibe açar. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"Cloudflare Tunnel"} satir={5} href={"https://www.cloudflare.com/products/tunnel/"} tur={"Güvenli erişim"} prompt={"Cloudflare Tunnel (https://www.cloudflare.com/products/tunnel/) aracını bu projede kullanmak istiyorum. Ne işe yarar: Sunucuda port açmadan uygulamayı internete ya da sadece ekibe açar. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Sunucuda port açmadan uygulamayı internete ya da sadece ekibe açar.
 
-<span class="meta">**Ne zaman:** Ev ya da ofis sunucusu, iç araçlar, staging</span>
-<span class="meta">**Ücret:** Ücretsiz</span>
+<span class="k-alan ilk"><span class="k-etiket">Ne zaman</span><span class="k-deger">Ev ya da ofis sunucusu, iç araçlar, staging</span></span>
+<span class="k-alan son"><span class="k-etiket">Ücret</span><span class="k-deger">Ücretsiz</span></span>
 
 </Kart>
 
-<Kart baslik={"Cloudflare Turnstile"} href={"https://www.cloudflare.com/products/turnstile/"} tur={"Bot koruması"} prompt={"Cloudflare Turnstile (https://www.cloudflare.com/products/turnstile/) aracını bu projede kullanmak istiyorum. Ne işe yarar: CAPTCHA yerine görünmez doğrulama; giriş, kayıt ve iletişim formlarını botlardan korur. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"Cloudflare Turnstile"} satir={5} href={"https://www.cloudflare.com/products/turnstile/"} tur={"Bot koruması"} prompt={"Cloudflare Turnstile (https://www.cloudflare.com/products/turnstile/) aracını bu projede kullanmak istiyorum. Ne işe yarar: CAPTCHA yerine görünmez doğrulama; giriş, kayıt ve iletişim formlarını botlardan korur. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 CAPTCHA yerine görünmez doğrulama; giriş, kayıt ve iletişim formlarını botlardan korur.
 
-<span class="meta">**Ne zaman:** Herkese açık formlar</span>
-<span class="meta">**Ücret:** Ücretsiz</span>
+<span class="k-alan ilk"><span class="k-etiket">Ne zaman</span><span class="k-deger">Herkese açık formlar</span></span>
+<span class="k-alan son"><span class="k-etiket">Ücret</span><span class="k-deger">Ücretsiz</span></span>
 
 </Kart>
 
@@ -103,8 +103,8 @@ CAPTCHA yerine görünmez doğrulama; giriş, kayıt ve iletişim formlarını b
 - **Güvenlik başlıkları ([31. madde](/listeler/yayin-oncesi/#yo-guvenlik-basliklari)):** Uygulamada ya da Cloudflare'in yanıt başlığı kurallarıyla eklenir.
 - **Bot ve rate limit ([17–18. maddeler](/listeler/yayin-oncesi/#yo-hesap-kilitleme)):** Giriş ve kayıt formlarında Turnstile, API'de Cloudflare rate limiting kuralı.
 - **Staging dışarıya kapalı ([2. madde](/listeler/yayin-oncesi/#yo-env-gecmisten-temizle)):** Staging'i herkese açık alan adına koymak yerine Cloudflare Tunnel ile sadece ekibe aç.
-- **Alt alan adları ve e-posta ([93–94. maddeler](/listeler/yayin-oncesi/#yo-alt-alan-adi)):** `app.` için CNAME, `mail.` ve `news.` için SPF, DKIM ve DMARC kayıtları Cloudflare DNS'e girilir.
+- **Alt alan adları ve e-posta ([94–95. maddeler](/listeler/yayin-oncesi/#yo-alt-alan-adi)):** `app.` için CNAME, `mail.` ve `news.` için SPF, DKIM ve DMARC kayıtları Cloudflare DNS'e girilir.
 - **Yedekleme ([50. madde](/listeler/yayin-oncesi/#yo-yedekleme)):** Coolify veritabanı yedeklerini zamanlayıp R2 gibi S3 uyumlu bir depoya gönderir; geri yükleme testini ayrıca yap.
 - **Bağımlılık denetimi ([49. madde](/listeler/yayin-oncesi/#yo-bagimlilik-denetimi)):** [OSV-Scanner](https://github.com/google/osv-scanner) bağımlılıkları ve container imajlarını bilinen açıklara karşı tarar (kaynak kod gönderilmez); JS/TS projesinde [Knip](https://github.com/webpro-nl/knip) kullanılmayan paket ve dosyaları bulur.
 - **Directory listing ve source map ([4 ve 7. maddeler](/listeler/yayin-oncesi/#yo-directory-listing)):** Barındırmada klasör listelemenin kapalı olduğunu ve `.map` dosyalarının yayına çıkmadığını kontrol et.
-- **Kesintisiz güncelleme ve geri dönüş ([96–97. maddeler](/listeler/yayin-oncesi/#yo-kesintisiz-surum)):** Coolify, sağlık kontrolü tanımlıysa yeni sürümü eskisiyle bir süre birlikte çalıştırarak günceller (rolling update); kesintisizliği garanti etmez, host'a port açılmışsa ya da Docker Compose kullanılıyorsa çalışmaz. Sorun çıkarsa Configuration > Rollback'ten sunucuda tutulan eski sürüme dönülür; ama bu veritabanı değişikliklerini geri almaz, şema değişiklikleri geriye uyumlu olmalı ([rolling update](https://coolify.io/docs/knowledge-base/rolling-updates), [rollback](https://coolify.io/docs/applications/deployments/rollbacks)).
+- **Kesintisiz güncelleme ve geri dönüş ([97–98. maddeler](/listeler/yayin-oncesi/#yo-kesintisiz-surum)):** Coolify, sağlık kontrolü tanımlıysa yeni sürümü eskisiyle bir süre birlikte çalıştırarak günceller (rolling update); kesintisizliği garanti etmez, host'a port açılmışsa ya da Docker Compose kullanılıyorsa çalışmaz. Sorun çıkarsa Configuration > Rollback'ten sunucuda tutulan eski sürüme dönülür; ama bu veritabanı değişikliklerini geri almaz, şema değişiklikleri geriye uyumlu olmalı ([rolling update](https://coolify.io/docs/knowledge-base/rolling-updates), [rollback](https://coolify.io/docs/applications/deployments/rollbacks)).

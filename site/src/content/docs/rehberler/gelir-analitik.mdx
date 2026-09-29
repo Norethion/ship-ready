@@ -1,55 +1,63 @@
 ---
 title: "Gelir & analitik"
-description: "Uygulamadan para kazanırken sık birlikte kullanılan araçlar: satın alma altyapısı, satın alma ekranı ve kullanıcı analitiği."
+description: "Uygulamadan para kazanırken sık birlikte kullanılan araçlar: satın alma altyapısı, satın alma ekranı, kullanıcı analitiği ve hata izleme."
 ---
 
 import Kartlar from '../../../components/Kartlar.astro';
 import Kart from '../../../components/Kart.astro';
 
-Uygulamadan para kazanırken sık birlikte kullanılan araçlar: satın alma altyapısı, satın alma ekranı ve kullanıcı analitiği.
-Ücretler 25.09.2026'da sitelerinden alındı.
+Uygulamadan para kazanırken sık birlikte kullanılan araçlar: satın alma altyapısı, satın alma ekranı, kullanıcı analitiği ve hata izleme.
+Ücretler 25.09.2026'da (Sentry 29.09.2026'da) sitelerinden alındı.
 
 ## Araçlar
 
 <Kartlar>
 
-<Kart baslik={"RevenueCat"} href={"https://www.revenuecat.com"} tur={"Abonelik altyapısı"} prompt={"RevenueCat (https://www.revenuecat.com) aracını bu projede kullanmak istiyorum. Ne işe yarar: App Store ve Google Play satın almalarını tek yerde toplar: makbuzu doğrular, kullanıcının hangi özelliklere erişimi olduğunu tutar, aylık gelir ve abonelik iptali panelleri ve webhook'lar sunar. Satın alma ekranı, A/B testi ve web'den satış özellikleri de var. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"RevenueCat"} satir={4} href={"https://www.revenuecat.com"} tur={"Abonelik altyapısı"} prompt={"RevenueCat (https://www.revenuecat.com) aracını bu projede kullanmak istiyorum. Ne işe yarar: App Store ve Google Play satın almalarını tek yerde toplar: makbuzu doğrular, kullanıcının hangi özelliklere erişimi olduğunu tutar, aylık gelir ve abonelik iptali panelleri ve webhook'lar sunar. Satın alma ekranı, A/B testi ve web'den satış özellikleri de var. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 App Store ve Google Play satın almalarını tek yerde toplar: makbuzu doğrular, kullanıcının hangi özelliklere erişimi olduğunu tutar, aylık gelir ve abonelik iptali panelleri ve webhook'lar sunar. Satın alma ekranı, A/B testi ve web'den satış özellikleri de var.
 
-<span class="meta">**Ücret:** Aylık 2.500 $ gelire kadar ücretsiz, sonrası gelirin %1'i</span>
+<span class="k-alan ilk son"><span class="k-etiket">Ücret</span><span class="k-deger">Aylık 2.500 $ gelire kadar ücretsiz, sonrası gelirin %1'i</span></span>
 
 </Kart>
 
-<Kart baslik={"Superwall"} href={"https://superwall.com"} tur={"Satın alma ekranı ve A/B testi"} prompt={"Superwall (https://superwall.com) aracını bu projede kullanmak istiyorum. Ne işe yarar: Kodsuz editörle tasarlanan, uygulamayı güncellemeden değiştirilebilen satın alma ekranları (paywall). Hangi tasarımın, fiyatın ve ekranın gösterildiği yerin daha çok sattığını A/B testiyle ölçer. Kendi abonelik altyapısı da var. iOS, Android, React Native, Flutter, Expo, Unity ve web. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"Superwall"} satir={4} href={"https://superwall.com"} tur={"Satın alma ekranı ve A/B testi"} prompt={"Superwall (https://superwall.com) aracını bu projede kullanmak istiyorum. Ne işe yarar: Kodsuz editörle tasarlanan, uygulamayı güncellemeden değiştirilebilen satın alma ekranları (paywall). Hangi tasarımın, fiyatın ve ekranın gösterildiği yerin daha çok sattığını A/B testiyle ölçer. Kendi abonelik altyapısı da var. iOS, Android, React Native, Flutter, Expo, Unity ve web. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Kodsuz editörle tasarlanan, uygulamayı güncellemeden değiştirilebilen satın alma ekranları (paywall). Hangi tasarımın, fiyatın ve ekranın gösterildiği yerin daha çok sattığını A/B testiyle ölçer. Kendi abonelik altyapısı da var. iOS, Android, React Native, Flutter, Expo, Unity ve web.
 
-<span class="meta">**Ücret:** Altyapısı her ölçekte ücretsiz; paywall, paywall'dan gelen aylık 10.000 $ gelire kadar ücretsiz, sonrası sadece o gelirin %1'i</span>
+<span class="k-alan ilk son"><span class="k-etiket">Ücret</span><span class="k-deger">Altyapısı her ölçekte ücretsiz; paywall, paywall'dan gelen aylık 10.000 $ gelire kadar ücretsiz, sonrası sadece o gelirin %1'i</span></span>
 
 </Kart>
 
-<Kart baslik={"Mixpanel"} href={"https://mixpanel.com"} tur={"Ürün analitiği"} prompt={"Mixpanel (https://mixpanel.com) aracını bu projede kullanmak istiyorum. Ne işe yarar: Kullanıcının uygulamada yaptığı her işlemi kaydeder: kayıt ya da satın alma adımlarında kaç kişinin düştüğü, kullanıcıların geri gelip gelmediği, davranışa göre kullanıcı grupları. Oturum kaydı, A/B testi ve özellik açma-kapama da var. Google Analytics'ten farkı, sayfa ziyaretinden çok ürün içindeki davranışa odaklanması. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"Mixpanel"} satir={4} href={"https://mixpanel.com"} tur={"Ürün analitiği"} prompt={"Mixpanel (https://mixpanel.com) aracını bu projede kullanmak istiyorum. Ne işe yarar: Kullanıcının uygulamada yaptığı her işlemi kaydeder: kayıt ya da satın alma adımlarında kaç kişinin düştüğü, kullanıcıların geri gelip gelmediği, davranışa göre kullanıcı grupları. Oturum kaydı, A/B testi ve özellik açma-kapama da var. Google Analytics'ten farkı, sayfa ziyaretinden çok ürün içindeki davranışa odaklanması. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Kullanıcının uygulamada yaptığı her işlemi kaydeder: kayıt ya da satın alma adımlarında kaç kişinin düştüğü, kullanıcıların geri gelip gelmediği, davranışa göre kullanıcı grupları. Oturum kaydı, A/B testi ve özellik açma-kapama da var. Google Analytics'ten farkı, sayfa ziyaretinden çok ürün içindeki davranışa odaklanması.
 
-<span class="meta">**Ücret:** Ayda 1 milyon işleme kadar ücretsiz; veri ABD ya da AB'de tutulabiliyor</span>
+<span class="k-alan ilk son"><span class="k-etiket">Ücret</span><span class="k-deger">Ayda 1 milyon işleme kadar ücretsiz; veri ABD ya da AB'de tutulabiliyor</span></span>
 
 </Kart>
 
-<Kart baslik={"Umami"} href={"https://github.com/umami-software/umami"} tur={"Web analitiği"} prompt={"Umami (https://github.com/umami-software/umami) aracını bu projede kullanmak istiyorum. Ne işe yarar: Çerez kullanmayan, gizlilik odaklı web analitiği: trafik, kampanya, dönüşüm ve gelir tek panelde. Google Analytics'e kendi sunucunda çalışan alternatif; veri yurt dışına gitmez. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"Umami"} satir={4} href={"https://github.com/umami-software/umami"} tur={"Web analitiği"} prompt={"Umami (https://github.com/umami-software/umami) aracını bu projede kullanmak istiyorum. Ne işe yarar: Çerez kullanmayan, gizlilik odaklı web analitiği: trafik, kampanya, dönüşüm ve gelir tek panelde. Google Analytics'e kendi sunucunda çalışan alternatif; veri yurt dışına gitmez. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Çerez kullanmayan, gizlilik odaklı web analitiği: trafik, kampanya, dönüşüm ve gelir tek panelde. Google Analytics'e kendi sunucunda çalışan alternatif; veri yurt dışına gitmez.
 
-<span class="meta">**Ücret:** Kendi sunucunda ücretsiz (MIT, PostgreSQL ister); bulut sürümü de var</span>
+<span class="k-alan ilk son"><span class="k-etiket">Ücret</span><span class="k-deger">Kendi sunucunda ücretsiz (MIT, PostgreSQL ister); bulut sürümü de var</span></span>
 
 </Kart>
 
-<Kart baslik={"OpenReplay"} href={"https://github.com/openreplay/openreplay"} tur={"Oturum kaydı"} prompt={"OpenReplay (https://github.com/openreplay/openreplay) aracını bu projede kullanmak istiyorum. Ne işe yarar: Kullanıcının oturumunu konsol ve ağ kayıtlarıyla birlikte izletir; \"bende çalışmıyor\" diyen kullanıcının gördüğünü görürsün. Ürün analitiği ve canlı ortak tarama da var; kendi sunucunda çalışır, veri üçüncü tarafa gitmez. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"OpenReplay"} satir={4} href={"https://github.com/openreplay/openreplay"} tur={"Oturum kaydı"} prompt={"OpenReplay (https://github.com/openreplay/openreplay) aracını bu projede kullanmak istiyorum. Ne işe yarar: Kullanıcının oturumunu konsol ve ağ kayıtlarıyla birlikte izletir; \"bende çalışmıyor\" diyen kullanıcının gördüğünü görürsün. Ürün analitiği ve canlı ortak tarama da var; kendi sunucunda çalışır, veri üçüncü tarafa gitmez. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Kullanıcının oturumunu konsol ve ağ kayıtlarıyla birlikte izletir; "bende çalışmıyor" diyen kullanıcının gördüğünü görürsün. Ürün analitiği ve canlı ortak tarama da var; kendi sunucunda çalışır, veri üçüncü tarafa gitmez.
 
-<span class="meta">**Ücret:** Kendi sunucunda ücretsiz (AGPL; sitene eklenen izleme kodu MIT); en az 2 vCPU ve 8 GB RAM ister</span>
+<span class="k-alan ilk son"><span class="k-etiket">Ücret</span><span class="k-deger">Kendi sunucunda ücretsiz (AGPL; sitene eklenen izleme kodu MIT); en az 2 vCPU ve 8 GB RAM ister</span></span>
+
+</Kart>
+
+<Kart baslik={"Sentry"} satir={4} href={"https://sentry.io"} tur={"Hata izleme"} prompt={"Sentry (https://sentry.io) aracını bu projede kullanmak istiyorum. Ne işe yarar: Uygulamadaki ve sunucudaki hataları cihaz, tarayıcı, işletim sistemi ve sürüm bilgisiyle tek panelde toplar, yeni hata çıkınca haber verir; kaynak haritasıyla (source map) hatanın kodda hangi satırda olduğunu gösterir. Web, React Native, Flutter, iOS ve Android SDK'ları ve oturum tekrarı var; veri ABD'de ya da AB'de tutulur (organizasyon açılırken seçilir, sonra değişmez). Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Uygulamadaki ve sunucudaki hataları cihaz, tarayıcı, işletim sistemi ve sürüm bilgisiyle tek panelde toplar, yeni hata çıkınca haber verir; kaynak haritasıyla (source map) hatanın kodda hangi satırda olduğunu gösterir. Web, React Native, Flutter, iOS ve Android SDK'ları ve oturum tekrarı var; veri ABD'de ya da AB'de tutulur (organizasyon açılırken seçilir, sonra değişmez).
+
+<span class="k-alan ilk son"><span class="k-etiket">Ücret</span><span class="k-deger">Developer planı ücretsiz: tek kullanıcı, ayda 5.000 hata, 50 oturum tekrarı; Team yıllık ödemede aylık 26 $. Kendi sunucunda ücretsiz (FSL lisansı, en az 4 çekirdek ve 16 GB RAM)</span></span>
 
 </Kart>
 
@@ -63,6 +71,7 @@ Kullanıcının oturumunu konsol ve ağ kayıtlarıyla birlikte izletir; "bende 
 - **Kim için:** RevenueCat ve Superwall uygulama içi aboneliği olan mobil uygulamalar içindir. Sadece web projesinde Mixpanel yeterli.
 - **Türkiye'den web satışı:** RevenueCat'in web satışı Stripe ya da Paddle üzerinden çalışıyor. Stripe Türkiye'deki şirketlere açık değil (stripe.com/global listesinde yok); Paddle'ın Türkiye'den satıcı kabul edip etmediği ayrıca kontrol edilmeli.
 - **Veri yurt dışına çıkmasın:** Umami ve OpenReplay kendi sunucunda çalışır; Google Analytics ya da Mixpanel yerine bunları seçersen kullanıcı verisi yurt dışına gitmez.
-- **Oturum kaydı:** Mixpanel'in ya da OpenReplay'in oturum kaydında form alanlarını maskele, çerez onayı olmadan başlatma; veri yurt dışına gittiği için KVKK aydınlatma metninde belirt ([yayın öncesi 86. madde](/listeler/yayin-oncesi/#yo-oturum-kaydi-maskeleme)).
+- **Oturum kaydı:** Mixpanel'in ya da OpenReplay'in oturum kaydında form alanlarını maskele, çerez onayı olmadan başlatma; veri yurt dışına gittiği için KVKK aydınlatma metninde belirt ([yayın öncesi 87. madde](/listeler/yayin-oncesi/#yo-oturum-kaydi-maskeleme)).
+- **Hata izleme ([bu videodan](https://www.instagram.com/reel/DdwbFPOAWpP/)):** Sentry, yayından sonra hiç test etmediğin cihaz ve tarayıcılarda (ör. Instagram'ın uygulama içi tarayıcısı) çıkan hataları gösterir ([yayın öncesi 54. madde](/listeler/yayin-oncesi/#yo-hata-izleme)). Kaynak haritalarını yükledikten sonra yayındaki siteden sil (`filesToDeleteAfterUpload`), kişisel veri gönderme ayarını kapalı tut; oturum tekrarında yazı ve form alanları varsayılan olarak maskelidir.
 - **AI ile takip:** RevenueCat'in resmi MCP'si abonelik ve gelir verisini Claude'a sordurur; kurulumu ve Buffer, Meta Ads gibi pazarlama MCP'leri [AI geliştirme akışı](/rehberler/ai-gelistirme-akisi/) sekmesinde.
-- **Abonelik ekranı:** Yenileme şartları ve iptal yolu abone ol butonunun yanında görünsün; Superwall ya da RevenueCat ile tasarlanan ekranda bu metin kalmalı ([yayın öncesi 88. madde](/listeler/yayin-oncesi/#yo-abonelik-sartlari)).
+- **Abonelik ekranı:** Yenileme şartları ve iptal yolu abone ol butonunun yanında görünsün; Superwall ya da RevenueCat ile tasarlanan ekranda bu metin kalmalı ([yayın öncesi 89. madde](/listeler/yayin-oncesi/#yo-abonelik-sartlari)).

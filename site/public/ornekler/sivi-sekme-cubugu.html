@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="yukseklik" content="400">
+<title>Sıvı sekme çubuğu</title>
+<style>
+  /* Renkler tek yerde; --acc seçili sekmenin rengi, kayıtlı olduğu için yumuşak geçer */
+  @property --acc { syntax: "<color>"; inherits: true; initial-value: #c9f24a; }
+  :root {
+    --bg-top: #2c2142;
+    --bg: #100c18;
+    --plate-top: #231b31;
+    --plate-bottom: #110d19;
+    --rim: rgba(255, 255, 255, .24);
+    --ink: #f5f2fb;
+    --muted: #a29cb3;
+    --icon: #b5aec6;
+    --bead-ink: #16111e;
+    --acc: #c9f24a;
+  }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: radial-gradient(130% 90% at 50% -10%, var(--bg-top), var(--bg) 65%);
+    color: var(--ink);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    transition: --acc .5s ease;
+  }
+  .stage {
+    width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Başlık alanı (sekme paneli) */
+  .eyebrow {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .18em;
+    color: var(--muted);
+  }
+  .eyebrow i { width: 7px; height: 7px; border-radius: 50%; background: var(--acc); box-shadow: 0 0 10px var(--acc); }
+  h1 { margin: 8px 0 6px; font-size: clamp(40px, 12vw, 68px); line-height: 1; font-weight: 800; letter-spacing: -.045em; }
+  .sub { margin: 0; font-size: 14px; color: var(--muted); }
+  .swap h1, .swap .sub { animation: rise .45s cubic-bezier(.2, .8, .2, 1) both; }
+  .swap .sub { animation-delay: .05s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } }
+
+  /* Çubuk: SVG gövde + sekmeler + sürüklenebilir damla */
+  .dock { position: relative; width: min(390px, 100%); height: 64px; margin-top: 56px; }
+  .glow {
+    position: absolute; left: 12%; right: 12%; top: 34px; height: 120px;
+    border-radius: 50%; background: var(--acc); opacity: .2; filter: blur(46px); pointer-events: none;
+  }
+  .skin { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 14px 22px rgba(0, 0, 0, .45)); }
+  .skin stop:first-child { stop-color: var(--plate-top); }
+  .skin stop:last-child { stop-color: var(--plate-bottom); }
+  .skin path { fill: url(#plate); stroke: var(--rim); stroke-width: 1.2; }
+
+  .tabs { position: absolute; inset: 0; display: flex; padding: 0 clamp(40px, 11%, 56px); }
+  .tab {
+    flex: 1 1 0; position: relative; height: 100%; padding: 0;
+    border: 0; background: none; font: inherit; color: var(--icon);
+    cursor: pointer; -webkit-tap-highlight-color: transparent;
+  }
+  .tab:hover { color: var(--ink); }
+  .tab:focus-visible { outline: 2px solid var(--acc); outline-offset: -6px; border-radius: 14px; }
+  .tab svg, .bead svg { fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+  .tab svg {
+    position: absolute; left: 50%; top: 20px; width: 22px; height: 22px; margin-left: -11px;
+    opacity: var(--o, 1); transform: scale(calc(.55 + .45 * var(--o, 1)));
+  }
+  .tab span {
+    position: absolute; left: 50%; bottom: 7px; transform: translate(-50%, 4px);
+    font-size: 11px; font-weight: 650; white-space: nowrap; color: var(--acc);
+    opacity: 0; transition: opacity .25s, transform .25s; pointer-events: none;
+  }
+  .settled .tab[aria-selected="true"] span { opacity: 1; transform: translate(-50%, 0); }
+
+  .bead {
+    position: absolute; left: 0; top: 0; width: 44px; height: 44px; border-radius: 50%;
+    display: grid; place-items: center; background: var(--acc); color: var(--bead-ink);
+    box-shadow: inset 0 -3px 6px rgba(0, 0, 0, .18), inset 0 2px 3px rgba(255, 255, 255, .45), 0 8px 22px -6px var(--acc);
+    cursor: grab; touch-action: none; will-change: transform;
+  }
+  .bead svg { width: 20px; height: 20px; opacity: var(--io, 1); }
+  .dragging .bead { cursor: grabbing; }
+
+  .hint { margin: 30px 0 0; font-size: 13px; color: var(--muted); }
+  .hint b { font-weight: 600; color: var(--ink); text-decoration: underline dotted; text-underline-offset: 3px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    body { transition: none; }
+    .swap h1, .swap .sub { animation: none; }
+    .tab span { transition: none; }
+  }
+</style>
+</head>
+<body>
+<main class="stage">
+  <div class="head" id="panel" role="tabpanel" aria-labelledby="t0">
+    <p class="eyebrow"><i></i>MENİSKÜS</p>
+    <h1 id="title">Ana sayfa</h1>
+    <p class="sub" id="sub">Her şey, tek bir yüzeyde.</p>
+  </div>
+
+  <div class="dock" id="dock">
+    <div class="glow"></div>
+    <svg class="skin" aria-hidden="true">
+      <defs><linearGradient id="plate" x1="0" y1="0" x2="0" y2="1"><stop offset="0"/><stop offset="1"/></linearGradient></defs>
+      <path id="skinPath"/>
+    </svg>
+    <div class="tabs" role="tablist" aria-label="Ana gezinme">
+      <button class="tab" type="button" role="tab" id="t0" aria-selected="true" aria-controls="panel"
+        data-acc="#c9f24a" data-sub="Her şey, tek bir yüzeyde.">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg><span>Ana sayfa</span>
+      </button>
+      <button class="tab" type="button" role="tab" id="t1" aria-selected="false" aria-controls="panel"
+        data-acc="#7cc8ff" data-sub="Tek bakışta sen.">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg><span>Profil</span>
+      </button>
+      <button class="tab" type="button" role="tab" id="t2" aria-selected="false" aria-controls="panel"
+        data-acc="#ffab3d" data-sub="Üç okunmamış. Hepsi iyi haber.">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.5a8.5 8.5 0 0 1-12.4 7.6L3.5 20.5l1.4-4.6a8.5 8.5 0 1 1 15.6-4.4z"/></svg><span>Mesajlar</span>
+      </button>
+      <button class="tab" type="button" role="tab" id="t3" aria-selected="false" aria-controls="panel"
+        data-acc="#b89cff" data-sub="Işık hazır, kadraj senin.">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 4h-5L7.5 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3.5z"/><circle cx="12" cy="13" r="3.5"/></svg><span>Kamera</span>
+      </button>
+      <button class="tab" type="button" role="tab" id="t4" aria-selected="false" aria-controls="panel"
+        data-acc="#ff5c7c" data-sub="Daha az anahtar. Daha iyi varsayılanlar.">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg><span>Ayarlar</span>
+      </button>
+    </div>
+    <div class="bead" id="bead" aria-hidden="true"></div>
+  </div>
+
+  <p class="hint">Sekmeye dokun — ya da <b>damlayı</b> çubuk boyunca sürükle.</p>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const dock = document.getElementById("dock");
+  const skin = document.getElementById("skinPath");
+  const bead = document.getElementById("bead");
+  const panel = document.getElementById("panel");
+  const title = document.getElementById("title");
+  const sub = document.getElementById("sub");
+  const tabs = Array.from(dock.querySelectorAll(".tab"));
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  // Geometri (px): damla yarıçapı, damla ile çukur arası boşluk, omuz yarıçapı, köşe yarıçapı
+  let R = 22, GAP = 5, FILLET = 10;
+  const CORNER = 18;
+
+  let W = 0, H = 0, slots = [], spacing = 60;
+  let x = 0, v = 0, target = 0, lift = 0, liftTo = 0;
+  let sel = 0, shown = -1, drag = null, raf = 0, last = 0;
+
+  const clamp = (n, a, b) => Math.min(b, Math.max(a, n));
+  const nearest = (px) => slots.reduce((best, s, i) => (Math.abs(s - px) < Math.abs(slots[best] - px) ? i : best), 0);
+  const setAccent = (i) => document.body.style.setProperty("--acc", tabs[i].dataset.acc);
+
+  function measure() {
+    const r = dock.getBoundingClientRect();
+    W = r.width;
+    H = r.height;
+    const sc = clamp(W / 360, 0.8, 1);
+    R = 22 * sc; GAP = 5 * sc; FILLET = 10 * sc;
+    bead.style.width = bead.style.height = 2 * R + "px";
+    slots = tabs.map((t) => { const b = t.getBoundingClientRect(); return b.left - r.left + b.width / 2; });
+    spacing = slots[1] - slots[0];
+  }
+
+  // Omuz: hem üst kenara (y = 0) hem çukur çemberine dıştan teğet olan küçük çember.
+  // Merkezler arası uzaklık s + rb olmalı; yatay mesafe Pisagor'la bulunur, böylece kırışma olmaz.
+  function shoulder(cx, cy, s, rb, side) {
+    const h = rb - cy;
+    const dx = Math.sqrt(Math.max(0, (s + rb) * (s + rb) - h * h));
+    const ox = cx + side * dx;
+    const k = rb / (s + rb);
+    return { x: ox, px: ox + (cx - ox) * k, py: rb + (cy - rb) * k };
+  }
+
+  function draw() {
+    const still = reduce.matches;
+    const speed = still ? 0 : Math.min(Math.abs(v) / 1400, 1);
+    const q = still ? 0 : clamp(v / 1400, -1, 1);
+    // Hızlanınca çukur genişler ve sığlaşır; arkadaki omuz uzar, öndeki sıkılaşır
+    const s = (R + GAP) * (1 + 0.16 * speed);
+    const cy = -lift - 7 * speed;
+    const rbL = FILLET * (1 + (q > 0 ? 0.9 : 0.5) * q);
+    const rbR = FILLET * (1 - (q < 0 ? 0.9 : 0.5) * q);
+    const L = shoulder(x, cy, s, rbL, -1);
+    const Rt = shoulder(x, cy, s, rbR, 1);
+    const f = (n) => n.toFixed(2);
+    const c = CORNER;
+
+    skin.setAttribute("d",
+      `M${c} 0H${f(L.x)}A${f(rbL)} ${f(rbL)} 0 0 1 ${f(L.px)} ${f(L.py)}` +
+      `A${f(s)} ${f(s)} 0 0 0 ${f(Rt.px)} ${f(Rt.py)}` +
+      `A${f(rbR)} ${f(rbR)} 0 0 1 ${f(Rt.x)} 0` +
+      `H${f(W - c)}A${c} ${c} 0 0 1 ${f(W)} ${c}V${f(H - c)}A${c} ${c} 0 0 1 ${f(W - c)} ${f(H)}` +
+      `H${c}A${c} ${c} 0 0 1 0 ${f(H - c)}V${c}A${c} ${c} 0 0 1 ${c} 0Z`);
+
+    bead.style.transform = `translate(${f(x - R)}px, ${f(cy - R)}px) scale(${f(1 + lift * 0.015)})`;
+    bead.style.setProperty("--io", clamp(1 - speed * 2.2, 0, 1).toFixed(2));
+
+    // Damlanın altında kalan ikon çukura "yutulur", uzaklaşınca geri gelir
+    tabs.forEach((t, i) => {
+      const d = Math.abs(x - slots[i]) / spacing;
+      t.style.setProperty("--o", clamp((d - 0.22) / 0.45, 0, 1).toFixed(3));
+    });
+
+    const n = nearest(x);
+    if (n !== shown) {
+      shown = n;
+      bead.innerHTML = tabs[n].querySelector("svg").outerHTML;
+      if (drag) setAccent(n);
+    }
+    dock.classList.toggle("settled", !drag && Math.abs(x - slots[sel]) < 2 && Math.abs(v) < 20);
+  }
+
+  // Yay fiziği: hafif sönümlü, damla hedefi azıcık aşıp yerine oturur
+  function tick(now) {
+    const dt = Math.min((now - last) / 1000, 1 / 30);
+    last = now;
+    v += (230 * (target - x) - 22 * v) * dt;
+    x += v * dt;
+    lift += (liftTo - lift) * Math.min(1, dt * 14);
+    const busy = drag || Math.abs(target - x) > 0.3 || Math.abs(v) > 3 || Math.abs(liftTo - lift) > 0.05;
+    if (!busy) { x = target; v = 0; lift = liftTo; }
+    draw();
+    raf = busy ? requestAnimationFrame(tick) : 0;
+  }
+
+  function run() {
+    if (reduce.matches) { x = target; v = 0; lift = liftTo; draw(); return; }
+    if (!raf) { last = performance.now(); raf = requestAnimationFrame(tick); }
+  }
+
+  function select(i) {
+    const changed = i !== sel;
+    sel = i;
+    tabs.forEach((t, j) => t.setAttribute("aria-selected", String(j === i)));
+    panel.setAttribute("aria-labelledby", tabs[i].id);
+    setAccent(i);
+    if (changed) {
+      title.textContent = tabs[i].querySelector("span").textContent;
+      sub.textContent = tabs[i].dataset.sub;
+      panel.classList.remove("swap");
+      void panel.offsetWidth;
+      panel.classList.add("swap");
+    }
+    target = slots[i];
+    run();
+  }
+
+  function layout() {
+    measure();
+    x = target = slots[sel];
+    v = 0;
+    draw();
+  }
+
+  // Sürükleme: damla parmağı izler, bırakınca en yakın sekmeye oturur
+  bead.addEventListener("pointerdown", (e) => {
+    stopDemo();
+    const r = dock.getBoundingClientRect();
+    drag = { off: e.clientX - r.left - x };
+    bead.setPointerCapture(e.pointerId);
+    liftTo = 4;
+    dock.classList.add("dragging");
+    run();
+    e.preventDefault();
+  });
+  bead.addEventListener("pointermove", (e) => {
+    if (!drag) return;
+    const r = dock.getBoundingClientRect();
+    target = clamp(e.clientX - r.left - drag.off, slots[0], slots[slots.length - 1]);
+    run();
+  });
+  const drop = () => {
+    if (!drag) return;
+    drag = null;
+    liftTo = 0;
+    dock.classList.remove("dragging");
+    select(nearest(target));
+  };
+  bead.addEventListener("pointerup", drop);
+  bead.addEventListener("pointercancel", drop);
+
+  // Tıklama ve klavye: Tab ile gez, Enter/Boşluk ile seç, oklar/Home/End ile geç
+  tabs.forEach((t, i) => t.addEventListener("click", () => { stopDemo(); select(i); }));
+  dock.querySelector(".tabs").addEventListener("keydown", (e) => {
+    const i = tabs.indexOf(document.activeElement);
+    const to = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
+    if (i < 0 || to === undefined) return;
+    e.preventDefault();
+    const n = (to + tabs.length) % tabs.length;
+    tabs[n].focus();
+    select(n);
+  });
+
+  // Açılışta kısa otomatik gösterim; kullanıcı dokununca durur
+  let demo = [];
+  function stopDemo() { demo.forEach(clearTimeout); demo = []; }
+  addEventListener("pointerdown", stopDemo, true);
+  addEventListener("keydown", stopDemo, true);
+
+  layout();
+  if ("ResizeObserver" in window) new ResizeObserver(layout).observe(dock);
+  else addEventListener("resize", layout);
+  if (!reduce.matches) {
+    demo = [[900, 2], [2300, 4], [3700, 0]].map(([ms, i]) => setTimeout(() => select(i), ms));
+  }
+})();
+</script>
+</body>
+</html>

@@ -14,7 +14,7 @@ Teknoloji: Python standart kütüphanesi; Astro ve Starlight; Node.js ve npm; Ma
 - `veri/repolar.json`, `veri/linkler.json`, `veri/raporlar/`: katalog, link kontrolü ve kişisel denetim raporları.
 - `uygulama/katalog.py`: içerik ve veri için tek ayrıştırma çekirdeği; `mcp_sunucu.py` ve `site_uret.py` bunu kullanır.
 - `uygulama/guncelle.py`: kaynaklardan siteyi ve yerel sayfayı üretir, `AGENTS.md` dosyasını `CLAUDE.md` dosyasına kopyalar.
-- `site/src/components/`, `site/src/styles/`, `site/src/pages/`: elle düzenlenen Astro arayüzü; `skills/`: denetim skill'leri.
+- `site/src/components/`, `site/src/styles/`, `site/src/pages/`: elle düzenlenen Astro arayüzü; `site/public/ornekler/`: rehber kartlarındaki canlı örnekler; `skills/`: denetim skill'leri.
 - [Proje referansı](docs/proje-referansi.md): içerik biçimleri, katalog şeması, raporlar, URL'ler ve site davranışı.
 
 ## Komutlar

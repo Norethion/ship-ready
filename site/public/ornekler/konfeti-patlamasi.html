@@ -1,0 +1,358 @@
+<!doctype html>
+<!--
+  Konfeti patlaması: canvas-confetti'nin etkisini kendi küçük canvas parçacık kodumuzla
+  gösteren örnek; kütüphanenin kodu burada yok.
+
+  Projede kütüphanenin kendisi:
+
+    npm install canvas-confetti
+
+    import confetti from 'canvas-confetti'
+
+    function patlat(e) {
+      // Klavyeyle tetiklenen tıklamada (e.detail === 0) düğmenin ortasından patlat
+      const r = e.currentTarget.getBoundingClientRect()
+      const x = e.detail ? e.clientX : r.left + r.width / 2
+      const y = e.detail ? e.clientY : r.top + r.height / 2
+      const base = {
+        origin: { x: x / innerWidth, y: y / innerHeight },
+        spread: 70, startVelocity: 42, gravity: 1, scalar: 0.9, ticks: 180,
+        disableForReducedMotion: true // hareketi azalt açıkken konfeti atılmaz
+      }
+      confetti({ ...base, particleCount: 80 })
+      // Hemen ardından ikinci patlama: gerçek patlama hissini bu verir
+      setTimeout(() => confetti({ ...base, particleCount: 50, spread: 100, startVelocity: 30 }), 120)
+    }
+
+  Her tıklama yeni bir patlama başlatır (kilit yok). Hareketi azalt açıkken konfeti
+  çıkmayacağı için kullanıcıya başka bir geri bildirim ver (burada "Tebrikler" kutusu).
+-->
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="yukseklik" content="440">
+<title>Konfeti patlaması</title>
+<style>
+  /* Renkler tek yerde */
+  :root {
+    --duvar-acik: #8f9295;
+    --duvar: #727578;
+    --duvar-koyu: #56595c;
+    --supurgelik: #3a3c3f;
+    --cim: #3f7a34;
+    --cim-koyu: #2a5423;
+    --panel: rgba(12, 14, 18, .82);
+    --metin: #f4f5f7;
+    --soluk: #c3c7cf;
+    --secili: #ffffff;
+    --secili-metin: #111318;
+    --secili-soluk: #454b57;
+    --parilti: rgba(34, 195, 238, .55);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    overflow: hidden;
+    font: 14px/1.35 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--metin);
+    /* Beton duvar, süpürgelik ve çim */
+    background:
+      linear-gradient(180deg, transparent 0 76%, var(--supurgelik) 76% 77.5%, var(--cim) 77.5%, var(--cim-koyu) 100%),
+      repeating-linear-gradient(90deg, rgba(255, 255, 255, .045) 0 2px, transparent 2px 64px),
+      radial-gradient(120% 90% at 50% 35%, var(--duvar-acik), var(--duvar) 55%, var(--duvar-koyu));
+  }
+  .sahne {
+    height: 100%; padding: 12px 12px 14px;
+    display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 10px;
+  }
+
+  /* Sürüm seçici: gerçek radyo düğmeleri, ok tuşlarıyla da değişir */
+  .mod {
+    display: flex; gap: 4px; width: min(100%, 360px); min-width: 0;
+    margin: 0; padding: 4px; border: 0; border-radius: 14px; background: var(--panel);
+  }
+  .mod label { position: relative; flex: 1; min-width: 0; cursor: pointer; }
+  .mod input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
+  .mod span {
+    display: grid; gap: 1px; padding: 7px 8px; border-radius: 10px; text-align: center;
+    color: var(--soluk); transition: background-color .2s, color .2s;
+  }
+  .mod b { font-size: 13px; color: var(--metin); transition: color .2s; }
+  .mod small { font-size: 11.5px; }
+  .mod input:checked + span { background: var(--secili); color: var(--secili-soluk); }
+  .mod input:checked + span b { color: var(--secili-metin); }
+  .mod input:focus-visible + span { outline: 2px solid var(--secili); outline-offset: 2px; }
+
+  /* Nişan tahtası */
+  .orta { position: relative; flex: 1; display: grid; place-items: center; width: 100%; }
+  .hedef {
+    position: relative; width: clamp(128px, 38vmin, 176px); aspect-ratio: 1; margin-bottom: 18px;
+    padding: 0; border: 0; border-radius: 50%; background: none; cursor: pointer;
+    touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+    transition: transform .15s ease, filter .3s;
+  }
+  .hedef svg { display: block; width: 100%; height: 100%; }
+  .hedef:hover { transform: scale(1.03); }
+  .hedef:active { transform: scale(.97); }
+  .hedef:focus-visible { outline: 3px solid var(--secili); outline-offset: 5px; }
+  [data-mod="son"] .hedef { filter: drop-shadow(0 0 16px var(--parilti)); }
+  [data-mod="son"] .ilk-merkez, [data-mod="ilk"] .son-merkez { display: none; }
+  /* Tıklamada genişleyip kaybolan beyaz halka */
+  .halka {
+    position: absolute; inset: 12%; border: 2px solid rgba(255, 255, 255, .9); border-radius: 50%;
+    opacity: 0; pointer-events: none;
+  }
+
+  /* Hareketi azalt açıkken konfeti yerine görünen kutu */
+  .tebrik {
+    position: absolute; left: 50%; top: calc(50% - 9px); transform: translate(-50%, -50%);
+    display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 12px;
+    background: var(--secili); color: var(--secili-metin); font-weight: 700; font-size: 15px; white-space: nowrap;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .35); pointer-events: none;
+    opacity: 0; visibility: hidden;
+  }
+  .tebrik svg { width: 18px; height: 18px; color: #15803d; }
+  .tebrik.goster { opacity: 1; visibility: visible; }
+
+  .alt {
+    margin: 0; padding: 7px 13px; border-radius: 14px; background: var(--panel);
+    font-size: 12.5px; color: var(--soluk); text-align: center; max-width: 100%;
+  }
+  .alt b { color: var(--metin); font-variant-numeric: tabular-nums; }
+
+  .konfeti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10; }
+  .gizli { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+    .hedef:hover, .hedef:active { transform: none; }
+  }
+</style>
+</head>
+<body data-mod="son">
+<main class="sahne">
+  <fieldset class="mod">
+    <legend class="gizli">Konfeti sürümü</legend>
+    <label><input type="radio" name="mod" value="ilk"><span><b>İlk deneme</b> <small>18 ince parça</small></span></label>
+    <label><input type="radio" name="mod" value="son" checked><span><b>Son hâl</b> <small>80 + 50 parça</small></span></label>
+  </fieldset>
+
+  <div class="orta">
+    <button type="button" class="hedef" id="hedef" aria-label="Hedefe vur, konfeti patlat" aria-describedby="bilgi">
+      <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+        <circle cx="50" cy="50" r="49" fill="#1b1d20" fill-opacity=".94"/>
+        <circle cx="50" cy="50" r="40.5" fill="#7a7d80"/>
+        <circle cx="50" cy="50" r="32" fill="#1b1d20" fill-opacity=".94"/>
+        <circle cx="50" cy="50" r="23.5" fill="#7a7d80"/>
+        <g class="ilk-merkez">
+          <circle cx="50" cy="50" r="12" fill="#e5484d"/>
+          <circle cx="50" cy="50" r="5.5" fill="#fff"/>
+        </g>
+        <g class="son-merkez">
+          <circle cx="50" cy="50" r="17" fill="#22c3ee"/>
+          <circle cx="50" cy="50" r="10.5" fill="none" stroke="#fff" stroke-width="1.6" stroke-opacity=".8"/>
+          <circle cx="50" cy="50" r="5.5" fill="none" stroke="#fff" stroke-width="1.6"/>
+          <circle cx="50" cy="50" r="1.8" fill="#fff"/>
+        </g>
+      </svg>
+      <span class="halka" id="halka" aria-hidden="true"></span>
+    </button>
+    <div class="tebrik" id="tebrik" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+      Tebrikler! Tam isabet
+    </div>
+  </div>
+
+  <p class="alt"><span id="bilgi">80 parça, 120 ms sonra +50</span> · İsabet <b id="sayac">0</b></p>
+</main>
+<canvas class="konfeti" id="konfeti" aria-hidden="true"></canvas>
+<p class="gizli" id="duyuru" aria-live="polite"></p>
+
+<script>
+(function () {
+  var hareketSorgu = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var tuval = document.getElementById('konfeti'), ctx = tuval.getContext('2d');
+  var hedef = document.getElementById('hedef'), halka = document.getElementById('halka');
+  var tebrik = document.getElementById('tebrik'), bilgi = document.getElementById('bilgi');
+  var sayac = document.getElementById('sayac'), duyuru = document.getElementById('duyuru');
+
+  var RENKLER = ['#ffe14d', '#ff4fd8', '#3ee0ff', '#7dff6b', '#ff7a45', '#9b7bff', '#ffffff'];
+
+  // İki sürüm: yazarın kütüphanesiz ilk denemesi ve ağırlaştırılmış son hâl.
+  // hiz, yayilma (derece), yercekimi, omur (kare) canvas-confetti ayarlarının karşılığı.
+  var SURUMLER = {
+    ilk: {
+      bilgi: '18 ince parça (2×9 px), 1,5 sn',
+      atislar: [{ gecikme: 0, adet: 18, yayilma: 50, hiz: 10, azalma: 0.95, yercekimi: 0.04, omur: 90, ince: true, renkler: ['#ffffff', '#bdefff', '#6fd3ea'] }]
+    },
+    son: {
+      bilgi: '80 parça, 120 ms sonra +50',
+      atislar: [
+        { gecikme: 0, adet: 80, yayilma: 70, hiz: 42, azalma: 0.9, yercekimi: 1, olcek: 0.9, omur: 180 },
+        { gecikme: 120, adet: 50, yayilma: 100, hiz: 30, azalma: 0.9, yercekimi: 1, olcek: 0.9, omur: 180 }
+      ]
+    }
+  };
+
+  var mod = document.querySelector('input[name="mod"]:checked').value;
+  var parcalar = [], W = 0, H = 0, dpr = 1, dongu = 0, onceki = 0, isabet = 0, tebrikZaman = null;
+
+  function azHareket() { return hareketSorgu.matches; }
+
+  /* ---------- Tuval ---------- */
+  function boyutla() {
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = window.innerWidth;
+    H = window.innerHeight;
+    tuval.width = Math.round(W * dpr);
+    tuval.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  /* ---------- Parçacıklar ---------- */
+  function parcaEkle(x, y, a) {
+    var olcek = a.olcek || 1, renkler = a.renkler || RENKLER;
+    var hizOlcek = Math.max(0.55, Math.min(1, H / 640)); // küçük ekranda daha kısa uçuş
+    for (var i = 0; i < a.adet && parcalar.length < 1500; i++) {
+      var aci = -Math.PI / 2 + (Math.random() - 0.5) * a.yayilma * Math.PI / 180;
+      var v = a.hiz * hizOlcek * (0.5 + Math.random() * 0.5);
+      parcalar.push({
+        x: x, y: y, vx: Math.cos(aci) * v, vy: Math.sin(aci) * v,
+        en: a.ince ? 2 : 9 * olcek * (0.7 + Math.random() * 0.6),
+        boy: a.ince ? 9 : 6 * olcek * (0.7 + Math.random() * 0.6),
+        renk: renkler[Math.floor(Math.random() * renkler.length)],
+        // İnce çubuk uçuş yönüne bakar; kâğıt parçası döner ve takla atar
+        don: a.ince ? aci + Math.PI / 2 : Math.random() * Math.PI,
+        donHiz: a.ince ? 0 : (Math.random() - 0.5) * 0.2,
+        takla: a.ince ? 0 : Math.random() * Math.PI * 2,
+        taklaHiz: a.ince ? 0 : 0.1 + Math.random() * 0.2,
+        sallan: Math.random() * Math.PI * 2,
+        sallanHiz: 0.05 + Math.random() * 0.1,
+        sallanGenlik: a.ince ? 0 : 0.4 + Math.random() * 1.2,
+        azalma: a.azalma, yercekimi: a.yercekimi,
+        yas: 0, omur: a.omur * (0.85 + Math.random() * 0.3)
+      });
+    }
+  }
+
+  function kare(simdi) {
+    var f = Math.max(0, Math.min(3, (simdi - onceki) / 16.667)); // 60 fps'e göre adım
+    onceki = simdi;
+    ctx.clearRect(0, 0, W, H);
+    for (var i = parcalar.length - 1; i >= 0; i--) {
+      var p = parcalar[i], surtunme = Math.pow(p.azalma, f);
+      p.vx *= surtunme;
+      p.vy = p.vy * surtunme + 0.3 * p.yercekimi * f;
+      p.x += (p.vx + Math.cos(p.sallan) * p.sallanGenlik) * f;
+      p.y += p.vy * f;
+      p.sallan += p.sallanHiz * f;
+      p.don += p.donHiz * f;
+      p.takla += p.taklaHiz * f;
+      p.yas += f;
+      if (p.yas >= p.omur || p.y > H + 20) { // ömrü biten parçayı sondakiyle değiştirip at
+        parcalar[i] = parcalar[parcalar.length - 1];
+        parcalar.pop();
+        continue;
+      }
+      ctx.globalAlpha = Math.min(1, 1.6 * (1 - p.yas / p.omur));
+      ctx.fillStyle = p.renk;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.don);
+      ctx.scale(1, Math.cos(p.takla));
+      ctx.fillRect(-p.en / 2, -p.boy / 2, p.en, p.boy);
+      ctx.restore();
+    }
+    ctx.globalAlpha = 1;
+    dongu = parcalar.length ? requestAnimationFrame(kare) : 0;
+  }
+
+  function baslat() {
+    if (dongu || !parcalar.length) return;
+    onceki = performance.now();
+    dongu = requestAnimationFrame(kare);
+  }
+
+  // Seçili sürümün atışlarını sırayla yapar (son hâlde 120 ms arayla iki patlama)
+  function atis(x, y) {
+    SURUMLER[mod].atislar.forEach(function (a) {
+      if (!a.gecikme) { parcaEkle(x, y, a); return; }
+      setTimeout(function () { parcaEkle(x, y, a); baslat(); }, a.gecikme);
+    });
+    baslat();
+  }
+
+  /* ---------- Hedef ---------- */
+  function halkaAt() {
+    if (!halka.animate) return;
+    halka.animate(
+      [{ opacity: 0.95, transform: 'scale(.55)' }, { opacity: 0, transform: 'scale(1.45)' }],
+      { duration: 520, easing: 'cubic-bezier(.2, .7, .3, 1)' }
+    );
+  }
+
+  function tebrikGoster() {
+    tebrik.classList.add('goster');
+    clearTimeout(tebrikZaman);
+    tebrikZaman = setTimeout(function () { tebrik.classList.remove('goster'); }, 1800);
+  }
+
+  function vur(x, y) {
+    isabet++;
+    sayac.textContent = isabet;
+    if (azHareket()) {
+      tebrikGoster();
+      duyuru.textContent = 'Tebrikler! Tam isabet. Toplam ' + isabet + '.';
+      return;
+    }
+    duyuru.textContent = 'İsabet! Toplam ' + isabet + '.';
+    halkaAt();
+    atis(x, y);
+  }
+
+  hedef.addEventListener('click', function (e) {
+    otomatikDurdur();
+    var r = hedef.getBoundingClientRect();
+    var klavye = e.detail === 0; // Enter ya da Boşluk: ortadan patlat
+    vur(klavye ? r.left + r.width / 2 : e.clientX, klavye ? r.top + r.height / 2 : e.clientY);
+  });
+
+  document.querySelectorAll('input[name="mod"]').forEach(function (r) {
+    r.addEventListener('change', function () {
+      mod = r.value;
+      document.body.setAttribute('data-mod', mod);
+      bilgi.textContent = SURUMLER[mod].bilgi;
+    });
+  });
+
+  /* ---------- Kısa otomatik gösterim: görünür olunca bir kez patlar, dokununca iptal ---------- */
+  var otoZaman = null, otoDurdu = false;
+  function otomatikDurdur() { otoDurdu = true; clearTimeout(otoZaman); }
+  ['pointerdown', 'keydown', 'focusin'].forEach(function (o) { document.addEventListener(o, otomatikDurdur, true); });
+  function otomatikAtis() {
+    if (otoDurdu || azHareket()) return;
+    var r = hedef.getBoundingClientRect();
+    halkaAt();
+    atis(r.left + r.width / 2, r.top + r.height / 2);
+  }
+  if ('IntersectionObserver' in window) {
+    var gozcu = new IntersectionObserver(function (girdiler) {
+      if (girdiler[0].isIntersecting) {
+        gozcu.disconnect();
+        otoZaman = setTimeout(otomatikAtis, 700);
+      }
+    }, { threshold: 0.6 });
+    gozcu.observe(hedef);
+  } else {
+    otoZaman = setTimeout(otomatikAtis, 700);
+  }
+
+  window.addEventListener('resize', boyutla);
+  boyutla();
+  document.body.setAttribute('data-mod', mod);
+  bilgi.textContent = SURUMLER[mod].bilgi;
+})();
+</script>
+</body>
+</html>

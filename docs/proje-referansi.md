@@ -5,10 +5,13 @@ Bu belge [depo talimatlarındaki](../AGENTS.md) içerik, katalog, rapor ve site 
 ## Kaynak değerlendirme
 
 Kullanıcının getirdiği kontrol işi ilgili kontrol listesine, GitHub deposu `veri/repolar.json` kataloğuna, site veya araç ise ilgili rehbere eklenir.
+UI/UX rehberinde projeye kurulan ya da kodu kopyalanan şey `Kütüphaneler`, tarayıcıda kullanılan araç `Siteler` tablosuna girer; iki tabloda da satırlar `Tür` sütununa göre gruplu durur.
+Geliştirmeyle ilgisi olmayan genel web siteleri (dosya araçları, alternatif bulma, fatura) `icerik/gunluk-siteler.md` rehberine eklenir.
 Repo kataloğu kullanıcının GitHub yıldızlarına bağlı değildir: yıldızlar çekilmez, repo yıldızlanmaz.
 Bilgiler kaynağından doğrulanır; videodaki iddia aynen alınmaz.
 Instagram videosu sadece açıklama metninden değerlendirilmez, tamamı izlenir: yt-dlp ile ses ve görüntü indirilir, ses faster-whisper ile zaman damgalı yazıya dökülür, görüntüden 2 saniyede bir kare alınıp ekrandaki yazılar okunur.
 Kaydırmalı gönderilerde her slayt `?img_index=N` ile tek tek açılır.
+Arayüz ve etkileşim gönderilerinden video karesi ya da ekran görüntüsü saklanmaz; tasarımın bizim yazdığımız çalışan hâli canlı örnek olarak eklenir (aşağıda [Canlı örnekler](#canlı-örnekler)).
 Bu araçlar sisteme değil, geçici bir Python ortamına (venv) kurulur.
 Proje sadece Türkçedir.
 
@@ -21,7 +24,7 @@ Proje sadece Türkçedir.
   `site/yerel-derleme.mjs` yerel derlemeyi dosyadan açılır yapar: adresleri göreli yapar, modül betiklerini sayfanın içine alır.
   Pagefind sunucusuz çalışmadığı için arama `YerelArama.astro` ile yapılır.
 - `python uygulama/guncelle.py` (içinde `uygulama/site_uret.py`) şunları çekirdekten üretir ve bunlar elle düzenlenmez: `site/src/content/docs/` (sayfalar), `site/src/data/katalog.json` ve `sidebar.json`, `site/public/katalog.json`, `llms.txt` (sayfalar ve kategoriye göre dizilmiş repolar) ve `llms-full.txt` (bütün içerik tek dosyada, maddeler kimlikleriyle; AI'lar için), `site/src/yerel/` (yerel sayfanın raporları, raporlu kenar menüsü ve arama dizini; `.gitignore`'da, herkese açık derleme okumaz).
-- Elle düzenlenenler: `site/src/components/` (Madde, DenetimPrompt, Kart, Kartlar, RepoKatalog, PromptDugme, KenarMenu, SiteBasligi, TemaSecici, SayfaIcerigi, Kutucuk, Simge, RaporOzeti, YerelTakip, YerelArama), `site/src/pages/raporlar/`, `site/src/yerel.ts`, `site/src/arama.ts` (iki aramanın ortak eşleştirme kuralları: dolgu kelimeleri, kökten eşleşme), `site/src/content.config.ts`, `site/src/content/i18n/tr.json`, `site/src/styles/ship.css`, `site/astro.config.mjs`, `site/yerel-derleme.mjs`.
+- Elle düzenlenenler: `site/src/components/` (Madde, DenetimPrompt, Kart, Kartlar, RepoKatalog, PromptDugme, KenarMenu, SiteBasligi, TemaSecici, SayfaIcerigi, Kutucuk, Simge, RaporOzeti, YerelTakip, YerelArama), `site/src/pages/raporlar/`, `site/src/yerel.ts`, `site/src/arama.ts` (iki aramanın ortak eşleştirme kuralları: dolgu kelimeleri, kökten eşleşme), `site/src/content.config.ts`, `site/src/content/i18n/tr.json`, `site/src/styles/ship.css`, `site/astro.config.mjs`, `site/yerel-derleme.mjs`, `site/public/ornekler/` (rehber kartlarındaki canlı örnekler).
   Sadece yerel sayfada olacak bir şey `src/yerel.ts`'deki `YEREL` ile koşullanır; kişisel veri herkese açık derlemeye girmez.
 ## Site davranışı
 
@@ -42,7 +45,7 @@ Proje sadece Türkçedir.
   - `<!-- sira: N -->` menüdeki sırası,
   - `<!-- liste: kimlik -->` md'nin bir kontrol listesi olduğunu ve kimliğini söyler (`yayin-oncesi`, `app-store`, `google-play`, `paywall`); rapor dosya adlarındaki tür de budur,
   - `<!-- grup: Kontrol listeleri -->` ya da `<!-- grup: Rehberler -->` menüdeki grubu (kontrol listelerinde madde sayısı menüde rozet olarak görünür, denetim prompt'u maddelerden üretilir),
-  - `<!-- ikon: ... -->` simgesi: `shield`, `phone`, `play`, `card`, `palette`, `chart`, `server`, `sparkles`, `package`, `clipboard`, `file` (yenisi gerekirse `site/src/components/Simge.astro`'ya Lucide çizgisi eklenir).
+  - `<!-- ikon: ... -->` simgesi: `shield`, `phone`, `play`, `card`, `palette`, `chart`, `server`, `sparkles`, `package`, `clipboard`, `file`, `globe` (yenisi gerekirse `site/src/components/Simge.astro`'ya Lucide çizgisi eklenir).
 - `veri/repolar.json`: repo kataloğu, kategorileri ve alt kategorileri (`folders`: her kategoride `name`, çipte görünen kısa `kisa`, başlığın altındaki `aciklama` ve `alt` listesi).
   Her repoda `r` sahip/ad, `f` kategori, `af` alt kategori kimliği, `k` kurulum yeri, `a` kurulabildiği ajanlar, `tr` Türkçe açıklama, `w` uyarı, `src` kaynak video, `at` kataloğa eklenme tarihi; `s` yıldız sayısı, `l` dil, `d` İngilizce açıklama, `archived` ve `pushed` `--github` ile GitHub'dan tazelenir.
   Kategori reponun ne işe yaradığını söyler (tasarım, güvenlik ve test, ajana web erişimi...); skill mi, uygulama mı, kütüphane mi olduğu kategoriye değil `k` kurulum yerine yazılır.
@@ -73,9 +76,14 @@ Proje sadece Türkçedir.
 
 - `##` bölümleri sayfanın sağındaki "Sayfa içeriği" menüsünde görünür; bölüm adları kısa tutulur.
 - Kod blokları (```) sayfada "Kopyala" düğmesi alır; hazır prompt ve komutlar kod bloğu olarak yazılır.
-- Sayfadaki prompt düğmeleri ne yaptığını adıyla ve simgesiyle söyler: denetim (kalkan), projeye kurulum (indirme), Claude'a kurulum (robot), Codex'e kurulum (komut satırı), uygulama kurulumu (ekran), kullanım (fiş), tasarım (palet), düz kopyalama; üzerine gelince prompt'un kendisi görünür.
+- Sayfadaki prompt düğmeleri ne yaptığını adıyla ve simgesiyle söyler: denetim (kalkan), projeye kurulum (indirme), Claude'a kurulum (robot), Codex'e kurulum (komut satırı), uygulama kurulumu (ekran), kullanım (fiş), tasarım (palet), canlı örneğin kodu (belge), düz kopyalama; üzerine gelince prompt'un kendisi görünür.
   Repo kartlarında kurulum düğmeleri "Kurulum prompt'u" başlıklı tek grupta hedefin adıyla (Proje, Claude, Codex, Uygulama) durur.
-- Repo kartları bento düzenindedir: her kart içeriği kadar yer kaplar, görünen kartlar arasında açıklaması ve uyarısı en uzun olan %15'lik dilim (en az 170 karakter) üç ve daha çok sütunlu ekranda iki sütun genişliğinde olur.
+- Rehber ve repo kartları aynı yapıdadır (shadcn/ui kartı): isteğe bağlı üst önizleme, başlık kısmı, açıklama, gri kutuda alanlar, alt şerit.
+  Başlık kısmında ad, altında soluk satırda tür (repo kartında sahip, dil ve eklenme tarihi), sağ üstte eylem durur: bağlantılı kartta siteyi yeni sekmede açan düğme, üstünde canlı örnek olan kartta örneği tam ekran açan düğme, repo kartında yıldız sayısı.
+  Alt şeritte asıl prompt düğmesi dolu (`PromptDugme` `ana`), diğer düğmeler çerçevelidir; düğmeler şeridin üstüne hizalanır.
+- Kartlar CSS subgrid ile ızgaranın satırlarına bağlanır: aynı sıradaki kartlarda başlık, açıklama, her alan ve alt şerit aynı hizada başlar, kısa içerikli kartta boşluk parçanın altında kalır.
+  Bunun için kartın doğrudan çocuklarının sayısı kapladığı satır sayısına eşit olmalıdır: rehber kartında `site_uret.py` bunu `satir` olarak verir, repo kartı her zaman 6 satırdır (başlık, açıklama, uyarı, kurulum, kaynak, alt şerit); boş kalan parça da yerini korur (uyarısız repoda boş uyarı satırı).
+- Repo kartlarında görünen kartlar arasında açıklaması ve uyarısı en uzun olan %15'lik dilim (en az 170 karakter) üç ve daha çok sütunlu ekranda iki sütun genişliğinde olur.
   Yeni düğme eklenirse `site/src/components/PromptDugme.astro` bu türlerden biriyle (`tur`) kullanılır.
 - Sayfada genişlik sınırı (max-width) kullanılmaz; her şey ekran genişliğine göre akar.
 - Kontrol listelerinde maddeler ya numaralı satırdır (yayın öncesi listesi) ya da ilk sütunu `#` olan tablo satırıdır.
@@ -87,11 +95,25 @@ Proje sadece Türkçedir.
   Numaralar sırayla verilir, madde eklenince sonrakiler kayabilir.
 - Başka bir md'den bir maddeye numarasıyla atıf verilecekse numara yazılmaz, `{{no:kimlik}}` yazılır (ör. `[yayın öncesi {{no:yo-hesap-silme}}. madde](yayin-oncesi-maddeler.md)`); sayfa ve skill kopyaları maddenin o anki numarasını gösterir.
 - `<!-- yan-yana -->` satırı olan md'de tablolar karta dönüşür.
-  Kartta ilk sütun başlık olur, `Tür` sütunu başlığın yanında etiket olarak görünür, sonraki ilk sütun açıklama, kalanlar "Başlık: değer" satırı olur.
+  Kartta ilk sütun başlık olur, `Tür` sütunu ve bağlantı olan `Kaynak` sütunu başlığın altındaki soluk satırda görünür (düz metin kaynak alan olarak kalır), sonraki ilk sütun açıklama, kalanlar sütun sırasıyla gri kutuda "ad üstte, değer altta" alan olur.
+  Boş hücre de alan olarak yerini korur; alan sırası tablonun sütun sırasıdır, bu yüzden aynı tablodaki kartlarda "Ücret" hep aynı yerde durur.
 - Böyle bir md'de kartın prompt düğmesi tablonun ilk sütun başlığına göre seçilir: `Stil` "Bu stilde tasarla", `Kalıp` "Bu kalıbı uygula", `Renk çifti` "Bu renklerle dene", `İlham` "Bu fikri uyarla", `Etkileşim` "Bu etkileşimi yap", diğerleri araç sayılıp "Kullanım prompt'u" alır (`uygulama/site_uret.py` içindeki `CARD_PROMPTS`).
 - Böyle bir md'de ilk sütun başlığı `Stil` olan tablolarda her karta o stilin CSS örneği eklenir.
   Örnekler `site/src/styles/ship.css` içindeki `.pv-<stil-adı>` sınıflarıdır (ad küçük harf, harf ve rakam dışı karakterler `-`); yeni stil eklenince örneğini de oraya yaz.
 - Md'ler arasında göreli link ver (`[yayın öncesi](yayin-oncesi-maddeler.md)`); site bunları sayfa adresine çevirir.
+
+## Canlı örnekler
+
+- `<!-- yan-yana -->` rehberindeki bir tablo satırının ilk hücresine `<!-- ornek: ad -->` yazılırsa kart `site/public/ornekler/<ad>.html` örneğini gösterir ve "Kodu kopyala" (dosyanın tamamı) düğmesi çıkar.
+  Tablonun bütün satırlarında örnek varsa örnek kartın üstünde iframe içinde çalışır, sağ üstteki düğme onu tam ekran açar; sadece bazı satırlarda varsa (kütüphane tablosu gibi) "Örneği aç" düğmesi örneği pencerede (dialog) açar, satırlar boşuna uzamaz.
+  `python uygulama/katalog.py dogrula` dosyası olmayan örneği sorun sayar; `llms-full.txt` örneği bağlantı olarak verir.
+- Örnek tek dosyadır: CSS ve JavaScript içinde, CDN, web fontu ya da uzak görsel yok; ikonlar satır içi SVG.
+  Yerel sayfada dosyadan açıldığı için `<script type="module">` ve `/` ile başlayan adres kullanılmaz.
+- Kartın iframe yüksekliği örneğin `<meta name="yukseklik" content="420">` satırından gelir; örnek 280 px ile 900 px genişlik arasında yatay kaydırmasız görünür.
+- Metinler Türkçedir, etkileşim klavyeyle de çalışır, `prefers-reduced-motion` açıkken animasyon kapanır.
+- Örnek, gönderideki tasarımın bizim kodumuzla yeniden kurulmuş hâlidir; başkasının kodu kopyalanmaz.
+  Kütüphane kartındaki örnek kütüphanenin etkisini kendi kısa kodumuzla gösterir, kütüphaneyi içine gömmez; dosyanın başındaki yorumda kütüphanenin gerçek kurulumu ve kullanımı yazar.
+  Özgün kod paylaşılmışsa yeri ve koşulu (ücretsiz, ücretli, DM ile, lisanssız) `Özgün kod` sütununa yazılır; lisansı olmayan kod sadece incelenir.
 
 ## Proje raporları
 

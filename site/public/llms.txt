@@ -7,7 +7,7 @@ Bütün içerik tek dosyada: [llms-full.txt](/llms-full.txt). Makinenin okuyaca�
 
 ## Kontrol listeleri
 
-- [Yayına almadan önce: 97 benzersiz iş](/listeler/yayin-oncesi/): Yayına çıkmadan önce kontrol edilecek güvenlik, kimlik doğrulama, veri, başlık, ödeme, operasyon, tedarik zinciri, mobil, SEO, içerik, KVKK ve alan adı maddeleri. Hukuki maddeler bilgilendirme amaçlıdır, hukuki tavsiye değildir; kendi durumun için bir hukukçuya danış.
+- [Yayına almadan önce: 98 benzersiz iş](/listeler/yayin-oncesi/): Yayına çıkmadan önce kontrol edilecek güvenlik, kimlik doğrulama, veri, başlık, ödeme, operasyon, tedarik zinciri, mobil, SEO, içerik, KVKK ve alan adı maddeleri. Hukuki maddeler bilgilendirme amaçlıdır, hukuki tavsiye değildir; kendi durumun için bir hukukçuya danış.
 - [App Store incelemesi](/listeler/app-store/): En sık 26 red sebebi ve her biri için ne yapılacağı. Apple uygulamayı reddederken çoğu zaman sadece bir kural numarası ve iki cümle yazar; hangi ekranda neyin eksik olduğunu söylemez. Bu sebeplerin çoğu kod hatası değil; eksik anlatılan, unutulan ya da yanlış girilen ayarlar. Liste bu videodan ve aynı hesabın 24 maddelik ikinci listesinden alındı; kural numaraları 25.09.2026'da App Review Guidelines sayfasından doğrulandı.
 - [Google Play incelemesi](/listeler/google-play/): Google Play'in uygulamayı reddetmesine ya da kaldırmasına en sık yol açan 24 madde ve her biri için ne yapılacağı. Çoğu kod hatası değil; Play Console'daki formların eksik ya da gerçekle uyumsuz doldurulması. Maddeler 25.09.2026'da Google Play politika merkezinden ve Play Console Yardım sayfalarından doğrulandı; tarih ve API seviyeleri her yıl değişir.
 - [Paywall dönüşümü](/listeler/paywall/): Satın alma ekranı (paywall) az satıyorsa en sık 27 sebep ve her biri için ne yapılacağı. Liste bir videodaki 27 maddelik listeden alındı; videodaki "hepsi ölçüldü" iddiası ve etki oranları doğrulanmadı, her maddeyi kendi uygulamanda A/B testiyle dene. Mağaza kuralına dokunan maddeler (fiyatın gösterimi, deneme süresi, şartlar, geri yükleme) Apple'ın abonelik sayfasından doğrulandı ve App Store incelemesi sekmesine bağlandı. Paywall'ı kodsuz değiştirip test etmek için Superwall ya da RevenueCat Gelir & analitik sekmesinde.
@@ -15,13 +15,14 @@ Bütün içerik tek dosyada: [llms-full.txt](/llms-full.txt). Makinenin okuyaca�
 ## Rehberler
 
 - [UI/UX: stiller ve araçlar](/rehberler/ui-ux-tasarim-stilleri/): Claude'a arayüz yaptırırken stilin İngilizce adını prompt'a yazmak yeterli, örneğin "Bento Grid düzeninde, Glassmorphism kartlarla bir özellik sayfası". İşe yarayan tasarım skill'leri: Impeccable, Taste Skill, UI/UX Pro Max. Arayüzün her sayfada aynı kalması için projeye bir DESIGN.md koy: renkleri, yazı tiplerini ve boşlukları tanımlar, ajan arayüzü buna göre üretir; hazır örnekler awesome-design-md reposunda.
-- [Gelir & analitik](/rehberler/gelir-analitik/): Uygulamadan para kazanırken sık birlikte kullanılan araçlar: satın alma altyapısı, satın alma ekranı ve kullanıcı analitiği. Ücretler 25.09.2026'da sitelerinden alındı.
+- [Gelir & analitik](/rehberler/gelir-analitik/): Uygulamadan para kazanırken sık birlikte kullanılan araçlar: satın alma altyapısı, satın alma ekranı, kullanıcı analitiği ve hata izleme. Ücretler 25.09.2026'da (Sentry 29.09.2026'da) sitelerinden alındı.
 - [Yayına alma & barındırma](/rehberler/yayina-alma-barindirma/): Projeyi yayına alırken kullanılan servisler ve yayın öncesi listesinde bunlarla çözülen maddeler. Ücretler 25.09.2026'da sitelerinden alındı.
 - [AI geliştirme akışı](/rehberler/ai-gelistirme-akisi/): Claude Code ile proje geliştirirken işe yarayan komutlar, MCP sunucuları, skill'ler ve hazır prompt'lar.
+- [Günlük siteler](/rehberler/gunluk-siteler/): Geliştirmenin dışında işe yarayan ücretsiz web siteleri: ücretli programa alternatif bulma, dosya düzenleme, büyük dosya gönderme ve fatura hazırlama. AlternativeTo, TinyWow ve ToffeeShare bu videodan alındı; bilgiler 29.09.2026'da sitelerinden doğrulandı.
 
 ## Repo kataloğu
 
-122 doğrulanmış GitHub reposu amaca göre kategori ve alt kategoriye ayrılır; sayfası [/repolar/](/repolar/), açıklamaları ve kurulum yerleri llms-full.txt'te.
+141 doğrulanmış GitHub reposu amaca göre kategori ve alt kategoriye ayrılır; sayfası [/repolar/](/repolar/), açıklamaları ve kurulum yerleri llms-full.txt'te.
 
 ### 🧠 Ajan skill'leri ve çalışma yöntemi
 
@@ -37,27 +38,28 @@ Kodlama ajanının nasıl çalıştığını değiştiren skill'ler: plan, kod v
 Ajanın tarayıcıyı kullanması; web sayfalarını, videoları, belgeleri ve kod tabanını okuyabilmesi için araçlar.
 
 - Tarayıcı ve uygulama kontrolü: [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser), [microsoft/playwright-mcp](https://github.com/microsoft/playwright-mcp), [HKUDS/CLI-Anything](https://github.com/HKUDS/CLI-Anything), [microsoft/Webwright](https://github.com/microsoft/Webwright)
-- Web, video ve sosyal medya okuma: [Panniantong/Agent-Reach](https://github.com/Panniantong/Agent-Reach), [unclecode/crawl4ai](https://github.com/unclecode/crawl4ai), [bradautomates/claude-video](https://github.com/bradautomates/claude-video), [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill)
-- Belge ve doküman: [firecrawl/pdf-inspector](https://github.com/firecrawl/pdf-inspector), [microsoft/markitdown](https://github.com/microsoft/markitdown), [upstash/context7](https://github.com/upstash/context7)
-- Kod tabanı haritası: [Egonex-AI/Understand-Anything](https://github.com/Egonex-AI/Understand-Anything), [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify)
+- Web, video ve sosyal medya okuma: [Panniantong/Agent-Reach](https://github.com/Panniantong/Agent-Reach), [unclecode/crawl4ai](https://github.com/unclecode/crawl4ai), [bradautomates/claude-video](https://github.com/bradautomates/claude-video), [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill), [D4Vinci/Scrapling](https://github.com/D4Vinci/Scrapling)
+- Belge ve doküman: [firecrawl/pdf-inspector](https://github.com/firecrawl/pdf-inspector), [microsoft/markitdown](https://github.com/microsoft/markitdown), [upstash/context7](https://github.com/upstash/context7), [PaddlePaddle/PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR)
+- Kod tabanı haritası: [Egonex-AI/Understand-Anything](https://github.com/Egonex-AI/Understand-Anything), [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify), [ahmedkhaleel2004/gitdiagram](https://github.com/ahmedkhaleel2004/gitdiagram), [coderamp-labs/gitingest](https://github.com/coderamp-labs/gitingest)
 
 ### 🖥️ Ajan yönetimi, modeller ve RAG
 
 Birden çok ajanı yöneten arayüzler, yerel model çalıştırma ve model yönlendirme, belgeyle sohbet (RAG).
 
-- Ajan arayüzleri ve ekipler: [1jehuang/jcode](https://github.com/1jehuang/jcode), [pingdotgg/t3code](https://github.com/pingdotgg/t3code), [microsoft/autogen](https://github.com/microsoft/autogen), [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent), [karpathy/llm-council](https://github.com/karpathy/llm-council), [BloopAI/vibe-kanban](https://github.com/BloopAI/vibe-kanban)
+- Ajan arayüzleri ve ekipler: [1jehuang/jcode](https://github.com/1jehuang/jcode), [pingdotgg/t3code](https://github.com/pingdotgg/t3code), [microsoft/autogen](https://github.com/microsoft/autogen), [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent), [karpathy/llm-council](https://github.com/karpathy/llm-council), [BloopAI/vibe-kanban](https://github.com/BloopAI/vibe-kanban), [Fosowl/agenticSeek](https://github.com/Fosowl/agenticSeek)
 - Yerel model ve yönlendirme: [diegosouzapw/OmniRoute](https://github.com/diegosouzapw/OmniRoute), [AlexsJones/llmfit](https://github.com/AlexsJones/llmfit), [ollama/ollama](https://github.com/ollama/ollama)
 - RAG ve belgeyle sohbet: [NirDiamant/RAG_Techniques](https://github.com/NirDiamant/RAG_Techniques), [dataease/SQLBot](https://github.com/dataease/SQLBot), [lfnovo/open-notebook](https://github.com/lfnovo/open-notebook)
 
 ### 🎨 Tasarım & arayüz
 
-Arayüz bileşenleri, animasyon kütüphaneleri, tasarım skill'leri, tasarım sistemi dosyaları ve diyagram araçları.
+Arayüz bileşenleri, animasyon kütüphaneleri, tasarım skill'leri, görselden arayüz üretimi, tasarım sistemi dosyaları ve diyagram araçları.
 
-- Bileşen kütüphaneleri: [AnmolSaini16/mapcn](https://github.com/AnmolSaini16/mapcn), [recharts/recharts](https://github.com/recharts/recharts), [tremorlabs/tremor](https://github.com/tremorlabs/tremor), [saadeghi/daisyui](https://github.com/saadeghi/daisyui), [DavidHDev/react-bits](https://github.com/DavidHDev/react-bits), [magicuidesign/magicui](https://github.com/magicuidesign/magicui), [shadcn-ui/ui](https://github.com/shadcn-ui/ui)
-- Animasyon: [catdad/canvas-confetti](https://github.com/catdad/canvas-confetti), [Jakubantalik/thinking-orbs](https://github.com/Jakubantalik/thinking-orbs), [airbnb/lottie-web](https://github.com/airbnb/lottie-web), [greensock/GSAP](https://github.com/greensock/GSAP), [motiondivision/motion](https://github.com/motiondivision/motion)
-- Tasarım skill'leri: [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill), [pbakaus/impeccable](https://github.com/pbakaus/impeccable), [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill), [emilkowalski/skills](https://github.com/emilkowalski/skills)
+- Bileşen kütüphaneleri: [AnmolSaini16/mapcn](https://github.com/AnmolSaini16/mapcn), [recharts/recharts](https://github.com/recharts/recharts), [tremorlabs/tremor](https://github.com/tremorlabs/tremor), [saadeghi/daisyui](https://github.com/saadeghi/daisyui), [DavidHDev/react-bits](https://github.com/DavidHDev/react-bits), [magicuidesign/magicui](https://github.com/magicuidesign/magicui), [shadcn-ui/ui](https://github.com/shadcn-ui/ui), [samasante/liquid-glass](https://github.com/samasante/liquid-glass), [Jakubantalik/Libraries.dev](https://github.com/Jakubantalik/Libraries.dev)
+- Animasyon ve geri bildirim: [catdad/canvas-confetti](https://github.com/catdad/canvas-confetti), [Jakubantalik/thinking-orbs](https://github.com/Jakubantalik/thinking-orbs), [airbnb/lottie-web](https://github.com/airbnb/lottie-web), [greensock/GSAP](https://github.com/greensock/GSAP), [motiondivision/motion](https://github.com/motiondivision/motion), [joshpuckett/dialkit](https://github.com/joshpuckett/dialkit), [romainsimon/uisfx](https://github.com/romainsimon/uisfx)
+- Tasarım skill'leri: [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill), [pbakaus/impeccable](https://github.com/pbakaus/impeccable), [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill), [emilkowalski/skills](https://github.com/emilkowalski/skills), [kaankiziltug/logo-design-skill](https://github.com/kaankiziltug/logo-design-skill)
+- Görselden arayüz üretimi: [JCodesMore/ai-website-cloner-template](https://github.com/JCodesMore/ai-website-cloner-template), [abi/screenshot-to-code](https://github.com/abi/screenshot-to-code)
 - Tasarım sistemi ve Figma: [figma/mcp-server-guide](https://github.com/figma/mcp-server-guide), [anthropics/html-effectiveness](https://github.com/anthropics/html-effectiveness), [google-labs-code/design.md](https://github.com/google-labs-code/design.md), [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md), [nexu-io/open-design](https://github.com/nexu-io/open-design)
-- Diyagram ve sunum: [cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design), [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides), [wentong2022-arch/flowforge-skill](https://github.com/wentong2022-arch/flowforge-skill)
+- Diyagram ve sunum: [cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design), [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides), [wentong2022-arch/flowforge-skill](https://github.com/wentong2022-arch/flowforge-skill), [hugohe3/ppt-master](https://github.com/hugohe3/ppt-master)
 
 ### 🔒 Güvenlik, test & kod kalitesi
 
@@ -87,7 +89,7 @@ AI yazısını doğallaştırma, SEO ve App Store optimizasyonu, pazarlama ve so
 Video, ses ve konuşma üretimi ve düzenlemesi.
 
 - Video: [deepbeepmeep/Wan2GP](https://github.com/deepbeepmeep/Wan2GP), [Anil-matcha/Open-Generative-AI](https://github.com/Anil-matcha/Open-Generative-AI), [latent-spaces/brag](https://github.com/latent-spaces/brag), [getopenscreen/openscreen](https://github.com/getopenscreen/openscreen), [remotion-dev/remotion](https://github.com/remotion-dev/remotion)
-- Ses ve konuşma: [abus-aikorea/voice-pro](https://github.com/abus-aikorea/voice-pro), [SessionLoops/PitchNet](https://github.com/SessionLoops/PitchNet), [openai/whisper](https://github.com/openai/whisper)
+- Ses ve konuşma: [abus-aikorea/voice-pro](https://github.com/abus-aikorea/voice-pro), [SessionLoops/PitchNet](https://github.com/SessionLoops/PitchNet), [openai/whisper](https://github.com/openai/whisper), [myshell-ai/OpenVoice](https://github.com/myshell-ai/OpenVoice)
 
 ### 📖 Öğrenme & listeler
 
@@ -98,8 +100,9 @@ Sistem tasarımı ve Claude Code rehberleri, faydalı listeler ve veri setleri.
 
 ### 🧰 Günlük araçlar
 
-Geliştirme dışı günlük işler: dosya dönüştürme, finans, kişisel verimlilik.
+Geliştirme dışı günlük işler: dosya dönüştürme, finans, iş uygulamaları (CRM, e-imza), kişisel verimlilik.
 
 - Dosya ve belge dönüştürme: [jgm/pandoc](https://github.com/jgm/pandoc), [C4illin/ConvertX](https://github.com/C4illin/ConvertX)
-- Finans: [HKUDS/Vibe-Trading](https://github.com/HKUDS/Vibe-Trading), [Fincept-Corporation/FinceptTerminal](https://github.com/Fincept-Corporation/FinceptTerminal), [we-promise/sure](https://github.com/we-promise/sure)
-- Kişisel ve verimlilik: [MadsLorentzen/ai-job-search](https://github.com/MadsLorentzen/ai-job-search), [usekaneo/kaneo](https://github.com/usekaneo/kaneo), [Sonarr/Sonarr](https://github.com/Sonarr/Sonarr), [antitree/nfc_canary](https://github.com/antitree/nfc_canary)
+- Finans: [HKUDS/Vibe-Trading](https://github.com/HKUDS/Vibe-Trading), [Fincept-Corporation/FinceptTerminal](https://github.com/Fincept-Corporation/FinceptTerminal), [we-promise/sure](https://github.com/we-promise/sure), [OpenBB-finance/OpenBB](https://github.com/OpenBB-finance/OpenBB)
+- İş uygulamaları: [documenso/documenso](https://github.com/documenso/documenso), [twentyhq/twenty](https://github.com/twentyhq/twenty), [trycompai/crm](https://github.com/trycompai/crm)
+- Kişisel ve verimlilik: [MadsLorentzen/ai-job-search](https://github.com/MadsLorentzen/ai-job-search), [usekaneo/kaneo](https://github.com/usekaneo/kaneo), [Sonarr/Sonarr](https://github.com/Sonarr/Sonarr), [antitree/nfc_canary](https://github.com/antitree/nfc_canary), [dgtlmoon/changedetection.io](https://github.com/dgtlmoon/changedetection.io)

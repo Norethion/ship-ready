@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="yukseklik" content="340">
+<title>Vazgeçme süresi</title>
+<style>
+/* ── Ortak görsel dil: altı "tehlikeli işlem" örneğinde aynıdır ── */
+:root{
+  --zemin:#0e0f14;
+  --izgara:rgba(255,255,255,.035);
+  --yuzey:#17181f;
+  --yuzey-2:#20212a;
+  --cizgi:#2c2e39;
+  --metin:#eef0f5;
+  --soluk:#a0a3b0;
+  --kirmizi:#f26d6d;         /* yıkıcı işlem yazısı, halka */
+  --kirmizi-dolgu:#c9343c;   /* yıkıcı düğme zemini (beyaz yazıyla 5:1) */
+  --kirmizi-zemin:rgba(242,109,109,.12);
+  --yesil:#2fd3b5;           /* güvenli sonuç */
+  --yesil-dolgu:#22c4a8;
+  --yesil-zemin:rgba(47,211,181,.12);
+  --amber:#f2a93b;           /* bekleyen iş, uyarı */
+  --amber-zemin:rgba(242,169,59,.12);
+  --yaricap:12px;
+  --font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%}
+body{
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;justify-content:safe center;gap:14px;padding:12px;
+  font:14px/1.4 var(--font);color:var(--metin);-webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(90% 70% at 50% 45%,rgba(255,255,255,.045),transparent 70%),
+    linear-gradient(var(--izgara) 1px,transparent 1px) 0 0/24px 24px,
+    linear-gradient(90deg,var(--izgara) 1px,transparent 1px) 0 0/24px 24px,
+    var(--zemin);
+}
+.ikon{flex:none;width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ikon.kucuk{width:12px;height:12px;stroke-width:2.5}
+.kart{background:var(--yuzey);border:1px solid var(--cizgi);border-radius:var(--yaricap);box-shadow:0 12px 32px rgba(0,0,0,.35)}
+.rozet{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:999px;font-size:10.5px;font-weight:700;letter-spacing:.12em;white-space:nowrap;color:var(--soluk);background:var(--yuzey-2);border:1px solid var(--cizgi)}
+.rozet.kirmizi{color:var(--kirmizi);background:var(--kirmizi-zemin);border-color:rgba(242,109,109,.3)}
+.rozet.yesil{color:var(--yesil);background:var(--yesil-zemin);border-color:rgba(47,211,181,.3)}
+.rozet.amber{color:var(--amber);background:var(--amber-zemin);border-color:rgba(242,169,59,.3)}
+.dugme{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:34px;padding:0 14px;border-radius:8px;border:1px solid var(--cizgi);background:var(--yuzey-2);color:var(--metin);font:600 13px/1 var(--font);white-space:nowrap;cursor:pointer;transition:background-color .15s,border-color .15s,color .15s,transform .1s}
+.dugme:hover{background:#2a2c37}
+.dugme:active{transform:scale(.97)}
+.dugme.kucuk{height:30px;padding:0 11px;font-size:12.5px}
+.dugme.birincil{background:var(--metin);border-color:var(--metin);color:#111218}
+.dugme.birincil:hover{background:#fff}
+.dugme.tehlike{background:var(--kirmizi-dolgu);border-color:var(--kirmizi-dolgu);color:#fff}
+.dugme.tehlike:hover{background:#b52d35}
+.dugme.tehlike-cizgi{background:transparent;border-color:rgba(242,109,109,.45);color:var(--kirmizi)}
+.dugme.tehlike-cizgi:hover{background:var(--kirmizi-zemin)}
+.dugme.yesil{background:var(--yesil-dolgu);border-color:var(--yesil-dolgu);color:#04201b}
+.dugme.yesil:hover{background:var(--yesil)}
+.dugme:disabled{opacity:.45;cursor:not-allowed;transform:none}
+:focus-visible{outline:2px solid var(--yesil);outline-offset:2px}
+.baslik{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.baslik h1{margin:0;font-size:clamp(22px,5vw,30px);font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.not{margin:0;padding:7px 14px;border-radius:10px;font-size:13.5px;font-weight:700;text-align:center;color:var(--soluk);background:var(--yuzey-2);border:1px solid var(--cizgi)}
+.not.yesil{color:var(--yesil);background:var(--yesil-zemin);border-color:rgba(47,211,181,.25)}
+.gizli{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* Kart içindeki alçak çerçevede başlık ve alt not gizlenir; tam ekranda görünür */
+@media (max-height:479px){.vitrin{display:none!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* ── Bu örnek: silme planlanır, 14 gün içinde tek tıkla iptal edilir ── */
+.hesap{width:100%;max-width:400px;padding:16px}
+.bolum{display:flex;flex-direction:column;gap:12px;animation:belir .25s ease}
+@keyframes belir{from{opacity:0;transform:translateY(4px)}}
+.h-ust{display:flex;align-items:center;gap:12px}
+.h-ust .rozet{margin-left:auto}
+.avatar,.ikon-kutu{flex:none;width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-size:13px;font-weight:700}
+.avatar{border-radius:50%;color:var(--yesil);background:var(--yesil-zemin)}
+.ikon-kutu{color:var(--amber);background:var(--amber-zemin);border:1px solid rgba(242,169,59,.3)}
+.s-metin{flex:1 1 150px;min-width:0;display:flex;flex-direction:column}
+.s-metin b,.s-metin h2{margin:0;font-size:14px;font-weight:700}
+.s-metin small{font-size:12px;color:var(--soluk)}
+.bolum > .s-metin{flex:none}
+#bastan{align-self:flex-start}
+[tabindex="-1"]:focus{outline:none}
+.satir{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;padding-top:12px;border-top:1px solid var(--cizgi)}
+.satir .dugme{margin-left:auto}
+.bilgi{display:flex;align-items:center;gap:8px;margin:0;padding:8px 10px;border-radius:8px;font-size:12.5px;font-weight:600;color:var(--yesil);background:var(--yesil-zemin);border:1px solid rgba(47,211,181,.25)}
+
+/* Geri sayım */
+.kalan{display:flex;align-items:center;gap:12px}
+.kalan-sayi{min-width:1.1em;font-size:44px;font-weight:800;line-height:1;letter-spacing:-.03em;color:var(--amber);font-variant-numeric:tabular-nums}
+.gunler{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(14,1fr);gap:3px}
+.gunler li{height:24px;display:grid;place-items:center;border-radius:5px;font-size:10px;font-weight:700;color:var(--metin);background:var(--yuzey-2);border:1px solid var(--cizgi);transition:background-color .3s,border-color .3s,color .3s}
+.gunler li.gecti{color:var(--soluk);background:transparent;border-color:transparent;text-decoration:line-through;text-decoration-color:var(--amber)}
+.dugme.genis{width:100%;height:40px;box-shadow:0 0 22px rgba(34,196,168,.22)}
+.dugme.hayalet{align-self:center;background:transparent;border-color:transparent;color:var(--soluk)}
+.dugme.hayalet:hover{color:var(--metin);background:var(--yuzey-2)}
+@media (max-width:359px){.h-ust .rozet{display:none}}
+</style>
+</head>
+<body>
+
+<header class="vitrin baslik">
+  <span class="rozet yesil">KALIP 06 · VAZGEÇME SÜRESİ</span>
+  <h1>Son savunma hattı</h1>
+</header>
+
+<main class="kart hesap">
+  <!-- 1) Hesap açık -->
+  <section class="bolum" id="acik">
+    <div class="h-ust">
+      <span class="avatar" aria-hidden="true">EY</span>
+      <div class="s-metin"><h2>Elif Yıldız</h2><small>elif@kuzey.app</small></div>
+      <span class="rozet yesil">AÇIK</span>
+    </div>
+    <p class="bilgi" id="iptal-notu" tabindex="-1" hidden>
+      <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>Silme iptal edildi, hesabın açık.
+    </p>
+    <div class="satir">
+      <div class="s-metin"><b>Hesabı sil</b><small>Hemen silinmez; 14 gün içinde tek tıkla iptal edebilirsin.</small></div>
+      <button class="dugme tehlike" type="button" id="sil">
+        <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>Hesabı sil
+      </button>
+    </div>
+  </section>
+
+  <!-- 2) Silme planlandı: geri sayım ve tek tıkla iptal -->
+  <section class="bolum" id="planli" hidden>
+    <div class="h-ust">
+      <span class="ikon-kutu" aria-hidden="true">
+        <svg class="ikon" viewBox="0 0 24 24"><path d="M6 3h12M6 21h12M7 3v3l5 6-5 6v3M17 3v3l-5 6 5 6v3"/></svg>
+      </span>
+      <div class="s-metin"><h2 id="planli-baslik" tabindex="-1">Hesap silme planlandı</h2><small>Kalıcı silme: <span id="tarih"></span></small></div>
+      <span class="rozet amber">PLANLANDI</span>
+    </div>
+    <div class="kalan">
+      <span class="kalan-sayi" id="kalan">14</span>
+      <div class="s-metin"><b>gün sonra silinecek</b><small>Bu sürede tek tıkla iptal edebilirsin.</small></div>
+    </div>
+    <ol class="gunler" id="gunler" aria-hidden="true"></ol>
+    <button class="dugme yesil genis" type="button" id="iptal">
+      <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14L4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/></svg>Silmeyi iptal et
+    </button>
+    <button class="dugme kucuk hayalet" type="button" id="ileri">
+      <svg class="ikon" id="ikon-ileri" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6l7 6-7 6zM13 6l7 6-7 6z"/></svg>
+      <svg class="ikon" id="ikon-dur" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M8 5v14M16 5v14"/></svg>
+      <span id="ileri-yazi">Zamanı ileri sar</span>
+    </button>
+  </section>
+
+  <!-- 3) Süre doldu -->
+  <section class="bolum" id="bitti" hidden>
+    <div class="s-metin"><h2 id="bitti-baslik" tabindex="-1">Hesap kalıcı olarak silindi</h2><small>14 gün doldu, silme iptal edilmedi.</small></div>
+    <button class="dugme" type="button" id="bastan">Örneği baştan başlat</button>
+  </section>
+</main>
+
+<p class="vitrin not yesil">Fikrini değiştirmek için 14 gün.</p>
+
+<script>
+(function () {
+  var GUN = 14;     // vazgeçme süresi (gün)
+  var ADIM = 600;   // ileri sararken bir günün süresi (ms)
+  function $(id) { return document.getElementById(id); }
+  var acik = $('acik'), planli = $('planli'), bitti = $('bitti'), gunler = $('gunler'), iptalNotu = $('iptal-notu');
+  var kalan = GUN, sayac = 0;
+
+  // 14 günlük şerit
+  for (var i = 1; i <= GUN; i++) {
+    var li = document.createElement('li');
+    li.textContent = i;
+    gunler.appendChild(li);
+  }
+
+  // Bir bölümü göster, odağı onun başlığına taşı
+  function goster(bolum, odak) {
+    [acik, planli, bitti].forEach(function (b) { b.hidden = b !== bolum; });
+    odak.focus();
+  }
+  function ciz() {
+    $('kalan').textContent = kalan;
+    [].forEach.call(gunler.children, function (li, i) { li.classList.toggle('gecti', i < GUN - kalan); });
+  }
+  function ileriSarmayiDurdur() {
+    clearInterval(sayac);
+    sayac = 0;
+    $('ileri-yazi').textContent = 'Zamanı ileri sar';
+    $('ikon-ileri').hidden = false;
+    $('ikon-dur').hidden = true;
+  }
+
+  // Silme hemen olmaz, 14 gün sonrasına planlanır
+  $('sil').addEventListener('click', function () {
+    var tarih = new Date();
+    tarih.setDate(tarih.getDate() + GUN);
+    $('tarih').textContent = tarih.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+    kalan = GUN;
+    ciz();
+    iptalNotu.hidden = true;
+    goster(planli, $('planli-baslik'));
+  });
+
+  $('iptal').addEventListener('click', function () {
+    ileriSarmayiDurdur();
+    iptalNotu.hidden = false;
+    goster(acik, iptalNotu);
+  });
+
+  // Gösterim için zamanı hızlandırır: her adımda bir gün geçer
+  $('ileri').addEventListener('click', function () {
+    if (sayac) return ileriSarmayiDurdur();
+    $('ileri-yazi').textContent = 'Durdur';
+    $('ikon-ileri').hidden = true;
+    $('ikon-dur').hidden = false;
+    sayac = setInterval(function () {
+      kalan--;
+      ciz();
+      if (kalan > 0) return;
+      ileriSarmayiDurdur();
+      goster(bitti, $('bitti-baslik'));
+    }, ADIM);
+  });
+
+  $('bastan').addEventListener('click', function () {
+    iptalNotu.hidden = true;
+    goster(acik, $('sil'));
+  });
+})();
+</script>
+</body>
+</html>

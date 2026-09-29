@@ -111,62 +111,210 @@
 	font-size: var(--sl-text-xs);
 }
 
-/* ---- Rehber kartları ---- */
+/* ---- Rehber ve repo kartları (shadcn/ui kart yapısı) ---- */
+/* Her kart kendi parçalarını (önizleme, başlık, açıklama, alanlar, alt şerit) subgrid ile Kartlar'ın ızgarasına bağlar;
+   aynı sıradaki kartlarda her parça aynı hizada durur. Kartın kaç satır kapladığını Kart.astro verir. */
 .sl-markdown-content .kartlar {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
-	gap: 0.9rem;
+	column-gap: 1rem;
+	row-gap: 0;
 	margin-top: 1rem;
 }
-.sl-markdown-content .kart {
-	display: flex;
-	flex-direction: column;
-	margin: 0;
-	border: 1px solid var(--sl-color-hairline);
-	border-radius: 0.75rem;
+.sl-markdown-content :is(.kart, .repo) {
+	display: grid;
+	grid-template-rows: subgrid;
+	row-gap: 0;
+	margin: 0 0 1rem;
+	border: 1px solid var(--sl-color-hairline-light);
+	border-radius: 0.875rem;
 	overflow: hidden;
 	background: var(--sl-color-bg);
+	box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
 }
-.kart-govde {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	gap: 0.45rem;
-	padding: 0.9rem 1rem 1rem;
+.sl-markdown-content :is(.kart, .repo) > * {
+	margin: 0;
 }
-.sl-markdown-content .kart-govde > * {
-	margin-top: 0;
+.sl-markdown-content .kart > dialog {
+	margin: auto;
 }
-.kart-baslik {
+.k-bas {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	align-content: start;
+	column-gap: 0.6rem;
+	row-gap: 0.3rem;
+	padding: 1.25rem 1.25rem 0.8rem;
+}
+.k-ad {
+	grid-column: 1;
 	display: flex;
 	align-items: center;
-	flex-wrap: wrap;
 	gap: 0.45rem;
+	font-size: 1.0625rem;
 	font-weight: 600;
+	line-height: 1.3;
 	color: var(--sl-color-white);
 }
-.kart-tur {
+.k-tur {
+	grid-column: 1;
 	font-size: var(--sl-text-xs);
-	font-weight: 500;
-	padding: 0.05rem 0.45rem;
-	border-radius: 0.35rem;
-	background: var(--sl-color-gray-6);
+	color: var(--sl-color-gray-3);
+}
+.k-eylem {
+	grid-column: 2;
+	grid-row: 1 / span 2;
+	display: grid;
+	place-items: center;
+	width: 2rem;
+	height: 2rem;
+	border: 1px solid var(--sl-color-hairline-light);
+	border-radius: 0.5rem;
+	color: var(--sl-color-gray-2);
+	background: var(--sl-color-bg);
+}
+.k-eylem:hover {
+	border-color: var(--sl-color-accent);
+	color: var(--sl-color-white);
+}
+.k-eylem svg,
+.k-alt button > svg {
+	width: 1rem;
+	height: 1rem;
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 2;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+/* Açıklama: başlık kısmından sonraki ilk parça */
+.sl-markdown-content :is(.kart, .repo) > .k-bas + * {
+	padding: 0 1.25rem 1rem;
+	font-size: var(--sl-text-sm);
 	color: var(--sl-color-gray-2);
 }
-.kart-metin {
-	font-size: var(--sl-text-sm);
+/* Alanlar: tablo sütun sırasıyla, gri kutuda alt alta; her alan ayrı ızgara satırıdır */
+.sl-markdown-content :is(.kart, .repo) > .k-alan {
+	display: flex;
+	flex-direction: column;
+	gap: 0.1rem;
+	margin: 0 1.25rem;
+	padding: 0.35rem 0.85rem;
+	background: var(--sl-color-gray-7);
 }
-.sl-markdown-content .kart-metin > * + * {
-	margin-top: 0.3rem;
+:root[data-theme='dark'] .sl-markdown-content :is(.kart, .repo) > .k-alan {
+	background: var(--sl-color-gray-6);
 }
-.kart-metin .meta {
-	display: block;
+.sl-markdown-content :is(.kart, .repo) > .k-alan.ilk {
+	padding-top: 0.75rem;
+	border-radius: 0.6rem 0.6rem 0 0;
+}
+.sl-markdown-content :is(.kart, .repo) > .k-alan.son {
+	margin-bottom: 1.25rem;
+	padding-bottom: 0.75rem;
+	border-radius: 0 0 0.6rem 0.6rem;
+}
+.sl-markdown-content :is(.kart, .repo) > .k-alan.ilk.son {
+	border-radius: 0.6rem;
+}
+.k-etiket {
+	font-size: 0.75rem;
+	font-weight: 500;
 	color: var(--sl-color-gray-3);
-	font-size: var(--sl-text-xs);
 }
-.kart .prompt-dugme {
-	margin-top: auto;
-	align-self: flex-start;
+.k-deger {
+	font-size: var(--sl-text-xs);
+	line-height: 1.5;
+	color: var(--sl-color-gray-2);
+}
+/* Düğmeler şeridin üstüne hizalanır: şerit komşu kart yüzünden uzasa da düğmeler aynı çizgide kalır. */
+.k-alt {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	gap: 0.4rem;
+	padding: 0.85rem 1.25rem;
+	border-top: 1px solid var(--sl-color-hairline-light);
+}
+.sl-markdown-content .k-alt > * {
+	margin: 0;
+}
+.k-alt-sag {
+	margin-left: auto;
+	display: flex;
+}
+.prompt-dugme.ana {
+	background: var(--sl-color-white);
+	border-color: var(--sl-color-white);
+	color: var(--sl-color-black);
+}
+.prompt-dugme.ana:hover {
+	opacity: 0.88;
+	color: var(--sl-color-black);
+}
+.prompt-dugme.ana svg {
+	color: inherit;
+}
+.prompt-dugme.ana.kopyalandi {
+	background: var(--sl-color-bg);
+	border-color: var(--sl-color-green);
+	color: var(--sl-color-green-high, var(--sl-color-white));
+}
+.prompt-dugme.simge {
+	padding-inline: 0.45rem;
+}
+.prompt-dugme.simge span {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+/* Canlı örnek: public/ornekler/<ad>.html. Üstte: satırın en uzun örneği kadar yer kaplar, en az kendi yüksekliği kadar
+   (min-height örneğin <meta name="yukseklik"> değeri). Pencerede: "Örneği aç" ile açılan dialog. */
+.kart-ornek {
+	display: block;
+	width: 100%;
+	height: 100%;
+	border: 0;
+	border-bottom: 1px solid var(--sl-color-hairline-light);
+	background: var(--sl-color-gray-6);
+}
+.ornek-pencere {
+	width: min(56rem, calc(100vw - 2rem));
+	padding: 0;
+	border: 1px solid var(--sl-color-hairline-light);
+	border-radius: 0.875rem;
+	background: var(--sl-color-bg);
+	color: var(--sl-color-white);
+}
+.ornek-pencere::backdrop {
+	background: rgb(0 0 0 / 0.5);
+}
+.sl-markdown-content .ornek-pencere > * {
+	margin: 0;
+}
+.op-ust {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.75rem 1rem;
+	border-bottom: 1px solid var(--sl-color-hairline-light);
+	font-weight: 600;
+}
+.op-ust > span {
+	margin-right: auto;
+}
+.ornek-pencere iframe {
+	display: block;
+	width: 100%;
+	max-height: calc(100vh - 8rem);
+	border: 0;
+}
+.prompt-dugme.t-kod svg { color: var(--sl-color-green); }
+a.prompt-dugme {
+	text-decoration: none;
 }
 .renk {
 	display: inline-grid;
@@ -284,30 +432,18 @@
 	font-size: var(--sl-text-sm);
 	color: var(--sl-color-gray-3);
 }
+/* Repo kartları rehber kartlarının yapısındadır; her kart 6 satır kaplar: başlık, açıklama, uyarı (yoksa boş), kurulum, kaynak, alt şerit.
+   İçeriği en uzun kartlar üç ve daha çok sütunda iki sütun genişliğinde olur (genis, RepoKatalog.astro). */
 .sl-markdown-content .rk-izgara {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
-	grid-auto-rows: 8px;
 	grid-auto-flow: row dense;
-	column-gap: 0.8rem;
-	row-gap: 0.8rem;
+	column-gap: 1rem;
+	row-gap: 0;
 	margin-top: 0.6rem;
 }
-.rk-izgara.tek {
-	grid-auto-rows: auto;
-}
-.rk-izgara.olc .repo {
-	align-self: start;
-}
 .sl-markdown-content .repo {
-	display: flex;
-	flex-direction: column;
-	gap: 0.4rem;
-	margin: 0;
-	padding: 0.95rem 1rem;
-	border: 1px solid var(--sl-color-hairline);
-	border-radius: 0.75rem;
-	background: var(--sl-color-bg);
+	grid-row: span 6;
 }
 .repo.genis {
 	grid-column: span 2;
@@ -315,48 +451,43 @@
 .repo[hidden] {
 	display: none;
 }
-.sl-markdown-content .repo > * {
-	margin: 0;
-}
-.repo-ust {
-	display: flex;
-	align-items: baseline;
-	gap: 0.5rem;
-}
-.repo-ad {
-	font-weight: 600;
-	color: var(--sl-color-text-accent);
-	text-decoration: none;
-	word-break: break-word;
-}
-.repo-ad:hover {
-	text-decoration: underline;
-}
 .repo-yildiz {
-	margin-left: auto;
+	grid-column: 2;
+	grid-row: 1 / span 2;
+	align-self: start;
+	padding: 0.15rem 0.5rem;
+	border: 1px solid var(--sl-color-hairline-light);
+	border-radius: 999px;
 	font-size: var(--sl-text-xs);
-	color: var(--sl-color-gray-3);
+	color: var(--sl-color-gray-2);
 	white-space: nowrap;
 }
-.repo-sahip {
-	font-size: var(--sl-text-xs);
-	color: var(--sl-color-gray-3);
+.repo-uyarilar {
+	display: flex;
+	flex-wrap: wrap;
+	align-content: start;
+	gap: 0.35rem;
+	padding: 0 1.25rem 1rem;
 }
-.repo-aciklama {
-	font-size: var(--sl-text-sm);
+.repo-uyarilar.bos {
+	padding: 0;
+}
+.repo-uyarilar > * {
+	margin: 0;
 }
 .repo-uyari {
+	width: 100%;
 	font-size: var(--sl-text-xs);
-	padding: 0.45rem 0.6rem;
+	padding: 0.5rem 0.65rem;
 	border-radius: 0.5rem;
 	background: var(--sl-color-orange-low);
 	color: var(--sl-color-orange-high);
 }
-.repo-etiketler {
+.repo-cipler {
 	display: flex;
 	flex-wrap: wrap;
-	align-items: center;
 	gap: 0.3rem;
+	margin-top: 0.15rem;
 }
 .etiket {
 	font-size: var(--sl-text-xs);
@@ -368,34 +499,20 @@
 	white-space: nowrap;
 }
 .etiket.cerceve {
-	background: none;
+	background: var(--sl-color-bg);
 	box-shadow: inset 0 0 0 1px var(--sl-color-hairline-light);
-}
-.etiket.kaynak {
-	background: var(--sl-color-accent-low);
-	color: var(--sl-color-accent-high);
 }
 .etiket.turuncu {
 	background: var(--sl-color-orange-low);
 	color: var(--sl-color-orange-high);
 }
-.repo-kurulum {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	gap: 0.35rem;
-	margin-top: auto !important;
-	padding-top: 0.55rem;
-	border-top: 1px solid var(--sl-color-hairline);
-}
-.repo-kurulum > span {
+/* Düğmeyle aynı yükseklikte, böylece üste hizalı şeritte düğmelerle aynı çizgide durur */
+.repo-alt-etiket {
+	padding-block: 0.45rem;
+	line-height: 1.2;
 	font-size: var(--sl-text-xs);
 	color: var(--sl-color-gray-3);
 	margin-right: 0.2rem;
-}
-.repo-kurulum .prompt-dugme {
-	font-size: var(--sl-text-xs);
-	padding: 0.25rem 0.55rem;
 }
 
 /* ---- Stil önizlemeleri (eski sayfadan): .pv-<stil-adı> ---- */

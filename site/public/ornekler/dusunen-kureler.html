@@ -1,0 +1,432 @@
+<!doctype html>
+<!--
+  Düşünen küreler: thinking-orbs kütüphanesinin dokuz durumu, kütüphanesiz ve kendi
+  kısa 2D canvas kodumuzla (README tariflerine benzer, birebir aynı değil).
+
+  Projede kütüphanenin kendisi (React):
+
+    npm install thinking-orbs
+
+    import { ThinkingOrb } from 'thinking-orbs'
+
+    <ThinkingOrb state="searching" size={64} />   // sohbet
+    <ThinkingOrb state="working" size={20} />     // satır içi
+
+  state: working, searching, solving, listening, connecting, weaving, composing,
+  breathing, shaping. theme="auto" sayfanın açık/koyu temasını algılar. Kütüphane de
+  düz 2D canvas ile çizer (WebGL yok), ekrandan çıkınca durur, hareketi azalt
+  tercihinde sabit kare gösterir.
+-->
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="yukseklik" content="540">
+<title>Düşünen küreler</title>
+<style>
+  /* Renkler tek yerde; açık tema aynı değişkenleri ezer */
+  :root {
+    --zemin: #111113;
+    --yuzey: #1c1c1f;
+    --kenar: #2c2c31;
+    --metin: #ededef;
+    --soluk: #a1a1aa;
+    --murekkep: #f4f4f5; /* kürelerin rengi */
+    --secili-zemin: #ededef;
+    --secili-metin: #111113;
+    --mono: ui-monospace, "Cascadia Mono", Consolas, "SF Mono", monospace;
+  }
+  [data-tema="acik"] {
+    --zemin: #f4f4f5;
+    --yuzey: #ffffff;
+    --kenar: #dcdce0;
+    --metin: #18181b;
+    --soluk: #52525b;
+    --murekkep: #18181b;
+    --secili-zemin: #18181b;
+    --secili-metin: #fafafa;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    display: flex; align-items: center; justify-content: center;
+    padding: 14px 16px; overflow: hidden;
+    font: 14px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--metin); background: var(--zemin);
+    transition: background-color .3s, color .3s;
+  }
+  .kasa { width: 100%; max-width: 760px; display: grid; gap: 16px; }
+
+  /* Üst satır ve tema düğmesi */
+  .ust { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .etiket { font: 11.5px var(--mono); color: var(--soluk); }
+  .tema {
+    display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 11px;
+    border: 1px solid var(--kenar); border-radius: 999px; background: var(--yuzey);
+    font: inherit; font-size: 12.5px; color: var(--metin); cursor: pointer;
+  }
+  .tema svg { width: 15px; height: 15px; }
+  .tema .ikon-ay, [data-tema="acik"] .tema .ikon-gunes { display: none; }
+  [data-tema="acik"] .tema .ikon-ay { display: block; }
+
+  /* Büyük küre ve durum seçici */
+  .sahne { display: grid; justify-items: center; gap: 10px; text-align: center; }
+  .kure { display: block; flex: none; color: var(--murekkep); }
+  .baslik { display: flex; align-items: baseline; justify-content: center; gap: 8px; margin: 0; }
+  .baslik b { font-size: 15px; }
+  .baslik code { font: 11.5px var(--mono); color: var(--soluk); }
+  .not { margin: 2px 0 0; font-size: 13px; color: var(--soluk); text-wrap: balance; }
+  .secici { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 2px; }
+  .secici button {
+    height: 28px; padding: 0 9px; border: 1px solid var(--kenar); border-radius: 999px;
+    background: var(--yuzey); font: inherit; font-size: 12.5px; color: var(--soluk); cursor: pointer;
+    transition: background-color .2s, border-color .2s, color .2s;
+  }
+  .secici button:hover { color: var(--metin); }
+  .secici button[aria-pressed="true"] { background: var(--secili-zemin); border-color: var(--secili-zemin); color: var(--secili-metin); }
+
+  /* 20 px'lik satır içi göstergeler */
+  .satirlar { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; justify-items: start; }
+  .satir {
+    display: inline-flex; align-items: center; gap: 9px; height: 36px; padding: 0 15px 0 10px;
+    border: 1px solid var(--kenar); border-radius: 999px; background: var(--yuzey);
+    font-size: 13px; color: var(--soluk); white-space: nowrap;
+  }
+  .satir:nth-child(2) { margin-left: 12%; }
+  .satir:nth-child(3) { margin-left: 5%; }
+
+  :focus-visible { outline: 2px solid var(--metin); outline-offset: 2px; }
+
+  /* Geniş ekranda iki sütun */
+  @media (min-width: 600px) {
+    .kasa { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: center; column-gap: 32px; }
+    .ust { grid-column: 1 / -1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<main class="kasa">
+  <div class="ust">
+    <span class="etiket">thinking-orbs · 9 durum</span>
+    <button type="button" class="tema" id="tema">
+      <svg class="ikon-gunes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>
+      <svg class="ikon-ay" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5z"/></svg>
+      <span id="tema-yazi">Açık tema</span>
+    </button>
+  </div>
+
+  <section class="sahne" aria-label="Seçili durum">
+    <canvas class="kure" id="buyuk" data-boyut="96" role="img" aria-label="Arıyor durumundaki küre"></canvas>
+    <div>
+      <p class="baslik"><b id="ad">Arıyor</b><code id="kod">state="searching"</code></p>
+      <p class="not" id="not">Tarama meridyeni noktalı küreyi süpürür.</p>
+    </div>
+    <div class="secici" id="secici" role="group" aria-label="Durum seç"></div>
+  </section>
+
+  <ul class="satirlar" aria-label="Satır içi göstergeler">
+    <li class="satir"><canvas class="kure" data-boyut="20" data-durum="working" aria-hidden="true"></canvas><span>Düşünüyor…</span></li>
+    <li class="satir"><canvas class="kure" data-boyut="20" data-durum="searching" aria-hidden="true"></canvas><span>1.204 sonuç aranıyor…</span></li>
+    <li class="satir"><canvas class="kure" data-boyut="20" data-durum="solving" aria-hidden="true"></canvas><span>Ödeme işleniyor…</span></li>
+  </ul>
+</main>
+
+<script>
+(function () {
+  var TAU = Math.PI * 2;
+  var azHareket = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Yardımcılar ---------- */
+  function yumusak(k) { k = k < 0 ? 0 : k > 1 ? 1 : k; return k * k * (3 - 2 * k); }
+  // Aynı girdiye hep aynı 0..1 değerini veren sözde rastgele sayı
+  function ozet(n) { var s = Math.sin(n * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); }
+  // a açısı b'nin ne kadar gerisinde (0..TAU)
+  function geride(a, b) { return ((b - a) % TAU + TAU) % TAU; }
+  // Görüş açısı: küre y ekseninde ay, x ekseninde ax kadar döner
+  function gorus(k, ay, ax) { k.cy = Math.cos(ay); k.sy = Math.sin(ay); k.cx = Math.cos(ax); k.sx = Math.sin(ax); }
+
+  // 3B noktayı döndürüp basit perspektifle 2D'ye izdüşürür; d: 0 arka, 1 ön
+  var P = {};
+  function izdus(k, x, y, z) {
+    var x1 = x * k.cy + z * k.sy, z1 = z * k.cy - x * k.sy;
+    var y2 = y * k.cx - z1 * k.sx, z2 = y * k.sx + z1 * k.cx, p = k.R / (1 - z2 * 0.15);
+    P.x = k.m + x1 * p; P.y = k.m + y2 * p; P.d = (z2 + 1) / 2;
+    return P;
+  }
+  function daire(k, x, y, a, r) {
+    k.ctx.globalAlpha = Math.min(1, a);
+    k.ctx.beginPath();
+    k.ctx.arc(x, y, k.taban * r, 0, TAU);
+    k.ctx.fill();
+  }
+  // Öndeki nokta büyük ve parlak, arkadaki küçük ve soluk
+  function nokta(k, x, y, z, a, r) {
+    var q = izdus(k, x, y, z);
+    daire(k, q.x, q.y, a * (0.16 + 0.84 * q.d), r * (0.6 + 0.5 * q.d));
+  }
+  // Küre yüzeyinde enlem f, boylam l
+  function kureNokta(k, f, l, a, r) { var c = Math.cos(f); nokta(k, c * Math.cos(l), Math.sin(f), c * Math.sin(l), a, r); }
+  function izgara(sat, sut, fn) {
+    for (var i = 1; i < sat; i++) {
+      for (var j = 0; j < sut; j++) fn(i, -Math.PI / 2 + Math.PI * i / sat, TAU * j / sut);
+    }
+  }
+
+  /* ---------- Dokuz durum ---------- */
+
+  // Çalışıyor: eğik yörüngelerde parçacıklar
+  var YORUNGE = [];
+  for (var i = 0; i < 34; i++) {
+    YORUNGE.push({ r: 0.45 + 0.55 * ozet(i), e: ozet(i + 50) * Math.PI, d: ozet(i + 99) * TAU,
+      hiz: (0.8 + ozet(i + 7) * 1.6) * (ozet(i + 3) < 0.5 ? -1 : 1), faz: ozet(i + 21) * TAU, boy: 0.8 + ozet(i + 13) * 1.2 });
+  }
+  function calisiyor(k, t) {
+    gorus(k, t * 0.2, 0.35);
+    for (var i = 0; i < (k.kucuk ? 14 : 34); i++) {
+      var o = YORUNGE[i];
+      for (var s = 0; s < (k.kucuk ? 1 : 3); s++) { // s > 0: arkada kalan soluk iz
+        var a = o.faz + (t - s * 0.09) * o.hiz, px = Math.cos(a) * o.r, py = Math.sin(a) * o.r;
+        var y = py * Math.cos(o.e), z = py * Math.sin(o.e);
+        nokta(k, px * Math.cos(o.d) + z * Math.sin(o.d), y, z * Math.cos(o.d) - px * Math.sin(o.d), s ? 0.4 / s : 1, o.boy * (1 - s * 0.25));
+      }
+    }
+  }
+
+  // Arıyor: noktalı kürede tarama meridyeni süpürür
+  function ariyor(k, t) {
+    gorus(k, t * 0.3, -0.35);
+    izgara(k.kucuk ? 7 : 12, k.kucuk ? 12 : 26, function (i, f, l) {
+      var h = Math.exp(-geride(l, t * 1.9) * 2.4);
+      kureNokta(k, f, l, 0.35 + 0.65 * h, 0.75 + 0.8 * h);
+    });
+  }
+
+  // Çözüyor: bantlar karışır, sonra yerine oturur
+  function cozuyor(k, t) {
+    gorus(k, t * 0.25, -0.3);
+    var tur = Math.floor(t / 3.2), p = t / 3.2 - tur;
+    var kar = p < 0.18 ? yumusak(p / 0.18) : 1 - yumusak((p - 0.18) / 0.47);
+    izgara(k.kucuk ? 6 : 10, k.kucuk ? 10 : 20, function (i, f, l) {
+      kureNokta(k, f + kar * (ozet(tur * 17 + i * 3) - 0.5) * 0.3, l + kar * (ozet(tur * 31 + i) - 0.5) * 3.4, 0.85, 0.9 + 0.4 * kar);
+    });
+  }
+
+  // Dinliyor: halkalardan yukarıdan aşağı dalga geçer
+  function dinliyor(k, t) {
+    gorus(k, t * 0.25, -0.5);
+    var sat = k.kucuk ? 7 : 12;
+    for (var i = 1; i < sat; i++) {
+      var d = Math.sin(t * 3.2 - i * 0.7), h = d > 0 ? d * d : 0, f = -Math.PI / 2 + Math.PI * i / sat;
+      var r = Math.cos(f) * (1 + 0.1 * d), n = Math.max(6, Math.round((k.kucuk ? 12 : 26) * Math.cos(f)));
+      for (var j = 0; j < n; j++) nokta(k, r * Math.cos(TAU * j / n), Math.sin(f), r * Math.sin(TAU * j / n), 0.4 + 0.6 * h, 0.8 + 0.7 * h);
+    }
+  }
+
+  // Bağlanıyor: takımyıldız kendini bağlar
+  function takimyildiz(n) {
+    var yildiz = [], cizgi = [], eklendi = {};
+    for (var i = 0; i < n; i++) {
+      var y = 1 - 2 * (i + 0.5) / n, r = Math.sqrt(1 - y * y), a = i * 2.39996 + ozet(i) * 0.8, s = 0.8 + ozet(i + 40) * 0.2;
+      yildiz.push({ x: r * Math.cos(a) * s, y: y * s, z: r * Math.sin(a) * s, boy: ozet(i + 80) < 0.2 ? 2 : 1 });
+    }
+    // Her yıldızı en yakın iki komşusuna bağla
+    yildiz.forEach(function (o, i) {
+      yildiz.map(function (b, j) { return [j === i ? 9 : Math.pow(b.x - o.x, 2) + Math.pow(b.y - o.y, 2) + Math.pow(b.z - o.z, 2), j]; })
+        .sort(function (a, b) { return a[0] - b[0]; }).slice(0, 2).forEach(function (b) {
+          var ad = Math.min(i, b[1]) + '-' + Math.max(i, b[1]);
+          if (!eklendi[ad]) { eklendi[ad] = 1; cizgi.push([o, yildiz[b[1]]]); }
+        });
+    });
+    return { yildiz: yildiz, cizgi: cizgi };
+  }
+  var TAKIM = [takimyildiz(26), takimyildiz(12)];
+  function baglaniyor(k, t) {
+    gorus(k, t * 0.3, 0.3);
+    var tk = TAKIM[k.kucuk ? 1 : 0], c = k.ctx, p = (t / 4.2) % 1;
+    var ilerleme = yumusak(p / 0.7) * tk.cizgi.length, sonum = 1 - yumusak((p - 0.85) / 0.15);
+    c.lineWidth = Math.max(0.5, k.taban * 0.55);
+    tk.cizgi.forEach(function (e, i) {
+      var g = Math.min(1, ilerleme - i);
+      if (g <= 0) return;
+      var q = izdus(k, e[0].x, e[0].y, e[0].z), x = q.x, y = q.y, d = q.d;
+      q = izdus(k, e[1].x, e[1].y, e[1].z);
+      c.globalAlpha = 0.5 * sonum * (0.2 + 0.4 * (d + q.d));
+      c.beginPath();
+      c.moveTo(x, y);
+      c.lineTo(x + (q.x - x) * g, y + (q.y - y) * g);
+      c.stroke();
+    });
+    tk.yildiz.forEach(function (o, i) { nokta(k, o.x, o.y, o.z, 0.7 + 0.3 * Math.sin(t * 2 + i), o.boy * 1.1); });
+  }
+
+  // Örüyor: kürenin etrafında üç iplik örülür
+  function oruyor(k, t) {
+    gorus(k, t * 0.35, -0.25);
+    if (!k.kucuk) izgara(8, 16, function (i, f, l) { kureNokta(k, f, l, 0.22, 0.6); });
+    var n = k.kucuk ? 22 : 54;
+    for (var s = 0; s < 3; s++) {
+      for (var j = 0; j < n; j++) {
+        // Her iplik kutuptan kutba dolanır; boylamı dalgalandığı için komşusuyla çaprazlanır
+        var u = TAU * j / n, h = Math.exp(-geride(u, t * 1.6 + s * 2.1) * 1.3);
+        kureNokta(k, u - Math.PI / 2, s * TAU / 3 + 0.5 * Math.sin(2 * u + t * 1.4 + s * 2.1), 0.45 + 0.55 * h, 0.85 + 0.8 * h);
+      }
+    }
+  }
+
+  // Yazıyor: dalgalanan çok bantlı kuşak
+  function yaziyor(k, t) {
+    gorus(k, t * 0.45, -0.6);
+    var bant = k.kucuk ? 3 : 6;
+    izgara(bant + 1, k.kucuk ? 20 : 46, function (b, f, l) {
+      var s = Math.sin(3 * l - t * 3.5);
+      kureNokta(k, (b - (bant + 1) / 2) * 0.1 + 0.18 * Math.sin(2 * l + t * 2.2) + 0.05 * Math.sin(5 * l - t * 3 + b), l, 0.55 + 0.45 * s * s, 0.85);
+    });
+  }
+
+  // Nefes alıyor: yavaşça biçim değiştiren, kısa çizgilerden halka
+  function nefes(k, t) {
+    var c = k.ctx, n = k.kucuk ? 22 : 46, soluk = 1 + 0.05 * Math.sin(t * 1.3);
+    c.lineWidth = Math.max(0.6, k.taban * 0.9);
+    c.lineCap = 'round';
+    for (var i = 0; i < n; i++) {
+      var a = TAU * i / n + t * 0.12, s = Math.sin(a + t * 0.8);
+      var r = 0.8 * soluk * (1 + 0.07 * Math.sin(3 * a + t * 0.9) + 0.05 * Math.sin(2 * a - t * 1.2 + 1));
+      var boy = 0.07 + 0.03 * Math.sin(2 * a + t * 1.5), x = Math.cos(a) * k.R, y = Math.sin(a) * k.R;
+      c.globalAlpha = 0.6 + 0.4 * s * s;
+      c.beginPath();
+      c.moveTo(k.m + x * (r - boy), k.m + y * (r - boy));
+      c.lineTo(k.m + x * (r + boy), k.m + y * (r + boy));
+      c.stroke();
+    }
+  }
+
+  // Biçimleniyor: noktalı çizgi daire → üçgen → kare
+  var DAIRE = [];
+  for (i = 0; i < 48; i++) DAIRE.push([Math.cos(TAU * i / 48 - Math.PI / 2) * 0.82, Math.sin(TAU * i / 48 - Math.PI / 2) * 0.82]);
+  var SEKIL = [DAIRE, [[0, -0.78], [0.866, 0.72], [-0.866, 0.72]],
+    [[0, -0.74], [0.74, -0.74], [0.74, 0], [0.74, 0.74], [0, 0.74], [-0.74, 0.74], [-0.74, 0], [-0.74, -0.74]]];
+  // Eşit kenarlı köşe listesinde çevre boyunca s (0..1) konumu
+  function cevre(kose, s) {
+    var n = kose.length, e = Math.floor(s * n), f = s * n - e, a = kose[e % n], b = kose[(e + 1) % n];
+    return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f];
+  }
+  function bicimleniyor(k, t) {
+    // 24 ve 48 nokta hem üçgenin hem karenin köşelerine denk gelir
+    var n = k.kucuk ? 24 : 48, q = (t / 2) % 3, no = Math.floor(q), g = yumusak((q - no - 0.55) / 0.45);
+    for (var j = 0; j < n; j++) {
+      var a = cevre(SEKIL[no], j / n), b = cevre(SEKIL[(no + 1) % 3], j / n);
+      daire(k, k.m + (a[0] + (b[0] - a[0]) * g) * k.R, k.m + (a[1] + (b[1] - a[1]) * g) * k.R, 0.95, k.kucuk ? 0.9 : 1.3);
+    }
+  }
+
+  // duragan: hareketi azalt açıkken çizilecek anın saniyesi
+  var DURUMLAR = [
+    { kod: 'working', ad: 'Çalışıyor', not: 'Parçacıklar eğik yörüngelerde döner.', ciz: calisiyor },
+    { kod: 'searching', ad: 'Arıyor', not: 'Tarama meridyeni noktalı küreyi süpürür.', ciz: ariyor },
+    { kod: 'solving', ad: 'Çözüyor', not: 'Bantlar karışır, sonra yerine oturur.', ciz: cozuyor, duragan: 2.6 },
+    { kod: 'listening', ad: 'Dinliyor', not: 'Halkalardan bir dalga geçer.', ciz: dinliyor },
+    { kod: 'connecting', ad: 'Bağlanıyor', not: 'Takımyıldız kendini bağlar.', ciz: baglaniyor, duragan: 3.15 },
+    { kod: 'weaving', ad: 'Örüyor', not: 'Kürenin etrafında üç iplik örülür.', ciz: oruyor },
+    { kod: 'composing', ad: 'Yazıyor', not: 'Çok bantlı kuşak dalgalanır.', ciz: yaziyor },
+    { kod: 'breathing', ad: 'Nefes alıyor', not: 'Halka yavaşça biçim değiştirir.', ciz: nefes },
+    { kod: 'shaping', ad: 'Biçimleniyor', not: 'Noktalı çizgi: daire, üçgen, kare.', ciz: bicimleniyor, duragan: 2.5 }
+  ];
+  var DURUM = {};
+  DURUMLAR.forEach(function (d) { DURUM[d.kod] = d; });
+
+  /* ---------- Küreler ve ortak saat ---------- */
+  var kureler = [], dongu = 0;
+  function kureKur(el, kod) {
+    var S = Number(el.getAttribute('data-boyut')), dpr = Math.min(2, window.devicePixelRatio || 1);
+    el.width = el.height = Math.round(S * dpr);
+    el.style.width = el.style.height = S + 'px';
+    var k = { el: el, ctx: el.getContext('2d'), kod: kod, m: S / 2, R: S * 0.4, kucuk: S < 40, taban: S < 40 ? 0.62 : S / 64 * 1.1 };
+    k.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    el.kure = k;
+    kureler.push(k);
+    return k;
+  }
+  function ciz(k, t) {
+    k.ctx.clearRect(0, 0, k.m * 2, k.m * 2);
+    k.ctx.fillStyle = k.ctx.strokeStyle = k.murekkep;
+    DURUM[k.kod].ciz(k, t);
+    k.ctx.globalAlpha = 1;
+  }
+  function duraganCiz(k) { ciz(k, DURUM[k.kod].duragan || 1); }
+  // Tek requestAnimationFrame döngüsü; yalnızca ekranda görünen küreler çizilir
+  function kare(zaman) {
+    var gorunen = kureler.filter(function (k) { return k.gorunur; });
+    gorunen.forEach(function (k) { ciz(k, zaman / 1000); });
+    dongu = gorunen.length ? requestAnimationFrame(kare) : 0;
+  }
+  function baslat() {
+    if (azHareket) kureler.forEach(duraganCiz);
+    else if (!dongu) dongu = requestAnimationFrame(kare);
+  }
+  // theme="auto" gibi: küre rengi canvas'ın CSS rengini (--murekkep) izler
+  function murekkepOku() {
+    kureler.forEach(function (k) { k.murekkep = getComputedStyle(k.el).color; });
+    if (azHareket) kureler.forEach(duraganCiz);
+  }
+
+  var buyuk = kureKur(document.getElementById('buyuk'), 'searching');
+  document.querySelectorAll('.satir canvas').forEach(function (el) { kureKur(el, el.getAttribute('data-durum')); });
+
+  /* ---------- Durum seçici ---------- */
+  var secici = document.getElementById('secici');
+  function sec(kod) {
+    var d = DURUM[kod];
+    buyuk.kod = kod;
+    document.getElementById('ad').textContent = d.ad;
+    document.getElementById('kod').textContent = 'state="' + kod + '"';
+    document.getElementById('not').textContent = d.not;
+    buyuk.el.setAttribute('aria-label', d.ad + ' durumundaki küre');
+    secici.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.kod === kod)); });
+    if (azHareket) duraganCiz(buyuk);
+  }
+  DURUMLAR.forEach(function (d) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = d.ad;
+    b.dataset.kod = d.kod;
+    b.addEventListener('click', function () { otomatikDurdur(); sec(d.kod); });
+    secici.appendChild(b);
+  });
+
+  /* ---------- Tema ---------- */
+  document.getElementById('tema').addEventListener('click', function () {
+    var kok = document.documentElement, acik = kok.getAttribute('data-tema') !== 'acik';
+    if (acik) kok.setAttribute('data-tema', 'acik'); else kok.removeAttribute('data-tema');
+    document.getElementById('tema-yazi').textContent = acik ? 'Koyu tema' : 'Açık tema';
+    murekkepOku();
+  });
+
+  /* ---------- Kısa otomatik gösterim: dokuz durumu bir kez gezer, dokununca durur ---------- */
+  var otoZaman = null, otoAdim = 0, otoDurdu = false, otoBasladi = false;
+  function otomatikDurdur() { otoDurdu = true; clearTimeout(otoZaman); }
+  ['pointerdown', 'keydown', 'focusin'].forEach(function (o) { document.addEventListener(o, otomatikDurdur, true); });
+  function otomatik() {
+    if (otoDurdu || azHareket) return;
+    otoAdim++;
+    sec(DURUMLAR[(1 + otoAdim) % DURUMLAR.length].kod); // Arıyor'dan başlar, Arıyor'da biter
+    if (otoAdim < DURUMLAR.length) otoZaman = setTimeout(otomatik, 2600);
+  }
+
+  /* ---------- Ekrandan çıkan küreyi durdur ---------- */
+  var gozcu = new IntersectionObserver(function (girdiler) {
+    girdiler.forEach(function (g) { g.target.kure.gorunur = g.isIntersecting; });
+    if (buyuk.gorunur && !otoBasladi) { otoBasladi = true; otoZaman = setTimeout(otomatik, 2600); }
+    baslat();
+  });
+  kureler.forEach(function (k) { gozcu.observe(k.el); });
+
+  murekkepOku();
+  sec('searching');
+  baslat();
+})();
+</script>
+</body>
+</html>

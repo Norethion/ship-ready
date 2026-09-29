@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="yukseklik" content="380">
+<title>Kilitli şifre gücü</title>
+<style>
+  /* Renkler tek yerde */
+  :root {
+    --zemin: #0b0c18;
+    --metin: #eceaff;
+    --soluk: #a3a6bd;
+    --vurgu: #b3a8ff;
+    --alan-zemin: rgba(20, 18, 42, .85);
+    --alan-kenar: #7c6cf0;
+    --kart-zemin: rgba(22, 24, 34, .9);
+    --ray: #2c3040;
+    --r0: #9ca3af; /* açık kapı */
+    --r1: #f26b6b; /* ataş */
+    --r2: #f59e42; /* asma kilit */
+    --r3: #f2cf4a; /* sürgü */
+    --r4: #34d399; /* kasa */
+    --gecis: cubic-bezier(.65, 0, .35, 1);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    display: flex; align-items: center; justify-content: center;
+    padding: 16px; overflow: hidden;
+    font: 15px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--metin);
+    background:
+      radial-gradient(120% 70% at 15% 0%, #2b1f63 0%, transparent 55%),
+      radial-gradient(90% 60% at 100% 10%, #3d1646 0%, transparent 50%),
+      radial-gradient(100% 70% at 90% 100%, #0f3b4d 0%, transparent 55%),
+      radial-gradient(80% 60% at 0% 100%, #33200f 0%, transparent 50%),
+      var(--zemin);
+  }
+  .kasa { width: 100%; max-width: 480px; }
+  .ust { margin: 0 0 18px; font-size: 12.5px; color: var(--soluk); }
+  .ust b { color: var(--vurgu); letter-spacing: .08em; }
+
+  /* Şifre alanı */
+  .alan-ust { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .alan-ust label { font-weight: 600; font-size: 14px; }
+  .oner {
+    border: 0; background: none; padding: 2px 0; cursor: pointer;
+    font: inherit; font-size: 14px; font-weight: 600; color: var(--vurgu);
+    text-decoration: underline; text-underline-offset: 3px;
+  }
+  .giris {
+    display: flex; align-items: center; gap: 4px;
+    height: 52px; padding: 0 6px 0 16px; border-radius: 12px;
+    background: var(--alan-zemin); border: 1.5px solid var(--alan-kenar);
+    box-shadow: 0 0 0 4px rgba(124, 108, 240, .16);
+    transition: box-shadow .2s;
+  }
+  .giris:focus-within { box-shadow: 0 0 0 4px rgba(124, 108, 240, .38); }
+  .giris input {
+    flex: 1; min-width: 0; height: 100%; border: 0; outline: 0; background: none;
+    font: 17px ui-monospace, "Cascadia Mono", Consolas, "SF Mono", monospace;
+    letter-spacing: .08em; color: var(--metin);
+  }
+  .giris input::placeholder { color: #8f8bb0; letter-spacing: .04em; }
+  .goz {
+    flex: none; width: 40px; height: 40px; border: 0; border-radius: 10px;
+    display: grid; place-items: center; cursor: pointer;
+    background: none; color: var(--vurgu);
+  }
+  .goz:hover { background: rgba(124, 108, 240, .14); }
+  .goz svg { width: 20px; height: 20px; }
+  .goz[aria-pressed="true"] .ikon-goz,
+  .goz[aria-pressed="false"] .ikon-gizli { display: none; }
+
+  /* Durum kartı: renkler aşamaya göre değişir */
+  .kart {
+    --renk: var(--r0);
+    display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: center;
+    margin-top: 12px; padding: 12px; border-radius: 14px;
+    background: var(--kart-zemin);
+    border: 1.5px solid color-mix(in srgb, var(--renk) 55%, transparent);
+    box-shadow: 0 12px 32px -14px color-mix(in srgb, var(--renk) 60%, transparent);
+    transition: border-color .5s, box-shadow .5s;
+  }
+  .kart[data-asama="1"] { --renk: var(--r1); }
+  .kart[data-asama="2"] { --renk: var(--r2); }
+  .kart[data-asama="3"] { --renk: var(--r3); }
+  .kart[data-asama="4"] { --renk: var(--r4); }
+
+  .cip { width: clamp(60px, 18vw, 80px); aspect-ratio: 1; border-radius: 12px; overflow: hidden; }
+  .cip svg { display: block; width: 100%; height: 100%; }
+  .kanat, .katman, .kanca, .dil, .teker { transform-box: fill-box; }
+
+  /* Kapı kanatları: aşama 0'da içe doğru açık */
+  .kanat { transition: transform .6s var(--gecis); }
+  .kanat-sol { transform-origin: left center; }
+  .kanat-sag { transform-origin: right center; }
+  .kart[data-asama="0"] .kanat { transform: scaleX(.78); }
+  .dikis { fill: var(--renk); transition: fill .5s, opacity .4s; }
+  .kart[data-asama="0"] .dikis { opacity: 0; }
+
+  /* Beş simge katmanı: etkin olan büyüyerek belirir, diğerleri küçülüp kaybolur */
+  .katman {
+    opacity: 0; transform-origin: center;
+    transform: scale(.55) rotate(-10deg);
+    transition: opacity .3s ease, transform .55s var(--gecis);
+  }
+  .katman.aktif { opacity: 1; transform: none; }
+  .kanca { transform-origin: center; transform: translateY(-6px); transition: transform .35s var(--gecis) .25s; }
+  .dil { transform: translateX(-20px); transition: transform .4s var(--gecis) .3s; }
+  .teker { transform-origin: center; transform: rotate(-140deg); transition: transform 1s var(--gecis) .15s; }
+  .aktif .kanca, .aktif .dil, .aktif .teker { transform: none; }
+
+  .bilgi { min-width: 0; }
+  .olcer { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 9px; }
+  .olcer i { height: 4px; border-radius: 2px; background: var(--ray); overflow: hidden; }
+  .olcer i::after {
+    content: ""; display: block; height: 100%; border-radius: inherit;
+    background: var(--c); transform: scaleX(0); transform-origin: left;
+    transition: transform .45s var(--gecis) calc(var(--s) * 70ms);
+  }
+  .olcer i.dolu::after { transform: none; }
+  .asama-ad { margin: 0; font-weight: 700; font-size: 15px; color: var(--renk); transition: color .5s; }
+  .sure { margin: 2px 0 0; font-size: 14px; color: #e3e5ee; }
+  .sure b { font-weight: 600; }
+  .bit { margin: 2px 0 0; font-size: 13px; color: var(--soluk); font-variant-numeric: tabular-nums; }
+
+  .not { display: flex; align-items: center; gap: 6px; margin: 14px 0 0; font-size: 12.5px; color: var(--soluk); }
+  .not svg { width: 15px; height: 15px; flex: none; }
+  .gizli { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  :focus-visible { outline: 2px solid var(--vurgu); outline-offset: 2px; }
+  .giris input:focus-visible { outline: 0; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0s !important; transition-delay: 0s !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+<main class="kasa">
+  <p class="ust"><b>KASA</b> · Şifren gerçekten ne kadar güçlü?</p>
+
+  <div class="alan-ust">
+    <label for="sifre">Şifre</label>
+    <button type="button" class="oner" id="oner">Güçlü öner</button>
+  </div>
+  <div class="giris">
+    <input id="sifre" type="password" placeholder="Yazmaya başla…" autocomplete="new-password"
+           spellcheck="false" autocapitalize="off" aria-describedby="durum-ozet">
+    <button type="button" class="goz" id="goz" aria-pressed="false" aria-label="Şifreyi göster">
+      <svg class="ikon-goz" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+      <svg class="ikon-gizli" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.1 4"/><path d="M6.6 6.6C3.8 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>
+    </button>
+  </div>
+
+  <section class="kart" id="kart" data-asama="0" aria-label="Şifre gücü">
+    <div class="cip" id="cip">
+      <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="g-kanat" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7f8898"/><stop offset="1" stop-color="#4c5461"/></linearGradient>
+          <linearGradient id="g-gumus" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0f2f5"/><stop offset="1" stop-color="#98a0ac"/></linearGradient>
+          <radialGradient id="g-kasa" cx=".4" cy=".35" r=".75"><stop offset="0" stop-color="#737c8b"/><stop offset="1" stop-color="#2a2f38"/></radialGradient>
+        </defs>
+        <rect width="100" height="100" rx="14" fill="#15181e"/>
+        <!-- Kapı kanatları ve ortadaki dikiş -->
+        <g class="kanat kanat-sol"><rect x="5" y="5" width="44" height="90" rx="6" fill="url(#g-kanat)"/><rect x="10" y="10" width="34" height="80" rx="3" fill="none" stroke="#fff" stroke-opacity=".09"/></g>
+        <g class="kanat kanat-sag"><rect x="51" y="5" width="44" height="90" rx="6" fill="url(#g-kanat)"/><rect x="56" y="10" width="34" height="80" rx="3" fill="none" stroke="#fff" stroke-opacity=".09"/></g>
+        <rect class="dikis" x="48.5" y="5" width="3" height="90" rx="1.5"/>
+
+        <!-- 1: ataş -->
+        <g class="katman" data-k="1">
+          <g transform="rotate(-7 50 50)">
+            <rect x="32" y="45" width="7" height="11" rx="2" fill="#2b3039"/>
+            <rect x="61" y="45" width="7" height="11" rx="2" fill="#2b3039"/>
+            <path d="M26 46.5H68a5 5 0 0 1 0 10H33.5a3.25 3.25 0 0 1 0-6.5H62l3 -3" fill="none" stroke="#e1e5ea" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+        </g>
+        <!-- 2: asma kilit -->
+        <g class="katman" data-k="2">
+          <path class="kanca" d="M39 50V39a11 11 0 0 1 22 0v11" fill="none" stroke="#d5dae1" stroke-width="5" stroke-linecap="round"/>
+          <rect x="31" y="47" width="38" height="31" rx="6" fill="url(#g-gumus)"/>
+          <circle cx="50" cy="59" r="4" fill="#2a2f38"/>
+          <path d="M48.3 61h3.4l1 8h-5.4z" fill="#2a2f38"/>
+        </g>
+        <!-- 3: sürgülü kilit -->
+        <g class="katman" data-k="3">
+          <rect x="58" y="41" width="22" height="18" rx="3" fill="#252a32"/>
+          <rect class="dil" x="38" y="45.5" width="31" height="9" rx="2" fill="#d5dae1"/>
+          <rect x="17" y="39" width="29" height="22" rx="4" fill="url(#g-gumus)"/>
+          <rect x="23" y="45" width="6" height="10" rx="2" fill="#88909c"/>
+        </g>
+        <!-- 4: kasa kapısı -->
+        <g class="katman" data-k="4">
+          <circle cx="50" cy="50" r="41" fill="#1d2129"/>
+          <circle cx="50" cy="50" r="37" fill="url(#g-kasa)" stroke="#8d96a4" stroke-width="1.5"/>
+          <g fill="#c9ced6">
+            <circle cx="81" cy="50" r="2.6"/><circle cx="71.9" cy="71.9" r="2.6"/><circle cx="50" cy="81" r="2.6"/><circle cx="28.1" cy="71.9" r="2.6"/>
+            <circle cx="19" cy="50" r="2.6"/><circle cx="28.1" cy="28.1" r="2.6"/><circle cx="50" cy="19" r="2.6"/><circle cx="71.9" cy="28.1" r="2.6"/>
+          </g>
+          <circle cx="50" cy="50" r="22" fill="none" stroke="#1b1f26" stroke-width="2"/>
+          <g class="teker" fill="none" stroke="#e3e7ec" stroke-width="3" stroke-linecap="round">
+            <circle cx="50" cy="50" r="13"/>
+            <path d="M50 37v26M38.7 43.5l22.6 13M38.7 56.5l22.6-13"/>
+          </g>
+          <circle cx="50" cy="50" r="4" fill="#e3e7ec"/>
+          <circle cx="50" cy="76" r="2.2" fill="#34d399"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="bilgi" id="durum-ozet">
+      <div class="olcer" aria-hidden="true">
+        <i style="--c:var(--r1);--s:0"></i><i style="--c:var(--r2);--s:1"></i><i style="--c:var(--r3);--s:2"></i><i style="--c:var(--r4);--s:3"></i>
+      </div>
+      <p class="asama-ad" id="ad">Açık kapı</p>
+      <p class="sure" id="sure">Kapı ardına kadar açık.</p>
+      <p class="bit" id="bit">0 bit entropi</p>
+    </div>
+  </section>
+
+  <p class="not">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+    Şifre bu sayfadan çıkmaz; hesap tarayıcında yapılır.
+  </p>
+  <p class="gizli" id="duyuru" aria-live="polite"></p>
+</main>
+
+<script>
+(function () {
+  var girdi = document.getElementById('sifre');
+  var kart = document.getElementById('kart');
+  var cip = document.getElementById('cip');
+  var adEl = document.getElementById('ad');
+  var sureEl = document.getElementById('sure');
+  var bitEl = document.getElementById('bit');
+  var duyuru = document.getElementById('duyuru');
+  var goz = document.getElementById('goz');
+  var katmanlar = kart.querySelectorAll('.katman');
+  var dilimler = kart.querySelectorAll('.olcer i');
+  var azHareket = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var ADLAR = ['Açık kapı', 'Ataş', 'Asma kilit', 'Sürgü', 'Kasa'];
+  var TAHMIN_HIZI = 1e10; // saniyede 10^10 tahmin varsayımı
+  var simdikiAsama = 0;
+
+  // Entropi: uzunluk × log2(karakter havuzu). Türkçe harfler ve boşluk sembol sayılır.
+  function entropi(s) {
+    var havuz = 0;
+    if (/[a-z]/.test(s)) havuz += 26;
+    if (/[A-Z]/.test(s)) havuz += 26;
+    if (/[0-9]/.test(s)) havuz += 10;
+    if (/[^a-zA-Z0-9]/.test(s)) havuz += 33;
+    var uzunluk = Array.from(s).length;
+    return havuz ? uzunluk * Math.log2(havuz) : 0;
+  }
+
+  function asamaBul(bit) {
+    if (bit === 0) return 0;
+    if (bit < 28) return 1;
+    if (bit < 45) return 2;
+    if (bit < 65) return 3;
+    return 4;
+  }
+
+  // Saniyeyi okunur Türkçe süreye çevirir
+  function sureYaz(sn) {
+    if (sn < 1) return 'anında';
+    var birimler = [[60, 1, 'saniye'], [3600, 60, 'dakika'], [86400, 3600, 'saat'], [2592000, 86400, 'gün'], [31536000, 2592000, 'ay']];
+    for (var i = 0; i < birimler.length; i++) {
+      if (sn < birimler[i][0]) return Math.floor(sn / birimler[i][1]) + ' ' + birimler[i][2];
+    }
+    var yil = sn / 31536000;
+    if (yil < 100) return Math.floor(yil) + ' yıl';
+    if (yil < 1000) return 'yüzyıllar';
+    if (yil < 1e6) return Math.floor(yil / 1e3) + ' bin yıl';
+    if (yil < 1e9) return Math.floor(yil / 1e6) + ' milyon yıl';
+    return 'milyarlarca yıl';
+  }
+
+  // sessiz: otomatik gösterimde ekran okuyucuya duyuru yapma
+  function guncelle(sessiz) {
+    var bit = Math.round(entropi(girdi.value));
+    var asama = asamaBul(bit);
+    var sure = asama === 0 ? '' : sureYaz(Math.pow(2, bit) / TAHMIN_HIZI);
+
+    adEl.textContent = ADLAR[asama];
+    bitEl.textContent = bit + ' bit entropi';
+    if (asama === 0) {
+      sureEl.textContent = 'Kapı ardına kadar açık.';
+    } else {
+      var kalin = document.createElement('b');
+      kalin.textContent = sure;
+      sureEl.replaceChildren('Kırılma süresi: ', kalin);
+    }
+
+    if (asama !== simdikiAsama) {
+      simdikiAsama = asama;
+      kart.dataset.asama = asama;
+      katmanlar.forEach(function (k) { k.classList.toggle('aktif', Number(k.dataset.k) === asama); });
+      dilimler.forEach(function (d, i) { d.classList.toggle('dolu', i < asama); });
+      if (sessiz !== true) duyuru.textContent = ADLAR[asama] + (sure ? ', kırılma süresi ' + sure : '');
+      if (!azHareket && cip.animate) {
+        cip.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.08)' }, { transform: 'scale(1)' }],
+          { duration: 450, easing: 'cubic-bezier(.3,.7,.4,1)' });
+      }
+    }
+  }
+
+  function gosterAyarla(goster) {
+    girdi.type = goster ? 'text' : 'password';
+    goz.setAttribute('aria-pressed', String(goster));
+    goz.setAttribute('aria-label', goster ? 'Şifreyi gizle' : 'Şifreyi göster');
+  }
+
+  // Modulo sapması olmadan 0..n-1 arası güvenli rastgele sayı
+  function rastgele(n) {
+    var sinir = Math.floor(0x100000000 / n) * n;
+    var kutu = new Uint32Array(1);
+    do { crypto.getRandomValues(kutu); } while (kutu[0] >= sinir);
+    return kutu[0] % n;
+  }
+
+  function sifreUret(uzunluk) {
+    var harfler = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*-_=+?.:;~';
+    var s;
+    do {
+      s = '';
+      for (var i = 0; i < uzunluk; i++) s += harfler[rastgele(harfler.length)];
+    } while (!(/[a-z]/.test(s) && /[A-Z]/.test(s) && /\d/.test(s) && /[^a-zA-Z0-9]/.test(s)));
+    return s;
+  }
+
+  girdi.addEventListener('input', guncelle);
+  goz.addEventListener('click', function () { gosterAyarla(girdi.type === 'password'); });
+  document.getElementById('oner').addEventListener('click', function () {
+    girdi.value = sifreUret(20);
+    gosterAyarla(true);
+    guncelle();
+    duyuru.textContent = '20 karakterlik güçlü şifre alana yazıldı.';
+  });
+
+  // Kısa otomatik gösterim: kart görünür olunca bir şifre yazılır; kullanıcı dokununca durur
+  var ornek = 'gece-lambasi';
+  var zamanlayici = null;
+  var durdu = false;
+
+  function durdur() {
+    durdu = true;
+    clearTimeout(zamanlayici);
+  }
+  ['pointerdown', 'keydown', 'focusin'].forEach(function (olay) {
+    document.addEventListener(olay, durdur, true);
+  });
+
+  function gosterimBaslat() {
+    if (durdu || azHareket) return;
+    var i = 0;
+    (function adim() {
+      if (durdu) return;
+      girdi.value = ornek.slice(0, ++i);
+      guncelle(true);
+      if (i < ornek.length) zamanlayici = setTimeout(adim, 170);
+    })();
+  }
+
+  if ('IntersectionObserver' in window) {
+    var gozcu = new IntersectionObserver(function (girdiler) {
+      if (girdiler[0].isIntersecting) {
+        gozcu.disconnect();
+        zamanlayici = setTimeout(gosterimBaslat, 600);
+      }
+    }, { threshold: 0.6 });
+    gozcu.observe(kart);
+  } else {
+    zamanlayici = setTimeout(gosterimBaslat, 600);
+  }
+
+  // Başlangıç: açık kapı katmanı yok, kanatlar açık
+  guncelle();
+})();
+</script>
+</body>
+</html>
