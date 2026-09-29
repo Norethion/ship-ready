@@ -95,7 +95,7 @@ Proje sadece Türkçedir.
   Numaralar sırayla verilir, madde eklenince sonrakiler kayabilir.
 - Başka bir md'den bir maddeye numarasıyla atıf verilecekse numara yazılmaz, `{{no:kimlik}}` yazılır (ör. `[yayın öncesi {{no:yo-hesap-silme}}. madde](yayin-oncesi-maddeler.md)`); sayfa ve skill kopyaları maddenin o anki numarasını gösterir.
 - `<!-- yan-yana -->` satırı olan md'de tablolar karta dönüşür.
-  Kartta ilk sütun başlık olur, `Tür` ve `Kaynak` sütunları başlığın altındaki soluk satırda görünür (kaynak bağlantı olarak), sonraki ilk sütun açıklama, kalanlar sütun sırasıyla gri kutuda "ad üstte, değer altta" alan olur.
+  Kartta ilk sütun başlık olur, `Tür` sütunu ve bağlantı olan `Kaynak` sütunu başlığın altındaki soluk satırda görünür (düz metin kaynak alan olarak kalır), sonraki ilk sütun açıklama, kalanlar sütun sırasıyla gri kutuda "ad üstte, değer altta" alan olur.
   Boş hücre de alan olarak yerini korur; alan sırası tablonun sütun sırasıdır, bu yüzden aynı tablodaki kartlarda "Ücret" hep aynı yerde durur.
 - Böyle bir md'de kartın prompt düğmesi tablonun ilk sütun başlığına göre seçilir: `Stil` "Bu stilde tasarla", `Kalıp` "Bu kalıbı uygula", `Renk çifti` "Bu renklerle dene", `İlham` "Bu fikri uyarla", `Etkileşim` "Bu etkileşimi yap", diğerleri araç sayılıp "Kullanım prompt'u" alır (`uygulama/site_uret.py` içindeki `CARD_PROMPTS`).
 - Böyle bir md'de ilk sütun başlığı `Stil` olan tablolarda her karta o stilin CSS örneği eklenir.

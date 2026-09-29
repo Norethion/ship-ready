@@ -255,6 +255,11 @@
 .prompt-dugme.ana svg {
 	color: inherit;
 }
+.prompt-dugme.ana.kopyalandi {
+	background: var(--sl-color-bg);
+	border-color: var(--sl-color-green);
+	color: var(--sl-color-green-high, var(--sl-color-white));
+}
 .prompt-dugme.simge {
 	padding-inline: 0.45rem;
 }

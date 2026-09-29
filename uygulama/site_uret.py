@@ -181,7 +181,7 @@ def list_page(doc, lst, tr, comp):
 
 def cards(heads, rows, tr):
     """Tablo satırlarını kart yapar: başlık kısmı, açıklama, alanlar (sütun sırasıyla, boş olsa da yeri korunur), alt şerit.
-    Tür ve Kaynak sütunları başlığın altında görünür. Kart, kapladığı ızgara satırı sayısını (satir) bilir ki aynı sıradaki
+    Tür sütunu ve bağlantı olan Kaynak sütunu başlığın altında görünür. Kart, kapladığı ızgara satırı sayısını (satir) bilir ki aynı sıradaki
     kartların satırları hizalansın. Bütün satırlarda canlı örnek varsa örnek kartın üstünde, yoksa pencerede açılır."""
     label, kind, make = CARD_PROMPTS.get(heads[0], TOOL_PROMPT)
     all_examples = all(katalog.EXAMPLE.search(r[0]) for r in rows)
@@ -193,13 +193,15 @@ def cards(heads, rows, tr):
         title = katalog.plain(cell0)
         fields = [(h, v) for h, v in zip(heads[1:], row[1:]) if h]
         tur = next((v for h, v in fields if h == "Tür"), None)
-        source = re.search(r"\[([^\]]+)\]\((https?://[^)\s]+)\)", next((v for h, v in fields if h == "Kaynak"), ""))
-        rest = [(h, v) for h, v in fields if h not in ("Tür", "Kaynak")]
+        # Kaynak bağlantıysa başlığın altına çıkar; düz metinse alan olarak kalır, kaybolmaz.
+        source = LINK.search(next((v for h, v in fields if h == "Kaynak"), ""))
+        rest = [(h, v) for h, v in fields if h != "Tür" and not (h == "Kaynak" and source)]
         main = rest[0][1] if rest else ""
         meta = rest[1:]
         example = katalog.EXAMPLE.search(cell0)
-        top = heads[0] == "Stil" or bool(example and all_examples)
-        props = [f"baslik={js(title)}", f"satir={{{int(top) + 3 + len(meta)}}}"]
+        # Üstteki satırlar: stil önizlemesi ve canlı örnek ayrı ayrı sayılır (ikisi birden olabilir).
+        style, top = heads[0] == "Stil", bool(example and all_examples)
+        props = [f"baslik={js(title)}", f"satir={{{int(style) + int(top) + 3 + len(meta)}}}"]
         if link:
             props.append(f"href={js(link.group(1))}")
             if link.group(1) in tr.broken:
@@ -207,8 +209,8 @@ def cards(heads, rows, tr):
         if tur:
             props.append(f"tur={js(katalog.plain(tur))}")
         if source:
-            props.append(f"kaynak={js({'ad': source.group(1), 'url': source.group(2)})}")
-        if heads[0] == "Stil":
+            props.append(f"kaynak={js({'ad': katalog.plain(source.group(1)), 'url': source.group(2)})}")
+        if style:
             props.append(f"onizleme={js(slug(title))}")
         if example:
             props += [f"ornek={js(example.group(1))}", f"ornekYeri={js('ust' if top else 'pencere')}"]
