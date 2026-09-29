@@ -2488,21 +2488,6 @@
       "s": 94732,
       "archived": false,
       "pushed": "2026-09-26"
-    },
-    {
-      "r": "paperclipai/paperclip",
-      "f": "ajan-yonetim",
-      "af": "arayuz",
-      "k": "uygulama",
-      "tr": "Birden çok AI ajanını (Claude Code, Codex, Cursor, OpenClaw...) bir şirket gibi yöneten açık kaynak uygulama: hedef verirsin, ajanlara rol ve bütçe atarsın, işleri ve maliyeti tek panelden izlersin.",
-      "d": "The open-source app everyone uses to manage agents at work",
-      "w": "Ajanlar sürekli çalışınca API maliyeti hızla birikir; bütçe sınırını baştan koy. Kendi sunucunda çalışır, hesap gerekmez.",
-      "l": "TypeScript",
-      "at": "2026-09-25",
-      "src": null,
-      "s": 86851,
-      "archived": false,
-      "pushed": "2026-09-26"
     }
   ]
 }
