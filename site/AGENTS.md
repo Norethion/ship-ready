@@ -1,22 +1,6 @@
-## Development
+# Site development
 
-When starting the dev server, use background mode:
-
-```
-astro dev --background
-```
-
-Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
-
-## Documentation
-
-Full documentation: https://docs.astro.build
-
-Consult these guides before working on related tasks:
-
-- [Adding pages, dynamic routes, or middleware](https://docs.astro.build/en/guides/routing/)
-- [Working with Astro components](https://docs.astro.build/en/basics/astro-components/)
-- [Using React, Vue, Svelte, or other framework components](https://docs.astro.build/en/guides/framework-components/)
-- [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
-- [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
-- [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)
+Develop the Astro Starlight site from `site/`; follow the [repository instructions](../AGENTS.md) for sources and privacy boundaries.
+Install dependencies with `npm ci`, start the development server with `npm run dev`, and verify the static build with `npm run build`.
+When an agent starts the development server, it runs it in the background with `npx astro dev --background` and stops it with `npx astro dev stop`, so the session does not block.
+Run these commands from `site/`.
