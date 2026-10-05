@@ -24,7 +24,7 @@ Bütün içerik tek dosyada: [llms-full.txt](/llms-full.txt). Makinenin okuyaca�
 
 ## Repo kataloğu
 
-174 doğrulanmış GitHub reposu amaca göre kategori ve alt kategoriye ayrılır; sayfası [/repolar/](/repolar/), açıklamaları ve kurulum yerleri llms-full.txt'te.
+177 doğrulanmış GitHub reposu amaca göre kategori ve alt kategoriye ayrılır; sayfası [/repolar/](/repolar/), açıklamaları ve kurulum yerleri llms-full.txt'te.
 
 ### 🧠 Ajan skill'leri ve çalışma yöntemi
 
@@ -48,7 +48,7 @@ Ajanın tarayıcıyı kullanması; web sayfalarını, videoları, belgeleri ve k
 
 Birden çok ajanı yöneten arayüzler, yerel model çalıştırma ve model yönlendirme, belgeyle sohbet (RAG) ve AI uygulamalarına bellek.
 
-- Ajan arayüzleri ve ekipler: [1jehuang/jcode](https://github.com/1jehuang/jcode), [pingdotgg/t3code](https://github.com/pingdotgg/t3code), [microsoft/autogen](https://github.com/microsoft/autogen), [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent), [karpathy/llm-council](https://github.com/karpathy/llm-council), [BloopAI/vibe-kanban](https://github.com/BloopAI/vibe-kanban), [Fosowl/agenticSeek](https://github.com/Fosowl/agenticSeek), [OpenHands/OpenHands](https://github.com/OpenHands/OpenHands), [langflow-ai/langflow](https://github.com/langflow-ai/langflow), [langgenius/dify](https://github.com/langgenius/dify), [cline/cline](https://github.com/cline/cline), [aaif-goose/goose](https://github.com/aaif-goose/goose), [stablyai/orca](https://github.com/stablyai/orca), [dyad-sh/dyad](https://github.com/dyad-sh/dyad)
+- Ajan arayüzleri ve ekipler: [1jehuang/jcode](https://github.com/1jehuang/jcode), [pingdotgg/t3code](https://github.com/pingdotgg/t3code), [microsoft/autogen](https://github.com/microsoft/autogen), [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent), [karpathy/llm-council](https://github.com/karpathy/llm-council), [BloopAI/vibe-kanban](https://github.com/BloopAI/vibe-kanban), [Fosowl/agenticSeek](https://github.com/Fosowl/agenticSeek), [OpenHands/OpenHands](https://github.com/OpenHands/OpenHands), [langflow-ai/langflow](https://github.com/langflow-ai/langflow), [langgenius/dify](https://github.com/langgenius/dify), [cline/cline](https://github.com/cline/cline), [aaif-goose/goose](https://github.com/aaif-goose/goose), [stablyai/orca](https://github.com/stablyai/orca), [dyad-sh/dyad](https://github.com/dyad-sh/dyad), [paperclipai/paperclip](https://github.com/paperclipai/paperclip)
 - Yerel model ve yönlendirme: [diegosouzapw/OmniRoute](https://github.com/diegosouzapw/OmniRoute), [AlexsJones/llmfit](https://github.com/AlexsJones/llmfit), [ollama/ollama](https://github.com/ollama/ollama), [open-webui/open-webui](https://github.com/open-webui/open-webui), [janhq/jan](https://github.com/janhq/jan), [ggml-org/llama.cpp](https://github.com/ggml-org/llama.cpp)
 - RAG, bellek ve belgeyle sohbet: [NirDiamant/RAG_Techniques](https://github.com/NirDiamant/RAG_Techniques), [dataease/SQLBot](https://github.com/dataease/SQLBot), [lfnovo/open-notebook](https://github.com/lfnovo/open-notebook), [mem0ai/mem0](https://github.com/mem0ai/mem0)
 
@@ -76,7 +76,7 @@ Güvenlik taraması, uçtan uca ve yük testi, kod inceleme ve kullanılmayan ko
 
 Kendi sunucuna deploy, mağaza yayınını otomatikleştirme, hazır backend ve kimlik doğrulama, izleme ve analitik.
 
-- Deploy ve mağaza yayını: [fastlane/fastlane](https://github.com/fastlane/fastlane), [Dokploy/dokploy](https://github.com/Dokploy/dokploy), [coollabsio/coolify](https://github.com/coollabsio/coolify)
+- Deploy ve mağaza yayını: [fastlane/fastlane](https://github.com/fastlane/fastlane), [Dokploy/dokploy](https://github.com/Dokploy/dokploy), [coollabsio/coolify](https://github.com/coollabsio/coolify), [tunaarikaya/magaza-mcp](https://github.com/tunaarikaya/magaza-mcp)
 - Backend, veritabanı ve kimlik: [supabase/supabase](https://github.com/supabase/supabase), [nhost/nhost](https://github.com/nhost/nhost), [better-auth/better-auth](https://github.com/better-auth/better-auth), [pocketbase/pocketbase](https://github.com/pocketbase/pocketbase), [appwrite/appwrite](https://github.com/appwrite/appwrite), [svix/svix-webhooks](https://github.com/svix/svix-webhooks)
 - İzleme ve analitik: [prometheus/prometheus](https://github.com/prometheus/prometheus), [umami-software/umami](https://github.com/umami-software/umami), [grafana/grafana](https://github.com/grafana/grafana), [openreplay/openreplay](https://github.com/openreplay/openreplay)
 
@@ -86,7 +86,7 @@ AI yazısını doğallaştırma, SEO ve App Store optimizasyonu, pazarlama ve so
 
 - AI yazısını temizleme: [petergyang/no-ai-slop](https://github.com/petergyang/no-ai-slop), [blader/humanizer](https://github.com/blader/humanizer), [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop)
 - SEO ve ASO: [every-app/open-seo](https://github.com/every-app/open-seo), [Kronop/vibe-aso](https://github.com/Kronop/vibe-aso)
-- Pazarlama ve sosyal medya: [gitroomhq/postiz-app](https://github.com/gitroomhq/postiz-app), [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)
+- Pazarlama ve sosyal medya: [gitroomhq/postiz-app](https://github.com/gitroomhq/postiz-app), [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills), [666ghj/MiroFish](https://github.com/666ghj/MiroFish)
 
 ### 🎬 Medya üretimi
 

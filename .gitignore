@@ -2,3 +2,9 @@
 sayfa/
 
 __pycache__/
+
+# Kişisel denetim raporları; sadece yerel sayfada ve MCP arayüzünde görünür, depo herkese açık
+veri/raporlar/
+
+# Playwright MCP'nin görsel kontrolde bıraktığı geçici dosyalar
+.playwright-mcp/

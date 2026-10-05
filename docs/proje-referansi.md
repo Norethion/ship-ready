@@ -60,7 +60,7 @@ Proje sadece Türkçedir.
   - `kaynak`: kurulmaz; okunur ya da örnek alınır, kurulum düğmesi yoktur.
   İki yolu olan repoda (örneğin hem eklenti hem projeye dosya yazan tam kurulum) asıl kullanım yolu seçilir, fark `w` uyarısına yazılır.
 - `veri/linkler.json`: `--github` çalıştırmasında içerikteki linklerden açılmayanlar; sitede ⚠ ile işaretlenir, Genel bakış'taki Dikkat kutucuğunda sayılır.
-- `veri/raporlar/<proje-adi>/<YYYY-MM-DD>.md` yayın öncesi, `<YYYY-MM-DD>-<liste>.md` diğer listelerin (ör. `-app-store`, `-google-play`, `-paywall`) denetim raporudur; yerel sayfanın "Proje raporları" bölümünde gösterilir ve aynı projenin aynı türdeki önceki raporuyla karşılaştırılır.
+- `veri/raporlar/<proje-adi>/<YYYY-MM-DD>.md` yayın öncesi, `<YYYY-MM-DD>-<liste>.md` diğer listelerin (ör. `-app-store`, `-google-play`, `-paywall`) denetim raporudur; yerel sayfanın "Proje raporları" bölümünde gösterilir ve aynı projenin aynı türdeki önceki raporuyla karşılaştırılır; klasör kök `.gitignore` ile git'e girmez, raporlar sadece bu bilgisayarda durur.
 - `skills/`: yayın öncesi, App Store ve Google Play denetim skill'leri.
   `skills/*/kontrol-listesi.md` elle düzenlenmez; `guncelle.py` onları `icerik/yayin-oncesi-maddeler.md`, `icerik/app-store-incelemesi.md` ve `icerik/google-play-incelemesi.md`'den kopyalar.
 - `uygulama/`: `katalog.py` (çekirdek), `mcp_sunucu.py` (AI arayüzü), `site_uret.py` (sitenin içeriğini üretir), `guncelle.py` (her şeyi üretir, yerel sayfayı derler, kopyaları eşitler).
