@@ -32,6 +32,10 @@ CARD_PROMPTS = {
     "Renk çifti": ("Bu renklerle dene", "tasarim", lambda t, d, u: f'Bu arayüzde "{t}" renk çiftini dene ({d}). Renkleri tema değişkeni olarak tanımla, kontrastı WCAG AA sınırının altına düşürme ve önce hangi öğelere uygulayacağını göster.'),
     "İlham": ("Bu fikri uyarla", "tasarim", lambda t, d, u: f'{t}{f" ({u})" if u else ""} sitesinden beğendiğim bir örneği ekran görüntüsü ya da adresiyle vereceğim. Düzeni birebir kopyalama; beğendiğim fikri (renk, tipografi, boşluk, hareket, bölüm akışı) bu projenin tasarımına ve altyapısına uyarla. Önce hangi fikri hangi ekrana uygulayacağını göster.'),
     "Etkileşim": ("Bu etkileşimi yap", "tasarim", lambda t, d, u: f'Bu projede "{t}" etkileşimini yap: {d} Projenin altyapısına uygun animasyon yolunu seç (web\'de CSS ya da projede varsa Motion veya GSAP, mobilde platformun kendi animasyonları), hareketi azalt tercihinde animasyonu kapat ve önce hangi ekrana uygulayacağını göster.'),
+    "Hareket": ("Bu hareketi ekle", "tasarim", lambda t, d, u: f'Bu projeye "{t}" hareket türünü ekle: {d} Önce hareketin anlam katacağı yerleri öner; hareketi süs için değil geri bildirim için kullan, projenin altyapısına uygun yolu seç (web\'de CSS ya da projede varsa Motion veya GSAP), hareketi azalt tercihinde kapat.'),
+    "İşaret": ("Bu işareti temizle", "tasarim", lambda t, d, u: f'Bu projenin arayüzünde "{t}" işaretini ara: {d} Bulduğun her yeri dosya ve satırıyla listele, hangisinin bilinçli bir tasarım kararı olduğunu bana sor; kalanları onayımla bu ürüne özgü bir tasarımla değiştir.'),
+    # Prompt tablosunda açıklama sütunu prompt'un kendisidir; düğme onu olduğu gibi kopyalar.
+    "Prompt": ("Prompt'u kopyala", "tasarim", lambda t, d, u: d),
 }
 TOOL_PROMPT = ("Kullanım prompt'u", "kullanim", lambda t, d, u: f"{t}{f' ({u})' if u else ''} aracını bu projede kullanmak istiyorum. Ne işe yarar: {d} Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle.")
 

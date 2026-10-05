@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="yukseklik" content="500">
+<title>Kaydırma hareketleri</title>
+<style>
+  /* ── Ortak görsel dil: dört "hareket türü" örneğinde aynıdır ── */
+  :root {
+    --zemin: #f4f1ea;       /* açık bej sayfa */
+    --yuzey: #fbfaf6;       /* kutu içi */
+    --metin: #111111;
+    --soluk: #5b564e;       /* ikincil yazı; bej üstünde 6.6:1 */
+    --cizgi: #161616;       /* başlık çizgisi */
+    --kenar: #d6d0c4;       /* kutu ve ayraç kenarı */
+    --vurgu: #2f4cf6;       /* tek vurgu rengi; beyaz yazıyla 6:1 */
+    --vurgu-koyu: #1f37c9;
+    --vurgu-acik: #c3ccfd;
+    --vurgu-zemin: #e5e9fe;
+    --gecis: cubic-bezier(.2, .7, .2, 1);    /* yumuşak çıkış */
+    --yay: cubic-bezier(.34, 1.56, .64, 1);  /* hafif taşan yay */
+    --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    display: flex; justify-content: center;
+    align-items: center; align-items: safe center;
+    padding: 16px;
+    font: 14px/1.45 var(--font); color: var(--metin);
+    background: var(--zemin);
+    -webkit-font-smoothing: antialiased;
+  }
+  .kasa { width: 100%; max-width: 560px; }
+  .ust {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px;
+    margin: 0; padding-top: 9px; border-top: 1.5px solid var(--cizgi);
+    font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+  }
+  .ust b { color: var(--vurgu); font-weight: 900; }
+  .ust span { color: var(--soluk); }
+  h1 {
+    margin: 8px 0 12px;
+    font-size: clamp(21px, 6.4vw, 30px); font-weight: 900; line-height: 1;
+    letter-spacing: -.035em; text-transform: uppercase;
+  }
+  .nokta { display: inline-block; width: .22em; height: .22em; margin-left: .06em; border-radius: 50%; background: var(--vurgu); }
+  .kutu { position: relative; background: var(--yuzey); border: 1px solid var(--kenar); border-radius: 3px; }
+  .ad { margin: 0; font-size: 13px; color: var(--soluk); }
+  .ad b { margin-right: 6px; font-size: 14px; font-weight: 900; letter-spacing: -.01em; text-transform: uppercase; color: var(--metin); }
+  .dugme {
+    display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 14px;
+    border: 1.5px solid var(--metin); border-radius: 999px; background: transparent;
+    font: 600 13px var(--font); color: var(--metin); cursor: pointer;
+    transition: background-color .2s, color .2s;
+  }
+  .dugme:hover { background: var(--metin); color: var(--zemin); }
+  .dugme svg { width: 15px; height: 15px; }
+  :focus-visible { outline: 2px solid var(--vurgu); outline-offset: 3px; }
+
+  /* ── Bu örnek: kasa iframe'i doldurur, kaydırılan pencere kalan yeri alır ── */
+  .kasa { display: flex; flex-direction: column; height: 100%; max-height: 760px; }
+  .pencere {
+    position: relative; flex: 1; min-height: 260px; overflow: hidden;
+    border: 1.5px solid var(--cizgi); border-radius: 4px;
+  }
+  .sahne {
+    position: absolute; inset: 0;
+    overflow-y: auto; overscroll-behavior: contain;  /* dış sayfa kaymasın */
+    container-type: size;                            /* içerideki 100cqh = pencere yüksekliği */
+    scrollbar-width: thin; scrollbar-color: var(--kenar) transparent;
+  }
+  .sahne:focus-visible { outline-offset: -3px; }
+  .sayfa { padding: 14px 14px 0; }
+  .bolum + .bolum, .pin { margin-top: 80px; margin-top: 22cqh; }
+  .bolum .ad { margin-top: 8px; }
+
+  /* Üstteki ipucu: kaydırınca kaybolur */
+  .ipucu {
+    position: absolute; z-index: 2; top: 10px; left: 50%;
+    display: flex; align-items: center; gap: 5px; margin: 0; padding: 5px 10px 5px 12px;
+    font-size: 12px; font-weight: 600; white-space: nowrap;
+    color: #fff; background: var(--metin); border-radius: 999px;
+    transform: translateX(-50%); pointer-events: none;
+    transition: opacity .3s, transform .3s var(--gecis);
+  }
+  .ipucu svg { width: 14px; height: 14px; animation: zipla 1.4s var(--gecis) infinite; }
+  .ipucu.kayboldu { opacity: 0; transform: translate(-50%, -8px); }
+  .ipucu.kayboldu svg, .durgun .ipucu svg { animation-play-state: paused; }
+  @keyframes zipla { 50% { transform: translateY(3px); } }
+
+  /* ── Kaydırma ilerlemesi: --p, 0'dan 1'e ──
+     CSS scroll-driven animations destekleniyorsa --p'yi tarayıcı hesaplar (view() zaman çizelgesi);
+     desteklenmiyorsa aynı değeri betik requestAnimationFrame ile yazar. */
+  @property --p { syntax: "<number>"; inherits: true; initial-value: 0; }
+  @keyframes ilerleme { from { --p: 0; } to { --p: 1; } }
+  @supports (animation-timeline: view()) {
+    .ilerle { animation: ilerleme linear both; animation-timeline: view(); }
+    .ilerle[data-ilerleme="contain"] { animation-range: contain; }
+  }
+
+  /* 1 · Paralaks: her katman kutuya göre kendi payı kadar kayar; uzaktaki daha geride kalır */
+  .manzara { height: 210px; height: 56cqh; overflow: hidden; background: linear-gradient(#eaeeff, var(--yuzey) 70%); }
+  .katman {
+    position: absolute; left: 0; width: 100%;
+    transform: translate3d(0, calc((var(--p) - .5) * var(--hiz) * 1px), 0);
+    will-change: transform;
+  }
+  .gunes { --hiz: 140; top: 14%; left: 70%; width: 42px; height: 42px; border-radius: 50%; background: var(--vurgu); }
+  .manzara-yazi {
+    --hiz: 70; top: 24%; margin: 0; padding: 0 16px;
+    font-size: 24px; font-size: clamp(20px, 9cqw, 30px); font-weight: 900; line-height: .95;
+    letter-spacing: -.03em; text-transform: uppercase;
+  }
+  .dag { bottom: -40px; }
+  .uzak  { --hiz: 90; height: calc(62% + 40px); fill: #dce2fd; }
+  .orta  { --hiz: 45; height: calc(46% + 40px); fill: #a9b5fb; }
+  .yakin { --hiz: 0;  height: calc(28% + 40px); fill: var(--vurgu); }
+
+  /* 2 · İlerlemeye bağlı: topuz ve dolgu --p'yi izler */
+  .ray-kutu { padding: 12px 14px 14px; }
+  .kutu-baslik { margin: 0 0 20px; font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--soluk); }
+  .ray { position: relative; height: 2px; margin: 0 12.5%; background: var(--kenar); }
+  .ray-dolu { position: absolute; inset: 0; background: var(--vurgu); transform-origin: left; transform: scaleX(var(--p)); }
+  .durak, .duraklar li {
+    /* 0 → 1: topuz bu durağa vardı mı (4 durak, aralarında 1/3 yol) */
+    --a: clamp(0, (var(--p) * 3 - var(--i)) * 25 + 1, 1);
+  }
+  .durak {
+    position: absolute; top: 50%; left: calc(var(--i) * 100% / 3);
+    width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: var(--kenar);
+  }
+  .durak::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: var(--vurgu); opacity: var(--a); }
+  .topuz-yol { position: absolute; inset: 0; transform: translateX(calc(var(--p) * 100%)); }
+  .topuz {
+    position: absolute; top: 50%; left: 0; width: 18px; height: 18px; margin: -9px 0 0 -9px;
+    border-radius: 50%; background: var(--vurgu); box-shadow: 0 0 0 7px rgba(47, 76, 246, .16);
+  }
+  .duraklar {
+    display: grid; grid-template-columns: repeat(4, 1fr); margin: 16px 0 0; padding: 0; list-style: none;
+    font-size: 11.5px; font-weight: 700; text-align: center;
+  }
+  .duraklar li { color: color-mix(in srgb, var(--vurgu) calc(var(--a) * 100%), var(--soluk)); }
+
+  /* 3 · Sabitle + dönüştür: dış bölüm uzun, iç kısım yapışkan; adımı betik seçer */
+  .pin { position: relative; height: 900px; height: 280cqh; }
+  .pin-ic {
+    position: sticky; top: 0; height: 320px; height: 100cqh;
+    display: flex; flex-direction: column; justify-content: center; gap: 8px;
+  }
+  .pin-kutu { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 16px; padding: 18px 16px; }
+  .sekil-yer { display: grid; place-items: center; width: 76px; height: 76px; }
+  .sekil {
+    width: 56px; height: 56px; border-radius: 4px; background: #cdd2dc;
+    transition: transform .6s var(--yay), border-radius .6s var(--gecis), background-color .5s;
+  }
+  .pin[data-adim="1"] .sekil { transform: rotate(45deg) scale(.92); border-radius: 16px; background: var(--vurgu-acik); }
+  .pin[data-adim="2"] .sekil { transform: rotate(90deg) scale(1.2); border-radius: 50%; background: var(--vurgu); }
+  .adimlar { display: grid; margin: 0; padding: 0; list-style: none; }
+  .adimlar li { grid-area: 1 / 1; opacity: 0; transform: translateY(10px); transition: opacity .3s, transform .45s var(--gecis); }
+  .pin[data-adim="0"] li:nth-child(1),
+  .pin[data-adim="1"] li:nth-child(2),
+  .pin[data-adim="2"] li:nth-child(3) { opacity: 1; transform: none; }
+  .adimlar b { display: block; font-size: 18px; font-size: clamp(15px, 5cqw, 18px); font-weight: 900; letter-spacing: -.02em; text-transform: uppercase; }
+  .adimlar span { font-size: 13px; color: var(--soluk); }
+  .sayac { display: flex; gap: 4px; margin: 10px 0 0; }
+  .sayac i { flex: 1; height: 3px; border-radius: 2px; background: var(--kenar); transition: background-color .3s; }
+  .pin[data-adim="0"] .sayac i:nth-child(1),
+  .pin[data-adim="1"] .sayac i:nth-child(-n+2),
+  .pin[data-adim="2"] .sayac i { background: var(--vurgu); }
+
+  /* Sayfa sonu */
+  .son {
+    display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 14px;
+    min-height: 240px; min-height: 80cqh;
+  }
+  .alinti { margin: 0; font-size: 22px; font-weight: 900; line-height: 1.02; letter-spacing: -.03em; text-transform: uppercase; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .katman { transform: none; }             /* paralaks kapalı */
+    .ipucu svg { animation: none; }
+    .ipucu, .sekil, .adimlar li { transition: none; }
+    /* İlerleme çizgisi kalır: kendiliğinden oynamaz, kaydırmayı birebir gösterir */
+  }
+</style>
+</head>
+<body>
+<main class="kasa">
+  <p class="ust"><b>01</b> · Kaydırma <span>→ hikâye anlatımı</span></p>
+  <h1>Sayfa seninle hareket etsin<span class="nokta"></span></h1>
+
+  <div class="pencere">
+    <p class="ipucu" id="ipucu">Aşağı kaydır
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+    </p>
+
+    <div class="sahne" id="sahne" tabindex="0" role="region" aria-label="Kaydırılan örnek sayfa">
+      <div class="sayfa">
+
+        <!-- 1 · Paralaks -->
+        <section class="bolum">
+          <div class="kutu manzara ilerle" data-ilerleme="cover" aria-hidden="true">
+            <span class="katman gunes"></span>
+            <p class="katman manzara-yazi">Ufka<br>doğru</p>
+            <svg class="katman dag uzak" viewBox="0 0 400 100" preserveAspectRatio="none"><path d="M0 100V46l46-20 54 22 62-34 70 30 48-14 60 26 60-20v64z"/></svg>
+            <svg class="katman dag orta" viewBox="0 0 400 100" preserveAspectRatio="none"><path d="M0 100V62l60-26 50 20 70-40 66 38 54-18 100 34v30z"/></svg>
+            <svg class="katman dag yakin" viewBox="0 0 400 100" preserveAspectRatio="none"><path d="M0 100V70l70-24 90 28 80-36 90 32 70-14v44z"/></svg>
+          </div>
+          <p class="ad"><b>Paralaks</b> <span>Katmanlar farklı hızda kayar.</span></p>
+        </section>
+
+        <!-- 2 · İlerlemeye bağlı (scrub) -->
+        <section class="bolum">
+          <div class="kutu ray-kutu ilerle" data-ilerleme="contain">
+            <p class="kutu-baslik">Kargo takibi</p>
+            <div class="ray" aria-hidden="true">
+              <span class="ray-dolu"></span>
+              <i class="durak" style="--i:0"></i><i class="durak" style="--i:1"></i><i class="durak" style="--i:2"></i><i class="durak" style="--i:3"></i>
+              <span class="topuz-yol"><span class="topuz"></span></span>
+            </div>
+            <ol class="duraklar">
+              <li style="--i:0">Sipariş</li><li style="--i:1">Hazırlık</li><li style="--i:2">Yolda</li><li style="--i:3">Teslim</li>
+            </ol>
+          </div>
+          <p class="ad"><b>İlerlemeye bağlı</b> <span>Hareket kaydırma ilerlemesini izler.</span></p>
+        </section>
+
+        <!-- 3 · Sabitle + dönüştür (pin + transform) -->
+        <section class="pin" id="pin" data-adim="0">
+          <div class="pin-ic">
+            <div class="kutu pin-kutu">
+              <div class="sekil-yer" aria-hidden="true"><div class="sekil"></div></div>
+              <div>
+                <ol class="adimlar">
+                  <li><b>Planla</b><span>Kaba bir taslakla başla.</span></li>
+                  <li><b>Tasarla</b><span>Köşeleri yumuşat, renk ekle.</span></li>
+                  <li><b>Yayınla</b><span>Net, bitmiş bir şekil.</span></li>
+                </ol>
+                <p class="sayac" aria-hidden="true"><i></i><i></i><i></i></p>
+              </div>
+            </div>
+            <p class="ad"><b>Sabitle + dönüştür</b> <span>Bölüm sabit kalır, içerik değişir.</span></p>
+          </div>
+        </section>
+
+        <section class="son">
+          <p class="alinti">İyi animasyon süs değil, geri bildirimdir<span class="nokta"></span></p>
+          <button type="button" class="dugme" id="basa-don">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+            Başa dön
+          </button>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+(function () {
+  var sahne = document.getElementById('sahne');
+  var ipucu = document.getElementById('ipucu');
+  var pin = document.getElementById('pin');
+  var ilerleyenler = sahne.querySelectorAll('[data-ilerleme]');
+  var azHareket = window.matchMedia('(prefers-reduced-motion: reduce)');
+  // Tarayıcı view() zaman çizelgesini biliyorsa --p'yi CSS yazar, betik sadece adımı bulur
+  var cssIlerleme = !!(window.CSS && CSS.supports && CSS.supports('animation-timeline: view()'));
+  var bekliyor = false;
+  var adim = 0;
+
+  function sinirla(x) { return x < 0 ? 0 : x > 1 ? 1 : x; }
+
+  // view() ile aynı hesap. ust: öğenin pencere üstüne uzaklığı, H: pencere yüksekliği.
+  // cover: alttan girdiği andan üstten çıktığı ana; contain: tamamen göründüğü sürece.
+  function ilerleme(el, H, ust) {
+    var h = el.offsetHeight;
+    if (el.dataset.ilerleme === 'contain') return (H - h - ust) / Math.max(1, H - h);
+    return (H - ust) / (H + h);
+  }
+
+  function ciz() {
+    bekliyor = false;
+    var pencereUst = sahne.getBoundingClientRect().top;
+    var H = sahne.clientHeight;
+
+    if (!cssIlerleme) {
+      ilerleyenler.forEach(function (el) {
+        var ust = el.getBoundingClientRect().top - pencereUst;
+        el.style.setProperty('--p', sinirla(ilerleme(el, H, ust)).toFixed(3));
+      });
+    }
+
+    // Sabitlenen bölüm: yapışkan kısmın kat ettiği yol üçe bölünür, her parça bir adım
+    var gecilen = pencereUst - pin.getBoundingClientRect().top;
+    var yol = Math.max(1, pin.offsetHeight - H);
+    var yeni = Math.min(2, Math.floor(sinirla(gecilen / yol) * 3));
+    if (yeni !== adim) {
+      adim = yeni;
+      pin.dataset.adim = adim;
+    }
+
+    ipucu.classList.toggle('kayboldu', sahne.scrollTop > 24);
+  }
+
+  // Kaydırma olayı sık gelir; her karede en fazla bir kez çiz
+  function istek() {
+    if (bekliyor) return;
+    bekliyor = true;
+    requestAnimationFrame(ciz);
+  }
+  sahne.addEventListener('scroll', istek, { passive: true });
+  window.addEventListener('resize', istek);
+
+  document.getElementById('basa-don').addEventListener('click', function () {
+    sahne.scrollTo({ top: 0, behavior: azHareket.matches ? 'auto' : 'smooth' });
+    sahne.focus({ preventScroll: true });
+  });
+
+  // Görünmezken ipucu oku zıplamasın
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (girdiler) {
+      document.body.classList.toggle('durgun', !girdiler[0].isIntersecting);
+    }).observe(sahne);
+  }
+
+  ciz();
+})();
+</script>
+</body>
+</html>

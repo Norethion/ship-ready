@@ -7,6 +7,7 @@ Bu belge [depo talimatlarındaki](../AGENTS.md) içerik, katalog, rapor ve site 
 Kullanıcının getirdiği kontrol işi ilgili kontrol listesine, GitHub deposu `veri/repolar.json` kataloğuna, site veya araç ise ilgili rehbere eklenir.
 UI/UX rehberinde projeye kurulan ya da kodu kopyalanan şey `Kütüphaneler`, tarayıcıda kullanılan araç `Siteler` tablosuna girer; iki tabloda da satırlar `Tür` sütununa göre gruplu durur.
 Geliştirmeyle ilgisi olmayan genel web siteleri (dosya araçları, alternatif bulma, fatura) `icerik/gunluk-siteler.md` rehberine eklenir.
+Mobil uygulamada platform, maliyet, ölçüm, çökme ve büyüme konuları `icerik/mobil-uygulama.md`, Türkiye'de şirketsiz yayın, 20/B ve mağaza hesabı konuları `icerik/sirket-kurmadan-yayin.md` rehberine eklenir.
 Repo kataloğu kullanıcının GitHub yıldızlarına bağlı değildir: yıldızlar çekilmez, repo yıldızlanmaz.
 Bilgiler kaynağından doğrulanır; videodaki iddia aynen alınmaz.
 Instagram videosu sadece açıklama metninden değerlendirilmez, tamamı izlenir: yt-dlp ile ses ve görüntü indirilir, ses faster-whisper ile zaman damgalı yazıya dökülür, görüntüden 2 saniyede bir kare alınıp ekrandaki yazılar okunur.
@@ -45,7 +46,7 @@ Proje sadece Türkçedir.
   - `<!-- sira: N -->` menüdeki sırası,
   - `<!-- liste: kimlik -->` md'nin bir kontrol listesi olduğunu ve kimliğini söyler (`yayin-oncesi`, `app-store`, `google-play`, `paywall`); rapor dosya adlarındaki tür de budur,
   - `<!-- grup: Kontrol listeleri -->` ya da `<!-- grup: Rehberler -->` menüdeki grubu (kontrol listelerinde madde sayısı menüde rozet olarak görünür, denetim prompt'u maddelerden üretilir),
-  - `<!-- ikon: ... -->` simgesi: `shield`, `phone`, `play`, `card`, `palette`, `chart`, `server`, `sparkles`, `package`, `clipboard`, `file`, `globe` (yenisi gerekirse `site/src/components/Simge.astro`'ya Lucide çizgisi eklenir).
+  - `<!-- ikon: ... -->` simgesi: `shield`, `phone`, `play`, `card`, `palette`, `chart`, `server`, `sparkles`, `package`, `clipboard`, `file`, `globe`, `landmark`, `devices` (yenisi gerekirse `site/src/components/Simge.astro`'ya Lucide çizgisi eklenir).
 - `veri/repolar.json`: repo kataloğu, kategorileri ve alt kategorileri (`folders`: her kategoride `name`, çipte görünen kısa `kisa`, başlığın altındaki `aciklama` ve `alt` listesi).
   Her repoda `r` sahip/ad, `f` kategori, `af` alt kategori kimliği, `k` kurulum yeri, `a` kurulabildiği ajanlar, `tr` Türkçe açıklama, `w` uyarı, `src` kaynak video, `at` kataloğa eklenme tarihi; `s` yıldız sayısı, `l` dil, `d` İngilizce açıklama, `archived` ve `pushed` `--github` ile GitHub'dan tazelenir.
   Kategori reponun ne işe yaradığını söyler (tasarım, güvenlik ve test, ajana web erişimi...); skill mi, uygulama mı, kütüphane mi olduğu kategoriye değil `k` kurulum yerine yazılır.
@@ -97,7 +98,7 @@ Proje sadece Türkçedir.
 - `<!-- yan-yana -->` satırı olan md'de tablolar karta dönüşür.
   Kartta ilk sütun başlık olur, `Tür` sütunu ve bağlantı olan `Kaynak` sütunu başlığın altındaki soluk satırda görünür (düz metin kaynak alan olarak kalır), sonraki ilk sütun açıklama, kalanlar sütun sırasıyla gri kutuda "ad üstte, değer altta" alan olur.
   Boş hücre de alan olarak yerini korur; alan sırası tablonun sütun sırasıdır, bu yüzden aynı tablodaki kartlarda "Ücret" hep aynı yerde durur.
-- Böyle bir md'de kartın prompt düğmesi tablonun ilk sütun başlığına göre seçilir: `Stil` "Bu stilde tasarla", `Kalıp` "Bu kalıbı uygula", `Renk çifti` "Bu renklerle dene", `İlham` "Bu fikri uyarla", `Etkileşim` "Bu etkileşimi yap", diğerleri araç sayılıp "Kullanım prompt'u" alır (`uygulama/site_uret.py` içindeki `CARD_PROMPTS`).
+- Böyle bir md'de kartın prompt düğmesi tablonun ilk sütun başlığına göre seçilir: `Stil` "Bu stilde tasarla", `Kalıp` "Bu kalıbı uygula", `Renk çifti` "Bu renklerle dene", `İlham` "Bu fikri uyarla", `Etkileşim` "Bu etkileşimi yap", `Hareket` "Bu hareketi ekle", `İşaret` "Bu işareti temizle", `Prompt` "Prompt'u kopyala" (açıklama sütunu prompt'un kendisidir), diğerleri araç sayılıp "Kullanım prompt'u" alır (`uygulama/site_uret.py` içindeki `CARD_PROMPTS`).
 - Böyle bir md'de ilk sütun başlığı `Stil` olan tablolarda her karta o stilin CSS örneği eklenir.
   Örnekler `site/src/styles/ship.css` içindeki `.pv-<stil-adı>` sınıflarıdır (ad küçük harf, harf ve rakam dışı karakterler `-`); yeni stil eklenince örneğini de oraya yaz.
 - Md'ler arasında göreli link ver (`[yayın öncesi](yayin-oncesi-maddeler.md)`); site bunları sayfa adresine çevirir.

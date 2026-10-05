@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-09-29T15:19:57+00:00",
+  "syncedAt": "2026-10-05T21:43:32+00:00",
   "folders": [
     {
       "id": "ajan-skill",
@@ -53,7 +53,7 @@
       "id": "ajan-yonetim",
       "name": "🖥️ Ajan yönetimi, modeller ve RAG",
       "kisa": "🖥️ Ajan yönetimi",
-      "aciklama": "Birden çok ajanı yöneten arayüzler, yerel model çalıştırma ve model yönlendirme, belgeyle sohbet (RAG).",
+      "aciklama": "Birden çok ajanı yöneten arayüzler, yerel model çalıştırma ve model yönlendirme, belgeyle sohbet (RAG) ve AI uygulamalarına bellek.",
       "alt": [
         {
           "id": "arayuz",
@@ -65,7 +65,7 @@
         },
         {
           "id": "rag",
-          "name": "RAG ve belgeyle sohbet"
+          "name": "RAG, bellek ve belgeyle sohbet"
         }
       ]
     },
@@ -73,7 +73,7 @@
       "id": "tasarim",
       "name": "🎨 Tasarım & arayüz",
       "kisa": "🎨 Tasarım",
-      "aciklama": "Arayüz bileşenleri, animasyon kütüphaneleri, tasarım skill'leri, görselden arayüz üretimi, tasarım sistemi dosyaları ve diyagram araçları.",
+      "aciklama": "Arayüz bileşenleri, animasyon kütüphaneleri, tasarım skill'leri, görselden arayüz üretimi, görsel site kurucular, tasarım sistemi dosyaları ve diyagram araçları.",
       "alt": [
         {
           "id": "bilesen",
@@ -90,6 +90,10 @@
         {
           "id": "uretim",
           "name": "Görselden arayüz üretimi"
+        },
+        {
+          "id": "site-kurucu",
+          "name": "Görsel site kurucu"
         },
         {
           "id": "sistem",
@@ -123,13 +127,17 @@
     },
     {
       "id": "yayin",
-      "name": "🚀 Yayına alma & izleme",
+      "name": "🚀 Yayına alma, backend & izleme",
       "kisa": "🚀 Yayına alma",
-      "aciklama": "Kendi sunucuna deploy, mağaza yayınını otomatikleştirme, izleme ve analitik.",
+      "aciklama": "Kendi sunucuna deploy, mağaza yayınını otomatikleştirme, hazır backend ve kimlik doğrulama, izleme ve analitik.",
       "alt": [
         {
           "id": "deploy",
           "name": "Deploy ve mağaza yayını"
+        },
+        {
+          "id": "backend",
+          "name": "Backend, veritabanı ve kimlik"
         },
         {
           "id": "izleme",
@@ -221,7 +229,7 @@
       "af": "arayuz",
       "k": "uygulama",
       "tr": "Rust ile yazılmış açık kaynak kodlama ajanı, Claude Code ve Codex CLI'a alternatif: az bellek kullanır, oturumlar arasında anlamsal hafızası ve paralel oturumları var; ajan kendi yardımcı ajanlarını açıp koordinatör olarak ekip hâlinde çalıştırabilir. Claude, OpenAI, Gemini, Copilot, Ollama ve OpenAI uyumlu sağlayıcılarla çalışır.",
-      "d": "The most RAM efficient harness",
+      "d": "High performance coding agent harness written in rust",
       "w": "Videodaki \"Claude Code'dan 20 kat az bellek\" iddiası README'deki ölçümle tutmuyor: yerel embedding kapalıyken yaklaşık 14 kat, varsayılan hâliyle yaklaşık 2 kat az. Anthropic'in kullanım koşulları Claude aboneliğiyle (Pro/Max) girişi üçüncü taraf araçlarda yasaklıyor; Claude'u API anahtarıyla kullan.",
       "l": "Rust",
       "at": "2026-09-26",
@@ -229,9 +237,9 @@
         "u": "https://www.instagram.com/reel/DaLUGUbMp4K/",
         "t": "talhaunuvai"
       },
-      "s": 20214,
+      "s": 20311,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "multica-ai/andrej-karpathy-skills",
@@ -251,7 +259,7 @@
       "d": "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.",
       "l": null,
       "at": "2026-09-26",
-      "s": 215827,
+      "s": 217052,
       "archived": false,
       "pushed": "2026-04-20"
     },
@@ -273,7 +281,7 @@
       "d": "Give your AI agent eyes to see the entire internet. Read & search Twitter, Reddit, YouTube, GitHub, Bilibili, XiaoHongShu — one CLI, zero API fees.",
       "l": "Python",
       "at": "2026-09-26",
-      "s": 86135,
+      "s": 91812,
       "archived": false,
       "pushed": "2026-09-15"
     },
@@ -291,7 +299,7 @@
         "u": "https://www.instagram.com/reel/Ddb5wiPopJ9/",
         "t": "juli_fella"
       },
-      "s": 12771,
+      "s": 12775,
       "archived": false,
       "pushed": "2025-10-25"
     },
@@ -309,9 +317,9 @@
       "d": "Fast Rust library for PDF inspection, classification, and text extraction. Intelligently detects scanned vs text-based PDFs to enable smart routing decisions.",
       "l": "Rust",
       "at": "2026-09-26",
-      "s": 19414,
+      "s": 19496,
       "archived": false,
-      "pushed": "2026-09-28"
+      "pushed": "2026-09-30"
     },
     {
       "r": "chaseai-yt/claudex-loop",
@@ -331,7 +339,7 @@
       "d": "Claude Code skill: four-phase plan hardening (recon, interrogate, Codex adversarial review, cross-model build & inspection) — two AI models harden your plan before a line of code exists, then swap jobs to build it. Whoever built it never grades it.",
       "l": "Python",
       "at": "2026-09-26",
-      "s": 2630,
+      "s": 2744,
       "archived": false,
       "pushed": "2026-09-06"
     },
@@ -349,9 +357,9 @@
       "d": "A modern load testing tool, using Go and JavaScript",
       "l": "Go",
       "at": "2026-09-26",
-      "s": 31706,
+      "s": 31792,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "OWASP/CheatSheetSeries",
@@ -367,9 +375,9 @@
       "d": "The OWASP Cheat Sheet Series was created to provide a concise collection of high value information on specific application security topics.",
       "l": "JavaScript",
       "at": "2026-09-26",
-      "s": 33350,
+      "s": 33461,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "donnemartin/system-design-primer",
@@ -385,7 +393,7 @@
       "d": "Learn how to design large-scale systems. Prep for the system design interview.  Includes Anki flashcards.",
       "l": "Python",
       "at": "2026-09-26",
-      "s": 372486,
+      "s": 373293,
       "archived": false,
       "pushed": "2026-09-15"
     },
@@ -403,7 +411,7 @@
         "u": "https://www.instagram.com/reel/DdgPH-poGbJ/",
         "t": "adilet.fndr"
       },
-      "s": 3353,
+      "s": 3534,
       "archived": false,
       "pushed": "2026-08-16"
     },
@@ -416,14 +424,14 @@
       "d": "Open-source AI penetration testing tool to find and fix your app’s vulnerabilities.",
       "w": "Sadece test etme yetkin olan sistemlerde kullan. Docker ve LLM API anahtarı ister.",
       "l": "Python",
-      "s": 65520,
+      "s": 66670,
       "at": "2026-09-25",
       "src": {
         "t": "the_coding_wizard",
         "u": "https://www.instagram.com/p/Dc-wvDXkaJU/"
       },
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "every-app/open-seo",
@@ -434,14 +442,14 @@
       "d": "Open source alternative to Semrush and Ahrefs",
       "w": "Her sorgu DataForSEO'ya ücretli.",
       "l": "TypeScript",
-      "s": 21698,
+      "s": 22412,
       "at": "2026-09-25",
       "src": {
         "t": "the_coding_wizard",
         "u": "https://www.instagram.com/p/Dc-wvDXkaJU/"
       },
       "archived": false,
-      "pushed": "2026-09-20"
+      "pushed": "2026-10-05"
     },
     {
       "r": "alibaba/open-code-review",
@@ -452,11 +460,11 @@
       "d": "Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible.",
       "w": "",
       "l": "Go",
-      "s": 42529,
+      "s": 43854,
       "at": "2026-09-21",
       "src": null,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "nextlevelbuilder/ui-ux-pro-max-skill",
@@ -471,11 +479,11 @@
       "d": "An AI skill that provides design intelligence for building professional UI/UX across multiple platforms.",
       "w": "",
       "l": "Python",
-      "s": 131448,
+      "s": 133313,
       "at": "2026-06-10",
       "src": null,
       "archived": false,
-      "pushed": "2026-09-27"
+      "pushed": "2026-10-03"
     },
     {
       "r": "pbakaus/impeccable",
@@ -490,14 +498,14 @@
       "d": "The design language that makes your AI harness better at design.",
       "w": "",
       "l": "JavaScript",
-      "s": 72405,
+      "s": 77023,
       "at": "2026-09-25",
       "src": {
         "t": "Nate Herk",
         "u": "https://www.instagram.com/reel/DbLuwUVlE9Z/"
       },
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "Leonxlnx/taste-skill",
@@ -512,7 +520,7 @@
       "d": "Taste-Skill - gives your AI good taste. stops the AI from generating boring, generic slop ",
       "w": "",
       "l": "JavaScript",
-      "s": 91135,
+      "s": 92831,
       "at": "2026-09-25",
       "src": {
         "t": "Nate Herk",
@@ -534,14 +542,14 @@
       "d": "Skills for Designers and Engineers.",
       "w": "",
       "l": "Markdown",
-      "s": 41789,
+      "s": 43657,
       "at": "2026-09-25",
       "src": {
         "t": "Nate Herk",
         "u": "https://www.instagram.com/reel/DbLuwUVlE9Z/"
       },
       "archived": false,
-      "pushed": "2026-09-23"
+      "pushed": "2026-10-02"
     },
     {
       "r": "figma/mcp-server-guide",
@@ -556,14 +564,14 @@
       "d": "A guide on how to use the Figma MCP server",
       "w": "",
       "l": "Python",
-      "s": 2030,
+      "s": 2049,
       "at": "2026-09-25",
       "src": {
         "t": "Nate Herk",
         "u": "https://www.instagram.com/reel/DbLuwUVlE9Z/"
       },
       "archived": false,
-      "pushed": "2026-09-25"
+      "pushed": "2026-10-05"
     },
     {
       "r": "anthropics/html-effectiveness",
@@ -574,7 +582,7 @@
       "d": "HTML effectiveness examples",
       "w": "",
       "l": "HTML",
-      "s": 661,
+      "s": 666,
       "at": "2026-07-05",
       "src": null,
       "archived": false,
@@ -593,14 +601,14 @@
       "d": "The open agent skills tool - npx skills",
       "w": "",
       "l": "TypeScript",
-      "s": 32760,
+      "s": 33189,
       "at": "2026-09-25",
       "src": {
         "t": "Nate Herk",
         "u": "https://www.instagram.com/reel/DbLuwUVlE9Z/"
       },
       "archived": false,
-      "pushed": "2026-09-28"
+      "pushed": "2026-10-05"
     },
     {
       "r": "vercel-labs/agent-skills",
@@ -615,7 +623,7 @@
       "d": "Vercel's official collection of agent skills",
       "w": "",
       "l": "JavaScript",
-      "s": 31709,
+      "s": 31966,
       "at": "2026-01-14",
       "src": null,
       "archived": false,
@@ -633,7 +641,7 @@
       "d": "a skill directory for world-class specialized agents, in your terminal / IDE. more sophisticated than skills with just md files. and they're free.",
       "w": "",
       "l": "JavaScript",
-      "s": 883,
+      "s": 885,
       "at": "2026-01-09",
       "src": null,
       "archived": false,
@@ -652,7 +660,7 @@
       "d": "Removes 20+ patterns of AI slop from any piece of writing.",
       "w": "",
       "l": "Python",
-      "s": 11523,
+      "s": 11919,
       "at": "2026-09-25",
       "src": {
         "t": "the_coding_wizard",
@@ -674,7 +682,7 @@
       "d": "A skill to stop your coding agent from burying the answer. ADHD-friendly output.",
       "w": "",
       "l": "Python",
-      "s": 52069,
+      "s": 53907,
       "at": "2026-09-25",
       "src": {
         "t": "the_coding_wizard",
@@ -696,7 +704,7 @@
       "d": "Turn any technical book PDF into a Claude Code skill — ready to study, reference, and use while you work.",
       "w": "Telifli kitaptan üretilen skill'i paylaşma.",
       "l": "Python",
-      "s": 33010,
+      "s": 33841,
       "at": "2026-09-25",
       "src": {
         "t": "the_coding_wizard",
@@ -714,7 +722,7 @@
       "d": "FULL Augment Code, Claude Code, Cluely, CodeBuddy, Comet, Cursor, Devin AI, Junie, Kiro, Leap.new, Lovable, Manus, NotionAI, Orchids.app, Perplexity, Poke, Qoder, Replit, Same.dev, Trae, Traycer AI, VSCode Agent, Warp.dev, Windsurf, Xcode, Z.ai Code, Dia & v0. (And other Open Sourced) System Prompts, Internal Tools & AI Models",
       "w": "",
       "l": null,
-      "s": 143942,
+      "s": 144036,
       "at": "2025-12-17",
       "src": null,
       "archived": false,
@@ -732,11 +740,11 @@
       "d": "CLI tool for configuring and monitoring Claude Code",
       "w": "",
       "l": "Python",
-      "s": 32143,
+      "s": 32398,
       "at": "2026-06-10",
       "src": null,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "ZeframLou/call-me",
@@ -750,7 +758,7 @@
       "d": "Minimal plugin that lets Claude Code call you on the phone.",
       "w": "",
       "l": "TypeScript",
-      "s": 2644,
+      "s": 2643,
       "at": "2026-01-11",
       "src": null,
       "archived": false,
@@ -765,14 +773,14 @@
       "d": "",
       "w": "Çok erken aşama, hata bekleniyor.",
       "l": "TypeScript",
-      "s": 23874,
+      "s": 25568,
       "at": "2026-09-25",
       "src": {
         "t": "Isaac Dyor",
         "u": "https://www.instagram.com/reel/Ddsfjsqjgaz/"
       },
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "vercel-labs/agent-browser",
@@ -787,14 +795,14 @@
       "d": "Browser automation CLI for AI agents",
       "w": "",
       "l": "Rust",
-      "s": 43351,
+      "s": 43545,
       "at": "2026-09-25",
       "src": {
         "t": "Isaac Dyor",
         "u": "https://www.instagram.com/reel/Ddsfjsqjgaz/"
       },
       "archived": false,
-      "pushed": "2026-09-28"
+      "pushed": "2026-10-05"
     },
     {
       "r": "microsoft/playwright-mcp",
@@ -809,7 +817,7 @@
       "d": "Playwright MCP server",
       "w": "",
       "l": "TypeScript",
-      "s": 37692,
+      "s": 37838,
       "at": "2026-09-25",
       "src": {
         "t": "Nate Herk",
@@ -827,14 +835,14 @@
       "d": "Never stop coding. Free MIT AI gateway: one endpoint, 359 providers (150+ free), 1200+ models Kimi, Claude, GPT, Gemini, GLM, DeepSeek, MiniMax. Works with Claude Code, Codex, Cursor, OpenCode, Cline & Copilot. Quota-aware auto-fallback, RTK+Caveman compression saves 15-95% tokens, MCP/A2A, Desktop/PWA. Built by hundreds of contributors",
       "w": "Bazı sağlayıcıların kullanım şartlarına aykırı olabilir.",
       "l": "TypeScript",
-      "s": 71297,
+      "s": 73324,
       "at": "2026-09-25",
       "src": {
         "t": "the_coding_wizard",
         "u": "https://www.instagram.com/p/Dc-wvDXkaJU/"
       },
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "EmpiricaAI/empirica",
@@ -848,11 +856,11 @@
       "d": "  Make AI agents and AI workflows measurably reliable. Epistemic measurement, Noetic RAG, Sentinel gating, and grounded calibration for Claude Code  and beyond",
       "w": "",
       "l": "Python",
-      "s": 250,
+      "s": 251,
       "at": "2026-01-07",
       "src": null,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "microsoft/autogen",
@@ -863,7 +871,7 @@
       "d": "A programming framework for agentic AI",
       "w": "",
       "l": "Python",
-      "s": 61218,
+      "s": 61266,
       "at": "2025-12-24",
       "src": null,
       "archived": false,
@@ -878,14 +886,14 @@
       "d": "The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor CVs, write cover letters, prep interviews. Fork it and own it.",
       "w": "İlan tarayıcıları Danimarka sitelerine göre yazılmış. Fork her zaman herkese açık olur ve kurulum kişisel bilgilerini (maaş beklentisi dahil) dosyalara yazar; README'nin önerdiği gibi gizli bir repo kullan.",
       "l": "Python",
-      "s": 44438,
+      "s": 45040,
       "at": "2026-09-25",
       "src": {
         "t": "the_coding_wizard",
         "u": "https://www.instagram.com/p/Dc-wvDXkaJU/"
       },
       "archived": false,
-      "pushed": "2026-09-28"
+      "pushed": "2026-10-05"
     },
     {
       "r": "unclecode/crawl4ai",
@@ -896,11 +904,11 @@
       "d": "Open-source web crawler and scraper for LLMs and AI agents: any website into clean, LLM-ready Markdown. Run it yourself, or use Crawl4AI Cloud with one key.",
       "w": "",
       "l": "Python",
-      "s": 84467,
+      "s": 84791,
       "at": "2026-09-14",
       "src": null,
       "archived": false,
-      "pushed": "2026-09-25"
+      "pushed": "2026-10-05"
     },
     {
       "r": "NirDiamant/RAG_Techniques",
@@ -911,7 +919,7 @@
       "d": "This repository showcases various advanced techniques for Retrieval-Augmented Generation (RAG) systems. Each technique has a detailed notebook tutorial.",
       "w": "",
       "l": "Jupyter Notebook",
-      "s": 29629,
+      "s": 29670,
       "at": "2026-07-19",
       "src": null,
       "archived": false,
@@ -926,11 +934,11 @@
       "d": "Hundreds of models & providers. One command to find what runs on your hardware.",
       "w": "",
       "l": "Rust",
-      "s": 37319,
+      "s": 37624,
       "at": "2026-07-22",
       "src": null,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "dataease/SQLBot",
@@ -941,7 +949,7 @@
       "d": "🔥 基于大模型和 RAG 的智能问数系统，对话式数据分析神器。Text-to-SQL Generation via LLMs using RAG.",
       "w": "Proje Çince.",
       "l": "JavaScript",
-      "s": 6861,
+      "s": 6867,
       "at": "2025-10-01",
       "src": null,
       "archived": false,
@@ -956,14 +964,14 @@
       "d": "An Open Source implementation of Notebook LM with more flexibility and features",
       "w": "",
       "l": "TypeScript",
-      "s": 39622,
+      "s": 39836,
       "at": "2026-09-25",
       "src": {
         "t": "the_coding_wizard",
         "u": "https://www.instagram.com/p/Dc-wvDXkaJU/"
       },
       "archived": false,
-      "pushed": "2026-09-27"
+      "pushed": "2026-10-05"
     },
     {
       "r": "deepbeepmeep/Wan2GP",
@@ -971,14 +979,14 @@
       "af": "video",
       "k": "uygulama",
       "tr": "Zayıf ekran kartında bile çalışan AI video üretici (Wan, LTX, Hunyuan, Flux).",
-      "d": "A fast AI Video Generator for the GPU Poor. Supports Wan 2.1/2.2, LTX-2, Qwen Image, Hunyuan Video, LTX  Video and Flux.",
+      "d": "A fast AI Video Generator for the GPU Poor. Supports Minimax H3, LTX-2.3/2.5, Wan 2.1/2.2,  Qwen Image 1/2, Krea 2, Hunyuan Video, LTX  Video and Flux.",
       "w": "",
       "l": "Python",
-      "s": 9690,
+      "s": 10032,
       "at": "2026-08-14",
       "src": null,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "abus-aikorea/voice-pro",
@@ -989,7 +997,7 @@
       "d": "Gradio WebUI for creators and developers, featuring key TTS (Edge-TTS, kokoro) and zero-shot Voice Cloning (E2 & F5-TTS, CosyVoice), with Whisper audio processing, YouTube download, Demucs vocal isolation, and multilingual translation.",
       "w": "",
       "l": "Python",
-      "s": 12960,
+      "s": 12967,
       "at": "2026-08-02",
       "src": null,
       "archived": false,
@@ -1004,14 +1012,14 @@
       "d": "Unrestricted Open-source alternative to AI video platforms — Free AI image & video generation studio with 600+ models (Flux, Midjourney, Kling, Sora, Veo). No content filters. Self-hosted, MIT licensed.",
       "w": "Bulut modelleri ücretli MuAPI servisi üzerinden çalışıyor.",
       "l": "JavaScript",
-      "s": 29392,
+      "s": 29683,
       "at": "2026-09-25",
       "src": {
         "t": "the_coding_wizard",
         "u": "https://www.instagram.com/p/Dc-wvDXkaJU/"
       },
       "archived": false,
-      "pushed": "2026-09-28"
+      "pushed": "2026-10-03"
     },
     {
       "r": "latent-spaces/brag",
@@ -1026,11 +1034,11 @@
       "d": "You built it. Now brag. Turn the project you just created into a short, shareable launch video with one command.",
       "w": "",
       "l": "Python",
-      "s": 11799,
+      "s": 13703,
       "at": "2026-09-23",
       "src": null,
       "archived": false,
-      "pushed": "2026-09-24"
+      "pushed": "2026-10-01"
     },
     {
       "r": "HKUDS/Vibe-Trading",
@@ -1041,11 +1049,11 @@
       "d": "\"Vibe-Trading: Your Personal Trading Agent\"",
       "w": "",
       "l": "Python",
-      "s": 34300,
+      "s": 34787,
       "at": "2026-08-10",
       "src": null,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "Fincept-Corporation/FinceptTerminal",
@@ -1056,11 +1064,11 @@
       "d": "FinceptTerminal is a modern finance application offering advanced market analytics, investment research, and economic data tools, designed for interactive exploration and data-driven decision-making in a user-friendly environment.",
       "w": "",
       "l": "C++",
-      "s": 32088,
+      "s": 32214,
       "at": "2026-08-10",
       "src": null,
       "archived": false,
-      "pushed": "2026-09-19"
+      "pushed": "2026-10-01"
     },
     {
       "r": "we-promise/sure",
@@ -1071,11 +1079,11 @@
       "d": "The personal finance app for everyone (by everyone)",
       "w": "",
       "l": "Ruby",
-      "s": 10325,
+      "s": 10398,
       "at": "2025-12-21",
       "src": null,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "jgm/pandoc",
@@ -1086,11 +1094,11 @@
       "d": "Universal markup converter",
       "w": "",
       "l": "Haskell",
-      "s": 46448,
+      "s": 46582,
       "at": "2026-08-03",
       "src": null,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "C4illin/ConvertX",
@@ -1101,11 +1109,11 @@
       "d": "💾 Self-hosted online file converter. Supports 1000+ formats ⚙️",
       "w": "",
       "l": "TypeScript",
-      "s": 19075,
+      "s": 19096,
       "at": "2025-12-17",
       "src": null,
       "archived": false,
-      "pushed": "2026-09-28"
+      "pushed": "2026-10-05"
     },
     {
       "r": "usekaneo/kaneo",
@@ -1116,11 +1124,11 @@
       "d": "🎯 All you need. Nothing you don't. Open source project management that works for you, not against you.",
       "w": "",
       "l": "TypeScript",
-      "s": 9280,
+      "s": 9345,
       "at": "2026-08-01",
       "src": null,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "BraveOPotato/FckSignups",
@@ -1131,7 +1139,7 @@
       "d": "A list of tools that are open-source, in-browser, and require no-signups!",
       "w": "",
       "l": "TypeScript",
-      "s": 4385,
+      "s": 4412,
       "at": "2026-09-04",
       "src": null,
       "archived": false,
@@ -1146,11 +1154,11 @@
       "d": "Smart PVR for newsgroup and bittorrent users.",
       "w": "",
       "l": "C#",
-      "s": 16656,
+      "s": 16821,
       "at": "2026-09-10",
       "src": null,
       "archived": false,
-      "pushed": "2026-09-27"
+      "pushed": "2026-10-04"
     },
     {
       "r": "antitree/nfc_canary",
@@ -1161,7 +1169,7 @@
       "d": "Flipper Zero app: a canary for your pocket — detects when someone scans you over NFC and alerts you by vibration",
       "w": "",
       "l": "C",
-      "s": 120,
+      "s": 121,
       "at": "2026-08-24",
       "src": null,
       "archived": false,
@@ -1176,7 +1184,7 @@
       "d": "Explain complex systems using visuals and simple terms. Help you prepare for system design interviews.",
       "w": "",
       "l": null,
-      "s": 90098,
+      "s": 90239,
       "at": "2026-09-25",
       "src": null,
       "archived": false,
@@ -1191,7 +1199,7 @@
       "d": ":books: 技术面试必备基础知识、Leetcode、计算机操作系统、计算机网络、系统设计",
       "w": "Proje Çince.",
       "l": null,
-      "s": 186346,
+      "s": 186380,
       "at": "2026-01-02",
       "src": null,
       "archived": false,
@@ -1206,11 +1214,11 @@
       "d": "",
       "w": "",
       "l": null,
-      "s": 465,
+      "s": 466,
       "at": "2026-05-20",
       "src": null,
       "archived": false,
-      "pushed": "2026-08-20"
+      "pushed": "2026-10-01"
     },
     {
       "r": "hasaneyldrm/exercises-dataset",
@@ -1221,7 +1229,7 @@
       "d": "1,324-exercise fitness dataset — animation GIFs, 180×180 thumbnails, muscle-group & equipment data, and step-by-step instructions in 6 languages. The exercise data layer behind the LogPress app.",
       "w": "",
       "l": "HTML",
-      "s": 22404,
+      "s": 22531,
       "at": "2026-06-30",
       "src": null,
       "archived": false,
@@ -1242,7 +1250,7 @@
       "l": "Python",
       "at": "2026-09-25",
       "src": null,
-      "s": 52827,
+      "s": 54178,
       "archived": false,
       "pushed": "2026-09-28"
     },
@@ -1261,9 +1269,9 @@
       "l": "Go",
       "at": "2026-09-25",
       "src": null,
-      "s": 108309,
+      "s": 109987,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "google-labs-code/design.md",
@@ -1279,9 +1287,9 @@
         "t": "divyannshisharma",
         "u": "https://www.instagram.com/p/Dc3vmYCEvpu/"
       },
-      "s": 28161,
+      "s": 28250,
       "archived": false,
-      "pushed": "2026-09-14"
+      "pushed": "2026-10-01"
     },
     {
       "r": "VoltAgent/awesome-design-md",
@@ -1297,9 +1305,9 @@
         "t": "divyannshisharma",
         "u": "https://www.instagram.com/p/Dc3vmYCEvpu/"
       },
-      "s": 118752,
+      "s": 119673,
       "archived": false,
-      "pushed": "2026-09-21"
+      "pushed": "2026-10-05"
     },
     {
       "r": "hardikpandya/stop-slop",
@@ -1319,7 +1327,7 @@
         "t": "divyannshisharma",
         "u": "https://www.instagram.com/p/Dc3vmYCEvpu/"
       },
-      "s": 17647,
+      "s": 17773,
       "archived": false,
       "pushed": "2026-03-17"
     },
@@ -1333,7 +1341,7 @@
         "codex"
       ],
       "tr": "Dergi kalitesinde diyagram çizdiren skill: akış, sistem mimarisi, Sankey, balık kılçığı, veritabanı şeması gibi 20'den fazla tür. Tek dosyalık HTML + SVG üretir; Mermaid ve draw.io çizimlerini de yeniden çizer.",
-      "d": "Editorial diagram design for Claude Code, Codex, and Pi. Self-contained HTML + SVG. No shadows. No Mermaid slop.",
+      "d": "Editorial diagram design for Claude Code, Codex, GitHub Copilot, Factory Droid, and Pi. 42 diagram types. Self-contained HTML + SVG. No shadows. No Mermaid slop.",
       "w": "",
       "l": "HTML",
       "at": "2026-09-25",
@@ -1341,9 +1349,9 @@
         "t": "divyannshisharma",
         "u": "https://www.instagram.com/p/Dc3vmYCEvpu/"
       },
-      "s": 42740,
+      "s": 43431,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "zarazhangrui/frontend-slides",
@@ -1363,7 +1371,7 @@
         "t": "divyannshisharma",
         "u": "https://www.instagram.com/p/Dc3vmYCEvpu/"
       },
-      "s": 29965,
+      "s": 30170,
       "archived": false,
       "pushed": "2026-06-23"
     },
@@ -1385,9 +1393,9 @@
         "t": "divyannshisharma",
         "u": "https://www.instagram.com/p/Dc3vmYCEvpu/"
       },
-      "s": 84646,
+      "s": 85357,
       "archived": false,
-      "pushed": "2026-09-28"
+      "pushed": "2026-10-02"
     },
     {
       "r": "ruvnet/ruflo",
@@ -1407,9 +1415,9 @@
         "t": "petergriffin.ai",
         "u": "https://www.instagram.com/reel/Da5be6dJ6Fi/"
       },
-      "s": 73489,
+      "s": 73933,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "NousResearch/hermes-agent",
@@ -1425,9 +1433,9 @@
         "u": "https://www.instagram.com/reel/Dcry4zypaOR/",
         "t": "codrkai"
       },
-      "s": 249993,
+      "s": 251424,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "karpathy/llm-council",
@@ -1443,7 +1451,7 @@
         "u": "https://www.instagram.com/reel/Dbpyz7FCLC3/",
         "t": "benburhankocabiyik"
       },
-      "s": 25052,
+      "s": 25167,
       "archived": false,
       "pushed": "2025-11-22"
     },
@@ -1461,9 +1469,9 @@
         "u": "https://www.instagram.com/reel/DdCOhLJAEAs/",
         "t": "selahattin.unlu"
       },
-      "s": 100,
+      "s": 106,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-03"
     },
     {
       "r": "gitroomhq/postiz-app",
@@ -1479,9 +1487,9 @@
         "u": "https://www.youtube.com/shorts/b66fksMVR-E",
         "t": "selahattin.unlu"
       },
-      "s": 36477,
+      "s": 36724,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "getopenscreen/openscreen",
@@ -1497,9 +1505,9 @@
         "u": "https://www.youtube.com/shorts/6GvXRk8NRZY",
         "t": "selahattin.unlu"
       },
-      "s": 3353,
+      "s": 3626,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-04"
     },
     {
       "r": "remotion-dev/remotion",
@@ -1515,9 +1523,9 @@
         "u": "https://www.youtube.com/shorts/w1MOSKvJSx0",
         "t": "selahattin.unlu"
       },
-      "s": 61064,
+      "s": 62029,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "openai/whisper",
@@ -1533,7 +1541,7 @@
         "u": "https://www.youtube.com/shorts/X-5ZLxh1yWY",
         "t": "selahattin.unlu"
       },
-      "s": 109730,
+      "s": 110004,
       "archived": false,
       "pushed": "2026-08-31"
     },
@@ -1551,7 +1559,7 @@
         "u": "https://www.youtube.com/shorts/AQ_OUlDcTOM",
         "t": "selahattin.unlu"
       },
-      "s": 12223,
+      "s": 12240,
       "archived": false,
       "pushed": "2026-09-06"
     },
@@ -1569,9 +1577,9 @@
         "u": "https://www.youtube.com/shorts/TBoP5k6QFtk",
         "t": "selahattin.unlu"
       },
-      "s": 27597,
+      "s": 27613,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "airbnb/lottie-web",
@@ -1587,7 +1595,7 @@
         "u": "https://www.youtube.com/shorts/86W1YfgPnYk",
         "t": "selahattin.unlu"
       },
-      "s": 32131,
+      "s": 32145,
       "archived": false,
       "pushed": "2025-09-01"
     },
@@ -1605,7 +1613,7 @@
         "u": "https://www.youtube.com/shorts/nSu_xsf8kSY",
         "t": "selahattin.unlu"
       },
-      "s": 28708,
+      "s": 28827,
       "archived": false,
       "pushed": "2026-04-13"
     },
@@ -1623,9 +1631,9 @@
         "u": "https://www.youtube.com/shorts/3gPLR82bmeQ",
         "t": "selahattin.unlu"
       },
-      "s": 33767,
+      "s": 33842,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "tremorlabs/tremor",
@@ -1641,7 +1649,7 @@
         "u": "https://www.youtube.com/shorts/Rf5jRfYtXiY",
         "t": "selahattin.unlu"
       },
-      "s": 3641,
+      "s": 3646,
       "archived": false,
       "pushed": "2025-10-10"
     },
@@ -1659,9 +1667,9 @@
         "u": "https://www.youtube.com/shorts/zKrNYSI-qd4",
         "t": "selahattin.unlu"
       },
-      "s": 42510,
+      "s": 42543,
       "archived": false,
-      "pushed": "2026-09-25"
+      "pushed": "2026-09-30"
     },
     {
       "r": "DavidHDev/react-bits",
@@ -1677,9 +1685,9 @@
         "u": "https://www.youtube.com/shorts/7XzSweUGnr4",
         "t": "selahattin.unlu"
       },
-      "s": 48266,
+      "s": 48543,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-03"
     },
     {
       "r": "magicuidesign/magicui",
@@ -1695,9 +1703,9 @@
         "u": "https://www.youtube.com/shorts/103EGz7WTE4",
         "t": "selahattin.unlu"
       },
-      "s": 22421,
+      "s": 22476,
       "archived": false,
-      "pushed": "2026-09-20"
+      "pushed": "2026-10-05"
     },
     {
       "r": "shadcn-ui/ui",
@@ -1713,9 +1721,9 @@
         "u": "https://www.youtube.com/shorts/GkbkS7U1a_Y",
         "t": "selahattin.unlu"
       },
-      "s": 124834,
+      "s": 125161,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "ollama/ollama",
@@ -1731,9 +1739,9 @@
         "u": "https://www.youtube.com/shorts/jXPcLQuP3hI",
         "t": "selahattin.unlu"
       },
-      "s": 181919,
+      "s": 182259,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-04"
     },
     {
       "r": "microsoft/markitdown",
@@ -1749,9 +1757,9 @@
         "u": "https://www.youtube.com/shorts/NqjHYFCcJss",
         "t": "selahattin.unlu"
       },
-      "s": 187583,
+      "s": 188635,
       "archived": false,
-      "pushed": "2026-09-21"
+      "pushed": "2026-10-04"
     },
     {
       "r": "marcelscruz/public-apis",
@@ -1767,9 +1775,9 @@
         "u": "https://www.youtube.com/shorts/Z81e6l27wJI",
         "t": "selahattin.unlu"
       },
-      "s": 9520,
+      "s": 9547,
       "archived": false,
-      "pushed": "2026-09-28"
+      "pushed": "2026-10-05"
     },
     {
       "r": "ripienaar/free-for-dev",
@@ -1785,9 +1793,9 @@
         "u": "https://www.youtube.com/shorts/fMWlswvNw34",
         "t": "selahattin.unlu"
       },
-      "s": 138862,
+      "s": 139226,
       "archived": false,
-      "pushed": "2026-09-28"
+      "pushed": "2026-10-05"
     },
     {
       "r": "prometheus/prometheus",
@@ -1803,9 +1811,9 @@
         "u": "https://www.youtube.com/shorts/_Megzvq771M",
         "t": "selahattin.unlu"
       },
-      "s": 66308,
+      "s": 66379,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "umami-software/umami",
@@ -1821,9 +1829,9 @@
         "u": "https://www.youtube.com/shorts/CQN7e1TyZZ0",
         "t": "selahattin.unlu"
       },
-      "s": 39081,
+      "s": 39184,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-04"
     },
     {
       "r": "grafana/grafana",
@@ -1839,9 +1847,9 @@
         "u": "https://www.youtube.com/shorts/EJJc2CE1gqc",
         "t": "selahattin.unlu"
       },
-      "s": 76992,
+      "s": 77092,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "openreplay/openreplay",
@@ -1857,9 +1865,9 @@
         "u": "https://www.youtube.com/shorts/KJTo0pluq7M",
         "t": "selahattin.unlu"
       },
-      "s": 12919,
+      "s": 12940,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "microsoft/playwright",
@@ -1875,9 +1883,9 @@
         "u": "https://www.youtube.com/shorts/9rUwfGPO0QI",
         "t": "selahattin.unlu"
       },
-      "s": 96864,
+      "s": 97135,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "octopusreview/octopus",
@@ -1893,9 +1901,9 @@
         "u": "https://www.youtube.com/shorts/3vpDdeP6P-0",
         "t": "selahattin.unlu"
       },
-      "s": 106,
+      "s": 107,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-01"
     },
     {
       "r": "webpro-nl/knip",
@@ -1911,9 +1919,9 @@
         "u": "https://www.youtube.com/shorts/7KwDz7tYfpc",
         "t": "selahattin.unlu"
       },
-      "s": 12376,
+      "s": 12407,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "google/osv-scanner",
@@ -1929,9 +1937,9 @@
         "u": "https://www.youtube.com/shorts/WEYL8-AAsEs",
         "t": "selahattin.unlu"
       },
-      "s": 11117,
+      "s": 11142,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "fastlane/fastlane",
@@ -1947,9 +1955,9 @@
         "u": "https://www.youtube.com/shorts/Mmj01VKVXeU",
         "t": "selahattin.unlu"
       },
-      "s": 42179,
+      "s": 42204,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "Dokploy/dokploy",
@@ -1965,9 +1973,9 @@
         "u": "https://www.youtube.com/shorts/vpHbCG8ag1M",
         "t": "selahattin.unlu"
       },
-      "s": 37569,
+      "s": 37667,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "coollabsio/coolify",
@@ -1983,9 +1991,9 @@
         "u": "https://www.youtube.com/shorts/PrlqXvx3LPk",
         "t": "selahattin.unlu"
       },
-      "s": 62395,
+      "s": 62620,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "NVIDIA/SkillSpector",
@@ -2001,9 +2009,9 @@
         "u": "https://www.instagram.com/reel/DdUQEYRALZj/",
         "t": "selahattin.unlu"
       },
-      "s": 18594,
+      "s": 19448,
       "archived": false,
-      "pushed": "2026-09-28"
+      "pushed": "2026-10-05"
     },
     {
       "r": "google/artemis",
@@ -2023,9 +2031,9 @@
         "u": "https://www.instagram.com/reel/DdMh1Fhg7Zg/",
         "t": "selahattin.unlu"
       },
-      "s": 10634,
+      "s": 11003,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-01"
     },
     {
       "r": "shanraisshan/claude-code-best-practice",
@@ -2041,9 +2049,9 @@
         "u": "https://www.youtube.com/shorts/cToXyrYtFTs",
         "t": "selahattin.unlu"
       },
-      "s": 66629,
+      "s": 67133,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "nexu-io/open-design",
@@ -2059,9 +2067,9 @@
         "u": "https://www.youtube.com/shorts/9dIxRgyANn0",
         "t": "selahattin.unlu"
       },
-      "s": 98655,
+      "s": 99559,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "HKUDS/CLI-Anything",
@@ -2081,7 +2089,7 @@
         "u": "https://www.youtube.com/shorts/NYx647nbybw",
         "t": "selahattin.unlu"
       },
-      "s": 50980,
+      "s": 51589,
       "archived": false,
       "pushed": "2026-09-22"
     },
@@ -2099,7 +2107,7 @@
         "u": "https://www.youtube.com/shorts/4VSJbVoeJRA",
         "t": "selahattin.unlu"
       },
-      "s": 28216,
+      "s": 28263,
       "archived": false,
       "pushed": "2026-09-19"
     },
@@ -2121,9 +2129,9 @@
         "u": "https://www.youtube.com/shorts/yv7toIYKwyU",
         "t": "selahattin.unlu"
       },
-      "s": 6020,
+      "s": 6028,
       "archived": false,
-      "pushed": "2026-08-03"
+      "pushed": "2026-10-05"
     },
     {
       "r": "wentong2022-arch/flowforge-skill",
@@ -2165,7 +2173,7 @@
         "u": "https://www.youtube.com/shorts/u1z2feSfXB8",
         "t": "selahattin.unlu"
       },
-      "s": 425,
+      "s": 435,
       "archived": false,
       "pushed": "2026-08-12"
     },
@@ -2187,7 +2195,7 @@
         "u": "https://www.youtube.com/shorts/pkJkn0TyGQc",
         "t": "selahattin.unlu"
       },
-      "s": 17825,
+      "s": 18085,
       "archived": false,
       "pushed": "2026-09-25"
     },
@@ -2209,9 +2217,9 @@
         "u": "https://www.youtube.com/shorts/KZZr5SoBbzo",
         "t": "selahattin.unlu"
       },
-      "s": 63179,
+      "s": 63578,
       "archived": false,
-      "pushed": "2026-09-27"
+      "pushed": "2026-10-04"
     },
     {
       "r": "Graphify-Labs/graphify",
@@ -2231,9 +2239,9 @@
         "u": "https://www.youtube.com/shorts/y4VLxJY0JbU",
         "t": "selahattin.unlu"
       },
-      "s": 122319,
+      "s": 124046,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "mksglu/context-mode",
@@ -2253,9 +2261,9 @@
         "u": "https://www.youtube.com/shorts/zdwAXTaxL5Y",
         "t": "selahattin.unlu"
       },
-      "s": 24214,
+      "s": 25470,
       "archived": false,
-      "pushed": "2026-09-28"
+      "pushed": "2026-10-05"
     },
     {
       "r": "composio-community/awesome-codex-skills",
@@ -2274,7 +2282,7 @@
         "u": "https://www.youtube.com/shorts/hSb1TAXAwTA",
         "t": "selahattin.unlu"
       },
-      "s": 16712,
+      "s": 16772,
       "archived": false,
       "pushed": "2026-07-26"
     },
@@ -2295,7 +2303,7 @@
         "u": "https://www.youtube.com/shorts/uISmT8Bv4Fo",
         "t": "selahattin.unlu"
       },
-      "s": 33681,
+      "s": 33860,
       "archived": false,
       "pushed": "2026-07-08"
     },
@@ -2317,9 +2325,9 @@
         "u": "https://www.youtube.com/shorts/eTrgWvRYdNE",
         "t": "selahattin.unlu"
       },
-      "s": 155264,
+      "s": 157200,
       "archived": false,
-      "pushed": "2026-09-28"
+      "pushed": "2026-10-04"
     },
     {
       "r": "coreyhaines31/marketingskills",
@@ -2339,9 +2347,9 @@
         "u": "https://www.youtube.com/shorts/dE4hFAW9cpk",
         "t": "selahattin.unlu"
       },
-      "s": 51890,
+      "s": 53359,
       "archived": false,
-      "pushed": "2026-09-05"
+      "pushed": "2026-10-03"
     },
     {
       "r": "addyosmani/agent-skills",
@@ -2361,9 +2369,9 @@
         "u": "https://www.youtube.com/shorts/Kg7eV4wv_3A",
         "t": "selahattin.unlu"
       },
-      "s": 99821,
+      "s": 101528,
       "archived": false,
-      "pushed": "2026-09-26"
+      "pushed": "2026-10-03"
     },
     {
       "r": "addyosmani/web-quality-skills",
@@ -2383,7 +2391,7 @@
         "u": "https://www.youtube.com/shorts/vkKtohvoBS8",
         "t": "selahattin.unlu"
       },
-      "s": 2855,
+      "s": 2880,
       "archived": false,
       "pushed": "2026-08-24"
     },
@@ -2405,9 +2413,9 @@
         "u": "https://www.youtube.com/shorts/HB3hNzdIa6o",
         "t": "selahattin.unlu"
       },
-      "s": 134467,
+      "s": 135358,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "open-gsd/gsd-core",
@@ -2427,9 +2435,9 @@
         "u": "https://www.youtube.com/shorts/hxUSmmj7Qek",
         "t": "selahattin.unlu"
       },
-      "s": 9991,
+      "s": 10201,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "obra/superpowers",
@@ -2449,7 +2457,7 @@
         "u": "https://www.youtube.com/shorts/uSbLXkV0tl4",
         "t": "selahattin.unlu"
       },
-      "s": 292743,
+      "s": 295628,
       "archived": false,
       "pushed": "2026-09-27"
     },
@@ -2471,9 +2479,9 @@
         "u": "https://www.youtube.com/shorts/d8-m2nxVOl4",
         "t": "selahattin.unlu"
       },
-      "s": 62521,
+      "s": 62716,
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "thedotmack/claude-mem",
@@ -2493,9 +2501,9 @@
         "u": "https://www.youtube.com/shorts/hPKyPjy505s",
         "t": "selahattin.unlu"
       },
-      "s": 94906,
+      "s": 96591,
       "archived": false,
-      "pushed": "2026-09-28"
+      "pushed": "2026-10-05"
     },
     {
       "r": "Fosowl/agenticSeek",
@@ -2509,11 +2517,11 @@
         "t": "hfnhq",
         "u": "https://www.instagram.com/p/Dd1BPoWgp5q/"
       },
-      "s": 27381,
+      "s": 27432,
       "l": "Python",
       "d": "Fully Local Manus AI. No APIs, No $200 monthly bills. Enjoy an autonomous agent that thinks, browses the web, and code for the sole cost of electricity.",
       "archived": false,
-      "pushed": "2026-09-25"
+      "pushed": "2026-10-02"
     },
     {
       "r": "D4Vinci/Scrapling",
@@ -2527,14 +2535,14 @@
         "t": "hfnhq",
         "u": "https://www.instagram.com/p/Dd1BPoWgp5q/"
       },
-      "s": 84468,
+      "s": 85834,
       "l": "Python",
       "d": "🕷️ An adaptive Web Scraping framework that handles everything from a single request to a full-scale crawl! Don't be shy, join here: https://discord.gg/EMgGbDceNQ and follow here for daily tips and tricks: https://x.com/Scrapling_dev",
       "archived": false,
-      "pushed": "2026-09-28"
+      "pushed": "2026-10-04"
     },
     {
-      "r": "OpenBB-finance/OpenBB",
+      "r": "openbq-org/OpenBB",
       "f": "gunluk",
       "af": "finans",
       "k": "proje",
@@ -2545,11 +2553,11 @@
         "t": "hfnhq",
         "u": "https://www.instagram.com/p/Dd1BPoWgp5q/"
       },
-      "s": 73629,
+      "s": 73873,
       "l": "Python",
       "d": "Open Data Platform for analysts, quants and AI agents.",
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-02"
     },
     {
       "r": "documenso/documenso",
@@ -2563,11 +2571,11 @@
         "t": "hfnhq",
         "u": "https://www.instagram.com/p/Dd1BPoWgp5q/"
       },
-      "s": 15253,
+      "s": 15335,
       "l": "TypeScript",
       "d": "The Open Source DocuSign Alternative.",
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "twentyhq/twenty",
@@ -2581,11 +2589,11 @@
         "t": "hfnhq",
         "u": "https://www.instagram.com/p/Dd1BPoWgp5q/"
       },
-      "s": 57706,
+      "s": 57941,
       "l": "TypeScript",
       "d": "The open alternative to Salesforce, designed for AI.",
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "myshell-ai/OpenVoice",
@@ -2599,7 +2607,7 @@
         "t": "hfnhq",
         "u": "https://www.instagram.com/p/Dd1BPoWgp5q/"
       },
-      "s": 37725,
+      "s": 37773,
       "l": "Python",
       "d": "Instant voice cloning by MIT and MyShell. Audio foundation model.",
       "archived": false,
@@ -2617,7 +2625,7 @@
         "t": "sebastianhardy_",
         "u": "https://www.instagram.com/p/Dcv9HtHDLDZ/"
       },
-      "s": 10963,
+      "s": 11074,
       "l": "TypeScript",
       "d": "Comp AI CRM is an open source, CRM designed for AI agents. Agentic-first CRM.",
       "archived": false,
@@ -2635,11 +2643,11 @@
         "t": "sebastianhardy_",
         "u": "https://www.instagram.com/p/Dcv9HtHDLDZ/"
       },
-      "s": 34668,
+      "s": 34793,
       "l": "Python",
       "d": "Best and simplest tool for website change detection, web page monitoring, and website change alerts. Perfect for tracking content changes, price drops, restock alerts, and website defacement monitoring—all for free or enjoy our SaaS plan!",
       "archived": false,
-      "pushed": "2026-09-28"
+      "pushed": "2026-10-02"
     },
     {
       "r": "JCodesMore/ai-website-cloner-template",
@@ -2653,11 +2661,11 @@
         "t": "sebastianhardy_",
         "u": "https://www.instagram.com/p/Dcv9HtHDLDZ/"
       },
-      "s": 35436,
+      "s": 35875,
       "l": "TypeScript",
       "d": "Clone any website with one command using AI coding agents",
       "archived": false,
-      "pushed": "2026-09-27"
+      "pushed": "2026-10-05"
     },
     {
       "r": "hugohe3/ppt-master",
@@ -2675,11 +2683,11 @@
         "t": "sebastianhardy_",
         "u": "https://www.instagram.com/p/Dcv9HtHDLDZ/"
       },
-      "s": 56979,
+      "s": 57741,
       "l": "Python",
       "d": "AI turns documents or topics into real, native PowerPoint decks—with native shapes, transitions and animations, data-backed charts and tables on demand, audio narration from speaker notes, and support for your own .pptx templates. · by Hugo He",
       "archived": false,
-      "pushed": "2026-09-27"
+      "pushed": "2026-10-05"
     },
     {
       "r": "PaddlePaddle/PaddleOCR",
@@ -2693,7 +2701,7 @@
         "t": "sebastianhardy_",
         "u": "https://www.instagram.com/p/Dcv9HtHDLDZ/"
       },
-      "s": 90411,
+      "s": 90643,
       "l": "Python",
       "d": "Turn any PDF or image document into structured data for your AI. A powerful, lightweight OCR toolkit that bridges the gap between images/PDFs and LLMs. Supports 100+ languages.",
       "archived": false,
@@ -2715,11 +2723,11 @@
         "t": "gittrend.io",
         "u": "https://www.instagram.com/reel/Dd1dJi9j-vq/"
       },
-      "s": 745,
+      "s": 1999,
       "l": "HTML",
       "d": "A comprehensive logo-design skill for Claude, Gemini CLI, Codex and other AI agents: principles, process, SVG craft, testing tools and a 1,400+ logo reference library.",
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-09-30"
     },
     {
       "r": "ahmedkhaleel2004/gitdiagram",
@@ -2733,11 +2741,11 @@
         "t": "codewithtoushif",
         "u": "https://www.instagram.com/reel/DdWnJFXjFmM/"
       },
-      "s": 17480,
+      "s": 17873,
       "l": "TypeScript",
-      "d": "Free, simple, fast interactive diagrams and videos for any GitHub repository",
+      "d": "Visualize any GitHub codebase: free interactive architecture diagrams and one-minute explainer videos. Replace 'hub' with 'diagram' in any GitHub URL.",
       "archived": false,
-      "pushed": "2026-09-29"
+      "pushed": "2026-10-05"
     },
     {
       "r": "coderamp-labs/gitingest",
@@ -2751,11 +2759,11 @@
         "t": "codewithtoushif",
         "u": "https://www.instagram.com/reel/DdWnJFXjFmM/"
       },
-      "s": 15734,
+      "s": 15844,
       "l": "Python",
       "d": "Replace 'hub' with 'ingest' in any GitHub URL to get a prompt-friendly extract of a codebase ",
       "archived": false,
-      "pushed": "2026-09-25"
+      "pushed": "2026-10-04"
     },
     {
       "r": "abi/screenshot-to-code",
@@ -2769,11 +2777,11 @@
         "t": "noahelhadedy",
         "u": "https://www.instagram.com/p/DdTD4xPF-I-/"
       },
-      "s": 79849,
+      "s": 80001,
       "l": "Python",
       "d": "Drop in a screenshot and convert it to clean code (HTML/Tailwind/React/Vue)",
       "archived": false,
-      "pushed": "2026-09-09"
+      "pushed": "2026-09-29"
     },
     {
       "r": "samasante/liquid-glass",
@@ -2787,7 +2795,7 @@
         "t": "noahelhadedy",
         "u": "https://www.instagram.com/p/DdTD4xPF-I-/"
       },
-      "s": 606,
+      "s": 617,
       "l": "TypeScript",
       "d": "Apple-style Liquid Glass for the web — a headless React lens that refracts the live DOM in Safari, Firefox and Chrome. Zero dependencies.",
       "archived": false,
@@ -2805,7 +2813,7 @@
         "t": "noahelhadedy",
         "u": "https://www.instagram.com/p/DdTD4xPF-I-/"
       },
-      "s": 1183,
+      "s": 1206,
       "l": "TypeScript",
       "d": "A library to help you dial in interface parameters of any kind",
       "archived": false,
@@ -2823,11 +2831,11 @@
         "t": "noahelhadedy",
         "u": "https://www.instagram.com/p/DdTD4xPF-I-/"
       },
-      "s": 3948,
+      "s": 4090,
       "l": "TypeScript",
       "d": "High-crafted UI libraries for AI agents: Border beam, Orbs, Metal, Gooey, Voice, Image, Avatar bots",
       "archived": false,
-      "pushed": "2026-09-24"
+      "pushed": "2026-10-05"
     },
     {
       "r": "romainsimon/uisfx",
@@ -2841,11 +2849,621 @@
         "t": "noahelhadedy",
         "u": "https://www.instagram.com/p/DdTD4xPF-I-/"
       },
-      "s": 831,
+      "s": 839,
       "l": "Vue",
       "d": "UI Sound Effects for your interfaces",
       "archived": false,
       "pushed": "2026-09-08"
+    },
+    {
+      "r": "OpenHands/OpenHands",
+      "f": "ajan-yonetim",
+      "af": "arayuz",
+      "k": "uygulama",
+      "tr": "Kodlama ajanları için kendi bilgisayarında ya da sunucunda çalışan kontrol merkezi (Agent Canvas): OpenHands ajanının yanında Claude Code, Codex ve Gemini'yi de çalıştırır; ajanları yerelde, Docker'da ya da sanal makinede koşturur, Slack, GitHub ve Linear'dan zamanlanmış ya da webhook ile tetiklenen işler kurar.",
+      "w": "Agent Canvas beta aşamasında. Sandbox'sız kurulumda ajan tüm dosya sistemine erişir; Docker ya da sanal makine seç. Model ücreti sende. İlk kurulum olayı onay beklemeden PostHog'a gider, diğer olaylar onaydan sonra; `--disable-telemetry` hepsini kapatır. Kurulum: `npm install -g @openhands/agent-canvas` (Node 24+ ve uv gerekir).",
+      "at": "2026-10-05",
+      "src": {
+        "t": "hypertech",
+        "u": "https://www.instagram.com/p/DdUI4inkfVs/"
+      },
+      "s": 90049,
+      "l": "TypeScript",
+      "d": "🙌 OpenHands: AI-Driven Development",
+      "archived": false,
+      "pushed": "2026-10-05"
+    },
+    {
+      "r": "getmaxun/maxun",
+      "f": "ajan-erisim",
+      "af": "web",
+      "k": "uygulama",
+      "tr": "Web sitelerini yapılandırılmış API'ye çeviren kodsuz veri çekme platformu: tarayıcı adımlarını kaydedip tekrar kullanılabilir robot yapar ya da AI'ya doğal dille veri çektirir; sayfayı Markdown'a çevirir, siteyi tarar, değişiklikleri izler. API, SDK, CLI ve MCP arayüzü var.",
+      "w": "AGPL-3.0: değiştirip ağ hizmeti olarak sunarsan kaynak kodu paylaşman gerekir. Örnek env dosyası telemetriyi açık getirir (`MAXUN_TELEMETRY=false` yap). CAPTCHA aşma ve proxy sadece ücretli bulutta. Veri çekerken sitenin kullanım koşullarına ve kişisel veride KVKK'ya dikkat et.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "hypertech",
+        "u": "https://www.instagram.com/p/DdUI4inkfVs/"
+      },
+      "s": 17663,
+      "l": "TypeScript",
+      "d": "Turn any website into a structured API. Extract, automate, search and monitor the web.",
+      "archived": false,
+      "pushed": "2026-10-02"
+    },
+    {
+      "r": "open-webui/open-webui",
+      "f": "ajan-yonetim",
+      "af": "model",
+      "k": "uygulama",
+      "tr": "Kendi sunucunda çalışan ChatGPT benzeri AI sohbet arayüzü: Ollama'daki yerel modellere ve OpenAI uyumlu API'lere bağlanır; belgeyle sohbet (RAG), web araması, eklentiler, kullanıcı yönetimi, LDAP ve SSO desteği var.",
+      "w": "Lisans, BSD-3'e marka maddesi eklenmiş hâli: 30 günde 50'den fazla kullanıcısı olan kurulumda \"Open WebUI\" markası kaldırılamaz. GPU sadece yerel model çalıştıracaksan gerekir. Kurulum: `pip install open-webui` (Python 3.11) ya da Docker.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "hypertech",
+        "u": "https://www.instagram.com/p/DdUI4inkfVs/"
+      },
+      "s": 154017,
+      "l": "Python",
+      "d": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
+      "archived": false,
+      "pushed": "2026-10-05"
+    },
+    {
+      "r": "browser-use/browser-use",
+      "f": "ajan-erisim",
+      "af": "tarayici",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "AI ajanına tarayıcıyı kullandırır: sayfada gezinir, tıklar, form doldurur, veri toplar. Claude Code ve Codex'e CLI ve skill olarak eklenir; Python kütüphanesi ve barındırılan bulut API'si olarak da kullanılabilir.",
+      "w": "Telemetri varsayılan açık (PostHog), `ANONYMIZED_TELEMETRY=false` ile kapanır. LLM ücreti sende; bulut tarayıcı ve kendi modeli ücretli API anahtarı ister. Oturumu açık tarayıcıda sayfalardan gelen prompt injection'a dikkat et. Katalogdaki agent-browser ve playwright-mcp ile aynı işi görür. Kurulum: uv ile kur, sonra `browser-use skill install`.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "hypertech",
+        "u": "https://www.instagram.com/p/DdUI4inkfVs/"
+      },
+      "s": 117207,
+      "l": "Python",
+      "d": "Agents that use the browser.",
+      "archived": false,
+      "pushed": "2026-10-03"
+    },
+    {
+      "r": "langflow-ai/langflow",
+      "f": "ajan-yonetim",
+      "af": "arayuz",
+      "k": "uygulama",
+      "tr": "AI ajanlarını ve iş akışlarını sürükle-bırak arayüzle kurdurur; her akış API ya da MCP sunucusu olarak yayınlanır, bileşenler Python ile özelleştirilir.",
+      "w": "İki kez kimlik doğrulamasız uzaktan kod çalıştırma açığı çıktı ve saldırılarda kullanıldı (CVE-2025-3248, CVE-2026-33017; CISA KEV listesinde): en az 1.9.0 kullan, güncel tut ve kimlik doğrulaması olmadan internete açma. Telemetri varsayılan açık, `DO_NOT_TRACK=True` ile kapanır.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "hypertech",
+        "u": "https://www.instagram.com/p/DdUI4inkfVs/"
+      },
+      "s": 155513,
+      "l": "Python",
+      "d": "Langflow is a powerful tool for building and deploying AI-powered agents and workflows.",
+      "archived": false,
+      "pushed": "2026-10-05"
+    },
+    {
+      "r": "supabase/supabase",
+      "f": "yayin",
+      "af": "backend",
+      "k": "uygulama",
+      "tr": "Postgres üzerine giriş, dosya depolama, gerçek zamanlı veri, sunucusuz fonksiyonlar, otomatik REST ve GraphQL API ve yönetim paneli koyan backend platformu; Firebase'e açık kaynak alternatif. supabase.com'da barındırılır ya da Docker ile kendi sunucunda çalışır.",
+      "w": "Çoğu proje barındırılan servisi ve ayrı repo olan supabase-js kütüphanesini kullanır; ücretsiz plan sınırları Yayına alma rehberinde. Her tabloda RLS açık olmalı, service_role anahtarı istemciye konmamalı. Kendi sunucunda çalıştırırsan yedekleme ve güvenlik sende.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "hypertech",
+        "u": "https://www.instagram.com/p/DdUI4inkfVs/"
+      },
+      "s": 111129,
+      "l": "TypeScript",
+      "d": "The Postgres development platform. Supabase gives you a dedicated Postgres database to build your web, mobile, and AI applications.",
+      "archived": false,
+      "pushed": "2026-10-05"
+    },
+    {
+      "r": "Stirling-Tools/Stirling-PDF",
+      "f": "gunluk",
+      "af": "belge",
+      "k": "uygulama",
+      "tr": "Kendi sunucunda ya da masaüstünde çalışan PDF aracı: 50'den fazla işlem (düzenleme, birleştirme, imza, karartma, dönüştürme, OCR, sıkıştırma), tarayıcı arayüzü ve REST API.",
+      "w": "Açık çekirdek: kod MIT ama bazı klasörler ayrı ticari lisanslı; ücretsiz kullanım 5 kullanıcıya kadar. Analitik ilk açılışta yöneticiye sorulur, açılırsa PostHog ve Scarf çalışır. `enableUrlToPDF` özelliğinin bilinen güvenlik sorunları var, kapalı tut.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "hypertech",
+        "u": "https://www.instagram.com/p/DdUI4inkfVs/"
+      },
+      "s": 93622,
+      "l": "TypeScript",
+      "d": "#1 PDF Application on GitHub that lets you edit PDFs on any device anywhere",
+      "archived": false,
+      "pushed": "2026-10-05"
+    },
+    {
+      "r": "langgenius/dify",
+      "f": "ajan-yonetim",
+      "af": "arayuz",
+      "k": "uygulama",
+      "tr": "AI ajan iş akışlarını, RAG hatlarını ve sohbet botlarını görsel olarak kurup API olarak yayınlatan platform; model ve araç marketi, kendi sandbox'ında çalışan ajanlar var.",
+      "w": "Lisans ek koşullu Apache 2.0: yazılı izin olmadan çok kiracılı (SaaS) servis işletilemez, ön yüzdeki logo ve telif bilgisi kaldırılamaz. Docker Compose kurulumu en az 2 çekirdek ve 4 GB RAM ister. LLM ücreti ayrı.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "hypertech",
+        "u": "https://www.instagram.com/p/DdUI4inkfVs/"
+      },
+      "s": 157899,
+      "l": "TypeScript",
+      "d": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
+      "archived": false,
+      "pushed": "2026-10-05"
+    },
+    {
+      "r": "nhost/nhost",
+      "f": "yayin",
+      "af": "backend",
+      "k": "uygulama",
+      "tr": "GraphQL'li açık kaynak Firebase alternatifi: PostgreSQL, Hasura GraphQL API, giriş, dosya depolama ve Node.js sunucusuz fonksiyonlar; Nhost Cloud, yerel geliştirme CLI'ı ve kendi sunucunda çalıştırma seçenekleri var.",
+      "w": "Uygulamaya `@nhost/nhost-js` SDK'sı eklenir. Bulutta ücretsiz plan 1 proje, 1 GB veritabanı ve 1 GB depolama; 1 hafta kullanılmayan proje duraklatılır. Pro ayda 25 $'dan.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "replace.so",
+        "u": "https://www.instagram.com/p/DdmTyEVAPMb/"
+      },
+      "s": 9347,
+      "l": "TypeScript",
+      "d": "The Open Source Firebase Alternative with GraphQL.",
+      "archived": false,
+      "pushed": "2026-10-05"
+    },
+    {
+      "r": "morluto/rea",
+      "f": "ajan-erisim",
+      "af": "kod",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Kodlama ajanını tersine mühendislik araçlarına bağlar: masaüstü ikili dosyaları (Ghidra ya da Hopper ile), JavaScript ve Electron uygulamaları, .NET, APK ve IPA paketleri ve web siteleri; bulguları kanıtıyla raporlar, analiz yerelde yapılır.",
+      "w": "Sadece kendi uygulamanı ya da izin aldığın uygulamayı incele: lisans sözleşmeleri ve mağaza koşulları çoğunlukla tersine mühendisliği yasaklar, FSEK md. 38 ancak dar koşullarda izin verir; kod, görsel ya da arayüz kopyalamak telif ihlalidir. Windows desteklenmez (macOS ve Linux), Node 22.19+ ister. Kurulum ajan ayarlarını değiştirir; değişikliği önce gösterir ve yedek alır.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "marc.kaz",
+        "u": "https://www.instagram.com/reel/DeFGs1_sk3Y/"
+      },
+      "s": 5332,
+      "l": "TypeScript",
+      "d": "Reverse engineer anything with agents, from app behavior down to native binaries.",
+      "archived": false,
+      "pushed": "2026-10-05"
+    },
+    {
+      "r": "better-auth/better-auth",
+      "f": "yayin",
+      "af": "backend",
+      "k": "proje",
+      "tr": "Framework'ten bağımsız TypeScript kimlik doğrulama ve yetkilendirme kütüphanesi: e-posta ve şifre, sosyal giriş ve oturum yönetimi hazır; iki adımlı doğrulama, organizasyon ve çok kiracılı yapı gibi özellikler eklentiyle az kodla eklenir.",
+      "w": "Kendi veritabanını ister (Postgres, MySQL, SQLite...). Ajanlara doğru kullandırmak için ayrı better-auth/skills reposu var.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "replace.so",
+        "u": "https://www.instagram.com/p/DeH33EMgBYT/"
+      },
+      "s": 30172,
+      "l": "TypeScript",
+      "d": "The most comprehensive authentication framework",
+      "archived": false,
+      "pushed": "2026-10-04"
+    },
+    {
+      "r": "pocketbase/pocketbase",
+      "f": "yayin",
+      "af": "backend",
+      "k": "uygulama",
+      "tr": "Tek dosyalık açık kaynak backend: gömülü SQLite veritabanı, gerçek zamanlı abonelik, kullanıcı ve dosya yönetimi, yönetim paneli ve REST benzeri API; JavaScript ve Dart (Flutter) SDK'ları var, Go kütüphanesi olarak da kullanılır.",
+      "w": "1.0 öncesi: sürümler arasında geriye uyumluluk garanti değil. Fiilen tek geliştirici var. SQLite tabanlı olduğu için tek sunucuda çalışır; kişisel ve küçük projeler için uygun.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "replace.so",
+        "u": "https://www.instagram.com/p/DeFMBD7AMBD/"
+      },
+      "s": 61287,
+      "l": "Go",
+      "d": "Open Source realtime backend in 1 file",
+      "archived": false,
+      "pushed": "2026-10-02"
+    },
+    {
+      "r": "appwrite/appwrite",
+      "f": "yayin",
+      "af": "backend",
+      "k": "uygulama",
+      "tr": "Giriş, veritabanı, dosya depolama, sunucusuz fonksiyonlar, mesajlaşma, site barındırma ve gerçek zamanlı veriyi tek yerde sunan açık kaynak backend platformu; kendi sunucunda Docker ile ya da Appwrite Cloud'da çalışır.",
+      "w": "Çok konteynerli, ağır bir kurulum; Docker soketini konteynere bağladığı için sunucuda root düzeyinde erişimi olur. Küçük proje için PocketBase daha hafif.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "replace.so",
+        "u": "https://www.instagram.com/p/Dd1DC1BgJTK/"
+      },
+      "s": 57574,
+      "l": "PHP",
+      "d": "Appwrite® - complete cloud infrastructure for your web, mobile and AI apps. Including Auth, Databases, Storage, Functions, Messaging, Hosting, Realtime and more",
+      "archived": false,
+      "pushed": "2026-10-05"
+    },
+    {
+      "r": "svix/svix-webhooks",
+      "f": "yayin",
+      "af": "backend",
+      "k": "uygulama",
+      "tr": "Müşterilerine webhook gönderen uygulamalar için gönderim servisi: teslimatı, yeniden denemeyi ve imzalamayı tek API çağrısıyla üstlenir; birçok dildeki SDK'ları webhook doğrulamayı da içerir.",
+      "w": "Sadece webhook gönderen projeler için; Stripe ya da RevenueCat webhook'u almak için gerekmez. PostgreSQL ve Redis ister. Barındırılan Svix servisindeki bazı özellikler açık kaynak sürümde yok.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "replace.so",
+        "u": "https://www.instagram.com/p/Dd1uKpNgDlW/"
+      },
+      "s": 3430,
+      "l": "Rust",
+      "d": "The open source and enterprise-ready webhooks service 🦀",
+      "archived": false,
+      "pushed": "2026-10-05"
+    },
+    {
+      "r": "heyform/heyform",
+      "f": "gunluk",
+      "af": "is",
+      "k": "uygulama",
+      "tr": "Sohbet biçiminde form, anket ve quiz kurucu: koşullu mantık, webhook ve Zapier entegrasyonu, yarıda bırakma analitiği, CSV dışa aktarma; Typeform'a açık kaynak alternatif.",
+      "w": "AGPL-3.0. Docker kurulumu MongoDB ve KeyDB ister; SSL sonlandırmaz, önüne reverse proxy koy. Küçük bir ekip geliştiriyor.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "replace.so",
+        "u": "https://www.instagram.com/p/DdzNn9gAR1z/"
+      },
+      "s": 8997,
+      "l": "TypeScript",
+      "d": "Open-Source Form Builder",
+      "archived": false,
+      "pushed": "2026-09-09"
+    },
+    {
+      "r": "gitleaks/gitleaks",
+      "f": "kalite",
+      "af": "guvenlik",
+      "k": "uygulama",
+      "tr": "Git geçmişinde, dosyalarda ve stdin'de unutulmuş şifre, API anahtarı ve token arar; pre-commit hook ve GitHub Action olarak çalışır.",
+      "w": "Özellikleri tamamlanmış, artık sadece güvenlik yaması alıyor; yazarı Betterleaks'e geçti. gitleaks-action v2'den beri MIT değil ve organizasyon reposunda ücretsiz lisans anahtarı ister. Bulunan anahtarı koddan silmek yetmez, iptal edip yenile.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "berkayabay.ai",
+        "u": "https://www.instagram.com/reel/DdqI39ERRuF/"
+      },
+      "s": 29701,
+      "l": "Go",
+      "d": "Find secrets with Gitleaks 🔑",
+      "archived": false,
+      "pushed": "2026-09-30"
+    },
+    {
+      "r": "semgrep/semgrep",
+      "f": "kalite",
+      "af": "guvenlik",
+      "k": "uygulama",
+      "tr": "30'dan fazla dilde statik kod analizi: temizlenmemiş girdi, SQL injection, koda yazılmış anahtar gibi güvenli olmayan kalıpları bulur; kurallar koda benzer yazılır, IDE'de, pre-commit'te ve CI'da çalışır.",
+      "w": "Motor LGPL-2.1 ama hazır kurallar ayrı lisanslı (sadece dahili kullanım); tamamen açık alternatif opengrep/opengrep. Ücretsiz Community Edition tek dosya içinde analiz eder ve README'ye göre açıkların çoğunu kaçırabilir; dosyalar arası analiz ve Pro kurallar giriş ve ücretli platform ister. Hazır kurallar kullanılınca semgrep.dev'e kod içermeyen metrik gider (`--metrics=off`). Ajana `semgrep mcp` ya da Claude Code eklentisiyle de eklenir.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "berkayabay.ai",
+        "u": "https://www.instagram.com/reel/DdqI39ERRuF/"
+      },
+      "s": 16888,
+      "l": "C",
+      "d": "Lightweight static analysis for many languages. Find bug variants with patterns that look like source code.",
+      "archived": false,
+      "pushed": "2026-10-05"
+    },
+    {
+      "r": "zaproxy/zaproxy",
+      "f": "kalite",
+      "af": "guvenlik",
+      "k": "uygulama",
+      "tr": "Çalışan web uygulamasını dışarıdan tarayıp güvenlik açığı arar (DAST): XSS, eksik güvenlik başlıkları, açık yönlendirme gibi; otomatik tarama ve elle pentest için kullanılır.",
+      "w": "Artık OWASP projesi değil, ZAP by Checkmarx adıyla Apache-2.0 lisanslı açık kaynak devam ediyor. Güncelleme kontrolü ve telemetri gönderir (taranan siteleri göndermez); `-silent` ya da `-notel` ile kapat. Sadece sahibi olduğun ya da izin aldığın siteleri tara; aktif tarama form gönderip veriyi bozabilir, staging'de çalıştır.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "berkayabay.ai",
+        "u": "https://www.instagram.com/reel/DdqI39ERRuF/"
+      },
+      "s": 15872,
+      "l": "Java",
+      "d": "The ZAP by Checkmarx Core project",
+      "archived": false,
+      "pushed": "2026-10-01"
+    },
+    {
+      "r": "cline/cline",
+      "f": "ajan-yonetim",
+      "af": "arayuz",
+      "k": "uygulama",
+      "tr": "VS Code, JetBrains, terminal ve masaüstünde çalışan açık kaynak kodlama ajanı: Plan ve Act modları, `.clinerules` proje kuralları, MCP desteği ve zamanlanmış ajanlar; her modelle çalışır.",
+      "w": "Kendi API anahtarınla çalışır, token ücreti sende. Otomatik onay açıksa komutları sormadan çalıştırır.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "replace.so",
+        "u": "https://www.instagram.com/p/DeCuH4lgGQj/"
+      },
+      "s": 69892,
+      "l": "TypeScript",
+      "d": "Autonomous coding agent as an SDK, IDE extension, or CLI assistant.",
+      "archived": false,
+      "pushed": "2026-10-05"
+    },
+    {
+      "r": "aaif-goose/goose",
+      "f": "ajan-yonetim",
+      "af": "arayuz",
+      "k": "uygulama",
+      "tr": "Araştırma, yazı, otomasyon, veri analizi ve kod için genel amaçlı açık kaynak AI ajanı; masaüstü uygulaması, CLI ve API sunar, 15'ten fazla model sağlayıcısı ve 70'ten fazla MCP eklentisiyle çalışır.",
+      "w": "Eski adı block/goose; Linux Foundation'a bağlı AAIF'nin projesi. API ücretleri sende; Claude aboneliğiyle kullanmadan önce Anthropic'in kullanım koşullarını kontrol et.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "replace.so",
+        "u": "https://www.instagram.com/p/DeCuH4lgGQj/"
+      },
+      "s": 54967,
+      "l": "Rust",
+      "d": "an open source, extensible AI agent that goes beyond code suggestions - install, execute, edit, and test with any LLM",
+      "archived": false,
+      "pushed": "2026-10-05"
+    },
+    {
+      "r": "stablyai/orca",
+      "f": "ajan-yonetim",
+      "af": "arayuz",
+      "k": "uygulama",
+      "tr": "Claude Code, Codex, OpenCode ve Pi'yi her biri kendi git worktree'sinde paralel çalıştıran masaüstü ortamı: terminal, tarayıcı, diff incelemesi, GitHub ve Linear bağlantısı, SSH ile uzak worktree ve mobil yardımcı uygulama.",
+      "w": "Anonim kullanım telemetrisi var, ayarlardan kapatılır. Ajan abonelikleri sende. Telemetrisiz ve sunucuda çalışan bir alternatif: getpaseo/paseo.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "replace.so",
+        "u": "https://www.instagram.com/p/Dd63tpUgBhU/"
+      },
+      "s": 85779,
+      "l": "TypeScript",
+      "d": "Orca is the ADE for working with a fleet of parallel agents. Run any coding agent with your own subscription. Available on desktop, mobile and remote runtime.",
+      "archived": false,
+      "pushed": "2026-10-05"
+    },
+    {
+      "r": "dyad-sh/dyad",
+      "f": "ajan-yonetim",
+      "af": "arayuz",
+      "k": "uygulama",
+      "tr": "Lovable, v0 ve Bolt'un bilgisayarda çalışan açık kaynak alternatifi: uygulamayı prompt'tan üretir, kendi API anahtarınla çalışır, kayıt istemez.",
+      "w": "`src/pro` klasörü FSL lisanslı, kalanı Apache-2.0. API ücretleri sende. Ağırlıkla tek geliştirici yazıyor.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "replace.so",
+        "u": "https://www.instagram.com/p/Dd9dsD8gDxf/"
+      },
+      "s": 21658,
+      "l": "TypeScript",
+      "d": "Local, open-source AI app builder for power users ✨ v0 / Lovable / Replit / Bolt alternative 🌟 Star if you like it!",
+      "archived": false,
+      "pushed": "2026-10-05"
+    },
+    {
+      "r": "janhq/jan",
+      "f": "ajan-yonetim",
+      "af": "model",
+      "k": "uygulama",
+      "tr": "Açık modelleri indirip internetsiz çalıştıran masaüstü sohbet uygulaması; bulut modellere de bağlanır, `localhost:1337`'de OpenAI uyumlu API ve MCP desteği sunar.",
+      "w": "Büyük modeller için yeterli RAM ya da GPU gerekir; bilgisayarında hangi modelin çalışacağını katalogdaki llmfit söyler.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "replace.so",
+        "u": "https://www.instagram.com/p/DeFMBD7AMBD/"
+      },
+      "s": 44806,
+      "l": "Rust",
+      "d": "Jan is an open source alternative to ChatGPT that runs 100% offline on your computer.",
+      "archived": false,
+      "pushed": "2026-10-05"
+    },
+    {
+      "r": "ggml-org/llama.cpp",
+      "f": "ajan-yonetim",
+      "af": "model",
+      "k": "uygulama",
+      "tr": "Yerel LLM çalıştırma motoru: GGUF modellerini CPU'da ve çeşitli GPU'larda çalıştırır, OpenAI uyumlu sunucu açar; Jan'ın altında da bu motor çalışır.",
+      "w": "Alt düzey bir araç; kolay kullanım için Ollama ya da Jan. GPU hızlandırma için uygun derleme gerekir.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "replace.so",
+        "u": "https://www.instagram.com/p/Dd4UPS4gD8Z/"
+      },
+      "s": 130396,
+      "l": "C++",
+      "d": "LLM inference in C/C++",
+      "archived": false,
+      "pushed": "2026-10-05"
+    },
+    {
+      "r": "mem0ai/mem0",
+      "f": "ajan-yonetim",
+      "af": "rag",
+      "k": "proje",
+      "tr": "AI uygulamasına ve ajanlara kalıcı bellek ekler: kullanıcı tercihlerini, oturum bağlamını ve ajan durumunu saklayıp sonraki konuşmalarda kullanır; kütüphane, kendi sunucunda çalışan servis ya da bulut olarak kullanılır.",
+      "w": "Kütüphane varsayılan olarak PostHog'a anonim kullanım verisi gönderir, `MEM0_TELEMETRY=False` ile kapanır. README'deki başarı skorları yönetilen platforma ait. Belleğe yazarken LLM çağrısı yapar, ücreti sende. Kodlama ajanının belleği için katalogdaki claude-mem.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "replace.so",
+        "u": "https://www.instagram.com/p/DeH33EMgBYT/"
+      },
+      "s": 66609,
+      "l": "Python",
+      "d": "The Memory Layer for AI Agents - Drop-in memory infrastructure for AI agents and apps. Context that persists. Built for production.",
+      "archived": false,
+      "pushed": "2026-10-05"
+    },
+    {
+      "r": "webstudio-is/webstudio",
+      "f": "tasarim",
+      "af": "site-kurucu",
+      "k": "uygulama",
+      "tr": "Webflow ve Framer'a açık kaynak alternatif görsel site kurucu: tüm CSS özelliklerini destekler, headless CMS'e bağlanır, site statik ya da dinamik olarak dışa aktarılıp istenen yerde barındırılır.",
+      "w": "AGPL-3.0; animasyon paketi tescilli lisanslı. Düzenleyiciyi kendi sunucunda üretimde çalıştırmak önerilmiyor, bulut düzenleyici kullanılır.",
+      "at": "2026-10-05",
+      "src": {
+        "t": "replace.so",
+        "u": "https://www.instagram.com/p/DeCPb9ZAOiA/"
+      },
+      "s": 9028,
+      "l": "TypeScript",
+      "d": "Open source website builder and Webflow alternative. Webstudio is an advanced visual builder that connects to any headless CMS, supports all CSS properties, and can be hosted anywhere, including with us.",
+      "archived": false,
+      "pushed": "2026-10-05"
+    },
+    {
+      "r": "nolly-studio/cult-ui",
+      "f": "tasarim",
+      "af": "bilesen",
+      "k": "proje",
+      "tr": "shadcn/ui'ı genişleten 150'den fazla animasyonlu React bileşeni (Tailwind ve Motion); AI arayüzleri için bileşenler de var. Kod shadcn CLI ile projeye kopyalanır.",
+      "w": "Sadece React bileşeni; başka altyapıda örnek alınıp çevrilir. Ücretli Pro indirmeleri ayrı.",
+      "at": "2026-10-06",
+      "src": {
+        "t": "web_pros",
+        "u": "https://www.instagram.com/p/Dd6VnMClIzz/"
+      },
+      "s": 6335,
+      "l": "TypeScript",
+      "d": "Animated components for design engineers. 150+ free shadcn/ui components, built with Tailwind CSS and Motion. MIT licensed.",
+      "archived": false,
+      "pushed": "2026-10-01"
+    },
+    {
+      "r": "WatermelonCorp/watermelon-platform",
+      "f": "tasarim",
+      "af": "bilesen",
+      "k": "proje",
+      "tr": "600'den fazla ücretsiz bileşen, animasyon, blok, dashboard ve şablon (React 19, Tailwind 4, Motion); shadcn CLI ile registry adresinden projeye kopyalanır, barındırılan MCP sunucusu da var.",
+      "w": "Proje yeni. Bileşen kayıtları ayrı repoda (watermellon-registry, çift l ile). MCP sunucusu toplu çağrı sayısını tutar, IP ve prompt saklamadığını söyler.",
+      "at": "2026-10-06",
+      "src": {
+        "t": "web_pros",
+        "u": "https://www.instagram.com/p/Dd6VnMClIzz/"
+      },
+      "s": 614,
+      "l": "TypeScript",
+      "d": "https://ui.watermelon.sh",
+      "archived": false,
+      "pushed": "2026-10-05"
+    },
+    {
+      "r": "ibelick/motion-primitives",
+      "f": "tasarim",
+      "af": "bilesen",
+      "k": "proje",
+      "tr": "Motion ile yapılmış animasyonlu bileşen kiti: metin efektleri, geçişler, kaydırmaya bağlı ve sürüklenen öğeler; kendi CLI'ı ya da shadcn CLI ile projeye kopyalanır.",
+      "w": "Tailwind ve motion paketi gerekir; Pro bileşenler ücretli.",
+      "at": "2026-10-06",
+      "src": {
+        "t": "web_pros",
+        "u": "https://www.instagram.com/p/Dd6VnMClIzz/"
+      },
+      "s": 6467,
+      "l": "TypeScript",
+      "d": "UI kit to make beautiful, animated interfaces, faster. Customizable. Open Source.",
+      "archived": false,
+      "pushed": "2026-09-28"
+    },
+    {
+      "r": "DavidHDev/canvas-ui",
+      "f": "tasarim",
+      "af": "animasyon",
+      "k": "proje",
+      "tr": "Canlı HTML'in üstüne WebGL ya da WebGPU efektleri koyan 35 bileşen (sıvı, cam, ateş, glitch); React, Vue, Svelte, Solid, Preact ve düz JavaScript sürümleri var, shadcn CLI ile eklenir.",
+      "w": "Lisans MIT + Commons Clause: üründe kullanmak serbest, bileşeni satmak ya da yeniden dağıtmak yasak. Çoğu efekt Chrome'da hâlâ deneme aşamasındaki HTML-in-canvas API'sine dayanır; desteklemeyen tarayıcıda sade görünüme düşer.",
+      "at": "2026-10-06",
+      "src": {
+        "t": "web_pros",
+        "u": "https://www.instagram.com/p/Dd86Z4wlKw4/"
+      },
+      "s": 4757,
+      "l": "TypeScript",
+      "d": "A library of creative canvas components. Real HTML with WebGL effects running over it. React, Vue, Svelte, vanilla.",
+      "archived": false,
+      "pushed": "2026-10-03"
+    },
+    {
+      "r": "Nutlope/hallmark",
+      "f": "tasarim",
+      "af": "skill",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Ajanın jenerik AI arayüzü üretmesini engelleyen tasarım skill'i: sayfa için bir yerleşim yapısı ve 21 temadan birini seçer, teslimden önce 57 maddelik \"slop testi\" ve öz eleştiri çalıştırır; audit, redesign ve study komutları var.",
+      "w": "Together AI ekibinden; Ağustos 2026'dan beri güncellenmiyor. Impeccable ve taste-skill ile aynı işi görür, birini seç.",
+      "at": "2026-10-06",
+      "src": {
+        "t": "web_pros",
+        "u": "https://www.instagram.com/p/DeHNkMklMK7/"
+      },
+      "s": 29643,
+      "l": "CSS",
+      "d": "Anti-AI-slop design skill for Claude Code, Cursor, and Codex.",
+      "archived": false,
+      "pushed": "2026-08-06"
+    },
+    {
+      "r": "miqdadbadjuber/anti-slop",
+      "f": "tasarim",
+      "af": "skill",
+      "k": "ajan",
+      "a": [
+        "claude",
+        "codex"
+      ],
+      "tr": "Arayüzde, metinde ve kodda jenerik AI kalıplarını süzen kural seti; stil dayatmaz, DESIGN.md ile birlikte kullanılması önerilir. Skill olarak ya da Claude Code eklentisi olarak kurulur.",
+      "w": "`npx antislop-ai` kurucusu her oturumda yüklenmesi için ajanın talimat dosyasına bir satır ekler. Aynı adlı dmmulroy/anti-slop ve peakoss/anti-slop başka projeler.",
+      "at": "2026-10-06",
+      "src": {
+        "t": "web_pros",
+        "u": "https://www.instagram.com/p/DeHNkMklMK7/"
+      },
+      "s": 4527,
+      "l": "JavaScript",
+      "d": "Rules for an AI coding agent to filter out generic AI-generated UI designs, text, and code.",
+      "archived": false,
+      "pushed": "2026-10-04"
+    },
+    {
+      "r": "headroomlabs-ai/headroom",
+      "f": "ajan-skill",
+      "af": "baglam",
+      "k": "uygulama",
+      "tr": "Araç çıktısını, logları ve dosyaları modele gitmeden yerelde sıkıştırarak token harcamasını azaltır; orijinali saklar, model gerektiğinde geri çağırır. Kütüphane, proxy, `headroom wrap claude` komutu ya da MCP sunucusu olarak kullanılır.",
+      "w": "Tasarruf oranları firmanın kendi ölçümü. Anonim telemetri varsayılan açık (`HEADROOM_BEACON=off` ya da `DO_NOT_TRACK=1`); `wrap` Claude Code trafiğini yerel bir proxy'den geçirir ve Serena MCP sunucusunu da kurar. Kurulum: `pip install \"headroom-ai[all]\"`.",
+      "at": "2026-10-06",
+      "src": {
+        "t": "millee.md",
+        "u": "https://www.instagram.com/p/Dd-BfTEmPcS/"
+      },
+      "s": 74456,
+      "l": "Python",
+      "d": "Compress tool outputs, logs, files, and RAG chunks before they reach the LLM. 20% fewer tokens for coding agents, 60-95% fewer tokens for JSON, same answers. Library, proxy, MCP server.",
+      "archived": false,
+      "pushed": "2026-10-05"
     }
   ]
 }

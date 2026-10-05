@@ -7,7 +7,7 @@ import Kartlar from '../../../components/Kartlar.astro';
 import Kart from '../../../components/Kart.astro';
 
 Projeyi yayına alırken kullanılan servisler ve yayın öncesi listesinde bunlarla çözülen maddeler.
-Ücretler 25.09.2026'da sitelerinden alındı.
+Servisler tablosunun ücretleri 25.09.2026'da, mobil servislerin ücretsiz sınırları 05.10.2026'da sitelerinden alındı.
 
 ## Servisler
 
@@ -67,6 +67,15 @@ Statik siteleri ve küçük API'leri barındırır; Git'e push edince yayına al
 
 </Kart>
 
+<Kart baslik={"Vercel"} satir={5} href={"https://vercel.com"} tur={"Site ve sunucusuz barındırma"} prompt={"Vercel (https://vercel.com) aracını bu projede kullanmak istiyorum. Ne işe yarar: Next.js ve diğer web projelerini Git'e push edince yayına alır, her PR için önizleme adresi verir; sunucusuz fonksiyonlar ve CDN dahil. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Next.js ve diğer web projelerini Git'e push edince yayına alır, her PR için önizleme adresi verir; sunucusuz fonksiyonlar ve CDN dahil.
+
+<span class="k-alan ilk"><span class="k-etiket">Ne zaman</span><span class="k-deger">Next.js projeleri, tanıtım siteleri</span></span>
+<span class="k-alan son"><span class="k-etiket">Ücret</span><span class="k-deger">Hobby planı ücretsiz ama sadece ticari olmayan kişisel kullanım için: ödeme alan, satış yapan, reklam ya da affiliate içeren site ücretli plan ister ([Vercel kullanım kuralları](https://vercel.com/docs/limits/fair-use-guidelines))</span></span>
+
+</Kart>
+
 <Kart baslik={"Cloudflare R2"} satir={5} href={"https://www.cloudflare.com/developer-platform/products/r2/"} tur={"Dosya depolama"} prompt={"Cloudflare R2 (https://www.cloudflare.com/developer-platform/products/r2/) aracını bu projede kullanmak istiyorum. Ne işe yarar: S3 uyumlu depolama; dışarı veri çıkışı (egress) ücretsiz. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 S3 uyumlu depolama; dışarı veri çıkışı (egress) ücretsiz.
@@ -97,14 +106,96 @@ CAPTCHA yerine görünmez doğrulama; giriş, kayıt ve iletişim formlarını b
 </Kartlar>
 
 
+## Mobil uygulama servisleri
+
+Mobil uygulamada sık kullanılan derleme, backend, bildirim ve e-posta servisleri; liste [bu videodan](https://www.instagram.com/reel/Dd6jhGxFbkV/) alındı, sınırlar servislerin kendi fiyat sayfalarından doğrulandı.
+Ücretsiz sınırlar sık değişiyor; ücretli plana geçmeden önce sayfasına yeniden bak.
+
+<Kartlar>
+
+<Kart baslik={"Expo EAS"} satir={5} href={"https://expo.dev/eas"} tur={"Mobil derleme"} prompt={"Expo EAS (https://expo.dev/eas) aracını bu projede kullanmak istiyorum. Ne işe yarar: React Native uygulamasını bulutta iOS ve Android için derler (Mac gerekmez), mağazalara gönderir (EAS Submit), JavaScript değişikliklerini mağaza incelemesine girmeden kullanıcılara ulaştırır (EAS Update). Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+React Native uygulamasını bulutta iOS ve Android için derler (Mac gerekmez), mağazalara gönderir (EAS Submit), JavaScript değişikliklerini mağaza incelemesine girmeden kullanıcılara ulaştırır (EAS Update).
+
+<span class="k-alan ilk"><span class="k-etiket">Ne zaman</span><span class="k-deger">React Native ya da Expo projesi</span></span>
+<span class="k-alan son"><span class="k-etiket">Ücret</span><span class="k-deger">Ücretsiz planda ayda 15 Android ve 15 iOS derlemesi (düşük öncelikli kuyruk), EAS Update ile 1.000 aylık aktif kullanıcı; kota bitince ücret çıkmaz, derleme ay başını bekler. Starter ayda 19 $</span></span>
+
+</Kart>
+
+<Kart baslik={"Codemagic"} satir={5} href={"https://codemagic.io"} tur={"Mobil CI/CD"} prompt={"Codemagic (https://codemagic.io) aracını bu projede kullanmak istiyorum. Ne işe yarar: Flutter, React Native ve yerel iOS ya da Android projesini her push'ta derler, test eder, imzalar ve App Store Connect ile Google Play'e yükler; macOS makinesi onlarda. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Flutter, React Native ve yerel iOS ya da Android projesini her push'ta derler, test eder, imzalar ve App Store Connect ile Google Play'e yükler; macOS makinesi onlarda.
+
+<span class="k-alan ilk"><span class="k-etiket">Ne zaman</span><span class="k-deger">Flutter projesi ya da Mac'in yoksa</span></span>
+<span class="k-alan son"><span class="k-etiket">Ücret</span><span class="k-deger">Kişisel hesapta ayda 500 dakika macOS derlemesi ücretsiz (tek eşzamanlı derleme, derleme başına en çok 120 dakika); sonrası dakika başına 0,095 $'dan</span></span>
+
+</Kart>
+
+<Kart baslik={"Supabase"} satir={5} href={"https://supabase.com"} tur={"Backend (Postgres)"} prompt={"Supabase (https://supabase.com) aracını bu projede kullanmak istiyorum. Ne işe yarar: Postgres veritabanı, giriş, dosya depolama, gerçek zamanlı veri ve sunucusuz fonksiyonlar; veritabanına otomatik REST API açar. Her tabloda RLS açık olmalı (yayın öncesi 3. madde). Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Postgres veritabanı, giriş, dosya depolama, gerçek zamanlı veri ve sunucusuz fonksiyonlar; veritabanına otomatik REST API açar. Her tabloda RLS açık olmalı ([yayın öncesi 3. madde](/listeler/yayin-oncesi/#yo-en-az-yetki)).
+
+<span class="k-alan ilk"><span class="k-etiket">Ne zaman</span><span class="k-deger">İlişkisel veri ve SQL isteyen projeler</span></span>
+<span class="k-alan son"><span class="k-etiket">Ücret</span><span class="k-deger">Ücretsiz planda en çok 2 aktif proje, proje başına 500 MB veritabanı, 1 GB depolama ve 50.000 aylık aktif kullanıcı; yedek yok, 1 hafta kullanılmayan proje duraklatılır. Pro ayda 25 $</span></span>
+
+</Kart>
+
+<Kart baslik={"Firebase"} satir={5} href={"https://firebase.google.com"} tur={"Backend (Google)"} prompt={"Firebase (https://firebase.google.com) aracını bu projede kullanmak istiyorum. Ne işe yarar: Firestore veritabanı, giriş (Authentication), bildirim (Cloud Messaging), uzaktan ayar (Remote Config), çökme raporu (Crashlytics) ve barındırma (Hosting) tek projede, hazır mobil SDK'larıyla. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Firestore veritabanı, giriş (Authentication), bildirim (Cloud Messaging), uzaktan ayar (Remote Config), çökme raporu (Crashlytics) ve barındırma (Hosting) tek projede, hazır mobil SDK'larıyla.
+
+<span class="k-alan ilk"><span class="k-etiket">Ne zaman</span><span class="k-deger">Mobil uygulamada hızlı başlangıç</span></span>
+<span class="k-alan son"><span class="k-etiket">Ücret</span><span class="k-deger">Spark planı ücretsiz: Firestore'da 1 GiB ve günde 50.000 okuma, 20.000 yazma; Authentication'da 50.000 aylık aktif kullanıcı (SMS ile giriş sadece ücretli Blaze planında); Cloud Messaging ve Crashlytics ücretsiz; Remote Config 1 Eylül 2026'dan beri günde 100.000 isteğe kadar ücretsiz; Hosting'de 10 GB depolama ve günde 360 MB aktarım</span></span>
+
+</Kart>
+
+<Kart baslik={"OneSignal"} satir={5} href={"https://onesignal.com"} tur={"Bildirim kampanyası"} prompt={"OneSignal (https://onesignal.com) aracını bu projede kullanmak istiyorum. Ne işe yarar: Push bildirimi, uygulama içi mesaj, e-posta ve SMS kampanyalarını panelden zamanlar, kullanıcı gruplarına göre gönderir, açılma oranını ölçer. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Push bildirimi, uygulama içi mesaj, e-posta ve SMS kampanyalarını panelden zamanlar, kullanıcı gruplarına göre gönderir, açılma oranını ölçer.
+
+<span class="k-alan ilk"><span class="k-etiket">Ne zaman</span><span class="k-deger">Pazarlama bildirimleri; işlem bildirimleri için Firebase Cloud Messaging yeter</span></span>
+<span class="k-alan son"><span class="k-etiket">Ücret</span><span class="k-deger">Ücretsiz planda mobil push ve uygulama içi mesaj 1.000 aylık aktif kullanıcıya kadar (Ekim 2026'dan beri; aşılırsa 24 saat içinde yükseltilmezse mobil push durur) ve ayda 10.000 e-posta. Growth ayda 19 $'dan</span></span>
+
+</Kart>
+
+<Kart baslik={"Resend"} satir={5} href={"https://resend.com"} tur={"İşlem e-postası"} prompt={"Resend (https://resend.com) aracını bu projede kullanmak istiyorum. Ne işe yarar: Kayıt, şifre sıfırlama ve fatura e-postalarını API ile gönderir; şablonlar React ile yazılabilir, alan adı için gereken SPF ve DKIM kayıtlarını gösterir. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Kayıt, şifre sıfırlama ve fatura e-postalarını API ile gönderir; şablonlar React ile yazılabilir, alan adı için gereken SPF ve DKIM kayıtlarını gösterir.
+
+<span class="k-alan ilk"><span class="k-etiket">Ne zaman</span><span class="k-deger">Uygulamanın kendi gönderdiği e-postalar ([yayın öncesi 112. madde](/listeler/yayin-oncesi/#yo-eposta-alt-alan))</span></span>
+<span class="k-alan son"><span class="k-etiket">Ücret</span><span class="k-deger">Ücretsiz planda ayda 3.000, günde 100 e-posta ve 3 alan adı. Pro ayda 20 $ (50.000 e-posta)</span></span>
+
+</Kart>
+
+<Kart baslik={"Zoho Mail"} satir={5} href={"https://www.zoho.com/mail/"} tur={"Alan adlı e-posta kutusu"} prompt={"Zoho Mail (https://www.zoho.com/mail/) aracını bu projede kullanmak istiyorum. Ne işe yarar: destek@alanadi.com gibi gelen kutusu; mağaza sayfalarında istenen destek adresi için. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+`destek@alanadi.com` gibi gelen kutusu; mağaza sayfalarında istenen destek adresi için.
+
+<span class="k-alan ilk"><span class="k-etiket">Ne zaman</span><span class="k-deger">Mağaza destek ve iletişim adresi</span></span>
+<span class="k-alan son"><span class="k-etiket">Ücret</span><span class="k-deger">Forever Free planı: 5 kullanıcı, tek alan adı, kullanıcı başına 5 GB; sadece web ve mobil uygulamadan erişilir, IMAP, POP ve yönlendirme yok. Ücretsiz plan her veri merkezinde sunulmuyor</span></span>
+
+</Kart>
+
+<Kart baslik={"TestFlight"} satir={5} href={"https://developer.apple.com/testflight/"} tur={"iOS beta testi"} prompt={"TestFlight (https://developer.apple.com/testflight/) aracını bu projede kullanmak istiyorum. Ne işe yarar: Uygulamanın test sürümünü mağazaya çıkmadan kullanıcılara dağıtır, geri bildirim ve çökme raporu toplar. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Uygulamanın test sürümünü mağazaya çıkmadan kullanıcılara dağıtır, geri bildirim ve çökme raporu toplar.
+
+<span class="k-alan ilk"><span class="k-etiket">Ne zaman</span><span class="k-deger">iOS'ta yayından önce</span></span>
+<span class="k-alan son"><span class="k-etiket">Ücret</span><span class="k-deger">Ücretsiz ama Apple Developer Program üyeliği (yıllık 99 $) gerekir; iç testte 100, dış testte 10.000 kişi, bir derleme 90 gün test edilebilir; dış testteki ilk derleme Beta App Review'a girer</span></span>
+
+</Kart>
+
+</Kartlar>
+
+
 ## Yayın öncesi maddeleriyle bağlantısı
 
-- **HTTPS ve HSTS ([30. madde](/listeler/yayin-oncesi/#yo-https-hsts)):** Coolify SSL sertifikasını otomatik alır; Cloudflare'de "Always Use HTTPS" ve HSTS açılır.
-- **Güvenlik başlıkları ([31. madde](/listeler/yayin-oncesi/#yo-guvenlik-basliklari)):** Uygulamada ya da Cloudflare'in yanıt başlığı kurallarıyla eklenir.
-- **Bot ve rate limit ([17–18. maddeler](/listeler/yayin-oncesi/#yo-hesap-kilitleme)):** Giriş ve kayıt formlarında Turnstile, API'de Cloudflare rate limiting kuralı.
+- **HTTPS ve HSTS ([32. madde](/listeler/yayin-oncesi/#yo-https-hsts)):** Coolify SSL sertifikasını otomatik alır; Cloudflare'de "Always Use HTTPS" ve HSTS açılır.
+- **Güvenlik başlıkları ([33. madde](/listeler/yayin-oncesi/#yo-guvenlik-basliklari)):** Uygulamada ya da Cloudflare'in yanıt başlığı kurallarıyla eklenir.
+- **Bot ve rate limit ([19–20. maddeler](/listeler/yayin-oncesi/#yo-hesap-kilitleme)):** Giriş ve kayıt formlarında Turnstile, API'de Cloudflare rate limiting kuralı.
 - **Staging dışarıya kapalı ([2. madde](/listeler/yayin-oncesi/#yo-env-gecmisten-temizle)):** Staging'i herkese açık alan adına koymak yerine Cloudflare Tunnel ile sadece ekibe aç.
-- **Alt alan adları ve e-posta ([94–95. maddeler](/listeler/yayin-oncesi/#yo-alt-alan-adi)):** `app.` için CNAME, `mail.` ve `news.` için SPF, DKIM ve DMARC kayıtları Cloudflare DNS'e girilir.
-- **Yedekleme ([50. madde](/listeler/yayin-oncesi/#yo-yedekleme)):** Coolify veritabanı yedeklerini zamanlayıp R2 gibi S3 uyumlu bir depoya gönderir; geri yükleme testini ayrıca yap.
-- **Bağımlılık denetimi ([49. madde](/listeler/yayin-oncesi/#yo-bagimlilik-denetimi)):** [OSV-Scanner](https://github.com/google/osv-scanner) bağımlılıkları ve container imajlarını bilinen açıklara karşı tarar (kaynak kod gönderilmez); JS/TS projesinde [Knip](https://github.com/webpro-nl/knip) kullanılmayan paket ve dosyaları bulur.
+- **Alt alan adları ve e-posta ([111–112. maddeler](/listeler/yayin-oncesi/#yo-alt-alan-adi)):** `app.` için CNAME, `mail.` ve `news.` için SPF, DKIM ve DMARC kayıtları Cloudflare DNS'e girilir.
+- **Yedekleme ([54. madde](/listeler/yayin-oncesi/#yo-yedekleme)):** Coolify veritabanı yedeklerini zamanlayıp R2 gibi S3 uyumlu bir depoya gönderir; geri yükleme testini ayrıca yap.
+- **Bağımlılık denetimi ([53. madde](/listeler/yayin-oncesi/#yo-bagimlilik-denetimi)):** [OSV-Scanner](https://github.com/google/osv-scanner) bağımlılıkları ve container imajlarını bilinen açıklara karşı tarar (kaynak kod gönderilmez); JS/TS projesinde [Knip](https://github.com/webpro-nl/knip) kullanılmayan paket ve dosyaları bulur.
 - **Directory listing ve source map ([4 ve 7. maddeler](/listeler/yayin-oncesi/#yo-directory-listing)):** Barındırmada klasör listelemenin kapalı olduğunu ve `.map` dosyalarının yayına çıkmadığını kontrol et.
-- **Kesintisiz güncelleme ve geri dönüş ([97–98. maddeler](/listeler/yayin-oncesi/#yo-kesintisiz-surum)):** Coolify, sağlık kontrolü tanımlıysa yeni sürümü eskisiyle bir süre birlikte çalıştırarak günceller (rolling update); kesintisizliği garanti etmez, host'a port açılmışsa ya da Docker Compose kullanılıyorsa çalışmaz. Sorun çıkarsa Configuration > Rollback'ten sunucuda tutulan eski sürüme dönülür; ama bu veritabanı değişikliklerini geri almaz, şema değişiklikleri geriye uyumlu olmalı ([rolling update](https://coolify.io/docs/knowledge-base/rolling-updates), [rollback](https://coolify.io/docs/applications/deployments/rollbacks)).
+- **Kesintisiz güncelleme ve geri dönüş ([114–115. maddeler](/listeler/yayin-oncesi/#yo-kesintisiz-surum)):** Coolify, sağlık kontrolü tanımlıysa yeni sürümü eskisiyle bir süre birlikte çalıştırarak günceller (rolling update); kesintisizliği garanti etmez, host'a port açılmışsa ya da Docker Compose kullanılıyorsa çalışmaz. Sorun çıkarsa Configuration > Rollback'ten sunucuda tutulan eski sürüme dönülür; ama bu veritabanı değişikliklerini geri almaz, şema değişiklikleri geriye uyumlu olmalı ([rolling update](https://coolify.io/docs/knowledge-base/rolling-updates), [rollback](https://coolify.io/docs/applications/deployments/rollbacks)).

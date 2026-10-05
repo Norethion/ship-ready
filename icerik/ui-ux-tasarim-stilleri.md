@@ -37,12 +37,43 @@ Arayüzün her sayfada aynı kalması için projeye bir `DESIGN.md` koy: renkler
 | Cyberpunk | Distopik gelecek: koyu zemin, neon sarı, camgöbeği ve pembe, glitch efektleri, HUD tarzı arayüz çizgileri. | Oyun, teknoloji ürünleri, etkinlik |
 | Wabi-Sabi | Japon "kusurun güzelliği" estetiği: doğal malzeme dokuları, asimetri, sade toprak renkleri, sakinlik. | Seramik ve el işi, mimari, çay ve kahve markaları |
 
+## AI görünümü
+
+Arayüzü "AI yapmış" gösteren işaretler; [bu videodan](https://www.instagram.com/reel/DcrqbqZRVvC/) alındı.
+Hiçbiri tek başına yanlış değil; sorun hepsinin düşünülmeden, varsayılan olarak gelmesi.
+Bir öğeyi bilerek seçtiysen kalabilir; seçmediysen kaldır ya da bu ürüne özgü bir kararla değiştir.
+Ajanın bu kalıplara düşmemesi için [Impeccable](https://github.com/pbakaus/impeccable) skill'i de işe yarar.
+
+| İşaret | Nasıl görünür | Yerine |
+|---|---|---|
+| Mor-mavi gradyan | Arka planda mordan maviye geçiş, büyük başlık yazısında renk geçişi. | Markanın tek ana rengi ve düz zemin; vurguyu renk geçişiyle değil boyut ve kalınlıkla ver. |
+| Başlıkta emoji ve rozet | Başlıkların önünde emoji, büyük başlığın üstünde "Yeni" ya da "AI destekli" rozeti. | Emojiyi kaldır; rozeti sadece gerçekten duyurulacak yeni bir şey varsa koy. |
+| Hazır yazı tipi eşleşmeleri | Her yerde Inter; ya da Space Grotesk ile Instrument Serif, vurgu kelimelerde eğik serif. | Markaya uyan bir başlık ve bir gövde yazı tipi seç, vurguyu sayfa boyunca aynı yolla yap. |
+| Kalıp kartlar | Sol kenarı renkli kartlar, cam görünümlü (glassmorphism) kartlar, yan yana üç ikonlu kutu. | Kart sayısını azalt; içeriğe göre farklı boyutlarda bloklar ya da kartsız, tipografiyle ayrılan bölümler kullan. |
+| Dokunulmamış bileşenler | shadcn/ui bileşenleri hiç değiştirilmeden, her öğenin yanında bir Lucide ikonu. | Bileşenlere markanın köşe, boşluk ve renk değerlerini ver; ikonu sadece anlam kattığı yerde kullan. |
+| Varsayılan hareketler | Kaydırınca her bölümün soluklaşarak belirmesi, imleci izleyen ışık, üzerine gelince soluklaşan düğmeler. | Hareketi geri bildirim için ve amaçlı kullan ([Hareket türleri](#hareket-türleri)); her bölüme aynı girişi verme. |
+| Düşük kontrast ve dağınık boşluk | Koyu temada gri üstüne gri yazı, bölümler arasında birbirini tutmayan boşluklar, gren dokusu. | Yazı kontrastını 4,5:1'in üstünde tut; 4 ya da 8'in katlarıyla bir boşluk ölçeği kullan. |
+| Kalıp metin | Her cümlede uzun tire, "güçlendir", "sorunsuz", "yeni nesil" gibi bir şey söylemeyen kelimeler. | Ürünün ne yaptığını somut söyle; uzun tireyi virgül ya da noktayla değiştir. |
+
+## Tasarım prompt'ları
+
+Var olan bir arayüzü toparlamak için dört prompt; [bu gönderiden](https://www.instagram.com/p/Dd3w1JdlH8b/) Türkçeye uyarlandı.
+Yapay zekâya bir şey ekletmek yerine neyin çıkarılacağını sor; her prompt'tan sonra sayfayı yeniden açıp bak.
+
+| Prompt | Prompt metni | Ne zaman |
+|---|---|---|
+| Hiyerarşiyi düzelt | Bu sayfada yazı boyutlarını, boşlukları, ölçeği, hizalamayı ve ana düğmenin (CTA) ne kadar öne çıktığını denetle. Hiyerarşiyi, kullanıcı önce neye bakacağını bilecek şekilde yeniden kur; değişiklikleri önce listele. | Önemli şeyler önemli görünmüyor, göz sayfada nereye bakacağını bilmiyor. |
+| AI görünümünü kaldır | Bu arayüzdeki hazır gradyanları, gereğinden fazla kartı, hap biçimli rozetleri ve tahmin edilebilir düzenleri bul. Bunları kaldırıp bu ürüne özgü, tutarlı bir görsel sistem kur; önce neyi neden değiştireceğini göster. | Sayfa başka yüzlerce AI yapımı siteye benziyor. |
+| İlk 5 saniyeyi düzelt | Sayfanın kaydırmadan görünen üst kısmında ürünün ne olduğunu, kimin için olduğunu, neden önemli olduğunu ve sonra ne yapılacağını açıkça anlat. Süslemeyi bunlardan sonraya bırak; 5 saniyede okunup anlaşılıyor mu diye kontrol et. | Ziyaretçi ilk bakışta ürünün ne yaptığını anlamıyor. |
+| Tasarımcı gözüyle geçir | Çalışan siteyi aç ve en çok etki eden 10 tasarım sorununu bul, önem sırasıyla listele. Onayımla düzelt, siteyi yeniden açıp tekrar incele; yeni bir şey ekleme, neyin çıkarılacağını öner. | Sayfa bitti gibi ama bir şeyler eksik ya da fazla duruyor. |
+
 ## Kütüphaneler
 
 Projeye kurulan ya da kodu projeye kopyalanan bileşen, animasyon, grafik, harita ve ses kütüphaneleri; türlerine göre sıralı.
 React dışı bir projede (Vue, Angular, Blazor, mobil) bileşen kütüphaneleri doğrudan kurulamaz ama örnek alınabilir.
 Beğendiğin bileşenin kodunu Claude'a verip "bunu kendi altyapıma çevir" demek yeterli.
 Liquid Glass, DialKit, Libraries.dev ve UI SFX [bu gönderiden](https://www.instagram.com/p/DdTD4xPF-I-/) alındı; bilgiler 29.09.2026'da sitelerinden doğrulandı.
+Cult UI, Watermelon UI ve Motion Primitives [bu gönderiden](https://www.instagram.com/p/Dd6VnMClIzz/), Canvas UI ve Spline [bu gönderiden](https://www.instagram.com/p/Dd86Z4wlKw4/) alındı; bilgiler 06.10.2026'da sitelerinden doğrulandı.
 canvas-confetti ([kaynak video](https://www.instagram.com/reel/Ddb5wiPopJ9/)) ve Thinking Orbs ([kaynak video](https://www.instagram.com/reel/DdgPH-poGbJ/)) kartlarındaki örnek, kütüphanenin etkisini kendi kısa kodumuzla gösterir; projede kütüphanenin kendisini kur, kullanımı örnek kodunun başında yazar.
 
 | Kütüphane | Tür | Ne işe yarar | Altyapı | Başka altyapıda | Ücret |
@@ -55,6 +86,9 @@ canvas-confetti ([kaynak video](https://www.instagram.com/reel/Ddb5wiPopJ9/)) ve
 | [daisyUI](https://github.com/saadeghi/daisyui) | Bileşen | Tailwind'e eklenti olarak kurulur, `btn`, `card` gibi hazır CSS sınıflarıyla kullanılır. | Tailwind çalışan her proje: React, Vue, Svelte, Angular, Laravel, Django, Rails | Tailwind yoksa kullanılamaz | Ücretsiz, MIT |
 | [Libraries.dev](https://libraries.dev) | Bileşen | AI arayüzleri için yedi React kütüphanesi: Border beam, Thinking orbs, Bot avatars, Gooey, Voice, Metal, Image. Her sayfada kodlama ajanına yapıştırılacak hazır prompt var; Thinking Orbs da artık burada. | React 18+ (npm) | Doğrudan kurulmaz; kopyalanan prompt ajana kendi altyapında yaptırılır | Kütüphaneler ücretsiz (MIT); Studio ile özelleştirme ve Pro hazır ayarlar aylık 9 $ ya da ömür boyu 149 $ |
 | [Liquid Glass](https://glass.samasante.com) | Bileşen | Apple'ın Liquid Glass görünümü: arkadaki canlı sayfayı gerçekten kırarak (refraction) buzlu cam, renk ve kenar parlaması verir; bağımlılığı yok. | React 18+ (`npm install @samasante/liquid-glass`) | Doğrudan kurulmaz; örnek alınıp çevrilir. Sayfayı bükme sadece Chrome ve Edge'de, Safari ve Firefox'ta buzlu cam kalır | Ücretsiz, MIT |
+| [Cult UI](https://www.cult-ui.com) | Bileşen | shadcn/ui'ı genişleten 150'den fazla animasyonlu bileşen; AI arayüzleri için bileşenler de var. `npx shadcn@latest add @cult-ui/<bileşen>` ile eklenir. | React + Tailwind + Motion | Doğrudan kurulmaz; örnek alınıp çevrilir | Ücretsiz, MIT; ayrıca ücretli Pro indirmeleri var |
+| [Watermelon UI](https://ui.watermelon.sh) | Bileşen | 600'den fazla bileşen, animasyon, blok, dashboard ve şablon; shadcn CLI ile registry adresinden eklenir, barındırılan MCP sunucusu da var. | React 19 + Tailwind 4 + Motion | Doğrudan kurulmaz; örnek alınıp çevrilir | Ücretsiz, MIT; proje yeni |
+| [Motion Primitives](https://motion-primitives.com) | Bileşen | Motion ile yapılmış animasyonlu bileşen kiti: metin efektleri, geçişler, kaydırmaya bağlı ve sürüklenen öğeler. `npx motion-primitives@latest add <bileşen>` ya da shadcn CLI ile eklenir. | React + Tailwind + Motion | Doğrudan kurulmaz; örnek alınıp çevrilir | Çekirdek ücretsiz, MIT; Pro ücretli |
 | [Motion](https://github.com/motiondivision/motion) | Animasyon | Framer Motion'ın yeni adı: yaylı animasyonlar, sayfa düzeni geçişleri, kaydırmaya bağlı efektler, sürükleme. Aceternity ve Magic UI bileşenleri bunu kullanır. | React, düz JavaScript, Vue | Web dışında kullanılmaz | Çekirdek ücretsiz, MIT; Motion+ ücretli |
 | [GSAP](https://github.com/greensock/GSAP) | Animasyon | Bağımlılıksız animasyon kütüphanesi; ScrollTrigger, SplitText, MorphSVG gibi eklentiler dahil, React için `useGSAP`. | Her web projesi: düz JS, React, Vue, SVG, canvas | Web dışında kullanılmaz | Tüm eklentiler dahil ücretsiz, ticari kullanım serbest; açık kaynak değil (GreenSock lisansı) |
 | [Lottie Web](https://github.com/airbnb/lottie-web) | Animasyon | After Effects'te yapılıp JSON'a aktarılan animasyonları web'de oynatır. | Her web projesi (düz JS, npm ya da CDN) | Mobil için Lottie'nin iOS ve Android kütüphaneleri ayrı | Ücretsiz, MIT; animasyonu üretmek için After Effects gerekir, bir yıldan uzun süredir güncellenmiyor |
@@ -62,6 +96,7 @@ canvas-confetti ([kaynak video](https://www.instagram.com/reel/Ddb5wiPopJ9/)) ve
 | [Animated Buttons](https://animatedbuttons.colorion.co) | Animasyon | Sadece CSS ile yapılmış 99 hover efektli buton; JavaScript ya da bağımlılık yok, kopyala-yapıştır. | Her web projesi: düz HTML, React, Vue, Angular, Blazor, PHP | Web dışında (mobil) sadece örnek alınır | Ücretsiz, MIT lisansı |
 | [canvas-confetti](https://github.com/catdad/canvas-confetti) <!-- ornek: konfeti-patlamasi --> | Animasyon | Tek fonksiyonla konfeti patlatan küçük kütüphane: parça sayısı, açı, renk ve şekil ayarlanır, canvas ile çizer; hareketi azalt tercihine uyması için `disableForReducedMotion: true` verilir (varsayılan kapalı). Ödeme ya da görev tamamlanınca ödül hissi vermek için. | Her web projesi (npm ya da CDN) | Web dışında kullanılmaz | Ücretsiz, ISC |
 | [Thinking Orbs](https://github.com/Jakubantalik/thinking-orbs) <!-- ornek: dusunen-kureler --> | Animasyon | AI ve ajan arayüzleri için noktalı "düşünen küre" animasyonları: çalışıyor, arıyor, çözüyor, dinliyor, bağlanıyor gibi dokuz durum, sohbet için 64 ve satır içi 20 piksellik iki boyut. Sayfanın açık ya da koyu temasına kendiliğinden uyar; düz 2D canvas ile çizer (WebGL yok), ekrandan çıkınca durur, hareketi azalt tercihinde sabit kare gösterir. | React (`npm install thinking-orbs`) | Doğrudan kurulmaz; örnek alınıp çevrilir | Ücretsiz, MIT |
+| [Canvas UI](https://canvasui.dev) | Animasyon | Canlı HTML'in üstüne WebGL ya da WebGPU efektleri koyan 35 bileşen: sıvı, cam, ateş, glitch. React Bits'in yazarından; `npx shadcn@latest add @canvas-ui/<bileşen>` ile eklenir. | React, Vue, Svelte, Solid, Preact ya da düz JavaScript | Çoğu altyapıda doğrudan çalışır | Ücretsiz, MIT + Commons Clause: üründe kullanmak serbest, bileşeni satmak yasak. Çoğu efekt Chrome'da hâlâ deneme aşamasındaki bir API'ye dayanır, desteklemeyen tarayıcıda sade görünüme düşer |
 | [Recharts](https://github.com/recharts/recharts) | Grafik | Bileşen tabanlı grafik kütüphanesi; eksen, tooltip, çizgi gibi parçalar ayrı bileşen olarak birleştirilir, SVG ile çizer. | React | Doğrudan kurulmaz; örnek alınır | Ücretsiz, MIT |
 | [Tremor](https://github.com/tremorlabs/tremor) | Grafik | Grafik ve dashboard için 35'ten fazla kopyala-yapıştır bileşen; grafikleri Recharts ile çizer. | React + Tailwind + Radix | Doğrudan kurulmaz; örnek alınır | Ücretsiz, Apache-2.0; Tremor Vercel'e katıldı, kodu Nisan 2025'ten beri güncellenmiyor |
 | [mapcn](https://github.com/AnmolSaini16/mapcn) | Harita | Hazır harita bileşenleri: işaretçi, popup, rota, zoom ve pusula; shadcn/ui ile aynı yapıda. | React + Tailwind, MapLibre GL | Doğrudan kurulmaz; örnek alınır | Ücretsiz, MIT; varsayılan CARTO haritalarının ticari kullanımı lisans ister, OpenStreetMap gibi başka sağlayıcıya geçilebilir |
@@ -70,11 +105,13 @@ canvas-confetti ([kaynak video](https://www.instagram.com/reel/Ddb5wiPopJ9/)) ve
 
 ## Siteler
 
-Tarayıcıda kullanılan tasarım araçları: AI ile arayüz üretme, hazır arayüz prompt'ları, ikon ve yazı tipi; türlerine göre sıralı.
-Typeface, Screenshot to Code ve VibeUI [bu gönderiden](https://www.instagram.com/p/DdTD4xPF-I-/) alındı; bilgiler 29.09.2026'da sitelerinden doğrulandı.
+Tarayıcıda kullanılan tasarım araçları: tasarım ve prototip, 3B, AI ile arayüz üretme, hazır arayüz prompt'ları, ikon ve yazı tipi; türlerine göre sıralı.
+Typeface, Screenshot to Code ve VibeUI [bu gönderiden](https://www.instagram.com/p/DdTD4xPF-I-/) alındı; bilgiler 29.09.2026'da sitelerinden doğrulandı, Figma'nın ücretsiz sınırları 05.10.2026'da alındı.
 
 | Site | Tür | Ne işe yarar | Altyapı | Başka altyapıda | Ücret |
 |---|---|---|---|---|---|
+| [Figma](https://www.figma.com) | Tasarım ve prototip | Web ve mobil ekranları tasarlayıp tıklanabilir prototip yapar, ekip aynı dosyada çalışır; ücretli planlardaki Dev Mode ölçüleri ve kod parçalarını verir. Figma MCP ile tasarım Claude'a okutulup koda çevrilir ([AI geliştirme akışı](ai-gelistirme-akisi.md)). | Her proje: web, iOS ve Android ekranları | Tasarım altyapıdan bağımsız; koda elle ya da Figma MCP ile aktarılır | Starter ücretsiz: kişisel taslaklar sınırsız, 3 ortak tasarım dosyası, günde 150 (ayda en çok 500) AI kredisi, 30 günlük sürüm geçmişi; Dev Mode ve ortak kütüphane yok. Professional Full koltuk ayda 16 $ |
+| [Spline](https://spline.design) | 3B tasarım | Tarayıcıda 3B sahne ve etkileşimli nesne tasarlayıp siteye gömersin; fare ve kaydırmaya tepki veren sahneler kurulur. | Her web projesi: gömme kodu ya da React bileşeni | Web dışı ortamda sahneyi görsel ya da video olarak dışa aktarırsın | Ücretsiz planda web dışa aktarımında filigran var, AI kredisi ve kod indirme yok; Hobby ayda 12 $'dan (yıllık), kod dışa aktarma sadece en üst planda |
 | [Stitch](https://stitch.withgoogle.com) | Arayüz üretimi (AI) | Google'ın aracı: metinden, eskizden ya da ekran görüntüsünden web ve mobil arayüz tasarlar, HTML/CSS koduna çevirir; Figma'ya, AI Studio'ya ya da Antigravity'ye aktarır. | Her proje: çıktı HTML/CSS | Kodu Claude'a kendi altyapına çevirttirirsin | Fiyat belirtilmemiş, kotalı; Google Labs deneyi, 18+ |
 | [Screenshot to Code](https://screenshottocode.com) | Arayüz üretimi (AI) | Ekran görüntüsünü, tasarım taslağını ya da ekran kaydını çalışan koda çevirir. Açık kaynak sürümü ([abi/screenshot-to-code](https://github.com/abi/screenshot-to-code)) kendi API anahtarınla bilgisayarında çalışır. | Çıktı HTML ve Tailwind, HTML ve CSS, React, Vue, Bootstrap | Kodu Claude'a kendi altyapına çevirttirirsin | İlk üretim ücretsiz, sonra aylık 15 $ (100 kredi); açık kaynak sürümü ücretsiz ama OpenAI, Anthropic ya da Gemini anahtarı ister |
 | [VibePrompt](https://vibeprompts.dev) | Prompt kütüphanesi | 15 kategoride 286'dan fazla arayüz prompt'u ve Tailwind kodu: giriş formu, dashboard, yorumlar vb. Prompt'u AI aracına yapıştırıp bileşeni ürettirirsin. | Tailwind kullanan her proje (HTML, React, Vue, Svelte) | Tailwind yoksa prompt'a kendi altyapını yazarsın ("Bootstrap ile", "düz CSS ile") | Ücretsiz |
@@ -85,7 +122,7 @@ Typeface, Screenshot to Code ve VibeUI [bu gönderiden](https://www.instagram.co
 
 ## İlham siteleri
 
-Tasarıma başlarken ve takıldığında bakılan siteler; [bu gönderiden](https://www.instagram.com/p/DdRp-ZSCKeH/) ve hareket için [bu gönderiden](https://www.instagram.com/p/Ddd22v1CDlb/) alındı.
+Tasarıma başlarken ve takıldığında bakılan siteler; [bu gönderiden](https://www.instagram.com/p/DdRp-ZSCKeH/), hareket için [bu gönderiden](https://www.instagram.com/p/Ddd22v1CDlb/), Mobbin, Curated ve Dark Design [bu gönderiden](https://www.instagram.com/p/DdwB8bJFC_-/) alındı.
 Beğendiğin örneği kaydet ve neden beğendiğini not al; düzeni değil fikri al.
 Hareket (animasyon) sitelerinde örnekler durağan görsel değil çalışan hâliyle görünür; hissi not al, kendi versiyonunu yap.
 
@@ -93,6 +130,9 @@ Hareket (animasyon) sitelerinde örnekler durağan görsel değil çalışan hâ
 |---|---|---|
 | [Recent](https://recent.design) | Her gün güncellenen seçilmiş tasarım örnekleri: web sayfaları, marka, ürün ekranları, tipografi, hareket (motion), 3B. Eski adı Godly; godly.website adresi buraya yönlenir. | Ücretsiz |
 | [Saaspo](https://saaspo.com) | Sadece SaaS siteleri; sayfa türüne (landing, fiyatlandırma, ürün, hakkında...), bölüme ve kullanılan altyapıya (Webflow, Next.js, Framer...) göre süzülür, OG görselleri de var. | Ücretsiz, haftalık bülten |
+| [Mobbin](https://mobbin.com) | Gerçek uygulama ve sitelerden 600 binden fazla ekran, kullanıcı akışı ve arayüz kalıbı; uygulamanın onboarding'i, ödeme ekranı ya da ayarları nasıl kurduğunu görürsün. | Ücretsiz planda kayıt gerekir, sınırlı uygulama görünür, akış ve arama yok; Pro ayda 10 $'dan (yıllık) |
+| [Curated](https://www.curated.design) | Sektöre ve stile göre süzülen seçilmiş siteler; temiz landing page'ler ve startup siteleri. | Gezinmek ücretsiz; gelişmiş filtreler Pro ile ayda 9 $ |
+| [Dark Design](https://www.dark.design) | Koyu temalı, elle seçilmiş siteler; koyu tema tasarlarken kontrast, boşluk ve vurgu örnekleri. | Ücretsiz; şablonlar ve sponsorlu kartlar da var |
 | [Awwwards](https://www.awwwards.com/websites/) | Jürinin ödüllendirdiği siteler ve yıllar öncesine uzanan "günün sitesi" arşivi; kategori, teknoloji (React, Webflow, Three.js), yazı tipi ve etikete göre süzülür. | Gezinmek ücretsiz; kurslar ve Pro üyelik ücretli |
 | [Pinterest](https://www.pinterest.com) | "web design", "dashboard ui" gibi aramalarla geniş görsel arşiv; beğendiklerini panolara kaydedersin. | Ücretsiz |
 | [X](https://x.com) | Tasarımcı ve geliştiricilerin yeni işlerini paylaştığı akış; beğendiğin kişileri bir listede toplarsın. | Ücretsiz |
@@ -130,6 +170,18 @@ Instagram'da görülen etkileşimlerin bizim yazdığımız çalışan hâli: ka
 | Akıcı giriş formu <!-- ornek: akici-giris-formu --> | Logo çizilerek açılır; Giriş ve Kayıt sekmeleri, alanın altında anında hata mesajı, giriş düğmesinde yükleniyor simgesinden onay işaretine geçiş. Flutter ile yapılmış. | Mobil giriş ve kayıt ekranı | Paylaşılmamış | [Instagram videosu](https://www.instagram.com/reel/Ddg450QpmE2/) |
 | Etkileşimli dashboard <!-- ornek: etkilesimli-dashboard --> | Cam görünümlü istatistik kartları üzerine gelince hafifçe yükselir; grafik, görev ve işlem listeleri kartlarda toplanır, mobilde alt alta dizilir. React, Motion ve Lucide ikonlarıyla yapılmış. | Yönetim paneli, analitik ekranı | Yorum yazana DM'den gönderiliyor | [Instagram videosu](https://www.instagram.com/reel/Ddf-7oiz126/) |
 | Açılan kenar çubuğu <!-- ornek: acilir-kenar-cubugu --> | Kapalıyken sadece ikonlardan oluşan dar, yüzen bir sütun; üzerine gelince genişler, profil, arama ve menü adları belirir, alttaki eylem düğmeleri üst üste yığından yan yana sıraya kayar, görev rozeti ikonun köşesinden satır sonuna geçer. Seçili sayfa radyo düğmesiyle, açık-koyu tema onay kutusuyla tutulur; sadece HTML ve CSS ile yapılmış. | Yönetim paneli, SaaS uygulamasının ana menüsü | Ücretsiz ama lisanssız, sadece incelenir ([frontend-joe/css-components](https://github.com/frontend-joe/css-components/tree/main/sidebars/sidebar-9)) | [Instagram gönderisi](https://www.instagram.com/p/DdXfSSqDMRd/) |
+
+## Hareket türleri
+
+Siteyi daha özenli gösteren dört hareket türü ve her birinin üç kalıbı; [bu gönderiden](https://www.instagram.com/p/DdBrvbRlElf/) alındı.
+İyi animasyon süs değil, geri bildirimdir: her hareket bir şeyi anlatsın, aynı hareket her yerde tekrarlanmasın.
+
+| Hareket | Ne işe yarar | Kalıplar |
+|---|---|---|
+| Kaydırma <!-- ornek: hareket-kaydirma --> | Sayfa kullanıcıyla birlikte hareket eder; kaydırma bir hikâye anlatır. | Parallax (katmanlar farklı hızda kayar), Scrub (hareket kaydırma ilerlemesini izler), Pin + Transform (bölüm sabit kalır, içerik değişir) |
+| Ortaya çıkış <!-- ornek: hareket-ortaya-cikis --> | Her şey aynı anda görünmez; giriş sırası neyin önce okunacağını gösterir. | Fade + Lift (soluk hâlden hafifçe yukarı kalkar), Stagger (öğeler sırayla girer), Clip reveal (içerik bir maskenin altından açılır) |
+| Üzerine gelme <!-- ornek: hareket-uzerine-gelme --> | İmleç bir şey hissettirir; öğe üzerine gelindiğini gösterir. | Mıknatıslı CTA (düğme imleci hafifçe izler), görsel yakınlaşma (düzen değil görsel büyür), metin kayması (ok, alt çizgi ya da etiket tepki verir) |
+| Tıklama <!-- ornek: hareket-tiklama --> | Her tıklama bir yanıt alır; kullanıcı işlemin gerçekleştiğini görür. | Bas ve yay (düğme sıkışıp geri gelir), durum değişimi (Gönder, Gönderiliyor, Gönderildi), tıklama onayı |
 
 ## Renk çiftleri
 
