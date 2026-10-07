@@ -33,6 +33,7 @@ Kurulum komutlarının sonuna `--scope user` eklersen sunucu tüm projelerde kul
 | [Playwright MCP](https://github.com/microsoft/playwright-mcp) | Claude'a tarayıcı verir: sayfayı açar, tıklar, form doldurur, ekran görüntüsü alır; yaptığı işi kendisi test eder. |
 | [Chrome DevTools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp) | Chrome'u geliştirici araçlarıyla kontrol eder: konsol, ağ istekleri, performans kaydı, Lighthouse denetimi, farklı cihaz ve ağ hızı taklidi. |
 | [Figma MCP](https://developers.figma.com/docs/figma-mcp-server/) | Figma tasarımını okuyup frame'i koda çevirir. |
+| [shadcn MCP](https://ui.shadcn.com/docs/mcp) | shadcn/ui ve projede tanımlı registry'lerdeki (Cult UI, Canvas UI gibi) bileşenleri Claude'a listeletir, arattırır ve doğal dille kurdurur; projede `components.json` olmalı. Ücretsiz, hesap gerekmez. |
 | [Context7](https://github.com/upstash/context7) | Kütüphanelerin güncel, sürüme özel dokümanını ve kod örneklerini ajana verir; eski ya da uydurma API önerilerini azaltır. Sorgular context7.com'a gider. |
 | [RevenueCat MCP](https://www.revenuecat.com/docs/tools/mcp) | Abonelik uygulamanın ürün, teklif, yetki (entitlement) ve gelir verisini Claude'a sordurur ve düzenletir; OAuth ile bağlanır. |
 | [Buffer MCP](https://buffer.com/mcp) | Instagram, LinkedIn, X, TikTok gibi 9 platforma gönderi taslağı hazırlatır, zamanlar ve paylaşır, istatistikleri getirir; ücretsiz planda da açık. |
@@ -59,6 +60,12 @@ Figma MCP:
 claude mcp add --transport http figma https://mcp.figma.com/mcp
 ```
 
+shadcn MCP (projenin klasöründe çalıştır, `.mcp.json` dosyasına ekler):
+
+```
+npx shadcn@latest mcp init --client claude
+```
+
 Context7 (kurulumda hangi ajana kurulacağını sorar, ücretsiz API anahtarı alır):
 
 ```
@@ -71,6 +78,27 @@ RevenueCat MCP:
 claude mcp add --transport http revenuecat https://mcp.revenuecat.ai/mcp
 ```
 
+## MCP izinleri
+
+Her MCP sunucusu Claude'a senin yetkinle okuma, değiştirme ve gönderme izni verir; yedi kontrol [bu gönderiden](https://www.instagram.com/p/Dd3Vb4BCIu2/) alındı.
+Ayda bir bu listeyle kurulu sunucuları gözden geçir.
+
+| Kontrol | Ne yapılır |
+|---|---|
+| Kullanmadığını kaldır | `claude mcp list` ile kurulu sunucuları listele, kullanmadığını `claude mcp remove <ad>` ile kaldır; claude.ai bağlayıcılarını da `/mcp` ile gözden geçir. |
+| Dosya erişimini daralt | Dosya sistemi sunucusuna ana dizini ya da diski değil sadece çalıştığın klasörü ver; `~/.ssh`, `~/.aws`, `.env` ve şifre dosyaları dışarıda kalsın. Claude Code'da `.claude/settings.json` içindeki `permissions.deny` ile (ör. `"Read(./.env)"`) bu dosyaları okumayı da kapat. |
+| Geri dönüşü olmayana onay | Okumak yetiyorsa sunucuyu salt okunur kur; silme, e-posta ya da mesaj gönderme, ödeme ve yayınlama her seferinde senin onayından geçsin. |
+| Token'a en az yetki | GitHub gibi servislerde tam yetkili kişisel token yerine sadece gereken repo ve izinleri olan, süresi dolan (fine-grained) token üret; token'ı ayar dosyasına düz metin yazma, ortam değişkeninden ver, sızarsa hemen iptal et. |
+| "Her zaman izin ver"i temizle | Onay penceresinde "her zaman" dediğin araç bir daha sormadan çalışır. `/permissions` ile izin listesini aç, silme ve gönderme araçlarını çıkar, sadece zararsız okuma araçları kalsın. |
+| Kaynağı ve sürümü doğrula | Sunucu bilgisayarında senin yetkinle çalışan bir koddur: resmî ya da tanınmış yayıncıdan kur, tanımadığın paketlerde sürümü sabitle (`@latest` yerine `@1.4.2`), uzak sunucunun OAuth izin ekranında istediği izinleri oku. |
+| Okuduğu içeriğe güvenme | Web sayfası, e-posta ya da dosyanın içine gizlenmiş talimat Claude'u yönlendirebilir (prompt injection). Dış içerik okuyan bir araçla veri gönderebilen bir aracı aynı oturumda otomatik onaylama. |
+
+MCP izinlerini denetle:
+
+```
+Bu bilgisayarda ve bu projede kurulu MCP sunucularını ve izinlerini denetle: claude mcp list çıktısını, ~/.claude.json, .mcp.json ve .claude/settings.json dosyalarını oku. Her sunucu için ne yapabildiğini (okuma, yazma, silme, gönderme, ödeme), hangi klasörlere ve hangi token'la eriştiğini, sürümünün sabit olup olmadığını ve kalıcı izin verilmiş araçlarını tablo hâlinde listele. Token değerlerini ekrana yazma. Kaldırılabilecek sunucuları ve daraltılması gereken izinleri öner; hiçbir şeyi onayım olmadan değiştirme.
+```
+
 ## Skill'ler ve eklentiler
 
 - **Skill nedir:** Claude'a belirli bir işi nasıl yapacağını öğreten `SKILL.md` dosyası. `npx skills add <sahip>/<repo>` ile kurulur, `npx skills find` ile aranır, dizini [skills.sh](https://skills.sh).
@@ -78,6 +106,7 @@ claude mcp add --transport http revenuecat https://mcp.revenuecat.ai/mcp
 - **Örnekler:** Yazı için [Humanizer](https://github.com/blader/humanizer) ve [Stop Slop](https://github.com/hardikpandya/stop-slop), tasarım için [Impeccable](https://github.com/pbakaus/impeccable), kod tabanını tanımak için [Understand Anything](https://github.com/Egonex-AI/Understand-Anything).
 - **Çalışma yöntemi:** [Superpowers](https://github.com/obra/superpowers), [gstack](https://github.com/garrytan/gstack), [Agent Skills](https://github.com/addyosmani/agent-skills) ve [GSD Core](https://github.com/open-gsd/gsd-core) ajana plan, test ve yayın adımları olan bir çalışma düzeni kurar; hepsi Claude Code ve Codex'e kurulur. Aynı işi yaptıkları için birini seç.
 - **Hafıza ve bağlam:** [claude-mem](https://github.com/thedotmack/claude-mem) oturumları kaydedip sonraki oturuma bağlam verir (varsayılan kurulum ücretli barındırılan servise bağlanır); [context-mode](https://github.com/mksglu/context-mode) araç çıktılarını bağlamın dışında tutar.
+- **Güvenlik taraması:** Anthropic'in resmî eklenti pazarındaki Claude Security projeyi birden çok ajanla tarar, bulguları ve yama önerilerini `CLAUDE-SECURITY-<zaman>/` klasörüne rapor olarak yazar, yamaları kendisi uygulamaz (`claude plugin install claude-security@claude-plugins-official`, sonra `/claude-security`); çok token harcar, sadece daldaki değişiklik için yerleşik `/security-review` yeter. [Bu videodaki](https://www.instagram.com/reel/DdqI39ERRuF/) beş adımlı tarama aşağıdaki hazır prompt'ta; araçları (Gitleaks, Semgrep, ZAP) repo kataloğunda.
 - **Claude'dan Codex'e:** [codex-plugin-cc](https://github.com/openai/codex-plugin-cc) ile Claude Code içinden Codex'e kod incelemesi yaptırır ya da görev devredersin.
 - **Kurmadan önce tara:** Skill'ler ajanın yetkileriyle çalışır; başkasının skill'ini kurmadan önce [SkillSpector](https://github.com/NVIDIA/SkillSpector) ile prompt injection ve veri sızdırma açısından tara. NVIDIA'nın incelediği 31.132 skill'in %26,1'inde güvenlik açığı, %5,2'sinde kötü niyet belirtisi bulunmuş.
 
@@ -138,6 +167,12 @@ Bağımlılıkları denetle:
 
 ```
 Projenin bağımlılıklarını denetle: güvenlik açığı olanları (osv-scanner kuruluysa onunla tara), çok eski ve bakımı bırakılmış olanları, JS/TS projesinde kullanılmayan paket ve dosyaları (knip ile) listele. Güncelleme önerilerini risk sırasıyla ver, kırıcı değişiklik içerenleri ayrıca belirt.
+```
+
+Yayından önce güvenlik taraması yap:
+
+```
+Bu projeyi yayından önce beş adımda güvenlik açısından tara ve her adımın bulgularını önem sırasıyla raporla: 1) paket denetimi (npm audit --audit-level=high ya da osv-scanner) ile bilinen açığı olan paketler; npm audit fix --force kullanma, büyük sürüm atlatıp projeyi bozabilir. 2) gitleaks ile kodda ve git geçmişinde sızmış anahtar, token ve şifre; bulduğun değeri ekrana yazma, iptal edilip yenilenmesi gerektiğini söyle. 3) semgrep ile güvenli olmayan kod kalıpları. 4) Kimlik doğrulama, yetki kontrolü, API uç noktaları, dosya yükleme ve kullanıcı girdisi için kendi incelemen. 5) Uygulama staging'de çalışıyorsa ZAP taramasının nasıl yapılacağı. Kurulu olmayan araçları kurmadan önce bana sor; hiçbir şeyi onayım olmadan düzeltme.
 ```
 
 Karpathy'nin [LLM Council](https://github.com/karpathy/llm-council) fikri soruyu birden çok modele sorup bir başkan modele karar verdirir; [bu videodaki](https://www.instagram.com/reel/Dbpyz7FCLC3/) gibi tek modelde beş danışmanla da uygulanabilir.

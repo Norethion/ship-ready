@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="yukseklik" content="500">
+<title>Üzerine gelme hareketleri</title>
+<style>
+  /* ── Ortak görsel dil: dört "hareket türü" örneğinde aynıdır ── */
+  :root {
+    --zemin: #f4f1ea;       /* açık bej sayfa */
+    --yuzey: #fbfaf6;       /* kutu içi */
+    --metin: #111111;
+    --soluk: #5b564e;       /* ikincil yazı; bej üstünde 6.6:1 */
+    --cizgi: #161616;       /* başlık çizgisi */
+    --kenar: #d6d0c4;       /* kutu ve ayraç kenarı */
+    --vurgu: #2f4cf6;       /* tek vurgu rengi; beyaz yazıyla 6:1 */
+    --vurgu-koyu: #1f37c9;
+    --vurgu-acik: #c3ccfd;
+    --vurgu-zemin: #e5e9fe;
+    --gecis: cubic-bezier(.2, .7, .2, 1);    /* yumuşak çıkış */
+    --yay: cubic-bezier(.34, 1.56, .64, 1);  /* hafif taşan yay */
+    --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    display: flex; justify-content: center;
+    align-items: center; align-items: safe center;
+    padding: 16px;
+    font: 14px/1.45 var(--font); color: var(--metin);
+    background: var(--zemin);
+    -webkit-font-smoothing: antialiased;
+  }
+  .kasa { width: 100%; max-width: 560px; }
+  .ust {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px;
+    margin: 0; padding-top: 9px; border-top: 1.5px solid var(--cizgi);
+    font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+  }
+  .ust b { color: var(--vurgu); font-weight: 900; }
+  .ust span { color: var(--soluk); }
+  h1 {
+    margin: 8px 0 12px;
+    font-size: clamp(21px, 6.4vw, 30px); font-weight: 900; line-height: 1;
+    letter-spacing: -.035em; text-transform: uppercase;
+  }
+  .nokta { display: inline-block; width: .22em; height: .22em; margin-left: .06em; border-radius: 50%; background: var(--vurgu); }
+  .kutu { position: relative; background: var(--yuzey); border: 1px solid var(--kenar); border-radius: 3px; }
+  .ad { margin: 0; font-size: 13px; color: var(--soluk); }
+  .ad b { margin-right: 6px; font-size: 14px; font-weight: 900; letter-spacing: -.01em; text-transform: uppercase; color: var(--metin); }
+  .satir { display: grid; gap: 6px; padding: 10px 0; }
+  .satir:first-of-type { padding-top: 0; }
+  .satir + .satir { border-top: 1px solid var(--kenar); }
+  @media (min-width: 540px) {
+    .satir { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: center; column-gap: 18px; }
+    .satir .ad { order: 2; }
+    .ad span { display: block; margin-top: 2px; }
+  }
+  :focus-visible { outline: 2px solid var(--vurgu); outline-offset: 3px; }
+
+  /* ── 1 · Mıknatıslı düğme: --x/--y betikten gelir, etiket bir kat daha fazla kayar ── */
+  .alan { display: grid; place-items: center; height: 96px; overflow: hidden; }
+  .miknatis {
+    --x: 0px; --y: 0px;
+    height: 44px; padding: 0 30px; border: 0; border-radius: 8px;
+    font: 800 13px var(--font); letter-spacing: .14em; text-transform: uppercase;
+    color: #fff; background: var(--vurgu); cursor: pointer;
+    transform: translate(var(--x), var(--y));
+    transition: transform .6s var(--yay), box-shadow .3s, scale .15s, translate .3s var(--gecis);
+  }
+  .miknatis span { display: block; transform: translate(calc(var(--x) * .5), calc(var(--y) * .5)); transition: transform .6s var(--yay); }
+  /* İmleç alandayken kısa ve yumuşak izler; bırakınca yukarıdaki yay geçişiyle döner */
+  .miknatis.cekiliyor { transition: transform .2s var(--gecis), box-shadow .3s, scale .15s, translate .3s var(--gecis); }
+  .miknatis.cekiliyor span { transition: transform .2s var(--gecis); }
+  .miknatis.cekiliyor, .miknatis:focus-visible, .miknatis:active {
+    box-shadow: 0 0 0 6px rgba(47, 76, 246, .18), 0 10px 22px -10px rgba(47, 76, 246, .8);
+  }
+  .miknatis:focus-visible { translate: 0 -2px; }   /* klavye odağı: hafif kalkış + hale */
+  .miknatis:active { scale: .95; }                 /* dokunmatik: basınca küçülür */
+  .alan-ipucu { position: absolute; left: 10px; bottom: 6px; margin: 0; font-size: 11.5px; color: var(--soluk); }
+  @media (hover: none) { .alan-ipucu { display: none; } }
+  .imlec {
+    position: absolute; left: 0; top: 0; z-index: 2; width: 20px; height: 24px; margin: -2px 0 0 -3px;
+    opacity: 0; pointer-events: none; transition: opacity .3s;
+  }
+  .imlec.gorunur { opacity: 1; }
+
+  /* ── 2 · Görsel yakınlaşma: çerçeve sabit, içindeki görsel büyür ── */
+  .gorsel-kart {
+    display: grid; grid-template-columns: 104px minmax(0, 1fr); align-items: center; gap: 12px;
+    width: 100%; padding: 8px; text-align: left;
+    font: inherit; color: var(--metin); background: #fff;
+    border: 1px solid var(--kenar); border-radius: 10px; cursor: pointer;
+    transition: border-color .3s;
+  }
+  .cerceve { display: block; height: 66px; border-radius: 6px; overflow: hidden; }
+  .resim { display: block; width: 100%; height: 100%; transition: transform .7s var(--gecis); }
+  .gorsel-kart:hover .resim, .gorsel-kart:focus-visible .resim,
+  .gorsel-kart:active .resim, .gorsel-kart.demo .resim { transform: scale(1.15); }
+  .gorsel-kart:hover, .gorsel-kart:focus-visible, .gorsel-kart.demo { border-color: var(--vurgu-acik); }
+  .kart-metin b { display: block; font-size: 14px; font-weight: 800; line-height: 1.25; }
+  .kart-metin small { font-size: 12.5px; color: var(--soluk); }
+
+  /* ── 3 · Yazı kayması: ok kayar, alt çizgi soldan dolar, çıkınca sağa çekilir ── */
+  .demo { display: flex; align-items: center; justify-content: center; min-height: 60px; padding: 10px 14px; }
+  .baglanti {
+    position: relative; display: inline-flex; align-items: center; gap: 6px; padding: 4px 0 6px;
+    border: 0; background: none; cursor: pointer;
+    font: 700 16px var(--font); color: var(--metin);
+    transition: color .25s;
+  }
+  .baglanti::before, .baglanti::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; }
+  .baglanti::before { background: var(--metin); opacity: .85; }
+  .baglanti::after {
+    background: var(--vurgu); transform: scaleX(0); transform-origin: right;
+    transition: transform .4s var(--gecis);
+  }
+  .baglanti .ok { width: 18px; height: 18px; transition: transform .35s var(--yay); }
+  .baglanti:hover, .baglanti:focus-visible, .baglanti:active, .baglanti.demo { color: var(--vurgu); }
+  .baglanti:hover::after, .baglanti:focus-visible::after, .baglanti:active::after, .baglanti.demo::after { transform: none; transform-origin: left; }
+  .baglanti:hover .ok, .baglanti:focus-visible .ok, .baglanti:active .ok, .baglanti.demo .ok { transform: translateX(5px); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0s !important; }
+  }
+</style>
+</head>
+<body>
+<main class="kasa">
+  <p class="ust"><b>03</b> · Üzerine gelme <span>→ geri bildirim</span></p>
+  <h1>İmleç bir şey hissetsin<span class="nokta"></span></h1>
+
+  <!-- 1 · Mıknatıslı düğme (magnetic CTA) -->
+  <section class="satir">
+    <p class="ad"><b>Mıknatıslı düğme</b> <span>Düğme imleci hafifçe izler.</span></p>
+    <div class="kutu alan" id="alan">
+      <button type="button" class="miknatis" id="miknatis"><span>Keşfet</span></button>
+      <p class="alan-ipucu" aria-hidden="true">İmleci yaklaştır</p>
+      <svg class="imlec" id="imlec" viewBox="0 0 20 24" aria-hidden="true"><path d="M3 2v17l4.5-4.3 3 6.8 3-1.3-3-6.6H17z" fill="#111" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg>
+    </div>
+  </section>
+
+  <!-- 2 · Görsel yakınlaşma (image zoom) -->
+  <section class="satir">
+    <p class="ad"><b>Görsel yakınlaşma</b> <span>Düzen değil, görsel büyür.</span></p>
+    <button type="button" class="gorsel-kart" id="kart">
+      <span class="cerceve">
+        <svg class="resim" viewBox="0 0 120 80" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="120" height="80" fill="#e5e9fe"/>
+          <circle cx="88" cy="22" r="9" fill="#c3ccfd"/>
+          <path d="M0 80V58l22-14 18 10 26-24 22 18 14-8 18 12v28z" fill="#a9b5fb"/>
+          <path d="M0 80V66l30-16 24 14 28-20 38 26v10z" fill="#2f4cf6"/>
+        </svg>
+      </span>
+      <span class="kart-metin"><b>Kapadokya hafta sonu</b><small>2 gece · 3.450 ₺</small></span>
+    </button>
+  </section>
+
+  <!-- 3 · Yazı kayması (text shift) -->
+  <section class="satir">
+    <p class="ad"><b>Yazı kayması</b> <span>Ok, alt çizgi ve renk tepki verir.</span></p>
+    <div class="kutu demo">
+      <button type="button" class="baglanti" id="baglanti">Devamını gör
+        <svg class="ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </button>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  var alan = document.getElementById('alan');
+  var dugme = document.getElementById('miknatis');
+  var imlec = document.getElementById('imlec');
+  var kart = document.getElementById('kart');
+  var baglanti = document.getElementById('baglanti');
+  var azHareket = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  var YARICAP = 120;  // px: imleç düğme merkezine bu kadar yakınsa çekim başlar
+  var GUC = 0.3;      // imlecin uzaklığının ne kadarı kadar kayılsın
+
+  function sinirla(d, en) { return Math.max(-en, Math.min(en, d)); }
+
+  // Düğmenin dönüşümsüz merkezi (getBoundingClientRect kaymayı da katacağı için offset kullanılır)
+  function merkez() {
+    var a = alan.getBoundingClientRect();
+    return {
+      x: a.left + alan.clientLeft + dugme.offsetLeft + dugme.offsetWidth / 2,
+      y: a.top + alan.clientTop + dugme.offsetTop + dugme.offsetHeight / 2
+    };
+  }
+
+  function birak() {
+    dugme.classList.remove('cekiliyor');
+    dugme.style.setProperty('--x', '0px');
+    dugme.style.setProperty('--y', '0px');
+  }
+
+  // x, y: imlecin pencere koordinatları
+  function cek(x, y) {
+    var m = merkez();
+    var dx = x - m.x, dy = y - m.y;
+    if (Math.hypot(dx, dy) > YARICAP) { birak(); return; }
+    dugme.classList.add('cekiliyor');
+    if (azHareket.matches) return;  // hareket azaltmada sadece hale görünür
+    dugme.style.setProperty('--x', sinirla(dx * GUC, 26).toFixed(1) + 'px');
+    dugme.style.setProperty('--y', sinirla(dy * GUC, 12).toFixed(1) + 'px');
+  }
+
+  // Dokunmatikte imleç yok: çekim yerine :active ile basma tepkisi verilir
+  alan.addEventListener('pointermove', function (e) {
+    if (e.pointerType !== 'touch') cek(e.clientX, e.clientY);
+  });
+  alan.addEventListener('pointerleave', birak);
+
+  // Kısa gösterim: alan görünür olunca sahte imleç düğmeye yaklaşıp uzaklaşır,
+  // ardından görsel ve bağlantı sırayla tepki verir. Kullanıcı dokunursa hemen durur.
+  var gosterim = { surer: false, bitti: false, kare: 0, zamanlar: [] };
+
+  function gosterimDurdur() {
+    gosterim.bitti = true;
+    if (!gosterim.surer) return;
+    gosterim.surer = false;
+    cancelAnimationFrame(gosterim.kare);
+    gosterim.zamanlar.forEach(clearTimeout);
+    imlec.classList.remove('gorunur');
+    kart.classList.remove('demo');
+    baglanti.classList.remove('demo');
+    birak();
+  }
+  document.addEventListener('pointermove', function (e) { if (e.pointerType !== 'touch') gosterimDurdur(); }, true);
+  ['pointerdown', 'keydown', 'focusin'].forEach(function (olay) {
+    document.addEventListener(olay, gosterimDurdur, true);
+  });
+
+  function sonra(is, ms) { gosterim.zamanlar.push(setTimeout(is, ms)); }
+
+  function gosterimBaslat() {
+    if (gosterim.bitti || azHareket.matches) return;
+    gosterim.surer = true;
+    var a = alan.getBoundingClientRect();
+    var m = merkez();
+    var mx = m.x - a.left, my = m.y - a.top;
+    // İmlecin uğrayacağı noktalar (alanın sol üstüne göre px)
+    var yol = [[a.width - 18, a.height - 6], [mx + 74, my + 20], [mx + 36, my + 6], [mx + 54, my - 12], [a.width + 24, my - 34]];
+    var SURE = 2600;
+    var bas = 0;
+    imlec.classList.add('gorunur');
+
+    function adim(simdi) {
+      if (!gosterim.surer) return;
+      if (!bas) bas = simdi;
+      var o = Math.min(1, (simdi - bas) / SURE);
+      var s = o * (yol.length - 1);
+      var i = Math.min(yol.length - 2, Math.floor(s));
+      var f = s - i;
+      f = f * f * (3 - 2 * f);  // her parçada yumuşak hızlanıp yavaşlama
+      var x = yol[i][0] + (yol[i + 1][0] - yol[i][0]) * f;
+      var y = yol[i][1] + (yol[i + 1][1] - yol[i][1]) * f;
+      imlec.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)';
+      cek(a.left + x, a.top + y);
+      if (o < 1) { gosterim.kare = requestAnimationFrame(adim); return; }
+
+      imlec.classList.remove('gorunur');
+      birak();
+      sonra(function () { kart.classList.add('demo'); }, 300);
+      sonra(function () { kart.classList.remove('demo'); baglanti.classList.add('demo'); }, 1600);
+      sonra(function () { baglanti.classList.remove('demo'); gosterim.surer = false; gosterim.bitti = true; }, 2900);
+    }
+    gosterim.kare = requestAnimationFrame(adim);
+  }
+
+  if ('IntersectionObserver' in window) {
+    var gozcu = new IntersectionObserver(function (girdiler) {
+      if (!girdiler[0].isIntersecting) return;
+      gozcu.disconnect();
+      sonra(gosterimBaslat, 500);
+    }, { threshold: 0.6 });
+    gozcu.observe(alan);
+  }
+})();
+</script>
+</body>
+</html>

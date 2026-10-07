@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="yukseklik" content="480">
+<title>Tıklama hareketleri</title>
+<style>
+  /* ── Ortak görsel dil: dört "hareket türü" örneğinde aynıdır ── */
+  :root {
+    --zemin: #f4f1ea;       /* açık bej sayfa */
+    --yuzey: #fbfaf6;       /* kutu içi */
+    --metin: #111111;
+    --soluk: #5b564e;       /* ikincil yazı; bej üstünde 6.6:1 */
+    --cizgi: #161616;       /* başlık çizgisi */
+    --kenar: #d6d0c4;       /* kutu ve ayraç kenarı */
+    --vurgu: #2f4cf6;       /* tek vurgu rengi; beyaz yazıyla 6:1 */
+    --vurgu-koyu: #1f37c9;
+    --vurgu-acik: #c3ccfd;
+    --vurgu-zemin: #e5e9fe;
+    --gecis: cubic-bezier(.2, .7, .2, 1);    /* yumuşak çıkış */
+    --yay: cubic-bezier(.34, 1.56, .64, 1);  /* hafif taşan yay */
+    --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    display: flex; justify-content: center;
+    align-items: center; align-items: safe center;
+    padding: 16px;
+    font: 14px/1.45 var(--font); color: var(--metin);
+    background: var(--zemin);
+    -webkit-font-smoothing: antialiased;
+  }
+  .kasa { width: 100%; max-width: 560px; }
+  .ust {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px;
+    margin: 0; padding-top: 9px; border-top: 1.5px solid var(--cizgi);
+    font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+  }
+  .ust b { color: var(--vurgu); font-weight: 900; }
+  .ust span { color: var(--soluk); }
+  h1 {
+    margin: 8px 0 12px;
+    font-size: clamp(21px, 6.4vw, 30px); font-weight: 900; line-height: 1;
+    letter-spacing: -.035em; text-transform: uppercase;
+  }
+  .nokta { display: inline-block; width: .22em; height: .22em; margin-left: .06em; border-radius: 50%; background: var(--vurgu); }
+  .kutu { position: relative; background: var(--yuzey); border: 1px solid var(--kenar); border-radius: 3px; }
+  .ad { margin: 0; font-size: 13px; color: var(--soluk); }
+  .ad b { margin-right: 6px; font-size: 14px; font-weight: 900; letter-spacing: -.01em; text-transform: uppercase; color: var(--metin); }
+  .satir { display: grid; gap: 6px; padding: 10px 0; }
+  .satir:first-of-type { padding-top: 0; }
+  .satir + .satir { border-top: 1px solid var(--kenar); }
+  @media (min-width: 540px) {
+    .satir { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: center; column-gap: 18px; }
+    .satir .ad { order: 2; }
+    .ad span { display: block; margin-top: 2px; }
+  }
+  :focus-visible { outline: 2px solid var(--vurgu); outline-offset: 3px; }
+  .gizli { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* ── Bu örnek ── */
+  :root {
+    /* Gerçek yay eğrisi (sönümlü salınım); linear() bilmeyen tarayıcıda taşan cubic-bezier kalır */
+    --yay-fizik: var(--yay);
+  }
+  @supports (transition-timing-function: linear(0, 1)) {
+    :root { --yay-fizik: linear(0, .339, .91, 1.253, 1.273, 1.117, .968, .912, .937, .988, 1.021, 1.025, 1.012, .998, .992, .994, .999, 1.002, 1.002, 1.001, 1); }
+  }
+  .demo { display: flex; align-items: center; justify-content: center; min-height: 66px; padding: 10px 14px; }
+  button { -webkit-tap-highlight-color: transparent; }
+
+  /* 1 · Bas + yay: basınca hızla sıkışır, bırakınca yay eğrisiyle taşarak döner */
+  .yay-demo { min-height: 78px; }
+  .yay-yer { position: relative; display: inline-flex; }
+  .yay-dugme {
+    height: 44px; padding: 0 24px; border: 0; border-radius: 10px;
+    font: 700 15px var(--font); color: #fff; background: var(--vurgu); cursor: pointer;
+    transition: transform .7s var(--yay-fizik), background-color .2s;
+  }
+  .yay-dugme:active, .yay-dugme.basili {
+    transform: scale(.88); background: var(--vurgu-koyu);
+    transition: transform .1s ease-out, background-color .1s;
+  }
+  .isin {
+    position: absolute; left: 50%; width: 24px; height: 10px; margin-left: -12px;
+    fill: none; stroke: var(--vurgu); stroke-width: 2; stroke-linecap: round;
+    opacity: 0; pointer-events: none;
+  }
+  .isin.ustte { bottom: calc(100% + 2px); }
+  .isin.altta { top: calc(100% + 2px); rotate: 180deg; }
+  .pat .isin { animation: isin .5s var(--gecis); }
+  @keyframes isin {
+    0% { opacity: 0; transform: translateY(4px) scale(.5); }
+    35% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-3px) scale(1.15); }
+  }
+
+  /* 2 · Durum değişimi: üç içerik aynı hücrede durur, düğme en genişi kadar kalır */
+  .gonder {
+    display: inline-grid; place-items: center; height: 44px; padding: 0 22px;
+    border: 0; border-radius: 10px; cursor: pointer;
+    font: 700 15px var(--font); color: #fff; background: var(--metin);
+    transition: background-color .35s, color .35s, scale .15s;
+  }
+  .gonder:active { scale: .97; }
+  .gonder[data-durum="yukleniyor"] { background: var(--vurgu); cursor: progress; }
+  .gonder[data-durum="tamam"] { background: var(--vurgu-zemin); color: var(--vurgu); cursor: default; }
+  .g {
+    grid-area: 1 / 1; display: inline-flex; align-items: center; gap: 8px;
+    opacity: 0; transform: translateY(10px);
+    transition: opacity .2s, transform .35s var(--gecis);
+  }
+  .g svg { width: 17px; height: 17px; }
+  .gonder[data-durum="hazir"] .g-hazir,
+  .gonder[data-durum="yukleniyor"] .g-yukleniyor,
+  .gonder[data-durum="tamam"] .g-tamam { opacity: 1; transform: none; }
+  .halka { width: 15px; height: 15px; border: 2px solid rgba(255, 255, 255, .35); border-top-color: #fff; border-radius: 50%; }
+  .gonder[data-durum="yukleniyor"] .halka { animation: don .8s linear infinite; }
+  @keyframes don { to { transform: rotate(1turn); } }
+  /* Onay işareti çizilerek gelir */
+  .g-tamam path { stroke-dasharray: 24; stroke-dashoffset: 24; transition: stroke-dashoffset .4s var(--gecis) .15s; }
+  .gonder[data-durum="tamam"] .g-tamam path { stroke-dashoffset: 0; }
+
+  /* 3 · Tıklama onayı: tıklanan noktadan halka dalgası + kısa bildirim */
+  .onay-demo { padding-top: 40px; padding-bottom: 12px; }
+  .onay-yer { position: relative; display: inline-flex; }
+  .kaydet {
+    position: relative; display: inline-flex; align-items: center; gap: 7px; height: 40px; padding: 0 16px;
+    border: 1.5px solid var(--metin); border-radius: 999px; background: #fff; cursor: pointer;
+    font: 700 14px var(--font); color: var(--metin);
+    transition: border-color .25s, color .25s, scale .15s;
+  }
+  .kaydet:active { scale: .96; }
+  .kaydet svg { width: 17px; height: 17px; fill: none; }
+  .kaydet[aria-pressed="true"] { border-color: var(--vurgu); color: var(--vurgu); }
+  .kaydet[aria-pressed="true"] svg { fill: currentColor; animation: pop .45s var(--yay); }
+  @keyframes pop { 40% { transform: scale(1.35); } }
+  .dalga {
+    position: absolute; width: 0; height: 0; border: 2px solid var(--vurgu); border-radius: 50%;
+    transform: translate(-50%, -50%); pointer-events: none;
+    animation: dalga .6s var(--gecis) forwards;
+  }
+  @keyframes dalga {
+    from { width: 0; height: 0; opacity: .9; }
+    to { width: 120px; height: 120px; opacity: 0; }
+  }
+  .bildirim {
+    position: absolute; left: 50%; bottom: calc(100% + 8px);
+    display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px 5px 9px;
+    font-size: 12.5px; font-weight: 700; white-space: nowrap;
+    color: #fff; background: var(--metin); border-radius: 999px;
+    opacity: 0; transform: translate(-50%, 6px) scale(.94); pointer-events: none;
+    transition: opacity .2s, transform .35s var(--yay);
+  }
+  .bildirim.acik { opacity: 1; transform: translate(-50%, 0); }
+  .bildirim svg { width: 14px; height: 14px; color: #9aabff; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0s !important; transition-delay: 0s !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+<main class="kasa">
+  <p class="ust"><b>04</b> · Tıklama <span>→ onay</span></p>
+  <h1>Her tıklama yanıt alsın<span class="nokta"></span></h1>
+
+  <!-- 1 · Bas + yay (press + spring) -->
+  <section class="satir">
+    <p class="ad"><b>Bas + yay</b> <span>Düğme sıkışır, yay gibi geri gelir.</span></p>
+    <div class="kutu demo yay-demo">
+      <span class="yay-yer" id="yay-yer">
+        <svg class="isin ustte" viewBox="0 0 24 10" aria-hidden="true"><path d="M8 9 4 2M12 9V1M16 9l4-7"/></svg>
+        <button type="button" class="yay-dugme" id="yay">Sepete ekle</button>
+        <svg class="isin altta" viewBox="0 0 24 10" aria-hidden="true"><path d="M8 9 4 2M12 9V1M16 9l4-7"/></svg>
+      </span>
+    </div>
+  </section>
+
+  <!-- 2 · Durum değişimi (state change) -->
+  <section class="satir">
+    <p class="ad"><b>Durum değişimi</b> <span>Gönder → Gönderiliyor → Gönderildi ✓</span></p>
+    <div class="kutu demo">
+      <button type="button" class="gonder" id="gonder" data-durum="hazir" aria-label="Gönder">
+        <span class="g g-hazir" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg>
+          Gönder
+        </span>
+        <span class="g g-yukleniyor" aria-hidden="true"><i class="halka"></i>Gönderiliyor</span>
+        <span class="g g-tamam" aria-hidden="true">
+          Gönderildi
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <!-- 3 · Tıklama onayı (click → confirmation) -->
+  <section class="satir">
+    <p class="ad"><b>Tıklama onayı</b> <span>İşin yapıldığını hemen gösterir.</span></p>
+    <div class="kutu demo onay-demo">
+      <span class="onay-yer">
+        <button type="button" class="kaydet" id="kaydet" aria-pressed="false">
+          <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          Kaydet
+        </button>
+        <span class="bildirim" id="bildirim" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          <span id="bildirim-yazi">Kaydedildi</span>
+        </span>
+      </span>
+    </div>
+  </section>
+
+  <p class="gizli" id="duyuru" aria-live="polite"></p>
+</main>
+
+<script>
+(function () {
+  var duyuru = document.getElementById('duyuru');
+  var azHareket = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  // Sınıfı kaldırıp yeniden ekler; aradaki ölçüm animasyonun baştan başlamasını sağlar
+  function yenidenOynat(el, sinif) {
+    el.classList.remove(sinif);
+    void el.offsetWidth;
+    el.classList.add(sinif);
+  }
+
+  // 1 · Bas + yay. Fare ve dokunuşta :active yeter; klavyede basılı hâli sınıfla gösteririz.
+  var yay = document.getElementById('yay');
+  var yayYer = document.getElementById('yay-yer');
+  yay.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') yay.classList.add('basili');
+  });
+  yay.addEventListener('keyup', function () { yay.classList.remove('basili'); });
+  yay.addEventListener('blur', function () { yay.classList.remove('basili'); });
+  yay.addEventListener('click', function () { yenidenOynat(yayYer, 'pat'); });
+
+  // 2 · Durum değişimi. Gerçek istek yok; setTimeout ağ gecikmesini taklit eder.
+  var gonder = document.getElementById('gonder');
+  var ETIKET = { hazir: 'Gönder', yukleniyor: 'Gönderiliyor', tamam: 'Gönderildi' };
+
+  function durum(d) {
+    gonder.dataset.durum = d;
+    gonder.setAttribute('aria-label', ETIKET[d]);
+    // disabled yerine aria-disabled: odak düğmede kalır
+    gonder.setAttribute('aria-disabled', String(d !== 'hazir'));
+  }
+
+  gonder.addEventListener('click', function () {
+    if (gonder.dataset.durum !== 'hazir') return;  // iş sürerken ikinci tıklama yok sayılır
+    durum('yukleniyor');
+    duyuru.textContent = 'Gönderiliyor…';
+    setTimeout(function () {
+      durum('tamam');
+      duyuru.textContent = 'Mesaj gönderildi.';
+      setTimeout(function () { durum('hazir'); }, 2200);
+    }, 1500);
+  });
+  durum('hazir');
+
+  // 3 · Tıklama onayı: dalga tıklanan noktadan çıkar, klavyede düğmenin ortasından
+  var kaydet = document.getElementById('kaydet');
+  var onayYer = kaydet.parentElement;  // halka düğmenin dışına taşabilsin diye sarmalayıcıya eklenir
+  var bildirim = document.getElementById('bildirim');
+  var bildirimYazi = document.getElementById('bildirim-yazi');
+  var bildirimZamani = 0;
+
+  function dalga(e) {
+    if (azHareket.matches) return;
+    var r = onayYer.getBoundingClientRect();
+    var halka = document.createElement('span');
+    halka.className = 'dalga';
+    halka.style.left = (e.detail ? e.clientX - r.left : r.width / 2) + 'px';
+    halka.style.top = (e.detail ? e.clientY - r.top : r.height / 2) + 'px';
+    halka.addEventListener('animationend', function () { halka.remove(); });
+    onayYer.appendChild(halka);
+  }
+
+  kaydet.addEventListener('click', function (e) {
+    var kayitli = kaydet.getAttribute('aria-pressed') !== 'true';
+    kaydet.setAttribute('aria-pressed', String(kayitli));
+    dalga(e);
+    var mesaj = kayitli ? 'Kaydedildi' : 'Kayıttan çıkarıldı';
+    bildirimYazi.textContent = mesaj;
+    duyuru.textContent = mesaj + '.';
+    bildirim.classList.add('acik');
+    clearTimeout(bildirimZamani);
+    bildirimZamani = setTimeout(function () { bildirim.classList.remove('acik'); }, 1600);
+  });
+})();
+</script>
+</body>
+</html>

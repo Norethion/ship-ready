@@ -7,7 +7,7 @@ import Kartlar from '../../../components/Kartlar.astro';
 import Kart from '../../../components/Kart.astro';
 
 Uygulamadan para kazanırken sık birlikte kullanılan araçlar: satın alma altyapısı, satın alma ekranı, kullanıcı analitiği ve hata izleme.
-Ücretler 25.09.2026'da (Sentry 29.09.2026'da) sitelerinden alındı.
+Ücretler 25.09.2026'da (Sentry 29.09.2026'da, PostHog ve Crashlytics 05.10.2026'da) sitelerinden alındı.
 
 ## Araçlar
 
@@ -37,6 +37,14 @@ Kullanıcının uygulamada yaptığı her işlemi kaydeder: kayıt ya da satın 
 
 </Kart>
 
+<Kart baslik={"PostHog"} satir={4} href={"https://posthog.com"} tur={"Ürün analitiği"} prompt={"PostHog (https://posthog.com) aracını bu projede kullanmak istiyorum. Ne işe yarar: Olay analitiği, kayıt ve satın alma hunisi, oturum kaydı, özellik bayrakları (feature flag), A/B testi, hata takibi ve anket tek araçta; web ve mobil SDK'ları var. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Olay analitiği, kayıt ve satın alma hunisi, oturum kaydı, özellik bayrakları (feature flag), A/B testi, hata takibi ve anket tek araçta; web ve mobil SDK'ları var.
+
+<span class="k-alan ilk son"><span class="k-etiket">Ücret</span><span class="k-deger">Ücretsiz planda kart istemez, sınır aşılırsa ücret çıkmaz, fazlası kaydedilmez: ayda 1 milyon olay, 5.000 web ve 2.500 mobil oturum kaydı, 1 milyon feature flag isteği, 100.000 hata; tek proje, veri 1 yıl saklanır</span></span>
+
+</Kart>
+
 <Kart baslik={"Umami"} satir={4} href={"https://github.com/umami-software/umami"} tur={"Web analitiği"} prompt={"Umami (https://github.com/umami-software/umami) aracını bu projede kullanmak istiyorum. Ne işe yarar: Çerez kullanmayan, gizlilik odaklı web analitiği: trafik, kampanya, dönüşüm ve gelir tek panelde. Google Analytics'e kendi sunucunda çalışan alternatif; veri yurt dışına gitmez. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Çerez kullanmayan, gizlilik odaklı web analitiği: trafik, kampanya, dönüşüm ve gelir tek panelde. Google Analytics'e kendi sunucunda çalışan alternatif; veri yurt dışına gitmez.
@@ -50,6 +58,14 @@ Kullanıcının uygulamada yaptığı her işlemi kaydeder: kayıt ya da satın 
 Kullanıcının oturumunu konsol ve ağ kayıtlarıyla birlikte izletir; "bende çalışmıyor" diyen kullanıcının gördüğünü görürsün. Ürün analitiği ve canlı ortak tarama da var; kendi sunucunda çalışır, veri üçüncü tarafa gitmez.
 
 <span class="k-alan ilk son"><span class="k-etiket">Ücret</span><span class="k-deger">Kendi sunucunda ücretsiz (AGPL; sitene eklenen izleme kodu MIT); en az 2 vCPU ve 8 GB RAM ister</span></span>
+
+</Kart>
+
+<Kart baslik={"Firebase Crashlytics"} satir={4} href={"https://firebase.google.com/products/crashlytics"} tur={"Çökme raporu"} prompt={"Firebase Crashlytics (https://firebase.google.com/products/crashlytics) aracını bu projede kullanmak istiyorum. Ne işe yarar: Mobil uygulamanın çökmelerini cihaz, işletim sistemi ve sürüm bilgisiyle toplar, benzer çökmeleri gruplar, en çok kullanıcıyı etkileyeni öne çıkarır; iOS, Android, Flutter ve Unity SDK'ları var. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Mobil uygulamanın çökmelerini cihaz, işletim sistemi ve sürüm bilgisiyle toplar, benzer çökmeleri gruplar, en çok kullanıcıyı etkileyeni öne çıkarır; iOS, Android, Flutter ve Unity SDK'ları var.
+
+<span class="k-alan ilk son"><span class="k-etiket">Ücret</span><span class="k-deger">Ücretsiz (Firebase'in ücretsiz ve ücretli planlarında); BigQuery'ye aktarırsan BigQuery ücreti çıkar</span></span>
 
 </Kart>
 
@@ -71,7 +87,7 @@ Uygulamadaki ve sunucudaki hataları cihaz, tarayıcı, işletim sistemi ve sür
 - **Kim için:** RevenueCat ve Superwall uygulama içi aboneliği olan mobil uygulamalar içindir. Sadece web projesinde Mixpanel yeterli.
 - **Türkiye'den web satışı:** RevenueCat'in web satışı Stripe ya da Paddle üzerinden çalışıyor. Stripe Türkiye'deki şirketlere açık değil (stripe.com/global listesinde yok); Paddle'ın Türkiye'den satıcı kabul edip etmediği ayrıca kontrol edilmeli.
 - **Veri yurt dışına çıkmasın:** Umami ve OpenReplay kendi sunucunda çalışır; Google Analytics ya da Mixpanel yerine bunları seçersen kullanıcı verisi yurt dışına gitmez.
-- **Oturum kaydı:** Mixpanel'in ya da OpenReplay'in oturum kaydında form alanlarını maskele, çerez onayı olmadan başlatma; veri yurt dışına gittiği için KVKK aydınlatma metninde belirt ([yayın öncesi 87. madde](/listeler/yayin-oncesi/#yo-oturum-kaydi-maskeleme)).
-- **Hata izleme ([bu videodan](https://www.instagram.com/reel/DdwbFPOAWpP/)):** Sentry, yayından sonra hiç test etmediğin cihaz ve tarayıcılarda (ör. Instagram'ın uygulama içi tarayıcısı) çıkan hataları gösterir ([yayın öncesi 54. madde](/listeler/yayin-oncesi/#yo-hata-izleme)). Kaynak haritalarını yükledikten sonra yayındaki siteden sil (`filesToDeleteAfterUpload`), kişisel veri gönderme ayarını kapalı tut; oturum tekrarında yazı ve form alanları varsayılan olarak maskelidir.
+- **Oturum kaydı:** Mixpanel'in ya da OpenReplay'in oturum kaydında form alanlarını maskele, çerez onayı olmadan başlatma; veri yurt dışına gittiği için KVKK aydınlatma metninde belirt ([yayın öncesi 97. madde](/listeler/yayin-oncesi/#yo-oturum-kaydi-maskeleme)).
+- **Hata izleme ([bu videodan](https://www.instagram.com/reel/DdwbFPOAWpP/)):** Sentry, yayından sonra hiç test etmediğin cihaz ve tarayıcılarda (ör. Instagram'ın uygulama içi tarayıcısı) çıkan hataları gösterir ([yayın öncesi 60. madde](/listeler/yayin-oncesi/#yo-hata-izleme)). Kaynak haritalarını yükledikten sonra yayındaki siteden sil (`filesToDeleteAfterUpload`), kişisel veri gönderme ayarını kapalı tut; oturum tekrarında yazı ve form alanları varsayılan olarak maskelidir.
 - **AI ile takip:** RevenueCat'in resmi MCP'si abonelik ve gelir verisini Claude'a sordurur; kurulumu ve Buffer, Meta Ads gibi pazarlama MCP'leri [AI geliştirme akışı](/rehberler/ai-gelistirme-akisi/) sekmesinde.
-- **Abonelik ekranı:** Yenileme şartları ve iptal yolu abone ol butonunun yanında görünsün; Superwall ya da RevenueCat ile tasarlanan ekranda bu metin kalmalı ([yayın öncesi 89. madde](/listeler/yayin-oncesi/#yo-abonelik-sartlari)).
+- **Abonelik ekranı:** Yenileme şartları ve iptal yolu abone ol butonunun yanında görünsün; Superwall ya da RevenueCat ile tasarlanan ekranda bu metin kalmalı ([yayın öncesi 104. madde](/listeler/yayin-oncesi/#yo-abonelik-sartlari)).

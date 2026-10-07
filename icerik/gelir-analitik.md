@@ -7,7 +7,7 @@
 <!-- yan-yana -->
 
 Uygulamadan para kazanırken sık birlikte kullanılan araçlar: satın alma altyapısı, satın alma ekranı, kullanıcı analitiği ve hata izleme.
-Ücretler 25.09.2026'da (Sentry 29.09.2026'da) sitelerinden alındı.
+Ücretler 25.09.2026'da (Sentry 29.09.2026'da, PostHog ve Crashlytics 05.10.2026'da) sitelerinden alındı.
 
 ## Araçlar
 
@@ -16,8 +16,10 @@ Uygulamadan para kazanırken sık birlikte kullanılan araçlar: satın alma alt
 | [RevenueCat](https://www.revenuecat.com) | Abonelik altyapısı | App Store ve Google Play satın almalarını tek yerde toplar: makbuzu doğrular, kullanıcının hangi özelliklere erişimi olduğunu tutar, aylık gelir ve abonelik iptali panelleri ve webhook'lar sunar. Satın alma ekranı, A/B testi ve web'den satış özellikleri de var. | Aylık 2.500 $ gelire kadar ücretsiz, sonrası gelirin %1'i |
 | [Superwall](https://superwall.com) | Satın alma ekranı ve A/B testi | Kodsuz editörle tasarlanan, uygulamayı güncellemeden değiştirilebilen satın alma ekranları (paywall). Hangi tasarımın, fiyatın ve ekranın gösterildiği yerin daha çok sattığını A/B testiyle ölçer. Kendi abonelik altyapısı da var. iOS, Android, React Native, Flutter, Expo, Unity ve web. | Altyapısı her ölçekte ücretsiz; paywall, paywall'dan gelen aylık 10.000 $ gelire kadar ücretsiz, sonrası sadece o gelirin %1'i |
 | [Mixpanel](https://mixpanel.com) | Ürün analitiği | Kullanıcının uygulamada yaptığı her işlemi kaydeder: kayıt ya da satın alma adımlarında kaç kişinin düştüğü, kullanıcıların geri gelip gelmediği, davranışa göre kullanıcı grupları. Oturum kaydı, A/B testi ve özellik açma-kapama da var. Google Analytics'ten farkı, sayfa ziyaretinden çok ürün içindeki davranışa odaklanması. | Ayda 1 milyon işleme kadar ücretsiz; veri ABD ya da AB'de tutulabiliyor |
+| [PostHog](https://posthog.com) | Ürün analitiği | Olay analitiği, kayıt ve satın alma hunisi, oturum kaydı, özellik bayrakları (feature flag), A/B testi, hata takibi ve anket tek araçta; web ve mobil SDK'ları var. | Ücretsiz planda kart istemez, sınır aşılırsa ücret çıkmaz, fazlası kaydedilmez: ayda 1 milyon olay, 5.000 web ve 2.500 mobil oturum kaydı, 1 milyon feature flag isteği, 100.000 hata; tek proje, veri 1 yıl saklanır |
 | [Umami](https://github.com/umami-software/umami) | Web analitiği | Çerez kullanmayan, gizlilik odaklı web analitiği: trafik, kampanya, dönüşüm ve gelir tek panelde. Google Analytics'e kendi sunucunda çalışan alternatif; veri yurt dışına gitmez. | Kendi sunucunda ücretsiz (MIT, PostgreSQL ister); bulut sürümü de var |
 | [OpenReplay](https://github.com/openreplay/openreplay) | Oturum kaydı | Kullanıcının oturumunu konsol ve ağ kayıtlarıyla birlikte izletir; "bende çalışmıyor" diyen kullanıcının gördüğünü görürsün. Ürün analitiği ve canlı ortak tarama da var; kendi sunucunda çalışır, veri üçüncü tarafa gitmez. | Kendi sunucunda ücretsiz (AGPL; sitene eklenen izleme kodu MIT); en az 2 vCPU ve 8 GB RAM ister |
+| [Firebase Crashlytics](https://firebase.google.com/products/crashlytics) | Çökme raporu | Mobil uygulamanın çökmelerini cihaz, işletim sistemi ve sürüm bilgisiyle toplar, benzer çökmeleri gruplar, en çok kullanıcıyı etkileyeni öne çıkarır; iOS, Android, Flutter ve Unity SDK'ları var. | Ücretsiz (Firebase'in ücretsiz ve ücretli planlarında); BigQuery'ye aktarırsan BigQuery ücreti çıkar |
 | [Sentry](https://sentry.io) | Hata izleme | Uygulamadaki ve sunucudaki hataları cihaz, tarayıcı, işletim sistemi ve sürüm bilgisiyle tek panelde toplar, yeni hata çıkınca haber verir; kaynak haritasıyla (source map) hatanın kodda hangi satırda olduğunu gösterir. Web, React Native, Flutter, iOS ve Android SDK'ları ve oturum tekrarı var; veri ABD'de ya da AB'de tutulur (organizasyon açılırken seçilir, sonra değişmez). | Developer planı ücretsiz: tek kullanıcı, ayda 5.000 hata, 50 oturum tekrarı; Team yıllık ödemede aylık 26 $. Kendi sunucunda ücretsiz (FSL lisansı, en az 4 çekirdek ve 16 GB RAM) |
 
 ## Birlikte kullanım ve dikkat

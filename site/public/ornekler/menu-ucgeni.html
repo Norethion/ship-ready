@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="yukseklik" content="440">
+<title>Menü üçgeni</title>
+<style>
+  /* Renkler tek yerde */
+  :root {
+    --zemin: #f4f1ea;
+    --kart: #ffffff;
+    --metin: #1c1b19;
+    --soluk: #5b5853;
+    --cizgi: #dcd6ca;
+    --vurgu: #2f4cf6;
+    --vurgu-acik: #e6eafe;
+    --ucgen: rgba(47, 76, 246, .13);
+    --ucgen-kenar: rgba(47, 76, 246, .55);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    display: flex; align-items: center; justify-content: center;
+    padding: 16px; overflow: hidden;
+    font: 14px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--metin); background: var(--zemin);
+  }
+  .sahne { width: 100%; max-width: 560px; }
+
+  /* Üst satır: başlık ve iki anahtar */
+  .ust { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .ust b { font-size: 15px; }
+  .anahtarlar { display: flex; gap: 6px; flex-wrap: wrap; }
+  .anahtar {
+    border: 1px solid var(--cizgi); background: var(--kart); color: var(--metin);
+    border-radius: 999px; padding: 5px 11px; font: inherit; font-size: 12.5px; cursor: pointer;
+  }
+  .anahtar[aria-pressed="true"] { background: var(--vurgu); border-color: var(--vurgu); color: #fff; }
+  button:focus-visible, a:focus-visible { outline: 2px solid var(--vurgu); outline-offset: 2px; }
+
+  /* Menü: solda kategoriler, sağda alt menü */
+  .menu {
+    position: relative; display: grid; grid-template-columns: minmax(0, 44%) minmax(0, 1fr);
+    background: var(--kart); border: 1px solid var(--cizgi); border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(28, 27, 25, .08); overflow: hidden;
+  }
+  .kategoriler { list-style: none; margin: 0; padding: 6px; border-right: 1px solid var(--cizgi); }
+  .kategori {
+    width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 6px;
+    border: 0; background: none; color: var(--metin); text-align: left;
+    padding: 11px 10px; border-radius: 9px; font: inherit; cursor: pointer;
+  }
+  .kategori svg { flex: none; opacity: .5; }
+  .kategori[aria-expanded="true"] { background: var(--vurgu-acik); color: var(--vurgu); font-weight: 600; }
+  .alt { padding: 14px 14px 10px; min-height: 100%; }
+  .alt h3 { margin: 2px 0 10px; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--soluk); }
+  .alt ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+  .alt a { display: block; padding: 8px 8px; border-radius: 8px; color: var(--metin); text-decoration: none; }
+  .alt a:hover { background: var(--zemin); }
+
+  /* Üçgeni gösteren katman ve hayalet imleç */
+  .katman { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .katman polygon { fill: var(--ucgen); stroke: var(--ucgen-kenar); stroke-width: 1.5; stroke-dasharray: 5 4; transition: opacity .2s; }
+  .hayalet { position: absolute; left: 0; top: 0; width: 20px; height: 20px; pointer-events: none; opacity: 0; transition: opacity .2s; }
+  .not { min-height: 2.8em; margin: 10px 2px 0; font-size: 12.5px; color: var(--soluk); }
+  .not b { color: var(--metin); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .katman polygon, .hayalet { transition: none; }
+  }
+</style>
+</head>
+<body>
+<div class="sahne">
+  <div class="ust">
+    <b>Menü üçgeni</b>
+    <div class="anahtarlar">
+      <button type="button" class="anahtar" id="ucgen" aria-pressed="true">Üçgen açık</button>
+      <button type="button" class="anahtar" id="goster" aria-pressed="true">Üçgeni göster</button>
+    </div>
+  </div>
+
+  <div class="menu" id="menu">
+    <ul class="kategoriler" id="kategoriler"></ul>
+    <section class="alt" id="alt" aria-live="polite"></section>
+    <svg class="katman" aria-hidden="true"><polygon id="poligon" points="" opacity="0"/></svg>
+    <svg class="hayalet" id="hayalet" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M5 3l14 8-6 1.6L10 19z" fill="#1c1b19" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <p class="not" id="not">İmleci bir kategoriden sağdaki alt menüye çapraz götür; aradaki kategorinin üstünden geçsen de menü değişmez.</p>
+</div>
+
+<script>
+  // Örnek veri
+  const VERI = [
+    { ad: "Elektronik", alt: ["Telefon", "Bilgisayar", "Kulaklık", "Akıllı saat"] },
+    { ad: "Ev & yaşam", alt: ["Mutfak", "Aydınlatma", "Tekstil", "Dekorasyon"] },
+    { ad: "Moda", alt: ["Kadın", "Erkek", "Ayakkabı", "Çanta"] },
+    { ad: "Spor", alt: ["Koşu", "Fitness", "Kamp", "Bisiklet"] },
+    { ad: "Kitap", alt: ["Roman", "Bilim", "Çocuk", "Çizgi roman"] },
+  ];
+  const BEKLEME = 300; // üçgenin içindeyken yeni kategoriye geçmeden önce beklenen süre (ms)
+
+  const menu = document.getElementById("menu");
+  const liste = document.getElementById("kategoriler");
+  const alt = document.getElementById("alt");
+  const poligon = document.getElementById("poligon");
+  const hayalet = document.getElementById("hayalet");
+  const not = document.getElementById("not");
+  const ucgenDugme = document.getElementById("ucgen");
+  const gosterDugme = document.getElementById("goster");
+  const azHareket = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  let aktif = 0;           // açık kategori
+  let capa = null;         // imlecin açık kategorinin üstündeki son konumu: üçgenin tepesi
+  let bekleyen = null;     // üçgen yüzünden ertelenen geçiş
+  let ucgenAcik = true;
+  let goster = true;
+
+  // Kategorileri çiz
+  VERI.forEach((k, i) => {
+    const li = document.createElement("li");
+    li.innerHTML = `<button type="button" class="kategori" aria-controls="alt" aria-expanded="false" data-i="${i}">${k.ad}
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>`;
+    liste.appendChild(li);
+  });
+  const satirlar = [...liste.querySelectorAll(".kategori")];
+
+  function ac(i) {
+    clearTimeout(bekleyen); bekleyen = null;
+    if (i === aktif && alt.dataset.i === String(i)) return;
+    aktif = i;
+    satirlar.forEach((s, j) => s.setAttribute("aria-expanded", j === i ? "true" : "false"));
+    alt.dataset.i = i;
+    alt.innerHTML = `<h3>${VERI[i].ad}</h3><ul>${VERI[i].alt.map(a => `<li><a href="#">${a}</a></li>`).join("")}</ul>`;
+  }
+
+  // Menüye göre koordinatlar
+  const kutu = el => {
+    const m = menu.getBoundingClientRect(), r = el.getBoundingClientRect();
+    return { x: r.left - m.left, y: r.top - m.top, w: r.width, h: r.height };
+  };
+  const satirBul = p => satirlar.findIndex(s => {
+    const k = kutu(s);
+    return p.x >= k.x && p.x <= k.x + k.w && p.y >= k.y && p.y <= k.y + k.h;
+  });
+
+  // p noktası a-b-c üçgeninin içinde mi (işaret yöntemi)
+  function icinde(p, a, b, c) {
+    const s = (p1, p2, p3) => (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
+    const d1 = s(p, a, b), d2 = s(p, b, c), d3 = s(p, c, a);
+    return !((d1 < 0 || d2 < 0 || d3 < 0) && (d1 > 0 || d2 > 0 || d3 > 0));
+  }
+  function ucgen() {
+    if (!capa) return null;
+    const k = kutu(alt);
+    return [capa, { x: k.x, y: k.y }, { x: k.x, y: k.y + k.h }];
+  }
+  function ciz(u) {
+    if (!u || !goster || !ucgenAcik) { poligon.setAttribute("opacity", "0"); return; }
+    poligon.setAttribute("points", u.map(n => `${n.x},${n.y}`).join(" "));
+    poligon.setAttribute("opacity", "1");
+  }
+
+  // Her imleç hareketinde çalışan asıl mantık
+  function hareket(p) {
+    const i = satirBul(p);
+    const u = ucgen();
+    const ucgendeyim = ucgenAcik && u && icinde(p, ...u);
+
+    if (i === aktif) {
+      capa = p; // açık kategorinin üstündeyken üçgenin tepesi imleçle birlikte kayar
+      clearTimeout(bekleyen); bekleyen = null;
+    } else if (i !== -1) {
+      if (ucgendeyim) {
+        // Alt menüye doğru gidiyor: hemen değiştirme, kısa bir süre bekle
+        clearTimeout(bekleyen);
+        bekleyen = setTimeout(() => { ac(i); capa = null; ciz(null); yaz("durdun"); }, BEKLEME);
+        yaz("korundu");
+      } else {
+        ac(i); capa = p;
+        if (!ucgenAcik && p.x > kutu(satirlar[0]).w * .55) yaz("kaydi");
+      }
+    } else if (!ucgendeyim) {
+      clearTimeout(bekleyen); bekleyen = null;
+    }
+    ciz(ucgendeyim || i === aktif ? ucgen() : null);
+  }
+
+  const NOTLAR = {
+    korundu: "<b>Üçgenin içindesin:</b> altındaki kategori değil, imlecin gittiği yön sayılıyor; menü açık kalıyor.",
+    durdun: "Üçgenin içinde durdun; kısa bir beklemeden sonra üstündeki kategori açıldı.",
+    kaydi: "<b>Üçgen kapalı:</b> çapraz giderken alttaki kategorinin üstünden geçince menü değişti.",
+    acik: not.innerHTML,
+    kapali: "Üçgen kapalı: şimdi aynı çapraz hareketi dene, alttaki kategori menüyü değiştirecek.",
+  };
+  const yaz = anahtar => { not.innerHTML = NOTLAR[anahtar]; };
+
+  // Fare
+  menu.addEventListener("pointermove", e => {
+    if (e.pointerType !== "mouse") return;
+    durdurGosterim();
+    const m = menu.getBoundingClientRect();
+    hareket({ x: e.clientX - m.left, y: e.clientY - m.top });
+  });
+  menu.addEventListener("pointerleave", () => { clearTimeout(bekleyen); bekleyen = null; ciz(null); });
+
+  // Dokunma ve klavye: tıklayınca açılır, oklarla gezilir
+  satirlar.forEach((s, i) => {
+    s.addEventListener("click", () => { durdurGosterim(); ac(i); });
+    s.addEventListener("keydown", e => {
+      const yon = { ArrowDown: 1, ArrowUp: -1 }[e.key];
+      if (yon) { e.preventDefault(); const j = (i + yon + satirlar.length) % satirlar.length; satirlar[j].focus(); ac(j); }
+      if (e.key === "ArrowRight") { e.preventDefault(); const a = alt.querySelector("a"); if (a) a.focus(); }
+    });
+  });
+  alt.addEventListener("keydown", e => {
+    const linkler = [...alt.querySelectorAll("a")], i = linkler.indexOf(document.activeElement);
+    if (e.key === "ArrowLeft") { e.preventDefault(); satirlar[aktif].focus(); }
+    const yon = { ArrowDown: 1, ArrowUp: -1 }[e.key];
+    if (yon && i !== -1) { e.preventDefault(); linkler[(i + yon + linkler.length) % linkler.length].focus(); }
+  });
+  alt.addEventListener("click", e => { if (e.target.closest("a")) e.preventDefault(); });
+
+  // Anahtarlar
+  ucgenDugme.addEventListener("click", () => {
+    durdurGosterim();
+    ucgenAcik = !ucgenAcik;
+    ucgenDugme.setAttribute("aria-pressed", String(ucgenAcik));
+    ucgenDugme.textContent = ucgenAcik ? "Üçgen açık" : "Üçgen kapalı";
+    yaz(ucgenAcik ? "acik" : "kapali");
+    ciz(null);
+  });
+  gosterDugme.addEventListener("click", () => {
+    goster = !goster;
+    gosterDugme.setAttribute("aria-pressed", String(goster));
+    ciz(null);
+  });
+
+  // Kendiliğinden oynayan gösterim: hayalet imleç birinci kategoriden alt menüye çapraz gider.
+  // Kullanıcı menüye dokununca durur, görünmüyorsa çalışmaz.
+  let gosterim = null, oynuyor = false, bitti = false, gorunur = false;
+  function durdurGosterim() {
+    if (bitti) return;
+    bitti = true; oynuyor = false; cancelAnimationFrame(gosterim); hayalet.style.opacity = "0";
+  }
+  function yol(t) {
+    const bas = kutu(satirlar[0]), al = kutu(alt);
+    const a = { x: bas.x + bas.w * .55, y: bas.y + bas.h / 2 };
+    const b = { x: al.x + al.w * .45, y: al.y + al.h * .62 };
+    const e = t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    return { x: a.x + (b.x - a.x) * e, y: a.y + (b.y - a.y) * e };
+  }
+  function tur(acik, sonra) {
+    ucgenAcik = acik;
+    ucgenDugme.setAttribute("aria-pressed", String(acik));
+    ucgenDugme.textContent = acik ? "Üçgen açık" : "Üçgen kapalı";
+    ac(0); capa = null;
+    const sure = 1600, t0 = performance.now();
+    hayalet.style.opacity = "1";
+    const adim = now => {
+      if (!oynuyor) return;
+      const t = Math.min(1, (now - t0) / sure), p = yol(t);
+      hayalet.style.transform = `translate(${p.x - 4}px, ${p.y - 3}px)`;
+      hareket(p);
+      if (t < 1) gosterim = requestAnimationFrame(adim);
+      else setTimeout(() => oynuyor && sonra(), 1300);
+    };
+    gosterim = requestAnimationFrame(adim);
+  }
+  function oynat() {
+    if (bitti || oynuyor || !gorunur) return;
+    oynuyor = true;
+    tur(true, () => tur(false, () => { tur(true, () => { oynuyor = false; hayalet.style.opacity = "0"; setTimeout(oynat, 1500); }); }));
+  }
+  ac(0);
+  if (!azHareket && "IntersectionObserver" in window) {
+    new IntersectionObserver(([g]) => {
+      gorunur = g.isIntersecting;
+      if (gorunur) oynat();
+      else { oynuyor = false; cancelAnimationFrame(gosterim); hayalet.style.opacity = "0"; }
+    }).observe(menu);
+  }
+</script>
+</body>
+</html>

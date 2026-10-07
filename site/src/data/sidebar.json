@@ -15,7 +15,7 @@
     "attrs": {
      "data-ikon": "shield"
     },
-    "badge": "98"
+    "badge": "115"
    },
    {
     "label": "App Store incelemesi",
@@ -61,6 +61,20 @@
     }
    },
    {
+    "label": "Mobil uygulama",
+    "link": "/rehberler/mobil-uygulama/",
+    "attrs": {
+     "data-ikon": "devices"
+    }
+   },
+   {
+    "label": "Şirket kurmadan yayın",
+    "link": "/rehberler/sirket-kurmadan-yayin/",
+    "attrs": {
+     "data-ikon": "landmark"
+    }
+   },
+   {
     "label": "Yayına alma & barındırma",
     "link": "/rehberler/yayina-alma-barindirma/",
     "attrs": {
@@ -92,7 +106,7 @@
     "attrs": {
      "data-ikon": "package"
     },
-    "badge": "141"
+    "badge": "182"
    }
   ]
  }

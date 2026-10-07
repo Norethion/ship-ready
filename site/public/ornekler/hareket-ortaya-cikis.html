@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="yukseklik" content="480">
+<title>Ortaya çıkış hareketleri</title>
+<style>
+  /* ── Ortak görsel dil: dört "hareket türü" örneğinde aynıdır ── */
+  :root {
+    --zemin: #f4f1ea;       /* açık bej sayfa */
+    --yuzey: #fbfaf6;       /* kutu içi */
+    --metin: #111111;
+    --soluk: #5b564e;       /* ikincil yazı; bej üstünde 6.6:1 */
+    --cizgi: #161616;       /* başlık çizgisi */
+    --kenar: #d6d0c4;       /* kutu ve ayraç kenarı */
+    --vurgu: #2f4cf6;       /* tek vurgu rengi; beyaz yazıyla 6:1 */
+    --vurgu-koyu: #1f37c9;
+    --vurgu-acik: #c3ccfd;
+    --vurgu-zemin: #e5e9fe;
+    --gecis: cubic-bezier(.2, .7, .2, 1);    /* yumuşak çıkış */
+    --yay: cubic-bezier(.34, 1.56, .64, 1);  /* hafif taşan yay */
+    --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    display: flex; justify-content: center;
+    align-items: center; align-items: safe center;
+    padding: 16px;
+    font: 14px/1.45 var(--font); color: var(--metin);
+    background: var(--zemin);
+    -webkit-font-smoothing: antialiased;
+  }
+  .kasa { width: 100%; max-width: 560px; }
+  .ust {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px;
+    margin: 0; padding-top: 9px; border-top: 1.5px solid var(--cizgi);
+    font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+  }
+  .ust b { color: var(--vurgu); font-weight: 900; }
+  .ust span { color: var(--soluk); }
+  h1 {
+    margin: 8px 0 12px;
+    font-size: clamp(21px, 6.4vw, 30px); font-weight: 900; line-height: 1;
+    letter-spacing: -.035em; text-transform: uppercase;
+  }
+  .nokta { display: inline-block; width: .22em; height: .22em; margin-left: .06em; border-radius: 50%; background: var(--vurgu); }
+  .kutu { position: relative; background: var(--yuzey); border: 1px solid var(--kenar); border-radius: 3px; }
+  .ad { margin: 0; font-size: 13px; color: var(--soluk); }
+  .ad b { margin-right: 6px; font-size: 14px; font-weight: 900; letter-spacing: -.01em; text-transform: uppercase; color: var(--metin); }
+  .satir { display: grid; gap: 6px; padding: 10px 0; }
+  .satir:first-child { padding-top: 0; }
+  .satir + .satir { border-top: 1px solid var(--kenar); }
+  @media (min-width: 540px) {
+    .satir { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: center; column-gap: 18px; }
+    .satir .ad { order: 2; }
+    .ad span { display: block; margin-top: 2px; }
+  }
+  .dugme {
+    display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 12px;
+    border: 1.5px solid var(--metin); border-radius: 999px; background: transparent;
+    font: 600 12.5px var(--font); letter-spacing: 0; text-transform: none; color: var(--metin); cursor: pointer;
+    transition: background-color .2s, color .2s;
+  }
+  .dugme:hover { background: var(--metin); color: var(--zemin); }
+  .dugme svg { width: 14px; height: 14px; }
+  :focus-visible { outline: 2px solid var(--vurgu); outline-offset: 3px; }
+
+  /* ── Bu örnek ── */
+  .ust .dugme { margin-left: auto; }
+  .azalt-notu { display: none; margin-left: auto; text-transform: none; letter-spacing: 0; }
+  .demo { display: flex; align-items: center; justify-content: center; gap: 14px; min-height: 64px; padding: 10px 14px; overflow: hidden; }
+
+  /* 1 · Belir + yüksel */
+  .selam { margin: 0; font-size: 28px; font-weight: 900; line-height: 1.1; letter-spacing: -.03em; }
+  .iz { width: 12px; height: 34px; color: var(--vurgu); }
+
+  /* 2 · Sırayla giriş */
+  .karolar { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; width: 100%; margin: 0; padding: 0; list-style: none; }
+  .karo {
+    --kalk: 12px;
+    display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 2px;
+    background: #fff; border: 1px solid var(--kenar); border-radius: 8px;
+    font-size: 11.5px; font-weight: 700;
+  }
+  .karo span { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; color: var(--vurgu); background: var(--vurgu-zemin); }
+  .karo svg { width: 14px; height: 14px; }
+
+  /* 3 · Maskeyle açılma: mavi örtü soldan kapanır, sağa çekilirken yazıyı açar */
+  .maske { position: relative; margin: 0; font-size: 30px; font-weight: 900; line-height: 1.1; letter-spacing: -.03em; }
+  .maske-yazi { display: block; }
+  .maske::after { content: ""; position: absolute; inset: 0; background: var(--vurgu); clip-path: inset(0 0 0 100%); }
+  .ok { width: 34px; height: 14px; color: var(--vurgu); }
+
+  /* Oynatma: betik sahneye önce .hazir (öğeler gizli), sonra .oyna (animasyon) ekler */
+  .hazir .canlan { opacity: 0; }
+  .hazir .maske-yazi { clip-path: inset(0 100% 0 0); }
+  .oyna .selam { animation: belir .7s var(--gecis) .1s both; }
+  .oyna .karo { animation: belir .55s var(--gecis) both; animation-delay: calc(.45s + var(--i) * 90ms); }
+  .oyna .maske::after { animation: ortu .9s cubic-bezier(.7, 0, .25, 1) 1s both; }
+  .oyna .maske-yazi { animation: ac .9s cubic-bezier(.7, 0, .25, 1) 1s both; }
+  @keyframes belir { from { opacity: 0; transform: translateY(var(--kalk, 18px)); } to { opacity: 1; transform: none; } }
+  /* İki animasyon aynı eğriyle oynar: örtünün sol kenarı ile yazının görünen sağ kenarı birlikte ilerler */
+  @keyframes ortu { 0% { clip-path: inset(0 100% 0 0); } 50% { clip-path: inset(0); } 100% { clip-path: inset(0 0 0 100%); } }
+  @keyframes ac { 0%, 50% { clip-path: inset(0 100% 0 0); } 100% { clip-path: inset(0); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hazir .canlan { opacity: 1; }
+    .hazir .maske-yazi { clip-path: none; }
+    .oyna .selam, .oyna .karo, .oyna .maske::after, .oyna .maske-yazi { animation: none; }
+    #yeniden { display: none; }
+    .azalt-notu { display: inline; }
+  }
+</style>
+</head>
+<body>
+<main class="kasa">
+  <div class="ust">
+    <b>02</b> · Ortaya çıkış <span>→ hiyerarşi</span>
+    <button type="button" class="dugme" id="yeniden">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+      Yeniden oynat
+    </button>
+    <span class="azalt-notu">Hareket azaltma açık</span>
+  </div>
+  <h1>Hepsini birden gösterme<span class="nokta"></span></h1>
+
+  <div class="sahne" id="sahne">
+    <!-- 1 · Belir + yüksel (fade + lift) -->
+    <section class="satir">
+      <p class="ad"><b>Belir + yüksel</b> <span>Sade, güvenilir, şık.</span></p>
+      <div class="kutu demo">
+        <p class="selam canlan">Merhaba<span class="nokta"></span></p>
+        <svg class="iz" viewBox="0 0 12 34" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M6 33V4" stroke-dasharray="2 3"/><path d="m2 7 4-5 4 5"/></svg>
+      </div>
+    </section>
+
+    <!-- 2 · Sırayla giriş (stagger) -->
+    <section class="satir">
+      <p class="ad"><b>Sırayla giriş</b> <span>Öğeler birbiri ardına gelir.</span></p>
+      <div class="kutu demo">
+        <ul class="karolar">
+          <li class="karo canlan" style="--i:0"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></span>Hızlı</li>
+          <li class="karo canlan" style="--i:1"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span>Güvenli</li>
+          <li class="karo canlan" style="--i:2"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 12 10 5 10-5"/><path d="m2 17 10 5 10-5"/></svg></span>Esnek</li>
+          <li class="karo canlan" style="--i:3"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 12.2a6 6 0 0 0-8.5-8.5L5 10.5V19h8.5z"/><path d="M16 8 2 22"/><path d="M17.5 15H9"/></svg></span>Sade</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 3 · Maskeyle açılma (clip reveal) -->
+    <section class="satir">
+      <p class="ad"><b>Maskeyle açılma</b> <span>İçerik örtünün altından çıkar.</span></p>
+      <div class="kutu demo">
+        <p class="maske"><span class="maske-yazi">Tasarım</span></p>
+        <svg class="ok" viewBox="0 0 34 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 7h31"/><path d="m27 2 5 5-5 5"/></svg>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script>
+(function () {
+  var sahne = document.getElementById('sahne');
+
+  // .oyna sınıfını kaldırıp yeniden ekler; aradaki ölçüm tarayıcıyı eski durumu işlemeye zorlar,
+  // böylece bütün animasyonlar baştan başlar
+  function oynat() {
+    sahne.classList.remove('oyna');
+    void sahne.offsetWidth;
+    sahne.classList.add('oyna');
+  }
+
+  sahne.classList.add('hazir');
+  document.getElementById('yeniden').addEventListener('click', oynat);
+
+  // Sahne ilk kez görünür olunca bir kez oynar; sonrası düğmeyle
+  if ('IntersectionObserver' in window) {
+    var gozcu = new IntersectionObserver(function (girdiler) {
+      if (!girdiler[0].isIntersecting) return;
+      gozcu.disconnect();
+      oynat();
+    }, { threshold: 0.4 });
+    gozcu.observe(sahne);
+  } else {
+    oynat();
+  }
+})();
+</script>
+</body>
+</html>
