@@ -34,6 +34,7 @@ CARD_PROMPTS = {
     "Etkileşim": ("Bu etkileşimi yap", "tasarim", lambda t, d, u: f'Bu projede "{t}" etkileşimini yap: {d} Projenin altyapısına uygun animasyon yolunu seç (web\'de CSS ya da projede varsa Motion veya GSAP, mobilde platformun kendi animasyonları), hareketi azalt tercihinde animasyonu kapat ve önce hangi ekrana uygulayacağını göster.'),
     "Hareket": ("Bu hareketi ekle", "tasarim", lambda t, d, u: f'Bu projeye "{t}" hareket türünü ekle: {d} Önce hareketin anlam katacağı yerleri öner; hareketi süs için değil geri bildirim için kullan, projenin altyapısına uygun yolu seç (web\'de CSS ya da projede varsa Motion veya GSAP), hareketi azalt tercihinde kapat.'),
     "İşaret": ("Bu işareti temizle", "tasarim", lambda t, d, u: f'Bu projenin arayüzünde "{t}" işaretini ara: {d} Bulduğun her yeri dosya ve satırıyla listele, hangisinin bilinçli bir tasarım kararı olduğunu bana sor; kalanları onayımla bu ürüne özgü bir tasarımla değiştir.'),
+    "Yasa": ("Bu yasaya göre incele", "tasarim", lambda t, d, u: f'Bu projenin arayüzünü "{t}" UX yasasına göre incele: {d} Yasaya uymayan ekranları dosya ve satırıyla listele, her biri için somut bir düzeltme öner; onayımla uygula ve değişiklikten sonra ekranı yeniden aç.'),
     # Prompt tablosunda açıklama sütunu prompt'un kendisidir; düğme onu olduğu gibi kopyalar.
     "Prompt": ("Prompt'u kopyala", "tasarim", lambda t, d, u: d),
 }

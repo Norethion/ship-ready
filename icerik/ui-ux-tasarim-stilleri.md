@@ -67,6 +67,19 @@ Yapay zekâya bir şey ekletmek yerine neyin çıkarılacağını sor; her promp
 | İlk 5 saniyeyi düzelt | Sayfanın kaydırmadan görünen üst kısmında ürünün ne olduğunu, kimin için olduğunu, neden önemli olduğunu ve sonra ne yapılacağını açıkça anlat. Süslemeyi bunlardan sonraya bırak; 5 saniyede okunup anlaşılıyor mu diye kontrol et. | Ziyaretçi ilk bakışta ürünün ne yaptığını anlamıyor. |
 | Tasarımcı gözüyle geçir | Çalışan siteyi aç ve en çok etki eden 10 tasarım sorununu bul, önem sırasıyla listele. Onayımla düzelt, siteyi yeniden açıp tekrar incele; yeni bir şey ekleme, neyin çıkarılacağını öner. | Sayfa bitti gibi ama bir şeyler eksik ya da fazla duruyor. |
 
+## UX yasaları
+
+İnsanların arayüzü nasıl algıladığını ve kullandığını anlatan beş yasa; [bu gönderiden](https://www.instagram.com/p/DeCGOVNEwKR/) alındı, ayrıntıları [Laws of UX](https://lawsofux.com) sitesinde.
+Yasalar katı kural değil, tasarım kararını gerekçelendirmenin yolu; kararı yine gerçek kullanıcıyla test ederek ver.
+
+| Yasa | Ne der | Arayüzde nasıl uygulanır | Örnek |
+|---|---|---|---|
+| Zirve-son kuralı | İnsanlar bir deneyimi ortalamasıyla değil, en yoğun anı ve sonuyla hatırlar. | Akışın en önemli anına küçük bir sevinç koy, sonunu (ödeme, kayıt, iş bitti ekranı) özenle bitir; bekleme ve hata anlarını yumuşat. | Yemek siparişinde teslim süresini hemen göstermek, kalori uygulamasının gün sonu özeti. |
+| Miller yasası | Kısa süreli bellek aynı anda sınırlı sayıda öğe tutar; Miller 7±2 dedi, sonraki araştırmalar 4 civarı diyor. | Bilgiyi gruplara böl: uzun formu adımlara, uzun sayıyı parçalara, menüyü bölümlere ayır. "Menüde en fazla 7 öğe" katı bir kural değil, gruplamanın gerekçesi. | Kart numarasını dörtlü gruplarla göstermek, kategorileri satır başına birkaç öğeyle sınırlamak. |
+| Hick yasası | Seçenek sayısı arttıkça karar vermek uzar. | Ana işlemi öne çıkar, nadir seçenekleri "Daha fazla" altına al, karmaşık seçimi adımlara böl, uygun varsayılanı önceden seç. | Az sekmeli alt menü, ödeme ekranında tek ana düğme. |
+| Fitts yasası | Bir hedefe ulaşma süresi hedefin uzaklığına ve büyüklüğüne bağlıdır; büyük ve yakın hedefe daha hızlı dokunulur. | Ana düğmeyi büyük yap ve başparmağın kolay ulaştığı yere koy; dokunma alanı iOS'ta en az 44×44 pt, Android'de 48×48 dp olsun, silme gibi yıkıcı işlemi ana işlemin hemen yanına koyma. | Mobilde sağ altta duran "Yaz" düğmesi. |
+| Benzerlik yasası | Rengi, şekli ya da biçimi benzeyen öğeler aynı gruptan sanılır. | Aynı işi yapan öğelere aynı görünümü ver (bütün ana düğmeler tek renk), farklı işi yapanları ayırt edilir yap (bağlantı düğmeye benzemesin). | Satın alma düğmelerinin her ekranda aynı renkte olması. |
+
 ## Kütüphaneler
 
 Projeye kurulan ya da kodu projeye kopyalanan bileşen, animasyon, grafik, harita ve ses kütüphaneleri; türlerine göre sıralı.
@@ -170,6 +183,7 @@ Instagram'da görülen etkileşimlerin bizim yazdığımız çalışan hâli: ka
 | Akıcı giriş formu <!-- ornek: akici-giris-formu --> | Logo çizilerek açılır; Giriş ve Kayıt sekmeleri, alanın altında anında hata mesajı, giriş düğmesinde yükleniyor simgesinden onay işaretine geçiş. Flutter ile yapılmış. | Mobil giriş ve kayıt ekranı | Paylaşılmamış | [Instagram videosu](https://www.instagram.com/reel/Ddg450QpmE2/) |
 | Etkileşimli dashboard <!-- ornek: etkilesimli-dashboard --> | Cam görünümlü istatistik kartları üzerine gelince hafifçe yükselir; grafik, görev ve işlem listeleri kartlarda toplanır, mobilde alt alta dizilir. React, Motion ve Lucide ikonlarıyla yapılmış. | Yönetim paneli, analitik ekranı | Yorum yazana DM'den gönderiliyor | [Instagram videosu](https://www.instagram.com/reel/Ddf-7oiz126/) |
 | Açılan kenar çubuğu <!-- ornek: acilir-kenar-cubugu --> | Kapalıyken sadece ikonlardan oluşan dar, yüzen bir sütun; üzerine gelince genişler, profil, arama ve menü adları belirir, alttaki eylem düğmeleri üst üste yığından yan yana sıraya kayar, görev rozeti ikonun köşesinden satır sonuna geçer. Seçili sayfa radyo düğmesiyle, açık-koyu tema onay kutusuyla tutulur; sadece HTML ve CSS ile yapılmış. | Yönetim paneli, SaaS uygulamasının ana menüsü | Ücretsiz ama lisanssız, sadece incelenir ([frontend-joe/css-components](https://github.com/frontend-joe/css-components/tree/main/sidebars/sidebar-9)) | [Instagram gönderisi](https://www.instagram.com/p/DdXfSSqDMRd/) |
+| Menü üçgeni <!-- ornek: menu-ucgeni --> | Alt menüye çapraz giden imleç alttaki kategorinin üstünden geçince menü kapanmasın diye imleçten alt menünün iki köşesine görünmez bir üçgen çizilir; imleç üçgenin içindeyken menü değişmez, üçgenden çıkınca ya da kısa bir süre durunca altındaki kategori açılır. Örnekte üçgen görünür yapılmış, açılıp kapatılarak fark denenir. | Açılır menüler, mega menüler, iç içe bağlam menüleri | Paylaşılmamış | [Instagram videosu](https://www.instagram.com/reel/DeHWUs4K-u_/) |
 
 ## Hareket türleri
 
