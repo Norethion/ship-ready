@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-09T10:53:38+00:00",
+  "syncedAt": "2026-10-09T17:09:34+00:00",
   "folders": [
     {
       "id": "ajan-skill",
@@ -237,7 +237,7 @@
         "u": "https://www.instagram.com/reel/DaLUGUbMp4K/",
         "t": "talhaunuvai"
       },
-      "s": 20361,
+      "s": 20371,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -259,7 +259,7 @@
       "d": "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.",
       "l": null,
       "at": "2026-09-26",
-      "s": 217597,
+      "s": 217689,
       "archived": false,
       "pushed": "2026-04-20"
     },
@@ -281,7 +281,7 @@
       "d": "Give your AI agent eyes to see the entire internet. Read & search Twitter, Reddit, YouTube, GitHub, Bilibili, XiaoHongShu — one CLI, zero API fees.",
       "l": "Python",
       "at": "2026-09-26",
-      "s": 94531,
+      "s": 94713,
       "archived": false,
       "pushed": "2026-10-08"
     },
@@ -317,7 +317,7 @@
       "d": "Fast Rust library for PDF inspection, classification, and text extraction. Intelligently detects scanned vs text-based PDFs to enable smart routing decisions.",
       "l": "Rust",
       "at": "2026-09-26",
-      "s": 19560,
+      "s": 19561,
       "archived": false,
       "pushed": "2026-10-07"
     },
@@ -339,7 +339,7 @@
       "d": "Claude Code skill: four-phase plan hardening (recon, interrogate, Codex adversarial review, cross-model build & inspection) — two AI models harden your plan before a line of code exists, then swap jobs to build it. Whoever built it never grades it.",
       "l": "Python",
       "at": "2026-09-26",
-      "s": 2803,
+      "s": 2808,
       "archived": false,
       "pushed": "2026-09-06"
     },
@@ -357,7 +357,7 @@
       "d": "A modern load testing tool, using Go and JavaScript",
       "l": "Go",
       "at": "2026-09-26",
-      "s": 31847,
+      "s": 31852,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -375,7 +375,7 @@
       "d": "The OWASP Cheat Sheet Series was created to provide a concise collection of high value information on specific application security topics.",
       "l": "JavaScript",
       "at": "2026-09-26",
-      "s": 33567,
+      "s": 33576,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -393,7 +393,7 @@
       "d": "Learn how to design large-scale systems. Prep for the system design interview.  Includes Anki flashcards.",
       "l": "Python",
       "at": "2026-09-26",
-      "s": 373501,
+      "s": 373545,
       "archived": false,
       "pushed": "2026-09-15"
     },
@@ -411,7 +411,7 @@
         "u": "https://www.instagram.com/reel/DdgPH-poGbJ/",
         "t": "adilet.fndr"
       },
-      "s": 3610,
+      "s": 3615,
       "archived": false,
       "pushed": "2026-08-16"
     },
@@ -424,7 +424,7 @@
       "d": "Open-source AI penetration testing tool to find and fix your app’s vulnerabilities.",
       "w": "Sadece test etme yetkin olan sistemlerde kullan. Docker ve LLM API anahtarı ister.",
       "l": "Python",
-      "s": 67420,
+      "s": 67495,
       "at": "2026-09-25",
       "src": {
         "t": "the_coding_wizard",
@@ -442,7 +442,7 @@
       "d": "Open source alternative to Semrush and Ahrefs",
       "w": "Her sorgu DataForSEO'ya ücretli.",
       "l": "TypeScript",
-      "s": 22837,
+      "s": 22860,
       "at": "2026-09-25",
       "src": {
         "t": "the_coding_wizard",
@@ -460,7 +460,7 @@
       "d": "Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible.",
       "w": "",
       "l": "Go",
-      "s": 44768,
+      "s": 44986,
       "at": "2026-09-21",
       "src": null,
       "archived": false,
@@ -479,7 +479,7 @@
       "d": "An AI skill that provides design intelligence for building professional UI/UX across multiple platforms.",
       "w": "",
       "l": "Python",
-      "s": 134062,
+      "s": 134165,
       "at": "2026-06-10",
       "src": null,
       "archived": false,
@@ -498,7 +498,7 @@
       "d": "The design language that makes your AI harness better at design.",
       "w": "",
       "l": "JavaScript",
-      "s": 78827,
+      "s": 78936,
       "at": "2026-09-25",
       "src": {
         "t": "Nate Herk",
@@ -520,7 +520,7 @@
       "d": "Taste-Skill - gives your AI good taste. stops the AI from generating boring, generic slop ",
       "w": "",
       "l": "JavaScript",
-      "s": 93975,
+      "s": 94052,
       "at": "2026-09-25",
       "src": {
         "t": "Nate Herk",
@@ -542,7 +542,7 @@
       "d": "Skills for Designers and Engineers.",
       "w": "",
       "l": "Markdown",
-      "s": 44560,
+      "s": 44656,
       "at": "2026-09-25",
       "src": {
         "t": "Nate Herk",
@@ -564,7 +564,7 @@
       "d": "A guide on how to use the Figma MCP server",
       "w": "",
       "l": "Python",
-      "s": 2058,
+      "s": 2059,
       "at": "2026-09-25",
       "src": {
         "t": "Nate Herk",
@@ -601,7 +601,7 @@
       "d": "The open agent skills tool - npx skills",
       "w": "",
       "l": "TypeScript",
-      "s": 33509,
+      "s": 33545,
       "at": "2026-09-25",
       "src": {
         "t": "Nate Herk",
@@ -623,7 +623,7 @@
       "d": "Vercel's official collection of agent skills",
       "w": "",
       "l": "JavaScript",
-      "s": 32110,
+      "s": 32121,
       "at": "2026-01-14",
       "src": null,
       "archived": false,
@@ -660,7 +660,7 @@
       "d": "Removes 20+ patterns of AI slop from any piece of writing.",
       "w": "",
       "l": "Python",
-      "s": 12087,
+      "s": 12096,
       "at": "2026-09-25",
       "src": {
         "t": "the_coding_wizard",
@@ -682,7 +682,7 @@
       "d": "A skill to stop your coding agent from burying the answer. ADHD-friendly output.",
       "w": "",
       "l": "Python",
-      "s": 55977,
+      "s": 56075,
       "at": "2026-09-25",
       "src": {
         "t": "the_coding_wizard",
@@ -704,7 +704,7 @@
       "d": "Turn any technical book PDF into a Claude Code skill — ready to study, reference, and use while you work.",
       "w": "Telifli kitaptan üretilen skill'i paylaşma.",
       "l": "Python",
-      "s": 34267,
+      "s": 34305,
       "at": "2026-09-25",
       "src": {
         "t": "the_coding_wizard",
@@ -722,7 +722,7 @@
       "d": "FULL Augment Code, Claude Code, Cluely, CodeBuddy, Comet, Cursor, Devin AI, Junie, Kiro, Leap.new, Lovable, Manus, NotionAI, Orchids.app, Perplexity, Poke, Qoder, Replit, Same.dev, Trae, Traycer AI, VSCode Agent, Warp.dev, Windsurf, Xcode, Z.ai Code, Dia & v0. (And other Open Sourced) System Prompts, Internal Tools & AI Models",
       "w": "",
       "l": null,
-      "s": 143921,
+      "s": 143924,
       "at": "2025-12-17",
       "src": null,
       "archived": false,
@@ -740,7 +740,7 @@
       "d": "CLI tool for configuring and monitoring Claude Code",
       "w": "",
       "l": "Python",
-      "s": 32488,
+      "s": 32499,
       "at": "2026-06-10",
       "src": null,
       "archived": false,
@@ -773,7 +773,7 @@
       "d": "",
       "w": "Çok erken aşama, hata bekleniyor.",
       "l": "TypeScript",
-      "s": 26488,
+      "s": 26561,
       "at": "2026-09-25",
       "src": {
         "t": "Isaac Dyor",
@@ -795,7 +795,7 @@
       "d": "Browser automation CLI for AI agents",
       "w": "",
       "l": "Rust",
-      "s": 43713,
+      "s": 43723,
       "at": "2026-09-25",
       "src": {
         "t": "Isaac Dyor",
@@ -817,7 +817,7 @@
       "d": "Playwright MCP server",
       "w": "",
       "l": "TypeScript",
-      "s": 37958,
+      "s": 37970,
       "at": "2026-09-25",
       "src": {
         "t": "Nate Herk",
@@ -835,14 +835,14 @@
       "d": "Never stop coding. Free MIT AI gateway: one endpoint, 359 providers (150+ free), 1200+ models Kimi, Claude, GPT, Gemini, GLM, DeepSeek, MiniMax. Works with Claude Code, Codex, Cursor, OpenCode, Cline & Copilot. Quota-aware auto-fallback, RTK+Caveman compression saves 15-95% tokens, MCP/A2A, Desktop/PWA. Built by hundreds of contributors",
       "w": "Bazı sağlayıcıların kullanım şartlarına aykırı olabilir.",
       "l": "TypeScript",
-      "s": 74478,
+      "s": 74584,
       "at": "2026-09-25",
       "src": {
         "t": "the_coding_wizard",
         "u": "https://www.instagram.com/p/Dc-wvDXkaJU/"
       },
       "archived": false,
-      "pushed": "2026-10-08"
+      "pushed": "2026-10-09"
     },
     {
       "r": "EmpiricaAI/empirica",
@@ -871,7 +871,7 @@
       "d": "A programming framework for agentic AI",
       "w": "",
       "l": "Python",
-      "s": 61316,
+      "s": 61330,
       "at": "2025-12-24",
       "src": null,
       "archived": false,
@@ -886,7 +886,7 @@
       "d": "The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor CVs, write cover letters, prep interviews. Fork it and own it.",
       "w": "İlan tarayıcıları Danimarka sitelerine göre yazılmış. Fork her zaman herkese açık olur ve kurulum kişisel bilgilerini (maaş beklentisi dahil) dosyalara yazar; README'nin önerdiği gibi gizli bir repo kullan.",
       "l": "Python",
-      "s": 45347,
+      "s": 45380,
       "at": "2026-09-25",
       "src": {
         "t": "the_coding_wizard",
@@ -904,7 +904,7 @@
       "d": "Open-source web crawler and scraper for LLMs and AI agents: any website into clean, LLM-ready Markdown. Run it yourself, or use Crawl4AI Cloud with one key.",
       "w": "",
       "l": "Python",
-      "s": 85058,
+      "s": 85080,
       "at": "2026-09-14",
       "src": null,
       "archived": false,
@@ -919,7 +919,7 @@
       "d": "This repository showcases various advanced techniques for Retrieval-Augmented Generation (RAG) systems. Each technique has a detailed notebook tutorial.",
       "w": "",
       "l": "Jupyter Notebook",
-      "s": 29705,
+      "s": 29719,
       "at": "2026-07-19",
       "src": null,
       "archived": false,
@@ -934,7 +934,7 @@
       "d": "Hundreds of models & providers. One command to find what runs on your hardware.",
       "w": "",
       "l": "Rust",
-      "s": 37738,
+      "s": 37749,
       "at": "2026-07-22",
       "src": null,
       "archived": false,
@@ -949,7 +949,7 @@
       "d": "🔥 基于大模型和 RAG 的智能问数系统，对话式数据分析神器。Text-to-SQL Generation via LLMs using RAG.",
       "w": "Proje Çince.",
       "l": "JavaScript",
-      "s": 6876,
+      "s": 6878,
       "at": "2025-10-01",
       "src": null,
       "archived": false,
@@ -964,7 +964,7 @@
       "d": "An Open Source implementation of Notebook LM with more flexibility and features",
       "w": "",
       "l": "TypeScript",
-      "s": 39987,
+      "s": 39998,
       "at": "2026-09-25",
       "src": {
         "t": "the_coding_wizard",
@@ -982,7 +982,7 @@
       "d": "A fast AI Video Generator for the GPU Poor. Supports Minimax H3, LTX-2.3/2.5, Wan 2.1/2.2,  Qwen Image 1/2, Krea 2, Hunyuan Video, LTX  Video and Flux.",
       "w": "",
       "l": "Python",
-      "s": 10232,
+      "s": 10248,
       "at": "2026-08-14",
       "src": null,
       "archived": false,
@@ -997,7 +997,7 @@
       "d": "Gradio WebUI for creators and developers, featuring key TTS (Edge-TTS, kokoro) and zero-shot Voice Cloning (E2 & F5-TTS, CosyVoice), with Whisper audio processing, YouTube download, Demucs vocal isolation, and multilingual translation.",
       "w": "",
       "l": "Python",
-      "s": 12984,
+      "s": 12985,
       "at": "2026-08-02",
       "src": null,
       "archived": false,
@@ -1012,14 +1012,14 @@
       "d": "Unrestricted Open-source alternative to AI video platforms — Free AI image & video generation studio with 600+ models (Flux, Midjourney, Kling, Sora, Veo). No content filters. Self-hosted, MIT licensed.",
       "w": "Bulut modelleri ücretli MuAPI servisi üzerinden, üretim başına ücretle çalışıyor; yerel üretim sadece masaüstü uygulamasında var (sd.cpp ile görsel, ayrıca kurulan Wan2GP ile NVIDIA ya da AMD GPU'da video).",
       "l": "JavaScript",
-      "s": 29917,
+      "s": 29931,
       "at": "2026-09-25",
       "src": {
         "t": "the_coding_wizard",
         "u": "https://www.instagram.com/p/Dc-wvDXkaJU/"
       },
       "archived": false,
-      "pushed": "2026-10-08"
+      "pushed": "2026-10-09"
     },
     {
       "r": "latent-spaces/brag",
@@ -1034,7 +1034,7 @@
       "d": "You built it. Now brag. Turn the project you just created into a short, shareable launch video with one command.",
       "w": "",
       "l": "Python",
-      "s": 14538,
+      "s": 14655,
       "at": "2026-09-23",
       "src": null,
       "archived": false,
@@ -1049,11 +1049,11 @@
       "d": "\"Vibe-Trading: Your Personal Trading Agent\"",
       "w": "",
       "l": "Python",
-      "s": 35053,
+      "s": 35068,
       "at": "2026-08-10",
       "src": null,
       "archived": false,
-      "pushed": "2026-10-08"
+      "pushed": "2026-10-09"
     },
     {
       "r": "Fincept-Corporation/FinceptTerminal",
@@ -1064,7 +1064,7 @@
       "d": "FinceptTerminal is a modern finance application offering advanced market analytics, investment research, and economic data tools, designed for interactive exploration and data-driven decision-making in a user-friendly environment.",
       "w": "",
       "l": "C++",
-      "s": 32323,
+      "s": 32333,
       "at": "2026-08-10",
       "src": null,
       "archived": false,
@@ -1079,7 +1079,7 @@
       "d": "The personal finance app for everyone (by everyone)",
       "w": "",
       "l": "Ruby",
-      "s": 10438,
+      "s": 10442,
       "at": "2025-12-21",
       "src": null,
       "archived": false,
@@ -1094,7 +1094,7 @@
       "d": "Universal markup converter",
       "w": "",
       "l": "Haskell",
-      "s": 46634,
+      "s": 46636,
       "at": "2026-08-03",
       "src": null,
       "archived": false,
@@ -1109,7 +1109,7 @@
       "d": "💾 Self-hosted online file converter. Supports 1000+ formats ⚙️",
       "w": "",
       "l": "TypeScript",
-      "s": 19119,
+      "s": 19120,
       "at": "2025-12-17",
       "src": null,
       "archived": false,
@@ -1124,7 +1124,7 @@
       "d": "🎯 All you need. Nothing you don't. Open source project management that works for you, not against you.",
       "w": "",
       "l": "TypeScript",
-      "s": 9409,
+      "s": 9417,
       "at": "2026-08-01",
       "src": null,
       "archived": false,
@@ -1139,7 +1139,7 @@
       "d": "A list of tools that are open-source, in-browser, and require no-signups!",
       "w": "",
       "l": "TypeScript",
-      "s": 4435,
+      "s": 4438,
       "at": "2026-09-04",
       "src": null,
       "archived": false,
@@ -1154,7 +1154,7 @@
       "d": "Smart PVR for newsgroup and bittorrent users.",
       "w": "",
       "l": "C#",
-      "s": 16922,
+      "s": 16936,
       "at": "2026-09-10",
       "src": null,
       "archived": false,
@@ -1184,7 +1184,7 @@
       "d": "Explain complex systems using visuals and simple terms. Help you prepare for system design interviews.",
       "w": "",
       "l": null,
-      "s": 90314,
+      "s": 90326,
       "at": "2026-09-25",
       "src": null,
       "archived": false,
@@ -1199,7 +1199,7 @@
       "d": ":books: 技术面试必备基础知识、Leetcode、计算机操作系统、计算机网络、系统设计",
       "w": "Proje Çince.",
       "l": null,
-      "s": 186183,
+      "s": 186190,
       "at": "2026-01-02",
       "src": null,
       "archived": false,
@@ -1229,7 +1229,7 @@
       "d": "1,324-exercise fitness dataset — animation GIFs, 180×180 thumbnails, muscle-group & equipment data, and step-by-step instructions in 6 languages. The exercise data layer behind the LogPress app.",
       "w": "",
       "l": "HTML",
-      "s": 22633,
+      "s": 22642,
       "at": "2026-06-30",
       "src": null,
       "archived": false,
@@ -1250,7 +1250,7 @@
       "l": "Python",
       "at": "2026-09-25",
       "src": null,
-      "s": 55075,
+      "s": 55167,
       "archived": false,
       "pushed": "2026-09-28"
     },
@@ -1269,7 +1269,7 @@
       "l": "Go",
       "at": "2026-09-25",
       "src": null,
-      "s": 110666,
+      "s": 110726,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -1287,7 +1287,7 @@
         "t": "divyannshisharma",
         "u": "https://www.instagram.com/p/Dc3vmYCEvpu/"
       },
-      "s": 28304,
+      "s": 28309,
       "archived": false,
       "pushed": "2026-10-08"
     },
@@ -1305,7 +1305,7 @@
         "t": "divyannshisharma",
         "u": "https://www.instagram.com/p/Dc3vmYCEvpu/"
       },
-      "s": 119979,
+      "s": 120018,
       "archived": false,
       "pushed": "2026-10-05"
     },
@@ -1327,7 +1327,7 @@
         "t": "divyannshisharma",
         "u": "https://www.instagram.com/p/Dc3vmYCEvpu/"
       },
-      "s": 17878,
+      "s": 17881,
       "archived": false,
       "pushed": "2026-03-17"
     },
@@ -1349,9 +1349,9 @@
         "t": "divyannshisharma",
         "u": "https://www.instagram.com/p/Dc3vmYCEvpu/"
       },
-      "s": 47242,
+      "s": 47597,
       "archived": false,
-      "pushed": "2026-10-08"
+      "pushed": "2026-10-09"
     },
     {
       "r": "zarazhangrui/frontend-slides",
@@ -1371,7 +1371,7 @@
         "t": "divyannshisharma",
         "u": "https://www.instagram.com/p/Dc3vmYCEvpu/"
       },
-      "s": 30345,
+      "s": 30360,
       "archived": false,
       "pushed": "2026-06-23"
     },
@@ -1393,7 +1393,7 @@
         "t": "divyannshisharma",
         "u": "https://www.instagram.com/p/Dc3vmYCEvpu/"
       },
-      "s": 85733,
+      "s": 85759,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -1415,7 +1415,7 @@
         "t": "petergriffin.ai",
         "u": "https://www.instagram.com/reel/Da5be6dJ6Fi/"
       },
-      "s": 74170,
+      "s": 74190,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -1433,7 +1433,7 @@
         "u": "https://www.instagram.com/reel/Dcry4zypaOR/",
         "t": "codrkai"
       },
-      "s": 252160,
+      "s": 252230,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -1451,7 +1451,7 @@
         "u": "https://www.instagram.com/reel/Dbpyz7FCLC3/",
         "t": "benburhankocabiyik"
       },
-      "s": 25294,
+      "s": 25305,
       "archived": false,
       "pushed": "2025-11-22"
     },
@@ -1487,7 +1487,7 @@
         "u": "https://www.youtube.com/shorts/b66fksMVR-E",
         "t": "selahattin.unlu"
       },
-      "s": 36924,
+      "s": 36935,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -1505,7 +1505,7 @@
         "u": "https://www.youtube.com/shorts/6GvXRk8NRZY",
         "t": "selahattin.unlu"
       },
-      "s": 3815,
+      "s": 3837,
       "archived": false,
       "pushed": "2026-10-08"
     },
@@ -1523,7 +1523,7 @@
         "u": "https://www.youtube.com/shorts/w1MOSKvJSx0",
         "t": "selahattin.unlu"
       },
-      "s": 62680,
+      "s": 62747,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -1541,7 +1541,7 @@
         "u": "https://www.youtube.com/shorts/X-5ZLxh1yWY",
         "t": "selahattin.unlu"
       },
-      "s": 110189,
+      "s": 110207,
       "archived": false,
       "pushed": "2026-08-31"
     },
@@ -1577,7 +1577,7 @@
         "u": "https://www.youtube.com/shorts/TBoP5k6QFtk",
         "t": "selahattin.unlu"
       },
-      "s": 27617,
+      "s": 27618,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -1595,7 +1595,7 @@
         "u": "https://www.youtube.com/shorts/86W1YfgPnYk",
         "t": "selahattin.unlu"
       },
-      "s": 32158,
+      "s": 32166,
       "archived": false,
       "pushed": "2025-09-01"
     },
@@ -1613,7 +1613,7 @@
         "u": "https://www.youtube.com/shorts/nSu_xsf8kSY",
         "t": "selahattin.unlu"
       },
-      "s": 28945,
+      "s": 28963,
       "archived": false,
       "pushed": "2026-04-13"
     },
@@ -1631,7 +1631,7 @@
         "u": "https://www.youtube.com/shorts/3gPLR82bmeQ",
         "t": "selahattin.unlu"
       },
-      "s": 33902,
+      "s": 33913,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -1667,7 +1667,7 @@
         "u": "https://www.youtube.com/shorts/zKrNYSI-qd4",
         "t": "selahattin.unlu"
       },
-      "s": 42563,
+      "s": 42565,
       "archived": false,
       "pushed": "2026-10-08"
     },
@@ -1677,7 +1677,7 @@
       "af": "bilesen",
       "k": "proje",
       "tr": "Metin animasyonu, arka plan, UI ve mikro etkileşim için 200+ animasyonlu React bileşeni; her biri JS/TS ve düz CSS/Tailwind olmak üzere 4 varyantla gelir. Vue ve Svelte için resmi portları ayrı sitelerde.",
-      "d": "An open source collection of animated, interactive & fully customizable React components for building memorable websites.",
+      "d": "The biggest open source library of animated, interactive & fully customizable React and NextJS components for building memorable websites.",
       "w": "Lisans MIT + Commons Clause: uygulama veya sitede ticari kullanım serbest, ama bileşenlerin kendisini tek tek, paket halinde ya da port ederek satmak veya yeniden dağıtmak yasak. OSI anlamında açık kaynak değil.",
       "l": "JavaScript",
       "at": "2026-09-25",
@@ -1685,7 +1685,7 @@
         "u": "https://www.youtube.com/shorts/7XzSweUGnr4",
         "t": "selahattin.unlu"
       },
-      "s": 48758,
+      "s": 48782,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -1721,7 +1721,7 @@
         "u": "https://www.youtube.com/shorts/GkbkS7U1a_Y",
         "t": "selahattin.unlu"
       },
-      "s": 125194,
+      "s": 125212,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -1739,7 +1739,7 @@
         "u": "https://www.youtube.com/shorts/jXPcLQuP3hI",
         "t": "selahattin.unlu"
       },
-      "s": 182472,
+      "s": 182510,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -1757,7 +1757,7 @@
         "u": "https://www.youtube.com/shorts/NqjHYFCcJss",
         "t": "selahattin.unlu"
       },
-      "s": 189149,
+      "s": 189198,
       "archived": false,
       "pushed": "2026-10-04"
     },
@@ -1793,9 +1793,9 @@
         "u": "https://www.youtube.com/shorts/fMWlswvNw34",
         "t": "selahattin.unlu"
       },
-      "s": 139244,
+      "s": 139259,
       "archived": false,
-      "pushed": "2026-10-07"
+      "pushed": "2026-10-09"
     },
     {
       "r": "prometheus/prometheus",
@@ -1811,7 +1811,7 @@
         "u": "https://www.youtube.com/shorts/_Megzvq771M",
         "t": "selahattin.unlu"
       },
-      "s": 66436,
+      "s": 66446,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -1829,7 +1829,7 @@
         "u": "https://www.youtube.com/shorts/CQN7e1TyZZ0",
         "t": "selahattin.unlu"
       },
-      "s": 39265,
+      "s": 39271,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -1847,7 +1847,7 @@
         "u": "https://www.youtube.com/shorts/EJJc2CE1gqc",
         "t": "selahattin.unlu"
       },
-      "s": 77162,
+      "s": 77185,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -1865,7 +1865,7 @@
         "u": "https://www.youtube.com/shorts/KJTo0pluq7M",
         "t": "selahattin.unlu"
       },
-      "s": 12962,
+      "s": 12966,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -1883,7 +1883,7 @@
         "u": "https://www.youtube.com/shorts/9rUwfGPO0QI",
         "t": "selahattin.unlu"
       },
-      "s": 97343,
+      "s": 97363,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -1919,7 +1919,7 @@
         "u": "https://www.youtube.com/shorts/7KwDz7tYfpc",
         "t": "selahattin.unlu"
       },
-      "s": 12426,
+      "s": 12429,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -1937,7 +1937,7 @@
         "u": "https://www.youtube.com/shorts/WEYL8-AAsEs",
         "t": "selahattin.unlu"
       },
-      "s": 11152,
+      "s": 11156,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -1955,7 +1955,7 @@
         "u": "https://www.youtube.com/shorts/Mmj01VKVXeU",
         "t": "selahattin.unlu"
       },
-      "s": 42220,
+      "s": 42218,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -1973,7 +1973,7 @@
         "u": "https://www.youtube.com/shorts/vpHbCG8ag1M",
         "t": "selahattin.unlu"
       },
-      "s": 37720,
+      "s": 37725,
       "archived": false,
       "pushed": "2026-10-08"
     },
@@ -1991,7 +1991,7 @@
         "u": "https://www.youtube.com/shorts/PrlqXvx3LPk",
         "t": "selahattin.unlu"
       },
-      "s": 62761,
+      "s": 62774,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -2009,7 +2009,7 @@
         "u": "https://www.instagram.com/reel/DdUQEYRALZj/",
         "t": "selahattin.unlu"
       },
-      "s": 19750,
+      "s": 19768,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -2031,7 +2031,7 @@
         "u": "https://www.instagram.com/reel/DdMh1Fhg7Zg/",
         "t": "selahattin.unlu"
       },
-      "s": 11208,
+      "s": 11226,
       "archived": false,
       "pushed": "2026-10-01"
     },
@@ -2049,7 +2049,7 @@
         "u": "https://www.youtube.com/shorts/cToXyrYtFTs",
         "t": "selahattin.unlu"
       },
-      "s": 67293,
+      "s": 67305,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -2067,7 +2067,7 @@
         "u": "https://www.youtube.com/shorts/9dIxRgyANn0",
         "t": "selahattin.unlu"
       },
-      "s": 100134,
+      "s": 100187,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -2089,7 +2089,7 @@
         "u": "https://www.youtube.com/shorts/NYx647nbybw",
         "t": "selahattin.unlu"
       },
-      "s": 51782,
+      "s": 51794,
       "archived": false,
       "pushed": "2026-09-22"
     },
@@ -2107,7 +2107,7 @@
         "u": "https://www.youtube.com/shorts/4VSJbVoeJRA",
         "t": "selahattin.unlu"
       },
-      "s": 28302,
+      "s": 28306,
       "archived": false,
       "pushed": "2026-09-19"
     },
@@ -2129,7 +2129,7 @@
         "u": "https://www.youtube.com/shorts/yv7toIYKwyU",
         "t": "selahattin.unlu"
       },
-      "s": 6046,
+      "s": 6047,
       "archived": false,
       "pushed": "2026-10-06"
     },
@@ -2195,7 +2195,7 @@
         "u": "https://www.youtube.com/shorts/pkJkn0TyGQc",
         "t": "selahattin.unlu"
       },
-      "s": 18269,
+      "s": 18279,
       "archived": false,
       "pushed": "2026-09-25"
     },
@@ -2217,7 +2217,7 @@
         "u": "https://www.youtube.com/shorts/KZZr5SoBbzo",
         "t": "selahattin.unlu"
       },
-      "s": 63808,
+      "s": 63834,
       "archived": false,
       "pushed": "2026-10-08"
     },
@@ -2239,7 +2239,7 @@
         "u": "https://www.youtube.com/shorts/y4VLxJY0JbU",
         "t": "selahattin.unlu"
       },
-      "s": 124875,
+      "s": 124954,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -2261,7 +2261,7 @@
         "u": "https://www.youtube.com/shorts/zdwAXTaxL5Y",
         "t": "selahattin.unlu"
       },
-      "s": 25855,
+      "s": 25912,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -2282,7 +2282,7 @@
         "u": "https://www.youtube.com/shorts/hSb1TAXAwTA",
         "t": "selahattin.unlu"
       },
-      "s": 16818,
+      "s": 16827,
       "archived": false,
       "pushed": "2026-07-26"
     },
@@ -2303,7 +2303,7 @@
         "u": "https://www.youtube.com/shorts/uISmT8Bv4Fo",
         "t": "selahattin.unlu"
       },
-      "s": 33995,
+      "s": 34019,
       "archived": false,
       "pushed": "2026-07-08"
     },
@@ -2325,7 +2325,7 @@
         "u": "https://www.youtube.com/shorts/eTrgWvRYdNE",
         "t": "selahattin.unlu"
       },
-      "s": 158420,
+      "s": 158482,
       "archived": false,
       "pushed": "2026-10-07"
     },
@@ -2347,7 +2347,7 @@
         "u": "https://www.youtube.com/shorts/dE4hFAW9cpk",
         "t": "selahattin.unlu"
       },
-      "s": 53869,
+      "s": 53911,
       "archived": false,
       "pushed": "2026-10-08"
     },
@@ -2369,7 +2369,7 @@
         "u": "https://www.youtube.com/shorts/Kg7eV4wv_3A",
         "t": "selahattin.unlu"
       },
-      "s": 103575,
+      "s": 103782,
       "archived": false,
       "pushed": "2026-10-03"
     },
@@ -2391,7 +2391,7 @@
         "u": "https://www.youtube.com/shorts/vkKtohvoBS8",
         "t": "selahattin.unlu"
       },
-      "s": 2909,
+      "s": 2910,
       "archived": false,
       "pushed": "2026-08-24"
     },
@@ -2413,7 +2413,7 @@
         "u": "https://www.youtube.com/shorts/HB3hNzdIa6o",
         "t": "selahattin.unlu"
       },
-      "s": 135682,
+      "s": 135717,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -2435,7 +2435,7 @@
         "u": "https://www.youtube.com/shorts/hxUSmmj7Qek",
         "t": "selahattin.unlu"
       },
-      "s": 10329,
+      "s": 10336,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -2457,7 +2457,7 @@
         "u": "https://www.youtube.com/shorts/uSbLXkV0tl4",
         "t": "selahattin.unlu"
       },
-      "s": 296721,
+      "s": 296828,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -2479,7 +2479,7 @@
         "u": "https://www.youtube.com/shorts/d8-m2nxVOl4",
         "t": "selahattin.unlu"
       },
-      "s": 62825,
+      "s": 62832,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -2501,7 +2501,7 @@
         "u": "https://www.youtube.com/shorts/hPKyPjy505s",
         "t": "selahattin.unlu"
       },
-      "s": 98840,
+      "s": 98918,
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -2517,7 +2517,7 @@
         "t": "hfnhq",
         "u": "https://www.instagram.com/p/Dd1BPoWgp5q/"
       },
-      "s": 27465,
+      "s": 27468,
       "l": "Python",
       "d": "Fully Local Manus AI. No APIs, No $200 monthly bills. Enjoy an autonomous agent that thinks, browses the web, and code for the sole cost of electricity.",
       "archived": false,
@@ -2535,7 +2535,7 @@
         "t": "hfnhq",
         "u": "https://www.instagram.com/p/Dd1BPoWgp5q/"
       },
-      "s": 86459,
+      "s": 86499,
       "l": "Python",
       "d": "🕷️ An adaptive Web Scraping framework that handles everything from a single request to a full-scale crawl! Don't be shy, join here: https://discord.gg/EMgGbDceNQ and follow here for daily tips and tricks: https://x.com/Scrapling_dev",
       "archived": false,
@@ -2553,7 +2553,7 @@
         "t": "hfnhq",
         "u": "https://www.instagram.com/p/Dd1BPoWgp5q/"
       },
-      "s": 74005,
+      "s": 74023,
       "l": "Python",
       "d": "Open Data Platform for analysts, quants and AI agents.",
       "archived": false,
@@ -2571,7 +2571,7 @@
         "t": "hfnhq",
         "u": "https://www.instagram.com/p/Dd1BPoWgp5q/"
       },
-      "s": 15366,
+      "s": 15368,
       "l": "TypeScript",
       "d": "The Open Source DocuSign Alternative.",
       "archived": false,
@@ -2589,7 +2589,7 @@
         "t": "hfnhq",
         "u": "https://www.instagram.com/p/Dd1BPoWgp5q/"
       },
-      "s": 58120,
+      "s": 58136,
       "l": "TypeScript",
       "d": "The open alternative to Salesforce, designed for AI.",
       "archived": false,
@@ -2607,7 +2607,7 @@
         "t": "hfnhq",
         "u": "https://www.instagram.com/p/Dd1BPoWgp5q/"
       },
-      "s": 37817,
+      "s": 37819,
       "l": "Python",
       "d": "Instant voice cloning by MIT and MyShell. Audio foundation model.",
       "archived": false,
@@ -2625,7 +2625,7 @@
         "t": "sebastianhardy_",
         "u": "https://www.instagram.com/p/Dcv9HtHDLDZ/"
       },
-      "s": 11167,
+      "s": 11175,
       "l": "TypeScript",
       "d": "Comp AI CRM is an open source, CRM designed for AI agents. Agentic-first CRM.",
       "archived": false,
@@ -2643,7 +2643,7 @@
         "t": "sebastianhardy_",
         "u": "https://www.instagram.com/p/Dcv9HtHDLDZ/"
       },
-      "s": 34852,
+      "s": 34858,
       "l": "Python",
       "d": "Best and simplest tool for website change detection, web page monitoring, and website change alerts. Perfect for tracking content changes, price drops, restock alerts, and website defacement monitoring—all for free or enjoy our SaaS plan!",
       "archived": false,
@@ -2661,7 +2661,7 @@
         "t": "sebastianhardy_",
         "u": "https://www.instagram.com/p/Dcv9HtHDLDZ/"
       },
-      "s": 36322,
+      "s": 36346,
       "l": "TypeScript",
       "d": "Clone any website with one command using AI coding agents",
       "archived": false,
@@ -2683,7 +2683,7 @@
         "t": "sebastianhardy_",
         "u": "https://www.instagram.com/p/Dcv9HtHDLDZ/"
       },
-      "s": 58503,
+      "s": 58678,
       "l": "Python",
       "d": "AI turns documents or topics into real, native PowerPoint decks—with native shapes, transitions and animations, data-backed charts and tables on demand, audio narration from speaker notes, and support for your own .pptx templates. · by Hugo He",
       "archived": false,
@@ -2701,7 +2701,7 @@
         "t": "sebastianhardy_",
         "u": "https://www.instagram.com/p/Dcv9HtHDLDZ/"
       },
-      "s": 90838,
+      "s": 90848,
       "l": "Python",
       "d": "Turn any PDF or image document into structured data for your AI. A powerful, lightweight OCR toolkit that bridges the gap between images/PDFs and LLMs. Supports 100+ languages.",
       "archived": false,
@@ -2723,7 +2723,7 @@
         "t": "gittrend.io",
         "u": "https://www.instagram.com/reel/Dd1dJi9j-vq/"
       },
-      "s": 2409,
+      "s": 2433,
       "l": "HTML",
       "d": "A comprehensive logo-design skill for Claude, Gemini CLI, Codex and other AI agents: principles, process, SVG craft, testing tools and a 1,400+ logo reference library.",
       "archived": false,
@@ -2741,7 +2741,7 @@
         "t": "codewithtoushif",
         "u": "https://www.instagram.com/reel/DdWnJFXjFmM/"
       },
-      "s": 18014,
+      "s": 18028,
       "l": "TypeScript",
       "d": "Visualize any GitHub codebase: free interactive architecture diagrams and one-minute explainer videos. Replace 'hub' with 'diagram' in any GitHub URL.",
       "archived": false,
@@ -2759,11 +2759,11 @@
         "t": "codewithtoushif",
         "u": "https://www.instagram.com/reel/DdWnJFXjFmM/"
       },
-      "s": 15874,
+      "s": 15878,
       "l": "Python",
       "d": "Replace 'hub' with 'ingest' in any GitHub URL to get a prompt-friendly extract of a codebase ",
       "archived": false,
-      "pushed": "2026-10-08"
+      "pushed": "2026-10-09"
     },
     {
       "r": "abi/screenshot-to-code",
@@ -2777,7 +2777,7 @@
         "t": "noahelhadedy",
         "u": "https://www.instagram.com/p/DdTD4xPF-I-/"
       },
-      "s": 80115,
+      "s": 80125,
       "l": "Python",
       "d": "Drop in a screenshot and convert it to clean code (HTML/Tailwind/React/Vue)",
       "archived": false,
@@ -2795,7 +2795,7 @@
         "t": "noahelhadedy",
         "u": "https://www.instagram.com/p/DdTD4xPF-I-/"
       },
-      "s": 622,
+      "s": 623,
       "l": "TypeScript",
       "d": "Apple-style Liquid Glass for the web — a headless React lens that refracts the live DOM in Safari, Firefox and Chrome. Zero dependencies.",
       "archived": false,
@@ -2813,7 +2813,7 @@
         "t": "noahelhadedy",
         "u": "https://www.instagram.com/p/DdTD4xPF-I-/"
       },
-      "s": 1217,
+      "s": 1220,
       "l": "TypeScript",
       "d": "A library to help you dial in interface parameters of any kind",
       "archived": false,
@@ -2831,7 +2831,7 @@
         "t": "noahelhadedy",
         "u": "https://www.instagram.com/p/DdTD4xPF-I-/"
       },
-      "s": 4147,
+      "s": 4150,
       "l": "TypeScript",
       "d": "High-crafted UI libraries for AI agents: Border beam, Orbs, Metal, Gooey, Voice, Image, Avatar bots",
       "archived": false,
@@ -2849,7 +2849,7 @@
         "t": "noahelhadedy",
         "u": "https://www.instagram.com/p/DdTD4xPF-I-/"
       },
-      "s": 846,
+      "s": 847,
       "l": "Vue",
       "d": "UI Sound Effects for your interfaces",
       "archived": false,
@@ -2867,7 +2867,7 @@
         "t": "hypertech",
         "u": "https://www.instagram.com/p/DdUI4inkfVs/"
       },
-      "s": 90349,
+      "s": 90387,
       "l": "TypeScript",
       "d": "🙌 OpenHands: AI-Driven Development",
       "archived": false,
@@ -2885,7 +2885,7 @@
         "t": "hypertech",
         "u": "https://www.instagram.com/p/DdUI4inkfVs/"
       },
-      "s": 17718,
+      "s": 17723,
       "l": "TypeScript",
       "d": "Turn any website into a structured API. Extract, automate, search and monitor the web.",
       "archived": false,
@@ -2903,7 +2903,7 @@
         "t": "hypertech",
         "u": "https://www.instagram.com/p/DdUI4inkfVs/"
       },
-      "s": 154102,
+      "s": 154127,
       "l": "Python",
       "d": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
       "archived": false,
@@ -2925,7 +2925,7 @@
         "t": "hypertech",
         "u": "https://www.instagram.com/p/DdUI4inkfVs/"
       },
-      "s": 117370,
+      "s": 117410,
       "l": "Python",
       "d": "Agents that use the browser.",
       "archived": false,
@@ -2943,7 +2943,7 @@
         "t": "hypertech",
         "u": "https://www.instagram.com/p/DdUI4inkfVs/"
       },
-      "s": 155422,
+      "s": 155437,
       "l": "Python",
       "d": "Langflow is a powerful tool for building and deploying AI-powered agents and workflows.",
       "archived": false,
@@ -2961,7 +2961,7 @@
         "t": "hypertech",
         "u": "https://www.instagram.com/p/DdUI4inkfVs/"
       },
-      "s": 111270,
+      "s": 111283,
       "l": "TypeScript",
       "d": "The Postgres development platform. Supabase gives you a dedicated Postgres database to build your web, mobile, and AI applications.",
       "archived": false,
@@ -2979,7 +2979,7 @@
         "t": "hypertech",
         "u": "https://www.instagram.com/p/DdUI4inkfVs/"
       },
-      "s": 93856,
+      "s": 93886,
       "l": "TypeScript",
       "d": "#1 PDF Application on GitHub that lets you edit PDFs on any device anywhere",
       "archived": false,
@@ -2997,7 +2997,7 @@
         "t": "hypertech",
         "u": "https://www.instagram.com/p/DdUI4inkfVs/"
       },
-      "s": 157984,
+      "s": 158005,
       "l": "TypeScript",
       "d": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
       "archived": false,
@@ -3037,7 +3037,7 @@
         "t": "marc.kaz",
         "u": "https://www.instagram.com/reel/DeFGs1_sk3Y/"
       },
-      "s": 33737,
+      "s": 39765,
       "l": "TypeScript",
       "d": "Reverse engineer anything with agents, from app behavior down to native binaries.",
       "archived": false,
@@ -3055,7 +3055,7 @@
         "t": "replace.so",
         "u": "https://www.instagram.com/p/DeH33EMgBYT/"
       },
-      "s": 30226,
+      "s": 30231,
       "l": "TypeScript",
       "d": "The most comprehensive authentication framework",
       "archived": false,
@@ -3073,7 +3073,7 @@
         "t": "replace.so",
         "u": "https://www.instagram.com/p/DeFMBD7AMBD/"
       },
-      "s": 61337,
+      "s": 61344,
       "l": "Go",
       "d": "Open Source realtime backend in 1 file",
       "archived": false,
@@ -3093,7 +3093,7 @@
       },
       "s": 57618,
       "l": "TypeScript",
-      "d": "Appwrite® - complete cloud infrastructure for your web, mobile and AI apps. Including Auth, Databases, Storage, Functions, Messaging, Hosting, Realtime and more",
+      "d": "The open-source cloud for agents & devs. Including Auth, Databases, Storage, Functions, Messaging, Hosting, Realtime, WAF and more",
       "archived": false,
       "pushed": "2026-10-09"
     },
@@ -3109,11 +3109,11 @@
         "t": "replace.so",
         "u": "https://www.instagram.com/p/Dd1uKpNgDlW/"
       },
-      "s": 3441,
+      "s": 3442,
       "l": "Rust",
       "d": "The open source and enterprise-ready webhooks service 🦀",
       "archived": false,
-      "pushed": "2026-10-08"
+      "pushed": "2026-10-09"
     },
     {
       "r": "heyform/heyform",
@@ -3127,7 +3127,7 @@
         "t": "replace.so",
         "u": "https://www.instagram.com/p/DdzNn9gAR1z/"
       },
-      "s": 9002,
+      "s": 9003,
       "l": "TypeScript",
       "d": "Open-Source Form Builder",
       "archived": false,
@@ -3145,7 +3145,7 @@
         "t": "berkayabay.ai",
         "u": "https://www.instagram.com/reel/DdqI39ERRuF/"
       },
-      "s": 29810,
+      "s": 29813,
       "l": "Go",
       "d": "Find secrets with Gitleaks 🔑",
       "archived": false,
@@ -3163,7 +3163,7 @@
         "t": "berkayabay.ai",
         "u": "https://www.instagram.com/reel/DdqI39ERRuF/"
       },
-      "s": 16941,
+      "s": 16945,
       "l": "C",
       "d": "Lightweight static analysis for many languages. Find bug variants with patterns that look like source code.",
       "archived": false,
@@ -3181,7 +3181,7 @@
         "t": "berkayabay.ai",
         "u": "https://www.instagram.com/reel/DdqI39ERRuF/"
       },
-      "s": 15901,
+      "s": 15904,
       "l": "Java",
       "d": "The ZAP by Checkmarx Core project",
       "archived": false,
@@ -3199,7 +3199,7 @@
         "t": "replace.so",
         "u": "https://www.instagram.com/p/DeCuH4lgGQj/"
       },
-      "s": 70050,
+      "s": 70074,
       "l": "TypeScript",
       "d": "Autonomous coding agent as an SDK, IDE extension, or CLI assistant.",
       "archived": false,
@@ -3217,7 +3217,7 @@
         "t": "replace.so",
         "u": "https://www.instagram.com/p/DeCuH4lgGQj/"
       },
-      "s": 55097,
+      "s": 55105,
       "l": "Rust",
       "d": "an open source, extensible AI agent that goes beyond code suggestions - install, execute, edit, and test with any LLM",
       "archived": false,
@@ -3235,7 +3235,7 @@
         "t": "replace.so",
         "u": "https://www.instagram.com/p/Dd63tpUgBhU/"
       },
-      "s": 88252,
+      "s": 88459,
       "l": "TypeScript",
       "d": "Orca is the ADE for working with a fleet of parallel agents. Run any coding agent with your own subscription. Available on desktop, mobile and remote runtime.",
       "archived": false,
@@ -3253,7 +3253,7 @@
         "t": "replace.so",
         "u": "https://www.instagram.com/p/Dd9dsD8gDxf/"
       },
-      "s": 21784,
+      "s": 21792,
       "l": "TypeScript",
       "d": "Local, open-source AI app builder for power users ✨ v0 / Lovable / Replit / Bolt alternative 🌟 Star if you like it!",
       "archived": false,
@@ -3271,7 +3271,7 @@
         "t": "replace.so",
         "u": "https://www.instagram.com/p/DeFMBD7AMBD/"
       },
-      "s": 44858,
+      "s": 44863,
       "l": "Rust",
       "d": "Jan is an open source alternative to ChatGPT that runs 100% offline on your computer.",
       "archived": false,
@@ -3289,7 +3289,7 @@
         "t": "replace.so",
         "u": "https://www.instagram.com/p/Dd4UPS4gD8Z/"
       },
-      "s": 130613,
+      "s": 130648,
       "l": "C++",
       "d": "LLM inference in C/C++",
       "archived": false,
@@ -3307,7 +3307,7 @@
         "t": "replace.so",
         "u": "https://www.instagram.com/p/DeH33EMgBYT/"
       },
-      "s": 66881,
+      "s": 66895,
       "l": "Python",
       "d": "The Memory Layer for AI Agents - Drop-in memory infrastructure for AI agents and apps. Context that persists. Built for production.",
       "archived": false,
@@ -3343,7 +3343,7 @@
         "t": "web_pros",
         "u": "https://www.instagram.com/p/Dd6VnMClIzz/"
       },
-      "s": 6391,
+      "s": 6392,
       "l": "TypeScript",
       "d": "Animated components for design engineers. 150+ free shadcn/ui components, built with Tailwind CSS and Motion. MIT licensed.",
       "archived": false,
@@ -3379,7 +3379,7 @@
         "t": "web_pros",
         "u": "https://www.instagram.com/p/Dd6VnMClIzz/"
       },
-      "s": 6496,
+      "s": 6499,
       "l": "TypeScript",
       "d": "UI kit to make beautiful, animated interfaces, faster. Customizable. Open Source.",
       "archived": false,
@@ -3397,7 +3397,7 @@
         "t": "web_pros",
         "u": "https://www.instagram.com/p/Dd86Z4wlKw4/"
       },
-      "s": 4776,
+      "s": 4780,
       "l": "TypeScript",
       "d": "A library of creative canvas components. Real HTML with WebGL effects running over it. React, Vue, Svelte, vanilla.",
       "archived": false,
@@ -3419,7 +3419,7 @@
         "t": "web_pros",
         "u": "https://www.instagram.com/p/DeHNkMklMK7/"
       },
-      "s": 29806,
+      "s": 29825,
       "l": "CSS",
       "d": "Anti-AI-slop design skill for Claude Code, Cursor, and Codex.",
       "archived": false,
@@ -3441,7 +3441,7 @@
         "t": "web_pros",
         "u": "https://www.instagram.com/p/DeHNkMklMK7/"
       },
-      "s": 5310,
+      "s": 5486,
       "l": "JavaScript",
       "d": "Rules for an AI coding agent to filter out generic AI-generated UI designs, text, and code.",
       "archived": false,
@@ -3459,7 +3459,7 @@
         "t": "millee.md",
         "u": "https://www.instagram.com/p/Dd-BfTEmPcS/"
       },
-      "s": 74799,
+      "s": 74823,
       "l": "Python",
       "d": "Compress tool outputs, logs, files, and RAG chunks before they reach the LLM. 20% fewer tokens for coding agents, 60-95% fewer tokens for JSON, same answers. Library, proxy, MCP server.",
       "archived": false,
@@ -3474,7 +3474,7 @@
       "w": "Sonuç bir simülasyondur, gerçek kullanıcı verisi değil. LLM API anahtarı ister ve çok token harcar (README ilk denemeleri 40 turun altında tutmayı öneriyor); hafıza için Zep Cloud anahtarı da gerekir. Lisans AGPL-3.0. API anahtarı yerine claude ya da codex CLI ile çalışan çatalı SCTY-Inc/mirofish-cli (her çağrı ayrı süreç açar, yavaştır ve abonelik sınırını çabuk doldurur); tamamen yerel, Ollama ile çalışan çatalı nikmcfly/MiroFish-Offline.",
       "at": "2026-10-06",
       "src": null,
-      "s": 77274,
+      "s": 77347,
       "l": "Python",
       "d": "A Simple and Universal Swarm Intelligence Engine, Predicting Anything. 简洁通用的群体智能引擎，预测万物",
       "archived": false,
@@ -3508,7 +3508,7 @@
       "w": "Anonim telemetri varsayılan açık (`PAPERCLIP_TELEMETRY_DISABLED=1` ya da `DO_NOT_TRACK=1` ile kapanır). Node.js 24.11+ ister; kurulum `npx paperclipai@latest onboard --yes`. Ajanların model ücreti sende; sürekli çalışan ajanlara bütçe sınırı koy.",
       "at": "2026-10-06",
       "src": null,
-      "s": 99027,
+      "s": 99130,
       "l": "TypeScript",
       "d": "The open-source app everyone uses to manage agents at work",
       "archived": false,
@@ -3526,7 +3526,7 @@
         "t": "hfnhq",
         "u": "https://www.instagram.com/p/DeD8sC4gqrO/"
       },
-      "s": 6280,
+      "s": 6353,
       "l": "TypeScript",
       "d": "Build your own network of agents from Claude Code, Codex and Pi: persistent teams with roles, shared context and owned work.",
       "archived": false,
@@ -3544,7 +3544,7 @@
         "t": "hfnhq",
         "u": "https://www.instagram.com/p/DeD8sC4gqrO/"
       },
-      "s": 55705,
+      "s": 56006,
       "l": "Python",
       "d": "VoiceStudio is the open-source, fully-local ElevenLabs alternative — voice cloning, voice design, video dubbing, dictation, transcription & audiobook creation in 646 languages.",
       "archived": false,
@@ -3566,7 +3566,7 @@
         "t": "hfnhq",
         "u": "https://www.instagram.com/p/DeD8sC4gqrO/"
       },
-      "s": 81329,
+      "s": 81335,
       "l": "Python",
       "d": "Transforms complex documents like PDFs and Office docs into LLM-ready markdown/JSON for your Agentic workflows.",
       "archived": false,
@@ -3584,7 +3584,7 @@
         "t": "hfnhq",
         "u": "https://www.instagram.com/p/DeD8sC4gqrO/"
       },
-      "s": 47528,
+      "s": 47643,
       "l": "Python",
       "d": "Hindsight: Agent Memory That Learns",
       "archived": false,
@@ -3603,11 +3603,11 @@
       "w": "Sadece kendi fotoğraflarında ya da incelemek için izin aldığın fotoğraflarda kullan; bulunmak istemeyen birinin yerini bulmak için kullanmak kişisel verilerin korunması kurallarına aykırıdır. Tersine görsel arama fotoğrafı arama motorlarına yükler. Python 3.10+, uv ve Chrome ya da Playwright Chromium ister; ilk kullanımda model indirir.",
       "at": "2026-10-07",
       "src": null,
-      "s": 1496,
+      "s": 1544,
       "l": "Python",
       "d": "An agent skill that finds where a photo was taken — OpenStreetMap geometry, elevation skylines, satellite imagery and street view — and shows its work. Works with Claude Code, Codex, Cursor, Gemini CLI, OpenCode and GitHub Copilot.",
       "archived": false,
-      "pushed": "2026-10-08"
+      "pushed": "2026-10-09"
     },
     {
       "r": "AgriciDaniel/claude-ads",
@@ -3625,7 +3625,7 @@
         "t": "onurhuseyinkocak.ai",
         "u": "https://www.instagram.com/p/DeHhu6qlL7Q/"
       },
-      "s": 9834,
+      "s": 9844,
       "l": "Python",
       "d": "Claude-first paid-media operations skill for Claude Code across 12 ad platforms (Google, Meta, YouTube, LinkedIn, TikTok, Microsoft, Apple, Amazon, Reddit, Pinterest, Snapchat, X): source-grounded audits, deterministic scoring, versioned JSON reports, and capability-gated account changes.",
       "archived": false,
@@ -3647,9 +3647,63 @@
         "t": "onurhuseyinkocak.ai",
         "u": "https://www.instagram.com/p/DeHhu6qlL7Q/"
       },
-      "s": 59459,
+      "s": 59637,
       "l": "TypeScript",
       "d": "Write HTML. Render video. Built for agents.",
+      "archived": false,
+      "pushed": "2026-10-09"
+    },
+    {
+      "r": "harshjdhv/componentry",
+      "f": "tasarim",
+      "af": "bilesen",
+      "k": "proje",
+      "tr": "Liquid glass carousel, görsel ripple, parçacıklı yazı, kaydırma sahneleri, 3B kart yığınları ve WebGL efektleri gibi animasyonlu React bileşenleri; shadcn CLI ya da shadcn MCP ile projeye kopyalanır. Vercel OSS Program destekli.",
+      "w": "Sadece React + Tailwind; başka altyapıda örnek alınıp çevrilir.",
+      "at": "2026-10-09",
+      "src": {
+        "t": "ux.amish",
+        "u": "https://www.instagram.com/p/Dd_RewkFpGt/"
+      },
+      "s": 583,
+      "l": "TypeScript",
+      "d": "Animated, production-ready UI components. Built the way real products need them.",
+      "archived": false,
+      "pushed": "2026-10-03"
+    },
+    {
+      "r": "usespaceui/ui",
+      "f": "tasarim",
+      "af": "bilesen",
+      "k": "proje",
+      "tr": "Base UI üstüne kurulu, hareket ağırlıklı React bileşenleri: liquid switch, morphing kontroller, gooey efektler, yükleyiciler ve shader arka planları; shadcn CLI ile projeye kopyalanır.",
+      "w": "Çekirdek MIT; Pro bileşen, blok ve şablonlar ücretli (yıllık 99 $, ömür boyu 129 $). Proje Ağustos 2026'da açıldı.",
+      "at": "2026-10-09",
+      "src": {
+        "t": "ux.amish",
+        "u": "https://www.instagram.com/p/Dd_RewkFpGt/"
+      },
+      "s": 42,
+      "l": "TypeScript",
+      "d": "Space UI — motion-powered React, TypeScript and Tailwind components. Docs, registry, and tools.",
+      "archived": false,
+      "pushed": "2026-10-09"
+    },
+    {
+      "r": "kuratlielia/arc-library",
+      "f": "tasarim",
+      "af": "bilesen",
+      "k": "proje",
+      "tr": "Sakin hareketli React bileşenleri ve hazır bloklar (giriş, dashboard, fiyat); ortak token'lara dayanır, her animasyonun hareketi azaltılmış hâli var. shadcn CLI ile ya da elle kopyalanır, Tailwind şart değil.",
+      "w": "Repoda ücretsiz 108 bileşen ve 22 blok var; Pro kısım ücretli (yıllık 129 $, ömür boyu 199 $). Kaynağı UI kiti olarak yeniden satmak yasak.",
+      "at": "2026-10-09",
+      "src": {
+        "t": "ux.amish",
+        "u": "https://www.instagram.com/p/Dd_RewkFpGt/"
+      },
+      "s": 480,
+      "l": "TypeScript",
+      "d": "Arc Library: free, open source React components with calm motion. Copy the code or install with the shadcn CLI.",
       "archived": false,
       "pushed": "2026-10-09"
     }
