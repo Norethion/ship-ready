@@ -279,9 +279,7 @@ def home_page(cat, pub, tr, comp):
 def repo_page(pub, comp):
     return (front(title="Repo kataloğu", description=f"{len(pub['repolar'])} doğrulanmış GitHub reposu; Türkçe açıklama, kurulum yeri ve uyarılarıyla.", tableOfContents=False) +
             f"\nimport RepoKatalog from '{comp}/RepoKatalog.astro';\n\n"
-            "AI ile proje geliştirirken işe yarayan repolar; her biri README'sinden doğrulandı.\n"
-            "Kurulum yeri projeye eklenen kütüphaneyi, Claude ya da Codex'e kurulan skill ve eklentiyi, ayrı çalışan uygulamayı ya da sadece okunan kaynağı gösterir.\n"
-            "Kurulum düğmeleri aracı kuracak ajana yapıştırılacak prompt'u kopyalar.\n\n<RepoKatalog />\n")
+            "<RepoKatalog />\n")
 
 
 KURULUM_METNI = {"proje": "projeye eklenir", "claude": "Claude Code'a kurulur", "codex": "Codex'e kurulur",

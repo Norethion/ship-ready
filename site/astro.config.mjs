@@ -25,6 +25,7 @@ export default defineConfig({
 				PageFrame: './src/components/SayfaCercevesi.astro',
 				Footer: './src/components/AltBilgi.astro',
 				ThemeSelect: './src/components/TemaSecici.astro',
+				ThemeProvider: './src/components/TemaSaglayici.astro',
 				TableOfContents: './src/components/SayfaIcerigi.astro',
 				// Pagefind sunucusuz çalışmaz; yerel sayfada çevrimdışı arama kullanılır.
 				...(YEREL ? { Search: './src/components/YerelArama.astro' } : {}),
