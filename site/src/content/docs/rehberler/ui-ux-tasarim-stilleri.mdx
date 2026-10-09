@@ -271,7 +271,7 @@ Her cümlede uzun tire, "güçlendir", "sorunsuz", "yeni nesil" gibi bir şey s�
 
 ## Tasarım prompt'ları
 
-Var olan bir arayüzü toparlamak için dört prompt; [bu gönderiden](https://www.instagram.com/p/Dd3w1JdlH8b/) Türkçeye uyarlandı.
+Var olan bir arayüzü toparlamak için altı prompt; ilk dördü [bu gönderiden](https://www.instagram.com/p/Dd3w1JdlH8b/), son ikisi [bu gönderiden](https://www.instagram.com/p/Dd_fMs4FLmR/) Türkçeye uyarlandı.
 Yapay zekâya bir şey ekletmek yerine neyin çıkarılacağını sor; her prompt'tan sonra sayfayı yeniden açıp bak.
 
 <Kartlar>
@@ -305,6 +305,22 @@ Sayfanın kaydırmadan görünen üst kısmında ürünün ne olduğunu, kimin i
 Çalışan siteyi aç ve en çok etki eden 10 tasarım sorununu bul, önem sırasıyla listele. Onayımla düzelt, siteyi yeniden açıp tekrar incele; yeni bir şey ekleme, neyin çıkarılacağını öner.
 
 <span class="k-alan ilk son"><span class="k-etiket">Ne zaman</span><span class="k-deger">Sayfa bitti gibi ama bir şeyler eksik ya da fazla duruyor.</span></span>
+
+</Kart>
+
+<Kart baslik={"Önce tasarım sistemini kur"} satir={4} prompt={"Yazı tiplerini, boşluk ölçeğini, renkleri ve temel bileşenleri (düğme, kart, girdi, menü) önce tek yerde tanımla. Sonra sayfadaki her bölümü sadece bunlarla yeniden kur; tanımın dışında kalan her stili listele ve onayımla tanıma bağla."} promptEtiket={"Prompt'u kopyala"} promptTur={"tasarim"}>
+
+Yazı tiplerini, boşluk ölçeğini, renkleri ve temel bileşenleri (düğme, kart, girdi, menü) önce tek yerde tanımla. Sonra sayfadaki her bölümü sadece bunlarla yeniden kur; tanımın dışında kalan her stili listele ve onayımla tanıma bağla.
+
+<span class="k-alan ilk son"><span class="k-etiket">Ne zaman</span><span class="k-deger">Her bölüm başka bir siteden alınmış gibi duruyor; düğmeler, kartlar ve boşluklar bölümden bölüme değişiyor.</span></span>
+
+</Kart>
+
+<Kart baslik={"Her ekran boyutunda dene"} satir={4} prompt={"Siteyi 390, 768, 1024 ve 1440 piksel genişlikte aç ve her birinde ekran görüntüsü al. Taşan, üst üste binen, okunmayan ya da dokunması zor öğeleri ekran boyutuyla birlikte listele, onayımla düzelt ve yeniden kontrol et."} promptEtiket={"Prompt'u kopyala"} promptTur={"tasarim"}>
+
+Siteyi 390, 768, 1024 ve 1440 piksel genişlikte aç ve her birinde ekran görüntüsü al. Taşan, üst üste binen, okunmayan ya da dokunması zor öğeleri ekran boyutuyla birlikte listele, onayımla düzelt ve yeniden kontrol et.
+
+<span class="k-alan ilk son"><span class="k-etiket">Ne zaman</span><span class="k-deger">Sadece masaüstünde baktın; telefonda ve tablette nasıl göründüğünü bilmiyorsun.</span></span>
 
 </Kart>
 
@@ -373,6 +389,7 @@ React dışı bir projede (Vue, Angular, Blazor, mobil) bileşen kütüphaneleri
 Beğendiğin bileşenin kodunu Claude'a verip "bunu kendi altyapıma çevir" demek yeterli.
 Liquid Glass, DialKit, Libraries.dev ve UI SFX [bu gönderiden](https://www.instagram.com/p/DdTD4xPF-I-/) alındı; bilgiler 29.09.2026'da sitelerinden doğrulandı.
 Cult UI, Watermelon UI ve Motion Primitives [bu gönderiden](https://www.instagram.com/p/Dd6VnMClIzz/), Canvas UI ve Spline [bu gönderiden](https://www.instagram.com/p/Dd86Z4wlKw4/) alındı; bilgiler 06.10.2026'da sitelerinden doğrulandı.
+Componentry, Space UI ve Arc [bu gönderiden](https://www.instagram.com/p/Dd_RewkFpGt/) alındı; bilgiler 09.10.2026'da sitelerinden doğrulandı.
 canvas-confetti ([kaynak video](https://www.instagram.com/reel/Ddb5wiPopJ9/)) ve Thinking Orbs ([kaynak video](https://www.instagram.com/reel/DdgPH-poGbJ/)) kartlarındaki örnek, kütüphanenin etkisini kendi kısa kodumuzla gösterir; projede kütüphanenin kendisini kur, kullanımı örnek kodunun başında yazar.
 
 <Kartlar>
@@ -484,6 +501,36 @@ Motion ile yapılmış animasyonlu bileşen kiti: metin efektleri, geçişler, k
 <span class="k-alan ilk"><span class="k-etiket">Altyapı</span><span class="k-deger">React + Tailwind + Motion</span></span>
 <span class="k-alan"><span class="k-etiket">Başka altyapıda</span><span class="k-deger">Doğrudan kurulmaz; örnek alınıp çevrilir</span></span>
 <span class="k-alan son"><span class="k-etiket">Ücret</span><span class="k-deger">Çekirdek ücretsiz, MIT; Pro ücretli</span></span>
+
+</Kart>
+
+<Kart baslik={"Componentry"} satir={6} href={"https://componentry.dev"} tur={"Bileşen"} prompt={"Componentry (https://componentry.dev) aracını bu projede kullanmak istiyorum. Ne işe yarar: Liquid glass carousel, görsel dalgalanma (ripple), parçacıklı yazı, kaydırmaya bağlı sahneler, 3B kart yığınları ve WebGL sıvı efekti gibi 50'yi aşkın animasyonlu bileşen. npx shadcn@latest add @componentry/ ile eklenir; shadcn MCP ile AI editöründen de kurulur. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Liquid glass carousel, görsel dalgalanma (ripple), parçacıklı yazı, kaydırmaya bağlı sahneler, 3B kart yığınları ve WebGL sıvı efekti gibi 50'yi aşkın animasyonlu bileşen. `npx shadcn@latest add @componentry/<bileşen>` ile eklenir; shadcn MCP ile AI editöründen de kurulur.
+
+<span class="k-alan ilk"><span class="k-etiket">Altyapı</span><span class="k-deger">React + Tailwind + Motion (bazı efektler GSAP ya da shader)</span></span>
+<span class="k-alan"><span class="k-etiket">Başka altyapıda</span><span class="k-deger">Doğrudan kurulmaz; örnek alınıp çevrilir</span></span>
+<span class="k-alan son"><span class="k-etiket">Ücret</span><span class="k-deger">Ücretsiz, MIT</span></span>
+
+</Kart>
+
+<Kart baslik={"Space UI"} satir={6} href={"https://www.spaceui.one"} tur={"Bileşen"} prompt={"Space UI (https://www.spaceui.one) aracını bu projede kullanmak istiyorum. Ne işe yarar: Hareket ve dokunsal his ağırlıklı bileşenler: liquid switch, morphing kontroller, gooey efektler, yükleyiciler ve shader arka planları; Base UI üstüne kurulu. shadcn CLI ile eklenir, MCP ve ajan skill'leri de var. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Hareket ve dokunsal his ağırlıklı bileşenler: liquid switch, morphing kontroller, gooey efektler, yükleyiciler ve shader arka planları; Base UI üstüne kurulu. shadcn CLI ile eklenir, MCP ve ajan skill'leri de var.
+
+<span class="k-alan ilk"><span class="k-etiket">Altyapı</span><span class="k-deger">React 19 + Tailwind 4 + Base UI + Motion</span></span>
+<span class="k-alan"><span class="k-etiket">Başka altyapıda</span><span class="k-deger">Doğrudan kurulmaz; örnek alınıp çevrilir</span></span>
+<span class="k-alan son"><span class="k-etiket">Ücret</span><span class="k-deger">Çekirdek ücretsiz, MIT; Pro yıllık 99 $ ya da ömür boyu 129 $; proje yeni</span></span>
+
+</Kart>
+
+<Kart baslik={"Arc"} satir={6} href={"https://uiarc.dev"} tur={"Bileşen"} prompt={"Arc (https://uiarc.dev) aracını bu projede kullanmak istiyorum. Ne işe yarar: Sakin, fiziksel hareketli bileşenler ve hazır bloklar: tarih seçici, silmeyi onaylama, skeleton, grafikler; giriş formu, dashboard ve fiyat karşılaştırma blokları. Ortak renk, yazı ve hareket token'larına dayanır, her animasyonun hareketi azaltılmış hâli var. shadcn CLI ile ya da dosyalar elle kopyalanarak eklenir, MCP desteği var. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+
+Sakin, fiziksel hareketli bileşenler ve hazır bloklar: tarih seçici, silmeyi onaylama, skeleton, grafikler; giriş formu, dashboard ve fiyat karşılaştırma blokları. Ortak renk, yazı ve hareket token'larına dayanır, her animasyonun hareketi azaltılmış hâli var. shadcn CLI ile ya da dosyalar elle kopyalanarak eklenir, MCP desteği var.
+
+<span class="k-alan ilk"><span class="k-etiket">Altyapı</span><span class="k-deger">React 19 + Motion, CSS modules (Tailwind şart değil; Next.js ya da Vite)</span></span>
+<span class="k-alan"><span class="k-etiket">Başka altyapıda</span><span class="k-deger">Doğrudan kurulmaz; örnek alınıp çevrilir</span></span>
+<span class="k-alan son"><span class="k-etiket">Ücret</span><span class="k-deger">Çekirdek (108 bileşen, 22 blok) ücretsiz, MIT; Pro yıllık 129 $ ya da ömür boyu 199 $</span></span>
 
 </Kart>
 

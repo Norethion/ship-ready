@@ -57,7 +57,7 @@ Ajanın bu kalıplara düşmemesi için [Impeccable](https://github.com/pbakaus/
 
 ## Tasarım prompt'ları
 
-Var olan bir arayüzü toparlamak için dört prompt; [bu gönderiden](https://www.instagram.com/p/Dd3w1JdlH8b/) Türkçeye uyarlandı.
+Var olan bir arayüzü toparlamak için altı prompt; ilk dördü [bu gönderiden](https://www.instagram.com/p/Dd3w1JdlH8b/), son ikisi [bu gönderiden](https://www.instagram.com/p/Dd_fMs4FLmR/) Türkçeye uyarlandı.
 Yapay zekâya bir şey ekletmek yerine neyin çıkarılacağını sor; her prompt'tan sonra sayfayı yeniden açıp bak.
 
 | Prompt | Prompt metni | Ne zaman |
@@ -66,6 +66,8 @@ Yapay zekâya bir şey ekletmek yerine neyin çıkarılacağını sor; her promp
 | AI görünümünü kaldır | Bu arayüzdeki hazır gradyanları, gereğinden fazla kartı, hap biçimli rozetleri ve tahmin edilebilir düzenleri bul. Bunları kaldırıp bu ürüne özgü, tutarlı bir görsel sistem kur; önce neyi neden değiştireceğini göster. | Sayfa başka yüzlerce AI yapımı siteye benziyor. |
 | İlk 5 saniyeyi düzelt | Sayfanın kaydırmadan görünen üst kısmında ürünün ne olduğunu, kimin için olduğunu, neden önemli olduğunu ve sonra ne yapılacağını açıkça anlat. Süslemeyi bunlardan sonraya bırak; 5 saniyede okunup anlaşılıyor mu diye kontrol et. | Ziyaretçi ilk bakışta ürünün ne yaptığını anlamıyor. |
 | Tasarımcı gözüyle geçir | Çalışan siteyi aç ve en çok etki eden 10 tasarım sorununu bul, önem sırasıyla listele. Onayımla düzelt, siteyi yeniden açıp tekrar incele; yeni bir şey ekleme, neyin çıkarılacağını öner. | Sayfa bitti gibi ama bir şeyler eksik ya da fazla duruyor. |
+| Önce tasarım sistemini kur | Yazı tiplerini, boşluk ölçeğini, renkleri ve temel bileşenleri (düğme, kart, girdi, menü) önce tek yerde tanımla. Sonra sayfadaki her bölümü sadece bunlarla yeniden kur; tanımın dışında kalan her stili listele ve onayımla tanıma bağla. | Her bölüm başka bir siteden alınmış gibi duruyor; düğmeler, kartlar ve boşluklar bölümden bölüme değişiyor. |
+| Her ekran boyutunda dene | Siteyi 390, 768, 1024 ve 1440 piksel genişlikte aç ve her birinde ekran görüntüsü al. Taşan, üst üste binen, okunmayan ya da dokunması zor öğeleri ekran boyutuyla birlikte listele, onayımla düzelt ve yeniden kontrol et. | Sadece masaüstünde baktın; telefonda ve tablette nasıl göründüğünü bilmiyorsun. |
 
 ## UX yasaları
 
@@ -87,6 +89,7 @@ React dışı bir projede (Vue, Angular, Blazor, mobil) bileşen kütüphaneleri
 Beğendiğin bileşenin kodunu Claude'a verip "bunu kendi altyapıma çevir" demek yeterli.
 Liquid Glass, DialKit, Libraries.dev ve UI SFX [bu gönderiden](https://www.instagram.com/p/DdTD4xPF-I-/) alındı; bilgiler 29.09.2026'da sitelerinden doğrulandı.
 Cult UI, Watermelon UI ve Motion Primitives [bu gönderiden](https://www.instagram.com/p/Dd6VnMClIzz/), Canvas UI ve Spline [bu gönderiden](https://www.instagram.com/p/Dd86Z4wlKw4/) alındı; bilgiler 06.10.2026'da sitelerinden doğrulandı.
+Componentry, Space UI ve Arc [bu gönderiden](https://www.instagram.com/p/Dd_RewkFpGt/) alındı; bilgiler 09.10.2026'da sitelerinden doğrulandı.
 canvas-confetti ([kaynak video](https://www.instagram.com/reel/Ddb5wiPopJ9/)) ve Thinking Orbs ([kaynak video](https://www.instagram.com/reel/DdgPH-poGbJ/)) kartlarındaki örnek, kütüphanenin etkisini kendi kısa kodumuzla gösterir; projede kütüphanenin kendisini kur, kullanımı örnek kodunun başında yazar.
 
 | Kütüphane | Tür | Ne işe yarar | Altyapı | Başka altyapıda | Ücret |
@@ -102,6 +105,9 @@ canvas-confetti ([kaynak video](https://www.instagram.com/reel/Ddb5wiPopJ9/)) ve
 | [Cult UI](https://www.cult-ui.com) | Bileşen | shadcn/ui'ı genişleten 150'den fazla animasyonlu bileşen; AI arayüzleri için bileşenler de var. `npx shadcn@latest add @cult-ui/<bileşen>` ile eklenir. | React + Tailwind + Motion | Doğrudan kurulmaz; örnek alınıp çevrilir | Ücretsiz, MIT; ayrıca ücretli Pro indirmeleri var |
 | [Watermelon UI](https://ui.watermelon.sh) | Bileşen | 600'den fazla bileşen, animasyon, blok, dashboard ve şablon; shadcn CLI ile registry adresinden eklenir, barındırılan MCP sunucusu da var. | React 19 + Tailwind 4 + Motion | Doğrudan kurulmaz; örnek alınıp çevrilir | Ücretsiz, MIT; proje yeni |
 | [Motion Primitives](https://motion-primitives.com) | Bileşen | Motion ile yapılmış animasyonlu bileşen kiti: metin efektleri, geçişler, kaydırmaya bağlı ve sürüklenen öğeler. `npx motion-primitives@latest add <bileşen>` ya da shadcn CLI ile eklenir. | React + Tailwind + Motion | Doğrudan kurulmaz; örnek alınıp çevrilir | Çekirdek ücretsiz, MIT; Pro ücretli |
+| [Componentry](https://componentry.dev) | Bileşen | Liquid glass carousel, görsel dalgalanma (ripple), parçacıklı yazı, kaydırmaya bağlı sahneler, 3B kart yığınları ve WebGL sıvı efekti gibi 50'yi aşkın animasyonlu bileşen. `npx shadcn@latest add @componentry/<bileşen>` ile eklenir; shadcn MCP ile AI editöründen de kurulur. | React + Tailwind + Motion (bazı efektler GSAP ya da shader) | Doğrudan kurulmaz; örnek alınıp çevrilir | Ücretsiz, MIT |
+| [Space UI](https://www.spaceui.one) | Bileşen | Hareket ve dokunsal his ağırlıklı bileşenler: liquid switch, morphing kontroller, gooey efektler, yükleyiciler ve shader arka planları; Base UI üstüne kurulu. shadcn CLI ile eklenir, MCP ve ajan skill'leri de var. | React 19 + Tailwind 4 + Base UI + Motion | Doğrudan kurulmaz; örnek alınıp çevrilir | Çekirdek ücretsiz, MIT; Pro yıllık 99 $ ya da ömür boyu 129 $; proje yeni |
+| [Arc](https://uiarc.dev) | Bileşen | Sakin, fiziksel hareketli bileşenler ve hazır bloklar: tarih seçici, silmeyi onaylama, skeleton, grafikler; giriş formu, dashboard ve fiyat karşılaştırma blokları. Ortak renk, yazı ve hareket token'larına dayanır, her animasyonun hareketi azaltılmış hâli var. shadcn CLI ile ya da dosyalar elle kopyalanarak eklenir, MCP desteği var. | React 19 + Motion, CSS modules (Tailwind şart değil; Next.js ya da Vite) | Doğrudan kurulmaz; örnek alınıp çevrilir | Çekirdek (108 bileşen, 22 blok) ücretsiz, MIT; Pro yıllık 129 $ ya da ömür boyu 199 $ |
 | [Motion](https://github.com/motiondivision/motion) | Animasyon | Framer Motion'ın yeni adı: yaylı animasyonlar, sayfa düzeni geçişleri, kaydırmaya bağlı efektler, sürükleme. Aceternity ve Magic UI bileşenleri bunu kullanır. | React, düz JavaScript, Vue | Web dışında kullanılmaz | Çekirdek ücretsiz, MIT; Motion+ ücretli |
 | [GSAP](https://github.com/greensock/GSAP) | Animasyon | Bağımlılıksız animasyon kütüphanesi; ScrollTrigger, SplitText, MorphSVG gibi eklentiler dahil, React için `useGSAP`. | Her web projesi: düz JS, React, Vue, SVG, canvas | Web dışında kullanılmaz | Tüm eklentiler dahil ücretsiz, ticari kullanım serbest; açık kaynak değil (GreenSock lisansı) |
 | [Lottie Web](https://github.com/airbnb/lottie-web) | Animasyon | After Effects'te yapılıp JSON'a aktarılan animasyonları web'de oynatır. | Her web projesi (düz JS, npm ya da CDN) | Mobil için Lottie'nin iOS ve Android kütüphaneleri ayrı | Ücretsiz, MIT; animasyonu üretmek için After Effects gerekir, bir yıldan uzun süredir güncellenmiyor |
