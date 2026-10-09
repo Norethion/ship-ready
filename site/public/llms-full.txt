@@ -174,7 +174,7 @@ Hukuki maddeler bilgilendirme amaçlıdır, hukuki tavsiye değildir; kendi duru
 
 Adres: /listeler/app-store/
 
-En sık 26 red sebebi ve her biri için ne yapılacağı.
+En sık 27 red sebebi ve her biri için ne yapılacağı.
 Apple uygulamayı reddederken çoğu zaman sadece bir kural numarası ve iki cümle yazar; hangi ekranda neyin eksik olduğunu söylemez.
 Bu sebeplerin çoğu kod hatası değil; eksik anlatılan, unutulan ya da yanlış girilen ayarlar.
 Liste [bu videodan](https://www.instagram.com/reel/DctdIykgb9C/) ve aynı hesabın 24 maddelik ikinci listesinden alındı; kural numaraları 25.09.2026'da [App Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) sayfasından doğrulandı.
@@ -195,40 +195,41 @@ Liste [bu videodan](https://www.instagram.com/reel/DctdIykgb9C/) ve aynı hesab�
 | 5 [as-hesap-silme] | Hesap silme yok | Uygulamada hesap açılabiliyorsa hesap silme de uygulamanın içinden yapılabilmeli; sadece e-posta ile talep yetmez. | 5.1.1(v) |
 | 6 [as-izin-gerekcesi] | İzin gerekçesi yok | Kamera, konum, rehber gibi izin isteklerinde verinin neden ve nasıl kullanılacağını açıkça yaz; "Kamera erişimi gerekli" yetmez. | 5.1.1(ii) |
 | 7 [as-takip-izni] | Takip izni yok | Kullanıcıyı başka uygulama ve sitelerde takip ediyorsan (reklam kimliği, bazı analitik SDK'ları) App Tracking Transparency izni iste. | 5.1.2(i) |
-| 8 [as-gizlilik-etiketi] | Gizlilik etiketi yanlış | App Store Connect'teki gizlilik bilgileri, uygulamanın ve eklediğin SDK'ların (analitik, reklam, çökme raporu) gerçekte topladığı veriyle birebir aynı olsun. | 2.3, 5.1.1(i) |
-| 9 [as-gizlilik-politikasi-linki] | Gizlilik politikası linki yok | Gizlilik politikası linkini hem App Store Connect'teki alana hem de uygulamanın içinde kolay bulunur bir yere koy; sadece satın alma ekranında olması yetmez. | 5.1.1(i) |
-| 10 [as-esdeger-giris-secenegi] | Eşdeğer giriş seçeneği yok | Google, Facebook gibi bir hesapla giriş varsa yanında veriyi ad ve e-postayla sınırlayan, e-postayı gizlemeye izin veren ve reklam için izlemeyen bir giriş seçeneği daha sun; Apple ile Giriş bu şartları karşılar. Sadece kendi e-posta ve şifre girişin varsa gerekmez. | 4.8 |
+| 8 [as-ucuncu-taraf-ai] | Veri AI servisine izinsiz gidiyor | Kullanıcının metni, fotoğrafı ya da sesi OpenAI, Anthropic, Gemini gibi bir AI servisine gidiyorsa ilk gönderimden önce hangi verinin hangi sağlayıcıya gittiğini açıkça söyleyip açık izin al; aynı bilgiyi gizlilik politikasına da yaz. Kural AI ile üretilen içeriği etiketlemeyi değil, kişisel verinin üçüncü taraf AI ile paylaşılmasını kapsar (13.11.2025'te eklendi). | 5.1.2(i) |
+| 9 [as-gizlilik-etiketi] | Gizlilik etiketi yanlış | App Store Connect'teki gizlilik bilgileri, uygulamanın ve eklediğin SDK'ların (analitik, reklam, çökme raporu) gerçekte topladığı veriyle birebir aynı olsun. | 2.3, 5.1.1(i) |
+| 10 [as-gizlilik-politikasi-linki] | Gizlilik politikası linki yok | Gizlilik politikası linkini hem App Store Connect'teki alana hem de uygulamanın içinde kolay bulunur bir yere koy; sadece satın alma ekranında olması yetmez. | 5.1.1(i) |
+| 11 [as-esdeger-giris-secenegi] | Eşdeğer giriş seçeneği yok | Google, Facebook gibi bir hesapla giriş varsa yanında veriyi ad ve e-postayla sınırlayan, e-postayı gizlemeye izin veren ve reklam için izlemeyen bir giriş seçeneği daha sun; Apple ile Giriş bu şartları karşılar. Sadece kendi e-posta ve şifre girişin varsa gerekmez. | 4.8 |
 
 ## İnceleme hazırlığı
 
 | # | Red sebebi | Ne yapmalı | Kural |
 |---|---|---|---|
-| 11 [as-yer-tutucu-icerik] | Yer tutucu içerik | "Lorem ipsum", boş ekran, çalışmayan link ya da "yakında" sayfası bırakma; gönderilen sürüm son sürüm olmalı. | 2.1(a) |
-| 12 [as-demo-hesap] | Demo hesap yok | Giriş gerektiren her şey için çalışan ve inceleme sürerken süresi dolmayacak bir demo hesap (ya da tam demo modu) ve gerekiyorsa örnek QR kodu gibi ek bilgileri inceleme notlarına yaz. | 2.1(a) |
-| 13 [as-gizli-ozellik] | Gizli özellik | Gizli, kapalı bekleyen ya da belgelenmemiş özellik bırakma; yeni özellikleri inceleme notlarında ayrıntılı anlat ve inceleme ekibinin her özelliğe (ör. satın alma ekranına) nasıl ulaşacağını adım adım yaz, genel açıklama reddedilir. | 2.3.1(a) |
-| 14 [as-ekran-goruntuleri] | Ekran görüntüsü yanlış | Ekran görüntüleri uygulamanın kullanımını göstermeli; sadece logo, giriş ya da açılış ekranı olmaz. | 2.3.3 |
-| 15 [as-cokme] | Çöküyor | Göndermeden önce gerçek cihazda test et; çöken ya da belirgin hatası olan sürüm reddedilir. | 2.1(a) |
-| 16 [as-destek-linki] | Destek linki çalışmıyor | App Store Connect'teki destek linki (Support URL) açılmalı ve sana ulaşmanın kolay bir yolunu göstermeli; boş ya da hata veren sayfa bırakma. | 1.5 |
-| 17 [as-yas-derecelendirmesi] | Yaş sınırı yanlış | App Store Connect'teki yaş derecelendirmesi sorularını dürüst cevapla; kullanıcı içeriği, sohbet, kumar ya da yetişkin içerik varsa belirt. | 2.3.6 |
+| 12 [as-yer-tutucu-icerik] | Yer tutucu içerik | "Lorem ipsum", boş ekran, çalışmayan link ya da "yakında" sayfası bırakma; gönderilen sürüm son sürüm olmalı. | 2.1(a) |
+| 13 [as-demo-hesap] | Demo hesap yok | Giriş gerektiren her şey için çalışan ve inceleme sürerken süresi dolmayacak bir demo hesap (ya da tam demo modu) ve gerekiyorsa örnek QR kodu gibi ek bilgileri inceleme notlarına yaz. | 2.1(a) |
+| 14 [as-gizli-ozellik] | Gizli özellik | Gizli, kapalı bekleyen ya da belgelenmemiş özellik bırakma; yeni özellikleri inceleme notlarında ayrıntılı anlat ve inceleme ekibinin her özelliğe (ör. satın alma ekranına) nasıl ulaşacağını adım adım yaz, genel açıklama reddedilir. | 2.3.1(a) |
+| 15 [as-ekran-goruntuleri] | Ekran görüntüsü yanlış | Ekran görüntüleri uygulamanın kullanımını göstermeli; sadece logo, giriş ya da açılış ekranı olmaz. | 2.3.3 |
+| 16 [as-cokme] | Çöküyor | Göndermeden önce gerçek cihazda test et; çöken ya da belirgin hatası olan sürüm reddedilir. | 2.1(a) |
+| 17 [as-destek-linki] | Destek linki çalışmıyor | App Store Connect'teki destek linki (Support URL) açılmalı ve sana ulaşmanın kolay bir yolunu göstermeli; boş ya da hata veren sayfa bırakma. | 1.5 |
+| 18 [as-yas-derecelendirmesi] | Yaş sınırı yanlış | App Store Connect'teki yaş derecelendirmesi sorularını dürüst cevapla; kullanıcı içeriği, sohbet, kumar ya da yetişkin içerik varsa belirt. | 2.3.6 |
 
 ## İçerik ve işlevsellik
 
 | # | Red sebebi | Ne yapmalı | Kural |
 |---|---|---|---|
-| 18 [as-web-gorunumu] | Sadece web görünümü | Uygulama, paketlenmiş bir web sitesinden fazlası olmalı: uygulamaya özgü özellik, içerik ve arayüz. | 4.2 |
-| 19 [as-minimum-islevsellik] | Minimum işlevsellik | Sadece reklam, link koleksiyonu ya da çok basit tek işlev olan uygulamalar reddedilir. | 4.2, 4.2.2 |
-| 20 [as-cocuk-kategorisi] | Çocuk kategorisi | Çocuk kategorisindeysen dışarıya link, satın alma ve reklam ebeveyn kilidinin arkasında olmalı; kişisel ve cihaz verisi üçüncü taraflara gitmemeli. | 1.3 |
-| 21 [as-kullanici-icerigi] | Kullanıcı içeriği | Kullanıcılar içerik paylaşabiliyorsa uygunsuz içeriği filtreleme, şikâyet etme, kullanıcı engelleme ve iletişim bilgisi şart. | 1.2 |
-| 22 [as-baskasinin-markasi] | Başkasının markası | Başka markanın adını, logosunu ya da telifli içeriğini izinsiz kullanma; başka uygulamanın ikonunu ya da adını taklit etme. Açıklamada ve ekran görüntülerinde Android gibi başka platformların adı ya da görseli de geçmesin. | 5.2.1, 4.1(c), 2.3.10 |
-| 23 [as-saglik-iddiasi] | Sağlık iddiası | Sağlıkla ilgili ölçüm ya da etki iddiasının verisini ve yöntemini göster; doğrulanamayan iddia ("stresi tedavi eder") reddedilir. | 1.4.1 |
-| 24 [as-sablon-uygulama] | Şablon uygulama | Hazır şablonla ya da uygulama üretme servisiyle yapılıp başkası adına gönderilen uygulama reddedilir; içerik sahibi kendi hesabından göndermeli ve uygulama özgün olmalı. | 4.2.6 |
-| 25 [as-olmayan-ozellik-vaadi] | Olmayan özellik vaadi | Açıklama, ekran görüntüleri ve önizleme videosu uygulamanın gerçekte yaptığını göstermeli; olmayan özelliği ya da yanlış fiyatı vaat etme. | 2.3, 2.3.1(a) |
+| 19 [as-web-gorunumu] | Sadece web görünümü | Uygulama, paketlenmiş bir web sitesinden fazlası olmalı: uygulamaya özgü özellik, içerik ve arayüz. | 4.2 |
+| 20 [as-minimum-islevsellik] | Minimum işlevsellik | Sadece reklam, link koleksiyonu ya da çok basit tek işlev olan uygulamalar reddedilir. | 4.2, 4.2.2 |
+| 21 [as-cocuk-kategorisi] | Çocuk kategorisi | Çocuk kategorisindeysen dışarıya link, satın alma ve reklam ebeveyn kilidinin arkasında olmalı; kişisel ve cihaz verisi üçüncü taraflara gitmemeli. | 1.3 |
+| 22 [as-kullanici-icerigi] | Kullanıcı içeriği | Kullanıcılar içerik paylaşabiliyorsa uygunsuz içeriği filtreleme, şikâyet etme, kullanıcı engelleme ve iletişim bilgisi şart. | 1.2 |
+| 23 [as-baskasinin-markasi] | Başkasının markası | Başka markanın adını, logosunu ya da telifli içeriğini izinsiz kullanma; başka uygulamanın ikonunu ya da adını taklit etme. Açıklamada ve ekran görüntülerinde Android gibi başka platformların adı ya da görseli de geçmesin. | 5.2.1, 4.1(c), 2.3.10 |
+| 24 [as-saglik-iddiasi] | Sağlık iddiası | Sağlıkla ilgili ölçüm ya da etki iddiasının verisini ve yöntemini göster; doğrulanamayan iddia ("stresi tedavi eder") reddedilir. | 1.4.1 |
+| 25 [as-sablon-uygulama] | Şablon uygulama | Hazır şablonla ya da uygulama üretme servisiyle yapılıp başkası adına gönderilen uygulama reddedilir; içerik sahibi kendi hesabından göndermeli ve uygulama özgün olmalı. | 4.2.6 |
+| 26 [as-olmayan-ozellik-vaadi] | Olmayan özellik vaadi | Açıklama, ekran görüntüleri ve önizleme videosu uygulamanın gerçekte yaptığını göstermeli; olmayan özelliği ya da yanlış fiyatı vaat etme. | 2.3, 2.3.1(a) |
 
 ## Reddedilince
 
 | # | Red sebebi | Ne yapmalı | Kural |
 |---|---|---|---|
-| 26 [as-red-cevabi] | Cevap yazmıyorsun | Sessizce yeni sürüm göndermek yerine App Store Connect'te uygulamanın App Review bölümünden inceleme ekibine yaz; neyin eksik olduğunu sor ya da neden kurala uyduğunu açıkla. | App Review |
+| 27 [as-red-cevabi] | Cevap yazmıyorsun | Sessizce yeni sürüm göndermek yerine App Store Connect'te uygulamanın App Review bölümünden inceleme ekibine yaz; neyin eksik olduğunu sor ya da neden kurala uyduğunu açıkla. | App Review |
 
 - **Önce yaz:** Ret mesajına App Store Connect'ten cevap vermek çoğu zaman yeni sürüm göndermekten hızlı sonuç verir.
 - **İtiraz:** Uygulamanın yanlış anlaşıldığını düşünüyorsan [App Review Board'a itiraz](https://developer.apple.com/contact/app-store/?topic=appeal) edebilirsin. Her ret için tek itiraz hakkı var; önce ekibin istediği ek bilgileri ver.
@@ -238,7 +239,7 @@ Liste [bu videodan](https://www.instagram.com/reel/DctdIykgb9C/) ve aynı hesab�
 ## Göndermeden önce kontrol prompt'u
 
 ```
-Bu iOS uygulamasını App Store incelemesine göndermeden önce şu 26 red sebebine göre kontrol et: satın alma ekranında Kullanım Koşulları ve Gizlilik Politikası linkleri, fiyat ve deneme süresi açıklaması, satın almaları geri yükleme düğmesi, dış ödeme linki, uygulama içinden hesap silme, izin gerekçesi metinleri, App Tracking Transparency, gizlilik etiketinin SDK'larla uyumu, App Store Connect'te ve uygulama içinde gizlilik politikası linki, Google/Facebook girişinin yanında eşdeğer giriş seçeneği, yer tutucu içerik, demo hesap, gizli özellikler ve inceleme ekibinin özelliklere nasıl ulaşacağı, ekran görüntüleri, çökme, destek linki, yaş derecelendirmesi, web görünümünden ibaret olma, minimum işlevsellik, çocuk kategorisi kuralları, kullanıcı içeriği için filtreleme/şikâyet/engelleme, başkasının markası ve başka platform adları, sağlık iddiaları, şablon uygulama, açıklamadaki vaatlerin uygulamayla uyumu. Her madde için durumu (✅ ⚠️ ❌ ➖) ve ilgili dosyayı yaz, sonra inceleme notlarına yazılacak metni ve demo hesap bilgisi taslağını hazırla.
+Bu iOS uygulamasını App Store incelemesine göndermeden önce şu 27 red sebebine göre kontrol et: satın alma ekranında Kullanım Koşulları ve Gizlilik Politikası linkleri, fiyat ve deneme süresi açıklaması, satın almaları geri yükleme düğmesi, dış ödeme linki, uygulama içinden hesap silme, izin gerekçesi metinleri, App Tracking Transparency, kişisel veri üçüncü taraf AI servisine gidiyorsa açıklama ve açık izin, gizlilik etiketinin SDK'larla uyumu, App Store Connect'te ve uygulama içinde gizlilik politikası linki, Google/Facebook girişinin yanında eşdeğer giriş seçeneği, yer tutucu içerik, demo hesap, gizli özellikler ve inceleme ekibinin özelliklere nasıl ulaşacağı, ekran görüntüleri, çökme, destek linki, yaş derecelendirmesi, web görünümünden ibaret olma, minimum işlevsellik, çocuk kategorisi kuralları, kullanıcı içeriği için filtreleme/şikâyet/engelleme, başkasının markası ve başka platform adları, sağlık iddiaları, şablon uygulama, açıklamadaki vaatlerin uygulamayla uyumu. Her madde için durumu (✅ ⚠️ ❌ ➖) ve ilgili dosyayı yaz, sonra inceleme notlarına yazılacak metni ve demo hesap bilgisi taslağını hazırla.
 ```
 
 ---
@@ -532,7 +533,7 @@ Typeface, Screenshot to Code ve VibeUI [bu gönderiden](https://www.instagram.co
 
 ## İlham siteleri
 
-Tasarıma başlarken ve takıldığında bakılan siteler; [bu gönderiden](https://www.instagram.com/p/DdRp-ZSCKeH/), hareket için [bu gönderiden](https://www.instagram.com/p/Ddd22v1CDlb/), Mobbin, Curated ve Dark Design [bu gönderiden](https://www.instagram.com/p/DdwB8bJFC_-/) alındı.
+Tasarıma başlarken ve takıldığında bakılan siteler; [bu gönderiden](https://www.instagram.com/p/DdRp-ZSCKeH/), hareket için [bu gönderiden](https://www.instagram.com/p/Ddd22v1CDlb/), Mobbin, Curated ve Dark Design [bu gönderiden](https://www.instagram.com/p/DdwB8bJFC_-/), Minimal Gallery [bu gönderiden](https://www.instagram.com/p/DdWzc45k8wY/), A1 Gallery, Unsection, Navbar Gallery, Footer Design ve 404s [bu gönderiden](https://www.instagram.com/p/DdJzEakF7Ux/) alındı.
 Beğendiğin örneği kaydet ve neden beğendiğini not al; düzeni değil fikri al.
 Hareket (animasyon) sitelerinde örnekler durağan görsel değil çalışan hâliyle görünür; hissi not al, kendi versiyonunu yap.
 
@@ -543,6 +544,12 @@ Hareket (animasyon) sitelerinde örnekler durağan görsel değil çalışan hâ
 | [Mobbin](https://mobbin.com) | Gerçek uygulama ve sitelerden 600 binden fazla ekran, kullanıcı akışı ve arayüz kalıbı; uygulamanın onboarding'i, ödeme ekranı ya da ayarları nasıl kurduğunu görürsün. | Ücretsiz planda kayıt gerekir, sınırlı uygulama görünür, akış ve arama yok; Pro ayda 10 $'dan (yıllık) |
 | [Curated](https://www.curated.design) | Sektöre ve stile göre süzülen seçilmiş siteler; temiz landing page'ler ve startup siteleri. | Gezinmek ücretsiz; gelişmiş filtreler Pro ile ayda 9 $ |
 | [Dark Design](https://www.dark.design) | Koyu temalı, elle seçilmiş siteler; koyu tema tasarlarken kontrast, boşluk ve vurgu örnekleri. | Ücretsiz; şablonlar ve sponsorlu kartlar da var |
+| [Minimal Gallery](https://minimal.gallery) | 2013'ten beri seçilen sade ve işlevsel site örnekleri; site, şablon ve araç bölümleri var, Framer ve Webflow gibi altyapılara göre süzülür. | Gezinmek ücretsiz, sponsorlu kartlar var |
+| [A1 Gallery](https://www.a1.gallery) | Neredeyse her gün güncellenen seçilmiş siteler; stile, teknolojiye ve renge göre süzülür, MCP sunucusu da var. | Gezinmek ücretsiz, ücretsiz hesapta 2 panoda 30 kayıt; Pro ayda 9 $ |
+| [Unsection](https://www.unsection.com) | 5 binden fazla siteden bölüm örnekleri: hero, özellik, yorum, CTA, footer; bölüm türüne göre süzülür. | Ücretsiz hesapta kategori başına 30 bölüm ve 100 kayıt; Pro ayda 5 $ |
+| [Navbar Gallery](https://www.navbar.gallery) | Türüne göre (sabit, açılır, mega menü, kenar çubuğu) gezinme çubuğu örnekleri. | Ücretsiz |
+| [Footer Design](https://www.footer.design) | Stile ve türe göre seçilmiş footer tasarımları. | Ücretsiz, sponsorlu kart var |
+| [404s](https://www.404s.design) | Yaratıcı 404 (sayfa bulunamadı) sayfaları galerisi. | Ücretsiz, sponsorlu kartlar var |
 | [Awwwards](https://www.awwwards.com/websites/) | Jürinin ödüllendirdiği siteler ve yıllar öncesine uzanan "günün sitesi" arşivi; kategori, teknoloji (React, Webflow, Three.js), yazı tipi ve etikete göre süzülür. | Gezinmek ücretsiz; kurslar ve Pro üyelik ücretli |
 | [Pinterest](https://www.pinterest.com) | "web design", "dashboard ui" gibi aramalarla geniş görsel arşiv; beğendiklerini panolara kaydedersin. | Ücretsiz |
 | [X](https://x.com) | Tasarımcı ve geliştiricilerin yeni işlerini paylaştığı akış; beğendiğin kişileri bir listede toplarsın. | Ücretsiz |
@@ -648,7 +655,7 @@ Uygulamadan para kazanırken sık birlikte kullanılan araçlar: satın alma alt
 
 Adres: /rehberler/mobil-uygulama/
 
-Mobil uygulamada mağaza incelemesi dışında kalan kararlar: platform seçimi, aylık maliyet, ölçülecek olaylar, kullanıcıda çökme sebepleri, satmayan ve kullanıcı tutamayan uygulamanın sebepleri, reklamsız ilk kullanıcılar ve reklam terimleri.
+Mobil uygulamada mağaza incelemesi dışında kalan kararlar: platform seçimi, aylık maliyet, ölçülecek olaylar, kullanıcıda çökme sebepleri, yayından önceki testler, satmayan ve kullanıcı tutamayan uygulamanın sebepleri, reklamsız ilk kullanıcılar ve reklam terimleri.
 Listeler dijitalakcin ve kema_the_engineer hesaplarının gönderilerinden alındı (her bölümde bağlantısı var); mağaza kuralları ve araç sınırları 06.10.2026'da kendi belgelerinden doğrulandı.
 Mağaza incelemesi için [App Store](/listeler/app-store/) ve [Google Play](/listeler/google-play/) listeleri, satın alma ekranı için [Paywall dönüşümü](/listeler/paywall/), servislerin ücretsiz sınırları için [Yayına alma & barındırma](/rehberler/yayina-alma-barindirma/) sekmesi.
 
@@ -750,6 +757,33 @@ Hepsi cihazda değil kodda düzeltilir; örnekler Flutter'dan, Swift ve Kotlin'd
 | Bozuk önbellek | Eski sürümün yazdığı ya da bozulmuş önbellek her açılışta aynı yerde çöktürür. | Önbelleğe sürüm numarası koy, sürüm değişince ya da okunamayınca temizle. |
 | Saat dilimi | Gece yarısı tarih bir gün kayar. | Tarihi UTC sakla, gösterirken yerel saate çevir. |
 | Rapor yok | Çökme raporu olmadığı için sorunu kullanıcının yorumundan öğrenirsin. | Crashlytics ya da Sentry'yi ilk günden kur ([yayın öncesi 60. madde](/listeler/yayin-oncesi/#yo-hata-izleme)). |
+
+## Yayından önce dene
+
+Uygulama çalışıyor diye yayına hazır sayılmaz; [bu videodaki](https://www.instagram.com/reel/DePZnH4Ildt/) 20 kontrolü yayından önce gerçek cihazda tek tek dene ya da yapay zekâya kontrol ettir.
+
+| Kontrol | Nasıl denenir |
+|---|---|
+| İzinler | Kamera, fotoğraf, konum ve bildirim izni özellik ilk kullanıldığında ve nedeni açıklanarak isteniyor mu, reddedilince uygulama çalışmaya devam ediyor mu ([App Store 6. madde](/listeler/app-store/#as-izin-gerekcesi)). |
+| Gizlilik politikası | Uygulamanın içinden ve mağaza sayfasından açılıyor mu, hangi veriyi neden topladığını gerçeğe uygun yazıyor mu ([yayın öncesi 98. madde](/listeler/yayin-oncesi/#yo-aydinlatma-gercege-uygun)). |
+| Hesap silme | Hesap ve veriler uygulamanın içinden silinebiliyor mu, silinen hesapla yeniden giriş yapılamıyor mu ([App Store 5. madde](/listeler/app-store/#as-hesap-silme)). |
+| Veri güvenliği | API anahtarları uygulama paketinde değil, kullanıcı verisi sadece sahibine açık mı ([yayın öncesi 65 ve 11. maddeler](/listeler/yayin-oncesi/#yo-mobil-pakette-anahtar)). |
+| Kayıt ve giriş | Her giriş yolu (e-posta, Google, Apple) yeni ve var olan hesapla baştan sona çalışıyor mu. |
+| E-posta doğrulama | Doğrulama e-postası gelmezse yeniden gönderme yolu var mı, e-posta spam klasörüne düşüyor mu. |
+| Şifre sıfırlama | Sıfırlama linki geliyor, bir kez çalışıyor ve süresi doluyor mu ([yayın öncesi 17. madde](/listeler/yayin-oncesi/#yo-sifirlama-linki)). |
+| Onboarding | Uygulamayı ilk kez açan biri ne yapacağını yardım almadan anlıyor mu. |
+| Ana akış | Uygulamanın asıl işi baştan sona takılmadan tamamlanabiliyor mu. |
+| Verinin kalıcılığı | Uygulama kapatılıp açılınca, güncellenince ve telefon yeniden başlatılınca veriler duruyor mu. |
+| Ödeme | Başarılı, iptal edilen, reddedilen ve yarıda kalan ödeme test hesabıyla denendi mi; yarıda kalan ödeme iki kez ücret çekmiyor mu. |
+| Satın alımı geri yükleme | Yeni telefona geçen kullanıcı satın alımlarını geri yükleyip aboneliğine ulaşabiliyor mu ([App Store 3. madde](/listeler/app-store/#as-geri-yukleme)). |
+| Yükleniyor durumu | İşlem sürerken gösterge çıkıyor mu, düğmeye iki kez basınca işlem iki kez yapılmıyor mu. |
+| Boş durum | Henüz içerik yokken ekran ne yapılacağını söylüyor mu. |
+| Hata durumu | Bir şey ters gidince anlaşılır bir mesaj ve tekrar deneme yolu çıkıyor mu. |
+| İnternet bağlantısı | Uçak modunda ve zayıf bağlantıda uygulama donmuyor, çökmüyor; bağlantı gelince kaldığı yerden devam ediyor mu. |
+| Bildirimler | Bildirim geliyor mu, uygulama kapalıyken de basınca doğru ekran açılıyor mu. |
+| Analitik ve çökme raporu | Olaylar ve çökmeler panelde görünüyor mu ([Ölçülecek olaylar](#ölçülecek-olaylar)). |
+| Farklı cihazlar | Küçük ve büyük telefonda, tablette, büyük yazı boyutunda ve koyu temada tasarım bozuluyor mu. |
+| Gerçek kullanıcı testi | Uygulamayı senden başka birkaç kişi, sen yardım etmeden denedi mi. |
 
 ## Satmıyorsa
 
@@ -1276,7 +1310,7 @@ Ajanın tarayıcıyı kullanması; web sayfalarını, videoları, belgeleri ve k
 ### Kod tabanı haritası
 
 - [Egonex-AI/Understand-Anything](https://github.com/Egonex-AI/Understand-Anything): Kod tabanını analiz edip her dosya, fonksiyon ve bağımlılığın etkileşimli bilgi grafiğini çıkaran Claude Code eklentisi; grafikte gezinip soru sorarak büyük bir projeyi hızlı tanırsın. Kurulum: Claude Code'a kurulur, Codex'e kurulur.
-- [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify): Kod tabanını (dokümanlar, PDF'ler ve SQL şemaları dahil) sorgulanabilir bir bilgi grafiğine çevirir; ajan dosyaları grep'lemek yerine grafiği sorgular. Kod yerelde tree-sitter ile, LLM kullanmadan ayrıştırılır. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: Önce `graphifyy` (çift y) Python CLI'ı kurulur, benzer adlı PyPI paketleri resmi değil. Doküman/PDF/görsel analizi asistanın modeline ya da API anahtarına gider; benchmark sonuçları yazarın iddiası.
+- [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify): Kod tabanını (dokümanlar, PDF'ler ve SQL şemaları dahil) sorgulanabilir bir bilgi grafiğine çevirir; ajan dosyaları grep'lemek yerine grafiği sorgular. Kod yerelde tree-sitter ile, LLM kullanmadan ayrıştırılır. `--obsidian` seçeneğiyle grafiği bir Obsidian kasası (vault) olarak çıkarır ya da var olan kasana yazar; kendi notlarına ve Obsidian ayarlarına dokunmaz. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: Önce `graphifyy` (çift y) Python CLI'ı kurulur, benzer adlı PyPI paketleri resmi değil. Doküman/PDF/görsel analizi asistanın modeline ya da API anahtarına gider; benchmark sonuçları yazarın iddiası.
 - [ahmedkhaleel2004/gitdiagram](https://github.com/ahmedkhaleel2004/gitdiagram): GitHub adresinde github yerine gitdiagram yazınca (gitdiagram.com/sahip/repo) reponun tıklanabilir mimari diyagramını çizer; özel repolar için erişim anahtarı girilir. Kurulum: ayrı uygulama. Uyarı: Genelde sitesinden ücretsiz kullanılır, günlük kota var; kendin kurarsan OpenAI ya da OpenRouter anahtarı, Cloudflare R2 ve Upstash Redis gerekir.
 - [coderamp-labs/gitingest](https://github.com/coderamp-labs/gitingest): GitHub adresinde github yerine gitingest yazınca reponun dizin ağacını ve dosya içeriklerini AI'a verilecek tek metin olarak çıkarır, token sayısını gösterir. Komut satırı aracı (pip install gitingest) yerel klasörlerle de çalışır. Kurulum: ayrı uygulama. Uyarı: Özel repo için erişim anahtarı gerekir; site 50 kB'tan büyük dosyaları varsayılan olarak atlar.
 - [morluto/rea](https://github.com/morluto/rea): Kodlama ajanını tersine mühendislik araçlarına bağlar: masaüstü ikili dosyaları (Ghidra ya da Hopper ile), JavaScript ve Electron uygulamaları, .NET, APK ve IPA paketleri ve web siteleri; bulguları kanıtıyla raporlar, analiz yerelde yapılır. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: Sadece kendi uygulamanı ya da izin aldığın uygulamayı incele: lisans sözleşmeleri ve mağaza koşulları çoğunlukla tersine mühendisliği yasaklar, FSEK md. 38 ancak dar koşullarda izin verir; kod, görsel ya da arayüz kopyalamak telif ihlalidir. Windows desteklenmez (macOS ve Linux), Node 22.19+ ister. Kurulum ajan ayarlarını değiştirir; değişikliği önce gösterir ve yedek alır.
@@ -1458,6 +1492,7 @@ AI yazısını doğallaştırma, SEO ve App Store optimizasyonu, pazarlama ve so
 - [gitroomhq/postiz-app](https://github.com/gitroomhq/postiz-app): Instagram, YouTube, LinkedIn, X, TikTok, Bluesky gibi platformlara gönderi zamanlayan, analiz ve ekip çalışması sunan sosyal medya yönetim aracı. Kendi sunucunda barındırılabilir; API, MCP ve CLI ile yapay zekâ ajanlarından kullanılabilir. Kurulum: ayrı uygulama. Uyarı: AGPL-3.0. Kendi sunucunda her platform için kendi geliştirici uygulamanı açıp onay alman gerekir (Meta, YouTube, TikTok haftalar sürebilir); AI özellikleri kendi API anahtarını ister, bulut sürümü ücretli abonelik.
 - [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills): Pazarlama işleri için skill koleksiyonu: dönüşüm optimizasyonu, metin yazarlığı, SEO, analitik, reklam ve büyüme. Skill'ler önce ürün ve hedef kitle bilgisini tutan product-marketing skill'ini okur. Kurulum: Claude Code'a kurulur, Codex'e kurulur.
 - [666ghj/MiroFish](https://github.com/666ghj/MiroFish): Haber, rapor ya da ürün duyurusu gibi bir başlangıç metninden kişiliği ve hafızası olan binlerce AI ajandan oluşan sanal bir topluluk kurar, sosyal medyaya benzer bir ortamda tepkisini simüle eder; sonunda tahmin raporu yazar, simülasyondaki ajanlarla sohbet edilebilir. Lansmana ya da duyuruya kitlenin tepkisini önceden denemek için. Kurulum: ayrı uygulama. Uyarı: Sonuç bir simülasyondur, gerçek kullanıcı verisi değil. LLM API anahtarı ister ve çok token harcar (README ilk denemeleri 40 turun altında tutmayı öneriyor); hafıza için Zep Cloud anahtarı da gerekir. Lisans AGPL-3.0. API anahtarı yerine claude ya da codex CLI ile çalışan çatalı SCTY-Inc/mirofish-cli (her çağrı ayrı süreç açar, yavaştır ve abonelik sınırını çabuk doldurur); tamamen yerel, Ollama ile çalışan çatalı nikmcfly/MiroFish-Offline.
+- [AgriciDaniel/claude-ads](https://github.com/AgriciDaniel/claude-ads): Claude'u reklam denetim ajansına çeviren skill ve eklenti: Google, Meta, YouTube, LinkedIn, TikTok, Apple dahil 12 reklam platformunda hesap dışa aktarımından kanıta dayalı denetim, bütçe planı, kreatif brief ve rapor üretir (`/ads audit`, `/ads plan`, `/ads google` gibi komutlar). Varsayılan olarak salt okunur çalışır. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: Python 3.11 ya da 3.12 ister. Görsel üretimi için ayrı ücretli API anahtarı (Gemini, OpenAI, Stability ya da Replicate), PDF rapor için sistem kütüphaneleri gerekir. Hesapta değişiklik ancak onay ve geri alma adımından sonra yapılır. README ücretli bir topluluğa yönlendiriyor ama herkese açık sürüm üyelik istemiyor; aynı adlı başka küçük bir repo da var.
 
 ## 🎬 Medya üretimi
 
@@ -1466,10 +1501,11 @@ Video, ses ve konuşma üretimi ve düzenlemesi.
 ### Video
 
 - [deepbeepmeep/Wan2GP](https://github.com/deepbeepmeep/Wan2GP): Zayıf ekran kartında bile çalışan AI video üretici (Wan, LTX, Hunyuan, Flux). Kurulum: ayrı uygulama.
-- [Anil-matcha/Open-Generative-AI](https://github.com/Anil-matcha/Open-Generative-AI): Görsel, video ve dudak senkronu üretimi için tek arayüz; yüzlerce model. Kurulum: ayrı uygulama. Uyarı: Bulut modelleri ücretli MuAPI servisi üzerinden çalışıyor.
+- [Anil-matcha/Open-Generative-AI](https://github.com/Anil-matcha/Open-Generative-AI): Görsel, video ve dudak senkronu üretimi için tek arayüz; yüzlerce model. Kurulum: ayrı uygulama. Uyarı: Bulut modelleri ücretli MuAPI servisi üzerinden, üretim başına ücretle çalışıyor; yerel üretim sadece masaüstü uygulamasında var (sd.cpp ile görsel, ayrıca kurulan Wan2GP ile NVIDIA ya da AMD GPU'da video).
 - [latent-spaces/brag](https://github.com/latent-spaces/brag): Yaptığın projeden tek komutla kısa bir tanıtım videosu çıkarır. Kurulum: Claude Code'a kurulur, Codex'e kurulur.
 - [getopenscreen/openscreen](https://github.com/getopenscreen/openscreen): Screen Studio'ya ücretsiz, açık kaynak alternatif masaüstü uygulaması: ekran ve ses kaydı, otomatik zoom, webcam, cihaz üstünde altyazı, MP4/GIF dışa aktarım. Windows, macOS ve Linux. Kurulum: ayrı uygulama. Uyarı: Asıl yazarın reposu (siddharthvaddem/openscreen) arşivlendi; geliştirme onun onayıyla aynı ad ve MIT lisansıyla bu repoda sürüyor.
 - [remotion-dev/remotion](https://github.com/remotion-dev/remotion): Videoyu React bileşenleri olarak kodlayıp render eden framework; render Node.js, AWS Lambda, Vercel veya tarayıcıda yapılabilir. Kodlama ajanlarıyla video üretmek için Agent Skills de sunar. Kurulum: projeye eklenir. Uyarı: Özel lisans: bireyler, en fazla 3 çalışanlı şirketler ve kâr amacı gütmeyenler için ücretsiz; daha büyük kâr amaçlı şirketler ücretli Company License almalı. Remotion 5.0'da sözleşmeli çalışanların da ekip sayısına katılması planlanıyor.
+- [heygen-com/hyperframes](https://github.com/heygen-com/hyperframes): HTML, CSS ve GSAP gibi animasyonlarla yazılan sahneleri headless Chrome ve FFmpeg ile her seferinde aynı çıkan MP4 videoya çevirir; ajana planlama, yazma, ses ekleme ve render döngüsünü öğreten skill'leri var. Remotion'dan farkı React yerine düz HTML kullanması. Kurulum: Claude Code'a kurulur, Codex'e kurulur. Uyarı: Node.js 22+ ve FFmpeg ister. Yerelde üretip render etmek için hesap gerekmez; HeyGen hesabı sadece HeyGen sesi, bulut render ve yayın için gerekir. CLI telemetrisi varsayılan açık (PostHog), `HYPERFRAMES_NO_TELEMETRY=1` ile kapanır.
 
 ### Ses ve konuşma
 
@@ -1492,7 +1528,7 @@ Sistem tasarımı ve Claude Code rehberleri, faydalı listeler ve veri setleri.
 
 ### Listeler ve veri setleri
 
-- [BraveOPotato/FckSignups](https://github.com/BraveOPotato/FckSignups): Tarayıcıda çalışan ve üyelik istemeyen açık kaynak araçların listesi. Kurulum: kaynak, kurulmaz.
+- [BraveOPotato/NoSignups](https://github.com/BraveOPotato/NoSignups): Tarayıcıda çalışan ve üyelik istemeyen açık kaynak araçların listesi. Kurulum: kaynak, kurulmaz.
 - [selahattinunlu/harika-github-repolari](https://github.com/selahattinunlu/harika-github-repolari): Türkçe hazırlanmış faydalı GitHub repoları listesi. Kurulum: kaynak, kurulmaz.
 - [hasaneyldrm/exercises-dataset](https://github.com/hasaneyldrm/exercises-dataset): 1.324 egzersizlik fitness veri seti; animasyonlar ve 6 dilde açıklamalar. Kurulum: projeye eklenir.
 - [marcelscruz/public-apis](https://github.com/marcelscruz/public-apis): Kategorilere ayrılmış herkese açık API listesi (AI, hava durumu, finans, spor...); her API için kimlik doğrulama türü ve CORS desteği belirtilir. Kurulum: kaynak, kurulmaz. Uyarı: Çoğu API anahtar ister, bazılarında ticari kullanım kısıtı var (ör. Open-Meteo yalnızca ticari olmayan kullanım); koşulları tek tek kontrol et.

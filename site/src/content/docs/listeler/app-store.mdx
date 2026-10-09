@@ -1,12 +1,12 @@
 ---
 title: "App Store incelemesi"
-description: "En sık 26 red sebebi ve her biri için ne yapılacağı."
+description: "En sık 27 red sebebi ve her biri için ne yapılacağı."
 ---
 
 import Madde from '../../../components/Madde.astro';
 import DenetimPrompt from '../../../components/DenetimPrompt.astro';
 
-En sık 26 red sebebi ve her biri için ne yapılacağı.
+En sık 27 red sebebi ve her biri için ne yapılacağı.
 Apple uygulamayı reddederken çoğu zaman sadece bir kural numarası ve iki cümle yazar; hangi ekranda neyin eksik olduğunu söylemez.
 Bu sebeplerin çoğu kod hatası değil; eksik anlatılan, unutulan ya da yanlış girilen ayarlar.
 Liste [bu videodan](https://www.instagram.com/reel/DctdIykgb9C/) ve aynı hesabın 24 maddelik ikinci listesinden alındı; kural numaraları 25.09.2026'da [App Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) sayfasından doğrulandı.
@@ -74,7 +74,15 @@ Kullanıcıyı başka uygulama ve sitelerde takip ediyorsan (reklam kimliği, ba
 
 </Madde>
 
-<Madde id={"as-gizlilik-etiketi"} no={8} baslik={"Gizlilik etiketi yanlış"}>
+<Madde id={"as-ucuncu-taraf-ai"} no={8} baslik={"Veri AI servisine izinsiz gidiyor"}>
+
+Kullanıcının metni, fotoğrafı ya da sesi OpenAI, Anthropic, Gemini gibi bir AI servisine gidiyorsa ilk gönderimden önce hangi verinin hangi sağlayıcıya gittiğini açıkça söyleyip açık izin al; aynı bilgiyi gizlilik politikasına da yaz. Kural AI ile üretilen içeriği etiketlemeyi değil, kişisel verinin üçüncü taraf AI ile paylaşılmasını kapsar (13.11.2025'te eklendi).
+
+<span class="meta">**Kural:** 5.1.2(i)</span>
+
+</Madde>
+
+<Madde id={"as-gizlilik-etiketi"} no={9} baslik={"Gizlilik etiketi yanlış"}>
 
 App Store Connect'teki gizlilik bilgileri, uygulamanın ve eklediğin SDK'ların (analitik, reklam, çökme raporu) gerçekte topladığı veriyle birebir aynı olsun.
 
@@ -82,7 +90,7 @@ App Store Connect'teki gizlilik bilgileri, uygulamanın ve eklediğin SDK'ların
 
 </Madde>
 
-<Madde id={"as-gizlilik-politikasi-linki"} no={9} baslik={"Gizlilik politikası linki yok"}>
+<Madde id={"as-gizlilik-politikasi-linki"} no={10} baslik={"Gizlilik politikası linki yok"}>
 
 Gizlilik politikası linkini hem App Store Connect'teki alana hem de uygulamanın içinde kolay bulunur bir yere koy; sadece satın alma ekranında olması yetmez.
 
@@ -90,7 +98,7 @@ Gizlilik politikası linkini hem App Store Connect'teki alana hem de uygulamanı
 
 </Madde>
 
-<Madde id={"as-esdeger-giris-secenegi"} no={10} baslik={"Eşdeğer giriş seçeneği yok"}>
+<Madde id={"as-esdeger-giris-secenegi"} no={11} baslik={"Eşdeğer giriş seçeneği yok"}>
 
 Google, Facebook gibi bir hesapla giriş varsa yanında veriyi ad ve e-postayla sınırlayan, e-postayı gizlemeye izin veren ve reklam için izlemeyen bir giriş seçeneği daha sun; Apple ile Giriş bu şartları karşılar. Sadece kendi e-posta ve şifre girişin varsa gerekmez.
 
@@ -102,7 +110,7 @@ Google, Facebook gibi bir hesapla giriş varsa yanında veriyi ad ve e-postayla 
 ## İnceleme hazırlığı
 
 
-<Madde id={"as-yer-tutucu-icerik"} no={11} baslik={"Yer tutucu içerik"}>
+<Madde id={"as-yer-tutucu-icerik"} no={12} baslik={"Yer tutucu içerik"}>
 
 "Lorem ipsum", boş ekran, çalışmayan link ya da "yakında" sayfası bırakma; gönderilen sürüm son sürüm olmalı.
 
@@ -110,7 +118,7 @@ Google, Facebook gibi bir hesapla giriş varsa yanında veriyi ad ve e-postayla 
 
 </Madde>
 
-<Madde id={"as-demo-hesap"} no={12} baslik={"Demo hesap yok"}>
+<Madde id={"as-demo-hesap"} no={13} baslik={"Demo hesap yok"}>
 
 Giriş gerektiren her şey için çalışan ve inceleme sürerken süresi dolmayacak bir demo hesap (ya da tam demo modu) ve gerekiyorsa örnek QR kodu gibi ek bilgileri inceleme notlarına yaz.
 
@@ -118,7 +126,7 @@ Giriş gerektiren her şey için çalışan ve inceleme sürerken süresi dolmay
 
 </Madde>
 
-<Madde id={"as-gizli-ozellik"} no={13} baslik={"Gizli özellik"}>
+<Madde id={"as-gizli-ozellik"} no={14} baslik={"Gizli özellik"}>
 
 Gizli, kapalı bekleyen ya da belgelenmemiş özellik bırakma; yeni özellikleri inceleme notlarında ayrıntılı anlat ve inceleme ekibinin her özelliğe (ör. satın alma ekranına) nasıl ulaşacağını adım adım yaz, genel açıklama reddedilir.
 
@@ -126,7 +134,7 @@ Gizli, kapalı bekleyen ya da belgelenmemiş özellik bırakma; yeni özellikler
 
 </Madde>
 
-<Madde id={"as-ekran-goruntuleri"} no={14} baslik={"Ekran görüntüsü yanlış"}>
+<Madde id={"as-ekran-goruntuleri"} no={15} baslik={"Ekran görüntüsü yanlış"}>
 
 Ekran görüntüleri uygulamanın kullanımını göstermeli; sadece logo, giriş ya da açılış ekranı olmaz.
 
@@ -134,7 +142,7 @@ Ekran görüntüleri uygulamanın kullanımını göstermeli; sadece logo, giri�
 
 </Madde>
 
-<Madde id={"as-cokme"} no={15} baslik={"Çöküyor"}>
+<Madde id={"as-cokme"} no={16} baslik={"Çöküyor"}>
 
 Göndermeden önce gerçek cihazda test et; çöken ya da belirgin hatası olan sürüm reddedilir.
 
@@ -142,7 +150,7 @@ Göndermeden önce gerçek cihazda test et; çöken ya da belirgin hatası olan 
 
 </Madde>
 
-<Madde id={"as-destek-linki"} no={16} baslik={"Destek linki çalışmıyor"}>
+<Madde id={"as-destek-linki"} no={17} baslik={"Destek linki çalışmıyor"}>
 
 App Store Connect'teki destek linki (Support URL) açılmalı ve sana ulaşmanın kolay bir yolunu göstermeli; boş ya da hata veren sayfa bırakma.
 
@@ -150,7 +158,7 @@ App Store Connect'teki destek linki (Support URL) açılmalı ve sana ulaşmanı
 
 </Madde>
 
-<Madde id={"as-yas-derecelendirmesi"} no={17} baslik={"Yaş sınırı yanlış"}>
+<Madde id={"as-yas-derecelendirmesi"} no={18} baslik={"Yaş sınırı yanlış"}>
 
 App Store Connect'teki yaş derecelendirmesi sorularını dürüst cevapla; kullanıcı içeriği, sohbet, kumar ya da yetişkin içerik varsa belirt.
 
@@ -162,7 +170,7 @@ App Store Connect'teki yaş derecelendirmesi sorularını dürüst cevapla; kull
 ## İçerik ve işlevsellik
 
 
-<Madde id={"as-web-gorunumu"} no={18} baslik={"Sadece web görünümü"}>
+<Madde id={"as-web-gorunumu"} no={19} baslik={"Sadece web görünümü"}>
 
 Uygulama, paketlenmiş bir web sitesinden fazlası olmalı: uygulamaya özgü özellik, içerik ve arayüz.
 
@@ -170,7 +178,7 @@ Uygulama, paketlenmiş bir web sitesinden fazlası olmalı: uygulamaya özgü ö
 
 </Madde>
 
-<Madde id={"as-minimum-islevsellik"} no={19} baslik={"Minimum işlevsellik"}>
+<Madde id={"as-minimum-islevsellik"} no={20} baslik={"Minimum işlevsellik"}>
 
 Sadece reklam, link koleksiyonu ya da çok basit tek işlev olan uygulamalar reddedilir.
 
@@ -178,7 +186,7 @@ Sadece reklam, link koleksiyonu ya da çok basit tek işlev olan uygulamalar red
 
 </Madde>
 
-<Madde id={"as-cocuk-kategorisi"} no={20} baslik={"Çocuk kategorisi"}>
+<Madde id={"as-cocuk-kategorisi"} no={21} baslik={"Çocuk kategorisi"}>
 
 Çocuk kategorisindeysen dışarıya link, satın alma ve reklam ebeveyn kilidinin arkasında olmalı; kişisel ve cihaz verisi üçüncü taraflara gitmemeli.
 
@@ -186,7 +194,7 @@ Sadece reklam, link koleksiyonu ya da çok basit tek işlev olan uygulamalar red
 
 </Madde>
 
-<Madde id={"as-kullanici-icerigi"} no={21} baslik={"Kullanıcı içeriği"}>
+<Madde id={"as-kullanici-icerigi"} no={22} baslik={"Kullanıcı içeriği"}>
 
 Kullanıcılar içerik paylaşabiliyorsa uygunsuz içeriği filtreleme, şikâyet etme, kullanıcı engelleme ve iletişim bilgisi şart.
 
@@ -194,7 +202,7 @@ Kullanıcılar içerik paylaşabiliyorsa uygunsuz içeriği filtreleme, şikâye
 
 </Madde>
 
-<Madde id={"as-baskasinin-markasi"} no={22} baslik={"Başkasının markası"}>
+<Madde id={"as-baskasinin-markasi"} no={23} baslik={"Başkasının markası"}>
 
 Başka markanın adını, logosunu ya da telifli içeriğini izinsiz kullanma; başka uygulamanın ikonunu ya da adını taklit etme. Açıklamada ve ekran görüntülerinde Android gibi başka platformların adı ya da görseli de geçmesin.
 
@@ -202,7 +210,7 @@ Başka markanın adını, logosunu ya da telifli içeriğini izinsiz kullanma; b
 
 </Madde>
 
-<Madde id={"as-saglik-iddiasi"} no={23} baslik={"Sağlık iddiası"}>
+<Madde id={"as-saglik-iddiasi"} no={24} baslik={"Sağlık iddiası"}>
 
 Sağlıkla ilgili ölçüm ya da etki iddiasının verisini ve yöntemini göster; doğrulanamayan iddia ("stresi tedavi eder") reddedilir.
 
@@ -210,7 +218,7 @@ Sağlıkla ilgili ölçüm ya da etki iddiasının verisini ve yöntemini göste
 
 </Madde>
 
-<Madde id={"as-sablon-uygulama"} no={24} baslik={"Şablon uygulama"}>
+<Madde id={"as-sablon-uygulama"} no={25} baslik={"Şablon uygulama"}>
 
 Hazır şablonla ya da uygulama üretme servisiyle yapılıp başkası adına gönderilen uygulama reddedilir; içerik sahibi kendi hesabından göndermeli ve uygulama özgün olmalı.
 
@@ -218,7 +226,7 @@ Hazır şablonla ya da uygulama üretme servisiyle yapılıp başkası adına g�
 
 </Madde>
 
-<Madde id={"as-olmayan-ozellik-vaadi"} no={25} baslik={"Olmayan özellik vaadi"}>
+<Madde id={"as-olmayan-ozellik-vaadi"} no={26} baslik={"Olmayan özellik vaadi"}>
 
 Açıklama, ekran görüntüleri ve önizleme videosu uygulamanın gerçekte yaptığını göstermeli; olmayan özelliği ya da yanlış fiyatı vaat etme.
 
@@ -230,7 +238,7 @@ Açıklama, ekran görüntüleri ve önizleme videosu uygulamanın gerçekte yap
 ## Reddedilince
 
 
-<Madde id={"as-red-cevabi"} no={26} baslik={"Cevap yazmıyorsun"}>
+<Madde id={"as-red-cevabi"} no={27} baslik={"Cevap yazmıyorsun"}>
 
 Sessizce yeni sürüm göndermek yerine App Store Connect'te uygulamanın App Review bölümünden inceleme ekibine yaz; neyin eksik olduğunu sor ya da neden kurala uyduğunu açıkla.
 
@@ -248,5 +256,5 @@ Sessizce yeni sürüm göndermek yerine App Store Connect'te uygulamanın App Re
 
 
 ```
-Bu iOS uygulamasını App Store incelemesine göndermeden önce şu 26 red sebebine göre kontrol et: satın alma ekranında Kullanım Koşulları ve Gizlilik Politikası linkleri, fiyat ve deneme süresi açıklaması, satın almaları geri yükleme düğmesi, dış ödeme linki, uygulama içinden hesap silme, izin gerekçesi metinleri, App Tracking Transparency, gizlilik etiketinin SDK'larla uyumu, App Store Connect'te ve uygulama içinde gizlilik politikası linki, Google/Facebook girişinin yanında eşdeğer giriş seçeneği, yer tutucu içerik, demo hesap, gizli özellikler ve inceleme ekibinin özelliklere nasıl ulaşacağı, ekran görüntüleri, çökme, destek linki, yaş derecelendirmesi, web görünümünden ibaret olma, minimum işlevsellik, çocuk kategorisi kuralları, kullanıcı içeriği için filtreleme/şikâyet/engelleme, başkasının markası ve başka platform adları, sağlık iddiaları, şablon uygulama, açıklamadaki vaatlerin uygulamayla uyumu. Her madde için durumu (✅ ⚠️ ❌ ➖) ve ilgili dosyayı yaz, sonra inceleme notlarına yazılacak metni ve demo hesap bilgisi taslağını hazırla.
+Bu iOS uygulamasını App Store incelemesine göndermeden önce şu 27 red sebebine göre kontrol et: satın alma ekranında Kullanım Koşulları ve Gizlilik Politikası linkleri, fiyat ve deneme süresi açıklaması, satın almaları geri yükleme düğmesi, dış ödeme linki, uygulama içinden hesap silme, izin gerekçesi metinleri, App Tracking Transparency, kişisel veri üçüncü taraf AI servisine gidiyorsa açıklama ve açık izin, gizlilik etiketinin SDK'larla uyumu, App Store Connect'te ve uygulama içinde gizlilik politikası linki, Google/Facebook girişinin yanında eşdeğer giriş seçeneği, yer tutucu içerik, demo hesap, gizli özellikler ve inceleme ekibinin özelliklere nasıl ulaşacağı, ekran görüntüleri, çökme, destek linki, yaş derecelendirmesi, web görünümünden ibaret olma, minimum işlevsellik, çocuk kategorisi kuralları, kullanıcı içeriği için filtreleme/şikâyet/engelleme, başkasının markası ve başka platform adları, sağlık iddiaları, şablon uygulama, açıklamadaki vaatlerin uygulamayla uyumu. Her madde için durumu (✅ ⚠️ ❌ ➖) ve ilgili dosyayı yaz, sonra inceleme notlarına yazılacak metni ve demo hesap bilgisi taslağını hazırla.
 ```

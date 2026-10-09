@@ -23,7 +23,7 @@
     "attrs": {
      "data-ikon": "phone"
     },
-    "badge": "26"
+    "badge": "27"
    },
    {
     "label": "Google Play incelemesi",
@@ -106,7 +106,7 @@
     "attrs": {
      "data-ikon": "package"
     },
-    "badge": "182"
+    "badge": "184"
    }
   ]
  }
