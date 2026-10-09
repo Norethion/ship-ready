@@ -25,13 +25,17 @@ Proje sadece Türkçedir.
   `site/yerel-derleme.mjs` yerel derlemeyi dosyadan açılır yapar: adresleri göreli yapar, modül betiklerini sayfanın içine alır.
   Pagefind sunucusuz çalışmadığı için arama `YerelArama.astro` ile yapılır.
 - `python uygulama/guncelle.py` (içinde `uygulama/site_uret.py`) şunları çekirdekten üretir ve bunlar elle düzenlenmez: `site/src/content/docs/` (sayfalar), `site/src/data/katalog.json` ve `sidebar.json`, `site/public/katalog.json`, `llms.txt` (sayfalar ve kategoriye göre dizilmiş repolar) ve `llms-full.txt` (bütün içerik tek dosyada, maddeler kimlikleriyle; AI'lar için), `site/src/yerel/` (yerel sayfanın raporları, raporlu kenar menüsü ve arama dizini; `.gitignore`'da, herkese açık derleme okumaz).
-- Elle düzenlenenler: `site/src/components/` (Madde, DenetimPrompt, Kart, Kartlar, RepoKatalog, PromptDugme, KenarMenu, SiteBasligi, TemaSecici, SayfaIcerigi, Kutucuk, Simge, RaporOzeti, YerelTakip, YerelArama), `site/src/pages/raporlar/`, `site/src/yerel.ts`, `site/src/arama.ts` (iki aramanın ortak eşleştirme kuralları: dolgu kelimeleri, kökten eşleşme), `site/src/content.config.ts`, `site/src/content/i18n/tr.json`, `site/src/styles/ship.css`, `site/astro.config.mjs`, `site/yerel-derleme.mjs`, `site/public/ornekler/` (rehber kartlarındaki canlı örnekler).
+- Elle düzenlenenler: `site/src/components/` (Madde, DenetimPrompt, Kart, Kartlar, RepoKatalog, PromptDugme, UstCubuk, SayfaCercevesi, AltBilgi, TemaSecici, SayfaIcerigi, AnaSayfa, Simge, RaporOzeti, YerelTakip, YerelArama), `site/src/pages/raporlar/`, `site/src/yerel.ts`, `site/src/arama.ts` (iki aramanın ortak eşleştirme kuralları: dolgu kelimeleri, kökten eşleşme), `site/src/content.config.ts`, `site/src/content/i18n/tr.json`, `site/src/styles/ship.css`, `site/astro.config.mjs`, `site/yerel-derleme.mjs`, `site/public/ornekler/` (rehber kartlarındaki canlı örnekler).
   Sadece yerel sayfada olacak bir şey `src/yerel.ts`'deki `YEREL` ile koşullanır; kişisel veri herkese açık derlemeye girmez.
 ## Site davranışı
 
-- Kenar menü: `KenarMenu.astro` Starlight'ın menüsünün, `SiteBasligi.astro` site adının, `TemaSecici.astro` tema seçim kutusunun (tarayıcının kendi açılır listesi yerine sitenin görünümünde açılır menü) yerine geçer; `SayfaIcerigi.astro` Starlight'ın "Sayfa içeriği" menüsünü sarar, sayfanın dibine inilince son başlığı seçer.
-  Menüdeki simge md'nin `<!-- ikon: -->` satırından, sayaç madde ya da repo sayısından gelir; gruplar Kontrol listeleri, Rehberler, Katalog ve yerel sayfada Takip'tir.
-- Genel bakış kutucuklardan (`Kutucuk.astro`) oluşur: kontrol listelerinde "Listeyi aç" ve denetim düğmesi, rehberler, repo kataloğu ve arşivlenmiş ya da 1+ yıldır güncellenmeyen repoları ve açılmayan linkleri sayan Dikkat kutucuğu (`/repolar/#dikkat` Dikkat süzgeciyle açılır).
+- Site üst çubuğu `UstCubuk.astro` ile Starlight `Header` yerine geçer; kontrol listeleri, rehberler ve repo kataloğu bağlantıları her sayfada görünür, rapor bağlantısı yalnızca yerel derlemede eklenir.
+- `SayfaCercevesi.astro` Starlight `PageFrame` yerine geçer ve sol kenar menüyü kaldırır; `AltBilgi.astro` alt bilgiyi, `TemaSecici.astro` açık/koyu tema düğmesini sağlar.
+- Tema seçimi Starlight'ın `starlight-theme` anahtarında saklanır; kayıt yoksa koyu tema kullanılır.
+- `SayfaIcerigi.astro` sağdaki Starlight sayfa içeriği menüsünü sarar ve sayfanın dibine inilince son başlığı seçer.
+- Genel bakış `AnaSayfa.astro` ile katalog verisinden üretilir; liste ve madde sayıları, rehberler ile en son eklenen üç repo veri değiştikçe güncellenir.
+- Kontrol listesinde işaretlenen maddeler `ship-ready-checks` anahtarıyla yalnızca tarayıcıda saklanır ve ana sayfadaki ilerleme bu kayıttan okunur.
+- Ana sayfa araması herkese açık derlemede Starlight Pagefind penceresini, yerel derlemede `YerelArama.astro` penceresini açar.
 - Adresler: kontrol listeleri `/listeler/<liste>/`, rehberler `/rehberler/<md adı>/`, repo kataloğu `/repolar/` (`#ara=<repo>` aramayla, `#dikkat` Dikkat süzgeciyle açılır), yerel sayfada raporlar `/raporlar/` ve `/raporlar/<proje>/<dosya adı>/`; her maddenin bağlantısı `#<kimlik>`. `{{no:kimlik}}` içeren linkler doğrudan o maddeye gider.
 - Kontrol listelerinde maddeler kimlikli kart olur, numaralı listede her bölüme denetim prompt'u eklenir; `<!-- yan-yana -->` rehberlerinde tablolar karta dönüşür (prompt düğmesi ilk sütun başlığına göre: `site_uret.py` içindeki `CARD_PROMPTS`), diğer rehberler Markdown olarak kalır.
 - Siteye sadece doğrulanmış, Türkçe açıklaması ve kurulum yeri olan repolar girer; raporlar girmez.
@@ -86,7 +90,8 @@ Proje sadece Türkçedir.
   Bunun için kartın doğrudan çocuklarının sayısı kapladığı satır sayısına eşit olmalıdır: rehber kartında `site_uret.py` bunu `satir` olarak verir, repo kartı her zaman 6 satırdır (başlık, açıklama, uyarı, kurulum, kaynak, alt şerit); boş kalan parça da yerini korur (uyarısız repoda boş uyarı satırı).
 - Repo kartlarında görünen kartlar arasında açıklaması ve uyarısı en uzun olan %15'lik dilim (en az 170 karakter) üç ve daha çok sütunlu ekranda iki sütun genişliğinde olur.
   Yeni düğme eklenirse `site/src/components/PromptDugme.astro` bu türlerden biriyle (`tur`) kullanılır.
-- Sayfada genişlik sınırı (max-width) kullanılmaz; her şey ekran genişliğine göre akar.
+- Sayfa içeriği en çok 1200 px genişliğinde ortalanır; masaüstünde 32 px, mobilde 16 px yan boşluk kullanılır.
+- Renkler koyu ve açık tema için `site/src/styles/ship.css` içinde tasarım tokenlarıyla tanımlanır; Geist ve Geist Mono fontları `@fontsource-variable` paketlerinden yerel olarak yüklenir.
 - Kontrol listelerinde maddeler ya numaralı satırdır (yayın öncesi listesi) ya da ilk sütunu `#` olan tablo satırıdır.
   Numaralı satırlı en uzun liste denetim listesi sayılır; her bölümüne "Bu bölümü denetle" prompt'u eklenir.
   Başka md'lerde uzun numaralı liste kullanma; tablo kullan.

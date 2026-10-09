@@ -10,6 +10,7 @@ const { id, no, baslik, meta } = Astro.props;
 ---
 
 <div class="madde" id={id}>
+	<label class="madde-check"><input type="checkbox" data-madde-check={id} aria-label={`${no}. maddeyi işaretle`} /></label>
 	<a class="madde-no" href={`#${id}`} aria-label={`${no}. madde, bağlantı`}>{no}</a>
 	<div class="madde-govde">
 		{baslik && <p class="madde-baslik">{baslik}</p>}
@@ -20,3 +21,16 @@ const { id, no, baslik, meta } = Astro.props;
 		</p>
 	</div>
 </div>
+<script>
+	const key = 'ship-ready-checks';
+	const checks = document.querySelectorAll<HTMLInputElement>('[data-madde-check]');
+	let values: Record<string, boolean> = {};
+	try { values = JSON.parse(localStorage.getItem(key) || '{}'); } catch {}
+	checks.forEach((check) => {
+		check.checked = !!values[check.dataset.maddeCheck || ''];
+		check.addEventListener('change', () => {
+			values[check.dataset.maddeCheck || ''] = check.checked;
+			try { localStorage.setItem(key, JSON.stringify(values)); } catch {}
+		});
+	});
+</script>

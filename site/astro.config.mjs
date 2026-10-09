@@ -21,8 +21,9 @@ export default defineConfig({
 			locales: { root: { label: 'Türkçe', lang: 'tr' } },
 			sidebar,
 			components: {
-				Sidebar: './src/components/KenarMenu.astro',
-				SiteTitle: './src/components/SiteBasligi.astro',
+				Header: './src/components/UstCubuk.astro',
+				PageFrame: './src/components/SayfaCercevesi.astro',
+				Footer: './src/components/AltBilgi.astro',
 				ThemeSelect: './src/components/TemaSecici.astro',
 				TableOfContents: './src/components/SayfaIcerigi.astro',
 				// Pagefind sunucusuz çalışmaz; yerel sayfada çevrimdışı arama kullanılır.

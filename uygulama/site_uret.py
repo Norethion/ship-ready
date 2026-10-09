@@ -272,36 +272,8 @@ def public_catalog(cat):
 
 
 def home_page(cat, pub, tr, comp):
-    """Genel bakış: eski sayfadaki gibi kutucuklar; kontrol listelerinde "Listeyi aç" ve denetim düğmesi,
-    katalogda repo sayısı ve arşivlenmiş, eskimiş repoları ya da açılmayan linkleri gösteren Dikkat kutucuğu."""
-    lists = {l["id"]: l for l in cat["listeler"]}
-    repos = pub["repolar"]
-    year_ago = (datetime.date.today() - datetime.timedelta(days=365)).isoformat()
-    stale = [r for r in repos if r["arsiv"] or (r["son_guncelleme"] and r["son_guncelleme"] < year_ago)]
-    synced = cat["repolar"].get("syncedAt")
-    tile = lambda **p: "<Kutucuk " + " ".join(f"{k}={js(v)}" for k, v in p.items() if v is not None) + " />"
-    grid = lambda tiles: ['<div class="kutucuklar not-content">', *tiles, "</div>", ""]
-    lines = [f"import Kutucuk from '{comp}/Kutucuk.astro';", f"import YerelTakip from '{comp}/YerelTakip.astro';", "",
-             "Yayına çıkmadan önce nelere bakılmalı, hangi araç, eklenti ve skill işe yarar: kontrol listeleri, rehberler ve doğrulanmış repolar.", "",
-             "## Kontrol listeleri", ""]
-    lines += grid([tile(ikon=d["ikon"], baslik=d["kisa"], href=route(d), ozet=summary(d["ozet"]),
-                        bilgi=f"{count(lists[d['liste']])} madde · {len(lists[d['liste']]['bolumler'])} bölüm", liste=d["liste"])
-                   for d in cat["belgeler"] if d["liste"]])
-    lines += ["## Rehberler", ""]
-    lines += grid([tile(ikon=d["ikon"], baslik=d["kisa"], href=route(d), ozet=summary(d["ozet"])) for d in cat["belgeler"] if not d["liste"]])
-    info = f"repo · {len(pub['klasorler'])} kategori" + (f" · {'.'.join(reversed(synced[:10].split('-')))} güncellendi" if synced else "")
-    tiles = [tile(ikon="package", baslik="Repo kataloğu", href="/repolar/", sayi=len(repos), bilgi=info,
-                  ozet="Türkçe açıklaması, kurulum yeri (proje, Claude, Codex, ayrı uygulama) ve uyarısıyla doğrulanmış GitHub repoları.")]
-    warn = [f"{len(stale)} repo arşivlenmiş ya da 1+ yıldır güncellenmiyor" if stale else "", f"{len(tr.broken)} link açılmıyor" if tr.broken else ""]
-    if stale or tr.broken:
-        tiles.append(tile(ikon="alert", baslik="Dikkat", href="/repolar/#dikkat", sayi=len(stale) + len(tr.broken),
-                          bilgi="; ".join(w for w in warn if w), uyari=True))
-    lines += ["## Katalog", ""] + grid(tiles)
-    lines += ["<YerelTakip />", ""]
-    lines += ["## AI'lar için", "",
-              "Kataloğun tamamı makinenin okuyacağı biçimde de yayımlanır: [katalog.json](/katalog.json) maddeleri kalıcı kimlikleriyle (ör. `yo-hesap-silme`), rehber öğelerini ve repoları, [llms.txt](/llms.txt) sayfaların ve kategoriye göre dizilmiş repoların özetini, [llms-full.txt](/llms-full.txt) bütün içeriği tek dosyada verir.",
-              "Denetim prompt'ları raporu bu kimliklerle ister; madde numaraları değişse de raporlar karşılaştırılabilir kalır."]
-    return front(title="Genel bakış", description=DESCRIPTION, tableOfContents=False) + "\n" + "\n".join(lines) + "\n"
+    return (front(title="Ana sayfa", description=DESCRIPTION, tableOfContents=False) +
+            f"\nimport AnaSayfa from '{comp}/AnaSayfa.astro';\n\n<AnaSayfa />\n")
 
 
 def repo_page(pub, comp):

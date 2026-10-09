@@ -1,0 +1,50 @@
+---
+import katalog from '../data/katalog.json';
+import menu from '../data/sidebar.json';
+import Simge from './Simge.astro';
+import YerelTakip from './YerelTakip.astro';
+import { YEREL } from '../yerel';
+
+const listeler = katalog.listeler.map((liste, i) => ({ ...liste, no: String(i + 1).padStart(2, '0'), count: liste.bolumler.reduce((n, b) => n + b.maddeler.length, 0) }));
+const toplam = listeler.reduce((n, l) => n + l.count, 0);
+const guides = katalog.belgeler.filter((d) => !d.liste).map((d, i) => ({ ...d, no: String(i + 1).padStart(2, '0'), ikon: menu.find((g) => g.label === 'Rehberler')?.items?.find((m) => m.link === d.adres)?.attrs?.['data-ikon'] || 'file', short: d.ozet.split(/(?<=[.!?])\s/)[0] }));
+const repos = [...katalog.repolar].sort((a, b) => (b.eklenme || '').localeCompare(a.eklenme || '') || (b.yildiz || 0) - (a.yildiz || 0)).slice(0, 3);
+const names = ['Kontrol listeleri', 'Rehberler', 'Repo kataloğu'];
+const entry = [
+	{ title: names[0], icon: 'check', href: '#listeler', count: `${listeler.length} liste · ${toplam} madde`, text: 'Yayından önce, mağaza incelemesinde ve paywall’da gözden kaçanları madde madde denetle.', action: 'Listelere git' },
+	{ title: names[1], icon: 'book', href: '#rehberler', count: `${guides.length} rehber`, text: 'Barındırmadan gelir modeline, şirket kurmadan yayına kadar konuyu baştan sona anlatan okumalar.', action: 'Rehberlere git' },
+	{ title: names[2], icon: 'grid', href: '/repolar/', count: `${katalog.repolar.length} repo · ${katalog.klasorler.length} kategori`, text: 'Ajanına, projene ya da bilgisayarına kurabileceğin repolar; her biri için hazır kurulum prompt’u.', action: 'Kataloğa git' },
+];
+---
+
+<div class="ship-home not-content">
+	<section class="home-hero" aria-labelledby="home-title">
+		<p class="home-eyebrow">yayına hazırlık araç kutusu · Türkçe</p>
+		<h1 id="home-title">AI ile yaptığın projeyi<br /> yayına hazırla.</h1>
+		<p class="home-subtitle">Yayından önce bakılacak maddeler, adım adım rehberler ve tek tek seçilmiş GitHub repoları. Kişisel web ve mobil projeler için, tek yerde.</p>
+		<button type="button" class="home-search" aria-label="Madde, rehber ya da repo ara" data-home-search><Simge ad="search" boyut={17} /><span>Madde, rehber ya da repo ara: env, paywall, ollama…</span><kbd>/</kbd></button>
+		<p class="home-stats"><span>{listeler.length} liste · {toplam} madde</span><span>{guides.length} rehber</span><span>{katalog.repolar.length} repo · {katalog.klasorler.length} kategori</span></p>
+	</section>
+	<div class="home-entries">{entry.map((item) => <a class="home-entry" href={item.href}><span class="home-entry-icon"><Simge ad={item.icon} boyut={24} /></span><h2>{item.title}</h2><p class="home-entry-count">{item.count}</p><p>{item.text}</p><strong>{item.action} <Simge ad="arrow" boyut={15} /></strong></a>)}</div>
+	<section id="listeler" class="home-section" aria-labelledby="home-lists"><div class="home-section-head"><h2 id="home-lists">Kontrol listeleri</h2><span>{toplam} madde</span></div><div class="home-list">{listeler.map((liste) => <a href={liste.adres} class="home-list-row" data-list={liste.id} data-count={liste.count}><span class="home-list-no">{liste.no}</span><strong>{liste.baslik.split(':')[0]}</strong><span class="home-list-meta">{liste.bolumler.length} bölüm · {liste.count} madde</span><span class="home-progress"><span class="home-progress-text">Başlanmadı</span><span class="home-progress-track"><span></span></span></span><Simge ad="arrow" boyut={16} /></a>)}</div></section>
+	<section id="rehberler" class="home-section" aria-labelledby="home-guides"><div class="home-section-head"><h2 id="home-guides">Rehberler</h2><span>{guides.length} rehber</span></div><div class="home-guides">{guides.map((g) => <a href={g.adres} class="home-guide"><span class="home-guide-top"><Simge ad={g.ikon} boyut={20} /><span>{g.no}</span></span><strong>{g.baslik}</strong><p>{g.short}</p></a>)}</div></section>
+	<section id="katalog" class="home-section" aria-labelledby="home-repos"><div class="home-section-head"><h2 id="home-repos">Katalogdan seçmeler</h2><a href="/repolar/">{katalog.repolar.length} reponun hepsi <Simge ad="arrow" boyut={16} /></a></div><div class="home-repos">{repos.map((r) => { const [owner, name] = r.repo.split('/'); return <a class="home-repo" href={`/repolar/#ara=${encodeURIComponent(r.repo)}`}><div class="home-cover"><span>{owner} /</span><strong>{name}</strong></div><div class="home-repo-body"><strong>{name}</strong><span>{owner}</span><p>{r.aciklama}</p><small>{r.dil || 'GitHub'} · ★ {Intl.NumberFormat('tr', { notation: 'compact' }).format(r.yildiz || 0)}</small><div class="home-tags">{r.kurulum.map((k) => <span>{k === 'uygulama' ? 'Ayrı uygulama' : k === 'proje' ? 'Projeye eklenir' : k === 'kaynak' ? 'Kaynak' : `${k[0].toUpperCase()}${k.slice(1)}’e kurulur`}</span>)}</div></div></a> })}</div></section>
+	{YEREL && <section class="home-section home-local"><YerelTakip /></section>}
+</div>
+<script>
+	const key = 'ship-ready-checks';
+	function progress() {
+		let done: Record<string, boolean> = {};
+		try { done = JSON.parse(localStorage.getItem(key) || '{}'); } catch {}
+		document.querySelectorAll<HTMLElement>('.home-list-row').forEach((row) => {
+			const count = Number(row.dataset.count);
+			const checked = Object.keys(done).filter((id) => id.startsWith(({ 'yayin-oncesi': 'yo-', 'app-store': 'as-', 'google-play': 'gp-', paywall: 'pw-' } as Record<string, string>)[row.dataset.list || ''])).filter((id) => done[id]).length;
+			row.querySelector<HTMLElement>('.home-progress-text')!.textContent = checked ? `${checked} / ${count}` : 'Başlanmadı';
+			row.querySelector<HTMLElement>('.home-progress-track > span')!.style.width = `${Math.min(checked / count, 1) * 100}%`;
+		});
+	}
+	progress();
+	window.addEventListener('storage', progress);
+	document.querySelector<HTMLButtonElement>('[data-home-search]')?.addEventListener('click', () => document.querySelector<HTMLButtonElement>('[data-ya-ac], site-search [data-open-modal]')?.click());
+	window.addEventListener('keydown', (event) => { if (event.key === '/' && !/INPUT|TEXTAREA/.test((event.target as HTMLElement).tagName)) { event.preventDefault(); document.querySelector<HTMLButtonElement>('[data-home-search]')?.click(); } });
+</script>
