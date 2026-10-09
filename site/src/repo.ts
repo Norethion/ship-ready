@@ -18,6 +18,8 @@ export const kategoriAdi = (ad: string) => ad.replace(/^[^\p{L}\p{N}]+/u, '');
 const escapeHtml = (text: string) => text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 export const inlineCode = (text: string) => text.split(/(`[^`]+`)/g).map((part) => part.startsWith('`') && part.endsWith('`') ? `<code>${escapeHtml(part.slice(1, -1))}</code>` : escapeHtml(part)).join('');
 export const plainInline = (text: string) => text.replace(/`([^`]+)`/g, '$1');
+// Veriden gelen dış bağlantılar yalnızca http(s) olabilir; javascript: gibi adresler bağlantıya dönüşmez.
+export const guvenliAdres = (u?: string | null) => (u && /^https?:\/\//i.test(u) ? u : undefined);
 export const eski = (r: Repo) => !!r.son_guncelleme && r.son_guncelleme < new Date(Date.now() - 365 * 864e5).toISOString().slice(0, 10);
 export const dikkat = (r: Repo) => r.arsiv || eski(r);
 export const prompt = {
