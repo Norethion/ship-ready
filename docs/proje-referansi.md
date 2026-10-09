@@ -34,7 +34,11 @@ Proje sadece Türkçedir.
 - Tema seçimi Starlight'ın `starlight-theme` anahtarında saklanır; `TemaSaglayici.astro` ilk boyamadan önce kayıtlı temayı, kayıt yoksa koyu temayı uygular.
 - `SayfaIcerigi.astro` sağdaki Starlight sayfa içeriği menüsünü sarar ve sayfanın dibine inilince son başlığı seçer.
 - Genel bakış `AnaSayfa.astro` ile katalog verisinden üretilir; liste ve madde sayıları, rehberler ile en son eklenen üç repo veri değiştikçe güncellenir.
-- Kontrol listesinde işaretlenen maddeler `ship-ready-checks` anahtarıyla yalnızca tarayıcıda saklanır ve ana sayfadaki ilerleme bu kayıttan okunur.
+- Kontrol listesi sayfasında dört liste çipi, kaynak girişinin tamamı bağlantılarıyla birlikte, bölüm gezintisi, bölüm başına denetim prompt'u ve sonraki bölüme geçiş bağlantısı bulunur; mobilde bölüm gezintisi seçiciye dönüşür.
+- İşaretlenen maddeler `ship-ready-checks` anahtarıyla yalnızca tarayıcıda saklanır; liste ve bölüm ilerlemesi anında, ana sayfa ilerlemesi sayfa açıldığında veya sekmeler arası depolama değiştiğinde güncellenir.
+- Madde satırındaki açıklama açılır, `#<kimlik>` bağlantısı maddeyi açıp ona kaydırır ve kalıcı kimlik raporlarda kullanılmaya devam eder.
+- Rehber sayfasında içerik yolu, kaynak giriş paragrafı bağlantılarıyla birlikte, numaralı bölüm başlıkları ve sağdaki "İçindekiler" ile araç listesi bulunur; mobilde içindekiler ve araçlar girişin altına iner, katalogda bulunan araçlar ayrıntı sayfalarına bağlanır.
+- Rehberlerdeki `{{no:kimlik}}` atıfları kaynak metindeki ifadeyi koruyan numaralı, vurgulu madde bağlantılarına, katalogdaki GitHub repo bağlantıları küçük harfli `/repolar/<sahip>/<ad>/` ayrıntı adresine dönüşür.
 - Ana sayfa araması herkese açık derlemede Starlight Pagefind penceresini, yerel derlemede `YerelArama.astro` penceresini açar.
 - Adresler: kontrol listeleri `/listeler/<liste>/`, rehberler `/rehberler/<md adı>/`, repo kataloğu `/repolar/` (`#ara=<repo>` aramayla, `#dikkat` Dikkat süzgeciyle açılır), repo ayrıntısı küçük harfli `/repolar/<sahip>/<ad>/`, `#kategori=<kategori>/<alt kategori>` ile katalog süzgeci, yerel sayfada raporlar `/raporlar/` ve `/raporlar/<proje>/<dosya adı>/`; her maddenin bağlantısı `#<kimlik>`.
   `{{no:kimlik}}` içeren linkler doğrudan o maddeye gider.
@@ -42,7 +46,7 @@ Proje sadece Türkçedir.
 - Repo kartının tamamı ayrıntı sayfasına bağlanır; ana sayfa ve benzer repolar da aynı kartı kullanır.
 - Repo ayrıntısı gerçek katalog verisinden açıklama, not, güncellik uyarısı, her kurulum yeri için tam prompt ve kopyalama düğmesi, kaynak, tarihler ve aynı alt kategoriden benzer repoları gösterir.
 - Kurulum etiketleri, prompt şablonları, yıldız ve tarih biçimleri `site/src/repo.ts` içinde paylaşılır.
-- Kontrol listelerinde maddeler kimlikli kart olur, numaralı listede her bölüme denetim prompt'u eklenir; `<!-- yan-yana -->` rehberlerinde tablolar karta dönüşür (prompt düğmesi ilk sütun başlığına göre: `site_uret.py` içindeki `CARD_PROMPTS`), diğer rehberler Markdown olarak kalır.
+- Kontrol listelerinde maddeler kimlikli açılır satır olur; `<!-- yan-yana -->` rehberlerinde tablolar karta dönüşür (prompt düğmesi ilk sütun başlığına göre: `site_uret.py` içindeki `CARD_PROMPTS`), diğer rehberlerin Markdown içeriği MDX sayfasında korunur.
 - Siteye sadece doğrulanmış, Türkçe açıklaması ve kurulum yeri olan repolar girer; raporlar girmez.
 - Herkese açık siteyi görmek için `site/` klasöründe `npm run build` ve `npm run preview` (ya da `npm run dev`).
   Paketler sadece `site/node_modules`'a kurulur; yerel sayfanın derlenmesi için Node.js ve bu paketler gerekir.
@@ -84,7 +88,7 @@ Proje sadece Türkçedir.
 
 ## İçerik biçimi ve site görünümü
 
-- `##` bölümleri sayfanın sağındaki "Sayfa içeriği" menüsünde görünür; bölüm adları kısa tutulur.
+- `##` bölümleri sayfanın sağındaki "İçindekiler" menüsünde görünür; bölüm adları kısa tutulur.
 - Kod blokları (```) sayfada "Kopyala" düğmesi alır; hazır prompt ve komutlar kod bloğu olarak yazılır.
 - Sayfadaki prompt düğmeleri ne yaptığını adıyla ve simgesiyle söyler: denetim (kalkan), projeye kurulum (indirme), Claude'a kurulum (robot), Codex'e kurulum (komut satırı), uygulama kurulumu (ekran), kullanım (fiş), tasarım (palet), canlı örneğin kodu (belge), düz kopyalama; üzerine gelince prompt'un kendisi görünür.
 - Rehber kartları mevcut alan ve prompt düzenini korur; repo kartları `RepoKart.astro` ile ayrı bir tipografik kapak, iki satırlık açıklama, dil, yıldız, kurulum yeri ve uyarı rozetleri gösterir.

@@ -6,20 +6,20 @@ interface Props {
 	baslik?: string;
 	meta?: string;
 }
+import katalog from '../data/katalog.json';
+import { inlineCode } from '../repo';
+import Simge from './Simge.astro';
 const { id, no, baslik, meta } = Astro.props;
+const item = katalog.listeler.flatMap((l) => l.bolumler.flatMap((s) => s.maddeler)).find((m) => m.id === id);
+const source = (baslik || item?.metin || '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+const end = [...source.matchAll(/;|[.!?](?=\s|$)/g)].find((match) => !/\b(?:e\.g|i\.e)$/i.test(source.slice(0, match.index)))?.index;
+const title = source.slice(0, end).trim() || `${no}. madde`;
 ---
 
 <div class="madde" id={id}>
+	<a class="madde-no" href={`#${id}`} aria-label={`${no}. madde, bağlantı`}>#{no}</a>
 	<label class="madde-check"><input type="checkbox" data-madde-check={id} aria-label={`${no}. maddeyi işaretle`} /></label>
-	<a class="madde-no" href={`#${id}`} aria-label={`${no}. madde, bağlantı`}>{no}</a>
-	<div class="madde-govde">
-		{baslik && <p class="madde-baslik">{baslik}</p>}
-		<div class="madde-metin"><slot /></div>
-		<p class="madde-alt">
-			{meta && <span>{meta}</span>}
-			<code class="madde-kimlik" title="Maddenin kalıcı kimliği; raporlarda bu yazılır">{id}</code>
-		</p>
-	</div>
+	<details class="madde-govde"><summary><span class="madde-baslik" set:html={inlineCode(title)} /><Simge ad="chevron-down" boyut={16} /></summary><div class="madde-metin"><slot />{meta && <span class="meta">{meta}</span>}<code class="madde-kimlik" title="Maddenin kalıcı kimliği; raporlarda bu yazılır">{id}</code></div></details>
 </div>
 <script>
 	const key = 'ship-ready-checks';

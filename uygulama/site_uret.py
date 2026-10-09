@@ -70,11 +70,13 @@ class Translate:
     """Md metnindeki {{no:kimlik}} atıflarını ve md linklerini site adreslerine çevirir.
     Metni atıf içeren bir link doğrudan o maddeye (#kimlik) gider; son kontrolde açılmayan link ⚠ ile işaretlenir."""
 
-    def __init__(self, cat):
+    def __init__(self, cat, site_links=True):
+        self.site_links = site_links
         self.docs = {d["dosya"]: d for d in cat["belgeler"]}
         self.numbers = cat["numaralar"]
         list_doc = {d["liste"]: d for d in cat["belgeler"] if d["liste"]}
         self.item_doc = {m["id"]: list_doc[l["id"]] for l in cat["listeler"] for s in l["bolumler"] for m in s["maddeler"]}
+        self.repos = {r["r"].lower() for r in cat["repolar"]["repos"] if r.get("tr") and r.get("kurulum")}
         self.broken = json.loads(LINKS.read_text(encoding="utf-8")).get("broken", {}) if LINKS.exists() else {}
 
     def __call__(self, text):
@@ -83,9 +85,12 @@ class Translate:
             refs = katalog.REF.findall(label)
             if refs and refs[0] in self.item_doc:
                 href = route(self.item_doc[refs[0]]) + "#" + refs[0]
+                return f'[{label}]({href})'
             elif href.split("#")[0] in self.docs:
                 base, _, anchor = href.partition("#")
                 href = route(self.docs[base]) + (f"#{anchor}" if anchor else "")
+            elif self.site_links and (repo := re.fullmatch(r"https://github\.com/([^/#?]+/[^/#?]+)/?", href, re.I)) and repo.group(1).lower() in self.repos:
+                href = f"/repolar/{repo.group(1).lower()}/"
             elif href in self.broken:
                 return f'[{label} ⚠]({href} "Son kontrolde açılmadı ({self.broken[href]})")'
             return f"[{label}]({href})"
@@ -144,32 +149,40 @@ def summary(text, limit=160):
 
 def list_page(doc, lst, tr, comp):
     numbered = lst["bicim"] == "liste"
-    state = {"lead": False}
+    state = {"section": -1}
 
     def special(lines, i):
         line = lines[i]
+        if state["section"] == -2:
+            return None
         h = re.match(r"^##\s+(.+)$", line)
         if h:
             out = []
-            if numbered and not state["lead"]:
-                out += [f"<DenetimPrompt liste={js(lst['id'])} />", ""]
-            state["lead"] = True
+            if state["section"] == -2:
+                return None
+            if state["section"] + 1 >= len(lst["bolumler"]):
+                state["section"] = -2
+                return ["</ListeBolum>", "", "</ListeGovde>", "", esc(line), ""], i + 1
             title = re.sub(r"\s*\(\d+\)$", "", h.group(1).strip())
-            out += [esc(line), ""]
-            if numbered and any(s["baslik"] == title for s in lst["bolumler"]):
-                out += [f"<DenetimPrompt liste={js(lst['id'])} bolum={js(title)} />", ""]
+            if state["section"] >= 0:
+                out += ["</ListeBolum>", ""]
+            state["section"] += 1
+            index = state["section"]
+            section = lst["bolumler"][index]
+            next_section = lst["bolumler"][index + 1] if index + 1 < len(lst["bolumler"]) else None
+            out += [f"<ListeBolum liste={js(lst['id'])} baslik={js(title)} no={{{index + 1}}} toplam={{{len(section['maddeler'])}}} sonraki={js(next_section['baslik'] if next_section else '')}>", ""]
             return out, i + 1
         m = re.match(r"^(\d+)\.\s+(.*)$", line)
         if m and numbered:
             iid = katalog.ITEM_ID.search(m.group(2)).group(1)
-            return [f"<Madde id={js(iid)} no={{{m.group(1)}}}>", "", esc(tr(m.group(2))), "", "</Madde>", ""], i + 1
+            return [f"<Madde id={js(iid)} no={{{m.group(1)}}} baslik={js(tr(m.group(2)))}>", "", esc(tr(m.group(2))), "", "</Madde>", ""], i + 1
         if line.lstrip().startswith("|") and katalog.cells(line)[0] == "#":
             heads, rows, nxt = table_rows(lines, i)
             out = []
             for row in rows:
                 iid = katalog.ITEM_ID.search(row[0]).group(1)
                 no = re.match(r"\d+", katalog.plain(row[0])).group()
-                out += [f"<Madde id={js(iid)} no={{{no}}} baslik={js(katalog.plain(row[1]))}>", ""]
+                out += [f"<Madde id={js(iid)} no={{{no}}} baslik={js(tr(row[1]))}>", ""]
                 if len(row) > 2:
                     out += [esc(tr(row[2])), ""]
                 meta = " · ".join(f"**{h}:** {esc(tr(v))}" for h, v in zip(heads[3:], row[3:]) if v.strip())
@@ -179,9 +192,15 @@ def list_page(doc, lst, tr, comp):
             return out, nxt
         return None
 
-    body = convert(body_lines(doc["metin"]), tr, special)
-    imports = [f"import Madde from '{comp}/Madde.astro';", f"import DenetimPrompt from '{comp}/DenetimPrompt.astro';"]
-    return front(title=doc["baslik"], description=summary(doc["ozet"])) + "\n" + "\n".join(imports) + "\n\n" + "\n".join(body).strip() + "\n"
+    lines = body_lines(doc["metin"])
+    first_section = next(i for i, line in enumerate(lines) if line.startswith("## "))
+    intro = "\n".join(convert(lines[:first_section], tr, lambda _lines, _i: None)).strip()
+    lines = lines[first_section:]
+    body = convert(lines, tr, special)
+    if state["section"] != -2:
+        body += ["</ListeBolum>", "", "</ListeGovde>"]
+    imports = [f"import Madde from '{comp}/Madde.astro';", f"import ListeBaslik from '{comp}/ListeBaslik.astro';", f"import ListeGovde from '{comp}/ListeGovde.astro';", f"import ListeBolum from '{comp}/ListeBolum.astro';"]
+    return front(title=doc["baslik"], description=summary(doc["ozet"]), tableOfContents=False) + "\n" + "\n".join(imports) + f"\n\n<ListeBaslik liste={js(lst['id'])}>\n\n{intro}\n\n</ListeBaslik>\n\n<ListeGovde liste={js(lst['id'])}>\n\n" + "\n".join(body).strip() + "\n"
 
 
 def cards(heads, rows, tr):
@@ -208,7 +227,9 @@ def cards(heads, rows, tr):
         style, top = heads[0] == "Stil", bool(example and all_examples)
         props = [f"baslik={js(title)}", f"satir={{{int(style) + int(top) + 3 + len(meta)}}}"]
         if link:
-            props.append(f"href={js(link.group(1))}")
+            repo = re.fullmatch(r"https://github\.com/([^/#?]+/[^/#?]+)/?", link.group(1), re.I)
+            href = f"/repolar/{repo.group(1).lower()}/" if repo and repo.group(1).lower() in tr.repos else link.group(1)
+            props.append(f"href={js(href)}")
             if link.group(1) in tr.broken:
                 props.append(f"kirik={js(tr.broken[link.group(1)])}")
         if tur:
@@ -233,9 +254,16 @@ def cards(heads, rows, tr):
 
 def guide_page(doc, tr, comp):
     lines = body_lines(doc["metin"])
-    fm = front(title=doc["baslik"], description=summary(doc["ozet"])) + "\n"
-    if not doc["yan_yana"]:
-        return fm + "\n".join(tr(l) for l in lines).strip() + "\n", ".md"
+    first = next((i for i, line in enumerate(lines) if line.strip()), len(lines))
+    end = next((i for i in range(first, len(lines)) if not lines[i].strip()), len(lines))
+    lead = ""
+    if first < len(lines) and not lines[first].startswith("## "):
+        lead = "\n".join(convert(lines[first:end], tr, lambda _lines, _i: None)).strip()
+        lines = lines[:first] + lines[end + 1:]
+    guide_no = sum(1 for d in tr.docs.values() if not d["liste"] and d["sira"] <= doc["sira"])
+    tools = sorted({r for r in tr.repos if re.search(r"https://github\.com/" + re.escape(r) + r"(?:[)/#?]|$)", doc["metin"], re.I)})
+    fm = front(title=doc["baslik"], description=summary(doc["ozet"]), araclar=tools) + "\n"
+    intro = f"<RehberBaslik baslik={js(doc['baslik'])} no={{{guide_no}}} bolum={{{sum(1 for line in lines if line.startswith('## '))}}} araclar={js(tools)}>\n\n{lead}\n\n</RehberBaslik>"
 
     def special(lines, i):
         if lines[i].lstrip().startswith("|"):
@@ -243,9 +271,11 @@ def guide_page(doc, tr, comp):
             return cards(heads, rows, tr), nxt
         return None
 
-    body = convert(lines, tr, special)
-    imports = [f"import Kartlar from '{comp}/Kartlar.astro';", f"import Kart from '{comp}/Kart.astro';"]
-    return fm + "\n".join(imports) + "\n\n" + "\n".join(body).strip() + "\n", ".mdx"
+    body = convert(lines, tr, special if doc["yan_yana"] else lambda _lines, _i: None)
+    imports = [f"import RehberBaslik from '{comp}/RehberBaslik.astro';"]
+    if doc["yan_yana"]:
+        imports += [f"import Kartlar from '{comp}/Kartlar.astro';", f"import Kart from '{comp}/Kart.astro';"]
+    return fm + "\n".join(imports) + "\n\n" + intro + "\n\n" + "\n".join(body).strip() + "\n", ".mdx"
 
 
 def public_catalog(cat):
@@ -508,6 +538,9 @@ def main(cat=None):
             write(DOCS / "listeler" / f"{d['liste']}.mdx", list_page(d, lst, tr, "../../../components"))
         else:
             text, ext = guide_page(d, tr, "../../../components")
+            for old in (DOCS / "rehberler").glob(f"{Path(d['dosya']).stem}.*"):
+                if old.suffix != ext:
+                    old.unlink()
             write(DOCS / "rehberler" / f"{Path(d['dosya']).stem}{ext}", text)
     write(DOCS / "repolar.mdx", repo_page(pub, "../../components"))
     write(DOCS / "index.mdx", home_page(cat, pub, tr, "../../components"))
@@ -516,7 +549,7 @@ def main(cat=None):
     write(DATA / "sidebar.json", json.dumps(sidebar(cat, pub), ensure_ascii=False, indent=1))
     write(PUBLIC / "katalog.json", data)
     write(PUBLIC / "llms.txt", llms(cat, pub))
-    write(PUBLIC / "llms-full.txt", llms_full(cat, pub, tr))
+    write(PUBLIC / "llms-full.txt", llms_full(cat, pub, Translate(cat, site_links=False)))
     local_data(cat, pub)
     pages = len(list(DOCS.rglob("*.md*")))
     print(f"site: {pages} sayfa, {sum(count(l) for l in cat['listeler'])} madde, {len(pub['ogeler'])} rehber öğesi, {len(pub['repolar'])} repo")

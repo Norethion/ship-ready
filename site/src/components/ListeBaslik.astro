@@ -1,0 +1,12 @@
+---
+import katalog from '../data/katalog.json';
+import DenetimPrompt from './DenetimPrompt.astro';
+interface Props { liste: string }
+const l = katalog.listeler.find((x) => x.id === Astro.props.liste)!;
+const doc = katalog.belgeler.find((x) => x.liste === l.id)!;
+const total = l.bolumler.reduce((n, s) => n + s.maddeler.length, 0);
+---
+<div class="check-page not-content" data-check-page data-list={l.id}>
+  <nav class="check-tabs" aria-label="Kontrol listeleri">{katalog.listeler.map((item) => <a href={katalog.belgeler.find((d) => d.liste === item.id)!.adres} aria-current={item.id === l.id ? 'page' : undefined}>{item.baslik.split(':')[0]} <span>{item.bolumler.reduce((n, s) => n + s.maddeler.length, 0)}</span></a>)}</nav>
+  <header class="check-hero"><div><p class="check-eyebrow">Kontrol listesi · {l.bolumler.length} bölüm · {total} madde</p><h1>{l.baslik.split(':')[0]}</h1><div class="check-intro"><slot /></div></div><div class="check-progress"><p><strong data-check-done>0</strong> / {total} tamamlandı <span data-check-percent>%0</span></p><div class="check-track"><span data-check-bar></span></div><small>İlerleme yalnızca bu tarayıcıda saklanır.</small><DenetimPrompt liste={l.id} sade etiket="Bu listeyle projemi denetle" /></div></header>
+</div>

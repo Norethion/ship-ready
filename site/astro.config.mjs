@@ -27,6 +27,8 @@ export default defineConfig({
 				ThemeSelect: './src/components/TemaSecici.astro',
 				ThemeProvider: './src/components/TemaSaglayici.astro',
 				TableOfContents: './src/components/SayfaIcerigi.astro',
+				PageSidebar: './src/components/RehberYan.astro',
+				TwoColumnContent: './src/components/RehberDuzen.astro',
 				// Pagefind sunucusuz çalışmaz; yerel sayfada çevrimdışı arama kullanılır.
 				...(YEREL ? { Search: './src/components/YerelArama.astro' } : {}),
 			},

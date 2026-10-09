@@ -1,17 +1,26 @@
 ---
 title: "App Store incelemesi"
 description: "En sık 27 red sebebi ve her biri için ne yapılacağı."
+tableOfContents: false
 ---
 
 import Madde from '../../../components/Madde.astro';
-import DenetimPrompt from '../../../components/DenetimPrompt.astro';
+import ListeBaslik from '../../../components/ListeBaslik.astro';
+import ListeGovde from '../../../components/ListeGovde.astro';
+import ListeBolum from '../../../components/ListeBolum.astro';
+
+<ListeBaslik liste={"app-store"}>
 
 En sık 27 red sebebi ve her biri için ne yapılacağı.
 Apple uygulamayı reddederken çoğu zaman sadece bir kural numarası ve iki cümle yazar; hangi ekranda neyin eksik olduğunu söylemez.
 Bu sebeplerin çoğu kod hatası değil; eksik anlatılan, unutulan ya da yanlış girilen ayarlar.
 Liste [bu videodan](https://www.instagram.com/reel/DctdIykgb9C/) ve aynı hesabın 24 maddelik ikinci listesinden alındı; kural numaraları 25.09.2026'da [App Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) sayfasından doğrulandı.
 
-## Ödeme ve abonelik
+</ListeBaslik>
+
+<ListeGovde liste={"app-store"}>
+
+<ListeBolum liste={"app-store"} baslik={"Ödeme ve abonelik"} no={1} toplam={4} sonraki={"Gizlilik ve izinler"}>
 
 
 <Madde id={"as-paywall-linkleri"} no={1} baslik={"Satın alma ekranında (paywall) link yok"}>
@@ -47,7 +56,9 @@ Dijital ürün ve abonelikleri uygulama dışında satın aldıran düğme ya da
 </Madde>
 
 
-## Gizlilik ve izinler
+</ListeBolum>
+
+<ListeBolum liste={"app-store"} baslik={"Gizlilik ve izinler"} no={2} toplam={7} sonraki={"İnceleme hazırlığı"}>
 
 
 <Madde id={"as-hesap-silme"} no={5} baslik={"Hesap silme yok"}>
@@ -107,7 +118,9 @@ Google, Facebook gibi bir hesapla giriş varsa yanında veriyi ad ve e-postayla 
 </Madde>
 
 
-## İnceleme hazırlığı
+</ListeBolum>
+
+<ListeBolum liste={"app-store"} baslik={"İnceleme hazırlığı"} no={3} toplam={7} sonraki={"İçerik ve işlevsellik"}>
 
 
 <Madde id={"as-yer-tutucu-icerik"} no={12} baslik={"Yer tutucu içerik"}>
@@ -167,7 +180,9 @@ App Store Connect'teki yaş derecelendirmesi sorularını dürüst cevapla; kull
 </Madde>
 
 
-## İçerik ve işlevsellik
+</ListeBolum>
+
+<ListeBolum liste={"app-store"} baslik={"İçerik ve işlevsellik"} no={4} toplam={8} sonraki={"Reddedilince"}>
 
 
 <Madde id={"as-web-gorunumu"} no={19} baslik={"Sadece web görünümü"}>
@@ -235,7 +250,9 @@ Açıklama, ekran görüntüleri ve önizleme videosu uygulamanın gerçekte yap
 </Madde>
 
 
-## Reddedilince
+</ListeBolum>
+
+<ListeBolum liste={"app-store"} baslik={"Reddedilince"} no={5} toplam={1} sonraki={""}>
 
 
 <Madde id={"as-red-cevabi"} no={27} baslik={"Cevap yazmıyorsun"}>
@@ -251,6 +268,10 @@ Sessizce yeni sürüm göndermek yerine App Store Connect'te uygulamanın App Re
 - **İtiraz:** Uygulamanın yanlış anlaşıldığını düşünüyorsan [App Review Board'a itiraz](https://developer.apple.com/contact/app-store/?topic=appeal) edebilirsin. Her ret için tek itiraz hakkı var; önce ekibin istediği ek bilgileri ver.
 - **Görüşme:** Apple, App Review ile 30 dakikalık Webex görüşmesi randevusu da veriyor ([App Review](https://developer.apple.com/distribute/app-review/) sayfasında).
 - **İlgili sekmeler:** Satın alma ekranı ve abonelik araçları [Gelir & analitik](/rehberler/gelir-analitik/) sekmesinde; abonelik şartları ve hesap silme [yayın öncesi listesinin](/listeler/yayin-oncesi/) 55. ve 104. maddelerinde.
+
+</ListeBolum>
+
+</ListeGovde>
 
 ## Göndermeden önce kontrol prompt'u
 

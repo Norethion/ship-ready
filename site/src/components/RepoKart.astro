@@ -1,6 +1,6 @@
 ---
 import type { Repo } from '../repo';
-import { dikkat, eski, kurulum, repoAdres, yildiz } from '../repo';
+import { dikkat, eski, inlineCode, kurulum, repoAdres, yildiz } from '../repo';
 interface Props { repo: Repo }
 const { repo: r } = Astro.props;
 const [sahip, ad] = r.repo.split('/');
@@ -9,7 +9,7 @@ const [sahip, ad] = r.repo.split('/');
 	<div class="repo-cover"><span>{sahip} /</span><strong>{ad}</strong></div>
 	<div class="repo-card-body">
 		<strong>{ad}</strong><span class="repo-owner">{sahip}</span>
-		<p>{r.aciklama}</p>
+		<p set:html={inlineCode(r.aciklama)} />
 		<div class="repo-meta">{r.dil && <span>{r.dil}</span>}{r.yildiz != null && <span>☆ {yildiz(r.yildiz)}</span>}</div>
 		<div class="repo-tags">{r.kurulum.map((k) => <span>{kurulum[k as keyof typeof kurulum].etiket}</span>)}{r.uyari && <span class="repo-note">Not var</span>}{dikkat(r) && <span class="repo-warning">{r.arsiv ? 'Arşivlenmiş' : 'Dikkat: 1+ yıldır güncellenmiyor'}</span>}{r.arsiv && eski(r) && <span class="repo-warning">Dikkat: 1+ yıldır güncellenmiyor</span>}</div>
 	</div>

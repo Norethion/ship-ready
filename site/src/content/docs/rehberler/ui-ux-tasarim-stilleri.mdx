@@ -1,14 +1,20 @@
 ---
 title: "UI/UX: stiller ve araçlar"
 description: "Claude'a arayüz yaptırırken stilin İngilizce adını prompt'a yazmak yeterli, örneğin \"Bento Grid düzeninde, Glassmorphism kartlarla bir özellik sayfası\"."
+araclar: ["abi/screenshot-to-code", "airbnb/lottie-web", "anmolsaini16/mapcn", "catdad/canvas-confetti", "davidhdev/react-bits", "greensock/gsap", "jakubantalik/thinking-orbs", "leonxlnx/taste-skill", "magicuidesign/magicui", "motiondivision/motion", "nextlevelbuilder/ui-ux-pro-max-skill", "pbakaus/impeccable", "recharts/recharts", "saadeghi/daisyui", "shadcn-ui/ui", "tremorlabs/tremor", "voltagent/awesome-design-md"]
 ---
 
+import RehberBaslik from '../../../components/RehberBaslik.astro';
 import Kartlar from '../../../components/Kartlar.astro';
 import Kart from '../../../components/Kart.astro';
 
+<RehberBaslik baslik={"UI/UX: stiller ve araçlar"} no={1} bolum={11} araclar={["abi/screenshot-to-code", "airbnb/lottie-web", "anmolsaini16/mapcn", "catdad/canvas-confetti", "davidhdev/react-bits", "greensock/gsap", "jakubantalik/thinking-orbs", "leonxlnx/taste-skill", "magicuidesign/magicui", "motiondivision/motion", "nextlevelbuilder/ui-ux-pro-max-skill", "pbakaus/impeccable", "recharts/recharts", "saadeghi/daisyui", "shadcn-ui/ui", "tremorlabs/tremor", "voltagent/awesome-design-md"]}>
+
 Claude'a arayüz yaptırırken stilin İngilizce adını prompt'a yazmak yeterli, örneğin "Bento Grid düzeninde, Glassmorphism kartlarla bir özellik sayfası".
-İşe yarayan tasarım skill'leri: [Impeccable](https://github.com/pbakaus/impeccable), [Taste Skill](https://github.com/Leonxlnx/taste-skill), [UI/UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill).
-Arayüzün her sayfada aynı kalması için projeye bir `DESIGN.md` koy: renkleri, yazı tiplerini ve boşlukları tanımlar, ajan arayüzü buna göre üretir; hazır örnekler [awesome-design-md](https://github.com/VoltAgent/awesome-design-md) reposunda.
+İşe yarayan tasarım skill'leri: [Impeccable](/repolar/pbakaus/impeccable/), [Taste Skill](/repolar/leonxlnx/taste-skill/), [UI/UX Pro Max](/repolar/nextlevelbuilder/ui-ux-pro-max-skill/).
+Arayüzün her sayfada aynı kalması için projeye bir `DESIGN.md` koy: renkleri, yazı tiplerini ve boşlukları tanımlar, ajan arayüzü buna göre üretir; hazır örnekler [awesome-design-md](/repolar/voltagent/awesome-design-md/) reposunda.
+
+</RehberBaslik>
 
 ## Stiller
 
@@ -198,7 +204,7 @@ Japon "kusurun güzelliği" estetiği: doğal malzeme dokuları, asimetri, sade 
 Arayüzü "AI yapmış" gösteren işaretler; [bu videodan](https://www.instagram.com/reel/DcrqbqZRVvC/) alındı.
 Hiçbiri tek başına yanlış değil; sorun hepsinin düşünülmeden, varsayılan olarak gelmesi.
 Bir öğeyi bilerek seçtiysen kalabilir; seçmediysen kaldır ya da bu ürüne özgü bir kararla değiştir.
-Ajanın bu kalıplara düşmemesi için [Impeccable](https://github.com/pbakaus/impeccable) skill'i de işe yarar.
+Ajanın bu kalıplara düşmemesi için [Impeccable](/repolar/pbakaus/impeccable/) skill'i de işe yarar.
 
 <Kartlar>
 
@@ -394,7 +400,7 @@ canvas-confetti ([kaynak video](https://www.instagram.com/reel/Ddb5wiPopJ9/)) ve
 
 <Kartlar>
 
-<Kart baslik={"shadcn/ui"} satir={6} href={"https://github.com/shadcn-ui/ui"} tur={"Bileşen"} prompt={"shadcn/ui (https://github.com/shadcn-ui/ui) aracını bu projede kullanmak istiyorum. Ne işe yarar: Kodu doğrudan projeye kopyalanan, erişilebilir bileşenler; CLI ile eklenir. 21st.dev ve Aceternity bileşenleri de shadcn CLI ile eklenir. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"shadcn/ui"} satir={6} href={"/repolar/shadcn-ui/ui/"} tur={"Bileşen"} prompt={"shadcn/ui (https://github.com/shadcn-ui/ui) aracını bu projede kullanmak istiyorum. Ne işe yarar: Kodu doğrudan projeye kopyalanan, erişilebilir bileşenler; CLI ile eklenir. 21st.dev ve Aceternity bileşenleri de shadcn CLI ile eklenir. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Kodu doğrudan projeye kopyalanan, erişilebilir bileşenler; CLI ile eklenir. 21st.dev ve Aceternity bileşenleri de shadcn CLI ile eklenir.
 
@@ -424,7 +430,7 @@ React, Tailwind ve Motion ile yapılmış 200'den fazla animasyonlu bileşen, bl
 
 </Kart>
 
-<Kart baslik={"Magic UI"} satir={6} href={"https://github.com/magicuidesign/magicui"} tur={"Bileşen"} prompt={"Magic UI (https://github.com/magicuidesign/magicui) aracını bu projede kullanmak istiyorum. Ne işe yarar: Landing page ve tanıtım sayfaları için animasyonlu, kopyala-yapıştır bileşenler; kurulumu shadcn/ui ile aynı. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"Magic UI"} satir={6} href={"/repolar/magicuidesign/magicui/"} tur={"Bileşen"} prompt={"Magic UI (https://github.com/magicuidesign/magicui) aracını bu projede kullanmak istiyorum. Ne işe yarar: Landing page ve tanıtım sayfaları için animasyonlu, kopyala-yapıştır bileşenler; kurulumu shadcn/ui ile aynı. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Landing page ve tanıtım sayfaları için animasyonlu, kopyala-yapıştır bileşenler; kurulumu shadcn/ui ile aynı.
 
@@ -434,7 +440,7 @@ Landing page ve tanıtım sayfaları için animasyonlu, kopyala-yapıştır bile
 
 </Kart>
 
-<Kart baslik={"React Bits"} satir={6} href={"https://github.com/DavidHDev/react-bits"} tur={"Bileşen"} prompt={"React Bits (https://github.com/DavidHDev/react-bits) aracını bu projede kullanmak istiyorum. Ne işe yarar: Metin animasyonu, arka plan ve mikro etkileşim için 200'den fazla bileşen; her biri JS/TS ve düz CSS ya da Tailwind hâliyle gelir. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"React Bits"} satir={6} href={"/repolar/davidhdev/react-bits/"} tur={"Bileşen"} prompt={"React Bits (https://github.com/DavidHDev/react-bits) aracını bu projede kullanmak istiyorum. Ne işe yarar: Metin animasyonu, arka plan ve mikro etkileşim için 200'den fazla bileşen; her biri JS/TS ve düz CSS ya da Tailwind hâliyle gelir. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Metin animasyonu, arka plan ve mikro etkileşim için 200'den fazla bileşen; her biri JS/TS ve düz CSS ya da Tailwind hâliyle gelir.
 
@@ -444,7 +450,7 @@ Metin animasyonu, arka plan ve mikro etkileşim için 200'den fazla bileşen; he
 
 </Kart>
 
-<Kart baslik={"daisyUI"} satir={6} href={"https://github.com/saadeghi/daisyui"} tur={"Bileşen"} prompt={"daisyUI (https://github.com/saadeghi/daisyui) aracını bu projede kullanmak istiyorum. Ne işe yarar: Tailwind'e eklenti olarak kurulur, btn, card gibi hazır CSS sınıflarıyla kullanılır. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"daisyUI"} satir={6} href={"/repolar/saadeghi/daisyui/"} tur={"Bileşen"} prompt={"daisyUI (https://github.com/saadeghi/daisyui) aracını bu projede kullanmak istiyorum. Ne işe yarar: Tailwind'e eklenti olarak kurulur, btn, card gibi hazır CSS sınıflarıyla kullanılır. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Tailwind'e eklenti olarak kurulur, `btn`, `card` gibi hazır CSS sınıflarıyla kullanılır.
 
@@ -534,7 +540,7 @@ Sakin, fiziksel hareketli bileşenler ve hazır bloklar: tarih seçici, silmeyi 
 
 </Kart>
 
-<Kart baslik={"Motion"} satir={6} href={"https://github.com/motiondivision/motion"} tur={"Animasyon"} prompt={"Motion (https://github.com/motiondivision/motion) aracını bu projede kullanmak istiyorum. Ne işe yarar: Framer Motion'ın yeni adı: yaylı animasyonlar, sayfa düzeni geçişleri, kaydırmaya bağlı efektler, sürükleme. Aceternity ve Magic UI bileşenleri bunu kullanır. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"Motion"} satir={6} href={"/repolar/motiondivision/motion/"} tur={"Animasyon"} prompt={"Motion (https://github.com/motiondivision/motion) aracını bu projede kullanmak istiyorum. Ne işe yarar: Framer Motion'ın yeni adı: yaylı animasyonlar, sayfa düzeni geçişleri, kaydırmaya bağlı efektler, sürükleme. Aceternity ve Magic UI bileşenleri bunu kullanır. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Framer Motion'ın yeni adı: yaylı animasyonlar, sayfa düzeni geçişleri, kaydırmaya bağlı efektler, sürükleme. Aceternity ve Magic UI bileşenleri bunu kullanır.
 
@@ -544,7 +550,7 @@ Framer Motion'ın yeni adı: yaylı animasyonlar, sayfa düzeni geçişleri, kay
 
 </Kart>
 
-<Kart baslik={"GSAP"} satir={6} href={"https://github.com/greensock/GSAP"} tur={"Animasyon"} prompt={"GSAP (https://github.com/greensock/GSAP) aracını bu projede kullanmak istiyorum. Ne işe yarar: Bağımlılıksız animasyon kütüphanesi; ScrollTrigger, SplitText, MorphSVG gibi eklentiler dahil, React için useGSAP. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"GSAP"} satir={6} href={"/repolar/greensock/gsap/"} tur={"Animasyon"} prompt={"GSAP (https://github.com/greensock/GSAP) aracını bu projede kullanmak istiyorum. Ne işe yarar: Bağımlılıksız animasyon kütüphanesi; ScrollTrigger, SplitText, MorphSVG gibi eklentiler dahil, React için useGSAP. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Bağımlılıksız animasyon kütüphanesi; ScrollTrigger, SplitText, MorphSVG gibi eklentiler dahil, React için `useGSAP`.
 
@@ -554,7 +560,7 @@ Bağımlılıksız animasyon kütüphanesi; ScrollTrigger, SplitText, MorphSVG g
 
 </Kart>
 
-<Kart baslik={"Lottie Web"} satir={6} href={"https://github.com/airbnb/lottie-web"} tur={"Animasyon"} prompt={"Lottie Web (https://github.com/airbnb/lottie-web) aracını bu projede kullanmak istiyorum. Ne işe yarar: After Effects'te yapılıp JSON'a aktarılan animasyonları web'de oynatır. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"Lottie Web"} satir={6} href={"/repolar/airbnb/lottie-web/"} tur={"Animasyon"} prompt={"Lottie Web (https://github.com/airbnb/lottie-web) aracını bu projede kullanmak istiyorum. Ne işe yarar: After Effects'te yapılıp JSON'a aktarılan animasyonları web'de oynatır. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 After Effects'te yapılıp JSON'a aktarılan animasyonları web'de oynatır.
 
@@ -584,7 +590,7 @@ Sadece CSS ile yapılmış 99 hover efektli buton; JavaScript ya da bağımlıl�
 
 </Kart>
 
-<Kart baslik={"canvas-confetti"} satir={6} href={"https://github.com/catdad/canvas-confetti"} tur={"Animasyon"} ornek={"konfeti-patlamasi"} ornekYeri={"pencere"} prompt={"canvas-confetti (https://github.com/catdad/canvas-confetti) aracını bu projede kullanmak istiyorum. Ne işe yarar: Tek fonksiyonla konfeti patlatan küçük kütüphane: parça sayısı, açı, renk ve şekil ayarlanır, canvas ile çizer; hareketi azalt tercihine uyması için disableForReducedMotion: true verilir (varsayılan kapalı). Ödeme ya da görev tamamlanınca ödül hissi vermek için. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"canvas-confetti"} satir={6} href={"/repolar/catdad/canvas-confetti/"} tur={"Animasyon"} ornek={"konfeti-patlamasi"} ornekYeri={"pencere"} prompt={"canvas-confetti (https://github.com/catdad/canvas-confetti) aracını bu projede kullanmak istiyorum. Ne işe yarar: Tek fonksiyonla konfeti patlatan küçük kütüphane: parça sayısı, açı, renk ve şekil ayarlanır, canvas ile çizer; hareketi azalt tercihine uyması için disableForReducedMotion: true verilir (varsayılan kapalı). Ödeme ya da görev tamamlanınca ödül hissi vermek için. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Tek fonksiyonla konfeti patlatan küçük kütüphane: parça sayısı, açı, renk ve şekil ayarlanır, canvas ile çizer; hareketi azalt tercihine uyması için `disableForReducedMotion: true` verilir (varsayılan kapalı). Ödeme ya da görev tamamlanınca ödül hissi vermek için.
 
@@ -594,7 +600,7 @@ Tek fonksiyonla konfeti patlatan küçük kütüphane: parça sayısı, açı, r
 
 </Kart>
 
-<Kart baslik={"Thinking Orbs"} satir={6} href={"https://github.com/Jakubantalik/thinking-orbs"} tur={"Animasyon"} ornek={"dusunen-kureler"} ornekYeri={"pencere"} prompt={"Thinking Orbs (https://github.com/Jakubantalik/thinking-orbs) aracını bu projede kullanmak istiyorum. Ne işe yarar: AI ve ajan arayüzleri için noktalı \"düşünen küre\" animasyonları: çalışıyor, arıyor, çözüyor, dinliyor, bağlanıyor gibi dokuz durum, sohbet için 64 ve satır içi 20 piksellik iki boyut. Sayfanın açık ya da koyu temasına kendiliğinden uyar; düz 2D canvas ile çizer (WebGL yok), ekrandan çıkınca durur, hareketi azalt tercihinde sabit kare gösterir. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"Thinking Orbs"} satir={6} href={"/repolar/jakubantalik/thinking-orbs/"} tur={"Animasyon"} ornek={"dusunen-kureler"} ornekYeri={"pencere"} prompt={"Thinking Orbs (https://github.com/Jakubantalik/thinking-orbs) aracını bu projede kullanmak istiyorum. Ne işe yarar: AI ve ajan arayüzleri için noktalı \"düşünen küre\" animasyonları: çalışıyor, arıyor, çözüyor, dinliyor, bağlanıyor gibi dokuz durum, sohbet için 64 ve satır içi 20 piksellik iki boyut. Sayfanın açık ya da koyu temasına kendiliğinden uyar; düz 2D canvas ile çizer (WebGL yok), ekrandan çıkınca durur, hareketi azalt tercihinde sabit kare gösterir. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 AI ve ajan arayüzleri için noktalı "düşünen küre" animasyonları: çalışıyor, arıyor, çözüyor, dinliyor, bağlanıyor gibi dokuz durum, sohbet için 64 ve satır içi 20 piksellik iki boyut. Sayfanın açık ya da koyu temasına kendiliğinden uyar; düz 2D canvas ile çizer (WebGL yok), ekrandan çıkınca durur, hareketi azalt tercihinde sabit kare gösterir.
 
@@ -614,7 +620,7 @@ Canlı HTML'in üstüne WebGL ya da WebGPU efektleri koyan 35 bileşen: sıvı, 
 
 </Kart>
 
-<Kart baslik={"Recharts"} satir={6} href={"https://github.com/recharts/recharts"} tur={"Grafik"} prompt={"Recharts (https://github.com/recharts/recharts) aracını bu projede kullanmak istiyorum. Ne işe yarar: Bileşen tabanlı grafik kütüphanesi; eksen, tooltip, çizgi gibi parçalar ayrı bileşen olarak birleştirilir, SVG ile çizer. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"Recharts"} satir={6} href={"/repolar/recharts/recharts/"} tur={"Grafik"} prompt={"Recharts (https://github.com/recharts/recharts) aracını bu projede kullanmak istiyorum. Ne işe yarar: Bileşen tabanlı grafik kütüphanesi; eksen, tooltip, çizgi gibi parçalar ayrı bileşen olarak birleştirilir, SVG ile çizer. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Bileşen tabanlı grafik kütüphanesi; eksen, tooltip, çizgi gibi parçalar ayrı bileşen olarak birleştirilir, SVG ile çizer.
 
@@ -624,7 +630,7 @@ Bileşen tabanlı grafik kütüphanesi; eksen, tooltip, çizgi gibi parçalar ay
 
 </Kart>
 
-<Kart baslik={"Tremor"} satir={6} href={"https://github.com/tremorlabs/tremor"} tur={"Grafik"} prompt={"Tremor (https://github.com/tremorlabs/tremor) aracını bu projede kullanmak istiyorum. Ne işe yarar: Grafik ve dashboard için 35'ten fazla kopyala-yapıştır bileşen; grafikleri Recharts ile çizer. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"Tremor"} satir={6} href={"/repolar/tremorlabs/tremor/"} tur={"Grafik"} prompt={"Tremor (https://github.com/tremorlabs/tremor) aracını bu projede kullanmak istiyorum. Ne işe yarar: Grafik ve dashboard için 35'ten fazla kopyala-yapıştır bileşen; grafikleri Recharts ile çizer. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Grafik ve dashboard için 35'ten fazla kopyala-yapıştır bileşen; grafikleri Recharts ile çizer.
 
@@ -634,7 +640,7 @@ Grafik ve dashboard için 35'ten fazla kopyala-yapıştır bileşen; grafikleri 
 
 </Kart>
 
-<Kart baslik={"mapcn"} satir={6} href={"https://github.com/AnmolSaini16/mapcn"} tur={"Harita"} prompt={"mapcn (https://github.com/AnmolSaini16/mapcn) aracını bu projede kullanmak istiyorum. Ne işe yarar: Hazır harita bileşenleri: işaretçi, popup, rota, zoom ve pusula; shadcn/ui ile aynı yapıda. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"mapcn"} satir={6} href={"/repolar/anmolsaini16/mapcn/"} tur={"Harita"} prompt={"mapcn (https://github.com/AnmolSaini16/mapcn) aracını bu projede kullanmak istiyorum. Ne işe yarar: Hazır harita bileşenleri: işaretçi, popup, rota, zoom ve pusula; shadcn/ui ile aynı yapıda. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Hazır harita bileşenleri: işaretçi, popup, rota, zoom ve pusula; shadcn/ui ile aynı yapıda.
 
@@ -706,7 +712,7 @@ Google'ın aracı: metinden, eskizden ya da ekran görüntüsünden web ve mobil
 
 <Kart baslik={"Screenshot to Code"} satir={6} href={"https://screenshottocode.com"} tur={"Arayüz üretimi (AI)"} prompt={"Screenshot to Code (https://screenshottocode.com) aracını bu projede kullanmak istiyorum. Ne işe yarar: Ekran görüntüsünü, tasarım taslağını ya da ekran kaydını çalışan koda çevirir. Açık kaynak sürümü (abi/screenshot-to-code) kendi API anahtarınla bilgisayarında çalışır. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
-Ekran görüntüsünü, tasarım taslağını ya da ekran kaydını çalışan koda çevirir. Açık kaynak sürümü ([abi/screenshot-to-code](https://github.com/abi/screenshot-to-code)) kendi API anahtarınla bilgisayarında çalışır.
+Ekran görüntüsünü, tasarım taslağını ya da ekran kaydını çalışan koda çevirir. Açık kaynak sürümü ([abi/screenshot-to-code](/repolar/abi/screenshot-to-code/)) kendi API anahtarınla bilgisayarında çalışır.
 
 <span class="k-alan ilk"><span class="k-etiket">Altyapı</span><span class="k-deger">Çıktı HTML ve Tailwind, HTML ve CSS, React, Vue, Bootstrap</span></span>
 <span class="k-alan"><span class="k-etiket">Başka altyapıda</span><span class="k-deger">Kodu Claude'a kendi altyapına çevirttirirsin</span></span>

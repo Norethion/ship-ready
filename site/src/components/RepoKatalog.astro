@@ -3,7 +3,7 @@ import katalog from '../data/katalog.json';
 import RepoKart from './RepoKart.astro';
 import Simge from './Simge.astro';
 import { katla } from '../arama';
-import { dikkat, kategoriAdi, kurulum } from '../repo';
+import { dikkat, kategoriAdi, kurulum, plainInline } from '../repo';
 
 const repolar = katalog.repolar;
 const say = (f: (r: typeof repolar[number]) => boolean) => repolar.filter(f).length;
@@ -16,7 +16,7 @@ const simgeler: Record<string, string> = { 'ajan-skill': 'layers', 'ajan-erisim'
 	{katalog.klasorler.map((f) => <div class="repo-chip-row repo-subcategories" role="group" aria-label={`${kategoriAdi(f.ad)} alt kategorileri`} data-sub-for={f.id} hidden><button type="button" class="repo-chip selected" data-sub="*" aria-pressed="true">Tümü</button>{f.alt.map((a) => <button type="button" class="repo-chip" data-sub={a.id} aria-pressed="false">{a.ad} <span>{say((r) => r.klasor === f.id && r.alt_klasor === a.id)}</span></button>)}</div>)}
 	<div class="repo-chip-row repo-install" role="group" aria-label="Kurulum yeri"><span class="repo-row-label">Kurulum yeri</span><button type="button" class="repo-chip selected" data-install="*" aria-pressed="true">Tümü</button>{(Object.keys(kurulum) as (keyof typeof kurulum)[]).map((k) => <button type="button" class="repo-chip" data-install={k} aria-pressed="false">{kurulum[k].etiket} <span>{say((r) => r.kurulum.includes(k))}</span></button>)}</div>
 	<div class="repo-results-head"><p class="repo-result-count" aria-live="polite">{repolar.length} / {repolar.length} repo</p><button type="button" class="repo-clear" hidden>Süzgeçleri temizle</button></div>
-	<div class="repo-grid">{repolar.map((r) => <div class="repo-grid-item" data-category={r.klasor} data-sub={r.alt_klasor} data-install={r.kurulum.join(' ')} data-warning={dikkat(r) ? '1' : ''} data-search={katla([r.repo, r.aciklama, r.uyari, r.kaynak?.ad, r.kategori, r.alt_kategori, ...r.kurulum.map((k) => kurulum[k as keyof typeof kurulum].etiket)].join(' '))} data-at={r.eklenme || ''} data-stars={r.yildiz || 0} data-name={r.repo.toLowerCase()}><RepoKart repo={r} /></div>)}</div>
+	<div class="repo-grid">{repolar.map((r) => <div class="repo-grid-item" data-category={r.klasor} data-sub={r.alt_klasor} data-install={r.kurulum.join(' ')} data-warning={dikkat(r) ? '1' : ''} data-search={katla(plainInline([r.repo, r.aciklama, r.uyari, r.kaynak?.ad, r.kategori, r.alt_kategori, ...r.kurulum.map((k) => kurulum[k as keyof typeof kurulum].etiket)].join(' ')))} data-at={r.eklenme || ''} data-stars={r.yildiz || 0} data-name={r.repo.toLowerCase()}><RepoKart repo={r} /></div>)}</div>
 	<div class="repo-empty" hidden><Simge ad="search" boyut={28} /><h2>Sonuç yok</h2><p>Aramanı kontrol et, daha kısa bir kelime dene ya da kategori ve kurulum yeri seçimlerini kaldır.</p><button type="button" class="repo-clear">Süzgeçleri temizle</button></div>
 </div>
 <script>

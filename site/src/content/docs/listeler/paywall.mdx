@@ -1,17 +1,26 @@
 ---
 title: "Paywall dönüşümü"
 description: "Satın alma ekranı (paywall) az satıyorsa en sık 27 sebep ve her biri için ne yapılacağı."
+tableOfContents: false
 ---
 
 import Madde from '../../../components/Madde.astro';
-import DenetimPrompt from '../../../components/DenetimPrompt.astro';
+import ListeBaslik from '../../../components/ListeBaslik.astro';
+import ListeGovde from '../../../components/ListeGovde.astro';
+import ListeBolum from '../../../components/ListeBolum.astro';
+
+<ListeBaslik liste={"paywall"}>
 
 Satın alma ekranı (paywall) az satıyorsa en sık 27 sebep ve her biri için ne yapılacağı.
 Liste bir videodaki 27 maddelik listeden alındı; videodaki "hepsi ölçüldü" iddiası ve etki oranları doğrulanmadı, her maddeyi kendi uygulamanda A/B testiyle dene.
 Mağaza kuralına dokunan maddeler (fiyatın gösterimi, deneme süresi, şartlar, geri yükleme) Apple'ın [abonelik sayfasından](https://developer.apple.com/app-store/subscriptions/) doğrulandı ve [App Store incelemesi](/listeler/app-store/) sekmesine bağlandı.
 Paywall'ı kodsuz değiştirip test etmek için Superwall ya da RevenueCat [Gelir & analitik](/rehberler/gelir-analitik/) sekmesinde.
 
-## Zamanlama ve akış
+</ListeBaslik>
+
+<ListeGovde liste={"paywall"}>
+
+<ListeBolum liste={"paywall"} baslik={"Zamanlama ve akış"} no={1} toplam={4} sonraki={"İçerik ve tasarım"}>
 
 
 <Madde id={"pw-yanlis-anda-gosteriliyor"} no={1} baslik={"Yanlış anda gösteriliyor"}>
@@ -39,7 +48,9 @@ Farklı yerler ve kullanıcılar için birden fazla paywall kur ve A/B testiyle 
 </Madde>
 
 
-## İçerik ve tasarım
+</ListeBolum>
+
+<ListeBolum liste={"paywall"} baslik={"İçerik ve tasarım"} no={2} toplam={7} sonraki={"Fiyat ve planlar"}>
 
 
 <Madde id={"pw-karsilastirma-tablosu"} no={5} baslik={"Karşılaştırma tablosu"}>
@@ -85,7 +96,9 @@ Paywall metnini kullanıcının dilinde göster; uygulama çevrilip paywall İng
 </Madde>
 
 
-## Fiyat ve planlar
+</ListeBolum>
+
+<ListeBolum liste={"paywall"} baslik={"Fiyat ve planlar"} no={3} toplam={5} sonraki={"Deneme süresi"}>
 
 
 <Madde id={"pw-fiyat-ilk-ekranda"} no={12} baslik={"Fiyat ilk ekranda değil"}>
@@ -119,7 +132,9 @@ Giriş indirimi ya da ilk ay indirimi gibi bir teklif sun (App Store tanıtım t
 </Madde>
 
 
-## Deneme süresi
+</ListeBolum>
+
+<ListeBolum liste={"paywall"} baslik={"Deneme süresi"} no={4} toplam={4} sonraki={"Güven ve teknik"}>
 
 
 <Madde id={"pw-deneme-yok"} no={17} baslik={"Deneme yok"}>
@@ -147,7 +162,9 @@ Deneme bitmeden önce bildirimle hatırlat; iade ve şikâyet azalır, güven ar
 </Madde>
 
 
-## Güven ve teknik
+</ListeBolum>
+
+<ListeBolum liste={"paywall"} baslik={"Güven ve teknik"} no={5} toplam={7} sonraki={""}>
 
 
 <Madde id={"pw-sosyal-kanit-asagida"} no={21} baslik={"Sosyal kanıt aşağıda"}>
@@ -192,6 +209,10 @@ Satın almayı ayda bir test hesabıyla (sandbox) baştan sona dene; mağaza, SD
 
 </Madde>
 
+
+</ListeBolum>
+
+</ListeGovde>
 
 ## Kontrol prompt'u
 

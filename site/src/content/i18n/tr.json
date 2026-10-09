@@ -1,5 +1,6 @@
 {
 	"expressiveCode.copyButtonTooltip": "Panoya kopyala",
 	"expressiveCode.copyButtonCopied": "Kopyalandı!",
-	"expressiveCode.terminalWindowFallbackTitle": "Terminal penceresi"
+	"expressiveCode.terminalWindowFallbackTitle": "Terminal penceresi",
+	"tableOfContents.onThisPage": "İçindekiler"
 }

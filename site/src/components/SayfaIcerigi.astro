@@ -38,7 +38,7 @@ import Default from '@astrojs/starlight/components/TableOfContents.astro';
 		if (secilen) toc.current = secilen;
 	}
 
-	Promise.all([customElements.whenDefined('starlight-toc'), customElements.whenDefined('mobile-starlight-toc')]).then(() => {
+	customElements.whenDefined('starlight-toc').then(() => {
 		const menuler = [...document.querySelectorAll<Toc>('starlight-toc, mobile-starlight-toc')];
 		menuler.forEach(sar);
 		let oncekiDipte = false;

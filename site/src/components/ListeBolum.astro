@@ -1,0 +1,6 @@
+---
+import DenetimPrompt from './DenetimPrompt.astro';
+interface Props { liste: string; baslik: string; no: number; toplam: number; sonraki: string }
+const { liste, baslik, no, toplam, sonraki } = Astro.props;
+---
+<section class="check-section" id={`bolum-${no}`} data-check-section><header><span>{String(no).padStart(2, '0')}</span><h2>{baslik}</h2><span data-section-count>0 / {toplam}</span></header><div class="check-items"><slot /></div><DenetimPrompt liste={liste} bolum={baslik} sade />{sonraki && <a class="check-next" href={`#bolum-${no + 1}`}><span><small>Sonraki bölüm · {String(no + 1).padStart(2, '0')}</small><strong>{sonraki}</strong></span><span>Devam et →</span></a>}</section>
