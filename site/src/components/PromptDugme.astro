@@ -3,11 +3,12 @@
 // tur="kod" canlı örneğin HTML kodunu kopyalar; ipucunda kod yerine ne kopyalanacağı yazar. ana, kartın asıl eylemini dolu düğme yapar;
 // simge, etiketi sadece ekran okuyucuya bırakıp düğmeyi simgeye indirir (dar alt şeritler için).
 import { Icon } from '@astrojs/starlight/components';
+import type { KurulumTuru } from '../repo';
 
 interface Props {
 	metin: string;
 	etiket: string;
-	tur?: 'denetim' | 'kurulum' | 'claude' | 'codex' | 'uygulama' | 'kullanim' | 'tasarim' | 'kod';
+	tur?: 'denetim' | KurulumTuru | 'kullanim' | 'tasarim' | 'kod';
 	ana?: boolean;
 	simge?: boolean;
 }
@@ -30,7 +31,7 @@ const ipucu =
 
 <button type="button" class={`prompt-dugme t-${tur}${ana ? ' ana' : ''}${simge ? ' simge' : ''}`} data-kopya={metin} title={simge ? `${etiket}: ${ipucu}` : ipucu}>
 	<Icon name={SIMGE[tur]} size="1em" />
-	<span>{etiket}</span>
+	<span aria-live="polite">{etiket}</span>
 </button>
 
 <script>
@@ -59,6 +60,6 @@ const ipucu =
 		setTimeout(() => {
 			if (span) span.textContent = eski;
 			b.classList.remove('kopyalandi');
-		}, 1600);
+		}, 2400);
 	});
 </script>

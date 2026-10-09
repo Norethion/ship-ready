@@ -8,6 +8,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import PromptDugme from './PromptDugme.astro';
+import { guvenliAdres } from '../repo';
 
 interface Props {
 	baslik: string;
@@ -66,7 +67,7 @@ const eylem = ustte
 				<span class="k-tur">
 					{tur}
 					{tur && kaynak && ' · '}
-					{kaynak && <a href={kaynak.url} target="_blank" rel="noopener">{kaynak.ad}</a>}
+					{kaynak && (guvenliAdres(kaynak.url) ? <a href={guvenliAdres(kaynak.url)} target="_blank" rel="noopener">{kaynak.ad}</a> : kaynak.ad)}
 				</span>
 			)
 		}

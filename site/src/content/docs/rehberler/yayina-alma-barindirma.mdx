@@ -1,13 +1,19 @@
 ---
 title: "Yayına alma & barındırma"
 description: "Projeyi yayına alırken kullanılan servisler ve yayın öncesi listesinde bunlarla çözülen maddeler."
+araclar: ["dokploy/dokploy", "fastlane/fastlane", "google/osv-scanner", "grafana/grafana", "prometheus/prometheus", "webpro-nl/knip"]
 ---
 
+import RehberBaslik from '../../../components/RehberBaslik.astro';
 import Kartlar from '../../../components/Kartlar.astro';
 import Kart from '../../../components/Kart.astro';
 
+<RehberBaslik baslik={"Yayına alma & barındırma"} no={5} bolum={3} araclar={["dokploy/dokploy", "fastlane/fastlane", "google/osv-scanner", "grafana/grafana", "prometheus/prometheus", "webpro-nl/knip"]}>
+
 Projeyi yayına alırken kullanılan servisler ve yayın öncesi listesinde bunlarla çözülen maddeler.
 Servisler tablosunun ücretleri 25.09.2026'da, mobil servislerin ücretsiz sınırları 05.10.2026'da sitelerinden alındı.
+
+</RehberBaslik>
 
 ## Servisler
 
@@ -22,7 +28,7 @@ Vercel, Heroku, Netlify ve Railway'e açık kaynak alternatif; kendi sunucuna (V
 
 </Kart>
 
-<Kart baslik={"Dokploy"} satir={5} href={"https://github.com/Dokploy/dokploy"} tur={"Kendi sunucunda PaaS"} prompt={"Dokploy (https://github.com/Dokploy/dokploy) aracını bu projede kullanmak istiyorum. Ne işe yarar: Coolify'a benzer açık kaynak alternatif: uygulama ve veritabanı yayına alma, Docker Compose, otomatik yedek, Traefik ile yönlendirme ve kaynak izleme; tek komutla kurulur. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"Dokploy"} satir={5} href={"/repolar/dokploy/dokploy/"} tur={"Kendi sunucunda PaaS"} prompt={"Dokploy (https://github.com/Dokploy/dokploy) aracını bu projede kullanmak istiyorum. Ne işe yarar: Coolify'a benzer açık kaynak alternatif: uygulama ve veritabanı yayına alma, Docker Compose, otomatik yedek, Traefik ile yönlendirme ve kaynak izleme; tek komutla kurulur. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Coolify'a benzer açık kaynak alternatif: uygulama ve veritabanı yayına alma, Docker Compose, otomatik yedek, Traefik ile yönlendirme ve kaynak izleme; tek komutla kurulur.
 
@@ -31,7 +37,7 @@ Coolify'a benzer açık kaynak alternatif: uygulama ve veritabanı yayına alma,
 
 </Kart>
 
-<Kart baslik={"fastlane"} satir={5} href={"https://github.com/fastlane/fastlane"} tur={"Mobil yayın otomasyonu"} prompt={"fastlane (https://github.com/fastlane/fastlane) aracını bu projede kullanmak istiyorum. Ne işe yarar: iOS ve Android'de ekran görüntüsü üretme, imzalama (provisioning profile) ve App Store ya da Google Play'e yükleme işlerini tek komuta bağlar; proje içindeki Fastfile ile tanımlanır. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"fastlane"} satir={5} href={"/repolar/fastlane/fastlane/"} tur={"Mobil yayın otomasyonu"} prompt={"fastlane (https://github.com/fastlane/fastlane) aracını bu projede kullanmak istiyorum. Ne işe yarar: iOS ve Android'de ekran görüntüsü üretme, imzalama (provisioning profile) ve App Store ya da Google Play'e yükleme işlerini tek komuta bağlar; proje içindeki Fastfile ile tanımlanır. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 iOS ve Android'de ekran görüntüsü üretme, imzalama (provisioning profile) ve App Store ya da Google Play'e yükleme işlerini tek komuta bağlar; proje içindeki Fastfile ile tanımlanır.
 
@@ -40,7 +46,7 @@ iOS ve Android'de ekran görüntüsü üretme, imzalama (provisioning profile) v
 
 </Kart>
 
-<Kart baslik={"Prometheus ve Grafana"} satir={5} href={"https://github.com/prometheus/prometheus"} tur={"İzleme ve alarm"} prompt={"Prometheus ve Grafana (https://github.com/prometheus/prometheus) aracını bu projede kullanmak istiyorum. Ne işe yarar: Prometheus sunucudan ve uygulamadan metrik toplar, Grafana bunları panolarda gösterir ve eşik aşılınca Slack gibi kanallara alarm gönderir. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"Prometheus ve Grafana"} satir={5} href={"/repolar/prometheus/prometheus/"} tur={"İzleme ve alarm"} prompt={"Prometheus ve Grafana (https://github.com/prometheus/prometheus) aracını bu projede kullanmak istiyorum. Ne işe yarar: Prometheus sunucudan ve uygulamadan metrik toplar, Grafana bunları panolarda gösterir ve eşik aşılınca Slack gibi kanallara alarm gönderir. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Prometheus sunucudan ve uygulamadan metrik toplar, Grafana bunları panolarda gösterir ve eşik aşılınca Slack gibi kanallara alarm gönderir.
 
@@ -196,6 +202,6 @@ Uygulamanın test sürümünü mağazaya çıkmadan kullanıcılara dağıtır, 
 - **Staging dışarıya kapalı ([2. madde](/listeler/yayin-oncesi/#yo-env-gecmisten-temizle)):** Staging'i herkese açık alan adına koymak yerine Cloudflare Tunnel ile sadece ekibe aç.
 - **Alt alan adları ve e-posta ([111–112. maddeler](/listeler/yayin-oncesi/#yo-alt-alan-adi)):** `app.` için CNAME, `mail.` ve `news.` için SPF, DKIM ve DMARC kayıtları Cloudflare DNS'e girilir.
 - **Yedekleme ([54. madde](/listeler/yayin-oncesi/#yo-yedekleme)):** Coolify veritabanı yedeklerini zamanlayıp R2 gibi S3 uyumlu bir depoya gönderir; geri yükleme testini ayrıca yap.
-- **Bağımlılık denetimi ([53. madde](/listeler/yayin-oncesi/#yo-bagimlilik-denetimi)):** [OSV-Scanner](https://github.com/google/osv-scanner) bağımlılıkları ve container imajlarını bilinen açıklara karşı tarar (kaynak kod gönderilmez); JS/TS projesinde [Knip](https://github.com/webpro-nl/knip) kullanılmayan paket ve dosyaları bulur.
+- **Bağımlılık denetimi ([53. madde](/listeler/yayin-oncesi/#yo-bagimlilik-denetimi)):** [OSV-Scanner](/repolar/google/osv-scanner/) bağımlılıkları ve container imajlarını bilinen açıklara karşı tarar (kaynak kod gönderilmez); JS/TS projesinde [Knip](/repolar/webpro-nl/knip/) kullanılmayan paket ve dosyaları bulur.
 - **Directory listing ve source map ([4 ve 7. maddeler](/listeler/yayin-oncesi/#yo-directory-listing)):** Barındırmada klasör listelemenin kapalı olduğunu ve `.map` dosyalarının yayına çıkmadığını kontrol et.
 - **Kesintisiz güncelleme ve geri dönüş ([114–115. maddeler](/listeler/yayin-oncesi/#yo-kesintisiz-surum)):** Coolify, sağlık kontrolü tanımlıysa yeni sürümü eskisiyle bir süre birlikte çalıştırarak günceller (rolling update); kesintisizliği garanti etmez, host'a port açılmışsa ya da Docker Compose kullanılıyorsa çalışmaz. Sorun çıkarsa Configuration > Rollback'ten sunucuda tutulan eski sürüme dönülür; ama bu veritabanı değişikliklerini geri almaz, şema değişiklikleri geriye uyumlu olmalı ([rolling update](https://coolify.io/docs/knowledge-base/rolling-updates), [rollback](https://coolify.io/docs/applications/deployments/rollbacks)).

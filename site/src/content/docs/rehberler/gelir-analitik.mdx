@@ -1,13 +1,19 @@
 ---
 title: "Gelir & analitik"
 description: "Uygulamadan para kazanırken sık birlikte kullanılan araçlar: satın alma altyapısı, satın alma ekranı, kullanıcı analitiği ve hata izleme."
+araclar: ["openreplay/openreplay", "umami-software/umami"]
 ---
 
+import RehberBaslik from '../../../components/RehberBaslik.astro';
 import Kartlar from '../../../components/Kartlar.astro';
 import Kart from '../../../components/Kart.astro';
 
+<RehberBaslik baslik={"Gelir & analitik"} no={2} bolum={2} araclar={["openreplay/openreplay", "umami-software/umami"]}>
+
 Uygulamadan para kazanırken sık birlikte kullanılan araçlar: satın alma altyapısı, satın alma ekranı, kullanıcı analitiği ve hata izleme.
 Ücretler 25.09.2026'da (Sentry 29.09.2026'da, PostHog ve Crashlytics 05.10.2026'da) sitelerinden alındı.
+
+</RehberBaslik>
 
 ## Araçlar
 
@@ -45,7 +51,7 @@ Olay analitiği, kayıt ve satın alma hunisi, oturum kaydı, özellik bayraklar
 
 </Kart>
 
-<Kart baslik={"Umami"} satir={4} href={"https://github.com/umami-software/umami"} tur={"Web analitiği"} prompt={"Umami (https://github.com/umami-software/umami) aracını bu projede kullanmak istiyorum. Ne işe yarar: Çerez kullanmayan, gizlilik odaklı web analitiği: trafik, kampanya, dönüşüm ve gelir tek panelde. Google Analytics'e kendi sunucunda çalışan alternatif; veri yurt dışına gitmez. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"Umami"} satir={4} href={"/repolar/umami-software/umami/"} tur={"Web analitiği"} prompt={"Umami (https://github.com/umami-software/umami) aracını bu projede kullanmak istiyorum. Ne işe yarar: Çerez kullanmayan, gizlilik odaklı web analitiği: trafik, kampanya, dönüşüm ve gelir tek panelde. Google Analytics'e kendi sunucunda çalışan alternatif; veri yurt dışına gitmez. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Çerez kullanmayan, gizlilik odaklı web analitiği: trafik, kampanya, dönüşüm ve gelir tek panelde. Google Analytics'e kendi sunucunda çalışan alternatif; veri yurt dışına gitmez.
 
@@ -53,7 +59,7 @@ Olay analitiği, kayıt ve satın alma hunisi, oturum kaydı, özellik bayraklar
 
 </Kart>
 
-<Kart baslik={"OpenReplay"} satir={4} href={"https://github.com/openreplay/openreplay"} tur={"Oturum kaydı"} prompt={"OpenReplay (https://github.com/openreplay/openreplay) aracını bu projede kullanmak istiyorum. Ne işe yarar: Kullanıcının oturumunu konsol ve ağ kayıtlarıyla birlikte izletir; \"bende çalışmıyor\" diyen kullanıcının gördüğünü görürsün. Ürün analitiği ve canlı ortak tarama da var; kendi sunucunda çalışır, veri üçüncü tarafa gitmez. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
+<Kart baslik={"OpenReplay"} satir={4} href={"/repolar/openreplay/openreplay/"} tur={"Oturum kaydı"} prompt={"OpenReplay (https://github.com/openreplay/openreplay) aracını bu projede kullanmak istiyorum. Ne işe yarar: Kullanıcının oturumunu konsol ve ağ kayıtlarıyla birlikte izletir; \"bende çalışmıyor\" diyen kullanıcının gördüğünü görürsün. Ürün analitiği ve canlı ortak tarama da var; kendi sunucunda çalışır, veri üçüncü tarafa gitmez. Önce projenin altyapısına bak; doğrudan kullanılabiliyorsa nasıl ekleneceğini göster, kullanılamıyorsa hangi kısmının örnek alınabileceğini söyle."} promptEtiket={"Kullanım prompt'u"} promptTur={"kullanim"}>
 
 Kullanıcının oturumunu konsol ve ağ kayıtlarıyla birlikte izletir; "bende çalışmıyor" diyen kullanıcının gördüğünü görürsün. Ürün analitiği ve canlı ortak tarama da var; kendi sunucunda çalışır, veri üçüncü tarafa gitmez.
 

@@ -1,6 +1,7 @@
 // Yerel sayfayı (SHIP_YEREL=1 derlemesi) sunucusuz açılır hale getiren Astro eklentisi. Derleme bitince her sayfada:
 //  - site içi adresler göreli olur, klasör adresleri index.html'e gider (dosyadan açılınca tarayıcı klasörü sayfa saymaz),
 //  - modül betikleri esbuild ile tek bir satır içi betikte toplanır (tarayıcılar file:// altında dış modül dosyası yüklemez),
+//  - CSS'teki /_astro/ yazı tipi adresleri göreli olur,
 // ve arama dizini (src/yerel/arama.json) arama.js olarak yazılır.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -81,6 +82,12 @@ export default function yerelDerleme() {
 				}
 				// Betiklerin hepsi sayfaların içine alındı.
 				for (const f of fs.readdirSync(astro)) if (f.endsWith('.js')) fs.rmSync(path.join(astro, f));
+				// Yazı tipleri CSS'te /_astro/ ile başlar; dosyadan açılınca CSS'in yanındaki dosyaya göreli olmalı.
+				for (const f of fs.readdirSync(astro)) {
+					if (!f.endsWith('.css')) continue;
+					const css = path.join(astro, f);
+					fs.writeFileSync(css, fs.readFileSync(css, 'utf-8').replaceAll('url(/_astro/', 'url(./'));
+				}
 				logger.info(`${liste.length} sayfa dosyadan açılacak şekilde hazırlandı`);
 			},
 		},

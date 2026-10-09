@@ -1,0 +1,5 @@
+---
+import Default from '@astrojs/starlight/components/TwoColumnContent.astro';
+const guide = Astro.locals.starlightRoute.entry.id.startsWith('rehberler/');
+---
+{guide ? <div class="guide-columns"><div class="guide-main"><slot /></div><aside class="guide-aside"><slot name="right-sidebar" /></aside></div> : <Default><slot /><Fragment slot="right-sidebar"><slot name="right-sidebar" /></Fragment></Default>}

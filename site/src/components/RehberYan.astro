@@ -1,0 +1,7 @@
+---
+import Default from '@astrojs/starlight/components/PageSidebar.astro';
+import SayfaIcerigi from './SayfaIcerigi.astro';
+const guide = Astro.locals.starlightRoute.entry.id.startsWith('rehberler/');
+const tools = (Astro.locals.starlightRoute.entry.data as { araclar?: string[] }).araclar ?? [];
+---
+{guide ? <div class="guide-side"><SayfaIcerigi />{tools.length > 0 && <aside class="guide-tools" aria-label="Bu rehberdeki araçlar"><p>Bu rehberdeki araçlar</p>{tools.map((repo) => <a href={`/repolar/${repo}/`}>{repo}</a>)}</aside>}</div> : <Default />}

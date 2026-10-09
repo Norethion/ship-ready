@@ -1,0 +1,6 @@
+---
+interface Props { baslik: string; no: number; bolum: number; araclar: string[] }
+const { baslik, no, bolum, araclar } = Astro.props;
+const toc = Astro.locals.starlightRoute.toc?.items ?? [];
+---
+<header class="guide-hero not-content"><nav aria-label="İçerik yolu"><a href="/#rehberler">Rehberler</a><span>/</span><span>{baslik}</span></nav><p class="guide-eyebrow">Rehber {String(no).padStart(2, '0')} · {bolum} bölüm{araclar.length ? ` · ${araclar.length} araç` : ''}</p><h1>{baslik}</h1><div class="guide-lead"><slot /></div><div class="guide-mobile-side"><nav aria-label="İçindekiler"><p>İçindekiler</p>{toc.map((item) => <a href={`#${item.slug}`}>{item.text}</a>)}</nav>{araclar.length > 0 && <aside class="guide-tools" aria-label="Bu rehberdeki araçlar"><p>Bu rehberdeki araçlar</p>{araclar.map((repo) => <a href={`/repolar/${repo}/`}>{repo}</a>)}</aside>}</div></header>

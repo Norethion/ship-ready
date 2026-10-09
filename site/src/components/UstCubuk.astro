@@ -1,0 +1,24 @@
+---
+import Simge from './Simge.astro';
+import TemaSecici from './TemaSecici.astro';
+import Search from 'virtual:starlight/components/Search';
+import { YEREL } from '../yerel';
+
+const pathname = Astro.url.pathname;
+const links = [
+	{ label: 'Kontrol listeleri', href: '/listeler/yayin-oncesi/', active: pathname.startsWith('/listeler/') },
+	{ label: 'Rehberler', href: '/#rehberler', active: pathname.startsWith('/rehberler/') },
+	{ label: 'Repo kataloğu', href: '/repolar/', active: pathname.startsWith('/repolar/') },
+	...(YEREL ? [{ label: 'Raporlar', href: '/raporlar/', active: pathname.startsWith('/raporlar/') }] : []),
+];
+---
+
+<div class="ship-nav ship-width">
+	<a class="ship-brand" href="/" aria-label="ship-ready ana sayfa"><span class="ship-brand-icon"><Simge ad="check" boyut={19} /></span><span>ship-ready</span></a>
+	<nav class="ship-links" aria-label="Ana menü">{links.map((link) => <a href={link.href} aria-current={link.active ? 'page' : undefined}>{link.label}</a>)}</nav>
+	<div class="ship-actions">
+		<div class="ship-search"><Search /></div>
+		<TemaSecici />
+		<details class="ship-mobile-menu"><summary aria-label="Menüyü aç"><Simge ad="menu" boyut={20} /></summary><nav aria-label="Mobil menü">{links.map((link) => <a href={link.href} aria-current={link.active ? 'page' : undefined}>{link.label}</a>)}</nav></details>
+	</div>
+</div>

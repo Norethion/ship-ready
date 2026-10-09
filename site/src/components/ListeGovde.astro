@@ -1,0 +1,48 @@
+---
+import katalog from '../data/katalog.json';
+interface Props { liste: string }
+const l = katalog.listeler.find((x) => x.id === Astro.props.liste)!;
+---
+<div class="check-layout not-content" data-check-layout><aside class="check-sidebar"><p>Bölümler</p><nav aria-label="Bölümler">{l.bolumler.map((s, i) => <a href={`#bolum-${i + 1}`} data-section-link={i + 1}><span>{String(i + 1).padStart(2, '0')}</span><span>{s.baslik}</span><span data-section-nav-count={i + 1}>0/{s.maddeler.length}</span></a>)}</nav></aside><label class="check-mobile-select">Bölüm <select aria-label="Bölüm seç" data-section-select>{l.bolumler.map((s, i) => <option value={`bolum-${i + 1}`}>{String(i + 1).padStart(2, '0')} · {s.baslik}</option>)}</select></label><div class="check-sections"><slot /></div></div>
+<script>
+  const root = document.querySelector<HTMLElement>('[data-check-layout]');
+  if (root) {
+    const sections = [...root.querySelectorAll<HTMLElement>('[data-check-section]')];
+    const select = root.querySelector<HTMLSelectElement>('[data-section-select]')!;
+    const key = 'ship-ready-checks';
+    function update() {
+      let values: Record<string, boolean> = {};
+      try { values = JSON.parse(localStorage.getItem(key) || '{}'); } catch {}
+      let all = 0, done = 0;
+      sections.forEach((section, i) => {
+        const checks = [...section.querySelectorAll<HTMLInputElement>('[data-madde-check]')];
+        const count = checks.filter((check) => values[check.dataset.maddeCheck || '']).length;
+        all += checks.length; done += count;
+        section.querySelector<HTMLElement>('[data-section-count]')!.textContent = `${count} / ${checks.length}`;
+        root.querySelector<HTMLElement>(`[data-section-nav-count="${i + 1}"]`)!.textContent = `${count}/${checks.length}`;
+      });
+      document.querySelector<HTMLElement>('[data-check-done]')!.textContent = String(done);
+      document.querySelector<HTMLElement>('[data-check-percent]')!.textContent = `%${Math.round(done / all * 100)}`;
+      document.querySelector<HTMLElement>('[data-check-bar]')!.style.width = `${done / all * 100}%`;
+    }
+    root.addEventListener('change', (event) => { if ((event.target as HTMLElement).matches('[data-madde-check]')) update(); });
+    select.addEventListener('change', () => { location.hash = select.value; });
+    const active = (i: number) => {
+      root.querySelectorAll<HTMLAnchorElement>('[data-section-link]').forEach((a) => a.classList.toggle('active', a.dataset.sectionLink === String(i)));
+      select.value = `bolum-${i}`;
+    };
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+      if (visible) active(sections.indexOf(visible.target as HTMLElement) + 1);
+    }, { rootMargin: '-80px 0px -65% 0px' });
+    sections.forEach((section) => observer.observe(section));
+    function deepLink() {
+      const item = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      const details = item?.querySelector('details');
+      if (details) details.open = true;
+    }
+    addEventListener('hashchange', deepLink);
+    root.addEventListener('click', (event) => { if ((event.target as HTMLElement).closest('.madde-no')) requestAnimationFrame(deepLink); });
+    deepLink(); update();
+  }
+</script>

@@ -1,9 +1,16 @@
 ---
 title: "AI geliştirme akışı"
 description: "Claude Code ile proje geliştirirken işe yarayan komutlar, MCP sunucuları, skill'ler ve hazır prompt'lar."
+araclar: ["addyosmani/agent-skills", "blader/humanizer", "egonex-ai/understand-anything", "garrytan/gstack", "google-labs-code/design.md", "google/artemis", "hardikpandya/stop-slop", "karpathy/llm-council", "microsoft/playwright-mcp", "mksglu/context-mode", "multica-ai/andrej-karpathy-skills", "nvidia/skillspector", "obra/superpowers", "open-gsd/gsd-core", "openai/codex-plugin-cc", "pbakaus/impeccable", "thedotmack/claude-mem", "upstash/context7", "voltagent/awesome-design-md"]
 ---
 
+import RehberBaslik from '../../../components/RehberBaslik.astro';
+
+<RehberBaslik baslik={"AI geliştirme akışı"} no={6} bolum={7} araclar={["addyosmani/agent-skills", "blader/humanizer", "egonex-ai/understand-anything", "garrytan/gstack", "google-labs-code/design.md", "google/artemis", "hardikpandya/stop-slop", "karpathy/llm-council", "microsoft/playwright-mcp", "mksglu/context-mode", "multica-ai/andrej-karpathy-skills", "nvidia/skillspector", "obra/superpowers", "open-gsd/gsd-core", "openai/codex-plugin-cc", "pbakaus/impeccable", "thedotmack/claude-mem", "upstash/context7", "voltagent/awesome-design-md"]}>
+
 Claude Code ile proje geliştirirken işe yarayan komutlar, MCP sunucuları, skill'ler ve hazır prompt'lar.
+
+</RehberBaslik>
 
 ## Claude Code komutları
 
@@ -30,17 +37,17 @@ Kurulum komutlarının sonuna `--scope user` eklersen sunucu tüm projelerde kul
 
 | Sunucu | Ne işe yarar |
 |---|---|
-| [Playwright MCP](https://github.com/microsoft/playwright-mcp) | Claude'a tarayıcı verir: sayfayı açar, tıklar, form doldurur, ekran görüntüsü alır; yaptığı işi kendisi test eder. |
+| [Playwright MCP](/repolar/microsoft/playwright-mcp/) | Claude'a tarayıcı verir: sayfayı açar, tıklar, form doldurur, ekran görüntüsü alır; yaptığı işi kendisi test eder. |
 | [Chrome DevTools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp) | Chrome'u geliştirici araçlarıyla kontrol eder: konsol, ağ istekleri, performans kaydı, Lighthouse denetimi, farklı cihaz ve ağ hızı taklidi. |
 | [Figma MCP](https://developers.figma.com/docs/figma-mcp-server/) | Figma tasarımını okuyup frame'i koda çevirir. |
 | [shadcn MCP](https://ui.shadcn.com/docs/mcp) | shadcn/ui ve projede tanımlı registry'lerdeki (Cult UI, Canvas UI gibi) bileşenleri Claude'a listeletir, arattırır ve doğal dille kurdurur; projede `components.json` olmalı. Ücretsiz, hesap gerekmez. |
-| [Context7](https://github.com/upstash/context7) | Kütüphanelerin güncel, sürüme özel dokümanını ve kod örneklerini ajana verir; eski ya da uydurma API önerilerini azaltır. Sorgular context7.com'a gider. |
+| [Context7](/repolar/upstash/context7/) | Kütüphanelerin güncel, sürüme özel dokümanını ve kod örneklerini ajana verir; eski ya da uydurma API önerilerini azaltır. Sorgular context7.com'a gider. |
 | [RevenueCat MCP](https://www.revenuecat.com/docs/tools/mcp) | Abonelik uygulamanın ürün, teklif, yetki (entitlement) ve gelir verisini Claude'a sordurur ve düzenletir; OAuth ile bağlanır. |
 | [Buffer MCP](https://buffer.com/mcp) | Instagram, LinkedIn, X, TikTok gibi 9 platforma gönderi taslağı hazırlatır, zamanlar ve paylaşır, istatistikleri getirir; ücretsiz planda da açık. |
 | Meta Ads MCP | Meta'nın resmi reklam bağlayıcısı (`mcp.facebook.com/ads`, Nisan 2026): kampanya performansını raporlar, kampanya ve reklam oluşturur; yeni kampanyalar varsayılan olarak duraklatılmış başlar. |
 | [ElevenLabs MCP](https://github.com/elevenlabs/elevenlabs-mcp) | Metni sese çevirir, ses klonlar, konuşmayı yazıya döker; Claude'un cevabını seslendirmek için. Yerel sunucu artık bakımda değil, barındırılan sürüm (`api.elevenlabs.io/v1/mcp`) öneriliyor; ElevenLabs hesabı ister. |
 | Gmail ve Google Takvim | claude.ai'deki Bağlayıcılar sayfasından (claude.ai/customize/connectors) eklenir; claude.ai hesabıyla girişte Claude Code'da kendiliğinden görünür, `/mcp` ile yönetilir. `claude mcp add` ile yerelde kurulamaz. |
-| [Artemis](https://github.com/google/artemis) | Android uygulamanı doğal dille verilen talimatlarla gerçek cihazda ya da emülatörde test ettirir; logcat ve ekran görüntüsü toplar. Bir LLM API anahtarı ister. |
+| [Artemis](/repolar/google/artemis/) | Android uygulamanı doğal dille verilen talimatlarla gerçek cihazda ya da emülatörde test ettirir; logcat ve ekran görüntüsü toplar. Bir LLM API anahtarı ister. |
 
 Playwright MCP:
 
@@ -103,12 +110,12 @@ Bu bilgisayarda ve bu projede kurulu MCP sunucularını ve izinlerini denetle: c
 
 - **Skill nedir:** Claude'a belirli bir işi nasıl yapacağını öğreten `SKILL.md` dosyası. `npx skills add <sahip>/<repo>` ile kurulur, `npx skills find` ile aranır, dizini [skills.sh](https://skills.sh).
 - **Eklenti (plugin):** Skill, komut ve ayarları bir arada getirir; `claude plugin marketplace add <sahip>/<repo>` ve ardından `claude plugin install <ad>@<pazar>` ile kurulur.
-- **Örnekler:** Yazı için [Humanizer](https://github.com/blader/humanizer) ve [Stop Slop](https://github.com/hardikpandya/stop-slop), tasarım için [Impeccable](https://github.com/pbakaus/impeccable), kod tabanını tanımak için [Understand Anything](https://github.com/Egonex-AI/Understand-Anything).
-- **Çalışma yöntemi:** [Superpowers](https://github.com/obra/superpowers), [gstack](https://github.com/garrytan/gstack), [Agent Skills](https://github.com/addyosmani/agent-skills) ve [GSD Core](https://github.com/open-gsd/gsd-core) ajana plan, test ve yayın adımları olan bir çalışma düzeni kurar; hepsi Claude Code ve Codex'e kurulur. Aynı işi yaptıkları için birini seç.
-- **Hafıza ve bağlam:** [claude-mem](https://github.com/thedotmack/claude-mem) oturumları kaydedip sonraki oturuma bağlam verir (varsayılan kurulum ücretli barındırılan servise bağlanır); [context-mode](https://github.com/mksglu/context-mode) araç çıktılarını bağlamın dışında tutar.
+- **Örnekler:** Yazı için [Humanizer](/repolar/blader/humanizer/) ve [Stop Slop](/repolar/hardikpandya/stop-slop/), tasarım için [Impeccable](/repolar/pbakaus/impeccable/), kod tabanını tanımak için [Understand Anything](/repolar/egonex-ai/understand-anything/).
+- **Çalışma yöntemi:** [Superpowers](/repolar/obra/superpowers/), [gstack](/repolar/garrytan/gstack/), [Agent Skills](/repolar/addyosmani/agent-skills/) ve [GSD Core](/repolar/open-gsd/gsd-core/) ajana plan, test ve yayın adımları olan bir çalışma düzeni kurar; hepsi Claude Code ve Codex'e kurulur. Aynı işi yaptıkları için birini seç.
+- **Hafıza ve bağlam:** [claude-mem](/repolar/thedotmack/claude-mem/) oturumları kaydedip sonraki oturuma bağlam verir (varsayılan kurulum ücretli barındırılan servise bağlanır); [context-mode](/repolar/mksglu/context-mode/) araç çıktılarını bağlamın dışında tutar.
 - **Güvenlik taraması:** Anthropic'in resmî eklenti pazarındaki Claude Security projeyi birden çok ajanla tarar, bulguları ve yama önerilerini `CLAUDE-SECURITY-<zaman>/` klasörüne rapor olarak yazar, yamaları kendisi uygulamaz (`claude plugin install claude-security@claude-plugins-official`, sonra `/claude-security`); çok token harcar, sadece daldaki değişiklik için yerleşik `/security-review` yeter. [Bu videodaki](https://www.instagram.com/reel/DdqI39ERRuF/) beş adımlı tarama aşağıdaki hazır prompt'ta; araçları (Gitleaks, Semgrep, ZAP) repo kataloğunda.
-- **Claude'dan Codex'e:** [codex-plugin-cc](https://github.com/openai/codex-plugin-cc) ile Claude Code içinden Codex'e kod incelemesi yaptırır ya da görev devredersin.
-- **Kurmadan önce tara:** Skill'ler ajanın yetkileriyle çalışır; başkasının skill'ini kurmadan önce [SkillSpector](https://github.com/NVIDIA/SkillSpector) ile prompt injection ve veri sızdırma açısından tara. NVIDIA'nın incelediği 31.132 skill'in %26,1'inde güvenlik açığı, %5,2'sinde kötü niyet belirtisi bulunmuş.
+- **Claude'dan Codex'e:** [codex-plugin-cc](/repolar/openai/codex-plugin-cc/) ile Claude Code içinden Codex'e kod incelemesi yaptırır ya da görev devredersin.
+- **Kurmadan önce tara:** Skill'ler ajanın yetkileriyle çalışır; başkasının skill'ini kurmadan önce [SkillSpector](/repolar/nvidia/skillspector/) ile prompt injection ve veri sızdırma açısından tara. NVIDIA'nın incelediği 31.132 skill'in %26,1'inde güvenlik açığı, %5,2'sinde kötü niyet belirtisi bulunmuş.
 
 SkillSpector'ı kur ve skill'i kurmadan önce GitHub linkinden tara:
 
@@ -122,8 +129,8 @@ skillspector scan https://github.com/<sahip>/<skill-reposu>
 - **CLAUDE.md ve AGENTS.md:** Projenin nasıl çalıştığını, komutlarını ve kurallarını anlatır; Claude Code `CLAUDE.md`'yi, Codex ve diğer ajanlar `AGENTS.md`'yi okur.
 - **İkisini aynı tut:** Projede ikisi de varsa biri diğerinin birebir kopyası olsun; düzenleme tek dosyada yapılsın. ship-ready'de `uygulama/guncelle.py` bunu otomatik yapıyor.
 - **Kısa tut:** Sadece Claude'un koddan çıkaramayacağı şeyleri yaz: komutlar, kurallar, dikkat edilecekler.
-- **Davranış kuralları:** Modelin sık yaptığı hataları (basit işi karmaşıklaştırmak, talimatın dışına çıkmak, bitmemiş işi bitti saymak, olmayan API uydurmak) kısa kurallarla önler; hazır örneği Karpathy'nin gözlemlerinden çıkarılmış [andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills): kodlamadan önce düşün, en basit çözümü yaz, sadece isteneni değiştir, başarıyı doğrulanabilir hedefe bağla. Tüm projelerde geçerli olsun istiyorsan `~/.claude/CLAUDE.md`'ye eklenir.
-- **DESIGN.md:** `AGENTS.md` projenin nasıl kurulacağını, `DESIGN.md` nasıl görüneceğini anlatır: renk, yazı tipi, köşe ve boşluk değerleri ve tasarımın gerekçesi. Biçimi Google'ın [design.md](https://github.com/google-labs-code/design.md) reposunda, markalardan çıkarılmış hazır örnekleri [awesome-design-md](https://github.com/VoltAgent/awesome-design-md) reposunda.
+- **Davranış kuralları:** Modelin sık yaptığı hataları (basit işi karmaşıklaştırmak, talimatın dışına çıkmak, bitmemiş işi bitti saymak, olmayan API uydurmak) kısa kurallarla önler; hazır örneği Karpathy'nin gözlemlerinden çıkarılmış [andrej-karpathy-skills](/repolar/multica-ai/andrej-karpathy-skills/): kodlamadan önce düşün, en basit çözümü yaz, sadece isteneni değiştir, başarıyı doğrulanabilir hedefe bağla. Tüm projelerde geçerli olsun istiyorsan `~/.claude/CLAUDE.md`'ye eklenir.
+- **DESIGN.md:** `AGENTS.md` projenin nasıl kurulacağını, `DESIGN.md` nasıl görüneceğini anlatır: renk, yazı tipi, köşe ve boşluk değerleri ve tasarımın gerekçesi. Biçimi Google'ın [design.md](/repolar/google-labs-code/design.md/) reposunda, markalardan çıkarılmış hazır örnekleri [awesome-design-md](/repolar/voltagent/awesome-design-md/) reposunda.
 
 ## Google'ın AI araçları
 
@@ -175,7 +182,7 @@ Yayından önce güvenlik taraması yap:
 Bu projeyi yayından önce beş adımda güvenlik açısından tara ve her adımın bulgularını önem sırasıyla raporla: 1) paket denetimi (npm audit --audit-level=high ya da osv-scanner) ile bilinen açığı olan paketler; npm audit fix --force kullanma, büyük sürüm atlatıp projeyi bozabilir. 2) gitleaks ile kodda ve git geçmişinde sızmış anahtar, token ve şifre; bulduğun değeri ekrana yazma, iptal edilip yenilenmesi gerektiğini söyle. 3) semgrep ile güvenli olmayan kod kalıpları. 4) Kimlik doğrulama, yetki kontrolü, API uç noktaları, dosya yükleme ve kullanıcı girdisi için kendi incelemen. 5) Uygulama staging'de çalışıyorsa ZAP taramasının nasıl yapılacağı. Kurulu olmayan araçları kurmadan önce bana sor; hiçbir şeyi onayım olmadan düzeltme.
 ```
 
-Karpathy'nin [LLM Council](https://github.com/karpathy/llm-council) fikri soruyu birden çok modele sorup bir başkan modele karar verdirir; [bu videodaki](https://www.instagram.com/reel/Dbpyz7FCLC3/) gibi tek modelde beş danışmanla da uygulanabilir.
+Karpathy'nin [LLM Council](/repolar/karpathy/llm-council/) fikri soruyu birden çok modele sorup bir başkan modele karar verdirir; [bu videodaki](https://www.instagram.com/reel/Dbpyz7FCLC3/) gibi tek modelde beş danışmanla da uygulanabilir.
 Model kendi fikrini onaylamak yerine karşı görüş üretsin diye büyük kararlarda işe yarar.
 
 Büyük bir kararı danışman konseyine sor:

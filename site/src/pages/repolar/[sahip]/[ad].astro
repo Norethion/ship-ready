@@ -1,0 +1,42 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import katalog from '../../../data/katalog.json';
+import RepoKart from '../../../components/RepoKart.astro';
+import PromptDugme from '../../../components/PromptDugme.astro';
+import Simge from '../../../components/Simge.astro';
+import { dikkat, eski, guvenliAdres, inlineCode, kategoriAdi, kurulum, platform, prompt, tarih, yildiz, type Repo } from '../../../repo';
+
+export function getStaticPaths() {
+	const seen = new Set<string>();
+	return katalog.repolar.map((repo) => {
+		const [sahip, ad, extra] = repo.repo.split('/');
+		if (!sahip || !ad || extra) throw new Error(`Geçersiz repo kimliği: ${repo.repo}`);
+		const key = `${sahip}/${ad}`.toLowerCase();
+		if (seen.has(key)) throw new Error(`Çakışan repo adresi: ${key}`);
+		seen.add(key);
+		return { params: { sahip: sahip.toLowerCase(), ad: ad.toLowerCase() }, props: { repo } };
+	});
+}
+interface Props { repo: Repo }
+const { repo: r } = Astro.props;
+const [sahip, ad] = r.repo.split('/');
+const github = `https://github.com/${r.repo}`;
+const kaynakAdres = guvenliAdres(r.kaynak?.url);
+const similar = katalog.repolar.filter((x) => x.repo !== r.repo && x.klasor === r.klasor && x.alt_klasor === r.alt_klasor).sort((a, b) => (b.yildiz || 0) - (a.yildiz || 0)).slice(0, 3);
+const category = kategoriAdi(r.kategori);
+const detailHash = `#kategori=${r.klasor}/${r.alt_klasor}`;
+---
+<StarlightPage frontmatter={{ title: r.repo, description: r.aciklama, tableOfContents: false }} headings={[]}>
+	<div class="repo-detail not-content">
+		<nav class="repo-breadcrumb" aria-label="İçerik yolu"><a href="/repolar/">Repo kataloğu</a><span>/</span><a href={`/repolar/${detailHash}`}>{category}</a><span>/</span><a href={`/repolar/${detailHash}`}>{r.alt_kategori}</a></nav>
+		<div class="repo-detail-hero"><div class="repo-detail-cover"><span>{sahip} /</span><h1>{ad}</h1><p>☆ {yildiz(r.yildiz)} <span>·</span> {r.dil || '—'} <span>·</span> {r.kurulum.map((k) => kurulum[k as keyof typeof kurulum].etiket).join(' · ')}</p></div><a class="repo-github" href={github} target="_blank" rel="noopener noreferrer">GitHub'da aç ↗</a></div>
+		<div class="repo-detail-columns"><div class="repo-detail-main">
+			<section><h2 class="repo-section-label">Açıklama</h2><p class="repo-description" set:html={inlineCode(r.aciklama)} /></section>
+			{r.uyari && <aside class="repo-callout"><Simge ad="file" boyut={18} /><div><strong>Not</strong><p set:html={inlineCode(r.uyari)} /></div></aside>}
+			{dikkat(r) && <aside class="repo-callout warning"><Simge ad="alert" boyut={18} /><div><strong>Dikkat</strong><p>{r.arsiv ? 'Bu repo arşivlenmiş.' : ''}{r.arsiv && eski(r) ? ' ' : ''}{eski(r) ? `Son güncelleme ${tarih(r.son_guncelleme)}; 1+ yıldır güncellenmiyor.` : ''}</p></div></aside>}
+			<section class="repo-install-section"><h2 class="repo-section-label">Kurulum</h2>{r.kurulum.map((place) => place === 'kaynak' ? <div class="repo-install-card"><strong>Kurulmaz; README okunur</strong><p>Kaynağı GitHub'da açıp README dosyasını incele.</p></div> : (() => { const k = place as keyof typeof prompt; const value = prompt[k](github); return <div class="repo-install-card"><div class="repo-install-card-head"><div><strong>{kurulum[k].baslik}</strong><p>{kurulum[k].aciklama}</p></div><PromptDugme metin={value} etiket="Kurulum prompt'unu kopyala" tur={kurulum[k].tur} /></div><pre>{value}</pre></div>; })())}</section>
+			{r.kaynak && kaynakAdres && <section class="repo-source-section"><h2 class="repo-section-label">Kaynak</h2><a class="repo-source" href={kaynakAdres} target="_blank" rel="noopener noreferrer"><Simge ad={platform(kaynakAdres) === 'YouTube' ? 'play' : 'globe'} boyut={20} /><span><strong>{r.kaynak.ad}</strong><small>{platform(kaynakAdres)}</small></span><span aria-hidden="true">↗</span></a></section>}
+		</div><aside class="repo-facts" aria-label="Repo bilgileri"><dl><div><dt>Sahip</dt><dd>{sahip}</dd></div><div><dt>Yıldız</dt><dd>{yildiz(r.yildiz)}</dd></div><div><dt>Dil</dt><dd>{r.dil || '—'}</dd></div><div><dt>Eklenme</dt><dd>{tarih(r.eklenme) || '—'}</dd></div><div><dt>Son güncelleme</dt><dd>{tarih(r.son_guncelleme) || '—'}</dd></div><div><dt>Kategori</dt><dd>{category}</dd></div><div><dt>Alt kategori</dt><dd>{r.alt_kategori}</dd></div></dl></aside></div>
+		{similar.length > 0 && <section class="repo-similar"><div class="repo-similar-head"><h2>Benzer repolar</h2><a href={`/repolar/${detailHash}`}>Alt kategori: {r.alt_kategori}</a></div><div class="repo-grid">{similar.map((repo) => <RepoKart repo={repo} />)}</div></section>}
+	</div>
+</StarlightPage>

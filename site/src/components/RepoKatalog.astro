@@ -1,220 +1,57 @@
 ---
-// Doğrulanmış GitHub repoları amaca göre kategori ve alt kategori başlıkları altında gruplu gösterilir.
-// Üstteki çiplerle kategori, alt kategori, kurulum yeri ve durum süzülür; arama ve sıralama grupların içinde çalışır,
-// boş kalan başlıklar gizlenir. Kartlar rehber kartlarıyla aynı yapıdadır (başlık, açıklama, uyarı, alanlar, alt şerit) ve satır satır
-// hizalı ızgarada durur. Arama kuralları src/arama.ts'te (yerel sayfanın aramasıyla aynı).
 import katalog from '../data/katalog.json';
-import PromptDugme from './PromptDugme.astro';
+import RepoKart from './RepoKart.astro';
+import Simge from './Simge.astro';
 import { katla } from '../arama';
+import { dikkat, kategoriAdi, kurulum, plainInline } from '../repo';
 
-type Repo = (typeof katalog.repolar)[number];
 const repolar = katalog.repolar;
-const klasorler = katalog.klasorler;
-const yilOnce = new Date(Date.now() - 365 * 864e5).toISOString().slice(0, 10);
-const eski = (r: Repo) => !!r.son_guncelleme && r.son_guncelleme < yilOnce;
-const dikkat = (r: Repo) => r.arsiv || eski(r);
-const KURULUM = {
-	proje: { etiket: '📦 Projeye eklenir', kart: 'Projeye eklenir', dugme: 'Proje', tur: 'kurulum' },
-	claude: { etiket: "🧰 Claude'a kurulur", kart: 'Claude', dugme: 'Claude', tur: 'claude' },
-	codex: { etiket: "🧰 Codex'e kurulur", kart: 'Codex', dugme: 'Codex', tur: 'codex' },
-	uygulama: { etiket: '💻 Ayrı uygulama', kart: 'Ayrı uygulama', dugme: 'Uygulama', tur: 'uygulama' },
-	kaynak: { etiket: '📖 Kaynak · kurulmaz', kart: 'Kurulmaz, okunur', dugme: '', tur: '' },
-} as const;
-const PROMPT = {
-	proje: (u: string) => `Şu aracı bu projede kullanmak istiyorum: ${u}\nREADME'sini oku; bu projenin diline ve altyapısına uygun mu söyle. Uygunsa projeye ekle ve nasıl kullanılacağını kısaca göster.`,
-	claude: (u: string) => `Şu aracı Claude Code'a kurmak istiyorum: ${u}\nREADME'sini oku ve neyin kurulacağını söyle (skill, eklenti, MCP sunucusu, hook); birden fazla kurulum yolu varsa farklarını anlat. Tüm projelerde mi (kullanıcı düzeyi, ~/.claude) yoksa sadece bu projede mi kurulması gerektiğini öner ve bana sor. Projeye dosya yazacak ya da mevcut ayarları veya CLAUDE.md'yi değiştirecekse önceden söyle. Onaylarsam kur ve nasıl kullanılacağını kısaca göster.`,
-	codex: (u: string) => `Şu aracı Codex'e kurmak istiyorum: ${u}\nREADME'sini oku ve Codex için neyin kurulacağını söyle (skill, eklenti, MCP sunucusu, hook); birden fazla kurulum yolu varsa farklarını anlat. Tüm projelerde mi (kullanıcı düzeyi, ~/.codex ya da ~/.agents/skills) yoksa sadece bu projede mi kurulması gerektiğini öner ve bana sor. Projeye dosya yazacak ya da ~/.codex/config.toml'u veya AGENTS.md'yi değiştirecekse önceden söyle. Onaylarsam kur ve nasıl kullanılacağını kısaca göster.`,
-	uygulama: (u: string) => `Şu uygulamayı kurmak istiyorum: ${u}\nREADME'sini oku; bu bilgisayara mı (masaüstü uygulaması ya da komut satırı aracı) yoksa bir sunucuya mı (Docker ile çalışan servis) kurulduğunu söyle. İşletim sistemimde çalışıp çalışmadığını ve gereksinimlerini (ekran kartı, Docker, API anahtarı, disk alanı) kontrol et. Kurulum adımlarını göster; onaylarsam kur ve nasıl kullanılacağını kısaca göster.`,
-};
-const yildiz = (n: number | null) => (n == null ? '' : n >= 1000 ? (n / 1000).toFixed(n >= 10000 ? 0 : 1).replace('.', ',') + 'k' : String(n));
-const tarih = (d: string | null) => (d ? d.split('-').reverse().join('.') : '');
-const PLATFORM: Record<string, string> = { 'instagram.com': 'Instagram', 'youtube.com': 'YouTube', 'youtu.be': 'YouTube' };
-const platform = (u: string) => { const h = new URL(u).hostname.replace(/^www\./, ''); return PLATFORM[h] ?? h; };
-const say = (f: (r: Repo) => boolean) => repolar.filter(f).length;
+const say = (f: (r: typeof repolar[number]) => boolean) => repolar.filter(f).length;
+const simgeler: Record<string, string> = { 'ajan-skill': 'layers', 'ajan-erisim': 'globe', 'ajan-yonetim': 'sparkles', tasarim: 'palette', kalite: 'shield', yayin: 'server', icerik: 'megaphone', medya: 'play', ogrenme: 'book', gunluk: 'package' };
 ---
-
-<div class="rk not-content">
-	<div class="rk-arac">
-		<input type="search" class="rk-ara" placeholder="Repo adı, açıklama, kategori ya da uyarı ara…" aria-label="Repolarda ara" />
-		<div class="rk-sirala" role="group" aria-label="Sıralama">
-			<span class="rk-etiket">Sırala:</span>
-			<button type="button" class="sira" data-sira="at" aria-pressed="true">Yeni eklenen</button>
-			<button type="button" class="sira" data-sira="s" aria-pressed="false">Yıldız</button>
-			<button type="button" class="sira" data-sira="ad" aria-pressed="false">Ad</button>
-		</div>
-	</div>
-	<div class="rk-cipler" role="group" aria-label="Kategori">
-		<button type="button" class="cip on" data-klasor="*">Tümü <span>{repolar.length}</span></button>
-		{say(dikkat) > 0 && <button type="button" class="cip uyari" data-klasor="!">⚠ Dikkat <span>{say(dikkat)}</span></button>}
-		{klasorler.map((f) => <button type="button" class="cip" data-klasor={f.id} title={f.ad}>{f.kisa} <span>{say((r) => r.klasor === f.id)}</span></button>)}
-	</div>
-	{
-		klasorler.map((f) => (
-			<div class="rk-cipler kucuk rk-alt" role="group" aria-label={`${f.ad} alt kategorileri`} data-alt-for={f.id} hidden>
-				<span class="rk-etiket">Alt kategori:</span>
-				<button type="button" class="cip on" data-alt="*">Hepsi</button>
-				{f.alt.map((a) => <button type="button" class="cip" data-alt={a.id}>{a.ad} <span>{say((r) => r.klasor === f.id && r.alt_klasor === a.id)}</span></button>)}
-			</div>
-		))
-	}
-	<div class="rk-cipler kucuk" role="group" aria-label="Kurulum yeri">
-		<span class="rk-etiket">Kurulum:</span>
-		<button type="button" class="cip on" data-kurulum="*">Hepsi</button>
-		{(['proje', 'claude', 'codex', 'uygulama', 'kaynak'] as const).map((k) => (
-			<button type="button" class="cip" data-kurulum={k}>{KURULUM[k].etiket} <span>{say((r) => r.kurulum.includes(k))}</span></button>
-		))}
-	</div>
-	<p class="rk-sonuc" aria-live="polite"></p>
-	{
-		klasorler.map((f) => (
-			<section class="rk-bolum" id={`kategori-${f.id}`} data-klasor={f.id}>
-				<header class="rk-bolum-ust">
-					<h2 class="rk-bolum-baslik">{f.ad} <span class="rk-sayi">{say((r) => r.klasor === f.id)}</span></h2>
-					<p class="rk-bolum-aciklama">{f.aciklama}</p>
-				</header>
-				{f.alt.map((a) => (
-					<div class="rk-alt-bolum" data-alt={a.id}>
-						<h3 class="rk-alt-baslik">{a.ad} <span class="rk-sayi">{say((r) => r.klasor === f.id && r.alt_klasor === a.id)}</span></h3>
-						<div class="rk-izgara">
-							{repolar.filter((r) => r.klasor === f.id && r.alt_klasor === a.id).map((r) => {
-								const [sahip, ad] = r.repo.split('/');
-								const url = `https://github.com/${r.repo}`;
-								const kur = r.kurulum.filter((k) => k !== 'kaynak') as ('proje' | 'claude' | 'codex' | 'uygulama')[];
-								const ara = katla([r.repo, r.aciklama, r.uyari, r.kaynak?.ad, r.kategori, r.alt_kategori, ...r.kurulum.map((k) => KURULUM[k as keyof typeof KURULUM].etiket)].join(' '));
-								const uzun = r.aciklama.length + (r.uyari || '').length;
-								return (
-									<article class="repo" data-klasor={r.klasor} data-alt={r.alt_klasor} data-kurulum={r.kurulum.join(' ')} data-dikkat={dikkat(r) ? '1' : ''}
-										data-ara={ara} data-at={r.eklenme || ''} data-s={r.yildiz ?? 0} data-ad={r.repo.toLowerCase()} data-uzun={uzun}>
-										<div class="k-bas">
-											<span class="k-ad"><a href={url} target="_blank" rel="noopener">{ad}</a></span>
-											<span class="k-tur">{sahip}{r.dil && ` · ${r.dil}`}{r.eklenme && ` · ${tarih(r.eklenme)}`}</span>
-											<span class="repo-yildiz" title={`${r.yildiz ?? 0} yıldız`}>★ {yildiz(r.yildiz)}</span>
-										</div>
-										<p class="repo-aciklama">{r.aciklama}</p>
-										<div class:list={['repo-uyarilar', { bos: !r.uyari && !dikkat(r) }]}>
-											{r.uyari && <p class="repo-uyari">{r.uyari}</p>}
-											{r.arsiv && <span class="etiket turuncu">Arşivlenmiş</span>}
-											{eski(r) && <span class="etiket turuncu" title={`Son güncelleme ${tarih(r.son_guncelleme)}`}>1+ yıldır güncellenmiyor</span>}
-										</div>
-										<div class="k-alan ilk">
-											<span class="k-etiket">Kurulum</span>
-											<span class="k-deger repo-cipler">{r.kurulum.map((k) => <span class="etiket cerceve">{KURULUM[k as keyof typeof KURULUM].kart}</span>)}</span>
-										</div>
-										<div class="k-alan son">
-											<span class="k-etiket">Kaynak</span>
-											<span class="k-deger">{r.kaynak ? <a href={r.kaynak.url} target="_blank" rel="noopener">{platform(r.kaynak.url)} · {r.kaynak.ad}</a> : 'Belirtilmemiş'}</span>
-										</div>
-										<div class="k-alt">
-											<span class="repo-alt-etiket">{kur.length > 0 ? "Kurulum prompt'u" : 'Kurulmaz; README okunur'}</span>
-											{kur.map((k) => <PromptDugme metin={PROMPT[k](url)} etiket={KURULUM[k].dugme} tur={KURULUM[k].tur} />)}
-										</div>
-									</article>
-								);
-							})}
-						</div>
-					</div>
-				))}
-			</section>
-		))
-	}
-	<p class="rk-bos" hidden>Sonuç yok; aramayı ya da süzgeci değiştir.</p>
+<div class="repo-catalog not-content">
+	<header class="repo-catalog-hero"><p class="repo-eyebrow">{repolar.length} repo · {katalog.klasorler.length} kategori</p><h1>Repo kataloğu</h1><p>Ajanına, projene ya da bilgisayarına kurabileceğin GitHub repoları. Her birinin kendi sayfasında hazır kurulum prompt’u var.</p></header>
+	<div class="repo-toolbar"><label class="repo-search"><Simge ad="search" boyut={18} /><input type="search" id="repo-search" placeholder="Repo adı, sahip ya da açıklama ara" aria-label="Repolarda ara" /></label><label class="repo-sort">Sırala <select aria-label="Repoları sırala"><option value="at">Yeni eklenen</option><option value="s">Yıldız</option><option value="ad">Ad</option></select></label></div>
+	<div class="repo-chip-row" role="group" aria-label="Kategori"><button type="button" class="repo-chip selected" data-category="*" aria-pressed="true">Tümü <span>{repolar.length}</span></button><button type="button" class="repo-chip warning" data-category="!" aria-pressed="false"><Simge ad="alert" boyut={15} /> Dikkat <span>{say(dikkat)}</span></button>{katalog.klasorler.map((f) => <button type="button" class="repo-chip" data-category={f.id} aria-pressed="false"><Simge ad={simgeler[f.id]} boyut={15} /> {kategoriAdi(f.kisa)} <span>{say((r) => r.klasor === f.id)}</span></button>)}</div>
+	{katalog.klasorler.map((f) => <div class="repo-chip-row repo-subcategories" role="group" aria-label={`${kategoriAdi(f.ad)} alt kategorileri`} data-sub-for={f.id} hidden><button type="button" class="repo-chip selected" data-sub="*" aria-pressed="true">Tümü</button>{f.alt.map((a) => <button type="button" class="repo-chip" data-sub={a.id} aria-pressed="false">{a.ad} <span>{say((r) => r.klasor === f.id && r.alt_klasor === a.id)}</span></button>)}</div>)}
+	<div class="repo-chip-row repo-install" role="group" aria-label="Kurulum yeri"><span class="repo-row-label">Kurulum yeri</span><button type="button" class="repo-chip selected" data-install="*" aria-pressed="true">Tümü</button>{(Object.keys(kurulum) as (keyof typeof kurulum)[]).map((k) => <button type="button" class="repo-chip" data-install={k} aria-pressed="false">{kurulum[k].etiket} <span>{say((r) => r.kurulum.includes(k))}</span></button>)}</div>
+	<div class="repo-results-head"><p class="repo-result-count" aria-live="polite">{repolar.length} / {repolar.length} repo</p><button type="button" class="repo-clear" hidden>Süzgeçleri temizle</button></div>
+	<div class="repo-grid">{repolar.map((r) => <div class="repo-grid-item" data-category={r.klasor} data-sub={r.alt_klasor} data-install={r.kurulum.join(' ')} data-warning={dikkat(r) ? '1' : ''} data-search={katla(plainInline([r.repo, r.aciklama, r.uyari, r.kaynak?.ad, r.kategori, r.alt_kategori, ...r.kurulum.map((k) => kurulum[k as keyof typeof kurulum].etiket)].join(' ')))} data-at={r.eklenme || ''} data-stars={r.yildiz || 0} data-name={r.repo.toLowerCase()}><RepoKart repo={r} /></div>)}</div>
+	<div class="repo-empty" hidden><Simge ad="search" boyut={28} /><h2>Sonuç yok</h2><p>Aramanı kontrol et, daha kısa bir kelime dene ya da kategori ve kurulum yeri seçimlerini kaldır.</p><button type="button" class="repo-clear">Süzgeçleri temizle</button></div>
 </div>
-
 <script>
-	// Süzme, arama ve sıralama tarayıcıda çalışır. Kartlar satır satır hizalı ızgarada durur; her alt kategoride
-	// içeriği en uzun %15'lik dilim üç ve daha çok sütunda iki sütun genişliğinde olur.
-	import { terimler, eslesme } from '../arama';
-	const kok = document.querySelector<HTMLElement>('.rk');
-	if (kok) {
-		const kartlar = [...kok.querySelectorAll<HTMLElement>('.repo')];
-		const izgaralar = [...kok.querySelectorAll<HTMLElement>('.rk-izgara')];
-		const bolumler = [...kok.querySelectorAll<HTMLElement>('.rk-bolum')];
-		const ara = kok.querySelector<HTMLInputElement>('.rk-ara')!;
-		const sonuc = kok.querySelector<HTMLElement>('.rk-sonuc')!;
-		const bos = kok.querySelector<HTMLElement>('.rk-bos')!;
-		let klasor = '*', alt = '*', kurulum = '*', sira = 'at';
-
-		const diz = (izgara: HTMLElement) => {
-			const sutun = getComputedStyle(izgara).gridTemplateColumns.split(' ').length;
-			const gorunen = [...izgara.children].filter((k): k is HTMLElement => !(k as HTMLElement).hidden) as HTMLElement[];
-			const uzunluklar = gorunen.map((k) => +k.dataset.uzun!).sort((a, b) => a - b);
-			const esik = Math.max(170, uzunluklar[Math.floor(uzunluklar.length * 0.85)] || 0);
-			gorunen.forEach((k) => k.classList.toggle('genis', sutun >= 3 && +k.dataset.uzun! > esik));
+	import { eslesme, terimler } from '../arama';
+	const root = document.querySelector<HTMLElement>('.repo-catalog');
+	if (root) {
+		const cards = [...root.querySelectorAll<HTMLElement>('.repo-grid-item')];
+		const grid = root.querySelector<HTMLElement>('.repo-grid')!;
+		const search = root.querySelector<HTMLInputElement>('#repo-search')!;
+		const sort = root.querySelector<HTMLSelectElement>('.repo-sort select')!;
+		let category = '*', sub = '*', install = '*';
+		const select = (button: HTMLButtonElement, attr: string) => {
+			button.closest('[role="group"]')?.querySelectorAll<HTMLButtonElement>(`button[data-${attr}]`).forEach((b) => { b.classList.toggle('selected', b === button); b.setAttribute('aria-pressed', String(b === button)); });
 		};
-		const dizHepsi = () => izgaralar.forEach((g) => { if (!g.closest('[hidden]')) diz(g); });
-
-		// Başlıklardaki sayı görünen kart sayısını gösterir; hiç kartı kalmayan başlık gizlenir.
-		const sayilariYaz = (kap: HTMLElement, secici: string) => {
-			const n = kap.querySelectorAll('.repo:not([hidden])').length;
-			kap.hidden = n === 0;
-			const sayi = kap.querySelector<HTMLElement>(secici);
-			if (sayi) sayi.textContent = String(n);
-			return n;
+		const apply = () => {
+			const terms = terimler(search.value);
+			let count = 0;
+			cards.forEach((card) => { const d = card.dataset; card.hidden = !((category === '*' || (category === '!' ? d.warning === '1' : d.category === category)) && (sub === '*' || d.sub === sub) && (install === '*' || d.install!.split(' ').includes(install)) && terms.every((t) => eslesme(t, d.search!) > 0)); if (!card.hidden) count++; });
+			cards.sort((a, b) => sort.value === 's' ? +b.dataset.stars! - +a.dataset.stars! : sort.value === 'ad' ? a.dataset.name!.localeCompare(b.dataset.name!) : b.dataset.at!.localeCompare(a.dataset.at!) || +b.dataset.stars! - +a.dataset.stars!).forEach((card) => grid.append(card));
+			root.querySelector<HTMLElement>('.repo-result-count')!.textContent = `${count} / ${cards.length} repo`;
+			root.querySelector<HTMLElement>('.repo-empty')!.hidden = count > 0;
+			root.querySelector<HTMLElement>('.repo-results-head .repo-clear')!.hidden = category === '*' && install === '*' && !search.value;
 		};
-
-		const uygula = () => {
-			const q = terimler(ara.value);
-			let n = 0;
-			for (const k of kartlar) {
-				const d = k.dataset;
-				const gor = (klasor === '*' || (klasor === '!' ? d.dikkat === '1' : d.klasor === klasor))
-					&& (alt === '*' || d.alt === alt)
-					&& (kurulum === '*' || d.kurulum!.split(' ').includes(kurulum))
-					&& q.every((t) => eslesme(t, d.ara!) > 0);
-				k.hidden = !gor;
-				if (gor) n++;
-			}
-			const s = sira;
-			for (const g of izgaralar) {
-				[...g.children as HTMLCollectionOf<HTMLElement>].sort((a, b) => s === 's' ? +b.dataset.s! - +a.dataset.s! : s === 'ad' ? a.dataset.ad!.localeCompare(b.dataset.ad!) : b.dataset.at!.localeCompare(a.dataset.at!))
-					.forEach((k) => g.append(k));
-			}
-			for (const b of bolumler) {
-				b.querySelectorAll<HTMLElement>('.rk-alt-bolum').forEach((a) => sayilariYaz(a, '.rk-alt-baslik .rk-sayi'));
-				sayilariYaz(b, '.rk-bolum-baslik .rk-sayi');
-			}
-			sonuc.textContent = n === kartlar.length ? `${n} repo` : `${n} / ${kartlar.length} repo`;
-			bos.hidden = n > 0;
-			dizHepsi();
-		};
-
-		kok.addEventListener('click', (e) => {
-			const b = (e.target as HTMLElement).closest<HTMLButtonElement>('.sira');
-			if (b) {
-				sira = b.dataset.sira!;
-				kok.querySelectorAll('.sira').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-				uygula();
-				return;
-			}
-			const c = (e.target as HTMLElement).closest<HTMLButtonElement>('.cip');
-			if (!c) return;
-			const grup = c.dataset.klasor !== undefined ? 'klasor' : c.dataset.alt !== undefined ? 'alt' : 'kurulum';
-			const kapsam = grup === 'alt' ? c.parentElement! : kok;
-			kapsam.querySelectorAll<HTMLElement>(`.cip[data-${grup}]`).forEach((x) => x.classList.toggle('on', x === c));
-			if (grup === 'klasor') {
-				klasor = c.dataset.klasor!;
-				// Kategori değişince alt kategori sıfırlanır; sadece seçilen kategorinin alt kategorileri görünür.
-				alt = '*';
-				kok.querySelectorAll<HTMLElement>('.rk-alt').forEach((s) => {
-					s.hidden = s.dataset.altFor !== klasor;
-					s.querySelectorAll<HTMLElement>('.cip').forEach((x) => x.classList.toggle('on', x.dataset.alt === '*'));
-				});
-			} else if (grup === 'alt') alt = c.dataset.alt!;
-			else kurulum = c.dataset.kurulum!;
-			uygula();
+		root.addEventListener('click', (e) => {
+			const target = e.target as HTMLElement;
+			if (target.closest('.repo-clear')) { category = sub = install = '*'; search.value = ''; root.querySelector<HTMLButtonElement>('[data-category="*"]')?.click(); root.querySelector<HTMLButtonElement>('[data-install="*"]')?.click(); history.replaceState(null, '', location.pathname); apply(); return; }
+			const button = target.closest<HTMLButtonElement>('button[data-category],button[data-sub],button[data-install]');
+			if (!button) return;
+			if (button.dataset.category !== undefined) { category = button.dataset.category; sub = '*'; select(button, 'category'); root.querySelectorAll<HTMLElement>('.repo-subcategories').forEach((row) => { row.hidden = row.dataset.subFor !== category; row.querySelector<HTMLButtonElement>('[data-sub="*"]')?.click(); }); }
+			else if (button.dataset.sub !== undefined) { sub = button.dataset.sub; select(button, 'sub'); }
+			else { install = button.dataset.install!; select(button, 'install'); }
+			apply();
 		});
-		ara.addEventListener('input', uygula);
-		const adresten = () => {
-			if (location.hash === '#dikkat') kok.querySelector<HTMLButtonElement>('.cip[data-klasor="!"]')?.click();
-			if (location.hash.startsWith('#ara=')) {
-				ara.value = decodeURIComponent(location.hash.slice(5));
-				uygula();
-			}
-		};
-		window.addEventListener('hashchange', adresten);
-		adresten();
-		let genislik = 0;
-		new ResizeObserver(() => { if (kok.clientWidth !== genislik) { genislik = kok.clientWidth; dizHepsi(); } }).observe(kok);
-		uygula();
+		search.addEventListener('input', apply); sort.addEventListener('change', apply);
+		const hash = () => { const value = location.hash.slice(1); if (value === 'dikkat') root.querySelector<HTMLButtonElement>('[data-category="!"]')?.click(); else if (value.startsWith('ara=')) { search.value = decodeURIComponent(value.slice(4)); apply(); } else if (value.startsWith('kategori=')) { const [cat, child] = value.slice(9).split('/'); root.querySelector<HTMLButtonElement>(`[data-category="${CSS.escape(cat)}"]`)?.click(); if (child) root.querySelector<HTMLElement>(`[data-sub-for="${CSS.escape(cat)}"]`)?.querySelector<HTMLButtonElement>(`[data-sub="${CSS.escape(child)}"]`)?.click(); } };
+		window.addEventListener('hashchange', hash); hash(); apply();
 	}
 </script>

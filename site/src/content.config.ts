@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+import { z } from 'astro/zod';
 import { raporVerisi } from './yerel';
 
 // Rapor metinleri sitenin kendi Markdown işleyicisiyle HTML'e çevrilir; sadece yerel derlemede dolar (src/yerel.ts).
@@ -19,7 +20,7 @@ const raporlar = defineCollection({
 });
 
 export const collections = {
-	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema({ extend: z.object({ araclar: z.array(z.string()).optional() }) }) }),
 	// Starlight'ın Türkçe çevirisinde olmayan metinler (src/content/i18n/tr.json).
 	i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
 	raporlar,

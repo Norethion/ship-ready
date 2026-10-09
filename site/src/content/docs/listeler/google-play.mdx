@@ -1,16 +1,25 @@
 ---
 title: "Google Play incelemesi"
 description: "Google Play'in uygulamayı reddetmesine ya da kaldırmasına en sık yol açan 24 madde ve her biri için ne yapılacağı."
+tableOfContents: false
 ---
 
 import Madde from '../../../components/Madde.astro';
-import DenetimPrompt from '../../../components/DenetimPrompt.astro';
+import ListeBaslik from '../../../components/ListeBaslik.astro';
+import ListeGovde from '../../../components/ListeGovde.astro';
+import ListeBolum from '../../../components/ListeBolum.astro';
+
+<ListeBaslik liste={"google-play"}>
 
 Google Play'in uygulamayı reddetmesine ya da kaldırmasına en sık yol açan 24 madde ve her biri için ne yapılacağı.
 Çoğu kod hatası değil; Play Console'daki formların eksik ya da gerçekle uyumsuz doldurulması.
 Maddeler 25.09.2026'da Google Play politika merkezinden ve Play Console Yardım sayfalarından doğrulandı; tarih ve API seviyeleri her yıl değişir.
 
-## Veri ve gizlilik
+</ListeBaslik>
+
+<ListeGovde liste={"google-play"}>
+
+<ListeBolum liste={"google-play"} baslik={"Veri ve gizlilik"} no={1} toplam={4} sonraki={"İzinler"}>
 
 
 <Madde id={"gp-veri-guvenligi-formu"} no={1} baslik={"Veri güvenliği formu uyumsuz"}>
@@ -46,7 +55,9 @@ Uygulamada hesap açılabiliyorsa hem uygulama içinden hesap ve veri silme yolu
 </Madde>
 
 
-## İzinler
+</ListeBolum>
+
+<ListeBolum liste={"google-play"} baslik={"İzinler"} no={2} toplam={3} sonraki={"Teknik gereksinimler"}>
 
 
 <Madde id={"gp-hassas-izin-beyani"} no={5} baslik={"Hassas izin beyanı yok"}>
@@ -74,7 +85,9 @@ Android 14 ve üstünü hedefliyorsan her ön plan servisi türünü App content
 </Madde>
 
 
-## Teknik gereksinimler
+</ListeBolum>
+
+<ListeBolum liste={"google-play"} baslik={"Teknik gereksinimler"} no={3} toplam={5} sonraki={"Ödeme ve abonelik"}>
 
 
 <Madde id={"gp-hedef-api-seviyesi"} no={8} baslik={"Hedef API seviyesi düşük"}>
@@ -118,7 +131,9 @@ Android geliştirici doğrulaması kapsamında 30 Eylül 2026'dan itibaren kayı
 </Madde>
 
 
-## Ödeme ve abonelik
+</ListeBolum>
+
+<ListeBolum liste={"google-play"} baslik={"Ödeme ve abonelik"} no={4} toplam={2} sonraki={"Mağaza sayfası ve içerik"}>
 
 
 <Madde id={"gp-play-faturalandirma"} no={13} baslik={"Play Faturalandırma dışında ödeme"}>
@@ -138,7 +153,9 @@ Fiyatı, fatura dönemini, otomatik yenilemeyi, denemenin ne zaman ve kaça dön
 </Madde>
 
 
-## Mağaza sayfası ve içerik
+</ListeBolum>
+
+<ListeBolum liste={"google-play"} baslik={"Mağaza sayfası ve içerik"} no={5} toplam={8} sonraki={"İnceleme hazırlığı"}>
 
 
 <Madde id={"gp-yaniltici-magaza-bilgisi"} no={15} baslik={"Yanıltıcı mağaza bilgisi"}>
@@ -206,7 +223,9 @@ Bu özellikler olmasa bile Sağlık uygulamaları ve Finansal özellikler beyan 
 </Madde>
 
 
-## İnceleme hazırlığı
+</ListeBolum>
+
+<ListeBolum liste={"google-play"} baslik={"İnceleme hazırlığı"} no={6} toplam={2} sonraki={""}>
 
 
 <Madde id={"gp-giris-bilgisi"} no={23} baslik={"Giriş bilgisi yok"}>
@@ -226,6 +245,10 @@ Uygulama giriş gerektiriyorsa App content > Giriş bilgileri (Sign-in details) 
 </Madde>
 
 
+</ListeBolum>
+
+</ListeGovde>
+
 ## Reddedilince
 
 
@@ -238,7 +261,6 @@ Uygulama giriş gerektiriyorsa App content > Giriş bilgileri (Sign-in details) 
 
 ## Yakında gelecekler
 
-
 | Tarih | Değişiklik |
 |---|---|
 | 27 Ocak 2027 | Arama kaydı (`READ_CALL_LOG`) telefonla hesap doğrulaması için gerekçe olmaktan çıkıyor; Android 17'yi hedefleyen uygulamalar kişilere erişimi sadece kişi seçici yetmiyorsa isteyebilecek; coğrafi çit (geofencing) ön plan servisi gerekçesi olmaktan çıkıyor. |
@@ -246,7 +268,6 @@ Uygulama giriş gerektiriyorsa App content > Giriş bilgileri (Sign-in details) 
 | Nisan 2027 | Giriş özelliği olan uygulamalar yeni cihazda girişi Restore Credentials API ile kendiliğinden geri yüklemeli. |
 
 ## Göndermeden önce kontrol prompt'u
-
 
 ```
 Bu Android uygulamasını Google Play incelemesine göndermeden önce şu maddelere göre kontrol et: Veri güvenliği formunun uygulama ve SDK'larla uyumu, uygulama içinde ve Play Console'da gizlilik politikası, beklenmedik veri kullanımı için belirgin açıklama ve onay, uygulama içi hesap silme ve silme web sayfası, hassas izinler ve beyan formları, arka planda konum, ön plan servisi türleri, hedef API seviyesi (API 36), native kod varsa 16 KB sayfa boyutu desteği, App Bundle ve 64 bit, çökme ve ANR riskleri, dijital satışlarda Play Faturalandırma, abonelik ekranındaki şartlar ve iptal yolu, mağaza başlığı ve açıklaması, içerik derecelendirmesi, hedef kitle ve çocuklar, kullanıcı içeriği için moderasyon, marka kullanımı, web görünümünden ibaret olma, reklam kuralları, sağlık ve finans beyanları. Her madde için durumu (✅ ⚠️ ❌ ➖) ve ilgili dosyayı yaz; Play Console'da doldurulması gereken formları (Veri güvenliği, izin beyanları, giriş bilgileri) ayrıca listele.
