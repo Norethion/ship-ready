@@ -4,7 +4,7 @@
 <!-- grup: Rehberler -->
 <!-- ikon: devices -->
 
-Mobil uygulamada mağaza incelemesi dışında kalan kararlar: platform seçimi, aylık maliyet, ölçülecek olaylar, kullanıcıda çökme sebepleri, satmayan ve kullanıcı tutamayan uygulamanın sebepleri, reklamsız ilk kullanıcılar ve reklam terimleri.
+Mobil uygulamada mağaza incelemesi dışında kalan kararlar: platform seçimi, aylık maliyet, ölçülecek olaylar, kullanıcıda çökme sebepleri, yayından önceki testler, satmayan ve kullanıcı tutamayan uygulamanın sebepleri, reklamsız ilk kullanıcılar ve reklam terimleri.
 Listeler dijitalakcin ve kema_the_engineer hesaplarının gönderilerinden alındı (her bölümde bağlantısı var); mağaza kuralları ve araç sınırları 06.10.2026'da kendi belgelerinden doğrulandı.
 Mağaza incelemesi için [App Store](app-store-incelemesi.md) ve [Google Play](google-play-incelemesi.md) listeleri, satın alma ekranı için [Paywall dönüşümü](paywall-donusumu.md), servislerin ücretsiz sınırları için [Yayına alma & barındırma](yayina-alma-barindirma.md) sekmesi.
 
@@ -106,6 +106,33 @@ Hepsi cihazda değil kodda düzeltilir; örnekler Flutter'dan, Swift ve Kotlin'd
 | Bozuk önbellek | Eski sürümün yazdığı ya da bozulmuş önbellek her açılışta aynı yerde çöktürür. | Önbelleğe sürüm numarası koy, sürüm değişince ya da okunamayınca temizle. |
 | Saat dilimi | Gece yarısı tarih bir gün kayar. | Tarihi UTC sakla, gösterirken yerel saate çevir. |
 | Rapor yok | Çökme raporu olmadığı için sorunu kullanıcının yorumundan öğrenirsin. | Crashlytics ya da Sentry'yi ilk günden kur ([yayın öncesi {{no:yo-hata-izleme}}. madde](yayin-oncesi-maddeler.md)). |
+
+## Yayından önce dene
+
+Uygulama çalışıyor diye yayına hazır sayılmaz; [bu videodaki](https://www.instagram.com/reel/DePZnH4Ildt/) 20 kontrolü yayından önce gerçek cihazda tek tek dene ya da yapay zekâya kontrol ettir.
+
+| Kontrol | Nasıl denenir |
+|---|---|
+| İzinler | Kamera, fotoğraf, konum ve bildirim izni özellik ilk kullanıldığında ve nedeni açıklanarak isteniyor mu, reddedilince uygulama çalışmaya devam ediyor mu ([App Store {{no:as-izin-gerekcesi}}. madde](app-store-incelemesi.md)). |
+| Gizlilik politikası | Uygulamanın içinden ve mağaza sayfasından açılıyor mu, hangi veriyi neden topladığını gerçeğe uygun yazıyor mu ([yayın öncesi {{no:yo-aydinlatma-gercege-uygun}}. madde](yayin-oncesi-maddeler.md)). |
+| Hesap silme | Hesap ve veriler uygulamanın içinden silinebiliyor mu, silinen hesapla yeniden giriş yapılamıyor mu ([App Store {{no:as-hesap-silme}}. madde](app-store-incelemesi.md)). |
+| Veri güvenliği | API anahtarları uygulama paketinde değil, kullanıcı verisi sadece sahibine açık mı ([yayın öncesi {{no:yo-mobil-pakette-anahtar}} ve {{no:yo-rls-kurallari}}. maddeler](yayin-oncesi-maddeler.md)). |
+| Kayıt ve giriş | Her giriş yolu (e-posta, Google, Apple) yeni ve var olan hesapla baştan sona çalışıyor mu. |
+| E-posta doğrulama | Doğrulama e-postası gelmezse yeniden gönderme yolu var mı, e-posta spam klasörüne düşüyor mu. |
+| Şifre sıfırlama | Sıfırlama linki geliyor, bir kez çalışıyor ve süresi doluyor mu ([yayın öncesi {{no:yo-sifirlama-linki}}. madde](yayin-oncesi-maddeler.md)). |
+| Onboarding | Uygulamayı ilk kez açan biri ne yapacağını yardım almadan anlıyor mu. |
+| Ana akış | Uygulamanın asıl işi baştan sona takılmadan tamamlanabiliyor mu. |
+| Verinin kalıcılığı | Uygulama kapatılıp açılınca, güncellenince ve telefon yeniden başlatılınca veriler duruyor mu. |
+| Ödeme | Başarılı, iptal edilen, reddedilen ve yarıda kalan ödeme test hesabıyla denendi mi; yarıda kalan ödeme iki kez ücret çekmiyor mu. |
+| Satın alımı geri yükleme | Yeni telefona geçen kullanıcı satın alımlarını geri yükleyip aboneliğine ulaşabiliyor mu ([App Store {{no:as-geri-yukleme}}. madde](app-store-incelemesi.md)). |
+| Yükleniyor durumu | İşlem sürerken gösterge çıkıyor mu, düğmeye iki kez basınca işlem iki kez yapılmıyor mu. |
+| Boş durum | Henüz içerik yokken ekran ne yapılacağını söylüyor mu. |
+| Hata durumu | Bir şey ters gidince anlaşılır bir mesaj ve tekrar deneme yolu çıkıyor mu. |
+| İnternet bağlantısı | Uçak modunda ve zayıf bağlantıda uygulama donmuyor, çökmüyor; bağlantı gelince kaldığı yerden devam ediyor mu. |
+| Bildirimler | Bildirim geliyor mu, uygulama kapalıyken de basınca doğru ekran açılıyor mu. |
+| Analitik ve çökme raporu | Olaylar ve çökmeler panelde görünüyor mu ([Ölçülecek olaylar](#ölçülecek-olaylar)). |
+| Farklı cihazlar | Küçük ve büyük telefonda, tablette, büyük yazı boyutunda ve koyu temada tasarım bozuluyor mu. |
+| Gerçek kullanıcı testi | Uygulamayı senden başka birkaç kişi, sen yardım etmeden denedi mi. |
 
 ## Satmıyorsa
 

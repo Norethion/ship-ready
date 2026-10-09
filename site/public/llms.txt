@@ -8,7 +8,7 @@ Bütün içerik tek dosyada: [llms-full.txt](/llms-full.txt). Makinenin okuyaca�
 ## Kontrol listeleri
 
 - [Yayına almadan önce: 115 benzersiz iş](/listeler/yayin-oncesi/): Yayına çıkmadan önce kontrol edilecek güvenlik, kimlik doğrulama, veri, başlık, ödeme, operasyon, tedarik zinciri, mobil, SEO, içerik, KVKK ve alan adı maddeleri. Hukuki maddeler bilgilendirme amaçlıdır, hukuki tavsiye değildir; kendi durumun için bir hukukçuya danış.
-- [App Store incelemesi](/listeler/app-store/): En sık 26 red sebebi ve her biri için ne yapılacağı. Apple uygulamayı reddederken çoğu zaman sadece bir kural numarası ve iki cümle yazar; hangi ekranda neyin eksik olduğunu söylemez. Bu sebeplerin çoğu kod hatası değil; eksik anlatılan, unutulan ya da yanlış girilen ayarlar. Liste bu videodan ve aynı hesabın 24 maddelik ikinci listesinden alındı; kural numaraları 25.09.2026'da App Review Guidelines sayfasından doğrulandı.
+- [App Store incelemesi](/listeler/app-store/): En sık 27 red sebebi ve her biri için ne yapılacağı. Apple uygulamayı reddederken çoğu zaman sadece bir kural numarası ve iki cümle yazar; hangi ekranda neyin eksik olduğunu söylemez. Bu sebeplerin çoğu kod hatası değil; eksik anlatılan, unutulan ya da yanlış girilen ayarlar. Liste bu videodan ve aynı hesabın 24 maddelik ikinci listesinden alındı; kural numaraları 25.09.2026'da App Review Guidelines sayfasından doğrulandı.
 - [Google Play incelemesi](/listeler/google-play/): Google Play'in uygulamayı reddetmesine ya da kaldırmasına en sık yol açan 24 madde ve her biri için ne yapılacağı. Çoğu kod hatası değil; Play Console'daki formların eksik ya da gerçekle uyumsuz doldurulması. Maddeler 25.09.2026'da Google Play politika merkezinden ve Play Console Yardım sayfalarından doğrulandı; tarih ve API seviyeleri her yıl değişir.
 - [Paywall dönüşümü](/listeler/paywall/): Satın alma ekranı (paywall) az satıyorsa en sık 27 sebep ve her biri için ne yapılacağı. Liste bir videodaki 27 maddelik listeden alındı; videodaki "hepsi ölçüldü" iddiası ve etki oranları doğrulanmadı, her maddeyi kendi uygulamanda A/B testiyle dene. Mağaza kuralına dokunan maddeler (fiyatın gösterimi, deneme süresi, şartlar, geri yükleme) Apple'ın abonelik sayfasından doğrulandı ve App Store incelemesi sekmesine bağlandı. Paywall'ı kodsuz değiştirip test etmek için Superwall ya da RevenueCat Gelir & analitik sekmesinde.
 
@@ -16,7 +16,7 @@ Bütün içerik tek dosyada: [llms-full.txt](/llms-full.txt). Makinenin okuyaca�
 
 - [UI/UX: stiller ve araçlar](/rehberler/ui-ux-tasarim-stilleri/): Claude'a arayüz yaptırırken stilin İngilizce adını prompt'a yazmak yeterli, örneğin "Bento Grid düzeninde, Glassmorphism kartlarla bir özellik sayfası". İşe yarayan tasarım skill'leri: Impeccable, Taste Skill, UI/UX Pro Max. Arayüzün her sayfada aynı kalması için projeye bir DESIGN.md koy: renkleri, yazı tiplerini ve boşlukları tanımlar, ajan arayüzü buna göre üretir; hazır örnekler awesome-design-md reposunda.
 - [Gelir & analitik](/rehberler/gelir-analitik/): Uygulamadan para kazanırken sık birlikte kullanılan araçlar: satın alma altyapısı, satın alma ekranı, kullanıcı analitiği ve hata izleme. Ücretler 25.09.2026'da (Sentry 29.09.2026'da, PostHog ve Crashlytics 05.10.2026'da) sitelerinden alındı.
-- [Mobil uygulama: platform, maliyet, ölçüm ve büyüme](/rehberler/mobil-uygulama/): Mobil uygulamada mağaza incelemesi dışında kalan kararlar: platform seçimi, aylık maliyet, ölçülecek olaylar, kullanıcıda çökme sebepleri, satmayan ve kullanıcı tutamayan uygulamanın sebepleri, reklamsız ilk kullanıcılar ve reklam terimleri. Listeler dijitalakcin ve kema_the_engineer hesaplarının gönderilerinden alındı (her bölümde bağlantısı var); mağaza kuralları ve araç sınırları 06.10.2026'da kendi belgelerinden doğrulandı. Mağaza incelemesi için App Store ve Google Play listeleri, satın alma ekranı için Paywall dönüşümü, servislerin ücretsiz sınırları için Yayına alma & barındırma sekmesi.
+- [Mobil uygulama: platform, maliyet, ölçüm ve büyüme](/rehberler/mobil-uygulama/): Mobil uygulamada mağaza incelemesi dışında kalan kararlar: platform seçimi, aylık maliyet, ölçülecek olaylar, kullanıcıda çökme sebepleri, yayından önceki testler, satmayan ve kullanıcı tutamayan uygulamanın sebepleri, reklamsız ilk kullanıcılar ve reklam terimleri. Listeler dijitalakcin ve kema_the_engineer hesaplarının gönderilerinden alındı (her bölümde bağlantısı var); mağaza kuralları ve araç sınırları 06.10.2026'da kendi belgelerinden doğrulandı. Mağaza incelemesi için App Store ve Google Play listeleri, satın alma ekranı için Paywall dönüşümü, servislerin ücretsiz sınırları için Yayına alma & barındırma sekmesi.
 - [Şirket kurmadan yayın: 20/B ve mağaza hesapları](/rehberler/sirket-kurmadan-yayin/): Türkiye'de şirket kurmadan, kendi adınla App Store ve Google Play'de uygulama yayınlayıp gelir almanın adımları: 20/B istisna belgesi, banka hesabı, mağaza hesapları, komisyon ve vergi. Bu videodaki adımlardan yola çıkıldı; her bilgi 05.10.2026'da GİB, Resmî Gazete, Apple ve Google'ın kendi sayfalarından doğrulandı, videodan farklı çıkanlar aşağıda. Bilgilendirme amaçlıdır, vergi ya da hukuki tavsiye değildir; kendi durumun için bir mali müşavire danış ya da GİB'den özelge iste.
 - [Yayına alma & barındırma](/rehberler/yayina-alma-barindirma/): Projeyi yayına alırken kullanılan servisler ve yayın öncesi listesinde bunlarla çözülen maddeler. Servisler tablosunun ücretleri 25.09.2026'da, mobil servislerin ücretsiz sınırları 05.10.2026'da sitelerinden alındı.
 - [AI geliştirme akışı](/rehberler/ai-gelistirme-akisi/): Claude Code ile proje geliştirirken işe yarayan komutlar, MCP sunucuları, skill'ler ve hazır prompt'lar.
@@ -24,7 +24,7 @@ Bütün içerik tek dosyada: [llms-full.txt](/llms-full.txt). Makinenin okuyaca�
 
 ## Repo kataloğu
 
-182 doğrulanmış GitHub reposu amaca göre kategori ve alt kategoriye ayrılır; sayfası [/repolar/](/repolar/), açıklamaları ve kurulum yerleri llms-full.txt'te.
+184 doğrulanmış GitHub reposu amaca göre kategori ve alt kategoriye ayrılır; sayfası [/repolar/](/repolar/), açıklamaları ve kurulum yerleri llms-full.txt'te.
 
 ### 🧠 Ajan skill'leri ve çalışma yöntemi
 
@@ -86,13 +86,13 @@ AI yazısını doğallaştırma, SEO ve App Store optimizasyonu, pazarlama ve so
 
 - AI yazısını temizleme: [petergyang/no-ai-slop](https://github.com/petergyang/no-ai-slop), [blader/humanizer](https://github.com/blader/humanizer), [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop)
 - SEO ve ASO: [every-app/open-seo](https://github.com/every-app/open-seo), [Kronop/vibe-aso](https://github.com/Kronop/vibe-aso)
-- Pazarlama ve sosyal medya: [gitroomhq/postiz-app](https://github.com/gitroomhq/postiz-app), [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills), [666ghj/MiroFish](https://github.com/666ghj/MiroFish)
+- Pazarlama ve sosyal medya: [gitroomhq/postiz-app](https://github.com/gitroomhq/postiz-app), [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills), [666ghj/MiroFish](https://github.com/666ghj/MiroFish), [AgriciDaniel/claude-ads](https://github.com/AgriciDaniel/claude-ads)
 
 ### 🎬 Medya üretimi
 
 Video, ses ve konuşma üretimi ve düzenlemesi.
 
-- Video: [deepbeepmeep/Wan2GP](https://github.com/deepbeepmeep/Wan2GP), [Anil-matcha/Open-Generative-AI](https://github.com/Anil-matcha/Open-Generative-AI), [latent-spaces/brag](https://github.com/latent-spaces/brag), [getopenscreen/openscreen](https://github.com/getopenscreen/openscreen), [remotion-dev/remotion](https://github.com/remotion-dev/remotion)
+- Video: [deepbeepmeep/Wan2GP](https://github.com/deepbeepmeep/Wan2GP), [Anil-matcha/Open-Generative-AI](https://github.com/Anil-matcha/Open-Generative-AI), [latent-spaces/brag](https://github.com/latent-spaces/brag), [getopenscreen/openscreen](https://github.com/getopenscreen/openscreen), [remotion-dev/remotion](https://github.com/remotion-dev/remotion), [heygen-com/hyperframes](https://github.com/heygen-com/hyperframes)
 - Ses ve konuşma: [abus-aikorea/voice-pro](https://github.com/abus-aikorea/voice-pro), [SessionLoops/PitchNet](https://github.com/SessionLoops/PitchNet), [openai/whisper](https://github.com/openai/whisper), [myshell-ai/OpenVoice](https://github.com/myshell-ai/OpenVoice), [debpalash/VoiceStudio](https://github.com/debpalash/VoiceStudio)
 
 ### 📖 Öğrenme & listeler
@@ -100,7 +100,7 @@ Video, ses ve konuşma üretimi ve düzenlemesi.
 Sistem tasarımı ve Claude Code rehberleri, faydalı listeler ve veri setleri.
 
 - Rehberler ve notlar: [donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer), [ByteByteGoHq/system-design-101](https://github.com/ByteByteGoHq/system-design-101), [CyC2018/CS-Notes](https://github.com/CyC2018/CS-Notes), [shanraisshan/claude-code-best-practice](https://github.com/shanraisshan/claude-code-best-practice)
-- Listeler ve veri setleri: [BraveOPotato/FckSignups](https://github.com/BraveOPotato/FckSignups), [selahattinunlu/harika-github-repolari](https://github.com/selahattinunlu/harika-github-repolari), [hasaneyldrm/exercises-dataset](https://github.com/hasaneyldrm/exercises-dataset), [marcelscruz/public-apis](https://github.com/marcelscruz/public-apis), [ripienaar/free-for-dev](https://github.com/ripienaar/free-for-dev)
+- Listeler ve veri setleri: [BraveOPotato/NoSignups](https://github.com/BraveOPotato/NoSignups), [selahattinunlu/harika-github-repolari](https://github.com/selahattinunlu/harika-github-repolari), [hasaneyldrm/exercises-dataset](https://github.com/hasaneyldrm/exercises-dataset), [marcelscruz/public-apis](https://github.com/marcelscruz/public-apis), [ripienaar/free-for-dev](https://github.com/ripienaar/free-for-dev)
 
 ### 🧰 Günlük araçlar
 

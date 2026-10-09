@@ -135,7 +135,7 @@ Typeface, Screenshot to Code ve VibeUI [bu gönderiden](https://www.instagram.co
 
 ## İlham siteleri
 
-Tasarıma başlarken ve takıldığında bakılan siteler; [bu gönderiden](https://www.instagram.com/p/DdRp-ZSCKeH/), hareket için [bu gönderiden](https://www.instagram.com/p/Ddd22v1CDlb/), Mobbin, Curated ve Dark Design [bu gönderiden](https://www.instagram.com/p/DdwB8bJFC_-/) alındı.
+Tasarıma başlarken ve takıldığında bakılan siteler; [bu gönderiden](https://www.instagram.com/p/DdRp-ZSCKeH/), hareket için [bu gönderiden](https://www.instagram.com/p/Ddd22v1CDlb/), Mobbin, Curated ve Dark Design [bu gönderiden](https://www.instagram.com/p/DdwB8bJFC_-/), Minimal Gallery [bu gönderiden](https://www.instagram.com/p/DdWzc45k8wY/), A1 Gallery, Unsection, Navbar Gallery, Footer Design ve 404s [bu gönderiden](https://www.instagram.com/p/DdJzEakF7Ux/) alındı.
 Beğendiğin örneği kaydet ve neden beğendiğini not al; düzeni değil fikri al.
 Hareket (animasyon) sitelerinde örnekler durağan görsel değil çalışan hâliyle görünür; hissi not al, kendi versiyonunu yap.
 
@@ -146,6 +146,12 @@ Hareket (animasyon) sitelerinde örnekler durağan görsel değil çalışan hâ
 | [Mobbin](https://mobbin.com) | Gerçek uygulama ve sitelerden 600 binden fazla ekran, kullanıcı akışı ve arayüz kalıbı; uygulamanın onboarding'i, ödeme ekranı ya da ayarları nasıl kurduğunu görürsün. | Ücretsiz planda kayıt gerekir, sınırlı uygulama görünür, akış ve arama yok; Pro ayda 10 $'dan (yıllık) |
 | [Curated](https://www.curated.design) | Sektöre ve stile göre süzülen seçilmiş siteler; temiz landing page'ler ve startup siteleri. | Gezinmek ücretsiz; gelişmiş filtreler Pro ile ayda 9 $ |
 | [Dark Design](https://www.dark.design) | Koyu temalı, elle seçilmiş siteler; koyu tema tasarlarken kontrast, boşluk ve vurgu örnekleri. | Ücretsiz; şablonlar ve sponsorlu kartlar da var |
+| [Minimal Gallery](https://minimal.gallery) | 2013'ten beri seçilen sade ve işlevsel site örnekleri; site, şablon ve araç bölümleri var, Framer ve Webflow gibi altyapılara göre süzülür. | Gezinmek ücretsiz, sponsorlu kartlar var |
+| [A1 Gallery](https://www.a1.gallery) | Neredeyse her gün güncellenen seçilmiş siteler; stile, teknolojiye ve renge göre süzülür, MCP sunucusu da var. | Gezinmek ücretsiz, ücretsiz hesapta 2 panoda 30 kayıt; Pro ayda 9 $ |
+| [Unsection](https://www.unsection.com) | 5 binden fazla siteden bölüm örnekleri: hero, özellik, yorum, CTA, footer; bölüm türüne göre süzülür. | Ücretsiz hesapta kategori başına 30 bölüm ve 100 kayıt; Pro ayda 5 $ |
+| [Navbar Gallery](https://www.navbar.gallery) | Türüne göre (sabit, açılır, mega menü, kenar çubuğu) gezinme çubuğu örnekleri. | Ücretsiz |
+| [Footer Design](https://www.footer.design) | Stile ve türe göre seçilmiş footer tasarımları. | Ücretsiz, sponsorlu kart var |
+| [404s](https://www.404s.design) | Yaratıcı 404 (sayfa bulunamadı) sayfaları galerisi. | Ücretsiz, sponsorlu kartlar var |
 | [Awwwards](https://www.awwwards.com/websites/) | Jürinin ödüllendirdiği siteler ve yıllar öncesine uzanan "günün sitesi" arşivi; kategori, teknoloji (React, Webflow, Three.js), yazı tipi ve etikete göre süzülür. | Gezinmek ücretsiz; kurslar ve Pro üyelik ücretli |
 | [Pinterest](https://www.pinterest.com) | "web design", "dashboard ui" gibi aramalarla geniş görsel arşiv; beğendiklerini panolara kaydedersin. | Ücretsiz |
 | [X](https://x.com) | Tasarımcı ve geliştiricilerin yeni işlerini paylaştığı akış; beğendiğin kişileri bir listede toplarsın. | Ücretsiz |
